@@ -1,6 +1,6 @@
 {
   "report_period": "115/03",
-  "last_updated": "2026-04-27T10:41:45.921047",
+  "last_updated": "2026-04-27T14:10:18.770858",
   "success_count": 1,
   "fail_count": 0,
   "companies": [
@@ -30,6 +30,450 @@
           "name": "華南產險",
           "monthly_profit": 161,
           "cumulative_profit": 506
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "announcement_date": "115/04/15",
+      "announcement_title": "公告本公司暨主要子公司115年3月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": 2570,
+        "cumulative_profit": 33270
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 3590,
+          "cumulative_profit": 12160
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 1050,
+          "cumulative_profit": 3960
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 470,
+          "cumulative_profit": 2590
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": -1940,
+          "cumulative_profit": 15120
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 130,
+          "cumulative_profit": 410
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "announcement_date": "115/04/15",
+      "announcement_title": "公告本公司暨主要子公司115年03月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 5030,
+        "cumulative_profit": 31660
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 720,
+          "cumulative_profit": 17370
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4060,
+          "cumulative_profit": 13200
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 420,
+          "cumulative_profit": 1060
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 540,
+          "cumulative_profit": 1540
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 300,
+          "cumulative_profit": 860
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "announcement_date": "115/04/13",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "凱基金控",
+        "monthly_profit": 2027,
+        "cumulative_profit": 11692
+      },
+      "subsidiaries": [
+        {
+          "name": "凱基人壽",
+          "monthly_profit": 717,
+          "cumulative_profit": 4796
+        },
+        {
+          "name": "凱基銀行",
+          "monthly_profit": 705,
+          "cumulative_profit": 2099
+        },
+        {
+          "name": "中華開發資本",
+          "monthly_profit": -148,
+          "cumulative_profit": 187
+        },
+        {
+          "name": "凱基證券",
+          "monthly_profit": 1207,
+          "cumulative_profit": 5907
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "announcement_date": "115/04/08",
+      "announcement_title": "公告本公司暨子公司115年3月自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "玉山金控",
+        "monthly_profit": 3013,
+        "cumulative_profit": 10057
+      },
+      "subsidiaries": [
+        {
+          "name": "玉山銀行",
+          "monthly_profit": 2641,
+          "cumulative_profit": 8762
+        },
+        {
+          "name": "玉山證券",
+          "monthly_profit": 289,
+          "cumulative_profit": 1053
+        },
+        {
+          "name": "玉山創投",
+          "monthly_profit": 207,
+          "cumulative_profit": 710
+        },
+        {
+          "name": "玉山投信",
+          "monthly_profit": 38,
+          "cumulative_profit": 100
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "announcement_date": "115/04/13",
+      "announcement_title": "元大金控公告115年3月份自結合併損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "元大金控",
+        "monthly_profit": 4616,
+        "cumulative_profit": 14409
+      },
+      "subsidiaries": [
+        {
+          "name": "元大證券",
+          "monthly_profit": 2867,
+          "cumulative_profit": 8735
+        },
+        {
+          "name": "元大銀行",
+          "monthly_profit": 1151,
+          "cumulative_profit": 3688
+        },
+        {
+          "name": "元大期貨",
+          "monthly_profit": 281,
+          "cumulative_profit": 700
+        },
+        {
+          "name": "元大人壽",
+          "monthly_profit": 177,
+          "cumulative_profit": 1290
+        },
+        {
+          "name": "元大投信",
+          "monthly_profit": 446,
+          "cumulative_profit": 1291
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2886",
+      "name": "兆豐金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "兆豐金控",
+        "monthly_profit": 2401,
+        "cumulative_profit": 9397
+      },
+      "subsidiaries": [
+        {
+          "name": "兆豐銀行",
+          "monthly_profit": 1592,
+          "cumulative_profit": 7080
+        },
+        {
+          "name": "兆豐證券",
+          "monthly_profit": 500,
+          "cumulative_profit": 1346
+        },
+        {
+          "name": "兆豐票券",
+          "monthly_profit": 281,
+          "cumulative_profit": 827
+        },
+        {
+          "name": "兆豐產險",
+          "monthly_profit": 82,
+          "cumulative_profit": 233
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份合併自結業績資料",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "台新新光金控",
+        "monthly_profit": 6070,
+        "cumulative_profit": 21060
+      },
+      "subsidiaries": [
+        {
+          "name": "台新銀行",
+          "monthly_profit": 2230,
+          "cumulative_profit": 6350
+        },
+        {
+          "name": "新光銀行",
+          "monthly_profit": 760,
+          "cumulative_profit": 2240
+        },
+        {
+          "name": "新光人壽",
+          "monthly_profit": 3460,
+          "cumulative_profit": 11920
+        },
+        {
+          "name": "台新證券",
+          "monthly_profit": 190,
+          "cumulative_profit": 1570
+        },
+        {
+          "name": "元富證券",
+          "monthly_profit": 10,
+          "cumulative_profit": 1510
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2889",
+      "name": "國票金",
+      "announcement_date": "115/04/09",
+      "announcement_title": "公告本公司115年3月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國票金控",
+        "monthly_profit": 205,
+        "cumulative_profit": 897
+      },
+      "subsidiaries": [
+        {
+          "name": "國際票券",
+          "monthly_profit": 211,
+          "cumulative_profit": 708
+        },
+        {
+          "name": "國票證券",
+          "monthly_profit": 147,
+          "cumulative_profit": 600
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "announcement_date": "115/04/10",
+      "announcement_title": "永豐金控公告其與子公司115年3月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "永豐金控",
+        "monthly_profit": 2749,
+        "cumulative_profit": 10941
+      },
+      "subsidiaries": [
+        {
+          "name": "永豐銀行",
+          "monthly_profit": 1969,
+          "cumulative_profit": 7349
+        },
+        {
+          "name": "京城銀行",
+          "monthly_profit": 420,
+          "cumulative_profit": 1539
+        },
+        {
+          "name": "永豐金證券",
+          "monthly_profit": 549,
+          "cumulative_profit": 2362
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n115年度三月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 7577,
+        "cumulative_profit": 23104
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 6667,
+          "cumulative_profit": 16586
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 545,
+          "cumulative_profit": 7752
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘數",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "第一金控",
+        "monthly_profit": 2711,
+        "cumulative_profit": 8244
+      },
+      "subsidiaries": [
+        {
+          "name": "第一銀行",
+          "monthly_profit": 2692,
+          "cumulative_profit": 7573
+        },
+        {
+          "name": "第一金證券",
+          "monthly_profit": 119,
+          "cumulative_profit": 511
+        },
+        {
+          "name": "第一金人壽",
+          "monthly_profit": 2,
+          "cumulative_profit": 153
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "5880",
+      "name": "合庫金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "合庫金控",
+        "monthly_profit": 1955,
+        "cumulative_profit": 5812
+      },
+      "subsidiaries": [
+        {
+          "name": "合庫銀行",
+          "monthly_profit": 1868,
+          "cumulative_profit": 5085
+        },
+        {
+          "name": "合庫資產",
+          "monthly_profit": 34,
+          "cumulative_profit": 89
+        },
+        {
+          "name": "合庫票券",
+          "monthly_profit": 44,
+          "cumulative_profit": 118
+        },
+        {
+          "name": "合庫證券",
+          "monthly_profit": 75,
+          "cumulative_profit": 400
+        },
+        {
+          "name": "合庫人壽",
+          "monthly_profit": -24,
+          "cumulative_profit": 447
+        },
+        {
+          "name": "合庫投信",
+          "monthly_profit": 0.4,
+          "cumulative_profit": 0.2
         }
       ],
       "unit": "百萬元",
