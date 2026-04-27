@@ -17,9 +17,6 @@
       </div>
       <div class="header-actions">
         <div class="period-badge" id="period-badge">載入中...</div>
-        <button id="update-btn" class="btn btn-primary" onclick="triggerUpdate()">
-          🔄 更新資料
-        </button>
       </div>
     </div>
   </header>
@@ -102,36 +99,6 @@
     </div>
 
   </main>
-
-  <!-- ── GitHub Actions 觸發 Modal ── -->
-  <div id="trigger-modal" class="modal hidden">
-    <div class="modal-box">
-      <h3>🔄 觸發資料更新</h3>
-      <p>輸入你的 GitHub Personal Access Token（需要 <code>repo</code> 或 <code>actions:write</code> 權限）</p>
-      <div class="form-group">
-        <label>GitHub Token</label>
-        <input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx" />
-      </div>
-      <div class="form-group">
-        <label>GitHub 使用者名稱</label>
-        <input type="text" id="gh-user" placeholder="your-username" />
-      </div>
-      <div class="form-group">
-        <label>Repository 名稱</label>
-        <input type="text" id="gh-repo" placeholder="taiwan-finhold-tracker" value="taiwan-finhold-tracker" />
-      </div>
-      <div class="form-group">
-        <label>目標月份（選填，留空自動判斷）</label>
-        <input type="text" id="gh-month" placeholder="115/03" />
-      </div>
-      <div class="modal-actions">
-        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
-        <button class="btn btn-primary" onclick="confirmTrigger()">確認觸發</button>
-      </div>
-      <p class="token-note">⚠️ Token 僅在本次使用，不會儲存</p>
-    </div>
-  </div>
-  <div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()"></div>
 
   <!-- ── Scripts ── -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>

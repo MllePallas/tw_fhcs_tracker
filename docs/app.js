@@ -343,69 +343,6 @@ function renderBarChart(canvasId, prevChart, field, label, unit) {
   });
 }
 
-// ── 觸發更新 Modal ─────────────────────────────────────
-function triggerUpdate() {
-  document.getElementById('trigger-modal').classList.remove('hidden');
-  document.getElementById('modal-overlay').classList.remove('hidden');
-}
-
-function closeModal() {
-  document.getElementById('trigger-modal').classList.add('hidden');
-  document.getElementById('modal-overlay').classList.add('hidden');
-}
-
-async function confirmTrigger() {
-  const token = document.getElementById('gh-token').value.trim();
-  const user  = document.getElementById('gh-user').value.trim();
-  const repo  = document.getElementById('gh-repo').value.trim();
-  const month = document.getElementById('gh-month').value.trim();
-
-  if (!token || !user || !repo) {
-    alert('請填寫 Token、使用者名稱和 Repository 名稱');
-    return;
-  }
-
-  closeModal();
-  showStatus('info', '<span class="spinner"></span> 正在觸發 GitHub Actions，請稍待...');
-
-  const body = {
-    ref: 'main',
-    inputs: {}
-  };
-  if (month) body.inputs.target_month = month;
-
-  try {
-    const resp = await fetch(
-      `https://api.github.com/repos/${user}/${repo}/actions/workflows/update_data.yml/dispatches`,
-      {
-        method: 'POST',
-        headers: {
-          'Authorization': `Bearer ${token}`,
-          'Accept': 'application/vnd.github+json',
-          'Content-Type': 'application/json',
-          'X-GitHub-Api-Version': '2022-11-28',
-        },
-        body: JSON.stringify(body),
-      }
-    );
-
-    if (resp.status === 204) {
-      showStatus('success',
-        '✅ 已成功觸發！GitHub Actions 正在執行爬蟲，約 3-5 分鐘後資料將更新。' +
-        `<a href="https://github.com/${user}/${repo}/actions" target="_blank" ` +
-        `style="margin-left:8px;color:inherit;text-decoration:underline">查看進度 →</a>`
-      );
-      // 5 分鐘後自動重新載入資料
-      setTimeout(loadData, 5 * 60 * 1000);
-    } else {
-      const err = await resp.json().catch(() => ({}));
-      showStatus('error', `❌ 觸發失敗 (HTTP ${resp.status})：${err.message || '請確認 Token 和 Repo 設定'}`);
-    }
-  } catch (e) {
-    showStatus('error', `❌ 請求失敗：${e.message}`);
-  }
-}
-
 // ── 輔助函數 ───────────────────────────────────────────
 function updatePeriodBadge() {
   const p = state.data?.report_period || '—';

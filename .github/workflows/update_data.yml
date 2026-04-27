@@ -1,11 +1,12 @@
 name: Update Financial Holdings Data
 
 on:
-  # 每月 8-15 日，台灣時間早上 9:00（UTC 01:00）自動執行
+  # 每月 8-31 日，台灣時間 17:00 與 20:00 各執行一次
+  # （UTC 09:00 / 12:00；後續若該月 13 家已收齊，short-circuit 會直接 skip）
   schedule:
-    - cron: '0 1 8-15 * *'
+    - cron: '0 9,12 8-31 * *'
 
-  # 允許從網站按鈕或手動觸發
+  # 允許手動觸發
   workflow_dispatch:
     inputs:
       target_month:
@@ -34,20 +35,44 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── 2. Python 環境 ───────────────────────────────
+      # ── 2. Short-circuit：若該月已收齊 13 家，直接結束 ──
+      # 只在 schedule 觸發時檢查；workflow_dispatch 不檢查，方便重跑
+      - name: Check if target month already complete
+        id: check
+        if: github.event_name == 'schedule'
+        run: |
+          # 計算目標月份 = 上個月（以該月 15 日為基準避開月底邊界），轉成民國年/月
+          PREV=$(date -u -d "$(date -u +%Y-%m-15) -1 month" +'%Y-%m')
+          PREV_Y=${PREV%-*}
+          PREV_M=${PREV#*-}
+          TARGET=$(printf '%03d/%02d' $((PREV_Y - 1911)) $((10#$PREV_M)))
+          PERIOD=$(jq -r '.report_period // ""' docs/data/latest.json 2>/dev/null || echo "")
+          SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
+          echo "Target month: $TARGET"
+          echo "Latest period: $PERIOD, success_count: $SUCCESS"
+          if [ "$PERIOD" = "$TARGET" ] && [ "$SUCCESS" -ge 13 ]; then
+            echo "skip=true" >> $GITHUB_OUTPUT
+            echo "✅ Target month $TARGET already collected ($SUCCESS/13) — skipping"
+          else
+            echo "skip=false" >> $GITHUB_OUTPUT
+          fi
+
+      # ── 3. Python 環境 ───────────────────────────────
       - name: Set up Python 3.11
+        if: steps.check.outputs.skip != 'true'
         uses: actions/setup-python@v5
         with:
           python-version: '3.11'
           cache: 'pip'
 
       - name: Install Python dependencies
+        if: steps.check.outputs.skip != 'true'
         run: |
           pip install -r requirements.txt
-          playwright install chromium --with-deps
 
-      # ── 3. 執行爬蟲 ──────────────────────────────────
+      # ── 4. 執行爬蟲 ──────────────────────────────────
       - name: Run scraper
+        if: steps.check.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -73,8 +98,9 @@ jobs:
 
           python main.py $ARGS
 
-      # ── 4. 提交更新的資料 ─────────────────────────────
+      # ── 5. 提交更新的資料 ─────────────────────────────
       - name: Commit updated data
+        if: steps.check.outputs.skip != 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
@@ -83,7 +109,7 @@ jobs:
           git diff --staged --quiet || git commit -m "chore: update financial data $(date +'%Y-%m-%d %H:%M')"
           git push
 
-      # ── 5. 失敗通知（可選）────────────────────────────
+      # ── 6. 失敗通知（可選）────────────────────────────
       - name: Report failure
         if: failure()
         run: |
