@@ -18,7 +18,8 @@
       "Bash(cp -f data/115-02.json docs/data/115-02.json)",
       "Bash(cp -f data/115-03.json docs/data/115-03.json)",
       "Bash(cp -f data/index.json docs/data/index.json)",
-      "Bash(cp -f data/latest.json docs/data/latest.json)"
+      "Bash(cp -f data/latest.json docs/data/latest.json)",
+      "Skill(schedule)"
     ]
   }
 }

@@ -394,12 +394,16 @@ def main():
         elif new_result:
             final_companies.append(new_result)
 
+    # success_count 反映 final 結果（含 cache merge）的有效家數
+    final_success = sum(1 for c in final_companies if "error" not in c)
+    final_fail    = sum(1 for c in final_companies if "error" in c)
+
     # 建構輸出
     output = {
         "report_period": target_month,
         "last_updated": datetime.now().isoformat(),
-        "success_count": success_count,
-        "fail_count": fail_count,
+        "success_count": final_success,
+        "fail_count": final_fail,
         "companies": final_companies,
     }
 

@@ -120,8 +120,8 @@ function renderRow(c) {
   }
 
   const h       = c.holding_company || {};
-  const monthly = convertUnit(h.monthly_profit, h.unit, state.displayUnit);
-  const cumul   = convertUnit(h.cumulative_profit, h.unit, state.displayUnit);
+  const monthly = convertUnit(h.monthly_profit, c.unit, state.displayUnit);
+  const cumul   = convertUnit(h.cumulative_profit, c.unit, state.displayUnit);
 
   const mClass  = monthly >= 0 ? 'positive' : 'negative';
   const cClass  = cumul   >= 0 ? 'positive' : 'negative';
@@ -163,11 +163,11 @@ function renderSummaryCards() {
 
   for (const c of companies) {
     const h = c.holding_company;
-    const m = convertUnit(h.monthly_profit, h.unit, unit) || 0;
-    const cu = convertUnit(h.cumulative_profit, h.unit, unit) || 0;
+    const m = convertUnit(h.monthly_profit, c.unit, unit) || 0;
+    const cu = convertUnit(h.cumulative_profit, c.unit, unit) || 0;
     totalMonthly += m;
     totalCumul   += cu;
-    if (!top || m > convertUnit(top.holding_company.monthly_profit, top.holding_company.unit, unit)) {
+    if (!top || m > convertUnit(top.holding_company.monthly_profit, top.unit, unit)) {
       top = c;
     }
   }
@@ -194,7 +194,7 @@ function renderSummaryCards() {
     <div class="card">
       <div class="card-label">當月獲利第一</div>
       <div class="card-value" style="font-size:18px">${top ? top.name : '—'}</div>
-      <div class="card-sub">${top ? formatNum(convertUnit(top.holding_company.monthly_profit, top.holding_company.unit, unit)) + ' ' + unit : ''}</div>
+      <div class="card-sub">${top ? formatNum(convertUnit(top.holding_company.monthly_profit, top.unit, unit)) + ' ' + unit : ''}</div>
     </div>
   `;
 }
@@ -299,7 +299,7 @@ function renderBarChart(canvasId, prevChart, field, label, unit) {
     .filter(c => !c.error && c.holding_company?.[field] != null)
     .map(c => ({
       name: c.name,
-      value: convertUnit(c.holding_company[field], c.holding_company.unit, unit) || 0,
+      value: convertUnit(c.holding_company[field], c.unit, unit) || 0,
     }))
     .sort((a, b) => b.value - a.value);
 
@@ -369,20 +369,20 @@ function sortCompanies(arr) {
   switch (state.sortMode) {
     case 'monthly_desc':
       return arr.sort((a, b) => {
-        const av = a.holding_company ? convertUnit(a.holding_company.monthly_profit, a.holding_company.unit, unit) || 0 : -Infinity;
-        const bv = b.holding_company ? convertUnit(b.holding_company.monthly_profit, b.holding_company.unit, unit) || 0 : -Infinity;
+        const av = a.holding_company ? convertUnit(a.holding_company.monthly_profit, a.unit, unit) || 0 : -Infinity;
+        const bv = b.holding_company ? convertUnit(b.holding_company.monthly_profit, b.unit, unit) || 0 : -Infinity;
         return bv - av;
       });
     case 'monthly_asc':
       return arr.sort((a, b) => {
-        const av = a.holding_company ? convertUnit(a.holding_company.monthly_profit, a.holding_company.unit, unit) || 0 : Infinity;
-        const bv = b.holding_company ? convertUnit(b.holding_company.monthly_profit, b.holding_company.unit, unit) || 0 : Infinity;
+        const av = a.holding_company ? convertUnit(a.holding_company.monthly_profit, a.unit, unit) || 0 : Infinity;
+        const bv = b.holding_company ? convertUnit(b.holding_company.monthly_profit, b.unit, unit) || 0 : Infinity;
         return av - bv;
       });
     case 'cumulative_desc':
       return arr.sort((a, b) => {
-        const av = a.holding_company ? convertUnit(a.holding_company.cumulative_profit, a.holding_company.unit, unit) || 0 : -Infinity;
-        const bv = b.holding_company ? convertUnit(b.holding_company.cumulative_profit, b.holding_company.unit, unit) || 0 : -Infinity;
+        const av = a.holding_company ? convertUnit(a.holding_company.cumulative_profit, a.unit, unit) || 0 : -Infinity;
+        const bv = b.holding_company ? convertUnit(b.holding_company.cumulative_profit, b.unit, unit) || 0 : -Infinity;
         return bv - av;
       });
     case 'code':
