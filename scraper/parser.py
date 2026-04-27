@@ -111,13 +111,6 @@ def find_profit_announcement(
             logger.info(f"Loose-matched announcement: {ann['date']} {title}")
             return ann
 
-    # 第三輪：完全不限月份，只找損益公告（回傳最新一筆）
-    for ann in announcements:
-        title = ann.get("title", "")
-        if any(kw in title for kw in keywords):
-            logger.warning(f"Month not matched, using latest: {ann['date']} {title}")
-            return ann
-
     return None
 
 

@@ -139,11 +139,19 @@ class MopsClient:
 
         logger.info(f"[{stock_code}] Fetching announcements year={roc_year} month={month}")
 
-        try:
-            html = self._fetch_legacy("ajax_t05st01", parameters)
-        except requests.RequestException as e:
-            logger.error(f"[{stock_code}] Request failed: {e}")
-            return []
+        html = ""
+        for attempt in range(3):
+            try:
+                html = self._fetch_legacy("ajax_t05st01", parameters)
+                break
+            except requests.RequestException as e:
+                if attempt < 2:
+                    wait = 2 ** (attempt + 1)
+                    logger.warning(f"[{stock_code}] Attempt {attempt+1} failed: {e} — retry in {wait}s")
+                    time.sleep(wait)
+                else:
+                    logger.error(f"[{stock_code}] Request failed after 3 attempts: {e}")
+                    return []
 
         if not html:
             return []
@@ -284,11 +292,18 @@ class MopsClient:
         logger.info(
             f"[{stock_code}] Fetching detail seq_no={seq_no} spoke_date={spoke_date} spoke_time={spoke_time}"
         )
-        try:
-            return self._fetch_legacy("ajax_t05st01", parameters)
-        except requests.RequestException as e:
-            logger.error(f"[{stock_code}] Detail fetch failed: {e}")
-            return ""
+        for attempt in range(3):
+            try:
+                return self._fetch_legacy("ajax_t05st01", parameters)
+            except requests.RequestException as e:
+                if attempt < 2:
+                    wait = 2 ** (attempt + 1)
+                    logger.warning(f"[{stock_code}] Detail attempt {attempt+1} failed: {e} — retry in {wait}s")
+                    time.sleep(wait)
+                else:
+                    logger.error(f"[{stock_code}] Detail fetch failed after 3 attempts: {e}")
+                    return ""
+        return ""
 
     # ── 4. 即時重大訊息（單日全市場掃描）─────────────────
     def get_realtime_announcements(
