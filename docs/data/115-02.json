@@ -1,6 +1,6 @@
 {
   "report_period": "115/02",
-  "last_updated": "2026-04-27T16:14:49.344124",
+  "last_updated": "2026-04-27T17:12:13.201947",
   "success_count": 13,
   "fail_count": 0,
   "companies": [
@@ -319,8 +319,8 @@
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "凱基金控",
-        "monthly_profit": 4020,
-        "cumulative_profit": 9665,
+        "monthly_profit": 4019,
+        "cumulative_profit": 9664,
         "monthly_eps": null,
         "cumulative_eps": 0.57
       },
@@ -342,14 +342,14 @@
         {
           "name": "中華開發資本",
           "monthly_profit": 255,
-          "cumulative_profit": 335,
+          "cumulative_profit": 334,
           "monthly_eps": null,
           "cumulative_eps": 0.16
         },
         {
           "name": "凱基證券",
           "monthly_profit": 1882,
-          "cumulative_profit": 4701,
+          "cumulative_profit": 4700,
           "monthly_eps": null,
           "cumulative_eps": 2.59
         }
@@ -803,7 +803,7 @@
       "holding_company": {
         "name": "台新新光金控",
         "monthly_profit": 6160,
-        "cumulative_profit": 14990,
+        "cumulative_profit": 14980,
         "monthly_eps": null,
         "cumulative_eps": 0.59
       },
@@ -1363,7 +1363,7 @@
       "holding_company": {
         "name": "合庫金控",
         "monthly_profit": 1869,
-        "cumulative_profit": 3857,
+        "cumulative_profit": 3624,
         "monthly_eps": null,
         "cumulative_eps": 0.23
       },

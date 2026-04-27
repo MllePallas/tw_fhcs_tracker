@@ -1,6 +1,6 @@
 {
   "report_period": "115/01",
-  "last_updated": "2026-04-27T16:09:23.359197",
+  "last_updated": "2026-04-27T17:06:53.692993",
   "success_count": 13,
   "fail_count": 0,
   "companies": [
@@ -191,7 +191,7 @@
         "name": "國泰金控",
         "monthly_profit": 14610,
         "cumulative_profit": 14610,
-        "monthly_eps": 0.99,
+        "monthly_eps": null,
         "cumulative_eps": 0.99
       },
       "subsidiaries": [
@@ -199,35 +199,35 @@
           "name": "國泰人壽",
           "monthly_profit": 8650,
           "cumulative_profit": 8650,
-          "monthly_eps": 1.36,
+          "monthly_eps": null,
           "cumulative_eps": 1.36
         },
         {
           "name": "國泰世華銀行",
           "monthly_profit": 5130,
           "cumulative_profit": 5130,
-          "monthly_eps": 0.39,
+          "monthly_eps": null,
           "cumulative_eps": 0.39
         },
         {
           "name": "國泰產險",
           "monthly_profit": 330,
           "cumulative_profit": 330,
-          "monthly_eps": 1.64,
+          "monthly_eps": null,
           "cumulative_eps": 1.64
         },
         {
           "name": "國泰證券",
           "monthly_profit": 770,
           "cumulative_profit": 770,
-          "monthly_eps": 1.0,
+          "monthly_eps": null,
           "cumulative_eps": 1.0
         },
         {
           "name": "國泰投信",
           "monthly_profit": 320,
           "cumulative_profit": 320,
-          "monthly_eps": 2.14,
+          "monthly_eps": null,
           "cumulative_eps": 2.14
         }
       ],
@@ -319,8 +319,8 @@
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "凱基金控",
-        "monthly_profit": 5646,
-        "cumulative_profit": 5646,
+        "monthly_profit": 5645,
+        "cumulative_profit": 5645,
         "monthly_eps": 0.33,
         "cumulative_eps": 0.33
       },
@@ -341,8 +341,8 @@
         },
         {
           "name": "中華開發資本",
-          "monthly_profit": 80,
-          "cumulative_profit": 80,
+          "monthly_profit": 79,
+          "cumulative_profit": 79,
           "monthly_eps": 0.04,
           "cumulative_eps": 0.04
         },
@@ -1362,8 +1362,8 @@
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "合庫金控",
-        "monthly_profit": 1988,
-        "cumulative_profit": 1988,
+        "monthly_profit": 1903,
+        "cumulative_profit": 1903,
         "monthly_eps": null,
         "cumulative_eps": 0.12
       },
