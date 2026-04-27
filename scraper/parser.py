@@ -347,20 +347,30 @@ def llm_parse(html: str, company_name: str, api_key: str) -> Optional[dict]:
 {{
   "holding_company": {{
     "name": "公司名稱",
-    "monthly_profit": 換算後的數字（百萬元，負數用負號），
-    "cumulative_profit": 換算後的數字（百萬元）
+    "monthly_profit": 當月稅後淨利（百萬元，負數用負號），
+    "cumulative_profit": 累計稅後淨利（百萬元），
+    "monthly_eps": 當月稅後 EPS（元，可為 null），
+    "cumulative_eps": 累計稅後 EPS（元）
   }},
   "subsidiaries": [
     {{
       "name": "子公司名稱",
-      "monthly_profit": 換算後的數字（百萬元）,
-      "cumulative_profit": 換算後的數字（百萬元）
+      "monthly_profit": 當月稅後淨利（百萬元）,
+      "cumulative_profit": 累計稅後淨利（百萬元），
+      "monthly_eps": 當月稅後 EPS（元，可為 null）,
+      "cumulative_eps": 累計稅後 EPS（元，可為 null）
     }}
   ],
   "unit": "百萬元",
   "report_month": "民國年/月，如 115/03",
   "parse_method": "llm"
 }}
+
+【EPS 規則】
+- EPS 單位固定「元」，不需換算
+- 公告若只列「累計 EPS」（最常見）→ cumulative_eps 填數字，monthly_eps 填 null
+- 公告若同時列「當月 EPS」與「累計 EPS」→ 兩者都填
+- 公告完全沒列 EPS（罕見）→ 兩個都填 null
 
 【其他規則】
 - 數字若為括號表示法如 (1,234)，代表負數 -1234

@@ -386,6 +386,11 @@ def main():
         old_result = existing_by_code.get(code)
 
         if new_result and "error" not in new_result:
+            # 重新爬取覆寫財報數字，但保留新聞摘要等不可重新生成的欄位
+            if old_result:
+                for k in ("news_summary", "news_sources", "news_generated_at"):
+                    if k in old_result:
+                        new_result[k] = old_result[k]
             final_companies.append(new_result)
         elif old_result and existing.get("report_period") == target_month:
             # 舊數據同一期間，沿用

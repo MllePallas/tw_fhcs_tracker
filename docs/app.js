@@ -111,7 +111,7 @@ function renderRow(c) {
     return `<tr class="error-row">
       <td class="col-code">${c.code}</td>
       <td><span class="company-link">${c.name}</span></td>
-      <td colspan="2" class="center" style="color:#718096;font-size:12px">
+      <td colspan="4" class="center" style="color:#718096;font-size:12px">
         ${c.error_msg || '資料待更新'}
       </td>
       <td class="center"><span class="status-tag status-error">未取得</span></td>
@@ -129,25 +129,43 @@ function renderRow(c) {
   const mDisplay = monthly  != null ? formatNum(monthly)  : '—';
   const cDisplay = cumul    != null ? formatNum(cumul)     : '—';
 
+  // EPS：當月 EPS 公告通常沒列，可用 月損益/累計損益 × 累計EPS 推算
+  const epsM = h.monthly_eps != null
+    ? h.monthly_eps
+    : (h.monthly_profit != null && h.cumulative_profit && h.cumulative_eps != null
+        ? h.monthly_profit / h.cumulative_profit * h.cumulative_eps
+        : null);
+  const epsC = h.cumulative_eps;
+  const epsMClass = (epsM ?? 0) >= 0 ? 'positive' : 'negative';
+  const epsCClass = (epsC ?? 0) >= 0 ? 'positive' : 'negative';
+  const epsMDisp = epsM != null ? formatEps(epsM) : '—';
+  const epsCDisp = epsC != null ? formatEps(epsC) : '—';
+
   const sourceLink = c.source_url
     ? `<a class="source-link" href="${c.source_url}" target="_blank" rel="noopener">
          📄 ${c.announcement_date || '公告'}
        </a>`
     : '—';
 
-  const hasSubs = (c.subsidiaries || []).length > 0;
-  const nameCell = hasSubs
-    ? `<a class="company-link" onclick="showDetail('${c.code}')">${c.name}</a>`
-    : `<span>${c.name}</span>`;
+  const nameCell = `<a class="company-link" onclick="showDetail('${c.code}')">${c.name}</a>`;
 
   return `<tr>
     <td class="col-code">${c.code}</td>
     <td>${nameCell}</td>
     <td class="num ${mClass}">${mDisplay}</td>
     <td class="num ${cClass}">${cDisplay}</td>
+    <td class="num ${epsMClass}">${epsMDisp}</td>
+    <td class="num ${epsCClass}">${epsCDisp}</td>
     <td class="center"><span class="status-tag status-ok">✓ 已取得</span></td>
     <td class="center">${sourceLink}</td>
   </tr>`;
+}
+
+// EPS 用兩位小數顯示（負數用括號）
+function formatEps(n) {
+  if (n == null) return '—';
+  if (n < 0) return '(' + Math.abs(n).toFixed(2) + ')';
+  return n.toFixed(2);
 }
 
 // ── 摘要卡片 ───────────────────────────────────────────
@@ -430,6 +448,12 @@ function sortCompanies(arr) {
       return arr.sort((a, b) => {
         const av = a.holding_company ? convertUnit(a.holding_company.cumulative_profit, a.unit, unit) || 0 : -Infinity;
         const bv = b.holding_company ? convertUnit(b.holding_company.cumulative_profit, b.unit, unit) || 0 : -Infinity;
+        return bv - av;
+      });
+    case 'eps_cumul_desc':
+      return arr.sort((a, b) => {
+        const av = a.holding_company?.cumulative_eps ?? -Infinity;
+        const bv = b.holding_company?.cumulative_eps ?? -Infinity;
         return bv - av;
       });
     case 'code':
