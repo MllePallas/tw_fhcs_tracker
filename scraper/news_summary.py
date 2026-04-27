@@ -65,12 +65,15 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 2. `{name} {m}月 EPS 累計`
 
 ⚠️ 媒體標題通常用「西元年 + 月份」（例如「{name}3月」、「{m}月稅後」），**不會**用「民國年」格式。
-⚠️ 一般股利、股東會、ESG、研究報告類新聞都不算數，必須是專門報導當月損益的。
+⚠️ 媒體**經常以「累計第 N 季」或「Q{((m-1)//3)+1} 累計」**報導同一份月自結資料；這也算 RELEVANT。
+⚠️ 報導中的數字若與我提供的不完全一致（例如新聞說 EPS、累計、合併、淨值，與我給的當月稅後不同），那**很正常**——以新聞數字為準摘要即可，不要因此判 IRRELEVANT。
 
 【relevance 標記（重要）】
 你必須在輸出第一行寫一個標記，告訴下游 script 是否真的找到相關新聞：
-- 找到 1 則以上專門報導當月損益的新聞：第一行寫 `RELEVANT`
-- 沒找到、或只有股利/股東會/週邊新聞：第一行寫 `IRRELEVANT`
+- 找到 1 則以上專門報導 {western_year}/{m:02d} 月損益（含累計 Q{((m-1)//3)+1}、EPS、月增/年增等延伸報導）：第一行寫 `RELEVANT`
+- 完全沒搜到 {western_year} 年該月份的損益新聞，只有去年舊報導、股利、股東會、ESG：第一行寫 `IRRELEVANT`
+
+判斷時請看新聞日期（URL 中的 YYYYMMDD 或標題中的時間）：報導 {western_year}/{m:02d} 月損益的新聞通常發佈於該月隔月的 8-15 日，絕大多數都是 RELEVANT。
 
 【輸出格式】
 第一行：`RELEVANT` 或 `IRRELEVANT`
@@ -99,7 +102,7 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 請開始搜尋並產生摘要。"""
 
 
-def _extract_text_and_sources(response):
+def _extract_text_and_sources(response, debug=False):
     """從 Claude response.content 抽出最終文字與所有引用過的搜尋結果"""
     text_parts = []
     seen_urls = set()
@@ -109,11 +112,20 @@ def _extract_text_and_sources(response):
         btype = getattr(block, "type", "")
         if btype == "text":
             text_parts.append(block.text)
+        elif btype == "server_tool_use":
+            if debug:
+                inp = getattr(block, "input", {})
+                logger.info(f"[DEBUG] LLM search query: {inp}")
         elif btype == "web_search_tool_result":
             # block.content 是 list of WebSearchResultBlock
-            for r in getattr(block, "content", []):
+            results = getattr(block, "content", [])
+            if debug:
+                logger.info(f"[DEBUG] returned {len(results)} results")
+            for r in results:
                 url = getattr(r, "url", None)
                 title = getattr(r, "title", None)
+                if debug:
+                    logger.info(f"[DEBUG]   - {title} | {url}")
                 if url and url not in seen_urls:
                     seen_urls.add(url)
                     sources.append({"url": url, "title": title or url})
@@ -121,7 +133,7 @@ def _extract_text_and_sources(response):
     return "\n".join(text_parts).strip(), sources
 
 
-def summarize_one(client, name, code, period, monthly, cumul, subs):
+def summarize_one(client, name, code, period, monthly, cumul, subs, debug=False):
     """呼叫 Claude API + web_search，遇 429 自動退避重試最多 3 次"""
     import anthropic as _anthropic
     prompt = _build_prompt(name, code, period, monthly, cumul, subs)
@@ -139,7 +151,7 @@ def summarize_one(client, name, code, period, monthly, cumul, subs):
                 }],
                 messages=[{"role": "user", "content": prompt}],
             )
-            return _extract_text_and_sources(response)
+            return _extract_text_and_sources(response, debug=debug)
         except _anthropic.RateLimitError as e:
             last_err = e
             wait = 65 * (attempt + 1)  # 65, 130, 195 秒（rate limit 是 per minute）
@@ -166,6 +178,11 @@ def main():
         type=int,
         default=30,
         help="每家之間 sleep 秒數（避開 30K tokens/min rate limit），預設 30",
+    )
+    ap.add_argument(
+        "--debug",
+        action="store_true",
+        help="印出 LLM 實際的搜尋 query 與所有結果",
     )
     args = ap.parse_args()
 
@@ -227,17 +244,35 @@ def main():
 
         logger.info(f"[{name}] generating news summary...")
         try:
-            raw, sources = summarize_one(client, name, code, period, monthly, cumul, subs)
+            raw, sources = summarize_one(client, name, code, period, monthly, cumul, subs, debug=args.debug)
             if not raw:
                 logger.warning(f"[{name}] empty summary returned")
                 failed += 1
                 continue
 
-            # 解析第一行的 RELEVANT / IRRELEVANT 標記
-            first_line, _, body = raw.partition("\n")
-            marker = first_line.strip().upper()
-            summary = body.strip() or raw  # body 為空時 fallback 到 raw
-            relevant = marker.startswith("RELEVANT")
+            # 解析 RELEVANT / IRRELEVANT 標記（在前 6 行內找，LLM 有時會加前言）
+            lines = raw.splitlines()
+            marker_idx = -1
+            relevant = False
+            for i, ln in enumerate(lines[:6]):
+                t = ln.strip().upper()
+                if t == "RELEVANT" or t.startswith("RELEVANT "):
+                    relevant = True
+                    marker_idx = i
+                    break
+                if t == "IRRELEVANT" or t.startswith("IRRELEVANT "):
+                    relevant = False
+                    marker_idx = i
+                    break
+
+            if marker_idx >= 0:
+                # 標記後的內容為摘要正文
+                summary = "\n".join(lines[marker_idx + 1 :]).strip()
+            else:
+                # 沒找到標記就保守當 IRRELEVANT
+                summary = raw
+                relevant = False
+                logger.warning(f"[{name}] no marker found, treating as IRRELEVANT")
 
             if not relevant:
                 # 沒搜到專屬報導 → 直接標記「無相關說明」，不再 retry
