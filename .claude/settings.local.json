@@ -4,7 +4,16 @@
       "Bash(python *)",
       "Bash(git init *)",
       "Bash(git remote *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git config *)",
+      "Bash(git branch *)",
+      "Bash(git push *)",
+      "Bash(git fetch *)",
+      "Bash(git ls-tree *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git mv *)"
     ]
   }
 }
