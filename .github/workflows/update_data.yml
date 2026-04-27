@@ -78,7 +78,7 @@ jobs:
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
-          git add data/
+          git add docs/data/
           # 如果沒有變更就跳過
           git diff --staged --quiet || git commit -m "chore: update financial data $(date +'%Y-%m-%d %H:%M')"
           git push
@@ -88,46 +88,3 @@ jobs:
         if: failure()
         run: |
           echo "❌ Scraping failed! Check the logs above."
-          # 若有設定 Slack/Email webhook，可在此加入通知
-
-  # ── 靜態網站部署（GitHub Pages）──────────────────────
-  deploy:
-    needs: scrape
-    runs-on: ubuntu-latest
-    if: success()
-    permissions:
-      contents: read
-      pages: write
-      id-token: write
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-        with:
-          ref: main   # 確保拿到最新 commit（含剛 push 的 data）
-
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Prepare website files
-        run: |
-          # 將 web/ 和 data/ 整合到 _site/
-          mkdir -p _site/data
-          cp web/index.html _site/
-          cp web/app.js _site/
-          cp web/style.css _site/
-          cp data/latest.json _site/data/
-          # 複製所有月份歸檔
-          cp data/*.json _site/data/ 2>/dev/null || true
-
-      - name: Upload artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: '_site'
-
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
