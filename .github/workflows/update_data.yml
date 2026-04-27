@@ -98,6 +98,21 @@ jobs:
 
           python main.py $ARGS
 
+      # ── 4b. 補上新聞摘要（僅當該月已收齊 13 家）──────
+      - name: Generate news summaries
+        if: steps.check.outputs.skip != 'true'
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
+          if [ "$SUCCESS" -ge 13 ]; then
+            echo "All 13 collected — generating news summaries (idempotent)..."
+            cd scraper
+            python news_summary.py
+          else
+            echo "Only $SUCCESS/13 collected; skipping news summaries (next run will retry)"
+          fi
+
       # ── 5. 提交更新的資料 ─────────────────────────────
       - name: Commit updated data
         if: steps.check.outputs.skip != 'true'

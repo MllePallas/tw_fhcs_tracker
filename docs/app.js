@@ -199,6 +199,29 @@ function renderSummaryCards() {
   `;
 }
 
+// ── 簡易 markdown 渲染（**bold**、## 標題、段落） ────────
+function escapeHtml(s) {
+  return String(s)
+    .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+function renderMarkdown(md) {
+  if (!md) return '';
+  let html = escapeHtml(md);
+  // **bold**
+  html = html.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+  // 列表項：行首 - 開頭
+  html = html.replace(/^- (.+)$/gm, '<li>$1</li>');
+  html = html.replace(/(<li>.+?<\/li>(?:\n<li>.+?<\/li>)*)/g, '<ul>$1</ul>');
+  // ## 標題 (在段落分隔之前處理)
+  html = html.replace(/^## (.+)$/gm, '<h4>$1</h4>');
+  // 雙換行 → 段落；單換行 → 換行
+  const blocks = html.split(/\n{2,}/).map(p => {
+    if (/^<(h\d|ul|ol)/.test(p.trim())) return p;
+    return '<p>' + p.replace(/\n/g, '<br>') + '</p>';
+  });
+  return blocks.join('');
+}
+
 // ── 子公司明細面板 ─────────────────────────────────────
 function showDetail(code) {
   const c = state.data.companies.find(x => x.code === code);
@@ -208,7 +231,7 @@ function showDetail(code) {
   const title = document.getElementById('detail-title');
   const content = document.getElementById('detail-content');
 
-  title.textContent = `${c.name} (${c.code}) — 子公司明細`;
+  title.textContent = `${c.name} (${c.code}) — 詳細資訊`;
 
   const subs = c.subsidiaries || [];
   const unit = state.displayUnit;
@@ -216,62 +239,86 @@ function showDetail(code) {
   const hm  = convertUnit(h.monthly_profit,  c.unit, unit);
   const hcu = convertUnit(h.cumulative_profit, c.unit, unit);
 
-  if (subs.length === 0) {
-    content.innerHTML = '<p style="color:#718096">無子公司明細資料</p>';
-    panel.classList.remove('hidden');
-    panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    return;
+  // ── 新聞摘要區塊 ──
+  let newsHtml = '';
+  if (c.news_summary) {
+    const sources = c.news_sources || [];
+    const sourcesHtml = sources.length
+      ? `<div class="news-sources">來源：${sources.slice(0, 6).map(s =>
+          `<a href="${s.url}" target="_blank" rel="noopener">${escapeHtml((s.title || s.url).slice(0, 40))}</a>`
+        ).join(' ｜ ')}</div>`
+      : '';
+    const ts = c.news_generated_at
+      ? new Date(c.news_generated_at).toLocaleDateString('zh-TW')
+      : '';
+    newsHtml = `
+      <div class="news-summary">
+        <div class="news-summary-header">
+          <span>📰 媒體新聞摘要</span>
+          ${ts ? `<span class="news-summary-time">${ts} 生成</span>` : ''}
+        </div>
+        <div class="news-summary-body">${renderMarkdown(c.news_summary)}</div>
+        ${sourcesHtml}
+      </div>`;
   }
 
-  // 計算各子公司當月值（用於 bar chart）
-  const subEntries = subs.map(s => ({
-    name: s.name,
-    monthly: convertUnit(s.monthly_profit, c.unit, unit),
-    cumul:   convertUnit(s.cumulative_profit, c.unit, unit),
-  }));
-  const allMonthly = subEntries.map(s => s.monthly || 0);
-  const maxAbs = Math.max(...allMonthly.map(Math.abs), 1);
+  // ── 子公司表格區塊 ──
+  let tableHtml = '';
+  if (subs.length === 0) {
+    tableHtml = '<p style="color:#718096">無子公司明細資料</p>';
+  } else {
+    const subEntries = subs.map(s => ({
+      name: s.name,
+      monthly: convertUnit(s.monthly_profit, c.unit, unit),
+      cumul:   convertUnit(s.cumulative_profit, c.unit, unit),
+    }));
+    const allMonthly = subEntries.map(s => s.monthly || 0);
+    const maxAbs = Math.max(...allMonthly.map(Math.abs), 1);
 
-  // 表格列
-  const rows = subEntries.map(s => {
-    const mc = (s.monthly || 0) >= 0 ? 'positive' : 'negative';
-    const cc = (s.cumul   || 0) >= 0 ? 'positive' : 'negative';
-    const barPct = Math.abs((s.monthly || 0) / maxAbs * 100).toFixed(1);
-    const barColor = (s.monthly || 0) >= 0 ? '#276749' : '#9b1c1c';
-    return `<tr>
-      <td style="min-width:90px">${s.name}</td>
-      <td class="num ${mc}" style="white-space:nowrap">${s.monthly != null ? formatNum(s.monthly) : '—'}</td>
-      <td style="width:120px;padding-left:8px">
-        <div style="background:${barColor};height:10px;border-radius:3px;width:${barPct}%;min-width:2px;opacity:0.75"></div>
-      </td>
-      <td class="num ${cc}" style="white-space:nowrap">${s.cumul != null ? formatNum(s.cumul) : '—'}</td>
-    </tr>`;
-  }).join('');
+    const rows = subEntries.map(s => {
+      const mc = (s.monthly || 0) >= 0 ? 'positive' : 'negative';
+      const cc = (s.cumul   || 0) >= 0 ? 'positive' : 'negative';
+      const barPct = Math.abs((s.monthly || 0) / maxAbs * 100).toFixed(1);
+      const barColor = (s.monthly || 0) >= 0 ? '#276749' : '#9b1c1c';
+      return `<tr style="border-bottom:1px solid #f0f0f0">
+        <td style="padding:5px 8px;min-width:90px">${s.name}</td>
+        <td class="num ${mc}" style="padding:5px 8px;white-space:nowrap">${s.monthly != null ? formatNum(s.monthly) : '—'}</td>
+        <td style="padding:5px 8px;width:120px;padding-left:8px">
+          <div style="background:${barColor};height:10px;border-radius:3px;width:${barPct}%;min-width:2px;opacity:0.75"></div>
+        </td>
+        <td class="num ${cc}" style="padding:5px 8px;white-space:nowrap">${s.cumul != null ? formatNum(s.cumul) : '—'}</td>
+      </tr>`;
+    }).join('');
+
+    tableHtml = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="border-bottom:1px solid #e2e8f0">
+            <th style="text-align:left;padding:4px 8px;font-weight:600;color:#4a5568">子公司</th>
+            <th style="text-align:right;padding:4px 8px;font-weight:600;color:#4a5568">當月 (${unit})</th>
+            <th style="padding:4px 8px"></th>
+            <th style="text-align:right;padding:4px 8px;font-weight:600;color:#4a5568">累計 (${unit})</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#ebf8ff;font-weight:700;border-bottom:2px solid #bee3f8">
+            <td style="padding:5px 8px">${c.name}（合併）</td>
+            <td class="num ${hm>=0?'positive':'negative'}" style="text-align:right;padding:5px 8px">
+              ${hm!=null?formatNum(hm):'—'}
+            </td>
+            <td></td>
+            <td class="num ${hcu>=0?'positive':'negative'}" style="text-align:right;padding:5px 8px">
+              ${hcu!=null?formatNum(hcu):'—'}
+            </td>
+          </tr>
+          ${rows}
+        </tbody>
+      </table>`;
+  }
 
   content.innerHTML = `
-    <table style="width:100%;border-collapse:collapse;font-size:13px">
-      <thead>
-        <tr style="border-bottom:1px solid #e2e8f0">
-          <th style="text-align:left;padding:4px 8px;font-weight:600;color:#4a5568">子公司</th>
-          <th style="text-align:right;padding:4px 8px;font-weight:600;color:#4a5568">當月 (${unit})</th>
-          <th style="padding:4px 8px"></th>
-          <th style="text-align:right;padding:4px 8px;font-weight:600;color:#4a5568">累計 (${unit})</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr style="background:#ebf8ff;font-weight:700;border-bottom:2px solid #bee3f8">
-          <td style="padding:5px 8px">${c.name}（合併）</td>
-          <td class="num ${hm>=0?'positive':'negative'}" style="text-align:right;padding:5px 8px">
-            ${hm!=null?formatNum(hm):'—'}
-          </td>
-          <td></td>
-          <td class="num ${hcu>=0?'positive':'negative'}" style="text-align:right;padding:5px 8px">
-            ${hcu!=null?formatNum(hcu):'—'}
-          </td>
-        </tr>
-        ${rows.replace(/<tr>/g, '<tr style="border-bottom:1px solid #f0f0f0">').replace(/<td/g, '<td style="padding:5px 8px"').replace(/style="padding:5px 8px" style=/g, 'style=')}
-      </tbody>
-    </table>
+    ${newsHtml}
+    ${tableHtml}
     <p style="font-size:11px;color:#718096;margin-top:8px">
       公告日期：${c.announcement_date || '—'} ｜ 來源：<a href="${c.source_url||'#'}" target="_blank" style="color:#3182ce">MOPS ↗</a>
     </p>
