@@ -1,0 +1,40 @@
+{
+  "report_period": "115/03",
+  "last_updated": "2026-04-27T10:41:45.921047",
+  "success_count": 1,
+  "fail_count": 0,
+  "companies": [
+    {
+      "code": "2880",
+      "name": "華南金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司115年3月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "華南金控",
+        "monthly_profit": 2558,
+        "cumulative_profit": 7660
+      },
+      "subsidiaries": [
+        {
+          "name": "華南銀行",
+          "monthly_profit": 2057,
+          "cumulative_profit": 6141
+        },
+        {
+          "name": "華南永昌證券",
+          "monthly_profit": 384,
+          "cumulative_profit": 1130
+        },
+        {
+          "name": "華南產險",
+          "monthly_profit": 161,
+          "cumulative_profit": 506
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    }
+  ]
+}

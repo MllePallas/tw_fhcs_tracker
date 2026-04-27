@@ -1,0 +1,133 @@
+name: Update Financial Holdings Data
+
+on:
+  # 每月 8-15 日，台灣時間早上 9:00（UTC 01:00）自動執行
+  schedule:
+    - cron: '0 1 8-15 * *'
+
+  # 允許從網站按鈕或手動觸發
+  workflow_dispatch:
+    inputs:
+      target_month:
+        description: '目標月份（民國年/月，例如 115/03）；留空則自動判斷'
+        required: false
+        default: ''
+      stock_codes:
+        description: '指定公司代號，空格分隔（例如 2881 2882）；留空則爬取全部'
+        required: false
+        default: ''
+      enable_llm:
+        description: '是否啟用 LLM 兜底解析（true/false）'
+        required: false
+        default: 'true'
+
+jobs:
+  scrape:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write   # 允許 push 到 repo
+
+    steps:
+      # ── 1. Checkout ──────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      # ── 2. Python 環境 ───────────────────────────────
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install Python dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium --with-deps
+
+      # ── 3. 執行爬蟲 ──────────────────────────────────
+      - name: Run scraper
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+        run: |
+          cd scraper
+
+          # 組裝參數
+          ARGS=""
+
+          # 指定月份
+          if [ -n "${{ github.event.inputs.target_month }}" ]; then
+            ARGS="$ARGS --month ${{ github.event.inputs.target_month }}"
+          fi
+
+          # 指定公司
+          if [ -n "${{ github.event.inputs.stock_codes }}" ]; then
+            ARGS="$ARGS --codes ${{ github.event.inputs.stock_codes }}"
+          fi
+
+          # LLM 設定
+          if [ "${{ github.event.inputs.enable_llm }}" = "false" ]; then
+            ARGS="$ARGS --no-llm"
+          fi
+
+          python main.py $ARGS
+
+      # ── 4. 提交更新的資料 ─────────────────────────────
+      - name: Commit updated data
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add data/
+          # 如果沒有變更就跳過
+          git diff --staged --quiet || git commit -m "chore: update financial data $(date +'%Y-%m-%d %H:%M')"
+          git push
+
+      # ── 5. 失敗通知（可選）────────────────────────────
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "❌ Scraping failed! Check the logs above."
+          # 若有設定 Slack/Email webhook，可在此加入通知
+
+  # ── 靜態網站部署（GitHub Pages）──────────────────────
+  deploy:
+    needs: scrape
+    runs-on: ubuntu-latest
+    if: success()
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: main   # 確保拿到最新 commit（含剛 push 的 data）
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Prepare website files
+        run: |
+          # 將 web/ 和 data/ 整合到 _site/
+          mkdir -p _site/data
+          cp web/index.html _site/
+          cp web/app.js _site/
+          cp web/style.css _site/
+          cp data/latest.json _site/data/
+          # 複製所有月份歸檔
+          cp data/*.json _site/data/ 2>/dev/null || true
+
+      - name: Upload artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: '_site'
+
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

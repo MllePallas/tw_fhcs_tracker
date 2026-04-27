@@ -1,0 +1,919 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>台灣金控月自結獲利追蹤</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --bg:#f0f4f8;--surface:#ffffff;--border:#e2e8f0;
+  --primary:#1a56db;--primary-h:#1e429f;
+  --success:#057a55;--success-bg:#def7ec;
+  --warning:#92400e;--warning-bg:#fef3c7;
+  --error:#9b1c1c;--error-bg:#fde8e8;
+  --text:#1a202c;--text-muted:#718096;
+  --positive:#065f46;--negative:#9b1c1c;
+  --radius:8px;
+  --shadow:0 1px 3px rgba(0,0,0,.1),0 1px 2px rgba(0,0,0,.06);
+  --shadow-md:0 4px 6px rgba(0,0,0,.07),0 2px 4px rgba(0,0,0,.06);
+}
+body{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans TC",sans-serif;background:var(--bg);color:var(--text);font-size:14px;line-height:1.5}
+header{background:linear-gradient(135deg,#1a56db 0%,#1e429f 100%);color:#fff;padding:16px 24px;box-shadow:var(--shadow-md);position:sticky;top:0;z-index:100}
+.header-inner{max-width:1200px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;gap:16px;flex-wrap:wrap}
+header h1{font-size:20px;font-weight:700}
+.subtitle{font-size:12px;opacity:.8;margin-top:2px}
+.header-actions{display:flex;align-items:center;gap:12px;flex-wrap:wrap}
+.period-badge{background:rgba(255,255,255,.2);border:1px solid rgba(255,255,255,.4);border-radius:20px;padding:4px 14px;font-size:13px;font-weight:600}
+.btn{border:none;border-radius:var(--radius);cursor:pointer;font-size:13px;font-weight:600;padding:8px 18px;transition:background .15s}
+.btn-primary{background:#fff;color:var(--primary)}
+.btn-primary:hover{background:#e8f0fe}
+.btn-close{background:transparent;color:var(--text-muted);font-size:18px;padding:4px 10px}
+.status-bar{max-width:1200px;margin:12px auto 0;padding:10px 16px;border-radius:var(--radius);font-size:13px;font-weight:500}
+.status-bar.success{background:var(--success-bg);color:var(--success)}
+.status-bar.info{background:#e8f0fe;color:var(--primary)}
+.hidden{display:none!important}
+main{max-width:1200px;margin:20px auto;padding:0 16px 40px}
+.controls{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:8px}
+.controls-right{display:flex;align-items:center;gap:8px}
+.controls-right label{color:var(--text-muted);font-size:13px}
+.controls-right select{border:1px solid var(--border);border-radius:6px;padding:5px 10px;font-size:13px;background:var(--surface);cursor:pointer}
+.last-updated{color:var(--text-muted);font-size:12px}
+.summary-cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-bottom:20px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:16px;box-shadow:var(--shadow)}
+.card-label{font-size:12px;color:var(--text-muted);margin-bottom:6px}
+.card-value{font-size:22px;font-weight:700;color:var(--text)}
+.card-sub{font-size:11px;color:var(--text-muted);margin-top:4px}
+.card-value.positive{color:var(--positive)}
+.card-value.negative{color:var(--negative)}
+.table-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);overflow:auto;margin-bottom:24px}
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:#f7fafc;color:var(--text-muted);font-weight:600;text-align:center;padding:10px 12px;border-bottom:2px solid var(--border);white-space:nowrap}
+thead th.col-name,thead th.col-code{text-align:left}
+tbody tr{border-bottom:1px solid var(--border);transition:background .1s}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:#f7fafc}
+tbody tr.error-row{background:#fff8f8}
+td{padding:10px 12px;vertical-align:middle}
+td.num{text-align:right;font-variant-numeric:tabular-nums;font-weight:600}
+td.num.positive{color:var(--positive)}
+td.num.negative{color:var(--negative)}
+td.center{text-align:center}
+td.col-code{font-weight:700;color:var(--primary)}
+.company-link{color:var(--text);text-decoration:none;font-weight:600;cursor:pointer}
+.company-link:hover{color:var(--primary);text-decoration:underline}
+.status-tag{display:inline-block;padding:2px 8px;border-radius:20px;font-size:11px;font-weight:600}
+.status-ok{background:var(--success-bg);color:var(--success)}
+.status-error{background:var(--error-bg);color:var(--error)}
+.source-link{color:var(--primary);text-decoration:none;font-size:12px}
+.source-link:hover{text-decoration:underline}
+.loading-cell{text-align:center;padding:40px;color:var(--text-muted)}
+.detail-panel{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow-md);margin-bottom:24px;overflow:hidden}
+.detail-header{display:flex;justify-content:space-between;align-items:center;padding:14px 20px;background:#f7fafc;border-bottom:1px solid var(--border)}
+.detail-header h3{font-size:15px;font-weight:700}
+#detail-content{padding:16px 20px;overflow-x:auto}
+#detail-content table{font-size:13px}
+.sub-bar-cell{width:120px;padding-left:6px}
+.sub-bar-track{width:100%;height:8px;background:#e2e8f0;border-radius:4px;overflow:hidden}
+.sub-bar-fill{height:8px;border-radius:4px}
+.section-title{font-size:16px;font-weight:700;color:var(--text);margin-bottom:12px}
+.chart-container{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:20px;max-height:380px}
+.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.5);z-index:200}
+.modal{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%);background:var(--surface);border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,.3);padding:28px;width:min(480px,95vw);z-index:201}
+.modal h3{font-size:17px;margin-bottom:12px}
+.modal p{font-size:13px;color:var(--text-muted);margin-bottom:16px}
+.form-group{margin-bottom:14px}
+.form-group label{display:block;font-size:12px;font-weight:600;color:var(--text-muted);margin-bottom:6px;text-transform:uppercase;letter-spacing:.5px}
+.form-group input{width:100%;border:1px solid var(--border);border-radius:6px;padding:8px 12px;font-size:14px}
+.form-group input:focus{outline:2px solid var(--primary);border-color:var(--primary)}
+.modal-actions{display:flex;justify-content:flex-end;gap:10px;margin-top:20px}
+.token-note{font-size:11px!important;color:#e53e3e!important;margin-top:12px!important;margin-bottom:0!important}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner{display:inline-block;width:14px;height:14px;border:2px solid rgba(26,86,219,.3);border-top-color:var(--primary);border-radius:50%;animation:spin .6s linear infinite;vertical-align:middle;margin-right:6px}
+@media(max-width:640px){header h1{font-size:16px}.col-source{display:none}.card-value{font-size:18px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="header-inner">
+    <div class="header-title">
+      <h1>🏦 台灣金控月自結獲利</h1>
+      <p class="subtitle">13 家上市金控 ｜ 資料來源：公開資訊觀測站 ｜ 單位：NT$m（百萬元）</p>
+    </div>
+    <div class="header-actions">
+      <div class="period-badge" id="period-badge">載入中...</div>
+      <button class="btn btn-primary" onclick="triggerUpdate()">🔄 更新資料</button>
+    </div>
+  </div>
+</header>
+
+<div id="status-bar" class="status-bar hidden"></div>
+
+<main>
+  <div class="controls">
+    <div class="controls-left"><span class="last-updated" id="last-updated"></span></div>
+    <div class="controls-right">
+      <label>排序：</label>
+      <select id="sort-select" onchange="renderAll()">
+        <option value="code">代號</option>
+        <option value="monthly_desc">當月獲利 ↓</option>
+        <option value="monthly_asc">當月獲利 ↑</option>
+        <option value="cumulative_desc">累計獲利 ↓</option>
+      </select>
+      <label>單位：</label>
+      <select id="unit-select" onchange="renderAll()">
+        <option value="百萬元" selected>百萬元 (NT$m)</option>
+        <option value="億元">億元</option>
+        <option value="千元">千元</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="summary-cards" id="summary-cards"></div>
+
+  <div class="table-container">
+    <table id="main-table">
+      <thead>
+        <tr>
+          <th rowspan="2" class="col-code">代號</th>
+          <th rowspan="2" class="col-name">金控</th>
+          <th colspan="2" class="col-group">合併稅後淨利</th>
+          <th rowspan="2" class="col-status">狀態</th>
+          <th rowspan="2" class="col-source">來源</th>
+        </tr>
+        <tr>
+          <th class="col-monthly" id="monthly-header">當月</th>
+          <th class="col-cumulative">累計</th>
+        </tr>
+      </thead>
+      <tbody id="main-tbody">
+        <tr><td colspan="6" class="loading-cell">載入中...</td></tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div id="detail-panel" class="detail-panel hidden">
+    <div class="detail-header">
+      <h3 id="detail-title"></h3>
+      <button onclick="closeDetail()" class="btn btn-close">✕</button>
+    </div>
+    <div id="detail-content"></div>
+  </div>
+
+  <div class="section-title">📈 當月獲利比較（NT$m）</div>
+  <div class="chart-container">
+    <canvas id="bar-chart"></canvas>
+  </div>
+</main>
+
+<div id="trigger-modal" class="modal hidden">
+  <div>
+    <h3>🔄 觸發資料更新</h3>
+    <p>輸入 GitHub Personal Access Token（需要 <code>repo</code> 或 <code>actions:write</code> 權限）</p>
+    <div class="form-group"><label>GitHub Token</label><input type="password" id="gh-token" placeholder="ghp_xxxxxxxxxxxx"/></div>
+    <div class="form-group"><label>GitHub 使用者名稱</label><input type="text" id="gh-user" placeholder="your-username"/></div>
+    <div class="form-group"><label>Repository 名稱</label><input type="text" id="gh-repo" placeholder="taiwan-finhold-tracker" value="taiwan-finhold-tracker"/></div>
+    <div class="form-group"><label>目標月份（選填）</label><input type="text" id="gh-month" placeholder="115/03"/></div>
+    <div class="modal-actions">
+      <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+      <button class="btn btn-primary" onclick="confirmTrigger()">確認觸發</button>
+    </div>
+    <p class="token-note">⚠️ Token 僅本次使用，不會儲存</p>
+  </div>
+</div>
+<div id="modal-overlay" class="modal-overlay hidden" onclick="closeModal()"></div>
+
+<script>
+'use strict';
+// ── 內嵌資料（不需要 fetch） ────────────────────────────
+const EMBEDDED_DATA = {
+  "report_period": "115/03",
+  "last_updated": "2026-04-21T18:39:56.352886",
+  "success_count": 12,
+  "fail_count": 1,
+  "companies": [
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "announcement_date": "115/04/15",
+      "announcement_title": "公告本公司暨主要子公司115年3月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": 2570.0,
+        "cumulative_profit": 33270.0
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 3590.0,
+          "cumulative_profit": 12160.0
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 1050.0,
+          "cumulative_profit": 3960.0
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 470.0,
+          "cumulative_profit": 2590.0
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": -1940.0,
+          "cumulative_profit": 15120.0
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 130.0,
+          "cumulative_profit": 410.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "announcement_date": "115/04/15",
+      "announcement_title": "公告本公司暨主要子公司115年03月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 5030.0,
+        "cumulative_profit": 31660.0
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 720.0,
+          "cumulative_profit": 17370.0
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4060.0,
+          "cumulative_profit": 13200.0
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 420.0,
+          "cumulative_profit": 1060.0
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 540.0,
+          "cumulative_profit": 1540.0
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 300.0,
+          "cumulative_profit": 860.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2883",
+      "name": "開發金",
+      "announcement_date": "115/04/13",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "凱基金控",
+        "monthly_profit": 2027.0,
+        "cumulative_profit": 11692.0
+      },
+      "subsidiaries": [
+        {
+          "name": "凱基人壽",
+          "monthly_profit": 717.0,
+          "cumulative_profit": 4796.0
+        },
+        {
+          "name": "凱基銀行",
+          "monthly_profit": 705.0,
+          "cumulative_profit": 2099.0
+        },
+        {
+          "name": "中華開發資本",
+          "monthly_profit": -148.0,
+          "cumulative_profit": 187.0
+        },
+        {
+          "name": "凱基證券",
+          "monthly_profit": 1207.0,
+          "cumulative_profit": 5907.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "announcement_date": "115/04/08",
+      "announcement_title": "公告本公司暨子公司115年3月自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "玉山金控",
+        "monthly_profit": 3013.0,
+        "cumulative_profit": 10057.0
+      },
+      "subsidiaries": [
+        {
+          "name": "玉山銀行",
+          "monthly_profit": 2641.0,
+          "cumulative_profit": 8762.0
+        },
+        {
+          "name": "玉山證券",
+          "monthly_profit": 289.0,
+          "cumulative_profit": 1053.0
+        },
+        {
+          "name": "玉山創投",
+          "monthly_profit": 207.0,
+          "cumulative_profit": 710.0
+        },
+        {
+          "name": "玉山投信",
+          "monthly_profit": 38.0,
+          "cumulative_profit": 100.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "announcement_date": "115/04/13",
+      "announcement_title": "元大金控公告115年3月份自結合併損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "元大金控",
+        "monthly_profit": 4616.0,
+        "cumulative_profit": 14409.0
+      },
+      "subsidiaries": [
+        {
+          "name": "元大證券",
+          "monthly_profit": 2867.0,
+          "cumulative_profit": 8735.0
+        },
+        {
+          "name": "元大銀行",
+          "monthly_profit": 1151.0,
+          "cumulative_profit": 3688.0
+        },
+        {
+          "name": "元大期貨",
+          "monthly_profit": 281.0,
+          "cumulative_profit": 700.0
+        },
+        {
+          "name": "元大人壽",
+          "monthly_profit": 177.0,
+          "cumulative_profit": 1290.0
+        },
+        {
+          "name": "元大投信",
+          "monthly_profit": 446.0,
+          "cumulative_profit": 1291.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2886",
+      "name": "兆豐金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "兆豐金控",
+        "monthly_profit": 2401.0,
+        "cumulative_profit": 9397.0
+      },
+      "subsidiaries": [
+        {
+          "name": "兆豐銀行",
+          "monthly_profit": 1592.0,
+          "cumulative_profit": 7080.0
+        },
+        {
+          "name": "兆豐證券",
+          "monthly_profit": 500.0,
+          "cumulative_profit": 1346.0
+        },
+        {
+          "name": "兆豐票券",
+          "monthly_profit": 281.0,
+          "cumulative_profit": 827.0
+        },
+        {
+          "name": "兆豐產險",
+          "monthly_profit": 82.0,
+          "cumulative_profit": 233.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份合併自結業績資料",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "台新新光金控",
+        "monthly_profit": 6070.0,
+        "cumulative_profit": 21060.0
+      },
+      "subsidiaries": [
+        {
+          "name": "台新銀行",
+          "monthly_profit": 2230.0,
+          "cumulative_profit": 6350.0
+        },
+        {
+          "name": "新光銀行",
+          "monthly_profit": 760.0,
+          "cumulative_profit": 2240.0
+        },
+        {
+          "name": "新光人壽",
+          "monthly_profit": 3460.0,
+          "cumulative_profit": 11920.0
+        },
+        {
+          "name": "台新證券",
+          "monthly_profit": 190.0,
+          "cumulative_profit": 1570.0
+        },
+        {
+          "name": "元富證券",
+          "monthly_profit": 10.0,
+          "cumulative_profit": 1510.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2889",
+      "name": "國票金",
+      "announcement_date": "115/04/09",
+      "announcement_title": "公告本公司115年3月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國票金控",
+        "monthly_profit": 205.0,
+        "cumulative_profit": 897.0
+      },
+      "subsidiaries": [
+        {
+          "name": "國際票券",
+          "monthly_profit": 211.0,
+          "cumulative_profit": 708.0
+        },
+        {
+          "name": "國票證券",
+          "monthly_profit": 147.0,
+          "cumulative_profit": 600.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "announcement_date": "115/04/10",
+      "announcement_title": "永豐金控公告其與子公司115年3月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "永豐金控",
+        "monthly_profit": 2749.0,
+        "cumulative_profit": 10941.0
+      },
+      "subsidiaries": [
+        {
+          "name": "永豐銀行",
+          "monthly_profit": 1969.0,
+          "cumulative_profit": 7349.0
+        },
+        {
+          "name": "京城銀行",
+          "monthly_profit": 420.0,
+          "cumulative_profit": 1539.0
+        },
+        {
+          "name": "永豐金證券",
+          "monthly_profit": 549.0,
+          "cumulative_profit": 2362.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司
+115年度三月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 7577.0,
+        "cumulative_profit": 23104.0
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 6667.0,
+          "cumulative_profit": 16586.0
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 545.0,
+          "cumulative_profit": 7752.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘數",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "第一金控",
+        "monthly_profit": 2711.0,
+        "cumulative_profit": 8244.0
+      },
+      "subsidiaries": [
+        {
+          "name": "第一銀行",
+          "monthly_profit": 2692.0,
+          "cumulative_profit": 7573.0
+        },
+        {
+          "name": "第一金證券",
+          "monthly_profit": 119.0,
+          "cumulative_profit": 511.0
+        },
+        {
+          "name": "第一金人壽",
+          "monthly_profit": 2.0,
+          "cumulative_profit": 153.0
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    },
+    {
+      "code": "5880",
+      "name": "合庫金",
+      "announcement_date": "115/04/14",
+      "announcement_title": "公告本公司暨主要子公司115年3月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "合庫金控(合併)",
+        "monthly_profit": 1955.0,
+        "cumulative_profit": 5812.0
+      },
+      "subsidiaries": [
+        {
+          "name": "合庫銀行(合併)",
+          "monthly_profit": 1868.0,
+          "cumulative_profit": 5085.0
+        },
+        {
+          "name": "合庫資產(合併)",
+          "monthly_profit": 34.0,
+          "cumulative_profit": 89.0
+        },
+        {
+          "name": "合庫票券(個別)",
+          "monthly_profit": 44.0,
+          "cumulative_profit": 118.0
+        },
+        {
+          "name": "合庫證券(合併)",
+          "monthly_profit": 75.0,
+          "cumulative_profit": 400.0
+        },
+        {
+          "name": "合庫人壽(個別)",
+          "monthly_profit": -24.0,
+          "cumulative_profit": 447.0
+        },
+        {
+          "name": "合庫投信(個別)",
+          "monthly_profit": 0.4,
+          "cumulative_profit": 0.2
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/03",
+      "parse_method": "llm"
+    }
+  ]
+};
+
+let state = { data: null, displayUnit: '百萬元', sortMode: 'code', barChart: null };
+
+document.addEventListener('DOMContentLoaded', () => {
+  state.data = EMBEDDED_DATA;
+  renderAll();
+});
+
+function renderAll() {
+  if (!state.data) return;
+  state.displayUnit = document.getElementById('unit-select').value;
+  state.sortMode    = document.getElementById('sort-select').value;
+  updatePeriodBadge();
+  updateLastUpdated();
+  renderSummaryCards();
+  renderTable();
+  renderChart();
+}
+
+const UNIT_MULTIPLIER = { '千元': 1, '百萬元': 1000, '億元': 100000 };
+function convertUnit(value, fromUnit, toUnit) {
+  if (value == null) return null;
+  const from = UNIT_MULTIPLIER[fromUnit] || 1000;
+  const to   = UNIT_MULTIPLIER[toUnit]   || 1000;
+  return (value * from) / to;
+}
+
+function formatNum(n) {
+  if (n == null) return '—';
+  const abs = Math.abs(n);
+  if (abs >= 1000) return n.toLocaleString('zh-TW', {minimumFractionDigits:0, maximumFractionDigits:0});
+  if (abs >= 10)   return n.toFixed(1);
+  if (abs >= 0.1)  return n.toFixed(2);
+  return n.toFixed(3);
+}
+
+function sortCompanies(arr) {
+  const unit = state.displayUnit;
+  switch (state.sortMode) {
+    case 'monthly_desc':
+      return arr.sort((a,b)=>{
+        const av = a.holding_company ? convertUnit(a.holding_company.monthly_profit, a.unit||'百萬元', unit)||0 : -Infinity;
+        const bv = b.holding_company ? convertUnit(b.holding_company.monthly_profit, b.unit||'百萬元', unit)||0 : -Infinity;
+        return bv-av;
+      });
+    case 'monthly_asc':
+      return arr.sort((a,b)=>{
+        const av = a.holding_company ? convertUnit(a.holding_company.monthly_profit, a.unit||'百萬元', unit)||0 : Infinity;
+        const bv = b.holding_company ? convertUnit(b.holding_company.monthly_profit, b.unit||'百萬元', unit)||0 : Infinity;
+        return av-bv;
+      });
+    case 'cumulative_desc':
+      return arr.sort((a,b)=>{
+        const av = a.holding_company ? convertUnit(a.holding_company.cumulative_profit, a.unit||'百萬元', unit)||0 : -Infinity;
+        const bv = b.holding_company ? convertUnit(b.holding_company.cumulative_profit, b.unit||'百萬元', unit)||0 : -Infinity;
+        return bv-av;
+      });
+    default:
+      return arr.sort((a,b)=>a.code.localeCompare(b.code));
+  }
+}
+
+function renderTable() {
+  const tbody  = document.getElementById('main-tbody');
+  const header = document.getElementById('monthly-header');
+  const period = state.data.report_period || '';
+  header.textContent = `當月 (${period})`;
+  const companies = sortCompanies([...state.data.companies]);
+  tbody.innerHTML = companies.map(renderRow).join('');
+}
+
+function renderRow(c) {
+  if (c.error && !c.holding_company) {
+    return `<tr class="error-row">
+      <td class="col-code">${c.code}</td>
+      <td><span>${c.name}</span></td>
+      <td colspan="2" class="center" style="color:var(--text-muted);font-size:12px">${c.error_msg||'資料待更新'}</td>
+      <td class="center"><span class="status-tag status-error">未取得</span></td>
+      <td></td>
+    </tr>`;
+  }
+  const h = c.holding_company || {};
+  const unit = state.displayUnit;
+  const srcUnit = c.unit || '百萬元';
+  const monthly = convertUnit(h.monthly_profit, srcUnit, unit);
+  const cumul   = convertUnit(h.cumulative_profit, srcUnit, unit);
+  const mClass  = monthly >= 0 ? 'positive' : 'negative';
+  const cClass  = cumul   >= 0 ? 'positive' : 'negative';
+  const hasSubs = (c.subsidiaries||[]).length > 0;
+  const nameCell = hasSubs
+    ? `<a class="company-link" onclick="showDetail('${c.code}')" title="點擊展開子公司明細">${c.name} ▾</a>`
+    : `<span>${c.name}</span>`;
+  const sourceLink = c.source_url
+    ? `<a class="source-link" href="${c.source_url}" target="_blank">📄 ${c.announcement_date||'公告'}</a>`
+    : '—';
+  return `<tr>
+    <td class="col-code">${c.code}</td>
+    <td>${nameCell}</td>
+    <td class="num ${mClass}">${monthly!=null?formatNum(monthly):'—'}</td>
+    <td class="num ${cClass}">${cumul!=null?formatNum(cumul):'—'}</td>
+    <td class="center"><span class="status-tag status-ok">✓</span></td>
+    <td class="center">${sourceLink}</td>
+  </tr>`;
+}
+
+function renderSummaryCards() {
+  const d = state.data;
+  const unit = state.displayUnit;
+  const companies = d.companies.filter(c => !c.error && c.holding_company);
+  let totalM=0, totalC=0, top=null;
+  for (const c of companies) {
+    const h = c.holding_company;
+    const m  = convertUnit(h.monthly_profit, c.unit||'百萬元', unit)||0;
+    const cu = convertUnit(h.cumulative_profit, c.unit||'百萬元', unit)||0;
+    totalM += m; totalC += cu;
+    if (!top || m > convertUnit(top.holding_company.monthly_profit, top.unit||'百萬元', unit)) top = c;
+  }
+  document.getElementById('summary-cards').innerHTML = `
+    <div class="card">
+      <div class="card-label">已取得資料</div>
+      <div class="card-value">${companies.length} <span style="font-size:14px;font-weight:400">/ 13 家</span></div>
+      <div class="card-sub">成功率 ${Math.round(companies.length/13*100)}%</div>
+    </div>
+    <div class="card">
+      <div class="card-label">合計當月獲利</div>
+      <div class="card-value positive">${formatNum(totalM)}</div>
+      <div class="card-sub">${unit} ｜ ${d.report_period}</div>
+    </div>
+    <div class="card">
+      <div class="card-label">合計累計獲利</div>
+      <div class="card-value positive">${formatNum(totalC)}</div>
+      <div class="card-sub">${unit} ｜ 本年累計</div>
+    </div>
+    <div class="card">
+      <div class="card-label">當月獲利第一</div>
+      <div class="card-value" style="font-size:18px">${top?top.name:'—'}</div>
+      <div class="card-sub">${top?formatNum(convertUnit(top.holding_company.monthly_profit,top.unit||'百萬元',unit))+' '+unit:''}</div>
+    </div>`;
+}
+
+function showDetail(code) {
+  const c = state.data.companies.find(x=>x.code===code);
+  if (!c) return;
+  const panel = document.getElementById('detail-panel');
+  const title = document.getElementById('detail-title');
+  const content = document.getElementById('detail-content');
+  title.textContent = `${c.name} (${c.code}) — 子公司明細`;
+  const subs = c.subsidiaries || [];
+  const unit = state.displayUnit;
+  const srcUnit = c.unit || '百萬元';
+  const h = c.holding_company || {};
+  const hm  = convertUnit(h.monthly_profit,  srcUnit, unit);
+  const hcu = convertUnit(h.cumulative_profit, srcUnit, unit);
+  if (subs.length === 0) {
+    content.innerHTML = '<p style="color:var(--text-muted)">無子公司明細資料</p>';
+  } else {
+    const subEntries = subs.map(s=>({
+      name: s.name,
+      monthly: convertUnit(s.monthly_profit, srcUnit, unit),
+      cumul:   convertUnit(s.cumulative_profit, srcUnit, unit),
+    }));
+    const maxAbs = Math.max(...subEntries.map(s=>Math.abs(s.monthly||0)), 1);
+    const rows = subEntries.map(s=>{
+      const mc = (s.monthly||0)>=0?'positive':'negative';
+      const cc = (s.cumul||0)>=0?'positive':'negative';
+      const pct = Math.abs((s.monthly||0)/maxAbs*100).toFixed(0);
+      const col = (s.monthly||0)>=0?'#057a55':'#9b1c1c';
+      return `<tr>
+        <td>${s.name}</td>
+        <td class="num ${mc}">${s.monthly!=null?formatNum(s.monthly):'—'}</td>
+        <td class="sub-bar-cell">
+          <div class="sub-bar-track"><div class="sub-bar-fill" style="width:${pct}%;background:${col}"></div></div>
+        </td>
+        <td class="num ${cc}">${s.cumul!=null?formatNum(s.cumul):'—'}</td>
+      </tr>`;
+    }).join('');
+    content.innerHTML = `
+      <table style="width:100%;border-collapse:collapse;font-size:13px">
+        <thead>
+          <tr style="border-bottom:2px solid var(--border)">
+            <th style="text-align:left;padding:6px 8px;color:var(--text-muted);font-weight:600">子公司</th>
+            <th style="text-align:right;padding:6px 8px;color:var(--text-muted);font-weight:600">當月 (${unit})</th>
+            <th style="width:120px"></th>
+            <th style="text-align:right;padding:6px 8px;color:var(--text-muted);font-weight:600">累計 (${unit})</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="background:#ebf8ff;border-bottom:2px solid #bee3f8">
+            <td style="padding:7px 8px;font-weight:700">${c.name}（合併）</td>
+            <td class="num ${hm>=0?'positive':'negative'}" style="padding:7px 8px;font-weight:700">${hm!=null?formatNum(hm):'—'}</td>
+            <td></td>
+            <td class="num ${hcu>=0?'positive':'negative'}" style="padding:7px 8px;font-weight:700">${hcu!=null?formatNum(hcu):'—'}</td>
+          </tr>
+          ${rows.replace(/<tr>/g,'<tr style="border-bottom:1px solid var(--border)">').replace(/<td>/g,'<td style="padding:6px 8px">')}
+        </tbody>
+      </table>
+      <p style="font-size:11px;color:var(--text-muted);margin-top:8px">
+        公告日期：${c.announcement_date||'—'} ｜
+        <a href="${c.source_url||'#'}" target="_blank" style="color:var(--primary)">原始公告 ↗</a>
+      </p>`;
+  }
+  panel.classList.remove('hidden');
+  panel.scrollIntoView({behavior:'smooth',block:'nearest'});
+}
+
+function closeDetail() {
+  document.getElementById('detail-panel').classList.add('hidden');
+}
+
+function renderChart() {
+  const unit = state.displayUnit;
+  const companies = (state.data.companies||[])
+    .filter(c=>!c.error&&c.holding_company?.monthly_profit!=null)
+    .sort((a,b)=>{
+      const av = convertUnit(a.holding_company.monthly_profit, a.unit||'百萬元', unit)||0;
+      const bv = convertUnit(b.holding_company.monthly_profit, b.unit||'百萬元', unit)||0;
+      return bv-av;
+    });
+  const labels = companies.map(c=>c.name);
+  const values = companies.map(c=>convertUnit(c.holding_company.monthly_profit, c.unit||'百萬元', unit)||0);
+  const colors = values.map(v=>v>=0?'rgba(5,122,85,.75)':'rgba(155,28,28,.75)');
+  if (state.barChart) state.barChart.destroy();
+  const ctx = document.getElementById('bar-chart').getContext('2d');
+  state.barChart = new Chart(ctx, {
+    type:'bar',
+    data:{labels,datasets:[{label:`當月稅後淨利 (${unit})`,data:values,backgroundColor:colors,borderRadius:4}]},
+    options:{
+      responsive:true,maintainAspectRatio:true,
+      plugins:{legend:{display:false},tooltip:{callbacks:{label:ctx=>` ${formatNum(ctx.raw)} ${unit}`}}},
+      scales:{y:{ticks:{callback:v=>formatNum(v)}}}
+    }
+  });
+}
+
+function updatePeriodBadge() {
+  document.getElementById('period-badge').textContent = `📅 ${state.data?.report_period||'—'} 月報`;
+}
+function updateLastUpdated() {
+  const ts = state.data?.last_updated;
+  if (!ts) return;
+  document.getElementById('last-updated').textContent = `最後更新：${new Date(ts).toLocaleString('zh-TW')}`;
+}
+function showStatus(type, msg) {
+  const bar = document.getElementById('status-bar');
+  bar.className=`status-bar ${type}`;
+  bar.innerHTML=msg;
+  bar.classList.remove('hidden');
+}
+function triggerUpdate() { document.getElementById('trigger-modal').classList.remove('hidden'); document.getElementById('modal-overlay').classList.remove('hidden'); }
+function closeModal() { document.getElementById('trigger-modal').classList.add('hidden'); document.getElementById('modal-overlay').classList.add('hidden'); }
+async function confirmTrigger() {
+  const token=document.getElementById('gh-token').value.trim();
+  const user=document.getElementById('gh-user').value.trim();
+  const repo=document.getElementById('gh-repo').value.trim();
+  const month=document.getElementById('gh-month').value.trim();
+  if (!token||!user||!repo){alert('請填寫 Token、使用者名稱和 Repository 名稱');return;}
+  closeModal();
+  showStatus('info','<span class="spinner"></span> 正在觸發 GitHub Actions...');
+  const body={ref:'main',inputs:{}};
+  if(month) body.inputs.target_month=month;
+  try {
+    const resp=await fetch(`https://api.github.com/repos/${user}/${repo}/actions/workflows/update_data.yml/dispatches`,{
+      method:'POST',
+      headers:{'Authorization':`Bearer ${token}`,'Accept':'application/vnd.github+json','Content-Type':'application/json','X-GitHub-Api-Version':'2022-11-28'},
+      body:JSON.stringify(body)
+    });
+    if(resp.status===204){
+      showStatus('success',`✅ 已成功觸發！約 3-5 分鐘後資料更新。<a href="https://github.com/${user}/${repo}/actions" target="_blank" style="margin-left:8px;text-decoration:underline">查看進度 →</a>`);
+    } else {
+      const err=await resp.json().catch(()=>({}));
+      showStatus('error',`❌ 觸發失敗 (HTTP ${resp.status})：${err.message||'請確認設定'}`);
+    }
+  } catch(e){showStatus('error',`❌ 請求失敗：${e.message}`);}
+}
+</script>
+</body>
+</html>

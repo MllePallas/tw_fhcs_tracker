@@ -1,0 +1,23 @@
+{
+  "latest": "115/03",
+  "months": [
+    {
+      "period": "115/03",
+      "file": "115-03.json",
+      "success_count": 1,
+      "last_updated": "2026-04-27T10:41:45.921047"
+    },
+    {
+      "period": "115/02",
+      "file": "115-02.json",
+      "success_count": 13,
+      "last_updated": "2026-04-27T10:22:24.305851"
+    },
+    {
+      "period": "115/01",
+      "file": "115-01.json",
+      "success_count": 13,
+      "last_updated": "2026-04-27T10:15:51.277627"
+    }
+  ]
+}
