@@ -15,6 +15,7 @@ let state = {
   displayUnit: '百萬元',
   sortMode: 'code',
   barChart: null,
+  cumulChart: null,
 };
 
 // ── 啟動 ───────────────────────────────────────────────
@@ -287,29 +288,34 @@ function closeDetail() {
 // ── 長條圖 ─────────────────────────────────────────────
 function renderChart() {
   const unit = state.displayUnit;
+  state.barChart   = renderBarChart('bar-chart', state.barChart, 'monthly_profit',
+                                    `當月稅後淨利 (${unit})`, unit);
+  state.cumulChart = renderBarChart('cumul-chart', state.cumulChart, 'cumulative_profit',
+                                    `本年累計稅後淨利 (${unit})`, unit);
+}
+
+function renderBarChart(canvasId, prevChart, field, label, unit) {
   const companies = (state.data.companies || [])
-    .filter(c => !c.error && c.holding_company?.monthly_profit != null)
-    .sort((a, b) => {
-      const av = convertUnit(a.holding_company.monthly_profit, a.holding_company.unit, unit) || 0;
-      const bv = convertUnit(b.holding_company.monthly_profit, b.holding_company.unit, unit) || 0;
-      return bv - av;
-    });
+    .filter(c => !c.error && c.holding_company?.[field] != null)
+    .map(c => ({
+      name: c.name,
+      value: convertUnit(c.holding_company[field], c.holding_company.unit, unit) || 0,
+    }))
+    .sort((a, b) => b.value - a.value);
 
   const labels = companies.map(c => c.name);
-  const values = companies.map(c =>
-    convertUnit(c.holding_company.monthly_profit, c.holding_company.unit, unit) || 0
-  );
+  const values = companies.map(c => c.value);
   const colors = values.map(v => v >= 0 ? 'rgba(5,122,85,.75)' : 'rgba(155,28,28,.75)');
 
-  if (state.barChart) state.barChart.destroy();
+  if (prevChart) prevChart.destroy();
 
-  const ctx = document.getElementById('bar-chart').getContext('2d');
-  state.barChart = new Chart(ctx, {
+  const ctx = document.getElementById(canvasId).getContext('2d');
+  return new Chart(ctx, {
     type: 'bar',
     data: {
       labels,
       datasets: [{
-        label: `當月稅後淨利 (${unit})`,
+        label,
         data: values,
         backgroundColor: colors,
         borderRadius: 4,
