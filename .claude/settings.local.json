@@ -20,7 +20,17 @@
       "Bash(cp -f data/index.json docs/data/index.json)",
       "Bash(cp -f data/latest.json docs/data/latest.json)",
       "Skill(schedule)",
-      "Bash(iconv -f cp950 -t utf-8)"
+      "Bash(iconv -f cp950 -t utf-8)",
+      "Bash(tasklist)",
+      "Bash(pip install *)",
+      "Bash(curl -s -o /dev/null -w \"%{http_code}\\\\n\" http://localhost:8765/index.html)",
+      "Bash(curl -v http://127.0.0.1:8765/index.html)",
+      "Bash(kill %1)",
+      "Bash(netstat -ano)",
+      "Bash(taskkill //F //PID 24408 //PID 7776 //PID 23128)",
+      "Bash(curl -s -o /dev/null -w \"HTTP=%{http_code} SIZE=%{size_download}\\\\n\" http://127.0.0.1:8766/index.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP=%{http_code} SIZE=%{size_download}\\\\n\" http://127.0.0.1:8766/data/index.json)",
+      "Bash(taskkill //F //PID 14644)"
     ]
   }
 }

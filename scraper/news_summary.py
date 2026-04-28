@@ -93,6 +93,11 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 - 不要使用「以上資訊」「希望對您有幫助」等客套話
 - 不要重複公告日期或公告標題
 
+【輸出末尾（必填）】
+摘要結束後，**最後一行**固定輸出：
+`CITED_URLS: <url1> | <url2>`
+只列出你實際參考用來撰寫摘要的 URL（最多 3 條）。若 IRRELEVANT 或無引用，寫 `CITED_URLS:` 即可（空白）。
+
 【財報數字（已抓取，供你避免錯置）】
 - {name} 合併稅後淨利當月：{monthly} 百萬元
 - 累計：{cumul} 百萬元
@@ -103,10 +108,13 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 
 
 def _extract_text_and_sources(response, debug=False):
-    """從 Claude response.content 抽出最終文字與所有引用過的搜尋結果"""
+    """
+    從 Claude response.content 抽出最終文字與實際引用的搜尋結果。
+    LLM 輸出末尾會有一行 CITED_URLS: url1 | url2，
+    只保留那幾條（cross-reference 搜尋結果取得 title）。
+    """
     text_parts = []
-    seen_urls = set()
-    sources = []
+    url_to_title = {}  # 搜尋結果 url → title 對照表
 
     for block in response.content:
         btype = getattr(block, "type", "")
@@ -117,7 +125,6 @@ def _extract_text_and_sources(response, debug=False):
                 inp = getattr(block, "input", {})
                 logger.info(f"[DEBUG] LLM search query: {inp}")
         elif btype == "web_search_tool_result":
-            # block.content 是 list of WebSearchResultBlock
             results = getattr(block, "content", [])
             if debug:
                 logger.info(f"[DEBUG] returned {len(results)} results")
@@ -126,11 +133,32 @@ def _extract_text_and_sources(response, debug=False):
                 title = getattr(r, "title", None)
                 if debug:
                     logger.info(f"[DEBUG]   - {title} | {url}")
-                if url and url not in seen_urls:
-                    seen_urls.add(url)
-                    sources.append({"url": url, "title": title or url})
+                if url and url not in url_to_title:
+                    url_to_title[url] = title or url
 
-    return "\n".join(text_parts).strip(), sources
+    full_text = "\n".join(text_parts).strip()
+
+    # 從末尾幾行找 CITED_URLS: 行
+    cited_sources = []
+    lines = full_text.splitlines()
+    cited_line = ""
+    for ln in reversed(lines[-5:]):
+        stripped = ln.strip()
+        if stripped.upper().startswith("CITED_URLS:"):
+            cited_line = stripped[len("CITED_URLS:"):].strip()
+            break
+
+    if cited_line:
+        for raw_url in cited_line.split("|"):
+            url = raw_url.strip()
+            if url:
+                title = url_to_title.get(url, url)
+                cited_sources.append({"url": url, "title": title})
+
+    if debug:
+        logger.info(f"[DEBUG] cited sources: {cited_sources}")
+
+    return full_text, cited_sources
 
 
 def summarize_one(client, name, code, period, monthly, cumul, subs, debug=False):
