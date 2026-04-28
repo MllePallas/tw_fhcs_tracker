@@ -93,11 +93,6 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 - 不要使用「以上資訊」「希望對您有幫助」等客套話
 - 不要重複公告日期或公告標題
 
-【輸出末尾（必填）】
-摘要結束後，**最後一行**固定輸出：
-`CITED_URLS: <url1> | <url2>`
-只列出你實際參考用來撰寫摘要的 URL（最多 3 條）。若 IRRELEVANT 或無引用，寫 `CITED_URLS:` 即可（空白）。
-
 【財報數字（已抓取，供你避免錯置）】
 - {name} 合併稅後淨利當月：{monthly} 百萬元
 - 累計：{cumul} 百萬元
@@ -107,14 +102,15 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 請開始搜尋並產生摘要。"""
 
 
-def _extract_text_and_sources(response, debug=False):
+def _extract_text_and_sources(response, western_year: int, debug=False):
     """
-    從 Claude response.content 抽出最終文字與實際引用的搜尋結果。
-    LLM 輸出末尾會有一行 CITED_URLS: url1 | url2，
-    只保留那幾條（cross-reference 搜尋結果取得 title）。
+    從 Claude response.content 抽出最終文字與搜尋結果。
+    過濾策略：只保留 URL 或標題中含有目標西元年份的搜尋結果（最多 3 條）。
+    不依賴 LLM 輸出格式，因為 CITED_URLS marker 不穩定。
     """
     text_parts = []
-    url_to_title = {}  # 搜尋結果 url → title 對照表
+    all_sources = []
+    seen_urls = set()
 
     for block in response.content:
         btype = getattr(block, "type", "")
@@ -133,37 +129,32 @@ def _extract_text_and_sources(response, debug=False):
                 title = getattr(r, "title", None)
                 if debug:
                     logger.info(f"[DEBUG]   - {title} | {url}")
-                if url and url not in url_to_title:
-                    url_to_title[url] = title or url
+                if url and url not in seen_urls:
+                    seen_urls.add(url)
+                    all_sources.append({"url": url, "title": title or url})
 
     full_text = "\n".join(text_parts).strip()
 
-    # 從末尾幾行找 CITED_URLS: 行
-    cited_sources = []
-    lines = full_text.splitlines()
-    cited_line = ""
-    for ln in reversed(lines[-5:]):
-        stripped = ln.strip()
-        if stripped.upper().startswith("CITED_URLS:"):
-            cited_line = stripped[len("CITED_URLS:"):].strip()
-            break
-
-    if cited_line:
-        for raw_url in cited_line.split("|"):
-            url = raw_url.strip()
-            if url:
-                title = url_to_title.get(url, url)
-                cited_sources.append({"url": url, "title": title})
+    # 只保留包含目標年份的來源（過濾舊年份文章）
+    year_str = str(western_year)
+    relevant = [
+        s for s in all_sources
+        if year_str in s["url"] or year_str in s.get("title", "")
+    ]
+    # 若過濾後為空（極少數情況），退回取前 2 條
+    sources = relevant[:3] if relevant else all_sources[:2]
 
     if debug:
-        logger.info(f"[DEBUG] cited sources: {cited_sources}")
+        logger.info(f"[DEBUG] filtered sources ({len(sources)}/{len(all_sources)}): {[s['url'] for s in sources]}")
 
-    return full_text, cited_sources
+    return full_text, sources
 
 
 def summarize_one(client, name, code, period, monthly, cumul, subs, debug=False):
     """呼叫 Claude API + web_search，遇 429 自動退避重試最多 3 次"""
     import anthropic as _anthropic
+    roc_year = period.split("/")[0]
+    western_year = int(roc_year) + 1911
     prompt = _build_prompt(name, code, period, monthly, cumul, subs)
     last_err = None
     for attempt in range(3):
@@ -179,10 +170,10 @@ def summarize_one(client, name, code, period, monthly, cumul, subs, debug=False)
                 }],
                 messages=[{"role": "user", "content": prompt}],
             )
-            return _extract_text_and_sources(response, debug=debug)
+            return _extract_text_and_sources(response, western_year, debug=debug)
         except _anthropic.RateLimitError as e:
             last_err = e
-            wait = 65 * (attempt + 1)  # 65, 130, 195 秒（rate limit 是 per minute）
+            wait = 65 * (attempt + 1)
             logger.warning(f"[{name}] Rate limit hit, wait {wait}s and retry ({attempt+1}/3)")
             time.sleep(wait)
     raise last_err
