@@ -66,26 +66,18 @@
     <!-- 摘要卡片 -->
     <div class="summary-cards" id="summary-cards"></div>
 
+    <!-- 視角 Tab -->
+    <div class="industry-tabs" id="industry-tabs">
+      <button class="tab active" data-view="holdings" onclick="setView('holdings')">🏦 金控總覽</button>
+      <button class="tab"        data-view="bank"     onclick="setView('bank')">💰 銀行</button>
+      <button class="tab"        data-view="life"     onclick="setView('life')">🛡️ 壽險</button>
+      <button class="tab"        data-view="securities" onclick="setView('securities')">📊 證券</button>
+    </div>
+
     <!-- 主表格 -->
     <div class="table-container">
       <table id="main-table">
-        <thead>
-          <tr>
-            <th rowspan="2" class="col-code">代號</th>
-            <th rowspan="2" class="col-name">金控</th>
-            <th colspan="3" class="col-group">合併稅後淨利</th>
-            <th colspan="2" class="col-group">稅後 EPS (元)</th>
-            <th rowspan="2" class="col-status">狀態</th>
-            <th rowspan="2" class="col-source">來源</th>
-          </tr>
-          <tr>
-            <th class="col-monthly" id="monthly-header">當月</th>
-            <th class="col-cumulative">累計</th>
-            <th class="col-cumulative">累計 YoY</th>
-            <th class="col-monthly">當月</th>
-            <th class="col-cumulative">累計</th>
-          </tr>
-        </thead>
+        <thead id="main-thead"></thead>
         <tbody id="main-tbody">
           <tr><td colspan="9" class="loading-cell">載入資料中...</td></tr>
         </tbody>
@@ -102,12 +94,12 @@
     </div>
 
     <!-- 歷史趨勢圖表 -->
-    <div class="section-title">📈 當月獲利比較</div>
+    <div class="section-title" id="bar-chart-title">📈 當月獲利比較</div>
     <div class="chart-container">
       <canvas id="bar-chart"></canvas>
     </div>
 
-    <div class="section-title">📊 累計獲利比較（本年累計）</div>
+    <div class="section-title" id="cumul-chart-title">📊 累計獲利比較（本年累計）</div>
     <div class="chart-container">
       <canvas id="cumul-chart"></canvas>
     </div>

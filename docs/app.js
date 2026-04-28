@@ -14,8 +14,54 @@ let state = {
   index: null,
   displayUnit: '百萬元',
   sortMode: 'code',
+  viewMode: 'holdings',  // 'holdings' | 'bank' | 'life' | 'securities'
   barChart: null,
   cumulChart: null,
+};
+
+// ── 視角切換 ───────────────────────────────────────────
+function setView(mode) {
+  state.viewMode = mode;
+  document.querySelectorAll('.industry-tabs .tab').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.view === mode);
+  });
+  renderAll();
+}
+
+// 產業分類（依子公司名稱判斷）
+function classifyIndustry(name) {
+  if (!name) return null;
+  if (name.includes('銀行')) return 'bank';
+  if (name.includes('人壽')) return 'life';
+  if (name.includes('證券')) return 'securities';
+  return null;
+}
+
+// 取出某產業的所有子公司列（含父金控資訊）
+function getIndustryRows(industry) {
+  const rows = [];
+  for (const c of state.data.companies || []) {
+    if (c.error) continue;
+    for (const s of c.subsidiaries || []) {
+      if (classifyIndustry(s.name) !== industry) continue;
+      rows.push({
+        parent_name: c.name,
+        parent_code: c.code,
+        name: s.name,
+        unit: c.unit,
+        monthly_profit: s.monthly_profit,
+        cumulative_profit: s.cumulative_profit,
+        cumulative_profit_yoy_pct: s.cumulative_profit_yoy_pct,
+      });
+    }
+  }
+  return rows;
+}
+
+const VIEW_TITLES = {
+  bank:       '銀行',
+  life:       '壽險',
+  securities: '證券',
 };
 
 // ── 啟動 ───────────────────────────────────────────────
@@ -186,15 +232,100 @@ function renderTable() {
   state.displayUnit = document.getElementById('unit-select').value;
   state.sortMode    = document.getElementById('sort-select').value;
 
-  const tbody  = document.getElementById('main-tbody');
-  const header = document.getElementById('monthly-header');
+  if (state.viewMode === 'holdings') {
+    renderHoldingsTable();
+  } else {
+    renderIndustryTable(state.viewMode);
+  }
+}
 
-  // 更新月份標頭
+// 13 家金控總覽（原本的表格）
+function renderHoldingsTable() {
   const period = state.data.report_period || '';
-  header.textContent = `當月 (${period})`;
-
+  document.getElementById('main-thead').innerHTML = `
+    <tr>
+      <th rowspan="2" class="col-code">代號</th>
+      <th rowspan="2" class="col-name">金控</th>
+      <th colspan="3" class="col-group">合併稅後淨利</th>
+      <th colspan="2" class="col-group">稅後 EPS (元)</th>
+      <th rowspan="2" class="col-status">狀態</th>
+      <th rowspan="2" class="col-source">來源</th>
+    </tr>
+    <tr>
+      <th class="col-monthly">當月 (${period})</th>
+      <th class="col-cumulative">累計</th>
+      <th class="col-cumulative">累計 YoY</th>
+      <th class="col-monthly">當月</th>
+      <th class="col-cumulative">累計</th>
+    </tr>`;
   const companies = sortCompanies([...state.data.companies]);
-  tbody.innerHTML = companies.map(renderRow).join('');
+  document.getElementById('main-tbody').innerHTML = companies.map(renderRow).join('');
+}
+
+// 產業視角（銀行 / 壽險 / 證券）
+function renderIndustryTable(industry) {
+  const period = state.data.report_period || '';
+  const rows = sortIndustryRows(getIndustryRows(industry));
+  document.getElementById('main-thead').innerHTML = `
+    <tr>
+      <th class="col-code">集團</th>
+      <th class="col-name">${VIEW_TITLES[industry]}子公司</th>
+      <th class="col-monthly">當月 (${period})</th>
+      <th class="col-cumulative">累計</th>
+      <th class="col-cumulative">累計 YoY</th>
+    </tr>`;
+
+  if (rows.length === 0) {
+    document.getElementById('main-tbody').innerHTML =
+      `<tr><td colspan="5" class="loading-cell" style="color:#718096">此期間無${VIEW_TITLES[industry]}資料</td></tr>`;
+    return;
+  }
+
+  const unit = state.displayUnit;
+  document.getElementById('main-tbody').innerHTML = rows.map(r => {
+    const m = convertUnit(r.monthly_profit, r.unit, unit);
+    const c = convertUnit(r.cumulative_profit, r.unit, unit);
+    const mClass = (m ?? 0) >= 0 ? 'positive' : 'negative';
+    const cClass = (c ?? 0) >= 0 ? 'positive' : 'negative';
+
+    const yoy = r.cumulative_profit_yoy_pct;
+    let yoyClass = '';
+    let yoyDisp;
+    if (yoy != null) {
+      yoyClass = yoy >= 0 ? 'positive' : 'negative';
+      yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
+    } else if (r.parent_code === '2887' && period < '115/07') {
+      yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
+    } else {
+      yoyDisp = '—';
+    }
+
+    return `<tr>
+      <td><a class="company-link" onclick="showDetail('${r.parent_code}')">${r.parent_name}</a></td>
+      <td style="font-weight:600">${r.name}</td>
+      <td class="num ${mClass}">${m != null ? formatNum(m) : '—'}</td>
+      <td class="num ${cClass}">${c != null ? formatNum(c) : '—'}</td>
+      <td class="num ${yoyClass}">${yoyDisp}</td>
+    </tr>`;
+  }).join('');
+}
+
+// 產業列排序（用既有 sortMode 對映）
+function sortIndustryRows(arr) {
+  switch (state.sortMode) {
+    case 'monthly_desc':
+      return arr.sort((a, b) => (b.monthly_profit ?? -Infinity) - (a.monthly_profit ?? -Infinity));
+    case 'monthly_asc':
+      return arr.sort((a, b) => (a.monthly_profit ?? Infinity) - (b.monthly_profit ?? Infinity));
+    case 'cumulative_desc':
+      return arr.sort((a, b) => (b.cumulative_profit ?? -Infinity) - (a.cumulative_profit ?? -Infinity));
+    case 'cumul_yoy_desc':
+      return arr.sort((a, b) => (b.cumulative_profit_yoy_pct ?? -Infinity) - (a.cumulative_profit_yoy_pct ?? -Infinity));
+    case 'eps_cumul_desc':  // 子公司無 EPS，回退到代號
+    case 'code':
+    default:
+      return arr.sort((a, b) => a.parent_code.localeCompare(b.parent_code));
+  }
 }
 
 function renderRow(c) {
@@ -460,23 +591,40 @@ function closeDetail() {
 // ── 長條圖 ─────────────────────────────────────────────
 function renderChart() {
   const unit = state.displayUnit;
-  state.barChart   = renderBarChart('bar-chart', state.barChart, 'monthly_profit',
-                                    `當月稅後淨利 (${unit})`, unit);
-  state.cumulChart = renderBarChart('cumul-chart', state.cumulChart, 'cumulative_profit',
-                                    `本年累計稅後淨利 (${unit})`, unit);
+
+  // 依視角產生資料
+  let monthlyRows, cumulRows, scopeLabel;
+  if (state.viewMode === 'holdings') {
+    monthlyRows = (state.data.companies || [])
+      .filter(c => !c.error && c.holding_company?.monthly_profit != null)
+      .map(c => ({ name: c.name, value: convertUnit(c.holding_company.monthly_profit, c.unit, unit) || 0 }));
+    cumulRows = (state.data.companies || [])
+      .filter(c => !c.error && c.holding_company?.cumulative_profit != null)
+      .map(c => ({ name: c.name, value: convertUnit(c.holding_company.cumulative_profit, c.unit, unit) || 0 }));
+    scopeLabel = '金控';
+  } else {
+    const rows = getIndustryRows(state.viewMode);
+    monthlyRows = rows
+      .filter(r => r.monthly_profit != null)
+      .map(r => ({ name: r.name, value: convertUnit(r.monthly_profit, r.unit, unit) || 0 }));
+    cumulRows = rows
+      .filter(r => r.cumulative_profit != null)
+      .map(r => ({ name: r.name, value: convertUnit(r.cumulative_profit, r.unit, unit) || 0 }));
+    scopeLabel = VIEW_TITLES[state.viewMode];
+  }
+
+  // 圖表標題同步
+  document.getElementById('bar-chart-title').textContent   = `📈 ${scopeLabel}當月獲利比較`;
+  document.getElementById('cumul-chart-title').textContent = `📊 ${scopeLabel}累計獲利比較（本年累計）`;
+
+  state.barChart   = renderBarChart('bar-chart',   state.barChart,   monthlyRows, `當月稅後淨利 (${unit})`, unit);
+  state.cumulChart = renderBarChart('cumul-chart', state.cumulChart, cumulRows,   `本年累計稅後淨利 (${unit})`, unit);
 }
 
-function renderBarChart(canvasId, prevChart, field, label, unit) {
-  const companies = (state.data.companies || [])
-    .filter(c => !c.error && c.holding_company?.[field] != null)
-    .map(c => ({
-      name: c.name,
-      value: convertUnit(c.holding_company[field], c.unit, unit) || 0,
-    }))
-    .sort((a, b) => b.value - a.value);
-
-  const labels = companies.map(c => c.name);
-  const values = companies.map(c => c.value);
+function renderBarChart(canvasId, prevChart, rows, label, unit) {
+  rows = [...rows].sort((a, b) => b.value - a.value);
+  const labels = rows.map(r => r.name);
+  const values = rows.map(r => r.value);
   const colors = values.map(v => v >= 0 ? 'rgba(5,122,85,.75)' : 'rgba(155,28,28,.75)');
 
   if (prevChart) prevChart.destroy();

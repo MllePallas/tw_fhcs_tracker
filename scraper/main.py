@@ -174,6 +174,7 @@ def compute_yoy(data: dict, target_period: str):
 
     baseline_by_code = {c["code"]: c for c in baseline.get("companies", []) if "code" in c}
     populated = 0
+    sub_populated = 0
     skipped_merger = 0
 
     for company in data.get("companies", []):
@@ -187,17 +188,34 @@ def compute_yoy(data: dict, target_period: str):
         prev = baseline_by_code.get(code)
         if not prev or "error" in prev:
             continue
+
+        # 母公司 YoY
         curr_cumul = company.get("holding_company", {}).get("cumulative_profit")
         prev_cumul = prev.get("holding_company", {}).get("cumulative_profit")
-        if curr_cumul is None or prev_cumul is None or prev_cumul == 0:
-            continue
-        yoy = (curr_cumul - prev_cumul) / abs(prev_cumul) * 100
-        company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
-        populated += 1
+        if curr_cumul is not None and prev_cumul is not None and prev_cumul != 0:
+            yoy = (curr_cumul - prev_cumul) / abs(prev_cumul) * 100
+            company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
+            populated += 1
 
-    msg = f"YoY populated for {populated} companies (baseline: {prev_period})"
+        # 子公司 YoY（用 name 對齊）
+        prev_subs_by_name = {s.get("name", ""): s for s in prev.get("subsidiaries", []) if s.get("name")}
+        for sub in company.get("subsidiaries", []):
+            name = sub.get("name", "")
+            if not name:
+                continue
+            prev_sub = prev_subs_by_name.get(name)
+            if not prev_sub:
+                continue
+            cs = sub.get("cumulative_profit")
+            ps = prev_sub.get("cumulative_profit")
+            if cs is None or ps is None or ps == 0:
+                continue
+            sub["cumulative_profit_yoy_pct"] = round((cs - ps) / abs(ps) * 100, 1)
+            sub_populated += 1
+
+    msg = f"YoY populated: {populated} parents, {sub_populated} subsidiaries (baseline: {prev_period})"
     if skipped_merger:
-        msg += f"; skipped {skipped_merger} due to M&A cutoff"
+        msg += f"; skipped {skipped_merger} parents due to M&A cutoff"
     logger.info(msg)
 
 

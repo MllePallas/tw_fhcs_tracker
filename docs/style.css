@@ -230,6 +230,41 @@ main {
 .card-value.positive { color: var(--positive); }
 .card-value.negative { color: var(--negative); }
 
+/* ── Industry Tabs ────────────────────────────────────── */
+.industry-tabs {
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+  margin-bottom: 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  overflow-x: auto;
+}
+.industry-tabs .tab {
+  flex: 1;
+  min-width: 110px;
+  border: none;
+  background: transparent;
+  color: var(--text-muted);
+  font-size: 14px;
+  font-weight: 600;
+  padding: 9px 16px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background .15s, color .15s;
+  white-space: nowrap;
+}
+.industry-tabs .tab:hover {
+  background: #f0f4f8;
+  color: var(--text);
+}
+.industry-tabs .tab.active {
+  background: var(--primary);
+  color: #fff;
+}
+
 /* ── Table ────────────────────────────────────────────── */
 .table-container {
   background: var(--surface);
