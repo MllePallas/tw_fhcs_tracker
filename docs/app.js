@@ -85,9 +85,100 @@ function renderAll() {
 
   updatePeriodBadge();
   updateLastUpdated();
+  renderMarketSummary();
   renderSummaryCards();
   renderTable();
   renderChart();
+}
+
+// ── 本月市場概況卡片 ───────────────────────────────────
+function renderMarketSummary() {
+  const section = document.getElementById('market-section');
+  const m = state.data && state.data.market_summary;
+  if (!m || !m.items) {
+    section.classList.add('hidden');
+    return;
+  }
+  section.classList.remove('hidden');
+
+  const meta = document.getElementById('market-meta');
+  const period = (m.period || state.data.report_period || '').replace('/', '年') + '月底';
+  const ts = m.generated_at ? new Date(m.generated_at).toLocaleDateString('zh-TW') : '';
+  meta.textContent = `${period}收盤｜更新：${ts}｜資料：Yahoo Finance、TWSE`;
+
+  const cards = [];
+  const it = m.items;
+
+  if (it.usdtwd && it.usdtwd.value != null) {
+    cards.push(marketCard({
+      label: '美元兌台幣',
+      value: it.usdtwd.value.toFixed(3),
+      unit: '',
+      changeText: pctText(it.usdtwd.pct_change, '較上月底'),
+      pct: it.usdtwd.pct_change,
+    }));
+  }
+  if (it.taiex && it.taiex.value != null) {
+    cards.push(marketCard({
+      label: '加權指數',
+      value: formatNum(it.taiex.value),
+      unit: '點',
+      changeText: pctText(it.taiex.pct_change, '較上月底'),
+      pct: it.taiex.pct_change,
+    }));
+  }
+  if (it.taiex_turnover && it.taiex_turnover.value_yi != null) {
+    cards.push(marketCard({
+      label: '台股日均成交額',
+      value: formatNum(it.taiex_turnover.value_yi),
+      unit: '億',
+      changeText: pctText(it.taiex_turnover.pct_change, '較上月底'),
+      pct: it.taiex_turnover.pct_change,
+    }));
+  }
+  if (it.spx && it.spx.value != null) {
+    cards.push(marketCard({
+      label: '美股 S&P 500',
+      value: formatNum(it.spx.value),
+      unit: '',
+      changeText: pctText(it.spx.pct_change, '較上月底'),
+      pct: it.spx.pct_change,
+    }));
+  }
+  if (it.us10y && it.us10y.value_pct != null) {
+    cards.push(marketCard({
+      label: '美國 10Y 公債殖利率',
+      value: it.us10y.value_pct.toFixed(2),
+      unit: '%',
+      changeText: bpsText(it.us10y.bps_change, '較上月底'),
+      pct: it.us10y.bps_change,
+    }));
+  }
+
+  document.getElementById('market-cards').innerHTML = cards.join('');
+}
+
+function marketCard({ label, value, unit, changeText, pct }) {
+  const cls = pct == null ? 'neutral' : (pct > 0 ? 'positive' : (pct < 0 ? 'negative' : 'neutral'));
+  return `
+    <div class="market-card ${cls}">
+      <div class="market-card-label">${label}</div>
+      <div class="market-card-value">${value}${unit ? `<span class="unit">${unit}</span>` : ''}</div>
+      <div class="market-card-change ${cls}">${changeText}</div>
+    </div>
+  `;
+}
+
+function pctText(pct, prefix) {
+  if (pct == null) return '—';
+  const sign = pct > 0 ? '+' : '';
+  return `${prefix} ${sign}${pct.toFixed(2)}%`;
+}
+
+function bpsText(bps, prefix) {
+  if (bps == null) return '—';
+  const sign = bps > 0 ? '+' : '';
+  return `${prefix} ${sign}${bps} bps`;
 }
 
 function renderTable() {

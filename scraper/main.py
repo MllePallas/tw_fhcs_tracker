@@ -103,16 +103,38 @@ def load_existing_data() -> dict:
 
 
 def save_data(data: dict, report_period: str):
-    """儲存到 latest.json 及月份歸檔"""
-    # latest.json
+    """儲存到 latest.json 及月份歸檔。會保留既有檔案的 market_summary 欄位。"""
+    # 月份歸檔：115-03.json
+    period_filename = report_period.replace("/", "-") + ".json"
+    archive_path = DATA_DIR / period_filename
+
+    # 保留既有 market_summary（由 market_summary.py 預先寫入，不應被 MOPS 覆蓋）
+    if archive_path.exists():
+        try:
+            with open(archive_path, encoding="utf-8") as f:
+                old = json.load(f)
+            if "market_summary" in old and "market_summary" not in data:
+                data["market_summary"] = old["market_summary"]
+        except Exception as e:
+            logger.warning(f"Failed to preserve market_summary from {period_filename}: {e}")
+
+    # latest.json：同樣保留 market_summary（若指向同一期）
     latest_path = DATA_DIR / "latest.json"
+    if latest_path.exists():
+        try:
+            with open(latest_path, encoding="utf-8") as f:
+                old_latest = json.load(f)
+            if (old_latest.get("report_period") == report_period
+                    and "market_summary" in old_latest
+                    and "market_summary" not in data):
+                data["market_summary"] = old_latest["market_summary"]
+        except Exception as e:
+            logger.warning(f"Failed to preserve market_summary from latest.json: {e}")
+
     with open(latest_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     logger.info(f"Saved latest.json")
 
-    # 月份歸檔：115-03.json
-    period_filename = report_period.replace("/", "-") + ".json"
-    archive_path = DATA_DIR / period_filename
     with open(archive_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
     logger.info(f"Saved archive {period_filename}")

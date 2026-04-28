@@ -734,5 +734,51 @@
       "news_sources": [],
       "news_generated_at": "2026-04-28T11:21:01.607378"
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/03",
+    "generated_at": "2026-04-28T14:17:32.310811",
+    "items": {
+      "usdtwd": {
+        "value": 32.039,
+        "date": "2026-03-31",
+        "prev_value": 31.2468,
+        "prev_date": "2026-02-27",
+        "pct_change": 2.54,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 31722.99,
+        "date": "2026-03-31",
+        "prev_value": 35414.49,
+        "prev_date": "2026-02-26",
+        "pct_change": -10.42,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 8166.6,
+        "trading_days": 22,
+        "prev_value_yi": 8154.2,
+        "prev_trading_days": 12,
+        "pct_change": 0.15,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 6528.52,
+        "date": "2026-03-31",
+        "prev_value": 6878.88,
+        "prev_date": "2026-02-27",
+        "pct_change": -5.09,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 4.311,
+        "date": "2026-03-31",
+        "prev_value_pct": 3.962,
+        "prev_date": "2026-02-27",
+        "bps_change": 35,
+        "source": "Yahoo Finance (^TNX)"
+      }
+    }
+  }
 }

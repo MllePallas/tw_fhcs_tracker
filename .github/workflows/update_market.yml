@@ -1,0 +1,59 @@
+name: Update Market Summary
+
+on:
+  # 每月 5 號台灣時間 09:00（UTC 01:00）執行一次
+  # 上個月最後交易日已過，可安心抓 month-end 收盤
+  schedule:
+    - cron: '0 1 5 * *'
+
+  # 允許手動觸發
+  workflow_dispatch:
+    inputs:
+      target_period:
+        description: '目標月份（民國年/月，例如 115/04）；留空則自動判斷上個月'
+        required: false
+        default: ''
+
+jobs:
+  market:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: 'pip'
+
+      - name: Install dependencies
+        run: |
+          pip install requests yfinance
+
+      - name: Run market summary
+        run: |
+          cd scraper
+          ARGS=""
+          if [ -n "${{ github.event.inputs.target_period }}" ]; then
+            ARGS="--period ${{ github.event.inputs.target_period }}"
+          fi
+          python market_summary.py $ARGS
+
+      - name: Commit updated data
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/data/
+          git diff --staged --quiet || git commit -m "chore: update market summary $(date +'%Y-%m-%d')"
+          git push
+
+      - name: Report failure
+        if: failure()
+        run: |
+          echo "❌ Market summary update failed! Check logs."
