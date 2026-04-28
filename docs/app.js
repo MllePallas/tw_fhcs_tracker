@@ -262,9 +262,9 @@ function showDetail(code) {
   if (c.news_summary) {
     const sources = c.news_sources || [];
     const sourcesHtml = sources.length
-      ? `<div class="news-sources">來源：${sources.slice(0, 6).map(s =>
-          `<a href="${s.url}" target="_blank" rel="noopener">${escapeHtml((s.title || s.url).slice(0, 40))}</a>`
-        ).join(' ｜ ')}</div>`
+      ? `<div class="news-sources"><span class="news-sources-label">延伸閱讀</span><ul class="news-sources-list">${sources.slice(0, 3).map(s =>
+          `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.title || s.url)}</a></li>`
+        ).join('')}</ul></div>`
       : '';
     const ts = c.news_generated_at
       ? new Date(c.news_generated_at).toLocaleDateString('zh-TW')
