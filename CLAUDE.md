@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-04-28
+> 最後更新：2026-04-28（晚）
 
 ## 專案目的
 
@@ -13,27 +13,31 @@
 ```
 tw_fhcs_tracker/
 ├── scraper/
-│   ├── companies.py      # 13 家金控設定（代號、名稱、子公司提示）
-│   ├── mops_client.py    # MOPS API 客戶端（2025 新版 gateway，含 retry）
-│   ├── parser.py         # HTML 解析器（規則 + LLM fallback，含 EPS）
-│   ├── news_summary.py   # 新聞摘要產生器（Claude API + web_search）
-│   └── main.py           # 主程式，產生 JSON，更新 index.json
-├── docs/                 # GitHub Pages 服務根目錄（原為 web/）
+│   ├── companies.py            # 13 家金控設定（代號、名稱、子公司提示）
+│   ├── mops_client.py          # MOPS API 客戶端（2025 新版 gateway，含 retry）
+│   ├── parser.py               # HTML 解析器（規則 + LLM fallback，含 EPS）
+│   ├── news_summary.py         # 新聞摘要產生器（Claude API + web_search）
+│   ├── market_summary.py       # 本月市場概況（FX/指數/殖利率，yfinance + TWSE）
+│   ├── bootstrap_history.py    # 一次性：批次爬取整年歸檔（YoY baseline）
+│   └── main.py                 # 主程式，產生 JSON、計算 YoY、更新 index.json
+├── docs/                       # GitHub Pages 服務根目錄（原為 web/）
 │   ├── index.html
 │   ├── app.js
 │   ├── style.css
-│   └── data/             # ★ 資料檔放在 docs/data/，不是 repo root
-│       ├── index.json    # 月份索引
-│       ├── latest.json   # 最新月份資料（與最新月份 JSON 同內容）
+│   └── data/                   # ★ 資料檔放在 docs/data/，不是 repo root
+│       ├── index.json          # 月份索引
+│       ├── latest.json         # 最新月份資料（與最新月份 JSON 同內容）
+│       ├── 114-01.json ~ 114-12.json   # YoY baseline（2026-04-28 一次爬完）
 │       ├── 115-01.json
 │       ├── 115-02.json
 │       └── 115-03.json
 ├── .github/workflows/
-│   └── update_data.yml   # 每月 8~31 日自動執行（含 short-circuit）
-├── .env                  # 本地用（ANTHROPIC_API_KEY），已加入 .gitignore
+│   ├── update_data.yml         # 每月 8~31 日 MOPS 爬蟲（含 short-circuit）
+│   └── update_market.yml       # 每月 5 號市場概況（yfinance + TWSE）
+├── .env                        # 本地用（ANTHROPIC_API_KEY），已加入 .gitignore
 ├── requirements.txt
-├── PROGRESS.md           # 人工進度筆記
-└── CLAUDE.md             # 本檔案
+├── PROGRESS.md                 # 人工進度筆記
+└── CLAUDE.md                   # 本檔案
 ```
 
 **重要**：GitHub Pages 設定為 branch `main` + folder `/docs`。`scraper/main.py` 的 `DATA_DIR` 指向 `docs/data/`，不是 repo root 的 `data/`。
@@ -112,6 +116,7 @@ MOPS 在 2025 年改版為 SPA，舊的直接 POST `ajax_t05st02` 已失效。
         "name": "富邦金控",
         "monthly_profit": 2570.0,
         "cumulative_profit": 33270.0,
+        "cumulative_profit_yoy_pct": -19.1,
         "monthly_eps": null,
         "cumulative_eps": 3.52
       },
@@ -128,10 +133,21 @@ MOPS 在 2025 年改版為 SPA，舊的直接 POST `ajax_t05st02` 已失效。
       "report_month": "115/03",
       "parse_method": "llm",
       "news_summary": "富邦金3月自結...",
-      "news_sources": ["https://ctee.com.tw/..."],
+      "news_sources": [{"url": "https://ctee.com.tw/...", "title": "..."}],
       "news_generated_at": "2026-04-28T10:05:00"
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/03",
+    "generated_at": "2026-04-28T14:17:32",
+    "items": {
+      "usdtwd":         {"value": 32.039, "prev_value": 31.2468, "pct_change": 2.54, ...},
+      "taiex":          {"value": 31722.99, "prev_value": 35414.49, "pct_change": -10.42, ...},
+      "taiex_turnover": {"value_yi": 8166.6, "prev_value_yi": 8154.2, "pct_change": 0.15, ...},
+      "spx":            {"value": 6528.52, "prev_value": 6878.88, "pct_change": -5.09, ...},
+      "us10y":          {"value_pct": 4.311, "prev_value_pct": 3.962, "bps_change": 35, ...}
+    }
+  }
 }
 ```
 
@@ -145,6 +161,51 @@ MOPS 在 2025 年改版為 SPA，舊的直接 POST `ajax_t05st02` 已失效。
 - `cumulative_eps`：累計稅後 EPS（元）；母公司業主應占為準（不是合併總損益）
 - 解析時抓「**母公司業主**」欄，不抓「總損益」（後者含少數股東，會高估）
 - 若公告完全無 EPS 資料，兩欄皆為 `null`
+
+---
+
+## 累計 YoY 欄位（main.py: compute_yoy）
+
+每次 `main.py` 跑完爬取後，自動讀**去年同期歸檔**（例：115/03 → 讀 `114-03.json`），計算累計獲利 YoY。
+
+- 公式：`(curr - prev) / abs(prev) × 100`（prev 為負時不會反轉）
+- 寫入 `holding_company.cumulative_profit_yoy_pct`（一位小數）
+- **2887 台新新光金 hardcoded 排除**（`EXCLUDED_CODES = {"2887"}`）：2025 年合併，114 年是「台新金」，分母不可比 → 顯示 `—`
+- baseline 不存在或公司缺資料時，欄位省略不寫，前端顯示 `—`
+
+### 對既有 JSON 補 YoY（不必重爬）
+
+```python
+import sys, json; sys.path.insert(0, 'scraper')
+from main import compute_yoy
+with open('docs/data/115-03.json', encoding='utf-8') as f: d = json.load(f)
+compute_yoy(d, '115/03')
+with open('docs/data/115-03.json', 'w', encoding='utf-8') as f: json.dump(d, f, ensure_ascii=False, indent=2)
+```
+
+---
+
+## 本月市場概況（market_summary.py）
+
+每月 5 號 cron 跑（早於 MOPS 8 號排程），抓 5 項指標：
+
+| 項目 | 來源 |
+|------|------|
+| USD/TWD | yfinance `TWD=X` |
+| 加權指數 | yfinance `^TWII` |
+| 台股日均成交額 | TWSE FMTQIK API（**注意：成交金額在 row[2]，不是 row[3]**） |
+| S&P 500 | yfinance `^GSPC` |
+| US 10Y 殖利率 | yfinance `^TNX` |
+
+**沒抓台灣 10Y 公債**（沒有乾淨免費 API，且參考度低）。
+
+值與「上個月最後交易日」比較。寫入該月份 JSON 的 `market_summary` 欄位 + 同步 `latest.json`。`main.py` 的 `save_data()` 會 read-merge-write，避免 MOPS 爬蟲覆蓋掉 `market_summary`（與 news_summary 同樣保留）。
+
+```bash
+python scraper/market_summary.py                  # 預設上個月
+python scraper/market_summary.py --period 115/04  # 指定月份
+python scraper/market_summary.py --dry-run        # 只印不寫
+```
 
 ---
 
@@ -216,32 +277,36 @@ python main.py --delay 5
 
 # 補上新聞摘要（爬完之後）
 python news_summary.py
+
+# 抓本月市場概況
+python market_summary.py
+
+# 一次性：爬整個 114 年作為 YoY baseline（已執行過，~75 分鐘）
+python bootstrap_history.py --year 114
 ```
 
 **輸出位置**：`docs/data/latest.json`、`docs/data/115-03.json`、`docs/data/index.json`
 
 ---
 
-## GitHub Actions（update_data.yml）
+## GitHub Actions
 
-### 觸發規則
+### update_data.yml（MOPS 月損益 + 新聞摘要）
 
 - **排程**：每月 **8~31 日**，UTC 09:00 與 12:00（台灣時間 17:00 / 20:00）各一次
 - **Short-circuit**：schedule 觸發時，若 `latest.json` 已顯示目標月份 `success_count >= 13`，直接跳過所有步驟（節省 API 費用）
 - **手動觸發**：Actions → Run workflow（不受 short-circuit 限制，方便補跑）
+- 執行 `scraper/main.py`（含 YoY 計算）→ 若收齊 13 家再執行 `news_summary.py`（冪等）→ commit + push
 
-### 執行步驟
+### update_market.yml（市場概況）
 
-1. Checkout repo
-2. 檢查是否已收齊（schedule only）
-3. 安裝 Python 依賴（`requirements.txt`，不含 playwright）
-4. 執行 `scraper/main.py`
-5. 若 success_count ≥ 13，執行 `scraper/news_summary.py`（冪等）
-6. `git add docs/data/` → commit → push
+- **排程**：每月 **5 號** UTC 01:00（台灣時間 09:00）。早於 MOPS 排程，會自己建立月份 stub 檔。
+- 執行 `scraper/market_summary.py` → commit + push
+- MOPS 之後 8 號跑時，`save_data()` 會保留 `market_summary` 欄位
 
 ### Secret
 
-`ANTHROPIC_API_KEY`（repo Settings → Secrets → Actions）
+`ANTHROPIC_API_KEY`（repo Settings → Secrets → Actions）— 只 update_data.yml 用，update_market.yml 不需要 LLM。
 
 ---
 
@@ -265,13 +330,14 @@ fetch("./data/index.json") → renderMonthSelector() → loadData("115/03")
 
 ### 功能清單
 
-- 月份選單（dropdown）：依 index.json 動態建立
-- 排序：代號 / 當月↓ / 累計↓ / 累計 EPS↓
+- 月份選單（dropdown）：依 index.json 動態建立（含 114 baseline 月份）
+- 排序：代號 / 當月↓ / 累計↓ / **累計 YoY↓** / 累計 EPS↓
 - 單位切換：百萬元（NT$m）/ 億元（前端換算，JSON 存百萬元）
+- **本月市場概況**：表格上方獨立區塊，5 張卡片（FX、TAIEX、日均量、S&P、US 10Y）
 - 摘要卡片：合計當月、合計累計 YTD、當月第一、累計第一
-- 主表格：代號、金控名、當月獲利（含 bar）、累計 YTD、累計 EPS
+- 主表格：代號、金控名、當月、累計、**累計 YoY**、當月 EPS、累計 EPS
 - 子公司展開：點金控名稱顯示子公司明細 + bar chart
-- 新聞摘要：子公司面板底部顯示
+- 新聞摘要：子公司面板底部顯示「延伸閱讀」清單
 - 雙圖表：當月獲利橫條圖（藍）+ 累計 YTD 橫條圖（綠）
 
 ---
