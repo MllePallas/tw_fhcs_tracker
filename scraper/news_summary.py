@@ -317,16 +317,21 @@ def main():
         json.dump(data, f, ensure_ascii=False, indent=2)
     logger.info(f"Saved {period_file.name}: updated={updated}, skipped={skipped}, failed={failed}")
 
-    # 若處理的不是 latest，順手把 latest.json 也同步（前提是它指向同一期）
-    if args.period:
-        latest_path = DATA_DIR / "latest.json"
-        if latest_path.exists():
-            with open(latest_path, encoding="utf-8") as f:
-                latest = json.load(f)
-            if latest.get("report_period") == period:
-                with open(latest_path, "w", encoding="utf-8") as f:
-                    json.dump(data, f, ensure_ascii=False, indent=2)
-                logger.info(f"Also synced latest.json")
+    # 同步另一個檔案：latest.json ↔ 對應月份歸檔（115-03.json 等）
+    archive_path = DATA_DIR / f"{period.replace('/', '-')}.json" if period else None
+    latest_path = DATA_DIR / "latest.json"
+    other = archive_path if period_file.name == "latest.json" else latest_path
+    if other and other != period_file:
+        # 若另一檔存在且指向同一期，才覆寫；否則直接寫（latest 永遠跟最新跑）
+        write_other = True
+        if other.exists() and other != latest_path:
+            with open(other, encoding="utf-8") as f:
+                if json.load(f).get("report_period") != period:
+                    write_other = False
+        if write_other:
+            with open(other, "w", encoding="utf-8") as f:
+                json.dump(data, f, ensure_ascii=False, indent=2)
+            logger.info(f"Also synced {other.name}")
 
 
 if __name__ == "__main__":
