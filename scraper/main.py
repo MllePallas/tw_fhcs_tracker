@@ -146,11 +146,15 @@ def save_data(data: dict, report_period: str):
 def compute_yoy(data: dict, target_period: str):
     """
     讀去年同期歸檔，計算 holding_company.cumulative_profit 的 YoY 變化（%），
-    寫入 cumulative_profit_yoy_pct 欄位（合併公司 / 缺資料則略過）。
+    寫入 cumulative_profit_yoy_pct 欄位（M&A 期間 / 缺資料則略過）。
 
     公式：(curr - prev) / abs(prev) × 100
     """
-    EXCLUDED_CODES = {"2887"}  # 台新新光金：2025 年合併，114 年資料不可比
+    # 合併日期 → 第一個可算 YoY 的目標月份。target_period < cutoff 時略過此公司。
+    # 例：2887 合併於 2025/07，114/07 起為合併後資料 → 115/07 起才能對齊 YoY。
+    YOY_CUTOFFS = {
+        "2887": "115/07",  # 台新新光金（台新金+新光金合併於 2025-07-24）
+    }
 
     roc_year, roc_month = target_period.split("/")
     prev_year = int(roc_year) - 1
@@ -170,12 +174,15 @@ def compute_yoy(data: dict, target_period: str):
 
     baseline_by_code = {c["code"]: c for c in baseline.get("companies", []) if "code" in c}
     populated = 0
+    skipped_merger = 0
 
     for company in data.get("companies", []):
         if "error" in company:
             continue
         code = company.get("code", "")
-        if code in EXCLUDED_CODES:
+        cutoff = YOY_CUTOFFS.get(code)
+        if cutoff and target_period < cutoff:
+            skipped_merger += 1
             continue
         prev = baseline_by_code.get(code)
         if not prev or "error" in prev:
@@ -188,7 +195,10 @@ def compute_yoy(data: dict, target_period: str):
         company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
         populated += 1
 
-    logger.info(f"YoY populated for {populated} companies (baseline: {prev_period})")
+    msg = f"YoY populated for {populated} companies (baseline: {prev_period})"
+    if skipped_merger:
+        msg += f"; skipped {skipped_merger} due to M&A cutoff"
+    logger.info(msg)
 
 
 def update_index(data: dict, report_period: str):

@@ -170,7 +170,7 @@ MOPS 在 2025 年改版為 SPA，舊的直接 POST `ajax_t05st02` 已失效。
 
 - 公式：`(curr - prev) / abs(prev) × 100`（prev 為負時不會反轉）
 - 寫入 `holding_company.cumulative_profit_yoy_pct`（一位小數）
-- **2887 台新新光金 hardcoded 排除**（`EXCLUDED_CODES = {"2887"}`）：2025 年合併，114 年是「台新金」，分母不可比 → 顯示 `—`
+- **M&A cutoff（`YOY_CUTOFFS`）**：2887 台新新光金合併於 2025-07-24，114/07 起就是合併後資料；因此 cutoff 設為 `115/07`，**`target_period < 115/07` 時跳過**（115/01-06 顯示 `—`），115/07 以後可正常算 YoY
 - baseline 不存在或公司缺資料時，欄位省略不寫，前端顯示 `—`
 
 ### 對既有 JSON 補 YoY（不必重爬）
