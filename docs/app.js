@@ -221,11 +221,19 @@ function renderRow(c) {
   const cDisplay = cumul    != null ? formatNum(cumul)     : '—';
 
   // 累計 YoY（main.py 預先寫入 holding_company.cumulative_profit_yoy_pct）
+  // 2887 台新新光金 2025-07-24 合併，115/07 之前無法算 YoY，顯示合併註記
   const yoy = h.cumulative_profit_yoy_pct;
-  const yoyClass = yoy == null ? '' : (yoy >= 0 ? 'positive' : 'negative');
-  const yoyDisp = yoy == null
-    ? '—'
-    : `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
+  const period = state.data.report_period || '';
+  let yoyClass = '';
+  let yoyDisp;
+  if (yoy != null) {
+    yoyClass = yoy >= 0 ? 'positive' : 'negative';
+    yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
+  } else if (c.code === '2887' && period < '115/07') {
+    yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
+  } else {
+    yoyDisp = '—';
+  }
 
   // EPS：當月 EPS 公告通常沒列，可用 月損益/累計損益 × 累計EPS 推算
   const epsM = h.monthly_eps != null
