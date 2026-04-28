@@ -1,47 +1,47 @@
 {
-  "report_period": "114/12",
-  "last_updated": "2026-04-28T15:57:02.630922",
+  "report_period": "114/10",
+  "last_updated": "2026-04-28T15:45:59.616369",
   "success_count": 13,
   "fail_count": 0,
   "companies": [
     {
       "code": "2880",
       "name": "華南金",
-      "announcement_date": "115/01/08",
-      "announcement_title": "公告本公司114年12月份自結盈餘",
-      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=2&TYPEK=all",
+      "announcement_date": "114/11/07",
+      "announcement_title": "公告本公司114年10月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "華南金控",
-        "monthly_profit": 2008,
-        "cumulative_profit": 26424,
+        "monthly_profit": 2523,
+        "cumulative_profit": 22433,
         "monthly_eps": null,
-        "cumulative_eps": 1.9
+        "cumulative_eps": 1.61
       },
       "subsidiaries": [
         {
           "name": "華南銀行",
-          "monthly_profit": 1587,
-          "cumulative_profit": 24153,
+          "monthly_profit": 2194,
+          "cumulative_profit": 20751,
           "monthly_eps": null,
-          "cumulative_eps": 2.27
+          "cumulative_eps": 1.95
         },
         {
           "name": "華南永昌證券",
-          "monthly_profit": 249,
-          "cumulative_profit": 2063,
+          "monthly_profit": 310,
+          "cumulative_profit": 1660,
           "monthly_eps": null,
-          "cumulative_eps": 3.15
+          "cumulative_eps": 2.53
         },
         {
           "name": "華南產險",
-          "monthly_profit": 262,
-          "cumulative_profit": 1802,
+          "monthly_profit": 137,
+          "cumulative_profit": 1407,
           "monthly_eps": null,
-          "cumulative_eps": 9.0
+          "cumulative_eps": 7.03
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
@@ -50,48 +50,48 @@
     {
       "code": "2881",
       "name": "富邦金",
-      "announcement_date": "115/01/12",
-      "announcement_title": "公告本公司暨主要子公司114年12月合併自結損益",
-      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "announcement_date": "114/11/10",
+      "announcement_title": "公告本公司暨主要子公司114年10月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "富邦金控",
-        "monthly_profit": 140,
-        "cumulative_profit": 120850,
+        "monthly_profit": 17920,
+        "cumulative_profit": 108840,
         "monthly_eps": null,
-        "cumulative_eps": 8.36
+        "cumulative_eps": 7.51
       },
       "subsidiaries": [
         {
           "name": "台北富邦銀行",
-          "monthly_profit": 1560,
-          "cumulative_profit": 36330,
+          "monthly_profit": 3230,
+          "cumulative_profit": 32410,
           "monthly_eps": null,
-          "cumulative_eps": 2.31
+          "cumulative_eps": 2.06
         },
         {
           "name": "富邦證券",
-          "monthly_profit": 830,
-          "cumulative_profit": 10590,
+          "monthly_profit": 1030,
+          "cumulative_profit": 8660,
           "monthly_eps": null,
-          "cumulative_eps": 6.51
+          "cumulative_eps": 5.32
         },
         {
           "name": "富邦產險",
-          "monthly_profit": 600,
-          "cumulative_profit": 6880,
+          "monthly_profit": 580,
+          "cumulative_profit": 5690,
           "monthly_eps": null,
-          "cumulative_eps": 22.92
+          "cumulative_eps": 18.95
         },
         {
           "name": "富邦人壽",
-          "monthly_profit": -5110,
-          "cumulative_profit": 62550,
+          "monthly_profit": 12350,
+          "cumulative_profit": 60200,
           "monthly_eps": null,
-          "cumulative_eps": 5.28
+          "cumulative_eps": 5.08
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n## 富邦金（2881）115 年 3 月月自結損益摘要\n\n**重點**\n\n\n富邦金控於 2026 年 4 月 15 日公布 3 月自結合併稅後純益 **25.7 億元**，累計前 3 月稅後純益 **332.7 億元**、每股稅後純益（EPS）**2.37 元**。3 月金融市場受中東戰事影響出現股債雙跌亂流，衝擊富邦人壽資產評價，加上稅務支出，導致人壽單月虧損。\n若加計 FVOCI 股票處分損益，\n富邦金控 3 月調整後獲利達 **177.6 億元**，累計前 3 月調整後獲利 **660.6 億元**，雙雙創歷史同期新高，調整後每股稅後純益為 **4.72 元**。\n\n\n**子公司明細**\n\n- **富邦人壽**：\n受美伊衝突升溫導致全球股市劇烈震盪、油價飆高及利率攀升影響，3 月金融資產產生評價損失，另因應稅所得比重增加產生所得稅費用，單月稅後淨損 **19.4 億元**，累計前 3 月稅後純益 **151.2 億元**；惟伺機出售 FVOCI 股票實現資本利得，加計後 3 月調整後獲利達 **130.3 億元**，累計前 3 月調整後獲利 **472.8 億元**，均創歷年同期最高。\n\n- **台北富邦銀行**：\n3 月稅後純益 **35.9 億元**，累計前 3 月稅後純益 **121.6 億元**，較去年同期成長 20%，創歷年同期新高；第 1 季利息淨收益及手續費淨收益分別較去年同期成長 25% 及 28%，帶動整體營收成長 23%。\n\n- **富邦證券**：\n3 月稅後純益 **10.5 億元**，累計前 3 月稅後純益 **39.6 億元**，較去年同期大幅成長 138%，續創歷史同期新高；受惠台股第 1 季日均成交值達 9,941 億元，帶動經紀及財管業務收入分別成長 85% 與 47%。\n\n- **富邦產險**：\n3 月稅後純益 **4.7 億元**，累計前 3 月稅後純益 **25.9 億元**，較去年同期成長 59%；3 月整體簽單保費 77.1 億元，較去年同期成長 31%。\n\n- **富邦投信**：\n3 月稅後純益 **1.3 億元**，累計前 3 月稅後純益 **4.1 億元**，分別較去年同期成長 83% 和 69%，雙雙續創歷史同期新",
       "news_sources": [
@@ -109,55 +109,55 @@
     {
       "code": "2882",
       "name": "國泰金",
-      "announcement_date": "115/01/12",
-      "announcement_title": "公告本公司暨主要子公司114年12月自結合併稅後損益",
-      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=4&TYPEK=all",
+      "announcement_date": "114/11/10",
+      "announcement_title": "公告本公司暨主要子公司114年10月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=2&TYPEK=all",
       "holding_company": {
         "name": "國泰金控",
-        "monthly_profit": -850,
-        "cumulative_profit": 107990,
+        "monthly_profit": 19440,
+        "cumulative_profit": 94220,
         "monthly_eps": null,
-        "cumulative_eps": 7.08
+        "cumulative_eps": 6.16
       },
       "subsidiaries": [
         {
           "name": "國泰人壽",
-          "monthly_profit": -3240,
-          "cumulative_profit": 56550,
+          "monthly_profit": 14810,
+          "cumulative_profit": 49210,
           "monthly_eps": null,
-          "cumulative_eps": 8.91
+          "cumulative_eps": 7.75
         },
         {
           "name": "國泰世華銀行",
-          "monthly_profit": 1760,
-          "cumulative_profit": 43510,
+          "monthly_profit": 3730,
+          "cumulative_profit": 38410,
           "monthly_eps": null,
-          "cumulative_eps": 3.35
+          "cumulative_eps": 2.97
         },
         {
           "name": "國泰產險",
-          "monthly_profit": 140,
-          "cumulative_profit": 3760,
+          "monthly_profit": 320,
+          "cumulative_profit": 3120,
           "monthly_eps": null,
-          "cumulative_eps": 18.79
+          "cumulative_eps": 15.58
         },
         {
           "name": "國泰證券",
-          "monthly_profit": 460,
-          "cumulative_profit": 4500,
+          "monthly_profit": 500,
+          "cumulative_profit": 3570,
           "monthly_eps": null,
-          "cumulative_eps": 5.85
+          "cumulative_eps": 4.64
         },
         {
           "name": "國泰投信",
-          "monthly_profit": 200,
-          "cumulative_profit": 2750,
+          "monthly_profit": 290,
+          "cumulative_profit": 2330,
           "monthly_eps": null,
-          "cumulative_eps": 18.34
+          "cumulative_eps": 15.52
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "## 國泰金（2882）115 年 3 月自結損益摘要\n\n**重點**\n\n\n國泰金控於 2026 年 3 月稅後純益 50.3 億元，前 3 月累計稅後純益 316.6 億元，EPS 為 2.15 元；各子公司核心業務動能強健，國泰世華銀行、國泰產險、國泰證券及國泰投信累計稅後純益皆創歷年同期新高，國泰人壽 3 月則逢中東戰事影響牽動金融資產評價，惟受惠過往厚實 CSM 之穩定攤銷、經常性收益挹注，整體營運持穩。\n\n\n**子公司明細**\n\n- **國泰人壽**：\n3 月稅後純益 7.2 億元，累計稅後純益達 173.7 億元；3 月初年度保費（FYP）及初年度等價保費（FYPE）分別為 362 億元及 82 億元，保費銷售動能維持強勁，A&H 及投資型商品 FYP 分別月成長 87% 及 73%。\n\n\n- **國泰世華銀行**：\n3 月稅後純益 40.6 億元，累計稅後純益 132 億元，年成長 8%；放款持續擴張，降息帶動外幣資金成本下降，累計淨利息收入呈雙位數成長；財富管理銷售動能延續，信用卡簽帳金額穩健，累計流通卡數超過 600 萬張；3 月底逾放比率為 0.16%，備抵呆帳覆蓋率 1,031%，資產品質穩健。\n\n\n- **國泰產險**：\n3 月稅後純益 4.2 億元，累計稅後純益 10.6 億元，創歷史同期新高；3 月簽單保費達 34.1 億元，累計簽單保費達 100.5 億元，健康險與工程險累計簽單保費分別較去年同期成長 55% 及 12%。\n\n\n- **國泰投信**：\n3 月稅後純益 3 億元，累計稅後純益 8.6 億元，年成長 16%，總管理資產規模達新台幣 2.8 兆元，較去年同期成長 29%。\n\n\n> 📌 **說明**：新聞數字（金控當月 50.3 億元、累計 316.6 億元、EPS 2.15 元）與題目提供之財報數字（當月 50.3 億元、累計 316.6 億元）核心吻合；部分子公司細項（如國泰證券）新聞未單獨揭露當月獲利，以新聞實際報導內容為準。",
       "news_sources": [
@@ -175,48 +175,48 @@
     {
       "code": "2883",
       "name": "凱基金",
-      "announcement_date": "115/01/09",
-      "announcement_title": "公告本公司暨主要子公司114年12月份自結合併盈餘",
+      "announcement_date": "114/11/07",
+      "announcement_title": "公告本公司暨主要子公司114年10月份自結合併盈餘",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "凱基金控",
-        "monthly_profit": 1758,
-        "cumulative_profit": 30013,
+        "monthly_profit": 4749,
+        "cumulative_profit": 23800,
         "monthly_eps": null,
-        "cumulative_eps": 1.74
+        "cumulative_eps": 1.37
       },
       "subsidiaries": [
         {
           "name": "凱基人壽",
-          "monthly_profit": -351,
-          "cumulative_profit": 15825,
+          "monthly_profit": 3609,
+          "cumulative_profit": 12872,
           "monthly_eps": null,
-          "cumulative_eps": 3.03
+          "cumulative_eps": 2.47
         },
         {
           "name": "凱基銀行",
-          "monthly_profit": 436,
-          "cumulative_profit": 6803,
+          "monthly_profit": 602,
+          "cumulative_profit": 5895,
           "monthly_eps": null,
-          "cumulative_eps": 1.45
+          "cumulative_eps": 1.25
         },
         {
           "name": "中華開發資本",
-          "monthly_profit": 116,
-          "cumulative_profit": 500,
+          "monthly_profit": -266,
+          "cumulative_profit": 253,
           "monthly_eps": null,
-          "cumulative_eps": 0.24
+          "cumulative_eps": 0.12
         },
         {
           "name": "凱基證券",
-          "monthly_profit": 1226,
-          "cumulative_profit": 11503,
+          "monthly_profit": 1224,
+          "cumulative_profit": 9388,
           "monthly_eps": null,
-          "cumulative_eps": 6.33
+          "cumulative_eps": 5.17
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n## 凱基金控（2883）115年3月月自結損益摘要\n\n**重點**\n\n\n凱基金控於 4 月 13 日公布 3 月自結財務數據，單月稅後純益為 20.26 億元，第一季累計稅後純益 116.9 億元，EPS 0.69 元，年增率約 34%。\n由於凱基人壽今年起適用 IFRS 17 新會計準則，獲利不再加計 FVOCI 股票處分利益；若加計此項目，調整後金控 3 月獲利為 65.77 億元，首季累計獲利 262.05 億元，年成長率逾 200%，持續創歷史同期新高。\n3 月間中東地緣衝突升溫，台股加權指數呈現拉回格局，但交易量能持續擴大；集團持續加強風險控管，子公司證券、銀行、壽險業務仍維持穩健獲利。\n\n\n---\n\n**子公司明細**\n\n- **凱基證券**：\n3 月資本市場雖因中東地緣衝突拉回整理，但台股交易天數增加且成交量能持續創高，在經紀暨財富管理手續費及承銷業務資本利得貢獻下，單月稅後純益 12.06 億元；累計前三月稅後純益 59.06 億元，相較去年同期成長 220%，續創同期新高。\n\n\n- **凱基銀行**：\n受惠於放款擴張及利差走升，淨利息收益穩定成長，手續費收入持續展現強勁動能，3 月稅後純益 7.05 億元；累計前三月稅後純益 20.99 億元，相較去年同期成長 23%。\n\n\n- **凱基人壽**：\n受美伊戰爭影響，債券殖利率走升，致帳列 FVTPL 的債券評價產生未實現損失而衝擊 3 月損益，但凱壽持續靈活資產配置並適時實現資本利得，3 月稅後純益 7.17 億元；加計 FVOCI 股票已實現資本利得稅後約 44.28 億元，單月調整後獲利達 51.45 億元。\n3 月新契約保費收入達 94 億元，累計新契約保費規模 252 億元，較去年同期成長 28%；外幣商品與投資型商品為業績成長關鍵動能，累計銷售分別年增 45% 及 210%。",
       "news_sources": [
@@ -234,48 +234,48 @@
     {
       "code": "2884",
       "name": "玉山金",
-      "announcement_date": "115/01/06",
-      "announcement_title": "公告本公司暨子公司114年12月自結盈餘",
+      "announcement_date": "114/11/05",
+      "announcement_title": "公告本公司暨子公司114年10月自結盈餘",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "玉山金控",
-        "monthly_profit": 2010,
-        "cumulative_profit": 34287,
+        "monthly_profit": 3130,
+        "cumulative_profit": 29333,
         "monthly_eps": null,
-        "cumulative_eps": 2.12
+        "cumulative_eps": 1.81
       },
       "subsidiaries": [
         {
           "name": "玉山銀行",
-          "monthly_profit": 1746,
-          "cumulative_profit": 32735,
+          "monthly_profit": 3078,
+          "cumulative_profit": 28306,
           "monthly_eps": null,
-          "cumulative_eps": 2.24
+          "cumulative_eps": 1.93
         },
         {
           "name": "玉山證券",
-          "monthly_profit": 275,
-          "cumulative_profit": 2610,
+          "monthly_profit": 303,
+          "cumulative_profit": 2076,
           "monthly_eps": null,
-          "cumulative_eps": 4.73
+          "cumulative_eps": 3.76
         },
         {
           "name": "玉山創投",
-          "monthly_profit": 41,
-          "cumulative_profit": 120,
+          "monthly_profit": -98,
+          "cumulative_profit": 96,
           "monthly_eps": null,
-          "cumulative_eps": 0.22
+          "cumulative_eps": 0.17
         },
         {
           "name": "玉山投信",
-          "monthly_profit": 21,
-          "cumulative_profit": 189,
+          "monthly_profit": 19,
+          "cumulative_profit": 149,
           "monthly_eps": null,
-          "cumulative_eps": 6.31
+          "cumulative_eps": 4.98
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "**重點**\n\n\n玉山金控於 4 月 8 日公布 2026 年 3 月單月稅後純益 30.1 億元，累計第一季稅後純益 100.57 億元，創歷年同期獲利最高，較去年同期增加 14.39%，EPS 為 0.62 元。\n玉山金首季合併稅後純益正式突破百億元大關，寫下歷年同期新猷。\n\n**子公司明細**\n\n\n主要子公司中，玉山銀行累計稅後純益 87.62 億元，較去年同期增加 0.45%；玉山證券累計 10.5 億元；玉山創投累計 7.1 億元；玉山投信累計 1 億元。\n銀行本業仍為獲利主引擎，貢獻逾八成金控盈餘。\n\n> 📌 **新聞來源數字說明**：工商時報與鉅亨網均以「億元」為單位揭露，與題目財報數字（百萬元）換算後一致（例如銀行累計 87.62 億元 ＝ 8,762 百萬元）。新聞未個別揭露銀行、證券、創投等子公司之「3 月單月」細項，僅揭露 Q1 累計數字。",
       "news_sources": [
@@ -289,55 +289,55 @@
     {
       "code": "2885",
       "name": "元大金",
-      "announcement_date": "115/01/08",
-      "announcement_title": "元大金控公告114年12月份自結合併損益",
+      "announcement_date": "114/11/07",
+      "announcement_title": "元大金控公告114年10月份自結合併損益",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "元大金控",
-        "monthly_profit": 3182,
-        "cumulative_profit": 36521,
+        "monthly_profit": 3433,
+        "cumulative_profit": 30127,
         "monthly_eps": null,
-        "cumulative_eps": 2.74
+        "cumulative_eps": 2.26
       },
       "subsidiaries": [
         {
           "name": "元大證券",
-          "monthly_profit": 2751,
-          "cumulative_profit": 24421,
+          "monthly_profit": 2267,
+          "cumulative_profit": 18762,
           "monthly_eps": null,
-          "cumulative_eps": 3.7
+          "cumulative_eps": 2.85
         },
         {
           "name": "元大銀行",
-          "monthly_profit": 451,
-          "cumulative_profit": 10668,
+          "monthly_profit": 1069,
+          "cumulative_profit": 9485,
           "monthly_eps": null,
-          "cumulative_eps": 1.22
+          "cumulative_eps": 1.09
         },
         {
           "name": "元大期貨",
-          "monthly_profit": 170,
-          "cumulative_profit": 2655,
+          "monthly_profit": 291,
+          "cumulative_profit": 2300,
           "monthly_eps": null,
-          "cumulative_eps": 8.45
+          "cumulative_eps": 7.35
         },
         {
           "name": "元大人壽",
-          "monthly_profit": -583,
-          "cumulative_profit": -1409,
+          "monthly_profit": -137,
+          "cumulative_profit": -448,
           "monthly_eps": null,
-          "cumulative_eps": -0.51
+          "cumulative_eps": -0.16
         },
         {
           "name": "元大投信",
-          "monthly_profit": 389,
-          "cumulative_profit": 4182,
+          "monthly_profit": 388,
+          "cumulative_profit": 3450,
           "monthly_eps": null,
-          "cumulative_eps": 18.43
+          "cumulative_eps": 15.2
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n## 元大金（2885）115年3月自結損益摘要\n\n**重點**\n\n\n元大金 3 月大賺 46.16 億元，創同期新高，在 13 家上市金控中排名第四。\n元大金控成長動能最為神勇，累計獲利年增幅高達 89%，主要歸功於台股大多頭帶動證券、投信獲利引擎全開，上市櫃第一季日成交值屢屢突破 1 兆元；由於元大金受壽險會計變革干擾較小，證券、銀行貢獻獲利較能直接且完整地呈現在損益表上。\n不過，\n3 月爆發中東戰爭導致金融市場股債震盪，壽險公司金融資產出現評價損失，全體金控單月獲利月減約 38%。\n\n\n**子公司明細**\n\n\n台股市場熱絡，3 月日均量突破 1 兆元創歷年新高，帶動**元大證券**經紀手收，單月稅後純益達 28.67 億元，月增 37.8%，年增 83%；累計第 1 季稅後純益 87.35 億元，年增 120%。**元大銀行** 3 月主要獲利來源為利息淨收益及財管手收，單月稅後純益為 11.51 億元，月增 2.8%，年增 34.46%；累計第 1 季 36.88 億元，年增 44.97%。**元大人壽** 3 月受惠新契約業務量及投資型商品銷售動能成長，整體保險服務結果及經常性投資收入持續貢獻獲利，致使 3 月份稅後純益達 1.77 億元，月增 12%，年減 50.6%。\n**元大期貨**首季稅後純益 7 億元；**元大投信**首季稅後純益為 12.91 億元。\n\n\n\n累計第 1 季稅後純益約 144 億元，創下歷史同期新高，年增 88.6%，EPS 1.08 元；其中證券、銀行、期貨、投信四家子公司第 1 季稅後純益皆創下同期新高。",
       "news_sources": [
@@ -355,48 +355,48 @@
     {
       "code": "2886",
       "name": "兆豐金",
-      "announcement_date": "115/01/07",
-      "announcement_title": "公告本公司暨主要子公司114年12月份自結合併盈餘",
+      "announcement_date": "114/11/07",
+      "announcement_title": "公告本公司暨主要子公司114年10月份自結合併盈餘",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "兆豐金控",
-        "monthly_profit": 3105,
-        "cumulative_profit": 35096,
+        "monthly_profit": 2074,
+        "cumulative_profit": 30360,
         "monthly_eps": null,
-        "cumulative_eps": 2.37
+        "cumulative_eps": 2.05
       },
       "subsidiaries": [
         {
           "name": "兆豐銀行",
-          "monthly_profit": 2431,
-          "cumulative_profit": 28924,
+          "monthly_profit": 1788,
+          "cumulative_profit": 25188,
           "monthly_eps": null,
-          "cumulative_eps": 2.95
+          "cumulative_eps": 2.58
         },
         {
           "name": "兆豐證券",
-          "monthly_profit": 257,
-          "cumulative_profit": 2258,
+          "monthly_profit": 47,
+          "cumulative_profit": 1887,
           "monthly_eps": null,
-          "cumulative_eps": 1.95
+          "cumulative_eps": 1.63
         },
         {
           "name": "兆豐票券",
-          "monthly_profit": 212,
-          "cumulative_profit": 2525,
+          "monthly_profit": 205,
+          "cumulative_profit": 2111,
           "monthly_eps": null,
-          "cumulative_eps": 1.67
+          "cumulative_eps": 1.4
         },
         {
           "name": "兆豐產險",
-          "monthly_profit": 14,
-          "cumulative_profit": 761,
+          "monthly_profit": 59,
+          "cumulative_profit": 713,
           "monthly_eps": null,
-          "cumulative_eps": 2.31
+          "cumulative_eps": 2.17
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "## 兆豐金（2886）115年3月自結損益摘要\n\n**重點**\n\n\n兆豐金於2026年4月14日公布3月自結獲利，單月稅後純益24.01億元，累計Q1稅後純益達93.97億元，較去年同期年增16.46%，EPS為0.63元。首季獲利主要由非銀行子公司帶動，美國聯邦準備銀行（FRB）亦正式解除對兆豐銀長達8年的裁罰令，為集團前景注入利多。\n\n\n\n兆豐銀行3月單月獲利月減近30%，主因台股於3月31日出現明顯跌勢，影響月底評價數據，導致財務操作收益減少約12億元、SWAP收益亦減少約3億元；惟利息與手續費淨收益仍維持成長趨勢。\n\n\n---\n\n**子公司明細**\n\n- **兆豐銀行**：\n3月稅後純益15.92億元，月減29.96%，主因財務操作淨收益減少；累計前三月稅後純益70.8億元，年減1.69%。\n\n\n- **兆豐證券**：\n受惠3月台股日均量增加且營業天數較2月多，帶動經紀手收增加，加上自營及承銷操作表現亮眼，3月稅後純益達5億元，月增119.3%；累計前三月稅後純益13.46億元，年增率高達421%。\n\n\n- **兆豐票券**：\n3月稅後純益2.81億元，月增4.07%；累計前三月稅後純益8.27億元，年增52.27%，主因聯準會啟動降息後台幣債券利差提升、外幣債券利息費用下降，票券承銷量亦有所增加。\n\n\n- **兆豐產險**：\n3月稅後純益0.82億元，月增34.43%；累計前三月稅後純益2.33億元，年增約10.25%，主因部分案件結清後先前提存的賠款準備有所回沖。",
       "news_sources": [
@@ -414,62 +414,62 @@
     {
       "code": "2887",
       "name": "台新新光金",
-      "announcement_date": "115/01/12",
-      "announcement_title": "公告本公司暨主要子公司114年12月份合併自結業績資料",
+      "announcement_date": "114/11/10",
+      "announcement_title": "公告本公司暨主要子公司114年10月份合併自結業績資料",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "台新新光金控",
-        "monthly_profit": 3460,
-        "cumulative_profit": 37330,
+        "monthly_profit": 7830,
+        "cumulative_profit": 33800,
         "monthly_eps": null,
-        "cumulative_eps": 1.91
+        "cumulative_eps": 1.88
       },
       "subsidiaries": [
         {
           "name": "台新銀行",
-          "monthly_profit": 1810,
-          "cumulative_profit": 21390,
+          "monthly_profit": 2220,
+          "cumulative_profit": 17680,
           "monthly_eps": null,
-          "cumulative_eps": 1.74
+          "cumulative_eps": 1.44
         },
         {
           "name": "台新人壽",
-          "monthly_profit": -1000,
-          "cumulative_profit": 2060,
+          "monthly_profit": 720,
+          "cumulative_profit": 2360,
           "monthly_eps": null,
-          "cumulative_eps": 1.74
+          "cumulative_eps": 1.99
         },
         {
           "name": "台新證券",
-          "monthly_profit": 610,
-          "cumulative_profit": 2450,
+          "monthly_profit": 200,
+          "cumulative_profit": 1720,
           "monthly_eps": null,
-          "cumulative_eps": 3.53
+          "cumulative_eps": 2.48
         },
         {
           "name": "新光銀行",
-          "monthly_profit": 460,
-          "cumulative_profit": 3920,
+          "monthly_profit": 780,
+          "cumulative_profit": 2800,
           "monthly_eps": null,
-          "cumulative_eps": 0.79
+          "cumulative_eps": 0.56
         },
         {
           "name": "新光人壽",
-          "monthly_profit": 1230,
-          "cumulative_profit": 5680,
+          "monthly_profit": 2000,
+          "cumulative_profit": 2910,
           "monthly_eps": null,
-          "cumulative_eps": 0.66
+          "cumulative_eps": 0.34
         },
         {
           "name": "元富證券",
-          "monthly_profit": 250,
-          "cumulative_profit": 2390,
+          "monthly_profit": 640,
+          "cumulative_profit": 1920,
           "monthly_eps": null,
-          "cumulative_eps": 1.48
+          "cumulative_eps": 1.19
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n## 台新新光金（2887）115年3月月自結損益摘要\n\n**重點**\n\n\n台新新光金控於 4 月 14 日公告 3 月自結稅後純益 60.7 億元，年增 437%；前三月（Q1）稅後純益為 210.6 億元，年增 345%，每股稅後純益（EPS）為 0.82 元，創歷史新高。\n獲利動能主要來自新光人壽 CSM 穩定攤銷與經常性投資收益、兩家銀行核心業務雙位數成長，以及證券子公司受惠市場交易熱絡。\n\n**子公司明細**\n\n- **新光人壽**：\n3 月稅後純益 34.6 億元，累計稅後純益 119.2 億元，受惠於 CSM 穩定攤銷與經常性投資收益挹注，獲利穩定；1 至 3 月初年度保費（FYP）達 377 億元，年成長 78%。\n\n\n- **台新銀行**：\n3 月稅後純益 22.3 億元，累計前三月稅後純益 63.5 億元，較去年同期增加 28.5%，續創歷年同期新高，受惠於核心業務動能強勁，帶動淨利息收入及淨手續費收入呈雙位數成長；3 月底逾放比為 0.14%，備抵呆帳覆蓋率 907.04%。\n\n\n- **新光銀行**：\n3 月稅後純益 7.6 億元，累計稅後純益 22.4 億元，獲利續創歷史同期新高；累計淨手續費收入較去年同期增加 26%，保險與基金等財富管理商品銷量動能強勁；3 月底逾放比 0.13%，備抵呆帳覆蓋率 1,007%。\n\n\n- **證券子公司**：\n台新證券 3 月稅後純益 1.9 億元，累計 15.7 億元；元富證券 3 月稅後純益 0.1 億元，累計 15.1 億元；兩家合計累計稅後純益 30.8 億元，主因證券市場指數上漲、交易熱絡，帶動營業證券處分利益及經紀手續費收入增加。",
       "news_sources": [
@@ -483,34 +483,34 @@
     {
       "code": "2889",
       "name": "國票金",
-      "announcement_date": "115/01/08",
-      "announcement_title": "公告本公司114年12月份自結盈餘",
+      "announcement_date": "114/11/07",
+      "announcement_title": "公告本公司114年10月份自結盈餘",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "國票金控",
-        "monthly_profit": 224,
-        "cumulative_profit": 2296,
+        "monthly_profit": 180,
+        "cumulative_profit": 1887,
         "monthly_eps": null,
-        "cumulative_eps": 0.63
+        "cumulative_eps": 0.52
       },
       "subsidiaries": [
         {
           "name": "國際票券",
-          "monthly_profit": 156,
-          "cumulative_profit": 1917,
+          "monthly_profit": 168,
+          "cumulative_profit": 1598,
           "monthly_eps": null,
-          "cumulative_eps": 1.04
+          "cumulative_eps": 0.86
         },
         {
           "name": "國票證券",
-          "monthly_profit": 355,
-          "cumulative_profit": 1499,
+          "monthly_profit": 245,
+          "cumulative_profit": 1053,
           "monthly_eps": null,
-          "cumulative_eps": 1.3
+          "cumulative_eps": 0.92
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "**重點**\n\n\n國票金控（2889）於 2026 年 4 月 9 日公告 3 月自結盈餘，單月稅後純益約 2 億元，累計前三月稅後純益 8.9 億元（新聞數字，近似官方公告之 8.97 億元），較去年同期大幅成長 123.3%，每股稅後純益（EPS）0.25 元，3 月底每股淨值為 12.81 元。\n主要驅動力來自美國聯準會降息紅利持續發酵，帶動外幣債券養券收益轉正，以及台股市場量能回升。\n\n**子公司明細**\n\n- **國際票券**：\n3 月單月稅後純益約 2.1 億元，累計今年前三月稅後純益約 7 億元，年成長 83%；主要受惠聯準會自 2025 年以來累計降息 3 碼，外幣債券資金成本下降，養券收益由負轉正，加上債券買賣斷操作獲利及股權業務收益提升。\n\n- **國票證券**：\n3 月單月稅後純益約 1.4 億元，累計今年前三月稅後純益約 6 億元，較去年同期成長 224%；受惠於證券市場日均量大幅攀升及自營投資操作得宜，經紀與自營業務獲利同步成長。",
       "news_sources": [
@@ -528,41 +528,41 @@
     {
       "code": "2890",
       "name": "永豐金",
-      "announcement_date": "115/01/08",
-      "announcement_title": "永豐金控公告其與子公司永豐銀行與京城銀行及永豐金證券\r\n114年12月合併自結損益",
+      "announcement_date": "114/11/07",
+      "announcement_title": "永豐金控公告其與子公司永豐銀行與京城銀行及永豐金證券\r\n114年10月合併自結損益",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "永豐金控",
-        "monthly_profit": 1565,
-        "cumulative_profit": 26502,
-        "monthly_eps": 0.11,
-        "cumulative_eps": 1.97
+        "monthly_profit": 2401,
+        "cumulative_profit": 22945,
+        "monthly_eps": 0.17,
+        "cumulative_eps": 1.72
       },
       "subsidiaries": [
         {
           "name": "永豐銀行",
-          "monthly_profit": 440,
-          "cumulative_profit": 19462,
-          "monthly_eps": 0.04,
-          "cumulative_eps": 1.76
+          "monthly_profit": 1626,
+          "cumulative_profit": 17756,
+          "monthly_eps": 0.15,
+          "cumulative_eps": 1.6
         },
         {
           "name": "京城銀行",
-          "monthly_profit": 548,
-          "cumulative_profit": 1218,
-          "monthly_eps": 0.49,
-          "cumulative_eps": 1.09
+          "monthly_profit": 337,
+          "cumulative_profit": 337,
+          "monthly_eps": 0.3,
+          "cumulative_eps": 0.3
         },
         {
           "name": "永豐金證券",
-          "monthly_profit": 655,
-          "cumulative_profit": 6471,
-          "monthly_eps": 0.39,
-          "cumulative_eps": 3.83
+          "monthly_profit": 542,
+          "cumulative_profit": 5363,
+          "monthly_eps": 0.32,
+          "cumulative_eps": 3.18
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n## 永豐金（2890）115年3月月自結損益摘要\n\n**重點**\n\n\n永豐金控於 2026 年 4 月 10 日公布 3 月自結稅後純益 27.49 億元，月減 11%、年增 48%，第一季累計稅後純益達 109.41 億元，年成長 52%，每股稅後純益（EPS）為 0.75 元，創下歷史同期新高，年化股東權益報酬率達 17%。\n金控單月獲利月減，主要歸因於資本市場波動；\n第一季整體成長則由核心子公司獲利創歷史新高的成果所驅動。\n\n\n---\n\n**子公司明細**\n\n- **永豐銀行**：\n連續第六年創同期新高紀錄，首季稅後純益達 73.49 億元，年增 18%，淨收益成長由利息淨收益及手續費淨收益的增長所帶動，年增幅各為 24% 與 6%，金融交易相關淨收益亦增加；資產品質維持良好，銀行逾放比率為 0.11%。\n3 月單月稅後純益達 19.69 億元、月增 4%，成長主因為核心淨收益仍維持強勁的成長動能。\n\n\n- **京城銀行**：\n3 月稅後純益為 4.2 億元、月減 14%，獲利減少主因資本利得減少，抵銷了利息淨收益與手續費淨收益的成長。\n首季累計稅後純益為 15.39 億元，除了 1 月京城銀國際租賃處分利得 2.87 億元外，利息淨收益與手續費淨收益皆有顯著成長，資產品質穩定，逾放比率為 0.06%。\n\n\n- **永豐金證券**：\n首季累計稅後純益達 23.62 億元，年增 96%，亦創下歷史同期新高，主要受惠於經紀與泛財管手續費淨收益成長，以及較高的資本利得，手續費淨收益年成長為 85%。\n3 月單月稅後純益為 5.49 億元（月減 7%），月度獲利減少受到資本利得減少與所得稅費用增加的影響，抵銷了手續費淨收益的成長。",
       "news_sources": [
@@ -576,34 +576,34 @@
     {
       "code": "2891",
       "name": "中信金",
-      "announcement_date": "115/01/09",
-      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n114年度十二月份自結盈餘",
-      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "announcement_date": "114/11/07",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n114年度十月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=4&TYPEK=all",
       "holding_company": {
         "name": "中信金控",
-        "monthly_profit": 6268,
-        "cumulative_profit": 80619,
+        "monthly_profit": 6584,
+        "cumulative_profit": 67343,
         "monthly_eps": null,
-        "cumulative_eps": 4.08
+        "cumulative_eps": 3.4
       },
       "subsidiaries": [
         {
           "name": "中國信託銀行",
-          "monthly_profit": 5254,
-          "cumulative_profit": 57298,
+          "monthly_profit": 4735,
+          "cumulative_profit": 46792,
           "monthly_eps": null,
-          "cumulative_eps": 3.35
+          "cumulative_eps": 2.73
         },
         {
           "name": "台灣人壽",
-          "monthly_profit": -336,
-          "cumulative_profit": 20850,
+          "monthly_profit": 1918,
+          "cumulative_profit": 19658,
           "monthly_eps": null,
-          "cumulative_eps": 3.35
+          "cumulative_eps": 3.16
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n## 中信金（2891）115年3月（2026年3月）月自結損益摘要\n\n**重點**\n\n\n2026年3月，受中東戰爭爆發導致金融市場股債震盪影響，壽險公司金融資產出現評價損失，13家上市金控單月獲利縮至434.81億元，月減約38%。\n在此逆風環境下，\n中信金以銀行為核心主體，3月單月稅後純益75.77億元，在金控中獨奪單月獲利王寶座。\n累計前三月合併稅後純益231億元，年增約16%，創下歷年同期新高。\n\n\n**子公司明細**\n\n\n子公司中信銀行累計前三月稅後純益165.8億元，除淨利差持續擴大外，放款、財富管理業務及刷卡消費金額均有雙位數成長，帶動整體獲利年成長23%。\n\n\n\n子公司台灣人壽3月雖受美伊戰爭影響，累計前三月稅後純益77.5億元，年增39%，主要來自債券及基金評價利益，以及過往累積CSM（合約服務邊際）攤銷，暨投資型保單接軌IFRS 15重新衡量之影響。\n\n\n> 📌 **補充說明**：上述新聞數字（中信金3月單月75.77億元、前三月累計231億元、中信銀165.8億元、台壽77.5億元）係報導2026年Q1自結獲利，因本年度起適用IFRS 17新準則（\n2026年起保險業正式適用IFRS 17，取消「金融資產覆蓋法」，部分金融資產重新指定為FVOCI科目\n），與公告原始財報數字（中信金合併稅後當月75.77億元、累計231.04億元）吻合，惟子公司明細因會計準則調整，新聞揭露數字與公告略有差異，以新聞報導為準。",
       "news_sources": [
@@ -621,41 +621,41 @@
     {
       "code": "2892",
       "name": "第一金",
-      "announcement_date": "115/01/08",
-      "announcement_title": "公告本公司暨主要子公司114年12月份自結合併盈餘數",
+      "announcement_date": "114/11/07",
+      "announcement_title": "公告本公司暨主要子公司114年10月份自結合併盈餘數",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "第一金控",
-        "monthly_profit": 1417,
-        "cumulative_profit": 26933,
+        "monthly_profit": 1708,
+        "cumulative_profit": 23406,
         "monthly_eps": null,
-        "cumulative_eps": 1.87
+        "cumulative_eps": 1.63
       },
       "subsidiaries": [
         {
           "name": "第一銀行",
-          "monthly_profit": 1405,
-          "cumulative_profit": 25663,
+          "monthly_profit": 1655,
+          "cumulative_profit": 22206,
           "monthly_eps": null,
-          "cumulative_eps": 2.09
+          "cumulative_eps": 1.81
         },
         {
           "name": "第一金證券",
-          "monthly_profit": 177,
-          "cumulative_profit": 1111,
+          "monthly_profit": 97,
+          "cumulative_profit": 854,
           "monthly_eps": null,
-          "cumulative_eps": 1.66
+          "cumulative_eps": 1.27
         },
         {
           "name": "第一金人壽",
-          "monthly_profit": -134,
-          "cumulative_profit": 635,
+          "monthly_profit": 17,
+          "cumulative_profit": 701,
           "monthly_eps": null,
-          "cumulative_eps": 1.04
+          "cumulative_eps": 1.18
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "---\n\n**重點**\n\n\n第一金（2892）2026 年 3 月稅後純益 27.1 億元，累計前三月（Q1）稅後純益 82.4 億元，創下史上同期新高，年增 14.4%，累計 EPS 0.57 元。\n主要驅動力來自子銀行第一銀行獲利表現強勁，\n銀行獲利受惠於淨提存減少，抵銷了子公司券商與人壽 3 月單月因市況變動所致的獲利走弱衝擊。\n\n\n**子公司明細**\n\n\n依自結合併盈餘數，各子公司 3 月（稅後）／Q1 累計（稅後）表現如下：\n- **第一銀行**：單月 26.92 億元，累計 75.73 億元，累計 EPS 0.62 元\n- **第一金證券**：單月 1.19 億元，累計 5.11 億元，累計 EPS 0.76 元\n- **第一金人壽**：單月 0.02 億元，累計 1.53 億元，累計 EPS 0.22 元\n\n\n\n另附註：累計 1–3 月不含外匯價格變動準備金之 EPS，第一金控為 0.58 元、第一金人壽為 0.44 元。",
       "news_sources": [
@@ -673,62 +673,62 @@
     {
       "code": "5880",
       "name": "合庫金",
-      "announcement_date": "115/01/09",
-      "announcement_title": "公告本公司暨主要子公司114年12月份自結合併盈餘",
+      "announcement_date": "114/11/07",
+      "announcement_title": "公告本公司暨主要子公司114年10月份自結合併盈餘",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
       "holding_company": {
         "name": "合庫金控",
-        "monthly_profit": 1541,
-        "cumulative_profit": 21276,
+        "monthly_profit": 1774,
+        "cumulative_profit": 17954,
         "monthly_eps": null,
-        "cumulative_eps": 1.36
+        "cumulative_eps": 1.14
       },
       "subsidiaries": [
         {
           "name": "合庫銀行",
-          "monthly_profit": 1389,
-          "cumulative_profit": 20808,
+          "monthly_profit": 1705,
+          "cumulative_profit": 17749,
           "monthly_eps": null,
-          "cumulative_eps": 1.59
+          "cumulative_eps": 1.36
         },
         {
           "name": "合庫資產",
-          "monthly_profit": 27,
-          "cumulative_profit": 377,
+          "monthly_profit": 34,
+          "cumulative_profit": 323,
           "monthly_eps": null,
-          "cumulative_eps": 1.2
+          "cumulative_eps": 1.03
         },
         {
           "name": "合庫票券",
-          "monthly_profit": 10,
-          "cumulative_profit": 327,
+          "monthly_profit": 27,
+          "cumulative_profit": 298,
           "monthly_eps": null,
-          "cumulative_eps": 0.67
+          "cumulative_eps": 0.61
         },
         {
           "name": "合庫證券",
-          "monthly_profit": 97,
-          "cumulative_profit": 428,
+          "monthly_profit": 74,
+          "cumulative_profit": 254,
           "monthly_eps": null,
-          "cumulative_eps": 0.82
+          "cumulative_eps": 0.49
         },
         {
           "name": "合庫人壽",
-          "monthly_profit": 86,
-          "cumulative_profit": 282,
+          "monthly_profit": 23,
+          "cumulative_profit": 93,
           "monthly_eps": null,
-          "cumulative_eps": 0.41
+          "cumulative_eps": 0.13
         },
         {
           "name": "合庫投信",
-          "monthly_profit": 3,
-          "cumulative_profit": 16,
+          "monthly_profit": 1,
+          "cumulative_profit": 11,
           "monthly_eps": null,
-          "cumulative_eps": 0.49
+          "cumulative_eps": 0.36
         }
       ],
       "unit": "百萬元",
-      "report_month": "114/12",
+      "report_month": "114/10",
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],

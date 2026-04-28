@@ -143,6 +143,54 @@ def save_data(data: dict, report_period: str):
     update_index(data, report_period)
 
 
+def compute_yoy(data: dict, target_period: str):
+    """
+    讀去年同期歸檔，計算 holding_company.cumulative_profit 的 YoY 變化（%），
+    寫入 cumulative_profit_yoy_pct 欄位（合併公司 / 缺資料則略過）。
+
+    公式：(curr - prev) / abs(prev) × 100
+    """
+    EXCLUDED_CODES = {"2887"}  # 台新新光金：2025 年合併，114 年資料不可比
+
+    roc_year, roc_month = target_period.split("/")
+    prev_year = int(roc_year) - 1
+    prev_period = f"{prev_year:03d}/{roc_month}"
+    baseline_file = DATA_DIR / f"{prev_period.replace('/', '-')}.json"
+
+    if not baseline_file.exists():
+        logger.info(f"YoY baseline {baseline_file.name} not found, skipping YoY")
+        return
+
+    try:
+        with open(baseline_file, encoding="utf-8") as f:
+            baseline = json.load(f)
+    except Exception as e:
+        logger.warning(f"Failed to read YoY baseline {baseline_file.name}: {e}")
+        return
+
+    baseline_by_code = {c["code"]: c for c in baseline.get("companies", []) if "code" in c}
+    populated = 0
+
+    for company in data.get("companies", []):
+        if "error" in company:
+            continue
+        code = company.get("code", "")
+        if code in EXCLUDED_CODES:
+            continue
+        prev = baseline_by_code.get(code)
+        if not prev or "error" in prev:
+            continue
+        curr_cumul = company.get("holding_company", {}).get("cumulative_profit")
+        prev_cumul = prev.get("holding_company", {}).get("cumulative_profit")
+        if curr_cumul is None or prev_cumul is None or prev_cumul == 0:
+            continue
+        yoy = (curr_cumul - prev_cumul) / abs(prev_cumul) * 100
+        company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
+        populated += 1
+
+    logger.info(f"YoY populated for {populated} companies (baseline: {prev_period})")
+
+
 def update_index(data: dict, report_period: str):
     """
     更新 data/index.json，記錄所有可用月份。
@@ -433,6 +481,9 @@ def main():
         "fail_count": final_fail,
         "companies": final_companies,
     }
+
+    # 計算 YoY 變化（讀去年同期歸檔）
+    compute_yoy(output, target_month)
 
     save_data(output, target_month)
 

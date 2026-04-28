@@ -18,6 +18,78 @@
       "file": "115-01.json",
       "success_count": 13,
       "last_updated": "2026-04-27T17:06:53.692993"
+    },
+    {
+      "period": "114/12",
+      "file": "114-12.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:57:02.630922"
+    },
+    {
+      "period": "114/11",
+      "file": "114-11.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:51:33.469514"
+    },
+    {
+      "period": "114/10",
+      "file": "114-10.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:45:59.616369"
+    },
+    {
+      "period": "114/09",
+      "file": "114-09.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:40:36.809226"
+    },
+    {
+      "period": "114/08",
+      "file": "114-08.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:34:27.983210"
+    },
+    {
+      "period": "114/07",
+      "file": "114-07.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:28:16.873297"
+    },
+    {
+      "period": "114/06",
+      "file": "114-06.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:21:54.582910"
+    },
+    {
+      "period": "114/05",
+      "file": "114-05.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:14:58.755116"
+    },
+    {
+      "period": "114/04",
+      "file": "114-04.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:09:12.865941"
+    },
+    {
+      "period": "114/03",
+      "file": "114-03.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T15:02:56.948907"
+    },
+    {
+      "period": "114/02",
+      "file": "114-02.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T14:57:14.677235"
+    },
+    {
+      "period": "114/01",
+      "file": "114-01.json",
+      "success_count": 13,
+      "last_updated": "2026-04-28T14:51:22.024870"
     }
   ]
 }

@@ -202,7 +202,7 @@ function renderRow(c) {
     return `<tr class="error-row">
       <td class="col-code">${c.code}</td>
       <td><span class="company-link">${c.name}</span></td>
-      <td colspan="4" class="center" style="color:#718096;font-size:12px">
+      <td colspan="5" class="center" style="color:#718096;font-size:12px">
         ${c.error_msg || '資料待更新'}
       </td>
       <td class="center"><span class="status-tag status-error">未取得</span></td>
@@ -219,6 +219,13 @@ function renderRow(c) {
 
   const mDisplay = monthly  != null ? formatNum(monthly)  : '—';
   const cDisplay = cumul    != null ? formatNum(cumul)     : '—';
+
+  // 累計 YoY（main.py 預先寫入 holding_company.cumulative_profit_yoy_pct）
+  const yoy = h.cumulative_profit_yoy_pct;
+  const yoyClass = yoy == null ? '' : (yoy >= 0 ? 'positive' : 'negative');
+  const yoyDisp = yoy == null
+    ? '—'
+    : `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
 
   // EPS：當月 EPS 公告通常沒列，可用 月損益/累計損益 × 累計EPS 推算
   const epsM = h.monthly_eps != null
@@ -245,6 +252,7 @@ function renderRow(c) {
     <td>${nameCell}</td>
     <td class="num ${mClass}">${mDisplay}</td>
     <td class="num ${cClass}">${cDisplay}</td>
+    <td class="num ${yoyClass}">${yoyDisp}</td>
     <td class="num ${epsMClass}">${epsMDisp}</td>
     <td class="num ${epsCClass}">${epsCDisp}</td>
     <td class="center"><span class="status-tag status-ok">✓ 已取得</span></td>
@@ -545,6 +553,12 @@ function sortCompanies(arr) {
       return arr.sort((a, b) => {
         const av = a.holding_company?.cumulative_eps ?? -Infinity;
         const bv = b.holding_company?.cumulative_eps ?? -Infinity;
+        return bv - av;
+      });
+    case 'cumul_yoy_desc':
+      return arr.sort((a, b) => {
+        const av = a.holding_company?.cumulative_profit_yoy_pct ?? -Infinity;
+        const bv = b.holding_company?.cumulative_profit_yoy_pct ?? -Infinity;
         return bv - av;
       });
     case 'code':

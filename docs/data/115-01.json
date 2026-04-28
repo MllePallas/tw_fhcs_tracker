@@ -15,7 +15,8 @@
         "monthly_profit": 2989,
         "cumulative_profit": 2989,
         "monthly_eps": null,
-        "cumulative_eps": 0.21
+        "cumulative_eps": 0.21,
+        "cumulative_profit_yoy_pct": 51.2
       },
       "subsidiaries": [
         {
@@ -58,7 +59,8 @@
         "monthly_profit": 10120,
         "cumulative_profit": 10120,
         "monthly_eps": 0.72,
-        "cumulative_eps": 0.72
+        "cumulative_eps": 0.72,
+        "cumulative_profit_yoy_pct": -33.5
       },
       "subsidiaries": [
         {
@@ -115,7 +117,8 @@
         "monthly_profit": 14610,
         "cumulative_profit": 14610,
         "monthly_eps": null,
-        "cumulative_eps": 0.99
+        "cumulative_eps": 0.99,
+        "cumulative_profit_yoy_pct": 0.8
       },
       "subsidiaries": [
         {
@@ -172,7 +175,8 @@
         "monthly_profit": 5645,
         "cumulative_profit": 5645,
         "monthly_eps": 0.33,
-        "cumulative_eps": 0.33
+        "cumulative_eps": 0.33,
+        "cumulative_profit_yoy_pct": 54.4
       },
       "subsidiaries": [
         {
@@ -222,7 +226,8 @@
         "monthly_profit": 4020,
         "cumulative_profit": 4020,
         "monthly_eps": null,
-        "cumulative_eps": 0.25
+        "cumulative_eps": 0.25,
+        "cumulative_profit_yoy_pct": 32.9
       },
       "subsidiaries": [
         {
@@ -272,7 +277,8 @@
         "monthly_profit": 6443,
         "cumulative_profit": 6443,
         "monthly_eps": null,
-        "cumulative_eps": 0.48
+        "cumulative_eps": 0.48,
+        "cumulative_profit_yoy_pct": 147.2
       },
       "subsidiaries": [
         {
@@ -329,7 +335,8 @@
         "monthly_profit": 4158,
         "cumulative_profit": 4158,
         "monthly_eps": null,
-        "cumulative_eps": 0.28
+        "cumulative_eps": 0.28,
+        "cumulative_profit_yoy_pct": 29.3
       },
       "subsidiaries": [
         {
@@ -436,7 +443,8 @@
         "monthly_profit": 486,
         "cumulative_profit": 486,
         "monthly_eps": null,
-        "cumulative_eps": 0.13
+        "cumulative_eps": 0.13,
+        "cumulative_profit_yoy_pct": 213.5
       },
       "subsidiaries": [
         {
@@ -472,7 +480,8 @@
         "monthly_profit": 5103,
         "cumulative_profit": 5103,
         "monthly_eps": 0.35,
-        "cumulative_eps": 0.35
+        "cumulative_eps": 0.35,
+        "cumulative_profit_yoy_pct": 75.8
       },
       "subsidiaries": [
         {
@@ -515,7 +524,8 @@
         "monthly_profit": 7367,
         "cumulative_profit": 7367,
         "monthly_eps": 0.38,
-        "cumulative_eps": 0.38
+        "cumulative_eps": 0.38,
+        "cumulative_profit_yoy_pct": 7.9
       },
       "subsidiaries": [
         {
@@ -551,7 +561,8 @@
         "monthly_profit": 3008,
         "cumulative_profit": 3008,
         "monthly_eps": null,
-        "cumulative_eps": 0.21
+        "cumulative_eps": 0.21,
+        "cumulative_profit_yoy_pct": 18.2
       },
       "subsidiaries": [
         {
@@ -594,7 +605,8 @@
         "monthly_profit": 1903,
         "cumulative_profit": 1903,
         "monthly_eps": null,
-        "cumulative_eps": 0.12
+        "cumulative_eps": 0.12,
+        "cumulative_profit_yoy_pct": 32.4
       },
       "subsidiaries": [
         {
