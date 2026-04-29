@@ -534,9 +534,120 @@ td.col-code { font-weight: 700; color: var(--primary); }
 }
 .news-sources-list a:hover { text-decoration: underline; }
 
+/* ── Mobile Cards (A2'：手機卡片視圖，桌機隱藏) ──────── */
+.mobile-cards { display: none; }
+
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 640px) {
   header h1  { font-size: 16px; }
   .col-source { display: none; }
   .card-value { font-size: 18px; }
+
+  /* A1：產業 Tab 改 2x2 grid */
+  .industry-tabs {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 4px;
+    overflow: visible;
+  }
+  .industry-tabs .tab {
+    flex: none;
+    min-width: 0;
+    font-size: 13px;
+    padding: 9px 8px;
+  }
+
+  /* A2'：主表手機改卡片佈局，隱藏原表格 */
+  .table-container { display: none; }
+  .mobile-cards {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .m-card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    box-shadow: var(--shadow);
+    padding: 12px 14px;
+    cursor: pointer;
+    transition: background .1s;
+  }
+  .m-card:active { background: #f7fafc; }
+  .m-card.error { background: #fff8f8; }
+  .m-card-error {
+    color: var(--text-muted);
+    font-size: 12px;
+    padding: 4px 0;
+  }
+  .m-card-head {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var(--border);
+    margin-bottom: 10px;
+  }
+  .m-card-titles {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    min-width: 0;
+  }
+  .m-card-sub {
+    font-size: 11px;
+    color: var(--text-muted);
+    font-weight: 600;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: .3px;
+  }
+  .m-card-name {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .m-card-arrow {
+    color: var(--text-muted);
+    font-size: 22px;
+    line-height: 1;
+    flex-shrink: 0;
+  }
+  .m-card-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 8px;
+  }
+  .m-card-grid-3 { grid-template-columns: repeat(3, 1fr); }
+  .m-cell {
+    background: #fafbfc;
+    border-radius: 4px;
+    padding: 8px 10px;
+  }
+  .m-cell-label {
+    font-size: 10px;
+    color: var(--text-muted);
+    margin-bottom: 3px;
+    font-weight: 500;
+  }
+  .m-cell-value {
+    font-size: 16px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    color: var(--text);
+    line-height: 1.2;
+  }
+  .m-cell-value.positive { color: var(--positive); }
+  .m-cell-value.negative { color: var(--negative); }
+  .m-empty {
+    text-align: center;
+    padding: 30px 20px;
+    color: var(--text-muted);
+    font-size: 13px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+  }
 }

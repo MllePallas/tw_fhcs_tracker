@@ -74,7 +74,7 @@
       <button class="tab"        data-view="securities" onclick="setView('securities')">📊 證券</button>
     </div>
 
-    <!-- 主表格 -->
+    <!-- 主表格（桌機） -->
     <div class="table-container">
       <table id="main-table">
         <thead id="main-thead"></thead>
@@ -82,6 +82,11 @@
           <tr><td colspan="9" class="loading-cell">載入資料中...</td></tr>
         </tbody>
       </table>
+    </div>
+
+    <!-- 主表卡片（手機） -->
+    <div class="mobile-cards" id="mobile-cards">
+      <div class="m-empty">載入資料中...</div>
     </div>
 
     <!-- 子公司明細（展開用） -->

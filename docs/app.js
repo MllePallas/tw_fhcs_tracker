@@ -120,6 +120,8 @@ async function loadData(period) {
     showStatus('error', `⚠️ 無法載入資料：${e.message}`);
     document.getElementById('main-tbody').innerHTML =
       `<tr><td colspan="6" class="loading-cell" style="color:#e53e3e">資料載入失敗</td></tr>`;
+    document.getElementById('mobile-cards').innerHTML =
+      `<div class="m-empty" style="color:#e53e3e">資料載入失敗</div>`;
   }
 }
 
@@ -234,8 +236,10 @@ function renderTable() {
 
   if (state.viewMode === 'holdings') {
     renderHoldingsTable();
+    renderHoldingsCards();
   } else {
     renderIndustryTable(state.viewMode);
+    renderIndustryCards(state.viewMode);
   }
 }
 
@@ -404,6 +408,133 @@ function formatEps(n) {
   if (n == null) return '—';
   if (n < 0) return '(' + Math.abs(n).toFixed(2) + ')';
   return n.toFixed(2);
+}
+
+// ── 手機卡片視圖（A2'） ──────────────────────────────────
+function renderHoldingsCards() {
+  const companies = sortCompanies([...state.data.companies]);
+  document.getElementById('mobile-cards').innerHTML =
+    companies.map(renderHoldingCard).join('');
+}
+
+function renderHoldingCard(c) {
+  if (c.error) {
+    return `<div class="m-card error">
+      <div class="m-card-head">
+        <div class="m-card-titles">
+          <div class="m-card-sub">${c.code}</div>
+          <div class="m-card-name">${c.name}</div>
+        </div>
+      </div>
+      <div class="m-card-error">${c.error_msg || '資料待更新'}</div>
+    </div>`;
+  }
+
+  const h = c.holding_company || {};
+  const period = state.data.report_period || '';
+  const unit = state.displayUnit;
+  const monthly = convertUnit(h.monthly_profit, c.unit, unit);
+  const cumul   = convertUnit(h.cumulative_profit, c.unit, unit);
+
+  const yoy = h.cumulative_profit_yoy_pct;
+  let yoyClass = '', yoyDisp;
+  if (yoy != null) {
+    yoyClass = yoy >= 0 ? 'positive' : 'negative';
+    yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
+  } else if (c.code === '2887' && period < '115/07') {
+    yoyDisp = '合併前';
+  } else {
+    yoyDisp = '—';
+  }
+
+  const epsC = h.cumulative_eps;
+  const epsCDisp = epsC != null ? formatEps(epsC) : '—';
+  const epsCClass = (epsC ?? 0) >= 0 ? 'positive' : 'negative';
+
+  const mClass = (monthly ?? 0) >= 0 ? 'positive' : 'negative';
+  const cClass = (cumul   ?? 0) >= 0 ? 'positive' : 'negative';
+
+  return `<div class="m-card" onclick="showDetail('${c.code}')">
+    <div class="m-card-head">
+      <div class="m-card-titles">
+        <div class="m-card-sub">${c.code}</div>
+        <div class="m-card-name">${c.name}</div>
+      </div>
+      <span class="m-card-arrow">›</span>
+    </div>
+    <div class="m-card-grid">
+      <div class="m-cell">
+        <div class="m-cell-label">當月 (${period})</div>
+        <div class="m-cell-value ${mClass}">${monthly != null ? formatNum(monthly) : '—'}</div>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label">累計 YTD</div>
+        <div class="m-cell-value ${cClass}">${cumul != null ? formatNum(cumul) : '—'}</div>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label">累計 YoY</div>
+        <div class="m-cell-value ${yoyClass}">${yoyDisp}</div>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label">累計 EPS</div>
+        <div class="m-cell-value ${epsCClass}">${epsCDisp}</div>
+      </div>
+    </div>
+  </div>`;
+}
+
+function renderIndustryCards(industry) {
+  const period = state.data.report_period || '';
+  const rows = sortIndustryRows(getIndustryRows(industry));
+  const el = document.getElementById('mobile-cards');
+
+  if (rows.length === 0) {
+    el.innerHTML = `<div class="m-empty">此期間無${VIEW_TITLES[industry]}資料</div>`;
+    return;
+  }
+
+  const unit = state.displayUnit;
+  el.innerHTML = rows.map(r => {
+    const m = convertUnit(r.monthly_profit, r.unit, unit);
+    const cu = convertUnit(r.cumulative_profit, r.unit, unit);
+    const mClass = (m ?? 0) >= 0 ? 'positive' : 'negative';
+    const cClass = (cu ?? 0) >= 0 ? 'positive' : 'negative';
+
+    const yoy = r.cumulative_profit_yoy_pct;
+    let yoyClass = '', yoyDisp;
+    if (yoy != null) {
+      yoyClass = yoy >= 0 ? 'positive' : 'negative';
+      yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
+    } else if (r.parent_code === '2887' && period < '115/07') {
+      yoyDisp = '合併前';
+    } else {
+      yoyDisp = '—';
+    }
+
+    return `<div class="m-card" onclick="showDetail('${r.parent_code}')">
+      <div class="m-card-head">
+        <div class="m-card-titles">
+          <div class="m-card-sub">${r.parent_name}</div>
+          <div class="m-card-name">${r.name}</div>
+        </div>
+        <span class="m-card-arrow">›</span>
+      </div>
+      <div class="m-card-grid m-card-grid-3">
+        <div class="m-cell">
+          <div class="m-cell-label">當月 (${period})</div>
+          <div class="m-cell-value ${mClass}">${m != null ? formatNum(m) : '—'}</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-label">累計 YTD</div>
+          <div class="m-cell-value ${cClass}">${cu != null ? formatNum(cu) : '—'}</div>
+        </div>
+        <div class="m-cell">
+          <div class="m-cell-label">累計 YoY</div>
+          <div class="m-cell-value ${yoyClass}">${yoyDisp}</div>
+        </div>
+      </div>
+    </div>`;
+  }).join('');
 }
 
 // ── 摘要卡片 ───────────────────────────────────────────
