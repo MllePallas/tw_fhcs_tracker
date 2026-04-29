@@ -33,24 +33,30 @@
         <span class="last-updated" id="last-updated"></span>
       </div>
       <div class="controls-right">
-        <label>月份：</label>
-        <select id="month-select" onchange="onMonthChange()">
-          <option value="">載入中...</option>
-        </select>
-        <label>排序：</label>
-        <select id="sort-select" onchange="renderAll()">
-          <option value="code">代號</option>
-          <option value="monthly_desc">當月獲利 ↓</option>
-          <option value="monthly_asc">當月獲利 ↑</option>
-          <option value="cumulative_desc">累計獲利 ↓</option>
-          <option value="cumul_yoy_desc">累計 YoY ↓</option>
-          <option value="eps_cumul_desc">累計 EPS ↓</option>
-        </select>
-        <label>單位：</label>
-        <select id="unit-select" onchange="renderAll()">
-          <option value="百萬元" selected>百萬元 (NT$m)</option>
-          <option value="億元">億元</option>
-        </select>
+        <div class="ctrl-group ctrl-month">
+          <label>月份：</label>
+          <select id="month-select" onchange="onMonthChange()">
+            <option value="">載入中...</option>
+          </select>
+        </div>
+        <div class="ctrl-group">
+          <label>排序：</label>
+          <select id="sort-select" onchange="renderAll()">
+            <option value="code">代號</option>
+            <option value="monthly_desc">當月獲利 ↓</option>
+            <option value="monthly_asc">當月獲利 ↑</option>
+            <option value="cumulative_desc">累計獲利 ↓</option>
+            <option value="cumul_yoy_desc">累計 YoY ↓</option>
+            <option value="eps_cumul_desc">累計 EPS ↓</option>
+          </select>
+        </div>
+        <div class="ctrl-group">
+          <label>單位：</label>
+          <select id="unit-select" onchange="renderAll()">
+            <option value="百萬元" selected>百萬元 (NT$m)</option>
+            <option value="億元">億元</option>
+          </select>
+        </div>
       </div>
     </div>
 

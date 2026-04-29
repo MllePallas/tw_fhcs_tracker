@@ -128,6 +128,12 @@ main {
   display: flex;
   align-items: center;
   gap: 8px;
+  flex-wrap: wrap;
+}
+.ctrl-group {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .controls-right label { color: var(--text-muted); font-size: 13px; }
 .controls-right select {
@@ -542,6 +548,27 @@ td.col-code { font-weight: 700; color: var(--primary); }
   header h1  { font-size: 16px; }
   .col-source { display: none; }
   .card-value { font-size: 18px; }
+
+  /* 控制列：月份/排序/單位 響應式（月份占整行，排序+單位共用一行） */
+  .controls {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  .controls-right {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 8px;
+    width: 100%;
+  }
+  .ctrl-group {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 3px;
+  }
+  .ctrl-group.ctrl-month { grid-column: 1 / -1; }
+  .ctrl-group label { font-size: 11px; font-weight: 600; }
+  .ctrl-group select { width: 100%; padding: 8px 10px; font-size: 14px; }
 
   /* A1：產業 Tab 改 2x2 grid */
   .industry-tabs {
