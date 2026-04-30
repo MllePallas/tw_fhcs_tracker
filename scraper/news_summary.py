@@ -46,6 +46,11 @@ def _load_dotenv():
 _load_dotenv()
 
 
+# 有壽險子公司的金控代號（IFRS 17 適用，需關注 CSM / 調整後獲利 / FVOCI）
+LIFE_INSURANCE_CODES = {"2881", "2882", "2883", "2887", "2891"}
+# 2881 富邦人壽、2882 國泰人壽、2883 凱基人壽、2887 新光人壽、2891 台灣人壽
+
+
 def _build_prompt(name, code, period, monthly, cumul, subs):
     roc_year, roc_month = period.split("/")
     western_year = int(roc_year) + 1911
@@ -56,18 +61,37 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
         for s in subs
     ) or "  - （無子公司明細）"
 
+    # 壽險金控：加入第三組專屬查詢
+    life_search = ""
+    life_context = ""
+    if code in LIFE_INSURANCE_CODES:
+        life_ins_name = next(
+            (s.get("name") for s in subs if "人壽" in s.get("name", "")), "壽險子公司"
+        )
+        life_search = f"3. `{life_ins_name} CSM 調整後獲利` 或 `{name} 壽險 FVOCI`"
+        life_context = f"""
+【壽險子公司特別注意（IFRS 17）】
+此金控旗下有壽險子公司（{life_ins_name}），媒體報導可能涉及：
+- **CSM（合約服務邊際）**：IFRS 17 下壽險核心獲利指標，反映未來利潤釋放速度
+- **調整後獲利**：排除 FVOCI 股票處份利益的核心獲利（較能反映業務本質）
+- **FVOCI 股票處份利益**：壽險公司處分 FVOCI 股票認列的一次性利益，波動大
+- **投資收益 vs 承保利益**：IFRS 17 下壽險獲利拆解為這兩大來源
+
+若新聞有提到以上任何指標，請在摘要中標注。"""
+
     return f"""你是台灣金融分析師。請查詢「{name}（{code}）」**民國 {roc_year} 年 {m} 月（西元 {western_year} 年 {m} 月）月自結損益**新聞報導，並產生繁體中文摘要。
 
 搜尋限制：工商時報、經濟日報、鉅亨網（透過 allowed_domains 限制，你不需要在 query 加 site:）。
 
-【搜尋策略】請至少嘗試這兩組查詢字串：
+【搜尋策略】請至少嘗試以下查詢字串：
 1. `{name} {m}月 自結 稅後`
 2. `{name} {m}月 EPS 累計`
+{life_search}
 
 ⚠️ 媒體標題通常用「西元年 + 月份」（例如「{name}3月」、「{m}月稅後」），**不會**用「民國年」格式。
 ⚠️ 媒體**經常以「累計第 N 季」或「Q{((m-1)//3)+1} 累計」**報導同一份月自結資料；這也算 RELEVANT。
 ⚠️ 報導中的數字若與我提供的不完全一致（例如新聞說 EPS、累計、合併、淨值，與我給的當月稅後不同），那**很正常**——以新聞數字為準摘要即可，不要因此判 IRRELEVANT。
-
+{life_context}
 【relevance 標記（重要）】
 你必須在輸出第一行寫一個標記，告訴下游 script 是否真的找到相關新聞：
 - 找到 1 則以上專門報導 {western_year}/{m:02d} 月損益（含累計 Q{((m-1)//3)+1}、EPS、月增/年增等延伸報導）：第一行寫 `RELEVANT`
@@ -77,14 +101,14 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 
 【輸出格式】
 第一行：`RELEVANT` 或 `IRRELEVANT`
-第二行起：摘要內容（markdown，~150 字）
+第二行起：摘要內容（markdown，~200 字）
 
 若 RELEVANT，摘要分兩段：
 **重點**
-1-2 句說明當月主要驅動因素（利息淨收益、股債市影響、保險業務變化、信用成本、匯率避險等）。
+1-2 句說明當月主要驅動因素（利息淨收益、股債市影響、保險業務變化、信用成本、匯率避險、CSM 釋放等）。
 
 **子公司明細**
-依新聞具體提到的數字（壽險投資收益／保費、銀行手續費／利差、證券手續費等）。若新聞未提就省略整段。
+依新聞具體提到的數字（壽險 CSM／調整後獲利／FVOCI 處份利益、銀行手續費／利差、證券手續費等）。若新聞未提就省略整段。
 
 若 IRRELEVANT，摘要寫單句：「{period} 無相關媒體報導；當月合併稅後淨利 {monthly} 百萬元，累計 {cumul} 百萬元。」
 
