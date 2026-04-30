@@ -317,26 +317,25 @@ function renderIndustryTable(industry) {
     </tr>`;
 
     // 壽險專屬：僅在有揭露 FVOCI 影響數的子公司下方加一行（目前富邦、凱基）
+    // 數字以淡藍色 + 較小字呈現，避免干擾主表的排序視覺
     let adj = '';
     const a = r.fvoci_adjusted;
     if (industry === 'life' && a && a.cumulative_profit != null) {
       hasFvoci = true;
       const aCumul = convertUnit(a.cumulative_profit, r.unit, unit);
-      const aCumulCls = aCumul < 0 ? 'negative' : 'positive';
-      let aYoyDisp = '—', aYoyCls = '';
-      if (a.yoy_pct != null) {
-        aYoyCls = a.yoy_pct >= 0 ? 'positive' : 'negative';
-        aYoyDisp = `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`;
-      }
+      const aYoyDisp = a.yoy_pct != null
+        ? `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`
+        : '—';
       const tip = a.source_quote
         ? ` title="${escapeHtml(a.source_quote)}"`
         : '';
+      const numStyle = 'color:#5568b8;font-size:12px;font-style:italic';
       adj = `<tr class="fvoci-row" style="background:#fafaff">
         <td></td>
         <td style="padding-left:20px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
         <td></td>
-        <td class="num ${aCumulCls}">${formatNum(aCumul)}</td>
-        <td class="num ${aYoyCls}">${aYoyDisp}</td>
+        <td class="num" style="${numStyle}">${formatNum(aCumul)}</td>
+        <td class="num" style="${numStyle}">${aYoyDisp}</td>
       </tr>`;
     }
 
@@ -553,23 +552,20 @@ function renderIndustryCards(industry) {
       yoyDisp = '—';
     }
 
-    // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示
+    // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示（淡藍色弱化，不干擾主排序）
     let adjBlock = '';
     const a = r.fvoci_adjusted;
     if (industry === 'life' && a && a.cumulative_profit != null) {
       const aCumul = convertUnit(a.cumulative_profit, r.unit, unit);
-      const aCumulCls = aCumul < 0 ? 'negative' : 'positive';
-      let aYoyDisp = '—', aYoyCls = '';
-      if (a.yoy_pct != null) {
-        aYoyCls = a.yoy_pct >= 0 ? 'positive' : 'negative';
-        aYoyDisp = `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`;
-      }
+      const aYoyDisp = a.yoy_pct != null
+        ? `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`
+        : '—';
       adjBlock = `
-      <div class="m-fvoci" style="margin-top:6px;padding-top:6px;border-top:1px dashed #d6d9e2;font-size:12px;color:#5568b8">
-        <div style="margin-bottom:4px">（加上FVOCI股票處份利益）<sup>*</sup></div>
+      <div class="m-fvoci" style="margin-top:6px;padding-top:6px;border-top:1px dashed #d6d9e2;font-size:12px;color:#5568b8;font-style:italic">
+        <div style="margin-bottom:4px;font-style:normal">（加上FVOCI股票處份利益）<sup>*</sup></div>
         <div style="display:flex;gap:14px">
-          <div>累計：<span class="${aCumulCls}">${formatNum(aCumul)}</span></div>
-          <div>YoY：<span class="${aYoyCls}">${aYoyDisp}</span></div>
+          <div>累計：${formatNum(aCumul)}</div>
+          <div>YoY：${aYoyDisp}</div>
         </div>
       </div>`;
     }
@@ -752,11 +748,10 @@ function showDetail(code) {
         <td class="num ${cc}" style="padding:5px 8px;white-space:nowrap">${s.cumul != null ? formatNum(s.cumul) : '—'}</td>
       </tr>`;
 
-      // 僅在壽險子公司且有揭露 FVOCI 影響數時加一行
+      // 僅在壽險子公司且有揭露 FVOCI 影響數時加一行（淡藍色弱化）
       if (!s.isLife || !s.fvoci || s.fvoci.cumulative_profit == null) return main;
       hasFvoci = true;
       const aCumul = convertUnit(s.fvoci.cumulative_profit, c.unit, unit);
-      const aCumulCls = aCumul < 0 ? 'negative' : 'positive';
       const tip = s.fvoci.source_quote
         ? ` title="${escapeHtml(s.fvoci.source_quote)}"`
         : '';
@@ -764,7 +759,7 @@ function showDetail(code) {
         <td style="padding:4px 8px;padding-left:18px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
         <td></td>
         <td></td>
-        <td class="num ${aCumulCls}" style="padding:4px 8px;white-space:nowrap">${formatNum(aCumul)}</td>
+        <td class="num" style="padding:4px 8px;white-space:nowrap;color:#5568b8;font-size:12px;font-style:italic">${formatNum(aCumul)}</td>
       </tr>`;
       return main + adj;
     }).join('');
