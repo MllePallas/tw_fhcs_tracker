@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-04-30
+> 最後更新：2026-04-30（晚）
 
 ## 專案目的
 
@@ -17,6 +17,7 @@ tw_fhcs_tracker/
 │   ├── mops_client.py          # MOPS API 客戶端（2025 新版 gateway，含 retry）
 │   ├── parser.py               # HTML 解析器（規則 + LLM fallback，含 EPS）
 │   ├── news_summary.py         # 新聞摘要產生器（Claude API + web_search）
+│   ├── fvoci_adjustment.py     # 壽險 IFRS 17：抓金控揭露之調整後獲利、推算到壽險子公司
 │   ├── market_summary.py       # 本月市場概況（FX/指數/殖利率，yfinance + TWSE）
 │   ├── bootstrap_history.py    # 一次性：批次爬取整年歸檔（YoY baseline）
 │   └── main.py                 # 主程式，產生 JSON、計算 YoY、更新 index.json
@@ -231,6 +232,48 @@ python news_summary.py --month 115/02  # 指定月份
 
 ---
 
+## 壽險 FVOCI 調整後獲利（fvoci_adjustment.py）
+
+2026 年起壽險公司接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L，使得壽險子公司的 P&L 與去年同期（仍含 FVOCI 計入 P&L）難以直接比較。部分金控（目前主要為富邦、凱基）會在月損益新聞稿揭露「**加計 FVOCI 處份利益後的累計調整後獲利**」，以利同基比較。
+
+```bash
+cd scraper
+python fvoci_adjustment.py              # 補齊最新月份（冪等）
+python fvoci_adjustment.py --force      # 強制重抓
+python fvoci_adjustment.py --period 115/03
+python fvoci_adjustment.py --codes 2881 2883
+```
+
+**模型**：`claude-sonnet-4-6` + web_search（限定工商時報 / 經濟日報 / 鉅亨網）
+
+**作用對象**：`LIFE_INSURANCE_CODES = {2881, 2882, 2883, 2887, 2891}` 旗下的壽險子公司（名稱含「人壽」者）。其他金控不處理。
+
+**推算邏輯**：
+1. LLM 從新聞抓出**金控層級**的「累計調整後獲利」（NT$m）
+2. `delta = adjusted_holding − original_holding.cumulative_profit`（推算的 FVOCI 處份利益）
+3. `life_sub.fvoci_adjusted.cumulative_profit = life_sub.cumulative_profit + delta`
+4. 假設：差額全數來自壽險子公司（壽險佔 FVOCI 部位絕大多數，近似但非會計精確）
+5. 若 `adjusted_holding ≤ original`（不符合 FVOCI 加計概念）→ 視為 not_found，欄位不寫
+
+**輸出欄位**（壽險子公司物件下新增 nested object）：
+```json
+"fvoci_adjusted": {
+  "cumulative_profit": 8200,           // NT$m
+  "delta_from_holding": 3200,          // 從金控差額推算
+  "yoy_pct": 12.3,                     // 由 main.compute_yoy 填入
+  "source_url": "https://ctee.com.tw/...",
+  "source_quote": "富邦金加計FVOCI股票處份利益後...",
+  "original_value_text": "82 億元",
+  "generated_at": "2026-04-30T..."
+}
+```
+
+**YoY 語意**：今年加計 FVOCI 後的調整數 vs 去年同期 baseline 的原始 P&L（去年仍含 FVOCI 計入 P&L）→ 兩邊皆「含 FVOCI 影響」，apples-to-apples。`main.compute_yoy` 自動計算並寫入 `fvoci_adjusted.yoy_pct`。
+
+**前端顯示**：壽險產業 tab、子公司展開面板皆於壽險子公司列下方加一行「（加上FVOCI股票處份利益）*」+ 累計 + YoY，註腳說明「依金控揭露推算」。其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入合計卡片或圖表。
+
+---
+
 ## 13 家金控（含異動記錄）
 
 | 代號 | 簡稱 | 備註 |
@@ -292,12 +335,12 @@ python bootstrap_history.py --year 114
 
 ## GitHub Actions
 
-### update_data.yml（MOPS 月損益 + 新聞摘要）
+### update_data.yml（MOPS 月損益 + 新聞摘要 + FVOCI 調整）
 
 - **排程**：每月 **8~31 日**，UTC 09:00 與 12:00（台灣時間 17:00 / 20:00）各一次
 - **Short-circuit**：schedule 觸發時，若 `latest.json` 已顯示目標月份 `success_count >= 13`，直接跳過所有步驟（節省 API 費用）
 - **手動觸發**：Actions → Run workflow（不受 short-circuit 限制，方便補跑）
-- 執行 `scraper/main.py`（含 YoY 計算）→ 若收齊 13 家再執行 `news_summary.py`（冪等）→ commit + push
+- 執行 `scraper/main.py`（含 YoY 計算）→ 若收齊 13 家再依序執行 `news_summary.py` → `fvoci_adjustment.py`（皆冪等）→ commit + push
 
 ### update_market.yml（市場概況）
 

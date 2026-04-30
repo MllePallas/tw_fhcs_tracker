@@ -221,12 +221,18 @@ def compute_yoy(data: dict, target_period: str):
             prev_sub = prev_subs_by_name.get(name)
             if not prev_sub:
                 continue
-            cs = sub.get("cumulative_profit")
             ps = prev_sub.get("cumulative_profit")
-            if cs is None or ps is None or ps == 0:
-                continue
-            sub["cumulative_profit_yoy_pct"] = round((cs - ps) / abs(ps) * 100, 1)
-            sub_populated += 1
+            cs = sub.get("cumulative_profit")
+            if cs is not None and ps is not None and ps != 0:
+                sub["cumulative_profit_yoy_pct"] = round((cs - ps) / abs(ps) * 100, 1)
+                sub_populated += 1
+
+            # FVOCI 調整後獲利 YoY：今年「加計 FVOCI」 vs 去年原始 P&L（去年含 FVOCI 計入 P&L）
+            adj = sub.get("fvoci_adjusted")
+            if adj and ps is not None and ps != 0:
+                ca = adj.get("cumulative_profit")
+                if ca is not None:
+                    adj["yoy_pct"] = round((ca - ps) / abs(ps) * 100, 1)
 
     msg = f"YoY populated: {populated} parents, {sub_populated} subsidiaries (baseline: {prev_period})"
     if skipped_merger:
