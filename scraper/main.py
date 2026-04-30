@@ -155,6 +155,11 @@ def compute_yoy(data: dict, target_period: str):
     YOY_CUTOFFS = {
         "2887": "115/07",  # 台新新光金（台新金+新光金合併於 2025-07-24）
     }
+    # 即使 holding-level cutoff 適用，這些子公司仍可算 YoY（尚未正式整併、baseline 對得齊）
+    # 例：2887 旗下台新銀行尚未與新光銀行合併，114 年資料以「台新銀行」獨立存在
+    YOY_SUB_ALLOWED_PRE_CUTOFF = {
+        "2887": {"台新銀行"},
+    }
 
     roc_year, roc_month = target_period.split("/")
     prev_year = int(roc_year) - 1
@@ -182,26 +187,36 @@ def compute_yoy(data: dict, target_period: str):
             continue
         code = company.get("code", "")
         cutoff = YOY_CUTOFFS.get(code)
-        if cutoff and target_period < cutoff:
+        skip_parent = bool(cutoff and target_period < cutoff)
+        sub_whitelist = YOY_SUB_ALLOWED_PRE_CUTOFF.get(code, set()) if skip_parent else None
+
+        # holding-level cutoff 適用、又無任何白名單子公司 → 整家略過
+        if skip_parent and not sub_whitelist:
             skipped_merger += 1
             continue
+
         prev = baseline_by_code.get(code)
         if not prev or "error" in prev:
             continue
 
-        # 母公司 YoY
-        curr_cumul = company.get("holding_company", {}).get("cumulative_profit")
-        prev_cumul = prev.get("holding_company", {}).get("cumulative_profit")
-        if curr_cumul is not None and prev_cumul is not None and prev_cumul != 0:
-            yoy = (curr_cumul - prev_cumul) / abs(prev_cumul) * 100
-            company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
-            populated += 1
+        # 母公司 YoY（cutoff 適用時跳過母公司）
+        if skip_parent:
+            skipped_merger += 1
+        else:
+            curr_cumul = company.get("holding_company", {}).get("cumulative_profit")
+            prev_cumul = prev.get("holding_company", {}).get("cumulative_profit")
+            if curr_cumul is not None and prev_cumul is not None and prev_cumul != 0:
+                yoy = (curr_cumul - prev_cumul) / abs(prev_cumul) * 100
+                company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
+                populated += 1
 
-        # 子公司 YoY（用 name 對齊）
+        # 子公司 YoY（用 name 對齊；cutoff 適用時僅算白名單子公司）
         prev_subs_by_name = {s.get("name", ""): s for s in prev.get("subsidiaries", []) if s.get("name")}
         for sub in company.get("subsidiaries", []):
             name = sub.get("name", "")
             if not name:
+                continue
+            if skip_parent and name not in sub_whitelist:
                 continue
             prev_sub = prev_subs_by_name.get(name)
             if not prev_sub:

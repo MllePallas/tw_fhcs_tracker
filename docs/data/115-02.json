@@ -429,7 +429,8 @@
           "monthly_profit": 1800,
           "cumulative_profit": 4120,
           "monthly_eps": null,
-          "cumulative_eps": 0.33
+          "cumulative_eps": 0.33,
+          "cumulative_profit_yoy_pct": 28.3
         },
         {
           "name": "新光銀行",
