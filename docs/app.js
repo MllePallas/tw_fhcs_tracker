@@ -289,6 +289,7 @@ function renderIndustryTable(industry) {
   }
 
   const unit = state.displayUnit;
+  let hasFvoci = false;
   document.getElementById('main-tbody').innerHTML = rows.map(r => {
     const m = convertUnit(r.monthly_profit, r.unit, unit);
     const c = convertUnit(r.cumulative_profit, r.unit, unit);
@@ -315,27 +316,26 @@ function renderIndustryTable(industry) {
       <td class="num ${yoyClass}">${yoyDisp}</td>
     </tr>`;
 
-    // 壽險專屬：加計 FVOCI 處份利益的調整後獲利（依金控揭露推算）
+    // 壽險專屬：僅在有揭露 FVOCI 影響數的子公司下方加一行（目前富邦、凱基）
     let adj = '';
-    if (industry === 'life') {
-      const a = r.fvoci_adjusted;
-      const aCumul = a ? convertUnit(a.cumulative_profit, r.unit, unit) : null;
-      const aCumulDisp = aCumul != null ? formatNum(aCumul) : '—';
-      const aCumulCls  = aCumul != null && aCumul < 0 ? 'negative' : 'positive';
-      const aYoy = a ? a.yoy_pct : null;
+    const a = r.fvoci_adjusted;
+    if (industry === 'life' && a && a.cumulative_profit != null) {
+      hasFvoci = true;
+      const aCumul = convertUnit(a.cumulative_profit, r.unit, unit);
+      const aCumulCls = aCumul < 0 ? 'negative' : 'positive';
       let aYoyDisp = '—', aYoyCls = '';
-      if (aYoy != null) {
-        aYoyCls = aYoy >= 0 ? 'positive' : 'negative';
-        aYoyDisp = `${aYoy >= 0 ? '+' : ''}${aYoy.toFixed(1)}%`;
+      if (a.yoy_pct != null) {
+        aYoyCls = a.yoy_pct >= 0 ? 'positive' : 'negative';
+        aYoyDisp = `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`;
       }
-      const tip = a && a.source_quote
+      const tip = a.source_quote
         ? ` title="${escapeHtml(a.source_quote)}"`
         : '';
       adj = `<tr class="fvoci-row" style="background:#fafaff">
         <td></td>
         <td style="padding-left:20px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
         <td></td>
-        <td class="num ${aCumul != null ? aCumulCls : ''}">${aCumulDisp}</td>
+        <td class="num ${aCumulCls}">${formatNum(aCumul)}</td>
         <td class="num ${aYoyCls}">${aYoyDisp}</td>
       </tr>`;
     }
@@ -343,10 +343,10 @@ function renderIndustryTable(industry) {
     return main + adj;
   }).join('');
 
-  // 壽險表格底部加註腳
+  // 壽險表格底部加註腳（只有實際出現 FVOCI 列時才顯示）
   const tfoot = document.getElementById('main-tfoot');
   if (tfoot) {
-    if (industry === 'life') {
+    if (industry === 'life' && hasFvoci) {
       tfoot.innerHTML = `<tr><td colspan="5" style="padding:8px 12px;font-size:11px;color:#718096;border-top:1px solid #edf2f7">
         <sup>*</sup> 加上FVOCI股票處份利益後的調整後累計獲利，依金控新聞稿揭露之金控層級調整數推算（差額假設全數來自壽險子公司，僅供與去年同期比較之參考）。
       </td></tr>`;
@@ -553,24 +553,22 @@ function renderIndustryCards(industry) {
       yoyDisp = '—';
     }
 
-    // 壽險專屬：加計 FVOCI 的調整後獲利
+    // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示
     let adjBlock = '';
-    if (industry === 'life') {
-      const a = r.fvoci_adjusted;
-      const aCumul = a ? convertUnit(a.cumulative_profit, r.unit, unit) : null;
-      const aCumulDisp = aCumul != null ? formatNum(aCumul) : '—';
-      const aCumulCls  = aCumul != null && aCumul < 0 ? 'negative' : 'positive';
-      const aYoy = a ? a.yoy_pct : null;
+    const a = r.fvoci_adjusted;
+    if (industry === 'life' && a && a.cumulative_profit != null) {
+      const aCumul = convertUnit(a.cumulative_profit, r.unit, unit);
+      const aCumulCls = aCumul < 0 ? 'negative' : 'positive';
       let aYoyDisp = '—', aYoyCls = '';
-      if (aYoy != null) {
-        aYoyCls = aYoy >= 0 ? 'positive' : 'negative';
-        aYoyDisp = `${aYoy >= 0 ? '+' : ''}${aYoy.toFixed(1)}%`;
+      if (a.yoy_pct != null) {
+        aYoyCls = a.yoy_pct >= 0 ? 'positive' : 'negative';
+        aYoyDisp = `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`;
       }
       adjBlock = `
       <div class="m-fvoci" style="margin-top:6px;padding-top:6px;border-top:1px dashed #d6d9e2;font-size:12px;color:#5568b8">
         <div style="margin-bottom:4px">（加上FVOCI股票處份利益）<sup>*</sup></div>
         <div style="display:flex;gap:14px">
-          <div>累計：<span class="${aCumul != null ? aCumulCls : ''}">${aCumulDisp}</span></div>
+          <div>累計：<span class="${aCumulCls}">${formatNum(aCumul)}</span></div>
           <div>YoY：<span class="${aYoyCls}">${aYoyDisp}</span></div>
         </div>
       </div>`;
@@ -602,8 +600,8 @@ function renderIndustryCards(industry) {
     </div>`;
   }).join('');
 
-  // 壽險手機卡片底部加註腳
-  if (industry === 'life') {
+  // 壽險手機卡片底部加註腳（只有實際出現 FVOCI 區塊時才加）
+  if (industry === 'life' && rows.some(r => r.fvoci_adjusted && r.fvoci_adjusted.cumulative_profit != null)) {
     el.insertAdjacentHTML('beforeend', `
       <div style="font-size:11px;color:#718096;padding:8px 4px">
         <sup>*</sup> 加上FVOCI股票處份利益後的調整後累計獲利，依金控新聞稿揭露之金控層級調整數推算（差額假設全數來自壽險子公司，僅供與去年同期比較之參考）。
@@ -738,7 +736,7 @@ function showDetail(code) {
     }));
     const allMonthly = subEntries.map(s => s.monthly || 0);
     const maxAbs = Math.max(...allMonthly.map(Math.abs), 1);
-    let hasLife = false;
+    let hasFvoci = false;
 
     const rows = subEntries.map(s => {
       const mc = (s.monthly || 0) >= 0 ? 'positive' : 'negative';
@@ -754,24 +752,24 @@ function showDetail(code) {
         <td class="num ${cc}" style="padding:5px 8px;white-space:nowrap">${s.cumul != null ? formatNum(s.cumul) : '—'}</td>
       </tr>`;
 
-      if (!s.isLife) return main;
-      hasLife = true;
-      const aCumul = s.fvoci ? convertUnit(s.fvoci.cumulative_profit, c.unit, unit) : null;
-      const aCumulDisp = aCumul != null ? formatNum(aCumul) : '—';
-      const aCumulCls  = aCumul != null && aCumul < 0 ? 'negative' : 'positive';
-      const tip = s.fvoci && s.fvoci.source_quote
+      // 僅在壽險子公司且有揭露 FVOCI 影響數時加一行
+      if (!s.isLife || !s.fvoci || s.fvoci.cumulative_profit == null) return main;
+      hasFvoci = true;
+      const aCumul = convertUnit(s.fvoci.cumulative_profit, c.unit, unit);
+      const aCumulCls = aCumul < 0 ? 'negative' : 'positive';
+      const tip = s.fvoci.source_quote
         ? ` title="${escapeHtml(s.fvoci.source_quote)}"`
         : '';
       const adj = `<tr style="border-bottom:1px solid #f0f0f0;background:#fafaff">
         <td style="padding:4px 8px;padding-left:18px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
         <td></td>
         <td></td>
-        <td class="num ${aCumul != null ? aCumulCls : ''}" style="padding:4px 8px;white-space:nowrap">${aCumulDisp}</td>
+        <td class="num ${aCumulCls}" style="padding:4px 8px;white-space:nowrap">${formatNum(aCumul)}</td>
       </tr>`;
       return main + adj;
     }).join('');
 
-    const fvociFootnote = hasLife
+    const fvociFootnote = hasFvoci
       ? `<p style="font-size:11px;color:#718096;margin-top:6px">
            <sup>*</sup> 依金控新聞稿揭露之金控層級調整後獲利推算，差額假設全數來自壽險子公司；僅供與去年同期比較之參考。
          </p>`

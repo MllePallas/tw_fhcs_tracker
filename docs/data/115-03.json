@@ -96,7 +96,16 @@
           "cumulative_profit": 15120,
           "monthly_eps": null,
           "cumulative_eps": 1.28,
-          "cumulative_profit_yoy_pct": -44.7
+          "cumulative_profit_yoy_pct": -44.7,
+          "fvoci_adjusted": {
+            "cumulative_profit": 47910,
+            "delta_from_holding": 32790,
+            "source_url": "https://money.udn.com/money/story/5612/9443762",
+            "source_quote": "累計前3月調整後獲利660.6億元，雙雙創歷史同期新高，調整後每股稅後純益為4.72元",
+            "original_value_text": "660.6 億元",
+            "generated_at": "2026-04-30T14:54:27.862941",
+            "yoy_pct": 75.1
+          }
         },
         {
           "name": "富邦投信",
@@ -215,7 +224,16 @@
           "cumulative_profit": 4796,
           "monthly_eps": null,
           "cumulative_eps": 0.92,
-          "cumulative_profit_yoy_pct": -22.3
+          "cumulative_profit_yoy_pct": -22.3,
+          "fvoci_adjusted": {
+            "cumulative_profit": 19311,
+            "delta_from_holding": 14515,
+            "source_url": "https://news.cnyes.com/news/id/6418976",
+            "source_quote": "若加計 FVOCI 股票處分利益，調整後金控 3 月獲利為 65.77 億元，首季累計獲利 262.05 億元",
+            "original_value_text": "262.05 億元",
+            "generated_at": "2026-04-30T14:55:12.226878",
+            "yoy_pct": 212.7
+          }
         },
         {
           "name": "凱基銀行",
