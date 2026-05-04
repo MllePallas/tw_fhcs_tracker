@@ -2,14 +2,18 @@
 # 為壽險金控的壽險子公司補上「加上 FVOCI 股票處份利益的調整後累計獲利」欄位。
 #
 # 背景：2026 年起接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L。為了與去年
-# 同期可比，富邦、凱基等金控會在新聞稿揭露「加計 FVOCI 處份利益後的調整
-# 後獲利」。本腳本透過 Claude API + web_search 抓出該數字，並推算到旗下
-# 壽險子公司（金控差額 = adjusted - 原始 P&L → 假設全數來自壽險子公司）。
+# 同期可比，富邦、凱基等金控會在月損益新聞稿直接揭露**壽險子公司本身**
+# （富邦人壽、凱基人壽）「加計 FVOCI 處份利益後的累計調整後獲利」。
+#
+# 本腳本透過 Claude API + web_search 直接抓壽險子公司的調整後累計獲利數字。
+# （舊版透過金控差額推算，但金控合併 P&L 包含其他子公司、少數權益、
+#  內部交易抵銷，差額不等於壽險的 FVOCI 處份利益，已停用。）
 #
 # 寫入 subsidiaries[*].fvoci_adjusted = {
-#   "cumulative_profit": <NT$m>,
+#   "cumulative_profit": <NT$m>,        # 直接從新聞抓到的壽險公司累計調整後獲利
+#   "delta_vs_original": <NT$m>,        # cumulative_profit - 壽險原始累計 P&L（純紀錄）
 #   "source_url": "...", "source_quote": "...",
-#   "delta_from_holding": <NT$m>,    # 用以追蹤推算過程
+#   "original_value_text": "...",
 #   "generated_at": "..."
 # }
 # YoY 由 main.compute_yoy 統一計算（呼叫於本腳本尾端）。
@@ -63,39 +67,45 @@ def _load_dotenv():
 _load_dotenv()
 
 
-def _build_prompt(name, code, period, holding_cumul, life_sub_name):
+def _build_prompt(name, code, period, life_sub_name, life_cumul):
     roc_year, roc_month = period.split("/")
     western_year = int(roc_year) + 1911
     m = int(roc_month)
 
-    return f"""你是台灣金融分析師。請查詢「{name}（{code}）」**民國 {roc_year} 年 {m} 月（西元 {western_year} 年 {m} 月）月自結損益**新聞，找出該金控揭露的「**加計 FVOCI 股票處份利益後的累計調整後獲利**」。
+    return f"""你是台灣金融分析師。請查詢「**{life_sub_name}**」（{name} {code} 旗下壽險子公司）**民國 {roc_year} 年 {m} 月（西元 {western_year} 年 {m} 月）月自結損益**新聞，找出**{life_sub_name} 本身**揭露的「**加計 FVOCI 股票處份利益後的累計調整後獲利**」。
 
 搜尋限制：工商時報、經濟日報、鉅亨網（已透過 allowed_domains 限制，不必加 site:）。
 
 【背景】
-2026 年起壽險公司接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L。為了與去年同期（2025 年仍計入 P&L）可比，部分金控（如 {name}）會在月損益新聞稿揭露「加計 FVOCI 處份利益後的調整後累計獲利」。此金控旗下有壽險子公司「{life_sub_name}」。
+2026 年起壽險公司接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L。為了與去年同期可比，富邦、凱基等金控會在月損益新聞稿**直接揭露壽險子公司本身**的「加計 FVOCI 處份利益後的累計調整後獲利」。
 
-【已知數字】
-- {name} {western_year}/{m:02d} 累計合併稅後淨利：{holding_cumul} 百萬元（原始 P&L）
-- 我要找的是：**累計加計 FVOCI 處份利益後**的金控數字（理論上應大於原始 P&L）
+⚠️ 本任務要找的是「**{life_sub_name}**」這家壽險公司**自己**的累計調整後獲利，**不是**金控（{name}）合併層級的調整後獲利。新聞通常會兩個都列，但你必須抓壽險公司的那個。
+
+【參考新聞語句範例】
+- 「富邦人壽：累計第一季稅後純益151.2億元；…加計FVOCI股票處分損益後，…累計首季調整後獲利為472.8億」
+- 「凱基人壽：…累計今年前三月，凱基人壽整體調整後獲利已達190.25億元」
+
+【已知數字（壽險子公司原始累計）】
+- {life_sub_name} {western_year}/{m:02d} 累計稅後淨利（原始 P&L）：{life_cumul} 百萬元
+- 我要找的是：{life_sub_name} 累計**加計 FVOCI 處份利益後**的調整後獲利（理論上應大於原始 P&L）
 
 【搜尋查詢建議】
-1. `{name} {m}月 加計FVOCI 調整後獲利`
-2. `{name} {m}月 累計 FVOCI股票處份利益`
-3. `{name} {western_year} {m}月 自結 調整後`
+1. `{life_sub_name} {m}月 累計 加計FVOCI 調整後獲利`
+2. `{life_sub_name} {western_year} {m}月 累計 調整後獲利 億元`
+3. `{life_sub_name} 首季 調整後獲利`（若 m=3）
 
 【輸出格式（嚴格 JSON，無前言、無後綴、無 markdown 標記）】
 
-若搜尋到該金控明確揭露之「加計 FVOCI 處份利益」後的累計獲利數字：
+若搜尋到 {life_sub_name} **本身**明確揭露之「加計 FVOCI 處份利益」後的累計獲利數字：
 {{
   "found": true,
   "adjusted_cumulative_nt_million": <number>,
-  "original_value_text": "<新聞中原始的數字與單位，例 '345.6 億元' 或 '34,560 百萬元'>",
+  "original_value_text": "<新聞中原始的數字與單位，例 '472.8 億元'>",
   "source_url": "<新聞 URL>",
-  "source_quote": "<引用原句，需含數字>"
+  "source_quote": "<引用原句，需含數字與「{life_sub_name}」公司名稱>"
 }}
 
-若新聞未揭露 / 該金控本期未公布調整後獲利：
+若新聞僅揭露金控合併層級調整後獲利、未揭露壽險子公司本身的調整後獲利：
 {{
   "found": false,
   "reason": "<簡短說明>"
@@ -103,9 +113,9 @@ def _build_prompt(name, code, period, holding_cumul, life_sub_name):
 
 【硬性規則】
 - 只能引用搜尋結果中實際出現的數字，禁止瞎編或推算
-- 數字單位轉換：億 → ×100；元（罕見）→ ÷1,000,000；皆換算成「百萬元」填入 adjusted_cumulative_nt_million
-- adjusted_cumulative_nt_million 必須大於 {holding_cumul}（加計處份利益會更大）；若搜到的「調整後」反而較小，可能是其他概念（例如剔除一次性損失），視為 found=false
-- 若僅有「壽險公司」單獨的調整後數字（非金控），仍可接受—但 source_quote 要清楚標示
+- 數字必須是「{life_sub_name}」這家壽險公司**自己**的累計調整後獲利，不是金控合併層級的數字。source_quote 必須清楚帶有「{life_sub_name}」字樣
+- 數字單位轉換：億 → ×100；皆換算成「百萬元」填入 adjusted_cumulative_nt_million
+- adjusted_cumulative_nt_million 必須大於 {life_cumul}（加計處份利益會更大）；若搜到的「調整後」反而較小，可能抓錯數字，視為 found=false
 - 不要使用 markdown code fence；直接輸出 JSON 物件
 """
 
@@ -136,10 +146,10 @@ def _extract_json(response):
         return None, raw
 
 
-def fetch_one(client, name, code, period, holding_cumul, life_sub_name, debug=False):
+def fetch_one(client, name, code, period, life_sub_name, life_cumul, debug=False):
     """呼叫 Claude API + web_search，遇 429 退避重試最多 3 次"""
     import anthropic as _anthropic
-    prompt = _build_prompt(name, code, period, holding_cumul, life_sub_name)
+    prompt = _build_prompt(name, code, period, life_sub_name, life_cumul)
     last_err = None
     for attempt in range(3):
         try:
@@ -197,17 +207,16 @@ def process_company(client, company, period, force=False, debug=False):
         logger.info(f"[{name}] already has fvoci_adjusted, skip")
         return "skipped"
 
-    h = company.get("holding_company", {})
-    holding_cumul = h.get("cumulative_profit")
-    if holding_cumul is None:
-        logger.warning(f"[{name}] no holding cumulative_profit, cannot derive adjustment")
+    life_cumul = life_sub.get("cumulative_profit")
+    if life_cumul is None:
+        logger.warning(f"[{name}] life sub has no cumulative_profit, cannot derive adjustment")
         return "failed"
 
     life_sub_name = life_sub.get("name", "壽險子公司")
     logger.info(f"[{name}] fetching FVOCI adjustment for {life_sub_name}...")
 
     try:
-        parsed, raw = fetch_one(client, name, code, period, holding_cumul, life_sub_name, debug=debug)
+        parsed, raw = fetch_one(client, name, code, period, life_sub_name, life_cumul, debug=debug)
     except Exception as e:
         logger.error(f"[{name}] LLM call failed: {e}")
         return "failed"
@@ -221,37 +230,31 @@ def process_company(client, company, period, force=False, debug=False):
         logger.info(f"[{name}] not found: {reason}")
         return "not_found"
 
-    adjusted_holding = parsed.get("adjusted_cumulative_nt_million")
-    if not isinstance(adjusted_holding, (int, float)):
-        logger.warning(f"[{name}] invalid adjusted_cumulative_nt_million: {adjusted_holding}")
+    adjusted_life = parsed.get("adjusted_cumulative_nt_million")
+    if not isinstance(adjusted_life, (int, float)):
+        logger.warning(f"[{name}] invalid adjusted_cumulative_nt_million: {adjusted_life}")
         return "failed"
 
-    if adjusted_holding <= holding_cumul:
+    if adjusted_life <= life_cumul:
         logger.warning(
-            f"[{name}] adjusted ({adjusted_holding}) <= original ({holding_cumul}), "
-            f"discarding (likely wrong concept)"
+            f"[{name}] adjusted ({adjusted_life}) <= life original ({life_cumul}), "
+            f"discarding (likely wrong concept or抓到金控數字)"
         )
         return "not_found"
 
-    delta = adjusted_holding - holding_cumul
-
-    # 取得壽險子公司原始累計，加上 delta = 推算後的調整後獲利
-    life_cumul = life_sub.get("cumulative_profit")
-    if life_cumul is None:
-        logger.warning(f"[{name}] life sub has no cumulative_profit, cannot derive adjustment")
-        return "failed"
+    delta_vs_original = adjusted_life - life_cumul
 
     life_sub["fvoci_adjusted"] = {
-        "cumulative_profit": round(life_cumul + delta, 1),
-        "delta_from_holding": round(delta, 1),
+        "cumulative_profit": round(adjusted_life, 1),
+        "delta_vs_original": round(delta_vs_original, 1),
         "source_url": parsed.get("source_url", ""),
         "source_quote": parsed.get("source_quote", ""),
         "original_value_text": parsed.get("original_value_text", ""),
         "generated_at": datetime.now().isoformat(),
     }
     logger.info(
-        f"[{name}] {life_sub_name} adjusted: {life_cumul} + {delta} = "
-        f"{life_sub['fvoci_adjusted']['cumulative_profit']} NT$m"
+        f"[{name}] {life_sub_name} adjusted (direct): {adjusted_life} NT$m "
+        f"(original {life_cumul}, +{delta_vs_original})"
     )
     return "updated"
 

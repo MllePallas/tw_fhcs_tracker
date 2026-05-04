@@ -98,13 +98,13 @@
           "cumulative_eps": 1.28,
           "cumulative_profit_yoy_pct": -44.7,
           "fvoci_adjusted": {
-            "cumulative_profit": 47910,
-            "delta_from_holding": 32790,
-            "source_url": "https://money.udn.com/money/story/5612/9443762",
-            "source_quote": "累計前3月調整後獲利660.6億元，雙雙創歷史同期新高，調整後每股稅後純益為4.72元",
-            "original_value_text": "660.6 億元",
-            "generated_at": "2026-04-30T14:54:27.862941",
-            "yoy_pct": 75.1
+            "cumulative_profit": 47280,
+            "delta_vs_original": 32160,
+            "source_url": "https://news.cnyes.com/news/id/6421696",
+            "source_quote": "富邦人壽…累計前3月稅後純益151.2億元；…加計FVOCI股票處分損益後，3月調整後獲利為130.3億元，累計前3月調整後獲利為472.8億元，均創下歷年同期最高紀錄。",
+            "original_value_text": "472.8 億元",
+            "generated_at": "2026-05-04T14:50:14.647670",
+            "yoy_pct": 72.8
           }
         },
         {
@@ -226,13 +226,13 @@
           "cumulative_eps": 0.92,
           "cumulative_profit_yoy_pct": -22.3,
           "fvoci_adjusted": {
-            "cumulative_profit": 19311,
-            "delta_from_holding": 14515,
-            "source_url": "https://news.cnyes.com/news/id/6418976",
-            "source_quote": "若加計 FVOCI 股票處分利益，調整後金控 3 月獲利為 65.77 億元，首季累計獲利 262.05 億元",
-            "original_value_text": "262.05 億元",
-            "generated_at": "2026-04-30T14:55:12.226878",
-            "yoy_pct": 212.7
+            "cumulative_profit": 19025,
+            "delta_vs_original": 14229,
+            "source_url": "https://money.udn.com/money/story/5613/9439254",
+            "source_quote": "累計今年前三月，凱基人壽整體調整後獲利已達190.25億元，為去年同期的3.1倍",
+            "original_value_text": "190.25 億元",
+            "generated_at": "2026-05-04T14:50:57.497115",
+            "yoy_pct": 208.0
           }
         },
         {
