@@ -1,0 +1,53 @@
+{
+  "report_period": "115/04",
+  "last_updated": "2026-05-04T02:57:18.563370",
+  "success_count": 0,
+  "fail_count": 0,
+  "companies": [],
+  "market_summary": {
+    "period": "115/04",
+    "generated_at": "2026-05-04T02:57:18.563289",
+    "items": {
+      "usdtwd": {
+        "value": 31.6265,
+        "date": "2026-04-30",
+        "prev_value": 32.039,
+        "prev_date": "2026-03-31",
+        "pct_change": -1.29,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 38926.63,
+        "date": "2026-04-30",
+        "prev_value": 31722.99,
+        "prev_date": "2026-03-31",
+        "pct_change": 22.71,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 9569.7,
+        "trading_days": 20,
+        "prev_value_yi": 8166.6,
+        "prev_trading_days": 22,
+        "pct_change": 17.18,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 7209.01,
+        "date": "2026-04-30",
+        "prev_value": 6528.52,
+        "prev_date": "2026-03-31",
+        "pct_change": 10.42,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 4.39,
+        "date": "2026-04-30",
+        "prev_value_pct": 4.311,
+        "prev_date": "2026-03-31",
+        "bps_change": 8,
+        "source": "Yahoo Finance (^TNX)"
+      }
+    }
+  }
+}
