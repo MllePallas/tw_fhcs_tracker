@@ -961,6 +961,195 @@ function convertUnit(value, fromUnit, toUnit) {
   return (value * from) / to;
 }
 
+// ── Excel 下載 ─────────────────────────────────────────
+// 動態載入 SheetJS（首次點擊才載入，避免初始 bundle 膨脹）
+const XLSX_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+let _xlsxLoading = null;
+function loadXlsxLib() {
+  if (window.XLSX) return Promise.resolve(window.XLSX);
+  if (_xlsxLoading) return _xlsxLoading;
+  _xlsxLoading = new Promise((resolve, reject) => {
+    const s = document.createElement('script');
+    s.src = XLSX_CDN;
+    s.onload = () => resolve(window.XLSX);
+    s.onerror = () => { _xlsxLoading = null; reject(new Error('SheetJS 載入失敗（請檢查網路）')); };
+    document.head.appendChild(s);
+  });
+  return _xlsxLoading;
+}
+
+// 取得「不屬於 bank/life/securities」的子公司列（產險、投信、票券、創投…）
+function getOtherSubsidiaryRows() {
+  const rows = [];
+  for (const c of state.data.companies || []) {
+    if (c.error) continue;
+    for (const s of c.subsidiaries || []) {
+      if (classifyIndustry(s.name) != null) continue;
+      rows.push({
+        parent_code: c.code,
+        parent_name: c.name,
+        name: s.name,
+        unit: c.unit,
+        monthly_profit: s.monthly_profit,
+        cumulative_profit: s.cumulative_profit,
+        cumulative_profit_yoy_pct: s.cumulative_profit_yoy_pct,
+      });
+    }
+  }
+  return rows;
+}
+
+async function downloadExcel() {
+  if (!state.data) {
+    alert('資料尚未載入，請稍候再試');
+    return;
+  }
+  const btn = document.getElementById('btn-download');
+  const textEl = btn.querySelector('.btn-download-text');
+  const origText = textEl.textContent;
+  btn.disabled = true;
+  textEl.textContent = '載入中…';
+
+  try {
+    const XLSX = await loadXlsxLib();
+    const d = state.data;
+    const period = d.report_period || '';
+    const unit = state.displayUnit;
+    const wb = XLSX.utils.book_new();
+
+    // ── Sheet 1: 金控總覽 ──
+    const holdHeader = ['代號', '金控', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)', '當月 EPS (元)', '累計 EPS (元)', '公告日期', '資料來源 URL'];
+    const holdRows = [holdHeader];
+    for (const c of d.companies || []) {
+      if (c.error) {
+        holdRows.push([c.code, c.name, null, null, null, null, null, c.announcement_date || '', c.error_msg || '資料未取得']);
+        continue;
+      }
+      const h = c.holding_company || {};
+      const m = convertUnit(h.monthly_profit, c.unit, unit);
+      const cu = convertUnit(h.cumulative_profit, c.unit, unit);
+      const epsM = h.monthly_eps != null
+        ? h.monthly_eps
+        : (h.monthly_profit != null && h.cumulative_profit && h.cumulative_eps != null
+            ? h.monthly_profit / h.cumulative_profit * h.cumulative_eps
+            : null);
+      holdRows.push([
+        c.code, c.name,
+        m, cu, h.cumulative_profit_yoy_pct ?? null,
+        epsM, h.cumulative_eps ?? null,
+        c.announcement_date || '', c.source_url || '',
+      ]);
+    }
+    const wsHold = XLSX.utils.aoa_to_sheet(holdRows);
+    wsHold['!cols'] = [{wch:8},{wch:14},{wch:16},{wch:16},{wch:14},{wch:14},{wch:14},{wch:14},{wch:60}];
+    wsHold['!freeze'] = { ySplit: 1 };
+    XLSX.utils.book_append_sheet(wb, wsHold, '金控總覽');
+
+    // ── Sheet 2-4: 產業子公司 ──
+    const industryConfigs = [
+      { key: 'bank',       sheetName: '銀行子公司',  hasFvoci: false },
+      { key: 'life',       sheetName: '壽險子公司',  hasFvoci: true  },
+      { key: 'securities', sheetName: '證券子公司',  hasFvoci: false },
+    ];
+    for (const cfg of industryConfigs) {
+      const rows = getIndustryRows(cfg.key);
+      const header = ['集團代號', '集團', '子公司', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)'];
+      if (cfg.hasFvoci) {
+        header.push(`加計 FVOCI 累計獲利 (${unit})`, '加計 FVOCI YoY (%)', 'FVOCI 引用原文', 'FVOCI 來源 URL');
+      }
+      const sheetData = [header];
+      for (const r of rows) {
+        const m = convertUnit(r.monthly_profit, r.unit, unit);
+        const cu = convertUnit(r.cumulative_profit, r.unit, unit);
+        const row = [r.parent_code, r.parent_name, r.name, m, cu, r.cumulative_profit_yoy_pct ?? null];
+        if (cfg.hasFvoci) {
+          const a = r.fvoci_adjusted;
+          if (a && a.cumulative_profit != null) {
+            row.push(
+              convertUnit(a.cumulative_profit, r.unit, unit),
+              a.yoy_pct ?? null,
+              a.source_quote || '',
+              a.source_url || '',
+            );
+          } else {
+            row.push(null, null, '', '');
+          }
+        }
+        sheetData.push(row);
+      }
+      const ws = XLSX.utils.aoa_to_sheet(sheetData);
+      ws['!cols'] = cfg.hasFvoci
+        ? [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14},{wch:20},{wch:18},{wch:60},{wch:50}]
+        : [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14}];
+      ws['!freeze'] = { ySplit: 1 };
+      XLSX.utils.book_append_sheet(wb, ws, cfg.sheetName);
+    }
+
+    // ── Sheet 5: 其他子公司（產險、投信、票券、創投…） ──
+    const otherRows = getOtherSubsidiaryRows();
+    if (otherRows.length > 0) {
+      const otherData = [['集團代號', '集團', '子公司', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)']];
+      for (const r of otherRows) {
+        otherData.push([
+          r.parent_code, r.parent_name, r.name,
+          convertUnit(r.monthly_profit, r.unit, unit),
+          convertUnit(r.cumulative_profit, r.unit, unit),
+          r.cumulative_profit_yoy_pct ?? null,
+        ]);
+      }
+      const wsOther = XLSX.utils.aoa_to_sheet(otherData);
+      wsOther['!cols'] = [{wch:10},{wch:14},{wch:20},{wch:16},{wch:16},{wch:14}];
+      wsOther['!freeze'] = { ySplit: 1 };
+      XLSX.utils.book_append_sheet(wb, wsOther, '其他子公司');
+    }
+
+    // ── Sheet 6: 市場概況 ──
+    const ms = d.market_summary;
+    if (ms && ms.items) {
+      const it = ms.items;
+      const mkt = [['指標', '本月底', '上月底', '變動', '備註']];
+      const fmtPct = v => v == null ? null : `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`;
+      const fmtBps = v => v == null ? null : `${v >= 0 ? '+' : ''}${v} bps`;
+      if (it.usdtwd)         mkt.push(['美元兌台幣',          it.usdtwd.value, it.usdtwd.prev_value, fmtPct(it.usdtwd.pct_change), `TWD｜${it.usdtwd.date || ''} vs ${it.usdtwd.prev_date || ''}`]);
+      if (it.taiex)          mkt.push(['加權指數',            it.taiex.value, it.taiex.prev_value, fmtPct(it.taiex.pct_change), `點｜${it.taiex.date || ''} vs ${it.taiex.prev_date || ''}`]);
+      if (it.taiex_turnover) mkt.push(['台股日均成交額',      it.taiex_turnover.value_yi, it.taiex_turnover.prev_value_yi, fmtPct(it.taiex_turnover.pct_change), `億元 / 日均（本月 ${it.taiex_turnover.trading_days || '?'} 日 / 上月 ${it.taiex_turnover.prev_trading_days || '?'} 日）`]);
+      if (it.spx)            mkt.push(['美股 S&P 500',        it.spx.value, it.spx.prev_value, fmtPct(it.spx.pct_change), `${it.spx.date || ''} vs ${it.spx.prev_date || ''}`]);
+      if (it.us10y)          mkt.push(['美國 10Y 公債殖利率', it.us10y.value_pct, it.us10y.prev_value_pct, fmtBps(it.us10y.bps_change), `%（變動以 bps 表示）`]);
+      const wsMkt = XLSX.utils.aoa_to_sheet(mkt);
+      wsMkt['!cols'] = [{wch:24},{wch:14},{wch:14},{wch:14},{wch:60}];
+      wsMkt['!freeze'] = { ySplit: 1 };
+      XLSX.utils.book_append_sheet(wb, wsMkt, '市場概況');
+    }
+
+    // ── Sheet 7: 新聞摘要 ──
+    const newsData = [['代號', '金控', '新聞摘要', '來源 URL', '生成時間']];
+    for (const c of d.companies || []) {
+      if (!c.news_summary) continue;
+      const sources = (c.news_sources || []).map(s => s.url).filter(Boolean).join('\n');
+      const ts = c.news_generated_at ? new Date(c.news_generated_at).toLocaleString('zh-TW') : '';
+      newsData.push([c.code, c.name, c.news_summary, sources, ts]);
+    }
+    if (newsData.length > 1) {
+      const wsNews = XLSX.utils.aoa_to_sheet(newsData);
+      wsNews['!cols'] = [{wch:8},{wch:14},{wch:90},{wch:50},{wch:22}];
+      wsNews['!freeze'] = { ySplit: 1 };
+      XLSX.utils.book_append_sheet(wb, wsNews, '新聞摘要');
+    }
+
+    // ── 寫入並下載 ──
+    const filename = `taiwan-fhcs-${period.replace('/', '-') || 'data'}.xlsx`;
+    XLSX.writeFile(wb, filename);
+
+    textEl.textContent = '✓ 已下載';
+    setTimeout(() => { textEl.textContent = origText; btn.disabled = false; }, 2000);
+  } catch (e) {
+    console.error('downloadExcel failed:', e);
+    alert(`下載失敗：${e.message || e}`);
+    textEl.textContent = origText;
+    btn.disabled = false;
+  }
+}
+
 // 數字格式化（百萬元基準，加千分位）
 function formatNum(n) {
   if (n == null) return '—';

@@ -93,6 +93,26 @@ header h1 { font-size: 20px; font-weight: 700; }
 }
 .btn-close:hover { color: var(--text); }
 
+/* Download button (controls bar) */
+.btn-download {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid #2f855a;
+  background: #2f855a;
+  color: #fff;
+  border-radius: 6px;
+  padding: 5px 12px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background .15s, transform .1s, box-shadow .15s;
+}
+.btn-download:hover  { background: #276749; box-shadow: 0 1px 3px rgba(0,0,0,.12); }
+.btn-download:active { transform: scale(.97); }
+.btn-download:disabled { background: #a0aec0; border-color: #a0aec0; cursor: wait; }
+.btn-download-icon { font-size: 14px; line-height: 1; }
+
 /* ── Status Bar ───────────────────────────────────────── */
 .status-bar {
   max-width: 1200px;
@@ -567,6 +587,8 @@ td.col-code { font-weight: 700; color: var(--primary); }
     gap: 3px;
   }
   .ctrl-group.ctrl-month { grid-column: 1 / -1; }
+  .ctrl-group.ctrl-download { grid-column: 1 / -1; }
+  .ctrl-group.ctrl-download .btn-download { width: 100%; justify-content: center; padding: 10px; font-size: 14px; }
   .ctrl-group label { font-size: 11px; font-weight: 600; }
   .ctrl-group select { width: 100%; padding: 8px 10px; font-size: 14px; }
 
