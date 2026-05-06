@@ -270,10 +270,23 @@ def main():
         if args.codes and code not in args.codes:
             continue
 
-        if company.get("news_summary") and not args.force:
-            logger.info(f"[{name}] already has summary, skip")
-            skipped += 1
-            continue
+        # 跳過條件（除非 --force）：
+        #   1. 已有真實新聞摘要（非「無相關說明」）→ skip
+        #   2. 已標記「無相關說明」且 retry_count >= 3 → permanently skip
+        #   否則：retry（拉早跑時新聞可能還沒索引到，下一輪可能成功）
+        if not args.force:
+            summary_val = company.get("news_summary")
+            retry_count = company.get("news_retry_count", 0)
+            if summary_val and summary_val != "無相關說明":
+                logger.info(f"[{name}] already has summary, skip")
+                skipped += 1
+                continue
+            if summary_val == "無相關說明" and retry_count >= 3:
+                logger.info(
+                    f"[{name}] no relevant news (retried {retry_count}x), permanently skip"
+                )
+                skipped += 1
+                continue
 
         h = company.get("holding_company", {})
         monthly = h.get("monthly_profit")
@@ -318,17 +331,20 @@ def main():
                 logger.warning(f"[{name}] no marker found, treating as IRRELEVANT")
 
             if not relevant:
-                # 沒搜到專屬報導 → 直接標記「無相關說明」，不再 retry
+                # 標記「無相關說明」+ 累加 retry_count（上限由 skip 邏輯把關）
+                new_count = company.get("news_retry_count", 0) + 1
                 company["news_summary"] = "無相關說明"
                 company["news_sources"] = []
                 company["news_generated_at"] = datetime.now().isoformat()
+                company["news_retry_count"] = new_count
                 updated += 1
-                logger.info(f"[{name}] marked IRRELEVANT → 無相關說明")
+                logger.info(f"[{name}] marked IRRELEVANT (retry {new_count}/3) → 無相關說明")
             else:
-                # 限定保留有實際引用的 sources（過濾無 url 的）
+                # 找到真實新聞 → 寫入並清除 retry_count
                 company["news_summary"] = summary
                 company["news_sources"] = [s for s in sources if s.get("url")]
                 company["news_generated_at"] = datetime.now().isoformat()
+                company.pop("news_retry_count", None)
                 updated += 1
                 logger.info(f"[{name}] OK ({len(summary)} chars, {len(sources)} sources)")
         except Exception as e:

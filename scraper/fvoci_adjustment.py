@@ -203,9 +203,20 @@ def process_company(client, company, period, force=False, debug=False):
         logger.info(f"[{name}] no life subsidiary found")
         return "no_life_sub"
 
-    if life_sub.get("fvoci_adjusted") and not force:
-        logger.info(f"[{name}] already has fvoci_adjusted, skip")
-        return "skipped"
+    # 跳過條件（除非 --force）：
+    #   1. 已有 fvoci_adjusted（成功）→ skip
+    #   2. 嘗試過 N 次都 not_found → permanently skip（避免無限燒 token）
+    if not force:
+        if life_sub.get("fvoci_adjusted"):
+            logger.info(f"[{name}] already has fvoci_adjusted, skip")
+            return "skipped"
+        not_found_count = life_sub.get("fvoci_not_found_count", 0)
+        if not_found_count >= 3:
+            logger.info(
+                f"[{name}] fvoci adjustment not found (retried {not_found_count}x), "
+                f"permanently skip"
+            )
+            return "skipped"
 
     life_cumul = life_sub.get("cumulative_profit")
     if life_cumul is None:
@@ -227,7 +238,9 @@ def process_company(client, company, period, force=False, debug=False):
 
     if not parsed.get("found"):
         reason = parsed.get("reason", "")
-        logger.info(f"[{name}] not found: {reason}")
+        new_count = life_sub.get("fvoci_not_found_count", 0) + 1
+        life_sub["fvoci_not_found_count"] = new_count
+        logger.info(f"[{name}] not found (retry {new_count}/3): {reason}")
         return "not_found"
 
     adjusted_life = parsed.get("adjusted_cumulative_nt_million")
@@ -236,9 +249,11 @@ def process_company(client, company, period, force=False, debug=False):
         return "failed"
 
     if adjusted_life <= life_cumul:
+        new_count = life_sub.get("fvoci_not_found_count", 0) + 1
+        life_sub["fvoci_not_found_count"] = new_count
         logger.warning(
             f"[{name}] adjusted ({adjusted_life}) <= life original ({life_cumul}), "
-            f"discarding (likely wrong concept or抓到金控數字)"
+            f"discarding (likely wrong concept or抓到金控數字) (retry {new_count}/3)"
         )
         return "not_found"
 
@@ -252,6 +267,8 @@ def process_company(client, company, period, force=False, debug=False):
         "original_value_text": parsed.get("original_value_text", ""),
         "generated_at": datetime.now().isoformat(),
     }
+    # 找到後清除 retry counter（不再需要）
+    life_sub.pop("fvoci_not_found_count", None)
     logger.info(
         f"[{name}] {life_sub_name} adjusted (direct): {adjusted_life} NT$m "
         f"(original {life_cumul}, +{delta_vs_original})"
@@ -312,8 +329,11 @@ def main():
         # 第二次 API call 起 sleep（避開 rate limit）
         if api_calls > 0 and company.get("code") in LIFE_INSURANCE_CODES:
             life_sub = find_life_subsidiary(company.get("subsidiaries", []))
-            already = life_sub and life_sub.get("fvoci_adjusted") and not args.force
-            if life_sub and not already:
+            will_skip = life_sub and not args.force and (
+                bool(life_sub.get("fvoci_adjusted"))
+                or life_sub.get("fvoci_not_found_count", 0) >= 3
+            )
+            if life_sub and not will_skip:
                 logger.info(f"Sleeping {args.inter_call_sleep}s before next call...")
                 time.sleep(args.inter_call_sleep)
 

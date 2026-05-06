@@ -107,34 +107,35 @@ jobs:
 
           python main.py $ARGS
 
-      # ── 4b. 補上新聞摘要（僅當該月已收齊 13 家）──────
+      # ── 4b. 補上新聞摘要（每家公告即可跑，不需等 13 家收齊）──
+      # 兩腳本皆冪等 + 有上限重試（無相關說明 retry 上限 3 次），增量處理
       - name: Generate news summaries
         if: steps.check.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
-          if [ "$SUCCESS" -ge 13 ]; then
-            echo "All 13 collected — generating news summaries (idempotent)..."
+          if [ "$SUCCESS" -ge 1 ]; then
+            echo "Collected $SUCCESS companies — generating news summaries (idempotent + bounded retry)..."
             cd scraper
             python news_summary.py
           else
-            echo "Only $SUCCESS/13 collected; skipping news summaries (next run will retry)"
+            echo "No companies collected yet; skipping news summaries"
           fi
 
-      # ── 4c. 補上壽險 FVOCI 調整後獲利（僅當該月已收齊 13 家）──
+      # ── 4c. 補上壽險 FVOCI 調整後獲利（每家公告即可跑）──
       - name: Generate FVOCI adjustment
         if: steps.check.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
           SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
-          if [ "$SUCCESS" -ge 13 ]; then
-            echo "All 13 collected — generating FVOCI adjustments for life insurance subs (idempotent)..."
+          if [ "$SUCCESS" -ge 1 ]; then
+            echo "Collected $SUCCESS companies — generating FVOCI adjustments (idempotent + bounded retry)..."
             cd scraper
             python fvoci_adjustment.py
           else
-            echo "Only $SUCCESS/13 collected; skipping FVOCI adjustment (next run will retry)"
+            echo "No companies collected yet; skipping FVOCI adjustment"
           fi
 
       # ── 5. 提交更新的資料 ─────────────────────────────
