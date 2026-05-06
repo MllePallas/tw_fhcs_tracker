@@ -703,5 +703,59 @@
       "news_sources": [],
       "news_generated_at": "2026-04-27T15:53:57.796921"
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/01",
+    "generated_at": "2026-05-04T14:27:00.852280",
+    "items": {
+      "usdtwd": {
+        "value": 31.3617,
+        "date": "2026-01-30",
+        "prev_value": 31.2436,
+        "prev_date": "2025-12-31",
+        "pct_change": 0.38,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 32063.75,
+        "date": "2026-01-30",
+        "prev_value": 28963.6,
+        "prev_date": "2025-12-31",
+        "pct_change": 10.7,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 7921.6,
+        "trading_days": 21,
+        "prev_value_yi": 4840.6,
+        "prev_trading_days": 22,
+        "pct_change": 63.65,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 6939.03,
+        "date": "2026-01-30",
+        "prev_value": 6845.5,
+        "prev_date": "2025-12-31",
+        "pct_change": 1.37,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 4.241,
+        "date": "2026-01-30",
+        "prev_value_pct": 4.163,
+        "prev_date": "2025-12-31",
+        "bps_change": 8,
+        "source": "Yahoo Finance (^TNX)"
+      },
+      "tlt": {
+        "value": 87.13,
+        "date": "2026-01-30",
+        "prev_value": 87.16,
+        "prev_date": "2025-12-31",
+        "pct_change": -0.03,
+        "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+      }
+    }
+  }
 }

@@ -811,7 +811,7 @@
   ],
   "market_summary": {
     "period": "115/03",
-    "generated_at": "2026-04-28T14:17:32.310811",
+    "generated_at": "2026-05-04T15:42:53.998549",
     "items": {
       "usdtwd": {
         "value": 32.039,
@@ -852,6 +852,14 @@
         "prev_date": "2026-02-27",
         "bps_change": 35,
         "source": "Yahoo Finance (^TNX)"
+      },
+      "tlt": {
+        "value": 86.69,
+        "date": "2026-03-31",
+        "prev_value": 90.82,
+        "prev_date": "2026-02-27",
+        "pct_change": -4.55,
+        "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
       }
     }
   }

@@ -174,6 +174,14 @@ def collect_month(year: int, month: int) -> dict:
         out["us10y_date"] = tnx[0].date().isoformat()
         out["us10y_pct"] = round(tnx[1], 3)
 
+    # TLT：iShares 20+ Year Treasury Bond ETF
+    # 台灣壽險公司持有大量境外長天期債券ETF（FVTPL項下），TLT是最具代表性的代理指標
+    # 殖利率上升 → TLT價格下跌 → 壽險公司FVTPL評價損失
+    tlt = fetch_yf_month_end("TLT", year, month)
+    if tlt:
+        out["tlt_date"] = tlt[0].date().isoformat()
+        out["tlt"] = round(tlt[1], 2)
+
     return out
 
 
@@ -245,6 +253,14 @@ def build_market_summary(period: str) -> dict:
                 "prev_date": prev.get("us10y_date"),
                 "bps_change": bps_change(curr.get("us10y_pct"), prev.get("us10y_pct")),
                 "source": "Yahoo Finance (^TNX)",
+            },
+            "tlt": {
+                "value": curr.get("tlt"),
+                "date": curr.get("tlt_date"),
+                "prev_value": prev.get("tlt"),
+                "prev_date": prev.get("tlt_date"),
+                "pct_change": pct_change(curr.get("tlt"), prev.get("tlt")),
+                "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標",
             },
         },
     }
