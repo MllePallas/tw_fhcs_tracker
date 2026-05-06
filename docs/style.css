@@ -560,6 +560,25 @@ td.col-code { font-weight: 700; color: var(--primary); }
 }
 .news-sources-list a:hover { text-decoration: underline; }
 
+/* ── Site Footer ──────────────────────────────────────── */
+.site-footer {
+  margin: 40px auto 0;
+  padding: 20px 24px 28px;
+  max-width: 1200px;
+  text-align: center;
+  border-top: 1px solid var(--border);
+  color: var(--text-muted);
+}
+.site-footer .copyright {
+  font-size: 13px;
+  font-weight: 500;
+  margin-bottom: 6px;
+}
+.site-footer .disclaimer {
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 /* ── Mobile Cards (A2'：手機卡片視圖，桌機隱藏) ──────── */
 .mobile-cards { display: none; }
 
@@ -699,4 +718,7 @@ td.col-code { font-weight: 700; color: var(--primary); }
     border: 1px solid var(--border);
     border-radius: var(--radius);
   }
+  .site-footer { padding: 16px 16px 24px; margin-top: 32px; }
+  .site-footer .copyright { font-size: 12px; }
+  .site-footer .disclaimer { font-size: 11px; }
 }
