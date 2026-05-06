@@ -96,7 +96,16 @@
           "cumulative_profit": 2810,
           "monthly_eps": 0.24,
           "cumulative_eps": 0.24,
-          "cumulative_profit_yoy_pct": -67.6
+          "cumulative_profit_yoy_pct": -67.6,
+          "fvoci_adjusted": {
+            "cumulative_profit": 12270,
+            "delta_vs_original": 9460,
+            "source_url": "https://news.cnyes.com/news/id/6344158",
+            "source_quote": "富邦人壽 2026 年 1 月稅後純益為 28.1 億元，包含 FVOCI 股票處分損益後，調整後獲利為 122.7 億元",
+            "original_value_text": "122.7 億元",
+            "generated_at": "2026-05-06T10:37:28.805638",
+            "yoy_pct": 41.4
+          }
         },
         {
           "name": "富邦投信",
@@ -197,7 +206,16 @@
           "cumulative_profit": 2451,
           "monthly_eps": 0.47,
           "cumulative_eps": 0.47,
-          "cumulative_profit_yoy_pct": 4.7
+          "cumulative_profit_yoy_pct": 4.7,
+          "fvoci_adjusted": {
+            "cumulative_profit": 6717,
+            "delta_vs_original": 4266,
+            "source_url": "https://www.ctee.com.tw/news/20260213701608-430304",
+            "source_quote": "凱基人壽1月稅後獲利24.51億元，另FVOCI股票處分利益稅後金額約42.66億元，合計為67.17億元",
+            "original_value_text": "67.17 億元",
+            "generated_at": "2026-05-06T10:39:00.019119",
+            "yoy_pct": 187.1
+          }
         },
         {
           "name": "凱基銀行",

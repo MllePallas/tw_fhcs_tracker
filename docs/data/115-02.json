@@ -96,7 +96,16 @@
           "cumulative_profit": 17050,
           "monthly_eps": null,
           "cumulative_eps": 1.44,
-          "cumulative_profit_yoy_pct": -6.2
+          "cumulative_profit_yoy_pct": -6.2,
+          "fvoci_adjusted": {
+            "cumulative_profit": 34250,
+            "delta_vs_original": 17200,
+            "source_url": "https://news.cnyes.com/news/id/6383823",
+            "source_quote": "富邦人壽 2026 年 2 月稅後純益為 142.4 億元，累計前 2 月稅後純益 170.5 億元，另分別加計 2 月及累計前 2 月 FVOCI 股票處分損益 77.3 億元及 172 億元後，2 月及累計前 2 月調整後獲利分別為 219.7 億元及 342.5 億元。",
+            "original_value_text": "342.5 億元",
+            "generated_at": "2026-05-06T10:42:03.634661",
+            "yoy_pct": 88.4
+          }
         },
         {
           "name": "富邦投信",
@@ -197,7 +206,16 @@
           "cumulative_profit": 4079,
           "monthly_eps": null,
           "cumulative_eps": 0.78,
-          "cumulative_profit_yoy_pct": -18.4
+          "cumulative_profit_yoy_pct": -18.4,
+          "fvoci_adjusted": {
+            "cumulative_profit": 13880,
+            "delta_vs_original": 9801,
+            "source_url": "https://www.ctee.com.tw/news/20260312701822-430304",
+            "source_quote": "凱基人壽2月稅後獲利16.28億元，若加計FVOCI股票處分利益，稅後金額55.34億元，合計達71.62億元。累計前兩月獲利規模達138.8億元，約為去年同期2.78倍",
+            "original_value_text": "138.8 億元",
+            "generated_at": "2026-05-06T10:44:41.222731",
+            "yoy_pct": 177.5
+          }
         },
         {
           "name": "凱基銀行",
