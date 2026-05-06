@@ -55,6 +55,10 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
     roc_year, roc_month = period.split("/")
     western_year = int(roc_year) + 1911
     m = int(roc_month)
+    # 公告月份 = 目標月份的下個月（例：1月損益於2月公告）
+    pub_year = western_year if m < 12 else western_year + 1
+    pub_month = m + 1 if m < 12 else 1
+    is_quarter_end = m in (3, 6, 9, 12)  # 只有 Q 末月才能用「累計 Q」字樣
     sub_lines = "\n".join(
         f"  - {s.get('name')}: 當月 {s.get('monthly_profit')} 百萬元，"
         f"累計 {s.get('cumulative_profit')} 百萬元"
@@ -88,16 +92,30 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 2. `{name} {m}月 EPS 累計`
 {life_search}
 
-⚠️ 媒體標題通常用「西元年 + 月份」（例如「{name}3月」、「{m}月稅後」），**不會**用「民國年」格式。
-⚠️ 媒體**經常以「累計第 N 季」或「Q{((m-1)//3)+1} 累計」**報導同一份月自結資料；這也算 RELEVANT。
-⚠️ 報導中的數字若與我提供的不完全一致（例如新聞說 EPS、累計、合併、淨值，與我給的當月稅後不同），那**很正常**——以新聞數字為準摘要即可，不要因此判 IRRELEVANT。
+⚠️ 媒體標題通常用「西元年 + 月份」（例如「{name}{m}月」、「{m}月稅後」），**不會**用「民國年」格式。
+⚠️ 報導中的數字若與我提供的不完全一致是正常的，以新聞數字為準即可——但**月份必須對齊**（見下方嚴格時間檢查）。
 {life_context}
-【relevance 標記（重要）】
-你必須在輸出第一行寫一個標記，告訴下游 script 是否真的找到相關新聞：
-- 找到 1 則以上專門報導 {western_year}/{m:02d} 月損益（含累計 Q{((m-1)//3)+1}、EPS、月增/年增等延伸報導）：第一行寫 `RELEVANT`
-- 完全沒搜到 {western_year} 年該月份的損益新聞，只有去年舊報導、股利、股東會、ESG：第一行寫 `IRRELEVANT`
+【relevance 標記（嚴格 — 過去曾大量錯置月份，務必逐項檢查）】
 
-判斷時請看新聞日期（URL 中的 YYYYMMDD 或標題中的時間）：報導 {western_year}/{m:02d} 月損益的新聞通常發佈於該月隔月的 8-15 日，絕大多數都是 RELEVANT。
+你必須在輸出第一行寫 `RELEVANT` 或 `IRRELEVANT`。
+
+✅ 標 **RELEVANT** 的條件（**核心：以新聞內容描述的月份為準，不以發布日期為準**）：
+1. **新聞內文明確描述「{western_year} 年 {m} 月」（即西元 {western_year} 年 {m} 月）的月自結損益、稅後純益、EPS 或累計數字**
+2. 即使發布日期較晚（例如 {pub_year}/{pub_month:02d} 之後才出現的法說會整理稿、季末回顧、年度回顧），只要**內文確實在報導 {western_year}/{m:02d} 月的數字**就算 RELEVANT
+3. {"是季底月份（Q" + str((m-1)//3 + 1) + " 末），新聞使用「累計 Q" + str((m-1)//3 + 1) + "」或「累計前" + str(m) + "月」描述同一份月自結資料 → 算 RELEVANT" if is_quarter_end else "**不是**季底月份；新聞若只用「Q1/Q2/Q3/Q4 累計」概括（無 " + str(m) + " 月數字）→ IRRELEVANT"}
+
+❌ 標 **IRRELEVANT** 的情境（**過去最常見的錯置**）：
+- 搜尋只回傳**其他月份**的新聞，內容描述的數字屬於 {western_year}/03 或 {western_year}/04 等非目標月份 → **IRRELEVANT**，**不要**拿其他月份的新聞數字湊 {m} 月摘要
+- 內文出現的月份數字（X 月稅後 Y 億）X ≠ {m} → IRRELEVANT
+- 只有去年（{western_year - 1} 年）舊報導、股利、股東會、ESG → IRRELEVANT
+- 完全沒有搜到任何相關新聞 → IRRELEVANT
+
+⚠️ **判斷重點**：看「**內文寫的是哪一月的數字**」，不是看「**新聞何時發布**」。
+⚠️ 寧可標 IRRELEVANT 也不要強行用其他月份的新聞代替。下游 script 會把 IRRELEVANT 標為「無相關說明」，這是預期行為。
+
+⚠️ **輸出格式硬性要求（過去常見錯誤：把分析寫在 marker 前面）**：
+**第一行**必須是純文字 `RELEVANT` 或 `IRRELEVANT`（無 markdown、無前綴）。
+不要在 marker 之前加任何分析、說明、客套話。要分析判斷過程的話，寫在 marker 之後的摘要正文裡。
 
 【輸出格式】
 第一行：`RELEVANT` 或 `IRRELEVANT`
@@ -306,12 +324,18 @@ def main():
                 failed += 1
                 continue
 
-            # 解析 RELEVANT / IRRELEVANT 標記（在前 6 行內找，LLM 有時會加前言）
+            # 解析 RELEVANT / IRRELEVANT 標記
+            # LLM 不一定把標記放第一行（有時會加分析），所以掃整份輸出，
+            # 並允許 markdown 包裹（**RELEVANT**、## RELEVANT 等）。
+            # 找到的第一個 marker 為準。
+            import re as _re
             lines = raw.splitlines()
             marker_idx = -1
             relevant = False
-            for i, ln in enumerate(lines[:6]):
-                t = ln.strip().upper()
+            for i, ln in enumerate(lines):
+                # 去掉 markdown 標記符號、前綴 emoji、空白
+                t = _re.sub(r"^[\s#*`>\-✅❌⚠️\U0001f4cd]+", "", ln).strip()
+                t = _re.sub(r"[\s#*`]+$", "", t).upper()
                 if t == "RELEVANT" or t.startswith("RELEVANT "):
                     relevant = True
                     marker_idx = i
