@@ -21,6 +21,10 @@ on:
         description: '是否啟用 LLM 兜底解析（true/false）'
         required: false
         default: 'true'
+      force_refresh:
+        description: '強制重爬已成功的金控（不影響新聞/FVOCI；true/false）'
+        required: false
+        default: 'false'
 
 jobs:
   scrape:
@@ -94,6 +98,11 @@ jobs:
           # LLM 設定
           if [ "${{ github.event.inputs.enable_llm }}" = "false" ]; then
             ARGS="$ARGS --no-llm"
+          fi
+
+          # 強制重爬（手動觸發專用）
+          if [ "${{ github.event.inputs.force_refresh }}" = "true" ]; then
+            ARGS="$ARGS --force"
           fi
 
           python main.py $ARGS

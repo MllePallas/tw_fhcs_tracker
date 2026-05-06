@@ -426,6 +426,11 @@ def main():
         help="禁用 LLM 兜底解析",
     )
     parser.add_argument(
+        "--force",
+        action="store_true",
+        help="強制重爬：忽略當期 latest.json 已成功的家（預設增量模式跳過已成功）",
+    )
+    parser.add_argument(
         "--delay",
         type=float,
         default=3.0,
@@ -461,12 +466,30 @@ def main():
         ]
         logger.info(f"Filtering to: {[c['name'] for c in companies_to_scrape]}")
 
-    # 初始化 client
-    client = MopsClient(delay_range=(args.delay, args.delay + 2.0))
-
-    # 載入現有數據（增量更新）
+    # 載入現有數據（既用於增量模式跳過，亦用於失敗時 fallback merge）
     existing = load_existing_data()
     existing_by_code = {c["code"]: c for c in existing.get("companies", [])}
+
+    # 增量模式：跳過當期 latest.json 已成功的家（除非 --force）
+    if not args.force and existing.get("report_period") == target_month:
+        already_success_codes = {
+            code for code, c in existing_by_code.items() if "error" not in c
+        }
+        if already_success_codes:
+            before = len(companies_to_scrape)
+            companies_to_scrape = [
+                c for c in companies_to_scrape
+                if c["code"] not in already_success_codes
+            ]
+            skipped = before - len(companies_to_scrape)
+            if skipped:
+                logger.info(
+                    f"Incremental mode: skipping {skipped} already-success companies "
+                    f"(use --force to rescrape all)"
+                )
+
+    # 初始化 client
+    client = MopsClient(delay_range=(args.delay, args.delay + 2.0))
 
     # 執行爬取
     results = []
@@ -538,7 +561,8 @@ def main():
 
     logger.info(
         "\n" + "="*50 + "\n"
-        + f"完成！成功: {success_count} 家，失敗: {fail_count} 家\n"
+        + f"本次爬取: 成功 {success_count} 家，失敗 {fail_count} 家\n"
+        + f"最終彙整: 成功 {final_success} 家，失敗 {final_fail} 家（共 13 家）\n"
         + "資料已儲存至 data/latest.json\n"
         + "="*50
     )
