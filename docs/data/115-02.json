@@ -678,8 +678,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-06T18:15:42.631206",
-      "news_retry_count": 2
+      "news_generated_at": "2026-05-06T18:20:34.063013",
+      "news_retry_count": 3
     },
     {
       "code": "2892",
