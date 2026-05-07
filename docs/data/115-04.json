@@ -1,9 +1,69 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-04T02:57:18.563370",
-  "success_count": 0,
+  "last_updated": "2026-05-07T02:41:26.238064",
+  "success_count": 1,
   "fail_count": 0,
-  "companies": [],
+  "companies": [
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "announcement_date": "115/05/06",
+      "announcement_title": "公告本公司暨子公司115年4月自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "玉山金控",
+        "monthly_profit": 4184,
+        "cumulative_profit": 14241,
+        "monthly_eps": null,
+        "cumulative_eps": 0.88,
+        "cumulative_profit_yoy_pct": 26.0
+      },
+      "subsidiaries": [
+        {
+          "name": "玉山銀行",
+          "monthly_profit": 3394,
+          "cumulative_profit": 12156,
+          "monthly_eps": null,
+          "cumulative_eps": 0.83,
+          "cumulative_profit_yoy_pct": 6.4
+        },
+        {
+          "name": "玉山證券",
+          "monthly_profit": 582,
+          "cumulative_profit": 1634,
+          "monthly_eps": null,
+          "cumulative_eps": 2.96,
+          "cumulative_profit_yoy_pct": 192.8
+        },
+        {
+          "name": "玉山創投",
+          "monthly_profit": 632,
+          "cumulative_profit": 1342,
+          "monthly_eps": null,
+          "cumulative_eps": 2.44,
+          "cumulative_profit_yoy_pct": 862.5
+        },
+        {
+          "name": "玉山投信",
+          "monthly_profit": 45,
+          "cumulative_profit": 145,
+          "monthly_eps": null,
+          "cumulative_eps": 4.84
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n\n玉山金控於 4 月 8 日公布 2026 年 3 月單月稅後純益 30.1 億元，累計第一季稅後純益 100.57 億元，創歷年同期獲利最高，較去年同期增加 14.39%，EPS 為 0.62 元。\n玉山金首季合併稅後純益正式突破百億元大關，寫下歷年同期新猷。\n\n**子公司明細**\n\n\n主要子公司中，玉山銀行累計稅後純益 87.62 億元，較去年同期增加 0.45%；玉山證券累計 10.5 億元；玉山創投累計 7.1 億元；玉山投信累計 1 億元。\n銀行本業仍為獲利主引擎，貢獻逾八成金控盈餘。\n\n> 📌 **新聞來源數字說明**：工商時報與鉅亨網均以「億元」為單位揭露，與題目財報數字（百萬元）換算後一致（例如銀行累計 87.62 億元 ＝ 8,762 百萬元）。新聞未個別揭露銀行、證券、創投等子公司之「3 月單月」細項，僅揭露 Q1 累計數字。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20260408701466-430304",
+          "title": "玉山金首季獲利逾百億、創同期新高 EPS為0.62元 - 金融 - 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-04-28T11:12:41.578768"
+    }
+  ],
   "market_summary": {
     "period": "115/04",
     "generated_at": "2026-05-05T04:20:59.512930",
