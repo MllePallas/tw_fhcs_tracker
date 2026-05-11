@@ -30,7 +30,28 @@
       "Bash(taskkill //F //PID 24408 //PID 7776 //PID 23128)",
       "Bash(curl -s -o /dev/null -w \"HTTP=%{http_code} SIZE=%{size_download}\\\\n\" http://127.0.0.1:8766/index.html)",
       "Bash(curl -s -o /dev/null -w \"HTTP=%{http_code} SIZE=%{size_download}\\\\n\" http://127.0.0.1:8766/data/index.json)",
-      "Bash(taskkill //F //PID 14644)"
+      "Bash(taskkill //F //PID 14644)",
+      "Bash(git *)",
+      "Bash(node --check ../docs/app.js)",
+      "Bash(curl -sf http://localhost:8000/ -o /dev/null)",
+      "Bash(node -c docs/app.js)",
+      "Bash(node --check docs/app.js)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8765/index.html)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8765/app.js)",
+      "Bash(curl -s -o /dev/null -w \"HTTP %{http_code}\\\\n\" http://localhost:8765/data/index.json)",
+      "Bash(ipconfig)",
+      "Bash(curl *)",
+      "Bash(awk '{print $2}')",
+      "Bash(xargs -r kill)",
+      "Bash(PYTHONIOENCODING=utf-8 python *)",
+      "Read(//c/tmp/claude/**)",
+      "Bash(cat \"C:\\\\\\\\Users\\\\\\\\ether\\\\\\\\AppData\\\\\\\\Local\\\\\\\\Temp\\\\\\\\claude\\\\\\\\C--Users-ether-OneDrive----Claude-CoWork-Monthly-taiwan-finhold-tracker\\\\\\\\e90dd097-2f7e-443e-bd35-4b29f68b84b5\\\\\\\\tasks\\\\\\\\blbi7k12z.output\")",
+      "Bash(tee /tmp/fvoci_115_01.log)",
+      "Bash(cp /tmp/115-01_full.json docs/data/115-01.json)",
+      "Bash(cp /tmp/115-02_full.json docs/data/115-02.json)",
+      "Bash(cp C:/tmp/115-01_full.json docs/data/115-01.json)",
+      "Bash(cp C:/tmp/115-02_full.json docs/data/115-02.json)",
+      "Bash(gh run *)"
     ]
   }
 }

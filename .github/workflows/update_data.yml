@@ -1,10 +1,11 @@
 name: Update Financial Holdings Data
 
 on:
-  # 每月 8-31 日，台灣時間 17:00 與 20:00 各執行一次
-  # （UTC 09:00 / 12:00；後續若該月 13 家已收齊，short-circuit 會直接 skip）
+  # 每月 11-15 日，台灣時間 19:00 跑一次（UTC 11:00）
+  # 5-10 日改為人工手動觸發（多數金控還沒公告，自動跑容易撲空 + 假性成功）
+  # 11-15 日後若 13 家已收齊，short-circuit 會直接 skip
   schedule:
-    - cron: '0 9,12 8-31 * *'
+    - cron: '0 11 11-15 * *'
 
   # 允許手動觸發
   workflow_dispatch:
@@ -109,8 +110,9 @@ jobs:
 
       # ── 4b. 補上新聞摘要（每家公告即可跑，不需等 13 家收齊）──
       # 兩腳本皆冪等 + 有上限重試（無相關說明 retry 上限 3 次），增量處理
+      # 用 always() 確保 scraper 即使 exit 1（部分失敗）也仍會嘗試補新聞
       - name: Generate news summaries
-        if: steps.check.outputs.skip != 'true'
+        if: always() && steps.check.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -125,7 +127,7 @@ jobs:
 
       # ── 4c. 補上壽險 FVOCI 調整後獲利（每家公告即可跑）──
       - name: Generate FVOCI adjustment
-        if: steps.check.outputs.skip != 'true'
+        if: always() && steps.check.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
         run: |
@@ -139,8 +141,9 @@ jobs:
           fi
 
       # ── 5. 提交更新的資料 ─────────────────────────────
+      # always() 確保部分失敗時仍會推上已成功的家（main.py 在 sys.exit(1) 之前已 save_data，JSON 是 consistent 狀態）
       - name: Commit updated data
-        if: steps.check.outputs.skip != 'true'
+        if: always() && steps.check.outputs.skip != 'true'
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'

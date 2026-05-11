@@ -338,10 +338,11 @@ python bootstrap_history.py --year 114
 
 ### update_data.yml（MOPS 月損益 + 新聞摘要 + FVOCI 調整）
 
-- **排程**：每月 **8~31 日**，UTC 09:00 與 12:00（台灣時間 17:00 / 20:00）各一次
+- **排程**：每月 **11~15 日**，UTC 11:00（台灣時間 19:00）一次。5~10 日改人工手動觸發（多數金控還沒公告，自動跑容易撲空 + 假性成功）
 - **Short-circuit**：schedule 觸發時，若 `latest.json` 已顯示目標月份 `success_count >= 13`，直接跳過所有步驟（節省 API 費用）
 - **手動觸發**：Actions → Run workflow（不受 short-circuit 限制，方便補跑）
-- 執行 `scraper/main.py`（含 YoY 計算）→ 若收齊 13 家再依序執行 `news_summary.py` → `fvoci_adjustment.py`（皆冪等）→ commit + push
+- 執行 `scraper/main.py`（含 YoY 計算）→ 接著依序執行 `news_summary.py` → `fvoci_adjustment.py`（皆冪等）→ commit + push
+- **Partial commit**：news/fvoci/commit 三 steps 用 `if: always()`。即使 scraper 因部分公司失敗而 `exit 1`，依然會把已成功的家 commit + push（`save_data` 在 `sys.exit` 之前已完成，JSON 是 consistent 狀態）
 
 ### update_market.yml（市場概況）
 

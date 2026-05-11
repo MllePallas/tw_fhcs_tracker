@@ -323,12 +323,8 @@ def scrape_company(
             "error_msg": "查無公告",
         }
 
-    # 2. 找到目標公告
+    # 2. 找到目標公告（嚴格匹配 target_month，避免抓到其他月份的公告被誤標為當期）
     ann = find_profit_announcement(announcements, ANNOUNCEMENT_KEYWORDS, target_month)
-
-    if ann is None:
-        # 寬鬆搜尋：不限月份
-        ann = find_profit_announcement(announcements, ANNOUNCEMENT_KEYWORDS, None)
 
     if ann is None:
         logger.warning(f"[{name}] No profit announcement matched")
