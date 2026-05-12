@@ -1,8 +1,8 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-11T13:38:04.997112",
-  "success_count": 3,
-  "fail_count": 10,
+  "last_updated": "2026-05-12T16:17:19.027786",
+  "success_count": 4,
+  "fail_count": 9,
   "companies": [
     {
       "code": "2880",
@@ -114,15 +114,66 @@
     {
       "code": "2885",
       "name": "元大金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "元大金控代子公司元大證券越南公告\r\nAuthorized Representative異動事",
-        "元大金控代子公司元大證券越南公告\r\nChairman of the Council of Members異動事",
-        "元大金控代子公司元大投信公告該公司對瞿姓前員工請求損\r\n害賠償訴訟民事第三審判決結果",
-        "元大金控代子公司元大證券補充說明115/03/12公告董事會\r\n決議發行無擔保次順位普通公司債之發行條件",
-        "元大金控代子公司元大銀行公告董事會通過對關係人捐贈\r\n事宜"
-      ]
+      "announcement_date": "115/05/12",
+      "announcement_title": "元大金控公告115年4月份自結合併損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "元大金控",
+        "monthly_profit": 7504,
+        "cumulative_profit": 21913,
+        "monthly_eps": null,
+        "cumulative_eps": 1.64,
+        "cumulative_profit_yoy_pct": 145.1
+      },
+      "subsidiaries": [
+        {
+          "name": "元大證券",
+          "monthly_profit": 5244,
+          "cumulative_profit": 13980,
+          "monthly_eps": null,
+          "cumulative_eps": 2.12,
+          "cumulative_profit_yoy_pct": 159.2
+        },
+        {
+          "name": "元大銀行",
+          "monthly_profit": 1212,
+          "cumulative_profit": 4900,
+          "monthly_eps": null,
+          "cumulative_eps": 0.56,
+          "cumulative_profit_yoy_pct": 50.6
+        },
+        {
+          "name": "元大期貨",
+          "monthly_profit": 207,
+          "cumulative_profit": 907,
+          "monthly_eps": null,
+          "cumulative_eps": 2.84,
+          "cumulative_profit_yoy_pct": 10.3
+        },
+        {
+          "name": "元大人壽",
+          "monthly_profit": 623,
+          "cumulative_profit": 1914,
+          "monthly_eps": null,
+          "cumulative_eps": 0.66,
+          "cumulative_profit_yoy_pct": 516.1
+        },
+        {
+          "name": "元大投信",
+          "monthly_profit": 494,
+          "cumulative_profit": 1785,
+          "monthly_eps": null,
+          "cumulative_eps": 7.87,
+          "cumulative_profit_yoy_pct": 35.6
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-05-12T16:42:03.545621",
+      "news_retry_count": 1
     },
     {
       "code": "2886",
