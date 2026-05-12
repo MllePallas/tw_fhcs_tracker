@@ -332,7 +332,7 @@ def scrape_company(
             "code": code,
             "name": name,
             "error": "no_match",
-            "error_msg": f"找不到 {target_month} 月自結損益公告",
+            "error_msg": f"{target_month} 月自結損益尚未公告",
             "available_titles": [a["title"] for a in announcements[:5]],
         }
 
