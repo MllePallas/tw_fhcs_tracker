@@ -37,6 +37,39 @@ function classifyIndustry(name) {
   return null;
 }
 
+// YoY 顯示：跨零點（虧轉盈/盈轉虧）用文字標籤＋絕對差額；同號用百分比
+// abs 在 JSON 中與 cumul 同單位（百萬元），顯示時跟著 displayUnit 換算
+function formatYoY(pct, abs, status, sourceUnit, displayUnit) {
+  if (pct == null) return { disp: '—', cls: '' };
+  if (status === 'loss_to_profit' || status === 'profit_to_loss') {
+    const label = status === 'loss_to_profit' ? '虧轉盈' : '盈轉虧';
+    const cls = status === 'loss_to_profit' ? 'positive' : 'negative';
+    if (abs != null) {
+      const a = convertUnit(abs, sourceUnit, displayUnit);
+      const sign = a >= 0 ? '+' : '';
+      return { disp: `${label} ${sign}${formatNum(a)}`, cls };
+    }
+    return { disp: label, cls };
+  }
+  const cls = pct >= 0 ? 'positive' : 'negative';
+  const sign = pct >= 0 ? '+' : '';
+  return { disp: `${sign}${pct.toFixed(1)}%`, cls };
+}
+
+// YoY 排序鍵：虧轉盈 > 正成長 > 負成長 > 盈轉虧；同 tier 內依 pct 排序
+function yoyTier(pct, status) {
+  if (status === 'loss_to_profit') return 3;
+  if (status === 'profit_to_loss') return 0;
+  if (pct == null) return -1;
+  return pct >= 0 ? 2 : 1;
+}
+function compareYoYDesc(aPct, aStatus, bPct, bStatus) {
+  const at = yoyTier(aPct, aStatus);
+  const bt = yoyTier(bPct, bStatus);
+  if (at !== bt) return bt - at;
+  return (bPct ?? -Infinity) - (aPct ?? -Infinity);
+}
+
 // 取出某產業的所有子公司列（含父金控資訊）
 function getIndustryRows(industry) {
   const rows = [];
@@ -52,6 +85,8 @@ function getIndustryRows(industry) {
         monthly_profit: s.monthly_profit,
         cumulative_profit: s.cumulative_profit,
         cumulative_profit_yoy_pct: s.cumulative_profit_yoy_pct,
+        cumulative_profit_yoy_abs: s.cumulative_profit_yoy_abs,
+        cumulative_profit_yoy_status: s.cumulative_profit_yoy_status,
         fvoci_adjusted: s.fvoci_adjusted || null,
       });
     }
@@ -296,16 +331,11 @@ function renderIndustryTable(industry) {
     const mClass = (m ?? 0) >= 0 ? 'positive' : 'negative';
     const cClass = (c ?? 0) >= 0 ? 'positive' : 'negative';
 
-    const yoy = r.cumulative_profit_yoy_pct;
-    let yoyClass = '';
-    let yoyDisp;
-    if (yoy != null) {
-      yoyClass = yoy >= 0 ? 'positive' : 'negative';
-      yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
-    } else if (r.parent_code === '2887' && period < '115/07') {
+    const yi = formatYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs, r.cumulative_profit_yoy_status, r.unit, unit);
+    let yoyClass = yi.cls;
+    let yoyDisp = yi.disp;
+    if (yi.disp === '—' && r.parent_code === '2887' && period < '115/07') {
       yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
-    } else {
-      yoyDisp = '—';
     }
 
     const main = `<tr>
@@ -323,9 +353,7 @@ function renderIndustryTable(industry) {
     if (industry === 'life' && a && a.cumulative_profit != null) {
       hasFvoci = true;
       const aCumul = convertUnit(a.cumulative_profit, r.unit, unit);
-      const aYoyDisp = a.yoy_pct != null
-        ? `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`
-        : '—';
+      const aYoyDisp = formatYoY(a.yoy_pct, a.yoy_abs, a.yoy_status, r.unit, unit).disp;
       const tip = a.source_quote
         ? ` title="${escapeHtml(a.source_quote)}"`
         : '';
@@ -365,7 +393,10 @@ function sortIndustryRows(arr) {
     case 'cumulative_desc':
       return arr.sort((a, b) => (b.cumulative_profit ?? -Infinity) - (a.cumulative_profit ?? -Infinity));
     case 'cumul_yoy_desc':
-      return arr.sort((a, b) => (b.cumulative_profit_yoy_pct ?? -Infinity) - (a.cumulative_profit_yoy_pct ?? -Infinity));
+      return arr.sort((a, b) => compareYoYDesc(
+        a.cumulative_profit_yoy_pct, a.cumulative_profit_yoy_status,
+        b.cumulative_profit_yoy_pct, b.cumulative_profit_yoy_status,
+      ));
     case 'eps_cumul_desc':  // 子公司無 EPS，回退到代號
     case 'code':
     default:
@@ -396,19 +427,15 @@ function renderRow(c) {
   const mDisplay = monthly  != null ? formatNum(monthly)  : '—';
   const cDisplay = cumul    != null ? formatNum(cumul)     : '—';
 
-  // 累計 YoY（main.py 預先寫入 holding_company.cumulative_profit_yoy_pct）
+  // 累計 YoY（main.py 預先寫入 holding_company.cumulative_profit_yoy_pct/_abs/_status）
   // 2887 台新新光金 2025-07-24 合併，115/07 之前無法算 YoY，顯示合併註記
-  const yoy = h.cumulative_profit_yoy_pct;
   const period = state.data.report_period || '';
-  let yoyClass = '';
-  let yoyDisp;
-  if (yoy != null) {
-    yoyClass = yoy >= 0 ? 'positive' : 'negative';
-    yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
-  } else if (c.code === '2887' && period < '115/07') {
+  const unit = state.displayUnit;
+  const yi = formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs, h.cumulative_profit_yoy_status, c.unit, unit);
+  let yoyClass = yi.cls;
+  let yoyDisp = yi.disp;
+  if (yi.disp === '—' && c.code === '2887' && period < '115/07') {
     yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
-  } else {
-    yoyDisp = '—';
   }
 
   // EPS：當月 EPS 公告通常沒列，可用 月損益/累計損益 × 累計EPS 推算
@@ -477,15 +504,10 @@ function renderHoldingCard(c) {
   const monthly = convertUnit(h.monthly_profit, c.unit, unit);
   const cumul   = convertUnit(h.cumulative_profit, c.unit, unit);
 
-  const yoy = h.cumulative_profit_yoy_pct;
-  let yoyClass = '', yoyDisp;
-  if (yoy != null) {
-    yoyClass = yoy >= 0 ? 'positive' : 'negative';
-    yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
-  } else if (c.code === '2887' && period < '115/07') {
+  const yi = formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs, h.cumulative_profit_yoy_status, c.unit, unit);
+  let yoyClass = yi.cls, yoyDisp = yi.disp;
+  if (yi.disp === '—' && c.code === '2887' && period < '115/07') {
     yoyDisp = '合併前';
-  } else {
-    yoyDisp = '—';
   }
 
   const epsC = h.cumulative_eps;
@@ -541,15 +563,10 @@ function renderIndustryCards(industry) {
     const mClass = (m ?? 0) >= 0 ? 'positive' : 'negative';
     const cClass = (cu ?? 0) >= 0 ? 'positive' : 'negative';
 
-    const yoy = r.cumulative_profit_yoy_pct;
-    let yoyClass = '', yoyDisp;
-    if (yoy != null) {
-      yoyClass = yoy >= 0 ? 'positive' : 'negative';
-      yoyDisp = `${yoy >= 0 ? '+' : ''}${yoy.toFixed(1)}%`;
-    } else if (r.parent_code === '2887' && period < '115/07') {
+    const yi = formatYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs, r.cumulative_profit_yoy_status, r.unit, unit);
+    let yoyClass = yi.cls, yoyDisp = yi.disp;
+    if (yi.disp === '—' && r.parent_code === '2887' && period < '115/07') {
       yoyDisp = '合併前';
-    } else {
-      yoyDisp = '—';
     }
 
     // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示（淡藍色弱化，不干擾主排序）
@@ -557,9 +574,7 @@ function renderIndustryCards(industry) {
     const a = r.fvoci_adjusted;
     if (industry === 'life' && a && a.cumulative_profit != null) {
       const aCumul = convertUnit(a.cumulative_profit, r.unit, unit);
-      const aYoyDisp = a.yoy_pct != null
-        ? `${a.yoy_pct >= 0 ? '+' : ''}${a.yoy_pct.toFixed(1)}%`
-        : '—';
+      const aYoyDisp = formatYoY(a.yoy_pct, a.yoy_abs, a.yoy_status, r.unit, unit).disp;
       adjBlock = `
       <div class="m-fvoci" style="margin-top:6px;padding-top:6px;border-top:1px dashed #d6d9e2;font-size:12px;color:#5568b8;font-style:italic">
         <div style="margin-bottom:4px;font-style:normal">（加上FVOCI股票處份利益）<sup>*</sup></div>
@@ -936,11 +951,12 @@ function sortCompanies(arr) {
         return bv - av;
       });
     case 'cumul_yoy_desc':
-      return arr.sort((a, b) => {
-        const av = a.holding_company?.cumulative_profit_yoy_pct ?? -Infinity;
-        const bv = b.holding_company?.cumulative_profit_yoy_pct ?? -Infinity;
-        return bv - av;
-      });
+      return arr.sort((a, b) => compareYoYDesc(
+        a.holding_company?.cumulative_profit_yoy_pct,
+        a.holding_company?.cumulative_profit_yoy_status,
+        b.holding_company?.cumulative_profit_yoy_pct,
+        b.holding_company?.cumulative_profit_yoy_status,
+      ));
     case 'code':
     default:
       return arr.sort((a, b) => a.code.localeCompare(b.code));
@@ -993,6 +1009,8 @@ function getOtherSubsidiaryRows() {
         monthly_profit: s.monthly_profit,
         cumulative_profit: s.cumulative_profit,
         cumulative_profit_yoy_pct: s.cumulative_profit_yoy_pct,
+        cumulative_profit_yoy_abs: s.cumulative_profit_yoy_abs,
+        cumulative_profit_yoy_status: s.cumulative_profit_yoy_status,
       });
     }
   }

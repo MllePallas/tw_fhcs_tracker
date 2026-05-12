@@ -171,6 +171,12 @@ MOPS 在 2025 年改版為 SPA，舊的直接 POST `ajax_t05st02` 已失效。
 
 - 公式：`(curr - prev) / abs(prev) × 100`（prev 為負時不會反轉）
 - 寫入 `holding_company.cumulative_profit_yoy_pct`（一位小數）
+- **跨零點（虧轉盈 / 盈轉虧）特殊處理**：
+  - `cumulative_profit_yoy_abs`：絕對差額 `curr - prev`（NT$m，整數），同號時也會寫入
+  - `cumulative_profit_yoy_status`：`"loss_to_profit"`（prev<0, curr>0）/ `"profit_to_loss"`（prev>0, curr<0）；同號時欄位省略
+  - 前端：status 存在時改顯示「虧轉盈 +X 億」/「盈轉虧 -X 億」，不顯示百分比（因為跨零點時 % 在數學上可算但語意誤導，例如元大人壽 114/04 -4.6 億 → 115/04 +19.14 億，pct 為 +516% 看似 6 倍成長，實為由虧轉盈）
+  - 排序：跨零點案例獨立分層（虧轉盈最高、盈轉虧最低），同層內依 pct 排序
+- 子公司、`fvoci_adjusted` 的 YoY 欄位亦套用同樣三件組（`yoy_pct` / `yoy_abs` / `yoy_status`）
 - **M&A cutoff（`YOY_CUTOFFS`）**：2887 台新新光金合併於 2025-07-24，114/07 起就是合併後資料；因此 cutoff 設為 `115/07`，**`target_period < 115/07` 時跳過**（115/01-06 顯示 `—`），115/07 以後可正常算 YoY
 - **子公司白名單（`YOY_SUB_ALLOWED_PRE_CUTOFF`）**：cutoff 適用時通常整家子公司一起跳過，但若某子公司尚未實質整併、且 baseline 對得齊，可加入白名單照常算 YoY。目前 `2887` 旗下 `台新銀行` 為唯一例外（台新銀行尚未與新光銀行合併，114 年 baseline 以「台新銀行」獨立存在）→ 115/01-06 期間 2887 holding 顯示 `—`，但台新銀行子公司列會顯示 YoY
 - baseline 不存在或公司缺資料時，欄位省略不寫，前端顯示 `—`

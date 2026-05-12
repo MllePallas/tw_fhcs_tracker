@@ -143,12 +143,53 @@ def save_data(data: dict, report_period: str):
     update_index(data, report_period)
 
 
+def _yoy_metrics(curr, prev):
+    """
+    計算 YoY 指標。回傳 (pct, abs_diff, status) 或 None（無法計算時）。
+
+    - pct: (curr - prev) / abs(prev) × 100，一位小數
+    - abs_diff: curr - prev（NT$m，整數）
+    - status:
+        "loss_to_profit"  → prev<0, curr>0（虧轉盈）
+        "profit_to_loss"  → prev>0, curr<0（盈轉虧）
+        None              → 同號（兩期皆盈 or 兩期皆虧）
+
+    跨零點時 pct 在數學上仍可計算，但語意誤導；前端應依 status 決定顯示方式。
+    """
+    if curr is None or prev is None or prev == 0:
+        return None
+    pct = round((curr - prev) / abs(prev) * 100, 1)
+    abs_diff = round(curr - prev)
+    if curr > 0 and prev < 0:
+        status = "loss_to_profit"
+    elif curr < 0 and prev > 0:
+        status = "profit_to_loss"
+    else:
+        status = None
+    return pct, abs_diff, status
+
+
+def _write_yoy_fields(target: dict, pct_key: str, metrics, abs_key=None, status_key=None):
+    """把 _yoy_metrics 的結果寫入 target dict。abs/status 欄位 key 不指定時自動推導。"""
+    pct, abs_diff, status = metrics
+    abs_key = abs_key or pct_key.replace("_pct", "_abs")
+    status_key = status_key or pct_key.replace("_pct", "_status")
+    target[pct_key] = pct
+    target[abs_key] = abs_diff
+    if status:
+        target[status_key] = status
+    else:
+        # 確保舊資料殘留的 status 在轉為同號時被清掉
+        target.pop(status_key, None)
+
+
 def compute_yoy(data: dict, target_period: str):
     """
-    讀去年同期歸檔，計算 holding_company.cumulative_profit 的 YoY 變化（%），
-    寫入 cumulative_profit_yoy_pct 欄位（M&A 期間 / 缺資料則略過）。
+    讀去年同期歸檔，計算 holding_company.cumulative_profit 的 YoY 變化，
+    寫入 cumulative_profit_yoy_pct / _abs / _status 欄位（M&A 期間 / 缺資料則略過）。
 
     公式：(curr - prev) / abs(prev) × 100
+    跨零點（虧轉盈 / 盈轉虧）會在 _status 標記，前端據此切換顯示。
     """
     # 合併日期 → 第一個可算 YoY 的目標月份。target_period < cutoff 時略過此公司。
     # 例：2887 合併於 2025/07，114/07 起為合併後資料 → 115/07 起才能對齊 YoY。
@@ -205,9 +246,9 @@ def compute_yoy(data: dict, target_period: str):
         else:
             curr_cumul = company.get("holding_company", {}).get("cumulative_profit")
             prev_cumul = prev.get("holding_company", {}).get("cumulative_profit")
-            if curr_cumul is not None and prev_cumul is not None and prev_cumul != 0:
-                yoy = (curr_cumul - prev_cumul) / abs(prev_cumul) * 100
-                company["holding_company"]["cumulative_profit_yoy_pct"] = round(yoy, 1)
+            m = _yoy_metrics(curr_cumul, prev_cumul)
+            if m:
+                _write_yoy_fields(company["holding_company"], "cumulative_profit_yoy_pct", m)
                 populated += 1
 
         # 子公司 YoY（用 name 對齊；cutoff 適用時僅算白名單子公司）
@@ -223,16 +264,18 @@ def compute_yoy(data: dict, target_period: str):
                 continue
             ps = prev_sub.get("cumulative_profit")
             cs = sub.get("cumulative_profit")
-            if cs is not None and ps is not None and ps != 0:
-                sub["cumulative_profit_yoy_pct"] = round((cs - ps) / abs(ps) * 100, 1)
+            m_sub = _yoy_metrics(cs, ps)
+            if m_sub:
+                _write_yoy_fields(sub, "cumulative_profit_yoy_pct", m_sub)
                 sub_populated += 1
 
             # FVOCI 調整後獲利 YoY：今年「加計 FVOCI」 vs 去年原始 P&L（去年含 FVOCI 計入 P&L）
             adj = sub.get("fvoci_adjusted")
-            if adj and ps is not None and ps != 0:
+            if adj:
                 ca = adj.get("cumulative_profit")
-                if ca is not None:
-                    adj["yoy_pct"] = round((ca - ps) / abs(ps) * 100, 1)
+                m_adj = _yoy_metrics(ca, ps)
+                if m_adj:
+                    _write_yoy_fields(adj, "yoy_pct", m_adj, abs_key="yoy_abs", status_key="yoy_status")
 
     msg = f"YoY populated: {populated} parents, {sub_populated} subsidiaries (baseline: {prev_period})"
     if skipped_merger:

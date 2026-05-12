@@ -64,7 +64,8 @@
         "cumulative_profit": 14241,
         "monthly_eps": null,
         "cumulative_eps": 0.88,
-        "cumulative_profit_yoy_pct": 26.0
+        "cumulative_profit_yoy_pct": 26.0,
+        "cumulative_profit_yoy_abs": 2939
       },
       "subsidiaries": [
         {
@@ -73,7 +74,8 @@
           "cumulative_profit": 12156,
           "monthly_eps": null,
           "cumulative_eps": 0.83,
-          "cumulative_profit_yoy_pct": 6.4
+          "cumulative_profit_yoy_pct": 6.4,
+          "cumulative_profit_yoy_abs": 733
         },
         {
           "name": "玉山證券",
@@ -81,7 +83,8 @@
           "cumulative_profit": 1634,
           "monthly_eps": null,
           "cumulative_eps": 2.96,
-          "cumulative_profit_yoy_pct": 192.8
+          "cumulative_profit_yoy_pct": 192.8,
+          "cumulative_profit_yoy_abs": 1076
         },
         {
           "name": "玉山創投",
@@ -89,7 +92,9 @@
           "cumulative_profit": 1342,
           "monthly_eps": null,
           "cumulative_eps": 2.44,
-          "cumulative_profit_yoy_pct": 862.5
+          "cumulative_profit_yoy_pct": 862.5,
+          "cumulative_profit_yoy_abs": 1518,
+          "cumulative_profit_yoy_status": "loss_to_profit"
         },
         {
           "name": "玉山投信",
@@ -123,7 +128,8 @@
         "cumulative_profit": 21913,
         "monthly_eps": null,
         "cumulative_eps": 1.64,
-        "cumulative_profit_yoy_pct": 145.1
+        "cumulative_profit_yoy_pct": 145.1,
+        "cumulative_profit_yoy_abs": 12973
       },
       "subsidiaries": [
         {
@@ -132,7 +138,8 @@
           "cumulative_profit": 13980,
           "monthly_eps": null,
           "cumulative_eps": 2.12,
-          "cumulative_profit_yoy_pct": 159.2
+          "cumulative_profit_yoy_pct": 159.2,
+          "cumulative_profit_yoy_abs": 8587
         },
         {
           "name": "元大銀行",
@@ -140,7 +147,8 @@
           "cumulative_profit": 4900,
           "monthly_eps": null,
           "cumulative_eps": 0.56,
-          "cumulative_profit_yoy_pct": 50.6
+          "cumulative_profit_yoy_pct": 50.6,
+          "cumulative_profit_yoy_abs": 1646
         },
         {
           "name": "元大期貨",
@@ -148,7 +156,8 @@
           "cumulative_profit": 907,
           "monthly_eps": null,
           "cumulative_eps": 2.84,
-          "cumulative_profit_yoy_pct": 10.3
+          "cumulative_profit_yoy_pct": 10.3,
+          "cumulative_profit_yoy_abs": 85
         },
         {
           "name": "元大人壽",
@@ -156,7 +165,9 @@
           "cumulative_profit": 1914,
           "monthly_eps": null,
           "cumulative_eps": 0.66,
-          "cumulative_profit_yoy_pct": 516.1
+          "cumulative_profit_yoy_pct": 516.1,
+          "cumulative_profit_yoy_abs": 2374,
+          "cumulative_profit_yoy_status": "loss_to_profit"
         },
         {
           "name": "元大投信",
@@ -164,7 +175,8 @@
           "cumulative_profit": 1785,
           "monthly_eps": null,
           "cumulative_eps": 7.87,
-          "cumulative_profit_yoy_pct": 35.6
+          "cumulative_profit_yoy_pct": 35.6,
+          "cumulative_profit_yoy_abs": 469
         }
       ],
       "unit": "百萬元",
@@ -218,7 +230,8 @@
         "cumulative_profit": 1409,
         "monthly_eps": null,
         "cumulative_eps": 0.39,
-        "cumulative_profit_yoy_pct": 608.0
+        "cumulative_profit_yoy_pct": 608.0,
+        "cumulative_profit_yoy_abs": 1210
       },
       "subsidiaries": [
         {
@@ -227,7 +240,8 @@
           "cumulative_profit": 959,
           "monthly_eps": null,
           "cumulative_eps": 0.52,
-          "cumulative_profit_yoy_pct": 90.3
+          "cumulative_profit_yoy_pct": 90.3,
+          "cumulative_profit_yoy_abs": 455
         },
         {
           "name": "國票證券",
@@ -235,7 +249,9 @@
           "cumulative_profit": 1158,
           "monthly_eps": null,
           "cumulative_eps": 1.01,
-          "cumulative_profit_yoy_pct": 1143.2
+          "cumulative_profit_yoy_pct": 1143.2,
+          "cumulative_profit_yoy_abs": 1269,
+          "cumulative_profit_yoy_status": "loss_to_profit"
         }
       ],
       "unit": "百萬元",
@@ -262,7 +278,8 @@
         "cumulative_profit": 15833,
         "monthly_eps": 0.34,
         "cumulative_eps": 1.09,
-        "cumulative_profit_yoy_pct": 75.4
+        "cumulative_profit_yoy_pct": 75.4,
+        "cumulative_profit_yoy_abs": 6806
       },
       "subsidiaries": [
         {
@@ -271,7 +288,8 @@
           "cumulative_profit": 9338,
           "monthly_eps": 0.18,
           "cumulative_eps": 0.84,
-          "cumulative_profit_yoy_pct": 16.1
+          "cumulative_profit_yoy_pct": 16.1,
+          "cumulative_profit_yoy_abs": 1293
         },
         {
           "name": "京城銀行",
@@ -286,7 +304,8 @@
           "cumulative_profit": 4296,
           "monthly_eps": 1.14,
           "cumulative_eps": 2.54,
-          "cumulative_profit_yoy_pct": 255.6
+          "cumulative_profit_yoy_pct": 255.6,
+          "cumulative_profit_yoy_abs": 3088
         }
       ],
       "unit": "百萬元",
