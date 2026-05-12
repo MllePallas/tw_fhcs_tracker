@@ -27,7 +27,7 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "docs" / "data"
 
-ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com"]
+ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
 MODEL = "claude-sonnet-4-6"
 
 
@@ -85,7 +85,7 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 
     return f"""你是台灣金融分析師。請查詢「{name}（{code}）」**民國 {roc_year} 年 {m} 月（西元 {western_year} 年 {m} 月）月自結損益**新聞報導，並產生繁體中文摘要。
 
-搜尋限制：工商時報、經濟日報、鉅亨網（透過 allowed_domains 限制，你不需要在 query 加 site:）。
+搜尋限制：工商時報、經濟日報、鉅亨網、自由財經（透過 allowed_domains 限制，你不需要在 query 加 site:）。
 
 【搜尋策略】請至少嘗試以下查詢字串：
 1. `{name} {m}月 自結 稅後`

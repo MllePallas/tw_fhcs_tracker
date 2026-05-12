@@ -222,7 +222,7 @@ python news_summary.py --force      # 強制重新產生所有摘要
 python news_summary.py --month 115/02  # 指定月份
 ```
 
-**來源限定**：工商時報（ctee.com.tw）、經濟日報（money.udn.com）、鉅亨網（news.cnyes.com）
+**來源限定**：工商時報（ctee.com.tw）、經濟日報（money.udn.com）、鉅亨網（news.cnyes.com）、自由財經（ec.ltn.com.tw）
 
 **模型**：`claude-sonnet-4-6`（含 web_search 工具）
 
@@ -244,7 +244,7 @@ python fvoci_adjustment.py --period 115/03
 python fvoci_adjustment.py --codes 2881 2883
 ```
 
-**模型**：`claude-sonnet-4-6` + web_search（限定工商時報 / 經濟日報 / 鉅亨網）
+**模型**：`claude-sonnet-4-6` + web_search（限定工商時報 / 經濟日報 / 鉅亨網 / 自由財經）
 
 **作用對象**：`LIFE_INSURANCE_CODES = {2881, 2882, 2883, 2887, 2891}` 旗下的壽險子公司（名稱含「人壽」者）。其他金控不處理。
 

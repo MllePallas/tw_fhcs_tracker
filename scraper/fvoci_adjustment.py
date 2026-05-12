@@ -45,7 +45,7 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "docs" / "data"
 
-ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com"]
+ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
 MODEL = "claude-sonnet-4-6"
 
 # 有壽險子公司的金控代號（IFRS 17 適用）
@@ -74,7 +74,7 @@ def _build_prompt(name, code, period, life_sub_name, life_cumul):
 
     return f"""你是台灣金融分析師。請查詢「**{life_sub_name}**」（{name} {code} 旗下壽險子公司）**民國 {roc_year} 年 {m} 月（西元 {western_year} 年 {m} 月）月自結損益**新聞，找出**{life_sub_name} 本身**揭露的「**加計 FVOCI 股票處份利益後的累計調整後獲利**」。
 
-搜尋限制：工商時報、經濟日報、鉅亨網（已透過 allowed_domains 限制，不必加 site:）。
+搜尋限制：工商時報、經濟日報、鉅亨網、自由財經（已透過 allowed_domains 限制，不必加 site:）。
 
 【背景】
 2026 年起壽險公司接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L。為了與去年同期可比，富邦、凱基等金控會在月損益新聞稿**直接揭露壽險子公司本身**的「加計 FVOCI 處份利益後的累計調整後獲利」。
