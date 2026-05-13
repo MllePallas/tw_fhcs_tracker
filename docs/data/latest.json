@@ -1,6 +1,6 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-13T11:13:06.990281",
+  "last_updated": "2026-05-13T12:16:32.982585",
   "success_count": 5,
   "fail_count": 8,
   "companies": [
@@ -63,7 +63,7 @@
           "cumulative_eps": 1.17,
           "cumulative_profit_yoy_pct": -7.9,
           "cumulative_profit_yoy_abs": -522,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "凱基銀行",
@@ -99,8 +99,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-13T11:13:17.822756",
-      "news_retry_count": 1
+      "news_generated_at": "2026-05-13T12:16:45.269147",
+      "news_retry_count": 2
     },
     {
       "code": "2884",
