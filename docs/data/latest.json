@@ -1,19 +1,60 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-14T12:04:28.730447",
-  "success_count": 10,
-  "fail_count": 3,
+  "last_updated": "2026-05-14T12:22:26.550493",
+  "success_count": 13,
+  "fail_count": 0,
   "companies": [
     {
       "code": "2880",
       "name": "華南金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "澄清115年5月6日媒體報導",
-        "澄清115年5月6日媒體報導(補充說明)",
-        "代子公司華南商業銀行公告授信資產之轉讓"
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "公告本公司115年4月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "華南金控",
+        "monthly_profit": 3454,
+        "cumulative_profit": 11114,
+        "monthly_eps": null,
+        "cumulative_eps": 0.8,
+        "cumulative_profit_yoy_pct": 59.7,
+        "cumulative_profit_yoy_abs": 4156
+      },
+      "subsidiaries": [
+        {
+          "name": "華南銀行",
+          "monthly_profit": 2306,
+          "cumulative_profit": 8447,
+          "monthly_eps": null,
+          "cumulative_eps": 0.79,
+          "cumulative_profit_yoy_pct": 23.3,
+          "cumulative_profit_yoy_abs": 1599
+        },
+        {
+          "name": "華南永昌證券",
+          "monthly_profit": 803,
+          "cumulative_profit": 1932,
+          "monthly_eps": null,
+          "cumulative_eps": 2.95,
+          "cumulative_profit_yoy_pct": 732.8,
+          "cumulative_profit_yoy_abs": 1700
+        },
+        {
+          "name": "華南產險",
+          "monthly_profit": 190,
+          "cumulative_profit": 696,
+          "monthly_eps": null,
+          "cumulative_eps": 3.48,
+          "cumulative_profit_yoy_pct": 60.4,
+          "cumulative_profit_yoy_abs": 262
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-05-14T12:22:38.323637",
+      "news_retry_count": 1
     },
     {
       "code": "2881",
@@ -66,7 +107,7 @@
           "cumulative_eps": 3.89,
           "cumulative_profit_yoy_pct": 84.6,
           "cumulative_profit_yoy_abs": 21110,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "富邦投信",
@@ -81,8 +122,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T12:04:43.029199",
-      "news_retry_count": 2
+      "news_generated_at": "2026-05-14T12:23:21.395723",
+      "news_retry_count": 3
     },
     {
       "code": "2882",
@@ -108,7 +149,7 @@
           "cumulative_eps": 4.08,
           "cumulative_profit_yoy_pct": 65.5,
           "cumulative_profit_yoy_abs": 10270,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "國泰世華銀行",
@@ -152,8 +193,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T12:05:27.217041",
-      "news_retry_count": 1
+      "news_generated_at": "2026-05-14T12:24:07.919640",
+      "news_retry_count": 2
     },
     {
       "code": "2883",
@@ -381,15 +422,63 @@
     {
       "code": "2886",
       "name": "兆豐金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "本公司對大眾傳播媒體報導有關併購傳聞之說明",
-        "代本公司之子公司兆豐產物保險股份有限公司公告董事會\r\n代行115年股東常會重要決議事項",
-        "代本公司之子公司兆豐國際商業銀行公告\r\n董事會代行股東會職權重要決議事項。",
-        "代本公司之子公司兆豐國際商業銀行股份有限公司公告擬出售不\r\n良債權",
-        "代本公司之子公司兆豐國際商業銀行(股)公司公告擬出售不\r\n良債權"
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "公告本公司暨主要子公司115年4月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "兆豐金控",
+        "monthly_profit": 4857,
+        "cumulative_profit": 14254,
+        "monthly_eps": null,
+        "cumulative_eps": 0.96,
+        "cumulative_profit_yoy_pct": 40.0,
+        "cumulative_profit_yoy_abs": 4072
+      },
+      "subsidiaries": [
+        {
+          "name": "兆豐銀行",
+          "monthly_profit": 3376,
+          "cumulative_profit": 10456,
+          "monthly_eps": null,
+          "cumulative_eps": 1.05,
+          "cumulative_profit_yoy_pct": 11.7,
+          "cumulative_profit_yoy_abs": 1094
+        },
+        {
+          "name": "兆豐證券",
+          "monthly_profit": 1079,
+          "cumulative_profit": 2425,
+          "monthly_eps": null,
+          "cumulative_eps": 2.05,
+          "cumulative_profit_yoy_pct": 2564.8,
+          "cumulative_profit_yoy_abs": 2334
+        },
+        {
+          "name": "兆豐票券",
+          "monthly_profit": 291,
+          "cumulative_profit": 1118,
+          "monthly_eps": null,
+          "cumulative_eps": 0.74,
+          "cumulative_profit_yoy_pct": 44.4,
+          "cumulative_profit_yoy_abs": 344
+        },
+        {
+          "name": "兆豐產險",
+          "monthly_profit": 109,
+          "cumulative_profit": 341,
+          "monthly_eps": null,
+          "cumulative_eps": 1.04,
+          "cumulative_profit_yoy_pct": 69.7,
+          "cumulative_profit_yoy_abs": 140
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-05-14T12:24:51.758646",
+      "news_retry_count": 1
     },
     {
       "code": "2887",
@@ -427,7 +516,7 @@
           "cumulative_profit": 15180,
           "monthly_eps": null,
           "cumulative_eps": 1.65,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         },
         {
           "name": "台新證券",
@@ -591,7 +680,7 @@
           "cumulative_eps": 1.35,
           "cumulative_profit_yoy_pct": 96.4,
           "cumulative_profit_yoy_abs": 4122,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         }
       ],
       "unit": "百萬元",
@@ -665,11 +754,82 @@
     {
       "code": "5880",
       "name": "合庫金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "澄清媒體報導「投信公公併拚下半年達陣」"
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "公告本公司暨主要子公司115年4月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "合庫金控",
+        "monthly_profit": 2565,
+        "cumulative_profit": 8016,
+        "monthly_eps": null,
+        "cumulative_eps": 0.51,
+        "cumulative_profit_yoy_pct": 27.4,
+        "cumulative_profit_yoy_abs": 1726
+      },
+      "subsidiaries": [
+        {
+          "name": "合庫銀行",
+          "monthly_profit": 1933,
+          "cumulative_profit": 7018,
+          "monthly_eps": null,
+          "cumulative_eps": 0.54,
+          "cumulative_profit_yoy_pct": 9.5,
+          "cumulative_profit_yoy_abs": 606
+        },
+        {
+          "name": "合庫資產",
+          "monthly_profit": 34,
+          "cumulative_profit": 124,
+          "monthly_eps": null,
+          "cumulative_eps": 0.39,
+          "cumulative_profit_yoy_pct": 1.6,
+          "cumulative_profit_yoy_abs": 2
+        },
+        {
+          "name": "合庫票券",
+          "monthly_profit": 51,
+          "cumulative_profit": 170,
+          "monthly_eps": null,
+          "cumulative_eps": 0.35,
+          "cumulative_profit_yoy_pct": 53.2,
+          "cumulative_profit_yoy_abs": 59
+        },
+        {
+          "name": "合庫證券",
+          "monthly_profit": 435,
+          "cumulative_profit": 835,
+          "monthly_eps": null,
+          "cumulative_eps": 1.6,
+          "cumulative_profit_yoy_pct": 866.1,
+          "cumulative_profit_yoy_abs": 944,
+          "cumulative_profit_yoy_status": "loss_to_profit"
+        },
+        {
+          "name": "合庫人壽",
+          "monthly_profit": 282,
+          "cumulative_profit": 729,
+          "monthly_eps": null,
+          "cumulative_eps": 1.06,
+          "cumulative_profit_yoy_pct": 3950.0,
+          "cumulative_profit_yoy_abs": 711
+        },
+        {
+          "name": "合庫投信",
+          "monthly_profit": 0.1,
+          "cumulative_profit": 0.3,
+          "monthly_eps": null,
+          "cumulative_eps": 0.01,
+          "cumulative_profit_yoy_pct": -94.0,
+          "cumulative_profit_yoy_abs": -5
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-05-14T12:25:37.830298",
+      "news_retry_count": 1
     }
   ],
   "market_summary": {
