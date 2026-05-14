@@ -1,8 +1,8 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-14T11:55:29.388649",
-  "success_count": 9,
-  "fail_count": 4,
+  "last_updated": "2026-05-14T12:04:28.730447",
+  "success_count": 10,
+  "fail_count": 3,
   "companies": [
     {
       "code": "2880",
@@ -65,7 +65,8 @@
           "monthly_eps": null,
           "cumulative_eps": 3.89,
           "cumulative_profit_yoy_pct": 84.6,
-          "cumulative_profit_yoy_abs": 21110
+          "cumulative_profit_yoy_abs": 21110,
+          "fvoci_not_found_count": 1
         },
         {
           "name": "富邦投信",
@@ -80,19 +81,79 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T11:55:46.133362",
-      "news_retry_count": 1
+      "news_generated_at": "2026-05-14T12:04:43.029199",
+      "news_retry_count": 2
     },
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "公告本公司受邀參加摩根大通證券舉辦之投資人會議",
-        "本公司代子公司國泰人壽公告取得\r\nLexington Private Equity Cavalry, L.P.",
-        "本公司代子公司國泰人壽公告取得\r\nICONIQ Strategic Partners VIII-B, L.P."
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "公告本公司暨主要子公司115年04月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=4&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 14270,
+        "cumulative_profit": 45930,
+        "monthly_eps": null,
+        "cumulative_eps": 3.12,
+        "cumulative_profit_yoy_pct": 37.5,
+        "cumulative_profit_yoy_abs": 12520
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 8570,
+          "cumulative_profit": 25940,
+          "monthly_eps": null,
+          "cumulative_eps": 4.08,
+          "cumulative_profit_yoy_pct": 65.5,
+          "cumulative_profit_yoy_abs": 10270,
+          "fvoci_not_found_count": 1
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4330,
+          "cumulative_profit": 17530,
+          "monthly_eps": null,
+          "cumulative_eps": 1.36,
+          "cumulative_profit_yoy_pct": 10.3,
+          "cumulative_profit_yoy_abs": 1640
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 380,
+          "cumulative_profit": 1430,
+          "monthly_eps": null,
+          "cumulative_eps": 7.17,
+          "cumulative_profit_yoy_pct": 15.3,
+          "cumulative_profit_yoy_abs": 190
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 1050,
+          "cumulative_profit": 2590,
+          "monthly_eps": null,
+          "cumulative_eps": 3.36,
+          "cumulative_profit_yoy_pct": 159.0,
+          "cumulative_profit_yoy_abs": 1590
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 360,
+          "cumulative_profit": 1220,
+          "monthly_eps": null,
+          "cumulative_eps": 8.14,
+          "cumulative_profit_yoy_pct": 25.8,
+          "cumulative_profit_yoy_abs": 250
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-05-14T12:05:27.217041",
+      "news_retry_count": 1
     },
     {
       "code": "2883",
@@ -366,7 +427,7 @@
           "cumulative_profit": 15180,
           "monthly_eps": null,
           "cumulative_eps": 1.65,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "台新證券",
@@ -530,7 +591,7 @@
           "cumulative_eps": 1.35,
           "cumulative_profit_yoy_pct": 96.4,
           "cumulative_profit_yoy_abs": 4122,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         }
       ],
       "unit": "百萬元",
