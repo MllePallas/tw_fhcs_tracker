@@ -1,8 +1,8 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-14T16:12:05.803711",
-  "success_count": 6,
-  "fail_count": 7,
+  "last_updated": "2026-05-14T16:59:01.444543",
+  "success_count": 8,
+  "fail_count": 5,
   "companies": [
     {
       "code": "2880",
@@ -278,12 +278,66 @@
     {
       "code": "2887",
       "name": "台新新光金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "本公司代子公司台新銀行公告授信資產轉讓",
-        "本公司代子公司台新證券公告向台新國際商業銀行取得使用權資產"
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "公告本公司暨主要子公司115年4月份合併自結業績資料",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=5&TYPEK=all",
+      "holding_company": {
+        "name": "台新新光金控",
+        "monthly_profit": 7790,
+        "cumulative_profit": 28830,
+        "monthly_eps": null,
+        "cumulative_eps": 1.12
+      },
+      "subsidiaries": [
+        {
+          "name": "台新銀行",
+          "monthly_profit": 1740,
+          "cumulative_profit": 8080,
+          "monthly_eps": null,
+          "cumulative_eps": 0.66,
+          "cumulative_profit_yoy_pct": 19.0,
+          "cumulative_profit_yoy_abs": 1290
+        },
+        {
+          "name": "新光銀行",
+          "monthly_profit": 810,
+          "cumulative_profit": 3050,
+          "monthly_eps": null,
+          "cumulative_eps": 0.61
+        },
+        {
+          "name": "新光人壽",
+          "monthly_profit": 3260,
+          "cumulative_profit": 15180,
+          "monthly_eps": null,
+          "cumulative_eps": 1.65
+        },
+        {
+          "name": "台新證券",
+          "monthly_profit": 2020,
+          "cumulative_profit": 3580,
+          "monthly_eps": null,
+          "cumulative_eps": 1.43
+        },
+        {
+          "name": "元富證券",
+          "monthly_profit": 60,
+          "cumulative_profit": 1570,
+          "monthly_eps": null,
+          "cumulative_eps": 0.98
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n台新新光金（2887）公告 115/04 自結，單月稅後純益 77.9 億元（YoY +513%），累計前四月稅後純益 288.5 億元（YoY +381%），EPS 1.12 元，續創歷史新高。\n\n**子公司表現**\n\n- 台新銀行：4 月 17.4 億，累計 80.8 億（YoY +19%）\n- 新光銀行：4 月 8.1 億，累計 30.5 億，創同期歷史新高\n- 新光人壽：4 月 32.6 億，累計 151.8 億\n- 台新證券＋元富證券：4 月合計 20.8 億，累計 51.5 億，創歷年同期新高\n\n**亮點**：合併綜效持續發酵，4 月為合併以來單月獲利新高。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9503056",
+          "title": "台新新光金獲利／前四月大賺288億元、續創歷史新高 每股賺1.12元"
+        }
+      ],
+      "news_generated_at": "2026-05-14T17:24:36.953358"
     },
     {
       "code": "2889",
@@ -441,11 +495,54 @@
     {
       "code": "2892",
       "name": "第一金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "澄清媒體報導「投信公公併拚下半年達陣」"
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "公告本公司暨主要子公司115年4月份自結合併盈餘數",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=3&TYPEK=all",
+      "holding_company": {
+        "name": "第一金控",
+        "monthly_profit": 3158,
+        "cumulative_profit": 11401,
+        "monthly_eps": null,
+        "cumulative_eps": 0.79,
+        "cumulative_profit_yoy_pct": 23.3,
+        "cumulative_profit_yoy_abs": 2156
+      },
+      "subsidiaries": [
+        {
+          "name": "第一銀行",
+          "monthly_profit": 2593,
+          "cumulative_profit": 10166,
+          "monthly_eps": null,
+          "cumulative_eps": 0.83,
+          "cumulative_profit_yoy_pct": 13.2,
+          "cumulative_profit_yoy_abs": 1186
+        },
+        {
+          "name": "第一金證券",
+          "monthly_profit": 306,
+          "cumulative_profit": 817,
+          "monthly_eps": null,
+          "cumulative_eps": 1.22,
+          "cumulative_profit_yoy_pct": 553.6,
+          "cumulative_profit_yoy_abs": 692
+        },
+        {
+          "name": "第一金人壽",
+          "monthly_profit": 98,
+          "cumulative_profit": 251,
+          "monthly_eps": null,
+          "cumulative_eps": 0.37,
+          "cumulative_profit_yoy_pct": -2.0,
+          "cumulative_profit_yoy_abs": -5
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-05-14T17:05:08.917137",
+      "news_retry_count": 2
     },
     {
       "code": "5880",
