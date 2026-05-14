@@ -1,6 +1,6 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-14T12:48:40.139367",
+  "last_updated": "2026-05-14T13:08:35.992403",
   "success_count": 13,
   "fail_count": 0,
   "companies": [
@@ -53,8 +53,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T12:48:53.616576",
-      "news_retry_count": 2
+      "news_generated_at": "2026-05-14T13:08:49.580174",
+      "news_retry_count": 3
     },
     {
       "code": "2881",
@@ -107,7 +107,7 @@
           "cumulative_eps": 3.89,
           "cumulative_profit_yoy_pct": 84.6,
           "cumulative_profit_yoy_abs": 21110,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "富邦投信",
@@ -122,8 +122,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T12:49:39.012548",
-      "news_retry_count": 1
+      "news_generated_at": "2026-05-14T13:09:35.620082",
+      "news_retry_count": 2
     },
     {
       "code": "2882",
@@ -477,8 +477,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T12:51:06.342722",
-      "news_retry_count": 2
+      "news_generated_at": "2026-05-14T13:10:17.786607",
+      "news_retry_count": 3
     },
     {
       "code": "2887",
@@ -828,8 +828,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T12:51:51.076573",
-      "news_retry_count": 2
+      "news_generated_at": "2026-05-14T13:11:02.111855",
+      "news_retry_count": 3
     }
   ],
   "market_summary": {
