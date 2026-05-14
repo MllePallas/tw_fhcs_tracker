@@ -77,6 +77,58 @@ def build_month_patterns(target_month: Optional[str]) -> list[str]:
     ]
 
 
+# 中文數字 → int（1~12，足以涵蓋月份）
+_CN_NUM = {
+    "一": 1, "二": 2, "三": 3, "四": 4, "五": 5, "六": 6,
+    "七": 7, "八": 8, "九": 9, "十": 10,
+    "十一": 11, "十二": 12,
+}
+
+
+def _cn_to_int(s: str) -> Optional[int]:
+    s = s.strip()
+    if s.isdigit():
+        return int(s)
+    return _CN_NUM.get(s)
+
+
+# 例： '115年度四月份'、'115年3月'、'115年度04月'
+_TITLE_MONTH_RE = re.compile(
+    r"(\d{2,3})\s*年(?:度)?\s*([0-9０-９一二三四五六七八九十]{1,3})\s*月(?:份)?"
+)
+
+
+def title_matches_month(title: str, target_month: Optional[str]) -> bool:
+    """檢查標題是否提及指定的民國年/月。
+
+    優先以 regex 擷取「N年(度)M月(份)」（涵蓋中文數字與 '年度…月份' 變體）；
+    擷取不到時，退回 build_month_patterns 的字串包含比對。
+    """
+    if not target_month:
+        return True
+    parts = target_month.split("/")
+    if len(parts) != 2:
+        return target_month in title
+    tgt_year = int(parts[0])
+    tgt_month = int(parts[1])
+
+    for m in _TITLE_MONTH_RE.finditer(title):
+        year_str, month_str = m.group(1), m.group(2)
+        # 全形數字轉半形
+        month_str = month_str.translate(str.maketrans("０１２３４５６７８９", "0123456789"))
+        month_int = _cn_to_int(month_str)
+        if month_int is None:
+            continue
+        try:
+            if int(year_str) == tgt_year and month_int == tgt_month:
+                return True
+        except ValueError:
+            continue
+
+    # Regex 沒抓到 → 退回字串比對
+    return any(p in title for p in build_month_patterns(target_month))
+
+
 def find_profit_announcement(
     announcements: list[dict],
     keywords: list[str],
@@ -90,12 +142,8 @@ def find_profit_announcement(
       '公告本公司暨主要子公司115年3月合併自結損益'
     因此 target_month 會被展開成多種可能格式比對。
     """
-    month_patterns = build_month_patterns(target_month)
-
     def month_match(title: str) -> bool:
-        if not month_patterns:
-            return True
-        return any(p in title for p in month_patterns)
+        return title_matches_month(title, target_month)
 
     # 第一輪：損益關鍵字 + 月份匹配
     for ann in announcements:

@@ -1,8 +1,8 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-14T06:59:35.824967",
-  "success_count": 5,
-  "fail_count": 8,
+  "last_updated": "2026-05-14T16:12:05.803711",
+  "success_count": 6,
+  "fail_count": 7,
   "companies": [
     {
       "code": "2880",
@@ -63,7 +63,16 @@
           "cumulative_eps": 1.17,
           "cumulative_profit_yoy_pct": -7.9,
           "cumulative_profit_yoy_abs": -522,
-          "fvoci_not_found_count": 3
+          "fvoci_adjusted": {
+            "cumulative_profit": 25658,
+            "delta_vs_original": 19573,
+            "source_url": "https://www.ctee.com.tw/news/20260513701752-430201",
+            "source_quote": "凱基人壽…累計稅後獲利60.85億元；加計FVOCI股票已實現資本利得稅後金額約53.44億元…前四月累計調整後獲利已達256.58億元",
+            "original_value_text": "256.58 億元",
+            "generated_at": "2026-05-14T16:14:21.894523",
+            "yoy_pct": 288.3,
+            "yoy_abs": 19051
+          }
         },
         {
           "name": "凱基銀行",
@@ -381,15 +390,53 @@
     {
       "code": "2891",
       "name": "中信金",
-      "error": "no_match",
-      "error_msg": "115/04 月自結損益尚未公告",
-      "available_titles": [
-        "子公司中信銀公告香港分行發行美元計價股權連結\r\n固定收益型結構型債券共3筆",
-        "子公司中信銀公告1筆香港分行美元計價股權連結\r\n固定收益型結構型債券因發生提前出場事件屆臨還清本金",
-        "代子公司台灣人壽保險股份有限公司公告董事會決議\r\n擬參與國內公共投資",
-        "代子公司台灣人壽保險股份有限公司公告董事會重要\r\n決議事項",
-        "子公司中信銀公告1筆香港分行美元計價股權連結\r\n固定收益型結構型債券因發生提前出場事件屆臨還清本金"
-      ]
+      "announcement_date": "115/05/14",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n115年度四月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 5395,
+        "cumulative_profit": 28499,
+        "monthly_eps": null,
+        "cumulative_eps": 1.46,
+        "cumulative_profit_yoy_pct": 26.3,
+        "cumulative_profit_yoy_abs": 5938
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 4319,
+          "cumulative_profit": 20904,
+          "monthly_eps": null,
+          "cumulative_eps": 1.22,
+          "cumulative_profit_yoy_pct": 16.8,
+          "cumulative_profit_yoy_abs": 3011
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 647,
+          "cumulative_profit": 8399,
+          "monthly_eps": null,
+          "cumulative_eps": 1.35,
+          "cumulative_profit_yoy_pct": 96.4,
+          "cumulative_profit_yoy_abs": 4122
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/04",
+      "parse_method": "llm",
+      "news_summary": "根據經濟日報（2026 年 5 月 14 日）最新報導，以下為中信金（2891）2026 年 4 月份自結損益摘要：\n\n---\n\n## 中信金（2891）115 年 4 月月自結損益摘要\n\n**重點**\n\n\n中信金於 5 月 14 日公告 2026 年 4 月份自結盈餘，單月稅後盈餘 53.95 億元，累計前四月合併稅後盈餘 284.99 億元，創下歷年同期新高，每股稅後盈餘（EPS）為 1.46 元。\n前四月累計獲利創同期歷史新高，顯示銀行核心業務與壽險投資雙引擎均維持正向動能。\n\n**子公司明細**\n\n- **台灣人壽（壽險子公司）：** \n台灣人壽 4 月份單月稅後獲利 6.47 億元，累計前四月稅後獲利 83.99 億元，主要來自債券及基金評價利益、過往累積 CSM 攤銷，以及投資型保單以 IFRS 15 重新衡量之影響。保險業務動能部分，在分紅及投資型保單銷售帶動下，累計新契約保費達 468 億元，較去年同期成長 161%。\n\n  - ✅ **IFRS 17 指標**：新聞明確提及 **CSM 攤銷**（過往累積 CSM 釋放為主要獲利來源之一）及 **FVOCI/評價利益**（債券及基金評價利益）。\n\n- **中國信託銀行（銀行子公司）：** 新聞未於本則報導單獨揭露 4 月銀行子公司明細數字，惟依公告數據，當月稅後獲利 43.19 億元，累計前四月 209.04 億元。\n\n> 📌 本摘要數字以新聞報導為準。台灣人壽 4 月單月獲利相對前月收斂，CSM 攤銷與評價利益為當月主要支撐，新契約保費年增逾 1.6 倍則為業務面亮點。",
+      "news_sources": [
+        {
+          "url": "https://news.cnyes.com/news/id/4640697",
+          "title": "中信金:中國信託金融控股股份有限公司公告本公司暨主要子公司110年度四月份自結盈餘 | Anue鉅亨 - 台股公告"
+        },
+        {
+          "url": "https://money.udn.com/money/story/5612/9502797?from=edn_related_storybottom",
+          "title": "中信金獲利／前四月284億元創同期新高 每股賺1.46元 | 金融脈動 | 金融 | 經濟日報"
+        }
+      ],
+      "news_generated_at": "2026-05-14T16:13:15.654399"
     },
     {
       "code": "2892",
