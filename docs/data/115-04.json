@@ -1,6 +1,6 @@
 {
   "report_period": "115/04",
-  "last_updated": "2026-05-14T13:08:35.992403",
+  "last_updated": "2026-05-14T13:19:55.079718",
   "success_count": 13,
   "fail_count": 0,
   "companies": [
@@ -107,7 +107,7 @@
           "cumulative_eps": 3.89,
           "cumulative_profit_yoy_pct": 84.6,
           "cumulative_profit_yoy_abs": 21110,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         },
         {
           "name": "富邦投信",
@@ -122,8 +122,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-05-14T13:09:35.620082",
-      "news_retry_count": 2
+      "news_generated_at": "2026-05-14T13:20:10.491266",
+      "news_retry_count": 3
     },
     {
       "code": "2882",
