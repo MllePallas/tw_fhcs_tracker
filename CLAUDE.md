@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-05-04
+> 最後更新：2026-05-15
 
 ## 專案目的
 
@@ -195,7 +195,7 @@ with open('docs/data/115-03.json', 'w', encoding='utf-8') as f: json.dump(d, f, 
 
 ## 本月市場概況（market_summary.py）
 
-每月 5 號 cron 跑（早於 MOPS 8 號排程），抓 5 項指標：
+每月 11 號 cron 跑（與 MOPS 月損益排程同日，早幾小時），抓 6 項指標：
 
 | 項目 | 來源 |
 |------|------|
@@ -204,8 +204,9 @@ with open('docs/data/115-03.json', 'w', encoding='utf-8') as f: json.dump(d, f, 
 | 台股日均成交額 | TWSE FMTQIK API（**注意：成交金額在 row[2]，不是 row[3]**） |
 | S&P 500 | yfinance `^GSPC` |
 | US 10Y 殖利率 | yfinance `^TNX` |
+| TLT（iShares 20+ Year Treasury Bond ETF） | yfinance `TLT` — 壽險 FVTPL 境外長債部位代理指標 |
 
-**沒抓台灣 10Y 公債**（沒有乾淨免費 API，且參考度低）。
+**台灣 10Y 公債不抓**（無乾淨免費 API，且參考度低）。
 
 值與「上個月最後交易日」比較。寫入該月份 JSON 的 `market_summary` 欄位 + 同步 `latest.json`。`main.py` 的 `save_data()` 會 read-merge-write，避免 MOPS 爬蟲覆蓋掉 `market_summary`（與 news_summary 同樣保留）。
 
@@ -352,9 +353,10 @@ python bootstrap_history.py --year 114
 
 ### update_market.yml（市場概況）
 
-- **排程**：每月 **5 號** UTC 01:00（台灣時間 09:00）。早於 MOPS 排程，會自己建立月份 stub 檔。
+- **排程**：每月 **11 號** UTC 01:00（台灣時間 09:00）。與 MOPS 排程同日早幾小時（MOPS 為 11~15 日 UTC 11:00）。會自己建立月份 stub 檔。
+- 設計考量：本網站主軸為月獲利公告，避免新月份在 5~10 日只有市場概況、公司列空白的觀感。市場數據其他管道可取得，不需提前。
 - 執行 `scraper/market_summary.py` → commit + push
-- MOPS 之後 8 號跑時，`save_data()` 會保留 `market_summary` 欄位
+- MOPS 當日稍晚（19:00）跑時，`save_data()` 會保留 `market_summary` 欄位
 
 ### Secret
 
