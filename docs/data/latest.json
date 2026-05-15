@@ -111,7 +111,16 @@
           "cumulative_eps": 3.89,
           "cumulative_profit_yoy_pct": 84.6,
           "cumulative_profit_yoy_abs": 21110,
-          "fvoci_not_found_count": 3
+          "fvoci_adjusted": {
+            "cumulative_profit": 94500,
+            "delta_vs_original": 48440,
+            "source_url": "https://news.cnyes.com/news/id/6458925",
+            "source_quote": "富邦人壽 4 月稅後純益 309.5 億元，累計前 4 月稅後純益 460.6 億元；加計 4 月及累計前 4 月 FVOCI 股票處分損益 162.6 億及 484.3 億元後，調整後獲利分別為 472.1 億元及 945 億元。",
+            "original_value_text": "945 億元",
+            "generated_at": "2026-05-15T10:37:56.181918",
+            "yoy_pct": 278.8,
+            "yoy_abs": 69550
+          }
         },
         {
           "name": "富邦投信",
@@ -161,7 +170,7 @@
           "cumulative_eps": 4.08,
           "cumulative_profit_yoy_pct": 65.5,
           "cumulative_profit_yoy_abs": 10270,
-          "fvoci_not_found_count": 3
+          "fvoci_not_found_count": 4
         },
         {
           "name": "國泰世華銀行",
@@ -540,7 +549,7 @@
           "cumulative_profit": 15180,
           "monthly_eps": null,
           "cumulative_eps": 1.65,
-          "fvoci_not_found_count": 3
+          "fvoci_not_found_count": 4
         },
         {
           "name": "台新證券",
@@ -704,7 +713,7 @@
           "cumulative_eps": 1.35,
           "cumulative_profit_yoy_pct": 96.4,
           "cumulative_profit_yoy_abs": 4122,
-          "fvoci_not_found_count": 3
+          "fvoci_not_found_count": 4
         }
       ],
       "unit": "百萬元",
