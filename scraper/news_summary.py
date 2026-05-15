@@ -105,7 +105,7 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 3. {"是季底月份（Q" + str((m-1)//3 + 1) + " 末），新聞使用「累計 Q" + str((m-1)//3 + 1) + "」或「累計前" + str(m) + "月」描述同一份月自結資料 → 算 RELEVANT" if is_quarter_end else "**不是**季底月份；新聞若只用「Q1/Q2/Q3/Q4 累計」概括（無 " + str(m) + " 月數字）→ IRRELEVANT"}
 
 ❌ 標 **IRRELEVANT** 的情境（**過去最常見的錯置**）：
-- 搜尋只回傳**其他月份**的新聞，內容描述的數字屬於 {western_year}/03 或 {western_year}/04 等非目標月份 → **IRRELEVANT**，**不要**拿其他月份的新聞數字湊 {m} 月摘要
+- 搜尋只回傳**其他月份**的新聞（內容描述的數字屬於 {western_year} 年的**其他**月份，**非** {m} 月）→ **IRRELEVANT**，**不要**拿其他月份的新聞數字湊 {m} 月摘要
 - 內文出現的月份數字（X 月稅後 Y 億）X ≠ {m} → IRRELEVANT
 - 只有去年（{western_year - 1} 年）舊報導、股利、股東會、ESG → IRRELEVANT
 - 完全沒有搜到任何相關新聞 → IRRELEVANT
