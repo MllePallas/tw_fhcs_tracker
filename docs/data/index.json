@@ -1,6 +1,12 @@
 {
-  "latest": "115/04",
+  "latest": "115/06",
   "months": [
+    {
+      "period": "115/06",
+      "file": "115-06.json",
+      "success_count": 0,
+      "last_updated": "2026-06-08T10:09:06.956669"
+    },
     {
       "period": "115/04",
       "file": "115-04.json",
