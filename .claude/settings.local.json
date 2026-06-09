@@ -51,7 +51,13 @@
       "Bash(cp /tmp/115-02_full.json docs/data/115-02.json)",
       "Bash(cp C:/tmp/115-01_full.json docs/data/115-01.json)",
       "Bash(cp C:/tmp/115-02_full.json docs/data/115-02.json)",
-      "Bash(gh run *)"
+      "Bash(gh run *)",
+      "WebFetch(domain:news.cnyes.com)",
+      "WebFetch(domain:money.udn.com)",
+      "WebFetch(domain:www.google.com)",
+      "WebSearch",
+      "Bash(rm docs/data/115-06.json)",
+      "Bash(cp docs/data/115-05.json docs/data/latest.json)"
     ]
   }
 }
