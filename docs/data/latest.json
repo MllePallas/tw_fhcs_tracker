@@ -300,5 +300,59 @@
         "代子公司合作金庫人壽保險股份有限公司公告\r\n首次適用國際財務報導準則第十七號對股東權益之影響數"
       ]
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/05",
+    "generated_at": "2026-06-09T10:32:18.861193",
+    "items": {
+      "usdtwd": {
+        "value": 31.424,
+        "date": "2026-05-29",
+        "prev_value": 31.6265,
+        "prev_date": "2026-04-30",
+        "pct_change": -0.64,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 44732.94,
+        "date": "2026-05-29",
+        "prev_value": 38926.63,
+        "prev_date": "2026-04-30",
+        "pct_change": 14.92,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 13167.6,
+        "trading_days": 20,
+        "prev_value_yi": 9569.7,
+        "prev_trading_days": 20,
+        "pct_change": 37.6,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 7580.06,
+        "date": "2026-05-29",
+        "prev_value": 7209.01,
+        "prev_date": "2026-04-30",
+        "pct_change": 5.15,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 4.453,
+        "date": "2026-05-29",
+        "prev_value_pct": 4.39,
+        "prev_date": "2026-04-30",
+        "bps_change": 6,
+        "source": "Yahoo Finance (^TNX)"
+      },
+      "tlt": {
+        "value": 85.76,
+        "date": "2026-05-29",
+        "prev_value": 85.62,
+        "prev_date": "2026-04-30",
+        "pct_change": 0.16,
+        "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+      }
+    }
+  }
 }
