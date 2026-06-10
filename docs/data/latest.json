@@ -1,8 +1,8 @@
 {
   "report_period": "115/05",
-  "last_updated": "2026-06-09T10:18:40.376282",
-  "success_count": 3,
-  "fail_count": 10,
+  "last_updated": "2026-06-10T10:23:41.177375",
+  "success_count": 4,
+  "fail_count": 9,
   "companies": [
     {
       "code": "2880",
@@ -19,15 +19,71 @@
     {
       "code": "2881",
       "name": "富邦金",
-      "error": "no_match",
-      "error_msg": "115/05 月自結損益尚未公告",
-      "available_titles": [
-        "富邦金控代子公司富邦人壽公告董事會通過114年度盈餘分\r\n派案(補充115/04/21公告)",
-        "公告本公司受邀參加Citi's 2026 Taiwan Tech Conference",
-        "富邦金控代子公司富邦人壽公告股東會重要決議事項",
-        "富邦金控代子公司富邦人壽公告關係人捐贈案",
-        "富邦金控代子公司富邦人壽公告股東會重要決議事項"
-      ]
+      "announcement_date": "115/06/10",
+      "announcement_title": "公告本公司暨主要子公司115年5月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": 15770,
+        "cumulative_profit": 87850,
+        "monthly_eps": null,
+        "cumulative_eps": 6.27,
+        "cumulative_profit_yoy_pct": 122.5,
+        "cumulative_profit_yoy_abs": 48360
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 4160,
+          "cumulative_profit": 20540,
+          "monthly_eps": null,
+          "cumulative_eps": 1.2,
+          "cumulative_profit_yoy_pct": 30.7,
+          "cumulative_profit_yoy_abs": 4830
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 2010,
+          "cumulative_profit": 8420,
+          "monthly_eps": null,
+          "cumulative_eps": 5.18,
+          "cumulative_profit_yoy_pct": 218.9,
+          "cumulative_profit_yoy_abs": 5780
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 890,
+          "cumulative_profit": 4640,
+          "monthly_eps": null,
+          "cumulative_eps": 15.45,
+          "cumulative_profit_yoy_pct": 92.5,
+          "cumulative_profit_yoy_abs": 2230
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": 7820,
+          "cumulative_profit": 53890,
+          "monthly_eps": null,
+          "cumulative_eps": 4.55,
+          "cumulative_profit_yoy_pct": 240.9,
+          "cumulative_profit_yoy_abs": 38080,
+          "fvoci_not_found_count": 1
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 180,
+          "cumulative_profit": 750,
+          "monthly_eps": null,
+          "cumulative_eps": 2.77
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/05",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-06-10T10:24:00.899732",
+      "news_retry_count": 1
     },
     {
       "code": "2882",
