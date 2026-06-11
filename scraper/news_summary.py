@@ -30,6 +30,21 @@ DATA_DIR = BASE_DIR / "docs" / "data"
 ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
 MODEL = "claude-sonnet-4-6"
 
+# 「無相關說明」永久跳過前的 retry 上限。
+# 預設 3；大型金控媒體必定報導，撲空幾乎都是 web_search 索引延遲（偽陰性），
+# 故拉高到 6，避免新聞還沒被索引時就提前永久放棄。
+NEWS_RETRY_CAP_DEFAULT = 3
+NEWS_RETRY_CAP_OVERRIDE = {
+    "2881": 6,  # 富邦金
+    "2882": 6,  # 國泰金
+    "2883": 6,  # 凱基金
+    "2891": 6,  # 中信金
+}
+
+
+def _retry_cap(code):
+    return NEWS_RETRY_CAP_OVERRIDE.get(code, NEWS_RETRY_CAP_DEFAULT)
+
 
 def _load_dotenv():
     env_path = BASE_DIR / ".env"
@@ -299,9 +314,9 @@ def main():
                 logger.info(f"[{name}] already has summary, skip")
                 skipped += 1
                 continue
-            if summary_val == "無相關說明" and retry_count >= 3:
+            if summary_val == "無相關說明" and retry_count >= _retry_cap(code):
                 logger.info(
-                    f"[{name}] no relevant news (retried {retry_count}x), permanently skip"
+                    f"[{name}] no relevant news (retried {retry_count}x, cap {_retry_cap(code)}), permanently skip"
                 )
                 skipped += 1
                 continue
@@ -362,7 +377,7 @@ def main():
                 company["news_generated_at"] = datetime.now().isoformat()
                 company["news_retry_count"] = new_count
                 updated += 1
-                logger.info(f"[{name}] marked IRRELEVANT (retry {new_count}/3) → 無相關說明")
+                logger.info(f"[{name}] marked IRRELEVANT (retry {new_count}/{_retry_cap(code)}) → 無相關說明")
             else:
                 # 找到真實新聞 → 寫入並清除 retry_count
                 company["news_summary"] = summary
