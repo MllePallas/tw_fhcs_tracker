@@ -69,6 +69,12 @@ function fvociDisplay(a, sourceUnit, displayUnit) {
   return { cumulDisp: formatNum(v), yoyDisp, isBound: false };
 }
 
+// 金控層級併購／重大異動備註（前端靜態，不依賴爬蟲資料，重爬不會遺失）。
+// 顯示於詳情面板底部。key = 金控代號。
+const COMPANY_NOTES = {
+  "2887": "元富證券於 2026/4/6（民國115/04/06）併入台新證券，台新證券數字自此含元富證券。",
+};
+
 // YoY 排序鍵：虧轉盈 > 正成長 > 負成長 > 盈轉虧；同 tier 內依 pct 排序
 function yoyTier(pct, status) {
   if (status === 'loss_to_profit') return 3;
@@ -823,9 +829,16 @@ function showDetail(code) {
       </table>${fvociFootnote}`;
   }
 
+  const noteHtml = COMPANY_NOTES[c.code]
+    ? `<p style="font-size:11px;color:#9b6a1c;background:#fffbeb;border:1px solid #f6e3b4;border-radius:4px;padding:6px 8px;margin-top:8px">
+         <strong>備註：</strong>${escapeHtml(COMPANY_NOTES[c.code])}
+       </p>`
+    : '';
+
   content.innerHTML = `
     ${newsHtml}
     ${tableHtml}
+    ${noteHtml}
     <p style="font-size:11px;color:#718096;margin-top:8px">
       公告日期：${c.announcement_date || '—'} ｜ 來源：<a href="${c.source_url||'#'}" target="_blank" style="color:#3182ce">MOPS ↗</a>
     </p>
