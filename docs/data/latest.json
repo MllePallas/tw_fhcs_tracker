@@ -1,8 +1,8 @@
 {
   "report_period": "115/05",
-  "last_updated": "2026-06-11T01:41:26.870588",
-  "success_count": 4,
-  "fail_count": 9,
+  "last_updated": "2026-06-11T16:53:35.504136",
+  "success_count": 5,
+  "fail_count": 8,
   "companies": [
     {
       "code": "2880",
@@ -109,14 +109,82 @@
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/05 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司國泰人壽保險股份有限公司公告，受邀參加摩根大通證券舉辦之投資人會議。",
-        "代子公司國泰投信公告董事會選任副董事長",
-        "公告本公司受邀參加Citi舉辦之投資人會議",
-        "國泰金控代子公司國泰世華商業銀行公告常務董事會決議\r\n參與國家發展委員會「企業投資美國融資保證機制推動方案」"
-      ]
+      "announcement_date": "115/06/11",
+      "announcement_title": "公告本公司暨主要子公司115年05月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 14000,
+        "cumulative_profit": 59930,
+        "monthly_eps": null,
+        "cumulative_eps": 4.07,
+        "cumulative_profit_yoy_pct": 55.1,
+        "cumulative_profit_yoy_abs": 21280
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 8930,
+          "cumulative_profit": 34870,
+          "monthly_eps": null,
+          "cumulative_eps": 5.48,
+          "cumulative_profit_yoy_pct": 116.4,
+          "cumulative_profit_yoy_abs": 18760,
+          "fvoci_adjusted": {
+            "cumulative_profit": 80000,
+            "delta_vs_original": 45130,
+            "source_url": "https://www.ctee.com.tw/news/20260529701945-430301",
+            "source_quote": "掌握前五月國壽調整後獲利達800億元、金控逾1,100億元",
+            "original_value_text": "800 億元",
+            "generated_at": "2026-06-11T16:54:28.091879",
+            "yoy_pct": 396.6,
+            "yoy_abs": 63890
+          }
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4460,
+          "cumulative_profit": 21990,
+          "monthly_eps": null,
+          "cumulative_eps": 1.7,
+          "cumulative_profit_yoy_pct": 12.7,
+          "cumulative_profit_yoy_abs": 2480
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 320,
+          "cumulative_profit": 1750,
+          "monthly_eps": null,
+          "cumulative_eps": 8.76,
+          "cumulative_profit_yoy_pct": 25.9,
+          "cumulative_profit_yoy_abs": 360
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 700,
+          "cumulative_profit": 3290,
+          "monthly_eps": null,
+          "cumulative_eps": 4.27,
+          "cumulative_profit_yoy_pct": 157.0,
+          "cumulative_profit_yoy_abs": 2010
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 240,
+          "cumulative_profit": 1460,
+          "monthly_eps": null,
+          "cumulative_eps": 9.74,
+          "cumulative_profit_yoy_pct": 21.7,
+          "cumulative_profit_yoy_abs": 260
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/05",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-06-11T16:54:12.825014",
+      "news_retry_count": 1
     },
     {
       "code": "2883",
