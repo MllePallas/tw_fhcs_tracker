@@ -1,8 +1,8 @@
 {
   "report_period": "115/05",
-  "last_updated": "2026-06-11T16:53:35.504136",
-  "success_count": 5,
-  "fail_count": 8,
+  "last_updated": "2026-06-11T17:32:49.801540",
+  "success_count": 6,
+  "fail_count": 7,
   "companies": [
     {
       "code": "2880",
@@ -182,8 +182,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-06-11T16:54:12.825014",
-      "news_retry_count": 1
+      "news_generated_at": "2026-06-11T17:33:27.587388",
+      "news_retry_count": 2
     },
     {
       "code": "2883",
@@ -410,15 +410,46 @@
     {
       "code": "2891",
       "name": "中信金",
-      "error": "no_match",
-      "error_msg": "115/05 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司Land and Houses Securities Public Company\r\nLimited公告會計主管異動",
-        "本公司參加Citi舉辦之投資人說明會(Citi 2026 Taiwan Conference)",
-        "本公司代子公司中國信託商業銀行\r\n(下稱「中國信託」)公告發行115年度第88期\r\n無擔保主順位金融債券新臺幣壹佰肆拾伍億元整",
-        "代子公司CTBC Bank Corp. (Canada)公告董事會推選董事長",
-        "代子公司台灣彩券股份有限公司\r\n公告向關係人處分使用權資產\r\n(補充114/12/30公告)"
-      ]
+      "announcement_date": "115/06/11",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n115年度五月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 6291,
+        "cumulative_profit": 34790,
+        "monthly_eps": null,
+        "cumulative_eps": 1.78,
+        "cumulative_profit_yoy_pct": 41.0,
+        "cumulative_profit_yoy_abs": 10114
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 6040,
+          "cumulative_profit": 26945,
+          "monthly_eps": null,
+          "cumulative_eps": 1.57,
+          "cumulative_profit_yoy_pct": 17.4,
+          "cumulative_profit_yoy_abs": 4003
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 283,
+          "cumulative_profit": 8681,
+          "monthly_eps": null,
+          "cumulative_eps": 1.39,
+          "cumulative_profit_yoy_pct": 499.5,
+          "cumulative_profit_yoy_abs": 7233,
+          "fvoci_not_found_count": 1
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/05",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-06-11T17:34:13.376551",
+      "news_retry_count": 1
     },
     {
       "code": "2892",
