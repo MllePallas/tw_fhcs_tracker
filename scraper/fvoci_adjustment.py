@@ -67,6 +67,35 @@ def _load_dotenv():
 _load_dotenv()
 
 
+def _extract_source_date(url):
+    """從新聞 URL 嘗試解析發布日期 (date)。
+    ctee.com.tw 的 `/news/YYYYMMDD...` 可解析；其他來源 URL 多無日期 → 回傳 None
+    （無法驗證就不阻擋，維持原行為）。"""
+    if not url:
+        return None
+    m = re.search(r"/news/(\d{8})", url)  # ctee: /news/20260529701945-430301
+    if not m:
+        # 一般性 fallback：路徑中獨立的 8 碼 YYYYMMDD（20xx 開頭）
+        m = re.search(r"(?<!\d)(20\d{6})(?!\d)", url)
+    if not m:
+        return None
+    try:
+        return datetime.strptime(m.group(1), "%Y%m%d").date()
+    except ValueError:
+        return None
+
+
+def _announcement_month_start(period):
+    """目標月份 N → 公告月份 N+1 的第一天 (date)。例 115/05 → 2026-06-01。
+    （月自結損益於次月公告，公告月份之前的新聞必為事前預估，不可採信。）"""
+    roc_year, roc_month = period.split("/")
+    western_year = int(roc_year) + 1911
+    m = int(roc_month)
+    if m < 12:
+        return datetime(western_year, m + 1, 1).date()
+    return datetime(western_year + 1, 1, 1).date()
+
+
 def _build_prompt(name, code, period, life_sub_name, life_cumul):
     roc_year, roc_month = period.split("/")
     western_year = int(roc_year) + 1911
@@ -254,6 +283,20 @@ def process_company(client, company, period, force=False, debug=False):
         logger.warning(
             f"[{name}] adjusted ({adjusted_life}) <= life original ({life_cumul}), "
             f"discarding (likely wrong concept or抓到金控數字) (retry {new_count}/3)"
+        )
+        return "not_found"
+
+    # 來源日期防呆：公告月份之前的新聞必為「事前預估／掌握」稿，非實際月自結數字
+    # （例：5/29 即報「前5月國壽調整後800億」，其實是記者推估，國泰公告本身不揭露 FVOCI 調整後獲利）。
+    # 要求來源發布日 >= 公告月份第一天；URL 無日期者無法驗證，維持原行為放行。
+    src_date = _extract_source_date(parsed.get("source_url", ""))
+    ann_start = _announcement_month_start(period)
+    if src_date and src_date < ann_start:
+        new_count = life_sub.get("fvoci_not_found_count", 0) + 1
+        life_sub["fvoci_not_found_count"] = new_count
+        logger.warning(
+            f"[{name}] source dated {src_date} < announcement month start {ann_start} "
+            f"(pre-announcement estimate), discarding (retry {new_count}/3)"
         )
         return "not_found"
 

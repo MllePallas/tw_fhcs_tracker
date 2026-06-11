@@ -129,17 +129,7 @@
           "monthly_eps": null,
           "cumulative_eps": 5.48,
           "cumulative_profit_yoy_pct": 116.4,
-          "cumulative_profit_yoy_abs": 18760,
-          "fvoci_adjusted": {
-            "cumulative_profit": 80000,
-            "delta_vs_original": 45130,
-            "source_url": "https://www.ctee.com.tw/news/20260529701945-430301",
-            "source_quote": "掌握前五月國壽調整後獲利達800億元、金控逾1,100億元",
-            "original_value_text": "800 億元",
-            "generated_at": "2026-06-11T16:54:28.091879",
-            "yoy_pct": 396.6,
-            "yoy_abs": 63890
-          }
+          "cumulative_profit_yoy_abs": 18760
         },
         {
           "name": "國泰世華銀行",
