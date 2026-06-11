@@ -129,7 +129,16 @@
           "monthly_eps": null,
           "cumulative_eps": 5.48,
           "cumulative_profit_yoy_pct": 116.4,
-          "cumulative_profit_yoy_abs": 18760
+          "cumulative_profit_yoy_abs": 18760,
+          "fvoci_adjusted": {
+            "value_type": "lower_bound",
+            "cumulative_profit": 100000,
+            "display_prefix": "逾",
+            "source_url": "https://money.udn.com/money/story/5613/9560691",
+            "source_quote": "國泰人壽5月單月調整後獲利逾400億元，累計前5月調整後獲利突破1,000億元（加計FVOCI股票處份利益）",
+            "original_value_text": "突破1,000億元",
+            "generated_at": "2026-06-11T17:22:44.489620"
+          }
         },
         {
           "name": "國泰世華銀行",

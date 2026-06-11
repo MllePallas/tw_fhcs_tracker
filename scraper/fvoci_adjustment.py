@@ -125,11 +125,23 @@ def _build_prompt(name, code, period, life_sub_name, life_cumul):
 
 【輸出格式（嚴格 JSON，無前言、無後綴、無 markdown 標記）】
 
-若搜尋到 {life_sub_name} **本身**明確揭露之「加計 FVOCI 處份利益」後的累計獲利數字：
+若搜尋到 {life_sub_name} **本身**明確揭露之「加計 FVOCI 處份利益」後的累計獲利**具體數字**（例：富邦人壽「累計調整後獲利472.8億」）：
 {{
   "found": true,
+  "value_kind": "exact",
   "adjusted_cumulative_nt_million": <number>,
   "original_value_text": "<新聞中原始的數字與單位，例 '472.8 億元'>",
+  "source_url": "<新聞 URL>",
+  "source_quote": "<引用原句，需含數字與「{life_sub_name}」公司名稱>"
+}}
+
+若 {life_sub_name} **本身**只揭露**區間/門檻**而非具體數字（例：國泰人壽「累計調整後獲利突破1,000億」「逾1,000億」「超過X億」），請回傳下界：
+{{
+  "found": true,
+  "value_kind": "lower_bound",
+  "adjusted_cumulative_nt_million": <門檻數值，百萬元，例 突破1,000億→100000>,
+  "display_prefix": "<新聞用字：逾／突破／超過，擇一>",
+  "original_value_text": "<新聞中原始字樣，例 '突破1,000億元'>",
   "source_url": "<新聞 URL>",
   "source_quote": "<引用原句，需含數字與「{life_sub_name}」公司名稱>"
 }}
@@ -144,6 +156,7 @@ def _build_prompt(name, code, period, life_sub_name, life_cumul):
 - 只能引用搜尋結果中實際出現的數字，禁止瞎編或推算
 - 數字必須是「{life_sub_name}」這家壽險公司**自己**的累計調整後獲利，不是金控合併層級的數字。source_quote 必須清楚帶有「{life_sub_name}」字樣
 - 數字單位轉換：億 → ×100；皆換算成「百萬元」填入 adjusted_cumulative_nt_million
+- **value_kind 判定**：新聞給「具體精確數字」用 `exact`；只給「逾／突破／超過／上看 X 億」這類門檻、沒有精確值時用 `lower_bound`。有精確數字時一律用 exact，不要因為出現「逾」字就誤判
 - adjusted_cumulative_nt_million 必須大於 {life_cumul}（加計處份利益會更大）；若搜到的「調整後」反而較小，可能抓錯數字，視為 found=false
 - 不要使用 markdown code fence；直接輸出 JSON 物件
 """
@@ -299,6 +312,27 @@ def process_company(client, company, period, force=False, debug=False):
             f"(pre-announcement estimate), discarding (retry {new_count}/3)"
         )
         return "not_found"
+
+    value_kind = parsed.get("value_kind", "exact")
+
+    if value_kind == "lower_bound":
+        # 區間/門檻型（如國泰人壽「突破1,000億」）：存下界 + display_prefix，不存 delta、不算 YoY。
+        # main.compute_yoy 會因 value_type=='lower_bound' 跳過 YoY。
+        life_sub["fvoci_adjusted"] = {
+            "value_type": "lower_bound",
+            "cumulative_profit": round(adjusted_life, 1),
+            "display_prefix": parsed.get("display_prefix", "逾"),
+            "source_url": parsed.get("source_url", ""),
+            "source_quote": parsed.get("source_quote", ""),
+            "original_value_text": parsed.get("original_value_text", ""),
+            "generated_at": datetime.now().isoformat(),
+        }
+        life_sub.pop("fvoci_not_found_count", None)
+        logger.info(
+            f"[{name}] {life_sub_name} adjusted (lower_bound): "
+            f"{parsed.get('display_prefix','逾')} {adjusted_life} NT$m (original {life_cumul})"
+        )
+        return "updated"
 
     delta_vs_original = adjusted_life - life_cumul
 

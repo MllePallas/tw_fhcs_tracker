@@ -260,6 +260,8 @@ python fvoci_adjustment.py --codes 2881 2883
 2. `life_sub.fvoci_adjusted.cumulative_profit = adjusted_life_cumul`（直接寫入，不再透過金控差額推算）
 3. 合理性檢查：`adjusted_life_cumul > life_sub.cumulative_profit`（加計處份利益應更大）；否則視為 not_found
 4. 若新聞僅揭露金控合併層級而未列出壽險子公司本身的調整後獲利 → not_found，欄位不寫
+5. **來源日期防呆**（`_extract_source_date` / `_announcement_month_start`）：要求新聞發布日 ≥ 公告月份第一天（N 月資料於 N+1 月公告，例 115/05 → 須 ≥ 2026-06-01）。擋掉公告前的「事前預估／掌握」稿（例：富邦/國泰常有 5/29 即報「前5月」的推估稿，數字未定）。**僅對 URL 帶日期的來源有效**（工商時報 ctee `/news/YYYYMMDD`）；cnyes/udn/ltn 的 URL 無日期 → 無法驗證、維持放行
+6. **區間/門檻型（`value_type: "lower_bound"`）**：少數壽險公司（目前**國泰人壽**）只揭露區間而非具體數字（例「累計調整後獲利突破1,000億」）。LLM 回傳 `value_kind: "lower_bound"` 時，存下界數值 + `display_prefix`（逾／突破／超過），**不寫 `delta_vs_original`、不算 YoY**（下界與去年精確值相除會得出假精度的百分比）。`main.compute_yoy` 偵測 `value_type=="lower_bound"` 自動跳過 YoY
 
 > **歷史備註**：舊版（< 2026-05-04）透過金控層級調整後獲利推算（`delta = adjusted_holding − holding_cumul` 全數歸給壽險子公司）。但金控合併 P&L 包含其他子公司、少數權益、內部交易抵銷，差額**不等於**壽險的 FVOCI 處份利益，數字會有差數。已停用。
 
@@ -278,7 +280,21 @@ python fvoci_adjustment.py --codes 2881 2883
 
 **YoY 語意**：今年加計 FVOCI 後的調整數 vs 去年同期 baseline 的原始 P&L（去年仍含 FVOCI 計入 P&L）→ 兩邊皆「含 FVOCI 影響」，apples-to-apples。`main.compute_yoy` 自動計算並寫入 `fvoci_adjusted.yoy_pct`。
 
-**前端顯示**：壽險產業 tab、子公司展開面板皆於壽險子公司列下方加一行「（加上FVOCI股票處份利益）*」+ 累計 + YoY，註腳說明數字來源。其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入合計卡片或圖表。
+**區間/門檻型輸出欄位**（國泰人壽）：
+```json
+"fvoci_adjusted": {
+  "value_type": "lower_bound",
+  "cumulative_profit": 100000,         // NT$m，門檻下界（突破1,000億 → 100000）
+  "display_prefix": "逾",              // 新聞用字（逾／突破／超過）
+  "source_url": "https://money.udn.com/...",
+  "source_quote": "國泰人壽…累計前5月調整後獲利突破1,000億元…",
+  "original_value_text": "突破1,000億元",
+  "generated_at": "2026-06-11T..."
+  // 無 delta_vs_original、無 yoy_*
+}
+```
+
+**前端顯示**：壽險產業 tab、子公司展開面板皆於壽險子公司列下方加一行「（加上FVOCI股票處份利益）*」+ 累計 + YoY，註腳說明數字來源。其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入合計卡片或圖表。前端 `fvociDisplay()` 統一格式化：`lower_bound` 顯示「逾 X」且 YoY 欄為 `—`；具體值顯示數字 + YoY。
 
 ---
 

@@ -270,8 +270,10 @@ def compute_yoy(data: dict, target_period: str):
                 sub_populated += 1
 
             # FVOCI 調整後獲利 YoY：今年「加計 FVOCI」 vs 去年原始 P&L（去年含 FVOCI 計入 P&L）
+            # 區間/門檻型（value_type=='lower_bound'，如國泰僅揭露「逾1,000億」）不算 YoY：
+            # 下界與去年精確值相除會得出假精度的百分比，語意誤導。
             adj = sub.get("fvoci_adjusted")
-            if adj:
+            if adj and adj.get("value_type") != "lower_bound":
                 ca = adj.get("cumulative_profit")
                 m_adj = _yoy_metrics(ca, ps)
                 if m_adj:
