@@ -1,6 +1,6 @@
 {
   "report_period": "115/05",
-  "last_updated": "2026-06-11T12:26:10.998218",
+  "last_updated": "2026-06-11T14:28:00.136900",
   "success_count": 9,
   "fail_count": 4,
   "companies": [
@@ -53,8 +53,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-06-11T12:26:24.384212",
-      "news_retry_count": 1
+      "news_generated_at": "2026-06-11T14:28:17.164723",
+      "news_retry_count": 2
     },
     {
       "code": "2881",
@@ -254,7 +254,17 @@
           "cumulative_profit_yoy_pct": 653.0,
           "cumulative_profit_yoy_abs": 9077,
           "cumulative_profit_yoy_status": "loss_to_profit",
-          "fvoci_not_found_count": 1
+          "fvoci_adjusted": {
+            "cumulative_profit": 37390,
+            "delta_vs_original": 29703,
+            "source_url": "https://ec.ltn.com.tw/article/breakingnews/5469264",
+            "source_quote": "凱基人壽…前5月累計調整後獲利已達373.9億元",
+            "original_value_text": "373.9 億元",
+            "generated_at": "2026-06-11T14:29:34.197217",
+            "yoy_pct": 2789.9,
+            "yoy_abs": 38780,
+            "yoy_status": "loss_to_profit"
+          }
         },
         {
           "name": "凱基銀行",
@@ -288,10 +298,22 @@
       "unit": "百萬元",
       "report_month": "115/05",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
-      "news_sources": [],
-      "news_generated_at": "2026-06-11T12:27:10.736427",
-      "news_retry_count": 1
+      "news_summary": "## 凱基金（2883）115 年 5 月月自結損益摘要\n\n**重點**\n\n\n凱基金控 5 月獲利表現亮眼，主要受惠於台股加權指數及成交量能再創新高，帶動集團旗下證券、銀行、壽險等業務動能全面走強。\n單月稅後盈餘 47.43 億元，累計前 5 月稅後獲利 223.3 億元、EPS 1.32 元。\n\n\n**子公司明細**\n\n- **凱基人壽（壽險）**：\n5 月新契約保費收入 115 億元、年增 126%，創近 5 年單月新高；累計前 5 月新契約保費收入達 459 億元，較去年同期成長 48%。\n5 月份稅後獲利 16.02 億元，前 5 月累計稅後獲利 76.87 億元；若加計 **FVOCI 股票處分利益**，單月**調整後獲利**高達 117.32 億元，創今年以來單月新高，前 5 月累計調整後獲利已達 373.9 億元。\n\n\n- **凱基銀行**：\n受惠於存放款規模穩健擴張，推升淨利息收益表現，財富管理帶動手續費收入成長；凱基銀行 5 月稅後獲利 7.10 億元，年度累計稅後獲利 35.9 億元，較去年同期成長 30%。\n\n\n- **凱基證券**：\n台股交易熱絡帶動經紀暨財富管理、自營、承銷等業務皆有獲利貢獻；凱基證券 5 月稅後淨利 31.5 億元，年度累計稅後獲利 129.06 億元，續創同期新高，較去年同期大幅成長 377%。\n\n\n- **CSM（合約服務邊際）背景**：\n凱壽第 1 季 CSM 釋出至損益金額為 37 億元，年化攤銷率 6.3%，今年預計全年度將穩定釋出 150 億元以上，新契約 CSM 增加 82 億元，累計達 2,409 億元。\n（此為",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9541849",
+          "title": "凱基金控前四月股票獲利近200億元 將利於2026股利發放 | 金融脈動 | 金融 | 經濟日報"
+        },
+        {
+          "url": "https://money.udn.com/money/story/5613/9501270",
+          "title": "凱基金2026年前四月 EPS 1.04元 | 金融脈動 | 金融 | 經濟日報"
+        },
+        {
+          "url": "https://www.ctee.com.tw/news/20260603700729-430201",
+          "title": "獲利狂飆3倍 凱基金股價攻漲停 法人喊出最新目標價 - 證券 - 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-06-11T14:29:18.167296"
     },
     {
       "code": "2884",
@@ -419,7 +441,7 @@
           "cumulative_profit": 17640,
           "monthly_eps": null,
           "cumulative_eps": 1.91,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         },
         {
           "name": "台新證券",
@@ -591,7 +613,7 @@
           "cumulative_eps": 1.39,
           "cumulative_profit_yoy_pct": 499.5,
           "cumulative_profit_yoy_abs": 7233,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         }
       ],
       "unit": "百萬元",
