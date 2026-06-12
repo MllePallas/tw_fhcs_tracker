@@ -1,6 +1,6 @@
 {
   "report_period": "115/05",
-  "last_updated": "2026-06-12T07:52:02.522192",
+  "last_updated": "2026-06-12T08:53:34.652934",
   "success_count": 13,
   "fail_count": 0,
   "companies": [
@@ -451,8 +451,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-06-12T07:52:16.506808",
-      "news_retry_count": 1
+      "news_generated_at": "2026-06-12T08:53:45.438665",
+      "news_retry_count": 2
     },
     {
       "code": "2886",
@@ -512,8 +512,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-06-12T07:53:00.648434",
-      "news_retry_count": 1
+      "news_generated_at": "2026-06-12T08:54:30.187736",
+      "news_retry_count": 2
     },
     {
       "code": "2887",
@@ -788,8 +788,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-06-12T07:53:48.655757",
-      "news_retry_count": 2
+      "news_generated_at": "2026-06-12T08:55:14.746120",
+      "news_retry_count": 3
     },
     {
       "code": "5880",
@@ -869,8 +869,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-06-12T07:54:29.972000",
-      "news_retry_count": 1
+      "news_generated_at": "2026-06-12T08:55:57.531742",
+      "news_retry_count": 2
     }
   ],
   "market_summary": {
