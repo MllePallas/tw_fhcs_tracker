@@ -320,6 +320,53 @@ python fvoci_adjustment.py --codes 2881 2883
 
 ---
 
+## 每月更新 SOP（自動化 / 低階模型照抄用）
+
+> 目標：每月不需自行推理，照下列順序執行即可。所有腳本皆**冪等**，中途失敗可直接重跑，不會重複累加或損壞資料。
+
+**執行時機**：每月 11 日之後（多數金控已於 N+1 月上旬公告 N 月損益）。
+
+```bash
+# 1. 先同步，避免與 GitHub Actions 的 commit 衝突
+git pull
+
+# 2. 進 scraper，設好金鑰（或已有 .env）
+cd scraper
+export ANTHROPIC_API_KEY=sk-ant-api03-...
+
+# 3. 爬上個月（不帶 --month 會自動判斷）→ 自動算 YoY、更新 index/latest
+python main.py
+
+# 4. 補新聞摘要與壽險 FVOCI 調整（冪等，已有的會跳過）
+python news_summary.py
+python fvoci_adjustment.py
+```
+
+**完成前的驗收檢查（務必逐項確認，不可略過）**：
+
+1. `docs/data/index.json` 的 `latest` 已指向本次目標月份（例：處理 115/05 → `latest` 應為 `115/05`）。
+2. 該月份的 `success_count` 為 **13**。若 < 13：屬部分金控尚未公告，**當日重跑或隔日再跑**即可補齊（腳本只補缺漏的家）。
+3. `docs/data/latest.json` 與該月份 JSON（如 `115-05.json`）內容一致。
+4. `market_summary` 欄位仍在（不應被覆蓋——`save_data()` 會 read-merge-write 保留它）。
+
+**確認無誤後才 commit + push**：
+
+```bash
+cd ..
+git add docs/data/
+git commit -m "chore: update financial data $(date +'%Y-%m-%d %H:%M')"
+git push
+```
+
+**常見狀況處理**：
+
+- **某家一直撲空**：多為該金控尚未公告，非程式錯誤。等下一批公告後重跑，勿手動偽造資料。
+- **JSON 被 OneDrive 填入空白 padding**：用 `data/` root 的乾淨版覆蓋 `docs/data/`（見「已知問題」）。
+- **只想補單一家**：`python main.py --month 115/05 --codes 2881`。
+- **前端（`docs/*.html/js/css`）與資料 pipeline 互不影響**：改前端不會動到 `docs/data/`，改 scraper 也不會動到前端；兩者可分開處理與驗證。
+
+---
+
 ## 本地執行
 
 ```bash

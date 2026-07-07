@@ -57,7 +57,13 @@
       "WebFetch(domain:www.google.com)",
       "WebSearch",
       "Bash(rm docs/data/115-06.json)",
-      "Bash(cp docs/data/115-05.json docs/data/latest.json)"
+      "Bash(cp docs/data/115-05.json docs/data/latest.json)",
+      "Bash(gh auth *)",
+      "Bash(gh workflow *)",
+      "WebFetch(domain:www.ctee.com.tw)",
+      "WebFetch(domain:udn.com)",
+      "WebFetch(domain:mllepallas.github.io)",
+      "WebFetch(domain:tw.stock.yahoo.com)"
     ]
   }
 }

@@ -284,10 +284,18 @@ function bpsText(bps, prefix) {
   return `${prefix} ${sign}${bps} bps`;
 }
 
+// 表格金額單位全名（跟著單位選單）。EPS 欄位另標「元」，不受此影響。
+function unitFullLabel(u) {
+  return u === '億元' ? '新台幣億元' : '新台幣百萬元';
+}
+
 function renderTable() {
   if (!state.data) return;
   state.displayUnit = document.getElementById('unit-select').value;
   state.sortMode    = document.getElementById('sort-select').value;
+
+  const hint = document.getElementById('table-unit-hint');
+  if (hint) hint.textContent = `單位：${unitFullLabel(state.displayUnit)}（EPS 為元）`;
 
   if (state.viewMode === 'holdings') {
     renderHoldingsTable();
@@ -633,7 +641,7 @@ function renderIndustryCards(industry) {
   if (industry === 'life' && rows.some(r => r.fvoci_adjusted && r.fvoci_adjusted.cumulative_profit != null)) {
     el.insertAdjacentHTML('beforeend', `
       <div style="font-size:11px;color:#718096;padding:8px 4px">
-        <sup>*</sup> 加上FVOCI股票處份利益後的調整後累計獲利，依金控新聞稿揭露之金控層級調整數推算（差額假設全數來自壽險子公司，僅供與去年同期比較之參考）。
+        <sup>*</sup> 加上FVOCI股票處份利益後的調整後累計獲利，依各壽險公司新聞稿揭露數字；僅供與去年同期比較之參考。部分公司（如國泰人壽）僅揭露區間，以「逾」標示下界且不計 YoY。
       </div>
     `);
   }

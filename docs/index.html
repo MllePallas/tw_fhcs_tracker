@@ -4,6 +4,11 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>台灣金控月自結獲利追蹤</title>
+  <meta name="description" content="13 家台灣上市金控每月自結損益追蹤：合併稅後淨利、累計 YoY、EPS、子公司明細與市場概況。資料來源：公開資訊觀測站（MOPS）。" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="台灣金控月自結獲利追蹤" />
+  <meta property="og:description" content="13 家上市金控每月自結損益、累計 YoY、EPS 與子公司明細。" />
+  <meta name="twitter:card" content="summary" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -85,6 +90,9 @@
       <button class="tab"        data-view="life"     onclick="setView('life')">🛡️ 壽險</button>
       <button class="tab"        data-view="securities" onclick="setView('securities')">📊 證券</button>
     </div>
+
+    <!-- 表格單位標示（跟著單位選單動態變化） -->
+    <div class="table-unit-hint" id="table-unit-hint"></div>
 
     <!-- 主表格（桌機） -->
     <div class="table-container">
