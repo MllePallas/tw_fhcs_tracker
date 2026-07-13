@@ -1,8 +1,8 @@
 {
   "report_period": "115/06",
-  "last_updated": "2026-07-12T11:50:30.864835",
-  "success_count": 3,
-  "fail_count": 10,
+  "last_updated": "2026-07-13T16:22:19.535228",
+  "success_count": 5,
+  "fail_count": 8,
   "companies": [
     {
       "code": "2880",
@@ -119,15 +119,72 @@
     {
       "code": "2885",
       "name": "元大金",
-      "error": "no_match",
-      "error_msg": "115/06 月自結損益尚未公告",
-      "available_titles": [
-        "元大金控代子公司元大銀行公告發言人異動案",
-        "元大金控代子公司元大證券公告董事異動",
-        "元大金控公告本公司代理發言人異動",
-        "元大金控公告114年度現金股利配發基準日",
-        "元大金控公告向元大證券原取得使用權資產內容調整"
-      ]
+      "announcement_date": "115/07/13",
+      "announcement_title": "元大金控公告115年6月份自結合併損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "元大金控",
+        "monthly_profit": 7512,
+        "cumulative_profit": 36572,
+        "monthly_eps": null,
+        "cumulative_eps": 2.74,
+        "cumulative_profit_yoy_pct": 125.4,
+        "cumulative_profit_yoy_abs": 20344
+      },
+      "subsidiaries": [
+        {
+          "name": "元大證券",
+          "monthly_profit": 5448,
+          "cumulative_profit": 24528,
+          "monthly_eps": null,
+          "cumulative_eps": 3.72,
+          "cumulative_profit_yoy_pct": 155.8,
+          "cumulative_profit_yoy_abs": 14940
+        },
+        {
+          "name": "元大銀行",
+          "monthly_profit": 1480,
+          "cumulative_profit": 7692,
+          "monthly_eps": null,
+          "cumulative_eps": 0.88,
+          "cumulative_profit_yoy_pct": 45.2,
+          "cumulative_profit_yoy_abs": 2396
+        },
+        {
+          "name": "元大期貨",
+          "monthly_profit": 351,
+          "cumulative_profit": 1544,
+          "monthly_eps": null,
+          "cumulative_eps": 4.82,
+          "cumulative_profit_yoy_pct": 18.6,
+          "cumulative_profit_yoy_abs": 242
+        },
+        {
+          "name": "元大人壽",
+          "monthly_profit": 216,
+          "cumulative_profit": 2441,
+          "monthly_eps": null,
+          "cumulative_eps": 0.84,
+          "cumulative_profit_yoy_pct": 1527.3,
+          "cumulative_profit_yoy_abs": 2291
+        },
+        {
+          "name": "元大投信",
+          "monthly_profit": 625,
+          "cumulative_profit": 2967,
+          "monthly_eps": null,
+          "cumulative_eps": 13.08,
+          "cumulative_profit_yoy_pct": 44.6,
+          "cumulative_profit_yoy_abs": 915
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/06",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-07-13T16:23:01.328669",
+      "news_retry_count": 1
     },
     {
       "code": "2886",
@@ -277,15 +334,54 @@
     {
       "code": "2892",
       "name": "第一金",
-      "error": "no_match",
-      "error_msg": "115/06 月自結損益尚未公告",
-      "available_titles": [
-        "澄清媒體報導「投信公公併拚下半年達陣」",
-        "公告本公司暨主要子公司115年4月份自結合併盈餘數",
-        "代子公司第一商業銀行股份有限公司公告114年度盈餘\r\n分配之現金股利除息基準日",
-        "代子公司第一商業銀行股份有限公司公告董事會代行股東\r\n會重要決議事項",
-        "代子公司第一金證券公告發言人異動"
-      ]
+      "announcement_date": "115/07/13",
+      "announcement_title": "公告本公司暨主要子公司115年6月份自結合併盈餘數",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "第一金控",
+        "monthly_profit": 2997,
+        "cumulative_profit": 17798,
+        "monthly_eps": null,
+        "cumulative_eps": 1.24,
+        "cumulative_profit_yoy_pct": 27.6,
+        "cumulative_profit_yoy_abs": 3852
+      },
+      "subsidiaries": [
+        {
+          "name": "第一銀行",
+          "monthly_profit": 2519,
+          "cumulative_profit": 15456,
+          "monthly_eps": null,
+          "cumulative_eps": 1.26,
+          "cumulative_profit_yoy_pct": 11.9,
+          "cumulative_profit_yoy_abs": 1649
+        },
+        {
+          "name": "第一金證券",
+          "monthly_profit": 291,
+          "cumulative_profit": 1411,
+          "monthly_eps": null,
+          "cumulative_eps": 2.11,
+          "cumulative_profit_yoy_pct": 373.5,
+          "cumulative_profit_yoy_abs": 1113
+        },
+        {
+          "name": "第一金人壽",
+          "monthly_profit": 67,
+          "cumulative_profit": 418,
+          "monthly_eps": null,
+          "cumulative_eps": 0.61,
+          "cumulative_profit_yoy_pct": 133.5,
+          "cumulative_profit_yoy_abs": 239
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/06",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-07-13T16:23:43.684855",
+      "news_retry_count": 1
     },
     {
       "code": "5880",
