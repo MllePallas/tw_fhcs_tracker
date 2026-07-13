@@ -1,6 +1,6 @@
 {
   "report_period": "115/06",
-  "last_updated": "2026-07-13T16:22:19.535228",
+  "last_updated": "2026-07-13T13:11:33.066750",
   "success_count": 5,
   "fail_count": 8,
   "companies": [
@@ -183,8 +183,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-07-13T16:23:01.328669",
-      "news_retry_count": 1
+      "news_generated_at": "2026-07-13T13:11:50.401909",
+      "news_retry_count": 2
     },
     {
       "code": "2886",
@@ -380,8 +380,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-07-13T16:23:43.684855",
-      "news_retry_count": 1
+      "news_generated_at": "2026-07-13T13:12:33.633502",
+      "news_retry_count": 2
     },
     {
       "code": "5880",
