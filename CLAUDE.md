@@ -201,7 +201,7 @@ with open('docs/data/115-03.json', 'w', encoding='utf-8') as f: json.dump(d, f, 
 |------|------|
 | USD/TWD | yfinance `TWD=X` |
 | 加權指數 | yfinance `^TWII` |
-| 台股日均成交額 | TWSE FMTQIK API（**注意：成交金額在 row[2]，不是 row[3]**） |
+| 台股集中市場日均成交額 | TWSE FMTQIK API（**注意：成交金額在 row[2]，不是 row[3]**）。**僅上市集中市場**，不含上櫃（TPEx）、興櫃、期權；前端卡片標示「台股集中市場日均成交額」以免誤解為全市場 |
 | S&P 500 | yfinance `^GSPC` |
 | US 10Y 殖利率 | yfinance `^TNX` |
 | TLT（iShares 20+ Year Treasury Bond ETF） | yfinance `TLT` — 壽險 FVTPL 境外長債部位代理指標 |

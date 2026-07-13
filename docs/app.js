@@ -232,7 +232,7 @@ function renderMarketSummary() {
   }
   if (it.taiex_turnover && it.taiex_turnover.value_yi != null) {
     cards.push(marketCard({
-      label: '台股日均成交額',
+      label: '台股集中市場日均成交額',
       value: formatNum(it.taiex_turnover.value_yi),
       unit: '億',
       changeText: pctText(it.taiex_turnover.pct_change, '較上月底'),
@@ -1168,7 +1168,7 @@ async function downloadExcel() {
       const fmtBps = v => v == null ? null : `${v >= 0 ? '+' : ''}${v} bps`;
       if (it.usdtwd)         mkt.push(['美元兌台幣',          it.usdtwd.value, it.usdtwd.prev_value, fmtPct(it.usdtwd.pct_change), `TWD｜${it.usdtwd.date || ''} vs ${it.usdtwd.prev_date || ''}`]);
       if (it.taiex)          mkt.push(['加權指數',            it.taiex.value, it.taiex.prev_value, fmtPct(it.taiex.pct_change), `點｜${it.taiex.date || ''} vs ${it.taiex.prev_date || ''}`]);
-      if (it.taiex_turnover) mkt.push(['台股日均成交額',      it.taiex_turnover.value_yi, it.taiex_turnover.prev_value_yi, fmtPct(it.taiex_turnover.pct_change), `億元 / 日均（本月 ${it.taiex_turnover.trading_days || '?'} 日 / 上月 ${it.taiex_turnover.prev_trading_days || '?'} 日）`]);
+      if (it.taiex_turnover) mkt.push(['台股集中市場日均成交額',      it.taiex_turnover.value_yi, it.taiex_turnover.prev_value_yi, fmtPct(it.taiex_turnover.pct_change), `億元 / 日均（本月 ${it.taiex_turnover.trading_days || '?'} 日 / 上月 ${it.taiex_turnover.prev_trading_days || '?'} 日）`]);
       if (it.spx)            mkt.push(['美股 S&P 500',        it.spx.value, it.spx.prev_value, fmtPct(it.spx.pct_change), `${it.spx.date || ''} vs ${it.spx.prev_date || ''}`]);
       if (it.us10y)          mkt.push(['美國 10Y 公債殖利率', it.us10y.value_pct, it.us10y.prev_value_pct, fmtBps(it.us10y.bps_change), `%（變動以 bps 表示）`]);
       const wsMkt = XLSX.utils.aoa_to_sheet(mkt);
