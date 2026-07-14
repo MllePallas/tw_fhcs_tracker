@@ -1,8 +1,8 @@
 {
   "report_period": "115/06",
-  "last_updated": "2026-07-13T13:11:33.066750",
-  "success_count": 5,
-  "fail_count": 8,
+  "last_updated": "2026-07-14T08:38:21.133842",
+  "success_count": 6,
+  "fail_count": 7,
   "companies": [
     {
       "code": "2880",
@@ -28,15 +28,73 @@
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/06 月自結損益尚未公告",
-      "available_titles": [
-        "本公司代子公司國泰人壽公告取得\r\nGreen Equity Investors X, L.P.",
-        "代子公司國泰投信公告總經理異動",
-        "代子公司國泰投信公告董事辭任",
-        "代子公司國泰投信公告變更第十屆董監事名單",
-        "代子公司國泰人壽澄清媒體報導\r\n「置地廣場桃園B區建物超高」乙事。"
-      ]
+      "announcement_date": "115/07/14",
+      "announcement_title": "公告本公司暨主要子公司115年06月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=4&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 16590,
+        "cumulative_profit": 76520,
+        "monthly_eps": null,
+        "cumulative_eps": 4.95,
+        "cumulative_profit_yoy_pct": 67.3,
+        "cumulative_profit_yoy_abs": 30770
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 11370,
+          "cumulative_profit": 46240,
+          "monthly_eps": null,
+          "cumulative_eps": 7.27,
+          "cumulative_profit_yoy_pct": 146.1,
+          "cumulative_profit_yoy_abs": 27450,
+          "fvoci_not_found_count": 1
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4990,
+          "cumulative_profit": 26990,
+          "monthly_eps": null,
+          "cumulative_eps": 1.95,
+          "cumulative_profit_yoy_pct": 15.4,
+          "cumulative_profit_yoy_abs": 3610
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 590,
+          "cumulative_profit": 2340,
+          "monthly_eps": null,
+          "cumulative_eps": 11.72,
+          "cumulative_profit_yoy_pct": 25.8,
+          "cumulative_profit_yoy_abs": 480
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 1120,
+          "cumulative_profit": 4410,
+          "monthly_eps": null,
+          "cumulative_eps": 5.73,
+          "cumulative_profit_yoy_pct": 147.8,
+          "cumulative_profit_yoy_abs": 2630
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 190,
+          "cumulative_profit": 1650,
+          "monthly_eps": null,
+          "cumulative_eps": 11.03,
+          "cumulative_profit_yoy_pct": 17.9,
+          "cumulative_profit_yoy_abs": 250
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/06",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-07-14T08:38:37.327798",
+      "news_retry_count": 1
     },
     {
       "code": "2883",
@@ -181,10 +239,14 @@
       "unit": "百萬元",
       "report_month": "115/06",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
-      "news_sources": [],
-      "news_generated_at": "2026-07-13T13:11:50.401909",
-      "news_retry_count": 2
+      "news_summary": "**重點**\n\n\n元大金控於 7 月 13 日公布 2026 年 6 月單月稅後純益 75.12 億元，連續兩個月突破 70 億元，並創下歷年同月新高，年增幅達 14.77%；累計前六月稅後純益 365.72 億元，再寫史上新高，今年僅半年即超越去年全年水準，年增幅達 125.36%，每股稅後純益（EPS）為 2.74 元。\n\n\n主要驅動因素為台股交易動能持續熱絡——\n6 月台股日均量續創歷年新高，帶動旗下「金雞母」元大證券經紀手收大幅成長。\n\n\n---\n\n**子公司明細**\n\n| 子公司 | 6 月單月稅後純益 | 累計前六月 |\n|---|---|---|\n| 元大證券 | 54.48 億元 | 245.28 億元 |\n| 元大銀行 | 14.8 億元 | 76.92 億元 |\n| 元大人壽 | 2.16 億元 | 24.41 億元 |\n| 元大期貨 | 3.51 億元 | 15.44 億元 |\n| 元大投信 | 6.25 億元 | 29.67 億元 |\n\n- \n**元大證券**：受惠台股日均量續創歷年新高，帶動經紀手收，6 月稅後純益達 54.48 億元，前六月大賺 245.28 億元，年增幅高達 155.82%；6 月與銀行單月獲利均創歷年同月新高。\n\n- \n**元大銀行**：6 月主要獲利來源仍為利息淨收益及財管手收，6 月稅後純益 14.8 億元，前六月稅後純益達 76.92 億元，年增幅 45.24%。\n\n- \n**元大人壽**：6 月稅後純益 2.16 億元，前六月稅後純益 24.41 億元；**元大期貨**：6 月稅後純益 3.51 億元，前六月 15.44 億元；**元大投信**：6 月稅後純益 6.25 億元，前六月 29.67 億元。\n\n- \n就前六月整體表現而言，金控、證券、銀行、人壽皆創歷史新高。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20260713701619-430304",
+          "title": "元大金上半年大賺365.72億元 已超越去年整年！ - 金融 - 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-07-14T08:39:24.142601"
     },
     {
       "code": "2886",
@@ -380,8 +442,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-07-13T13:12:33.633502",
-      "news_retry_count": 2
+      "news_generated_at": "2026-07-14T08:40:10.449639",
+      "news_retry_count": 3
     },
     {
       "code": "5880",
