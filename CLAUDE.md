@@ -17,7 +17,7 @@ tw_fhcs_tracker/
 │   ├── mops_client.py          # MOPS API 客戶端（2025 新版 gateway，含 retry）
 │   ├── parser.py               # HTML 解析器（規則 + LLM fallback，含 EPS）
 │   ├── news_summary.py         # 新聞摘要產生器（Claude API + web_search）
-│   ├── fvoci_adjustment.py     # 壽險 IFRS 17：抓金控揭露之調整後獲利、推算到壽險子公司
+│   ├── fvoci_adjustment.py     # 壽險 IFRS 17：抓壽險子公司加計FVOCI後獲利（當月+累計）
 │   ├── market_summary.py       # 本月市場概況（FX/指數/殖利率，yfinance + TWSE）
 │   ├── bootstrap_history.py    # 一次性：批次爬取整年歸檔（YoY baseline）
 │   └── main.py                 # 主程式，產生 JSON、計算 YoY、更新 index.json
@@ -233,15 +233,21 @@ python news_summary.py --month 115/02  # 指定月份
 
 **模型**：`claude-sonnet-4-6`（含 web_search 工具）
 
-**輸出欄位**：`news_summary`（~150字繁中）、`news_sources`（URL 列表）、`news_generated_at`
+**輸出欄位**：`news_summary`（~200字繁中）、`news_sources`（URL 列表）、`news_generated_at`
 
 若查無相關報導，`news_summary` 填 `"無相關說明"`。
 
+**格式一致化（2026-07-15 起）**：13 家摘要統一模板——恰好兩段，段落標題固定 `**重點**`、`**子公司明細**`（粗體），禁止 `##`/`###` 大標題、`---` 分隔線、判斷前言。除 prompt 約束外，`normalize_summary()` 於寫入前後處理（丟大標題/分隔線/前言、`#` 標題轉粗體），冪等。
+
+**來源日期防呆**：URL 帶日期的來源（ctee `/news/YYYYMMDD`）若發布日 < 公告月份第一天（N 月資料於 N+1 月公告）即剔除，擋掉去年同月與公告前的錯置文章；URL 無日期者放行。
+
 ---
 
-## 壽險 FVOCI 調整後獲利（fvoci_adjustment.py）
+## 壽險加計 FVOCI 後獲利（fvoci_adjustment.py）
 
-2026 年起壽險公司接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L，使得壽險子公司的 P&L 與去年同期（仍含 FVOCI 計入 P&L）難以直接比較。富邦、凱基等金控會在月損益新聞稿**直接揭露壽險子公司本身**（富邦人壽、凱基人壽）「**加計 FVOCI 處份利益後的累計調整後獲利**」，以利同基比較。
+2026 年起壽險公司接軌 IFRS 17，FVOCI 股票處份利益不再計入 P&L，使得壽險子公司的 P&L 與去年同期（仍含 FVOCI 計入 P&L）難以直接比較。富邦、凱基等金控會在月損益新聞稿**直接揭露壽險子公司本身**（富邦人壽、凱基人壽）「**加計 FVOCI 處份利益後的獲利**」（當月＋累計），以利同基比較。
+
+**用語變更（2026-07 起，重要）**：主管機關要求新聞稿**不得使用「調整後獲利」**一詞（與會計原則不符），各壽險公司自 115/06 損益新聞稿起改用新表述——凱基／富邦：「**加計FVOCI獲利**」；國泰：「**對保留盈餘影響數**」（例「加計 FVOCI 股票處分損益，累計前六月對保留盈餘影響數已突破 1,300 億元」）。prompt 搜尋關鍵字已同時涵蓋新舊用語（舊聞 fallback 仍搜「調整後獲利」）。
 
 ```bash
 cd scraper
@@ -256,9 +262,9 @@ python fvoci_adjustment.py --codes 2881 2883
 **作用對象**：`LIFE_INSURANCE_CODES = {2881, 2882, 2883, 2887, 2891}` 旗下的壽險子公司（名稱含「人壽」者）。其他金控不處理。
 
 **抓取邏輯**：
-1. LLM 直接搜尋**壽險子公司本身**（如「富邦人壽」、「凱基人壽」）在新聞中揭露的「累計調整後獲利」（NT$m）
-2. `life_sub.fvoci_adjusted.cumulative_profit = adjusted_life_cumul`（直接寫入，不再透過金控差額推算）
-3. 合理性檢查：`adjusted_life_cumul > life_sub.cumulative_profit`（加計處份利益應更大）；否則視為 not_found
+1. LLM 直接搜尋**壽險子公司本身**（如「富邦人壽」、「凱基人壽」）在新聞中揭露的加計 FVOCI 後**累計**獲利（必要）與**當月**獲利（選填，新聞有揭露才抓，如凱基；禁止用累計差額回推）（NT$m）
+2. `life_sub.fvoci_adjusted.cumulative_profit = adjusted_life_cumul`（直接寫入，不再透過金控差額推算）；當月數寫入 `fvoci_adjusted.monthly_profit`（缺漏則欄位省略，前端顯示 `—`）
+3. 合理性檢查：`adjusted_life_cumul > life_sub.cumulative_profit`（加計處份利益應更大）；否則視為 not_found。當月數同理（`>= monthly_profit`），驗證不過只丟當月數、不影響累計
 4. 若新聞僅揭露金控合併層級而未列出壽險子公司本身的調整後獲利 → not_found，欄位不寫
 5. **來源日期防呆**（`_extract_source_date` / `_announcement_month_start`）：要求新聞發布日 ≥ 公告月份第一天（N 月資料於 N+1 月公告，例 115/05 → 須 ≥ 2026-06-01）。擋掉公告前的「事前預估／掌握」稿（例：富邦/國泰常有 5/29 即報「前5月」的推估稿，數字未定）。**僅對 URL 帶日期的來源有效**（工商時報 ctee `/news/YYYYMMDD`）；cnyes/udn/ltn 的 URL 無日期 → 無法驗證、維持放行
 6. **區間/門檻型（`value_type: "lower_bound"`）**：少數壽險公司（目前**國泰人壽**）只揭露區間而非具體數字（例「累計調整後獲利突破1,000億」）。LLM 回傳 `value_kind: "lower_bound"` 時，存下界數值 + `display_prefix`（逾／突破／超過），**不寫 `delta_vs_original`、不算 YoY**（下界與去年精確值相除會得出假精度的百分比）。`main.compute_yoy` 偵測 `value_type=="lower_bound"` 自動跳過 YoY
@@ -268,33 +274,34 @@ python fvoci_adjustment.py --codes 2881 2883
 **輸出欄位**（壽險子公司物件下新增 nested object）：
 ```json
 "fvoci_adjusted": {
-  "cumulative_profit": 47280,          // NT$m，直接從新聞抓到的壽險公司累計調整後獲利
-  "delta_vs_original": 32160,          // = cumulative_profit − 壽險原始累計 P&L（純紀錄用）
-  "yoy_pct": 72.8,                     // 由 main.compute_yoy 填入
-  "source_url": "https://news.cnyes.com/...",
-  "source_quote": "富邦人壽…累計前3月調整後獲利為472.8億元…",
-  "original_value_text": "472.8 億元",
-  "generated_at": "2026-05-04T..."
+  "cumulative_profit": 67775,          // NT$m，直接從新聞抓到的壽險公司累計加計FVOCI後獲利
+  "monthly_profit": 15447,             // NT$m，當月加計FVOCI後獲利（新聞有揭露才有，選填）
+  "delta_vs_original": 58572,          // = cumulative_profit − 壽險原始累計 P&L（純紀錄用）
+  "yoy_pct": 72.8,                     // 由 main.compute_yoy 填入（累計基準）
+  "source_url": "https://www.ctee.com.tw/...",
+  "source_quote": "凱基人壽…6月加計FVOCI獲利154.47億元…累計前6月加計FVOCI獲利為677.75億元…",
+  "original_value_text": "677.75億元",
+  "generated_at": "2026-07-15T..."
 }
 ```
 
 **YoY 語意**：今年加計 FVOCI 後的調整數 vs 去年同期 baseline 的原始 P&L（去年仍含 FVOCI 計入 P&L）→ 兩邊皆「含 FVOCI 影響」，apples-to-apples。`main.compute_yoy` 自動計算並寫入 `fvoci_adjusted.yoy_pct`。
 
-**區間/門檻型輸出欄位**（國泰人壽）：
+**區間/門檻型輸出欄位**（國泰人壽，115/06 起以「對保留盈餘影響數」揭露）：
 ```json
 "fvoci_adjusted": {
   "value_type": "lower_bound",
-  "cumulative_profit": 100000,         // NT$m，門檻下界（突破1,000億 → 100000）
-  "display_prefix": "逾",              // 新聞用字（逾／突破／超過）
-  "source_url": "https://money.udn.com/...",
-  "source_quote": "國泰人壽…累計前5月調整後獲利突破1,000億元…",
-  "original_value_text": "突破1,000億元",
-  "generated_at": "2026-06-11T..."
-  // 無 delta_vs_original、無 yoy_*
+  "cumulative_profit": 130000,         // NT$m，門檻下界（突破1,300億 → 130000）
+  "display_prefix": "突破",            // 新聞用字（逾／突破／超過）
+  "source_url": "https://news.cnyes.com/...",
+  "source_quote": "國泰人壽…加計 FVOCI 股票處分損益，累計前六月對保留盈餘影響數已突破 1300 億元…",
+  "original_value_text": "突破1300億元",
+  "generated_at": "2026-07-14T..."
+  // 無 delta_vs_original、無 yoy_*；monthly_profit 通常亦無（國泰未揭露當月加計數）
 }
 ```
 
-**前端顯示**：壽險產業 tab、子公司展開面板皆於壽險子公司列下方加一行「（加上FVOCI股票處份利益）*」+ 累計 + YoY，註腳說明數字來源。其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入合計卡片或圖表。前端 `fvociDisplay()` 統一格式化：`lower_bound` 顯示「逾 X」且 YoY 欄為 `—`；具體值顯示數字 + YoY。
+**前端顯示**：壽險產業 tab、子公司展開面板皆於壽險子公司列下方加一行「（加上FVOCI股票處份利益）*」+ **當月** + 累計 + YoY，註腳說明數字來源。其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入合計卡片或圖表。前端 `fvociDisplay()` 統一格式化：`lower_bound` 顯示「逾／突破 X」且 YoY 欄為 `—`；具體值顯示數字 + YoY；當月數缺漏顯示 `—`（手機卡片則整項省略）。註腳文字統一存於 `FVOCI_FOOTNOTE` 常數。
 
 ---
 
@@ -311,7 +318,7 @@ python fvoci_adjustment.py --codes 2881 2883
 | 2886 | 兆豐金 | |
 | 2887 | 台新新光金 | 2025年台新金+新光金合併；MOPS 舊資料可能殘留「台灣金」 |
 | 2889 | 國票金 | |
-| 2890 | 永豐金 | |
+| 2890 | 永豐金 | 京城銀行自 114/10 起併入月自結公告；115/01–09 累計 YoY 基期未含京城（前端於 YoY 欄標註「京城銀 114/10 併入獲利公告」，115/10 起基期對齊、不再標註） |
 | 2891 | 中信金 | |
 | 2892 | 第一金 | |
 | 5880 | 合庫金 | |

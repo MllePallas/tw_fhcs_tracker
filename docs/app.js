@@ -56,23 +56,30 @@ function formatYoY(pct, abs, status, sourceUnit, displayUnit) {
   return { disp: `${sign}${pct.toFixed(1)}%`, cls };
 }
 
-// FVOCI 調整後獲利顯示。多數金控（富邦、凱基）揭露具體數字 → 顯示數字 + YoY。
-// 少數（國泰）僅揭露區間/門檻 → value_type==='lower_bound'，以「逾 X」表示下界、不顯示 YoY
-// （門檻值與去年精確值相除會得出假精度的百分比，語意誤導，故省略）。
+// 加計FVOCI股票處份利益後獲利顯示。多數金控（富邦、凱基）揭露具體數字 → 顯示數字 + YoY。
+// 少數（國泰，以「對保留盈餘影響數」揭露）僅給區間/門檻 → value_type==='lower_bound'，
+// 以「逾/突破 X」表示下界、不顯示 YoY（門檻值與去年精確值相除會得出假精度的百分比，語意誤導，故省略）。
+// 當月數（monthly_profit）為選填：新聞有揭露（如凱基）才有，缺漏顯示 —。
 function fvociDisplay(a, sourceUnit, displayUnit) {
   const v = convertUnit(a.cumulative_profit, sourceUnit, displayUnit);
+  const mv = convertUnit(a.monthly_profit, sourceUnit, displayUnit);
+  const monthlyDisp = mv != null ? formatNum(mv) : '—';
   if (a.value_type === 'lower_bound') {
     const prefix = a.display_prefix || '逾';
-    return { cumulDisp: `${prefix} ${formatNum(v)}`, yoyDisp: '—', isBound: true };
+    return { monthlyDisp, cumulDisp: `${prefix} ${formatNum(v)}`, yoyDisp: '—', isBound: true };
   }
   const yoyDisp = formatYoY(a.yoy_pct, a.yoy_abs, a.yoy_status, sourceUnit, displayUnit).disp;
-  return { cumulDisp: formatNum(v), yoyDisp, isBound: false };
+  return { monthlyDisp, cumulDisp: formatNum(v), yoyDisp, isBound: false };
 }
+
+// 壽險表格/卡片共用的 FVOCI 註腳文字
+const FVOCI_FOOTNOTE = '加計FVOCI股票處份利益後之當月／累計獲利，依各壽險公司新聞稿揭露數字，僅供與去年同期比較之參考。國泰人壽僅揭露「對保留盈餘影響數」門檻值，以「逾／突破」標示下界且不計 YoY。';
 
 // 金控層級併購／重大異動備註（前端靜態，不依賴爬蟲資料，重爬不會遺失）。
 // 顯示於詳情面板底部。key = 金控代號。
 const COMPANY_NOTES = {
   "2887": "元富證券於 2026/4/6（民國115/04/06）併入台新證券，台新證券數字自此含元富證券。",
+  "2890": "京城銀行自 114/10（2025年10月）起併入永豐金月自結獲利公告；115/01–115/09 的累計 YoY 比較基期（114/01–09）未含京城銀行，成長率會偏高。",
 };
 
 // YoY 排序鍵：虧轉盈 > 正成長 > 負成長 > 盈轉虧；同 tier 內依 pct 排序
@@ -364,6 +371,9 @@ function renderIndustryTable(industry) {
     if (yi.disp === '—' && r.parent_code === '2887' && period < '115/07') {
       yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
     }
+    if (yi.disp === '—' && r.name.includes('京城') && period < '115/10') {
+      yoyDisp = '<span class="yoy-note">114/10 併入獲利公告</span>';
+    }
 
     const main = `<tr>
       <td><a class="company-link" onclick="showDetail('${r.parent_code}')">${r.parent_name}</a></td>
@@ -387,7 +397,7 @@ function renderIndustryTable(industry) {
       adj = `<tr class="fvoci-row" style="background:#fafaff">
         <td></td>
         <td style="padding-left:20px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
-        <td></td>
+        <td class="num" style="${numStyle}">${fd.monthlyDisp}</td>
         <td class="num" style="${numStyle}">${fd.cumulDisp}</td>
         <td class="num" style="${numStyle}">${fd.yoyDisp}</td>
       </tr>`;
@@ -401,7 +411,7 @@ function renderIndustryTable(industry) {
   if (tfoot) {
     if (industry === 'life' && hasFvoci) {
       tfoot.innerHTML = `<tr><td colspan="5" style="padding:8px 12px;font-size:11px;color:#718096;border-top:1px solid #edf2f7">
-        <sup>*</sup> 加上FVOCI股票處份利益後的調整後累計獲利，依各壽險公司新聞稿揭露數字；僅供與去年同期比較之參考。部分公司（如國泰人壽）僅揭露區間，以「逾」標示下界且不計 YoY。
+        <sup>*</sup> ${FVOCI_FOOTNOTE}
       </td></tr>`;
     } else {
       tfoot.innerHTML = '';
@@ -462,6 +472,10 @@ function renderRow(c) {
   let yoyDisp = yi.disp;
   if (yi.disp === '—' && c.code === '2887' && period < '115/07') {
     yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
+  }
+  // 2890 永豐金：京城銀行 114/10 併入公告，115/01–09 的 YoY 基期未含京城 → 標註提醒
+  if (yi.disp !== '—' && c.code === '2890' && period < '115/10') {
+    yoyDisp += '<br><span class="yoy-note">京城銀 114/10 併入獲利公告</span>';
   }
 
   // EPS：當月 EPS 公告通常沒列，可用 月損益/累計損益 × 累計EPS 推算
@@ -535,6 +549,9 @@ function renderHoldingCard(c) {
   if (yi.disp === '—' && c.code === '2887' && period < '115/07') {
     yoyDisp = '合併前';
   }
+  if (yi.disp !== '—' && c.code === '2890' && period < '115/10') {
+    yoyDisp += '<span class="yoy-note" style="display:block">京城銀 114/10 併入</span>';
+  }
 
   const epsC = h.cumulative_eps;
   const epsCDisp = epsC != null ? formatEps(epsC) : '—';
@@ -594,6 +611,9 @@ function renderIndustryCards(industry) {
     if (yi.disp === '—' && r.parent_code === '2887' && period < '115/07') {
       yoyDisp = '合併前';
     }
+    if (yi.disp === '—' && r.name.includes('京城') && period < '115/10') {
+      yoyDisp = '<span class="yoy-note">114/10 併入</span>';
+    }
 
     // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示（淡藍色弱化，不干擾主排序）
     let adjBlock = '';
@@ -601,10 +621,12 @@ function renderIndustryCards(industry) {
     if (industry === 'life' && a && a.cumulative_profit != null) {
       const fd = fvociDisplay(a, r.unit, unit);
       const yoyPart = fd.isBound ? '' : `<div>YoY：${fd.yoyDisp}</div>`;
+      const monthlyPart = fd.monthlyDisp !== '—' ? `<div>當月：${fd.monthlyDisp}</div>` : '';
       adjBlock = `
       <div class="m-fvoci" style="margin-top:6px;padding-top:6px;border-top:1px dashed #d6d9e2;font-size:12px;color:#5568b8;font-style:italic">
         <div style="margin-bottom:4px;font-style:normal">（加上FVOCI股票處份利益）<sup>*</sup></div>
-        <div style="display:flex;gap:14px">
+        <div style="display:flex;gap:14px;flex-wrap:wrap">
+          ${monthlyPart}
           <div>累計：${fd.cumulDisp}</div>
           ${yoyPart}
         </div>
@@ -641,7 +663,7 @@ function renderIndustryCards(industry) {
   if (industry === 'life' && rows.some(r => r.fvoci_adjusted && r.fvoci_adjusted.cumulative_profit != null)) {
     el.insertAdjacentHTML('beforeend', `
       <div style="font-size:11px;color:#718096;padding:8px 4px">
-        <sup>*</sup> 加上FVOCI股票處份利益後的調整後累計獲利，依各壽險公司新聞稿揭露數字；僅供與去年同期比較之參考。部分公司（如國泰人壽）僅揭露區間，以「逾」標示下界且不計 YoY。
+        <sup>*</sup> ${FVOCI_FOOTNOTE}
       </div>
     `);
   }
@@ -798,7 +820,7 @@ function showDetail(code) {
         : '';
       const adj = `<tr style="border-bottom:1px solid #f0f0f0;background:#fafaff">
         <td style="padding:4px 8px;padding-left:18px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
-        <td></td>
+        <td class="num" style="padding:4px 8px;white-space:nowrap;color:#5568b8;font-size:12px;font-style:italic">${fd.monthlyDisp}</td>
         <td></td>
         <td class="num" style="padding:4px 8px;white-space:nowrap;color:#5568b8;font-size:12px;font-style:italic">${fd.cumulDisp}</td>
       </tr>`;
@@ -807,7 +829,7 @@ function showDetail(code) {
 
     const fvociFootnote = hasFvoci
       ? `<p style="font-size:11px;color:#718096;margin-top:6px">
-           <sup>*</sup> 依各壽險公司新聞稿揭露之加計 FVOCI 處份利益後調整後獲利；僅供與去年同期比較之參考。部分公司（如國泰人壽）僅揭露區間，以「逾」標示下界且不計 YoY。
+           <sup>*</sup> ${FVOCI_FOOTNOTE}
          </p>`
       : '';
 
@@ -1106,7 +1128,7 @@ async function downloadExcel() {
       const rows = getIndustryRows(cfg.key);
       const header = ['集團代號', '集團', '子公司', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)'];
       if (cfg.hasFvoci) {
-        header.push(`加計 FVOCI 累計獲利 (${unit})`, '加計 FVOCI YoY (%)', 'FVOCI 引用原文', 'FVOCI 來源 URL');
+        header.push(`加計 FVOCI 當月獲利 (${unit})`, `加計 FVOCI 累計獲利 (${unit})`, '加計 FVOCI YoY (%)', 'FVOCI 引用原文', 'FVOCI 來源 URL');
       }
       const sheetData = [header];
       for (const r of rows) {
@@ -1117,25 +1139,26 @@ async function downloadExcel() {
           const a = r.fvoci_adjusted;
           if (a && a.cumulative_profit != null) {
             const v = convertUnit(a.cumulative_profit, r.unit, unit);
-            // 區間/門檻型（國泰）：以「逾 X」字串表示下界、YoY 留空
+            // 區間/門檻型（國泰「對保留盈餘影響數」）：以「逾 X」字串表示下界、YoY 留空
             const cumulCell = a.value_type === 'lower_bound'
               ? `${a.display_prefix || '逾'} ${formatNum(v)}`
               : v;
             row.push(
+              convertUnit(a.monthly_profit, r.unit, unit),
               cumulCell,
               a.value_type === 'lower_bound' ? null : (a.yoy_pct ?? null),
               a.source_quote || '',
               a.source_url || '',
             );
           } else {
-            row.push(null, null, '', '');
+            row.push(null, null, null, '', '');
           }
         }
         sheetData.push(row);
       }
       const ws = XLSX.utils.aoa_to_sheet(sheetData);
       ws['!cols'] = cfg.hasFvoci
-        ? [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14},{wch:20},{wch:18},{wch:60},{wch:50}]
+        ? [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14},{wch:20},{wch:20},{wch:18},{wch:60},{wch:50}]
         : [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14}];
       ws['!freeze'] = { ySplit: 1 };
       XLSX.utils.book_append_sheet(wb, ws, cfg.sheetName);

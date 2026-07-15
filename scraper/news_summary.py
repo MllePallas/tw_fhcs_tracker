@@ -6,6 +6,7 @@
 # 冪等：已有 news_summary 的 entry 預設跳過；--force 才重做。
 
 import os
+import re
 import sys
 import json
 import time
@@ -62,9 +63,66 @@ def _load_dotenv():
 _load_dotenv()
 
 
-# 有壽險子公司的金控代號（IFRS 17 適用，需關注 CSM / 調整後獲利 / FVOCI）
+# 有壽險子公司的金控代號（IFRS 17 適用，需關注 CSM / 加計FVOCI後獲利）
 LIFE_INSURANCE_CODES = {"2881", "2882", "2883", "2887", "2891"}
 # 2881 富邦人壽、2882 國泰人壽、2883 凱基人壽、2887 新光人壽、2891 台灣人壽
+
+
+def normalize_summary(text):
+    """統一各家摘要格式（LLM 輸出偶爾夾雜 ## 大標題、---、判斷前言）：
+    - 丟棄分隔線與「XX金控…摘要」大標題行
+    - #/##/### 標題一律轉成 **粗體** 段落標題
+    - 若存在 **重點** 標題，丟棄其前的前言（LLM 判斷過程等）
+    冪等：已符合模板的摘要不會被改動。"""
+    if not text:
+        return text
+    out = []
+    for ln in text.splitlines():
+        s = ln.strip()
+        if re.match(r"^-{3,}$", s):
+            continue
+        m = re.match(r"^#{1,6}\s*(.+?)\s*$", s)
+        if m:
+            inner = m.group(1).strip().strip("*").strip()
+            # 「XX金（1234）115年X月自結損益摘要」這類大標題直接丟棄
+            if inner.endswith("摘要"):
+                continue
+            out.append(f"**{inner}**")
+            continue
+        out.append(ln)
+    result = "\n".join(out)
+    idx = result.find("**重點**")
+    if idx > 0:
+        result = result[idx:]
+    # 孤懸的清單符號「- 」＋換行 → 與下一行接回同一列
+    result = re.sub(r"^(-[ \t]*)\n+(?=\S)", "- ", result, flags=re.M)
+    return re.sub(r"\n{3,}", "\n\n", result).strip()
+
+
+def _extract_source_date(url):
+    """從新聞 URL 嘗試解析發布日期；ctee `/news/YYYYMMDD` 可解析，其餘多回傳 None。"""
+    if not url:
+        return None
+    m = re.search(r"/news/(\d{8})", url)
+    if not m:
+        m = re.search(r"(?<!\d)(20\d{6})(?!\d)", url)
+    if not m:
+        return None
+    try:
+        return datetime.strptime(m.group(1), "%Y%m%d").date()
+    except ValueError:
+        return None
+
+
+def _announcement_month_start(period):
+    """目標月份 N → 公告月份 N+1 的第一天。例 115/06 → 2026-07-01。
+    公告月份之前發布的新聞必屬其他月份（甚至去年），不可列為來源。"""
+    roc_year, roc_month = period.split("/")
+    western_year = int(roc_year) + 1911
+    m = int(roc_month)
+    if m < 12:
+        return datetime(western_year, m + 1, 1).date()
+    return datetime(western_year + 1, 1, 1).date()
 
 
 def _build_prompt(name, code, period, monthly, cumul, subs):
@@ -88,12 +146,14 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
         life_ins_name = next(
             (s.get("name") for s in subs if "人壽" in s.get("name", "")), "壽險子公司"
         )
-        life_search = f"3. `{life_ins_name} CSM 調整後獲利` 或 `{name} 壽險 FVOCI`"
+        life_search = f"3. `{life_ins_name} 加計FVOCI 獲利` 或 `{life_ins_name} 對保留盈餘影響數`"
         life_context = f"""
 【壽險子公司特別注意（IFRS 17）】
 此金控旗下有壽險子公司（{life_ins_name}），媒體報導可能涉及：
 - **CSM（合約服務邊際）**：IFRS 17 下壽險核心獲利指標，反映未來利潤釋放速度
-- **調整後獲利**：排除 FVOCI 股票處份利益的核心獲利（較能反映業務本質）
+- **加計FVOCI後獲利／對保留盈餘影響數**：主管機關已要求新聞稿不得使用「調整後獲利」一詞；
+  2026年7月起媒體改以「加計FVOCI（股票處分損益）獲利」（富邦、凱基）或「對保留盈餘影響數」
+  （國泰）表達加回 FVOCI 處份利益後的同基比較數字。摘要中請沿用新聞的新用語，不要自行改寫成「調整後獲利」
 - **FVOCI 股票處份利益**：壽險公司處分 FVOCI 股票認列的一次性利益，波動大
 - **投資收益 vs 承保利益**：IFRS 17 下壽險獲利拆解為這兩大來源
 
@@ -123,7 +183,7 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 ❌ 標 **IRRELEVANT** 的情境（**過去最常見的錯置**）：
 - 搜尋只回傳**其他月份**的新聞（內容描述的數字屬於 {western_year} 年的**其他**月份，**非** {m} 月）→ **IRRELEVANT**，**不要**拿其他月份的新聞數字湊 {m} 月摘要
 - 內文出現的月份數字（X 月稅後 Y 億）X ≠ {m} → IRRELEVANT
-- 只有去年（{western_year - 1} 年）舊報導、股利、股東會、ESG → IRRELEVANT
+- 只有去年（{western_year - 1} 年）舊報導、股利、股東會、ESG → IRRELEVANT。**特別注意去年同月的損益報導**（例：{western_year - 1} 年報導「{m - 1 if m > 1 else 12}月／前{m - 1 if m > 1 else 12}月獲利」），年份不對即 IRRELEVANT；可由 URL 中的日期（如 ctee `/news/YYYYMMDD`）輔助判斷年份
 - 完全沒有搜到任何相關新聞 → IRRELEVANT
 
 ⚠️ **判斷重點**：看「**內文寫的是哪一月的數字**」，不是看「**新聞何時發布**」。
@@ -133,16 +193,24 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 **第一行**必須是純文字 `RELEVANT` 或 `IRRELEVANT`（無 markdown、無前綴）。
 不要在 marker 之前加任何分析、說明、客套話。要分析判斷過程的話，寫在 marker 之後的摘要正文裡。
 
-【輸出格式】
+【輸出格式（嚴格模板——13 家金控的摘要必須呈現一致，逐字遵守）】
 第一行：`RELEVANT` 或 `IRRELEVANT`
-第二行起：摘要內容（markdown，~200 字）
 
-若 RELEVANT，摘要分兩段：
+若 RELEVANT，第二行起**必須**依下列模板，恰好兩段（專業分析師風格）：
+
 **重點**
-1-2 句說明當月主要驅動因素（利息淨收益、股債市影響、保險業務變化、信用成本、匯率避險、CSM 釋放等）。
+1-2 句說明當月獲利水準與主要驅動因素（利息淨收益、股債市影響、保險業務變化、信用成本、匯率避險、CSM 釋放等）。
 
 **子公司明細**
-依新聞具體提到的數字（壽險 CSM／調整後獲利／FVOCI 處份利益、銀行手續費／利差、證券手續費等）。若新聞未提就省略整段。
+- 子公司A：新聞具體提到的數字（壽險加計FVOCI後獲利／對保留盈餘影響數／CSM、銀行手續費／利差、證券手續費等）
+- 子公司B：…
+
+模板硬性規則：
+- 段落標題**固定**為 `**重點**`、`**子公司明細**`（粗體），**禁止**改用 #、##、### markdown 標題
+- **禁止**輸出大標題（如「## XX金控（代號）115年X月自結損益摘要」）、分隔線（---）、表格、emoji
+- **禁止**輸出你的判斷過程（如「搜尋結果中…符合 RELEVANT 標準」）；marker 之後直接從 `**重點**` 開始
+- 若新聞未提及子公司具體數字，省略整個 `**子公司明細**` 段（不要寫「新聞未提及」）
+- 總長約 200 字
 
 若 IRRELEVANT，摘要寫單句：「{period} 無相關媒體報導；當月合併稅後淨利 {monthly} 百萬元，累計 {cumul} 百萬元。」
 
@@ -380,13 +448,26 @@ def main():
                 updated += 1
                 logger.info(f"[{name}] marked IRRELEVANT (retry {new_count}/{_retry_cap(code)}) → 無相關說明")
             else:
-                # 找到真實新聞 → 寫入並清除 retry_count
+                # 找到真實新聞 → 統一格式後寫入並清除 retry_count
+                summary = normalize_summary(summary)
+                # 來源日期防呆：公告月份（N+1 月）之前發布的新聞必屬其他月份，剔除
+                # （僅 URL 帶日期者可驗證，如 ctee /news/YYYYMMDD；其餘放行）
+                ann_start = _announcement_month_start(period)
+                kept_sources = []
+                for s in sources:
+                    if not s.get("url"):
+                        continue
+                    d = _extract_source_date(s["url"])
+                    if d and d < ann_start:
+                        logger.warning(f"[{name}] dropping stale source dated {d}: {s['url']}")
+                        continue
+                    kept_sources.append(s)
                 company["news_summary"] = summary
-                company["news_sources"] = [s for s in sources if s.get("url")]
+                company["news_sources"] = kept_sources
                 company["news_generated_at"] = datetime.now().isoformat()
                 company.pop("news_retry_count", None)
                 updated += 1
-                logger.info(f"[{name}] OK ({len(summary)} chars, {len(sources)} sources)")
+                logger.info(f"[{name}] OK ({len(summary)} chars, {len(kept_sources)} sources)")
         except Exception as e:
             logger.error(f"[{name}] Summary generation failed: {e}", exc_info=True)
             failed += 1
