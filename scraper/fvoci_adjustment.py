@@ -247,7 +247,7 @@ def find_life_subsidiary(subs):
     return None
 
 
-def process_company(client, company, period, force=False, debug=False):
+def process_company(client, company, period, force=False, debug=False, override_manual=False):
     """
     對單一金控公司處理 FVOCI 調整後獲利。
     回傳 'updated' / 'skipped' / 'not_found' / 'no_life_sub' / 'failed'。
@@ -265,6 +265,13 @@ def process_company(client, company, period, force=False, debug=False):
     if not life_sub:
         logger.info(f"[{name}] no life subsidiary found")
         return "no_life_sub"
+
+    # 人工補入的 FVOCI（manual_fvoci.py 寫入 manual=true）一律保留，
+    # 即使 --force 也不覆蓋；除非明確 --override-manual。
+    existing = life_sub.get("fvoci_adjusted")
+    if existing and existing.get("manual") and not override_manual:
+        logger.info(f"[{name}] manual fvoci present, skip (use --override-manual to replace)")
+        return "skipped"
 
     # 跳過條件（除非 --force）：
     #   1. 已有 fvoci_adjusted（成功）→ skip
@@ -402,6 +409,10 @@ def main():
     ap.add_argument("--codes", nargs="+", help="只處理特定代號", default=None)
     ap.add_argument("--force", action="store_true", help="強制重新生成（即使已有 fvoci_adjusted）")
     ap.add_argument(
+        "--override-manual", action="store_true",
+        help="連同人工補入（manual=true）的 FVOCI 一併重新生成；預設一律保留人工內容",
+    )
+    ap.add_argument(
         "--inter-call-sleep", type=int, default=30,
         help="每家之間 sleep 秒數（避開 rate limit），預設 30",
     )
@@ -445,15 +456,23 @@ def main():
         # 第二次 API call 起 sleep（避開 rate limit）
         if api_calls > 0 and company.get("code") in LIFE_INSURANCE_CODES:
             life_sub = find_life_subsidiary(company.get("subsidiaries", []))
-            will_skip = life_sub and not args.force and (
-                bool(life_sub.get("fvoci_adjusted"))
-                or life_sub.get("fvoci_not_found_count", 0) >= 3
+            existing = life_sub.get("fvoci_adjusted") if life_sub else None
+            is_manual = bool(existing and existing.get("manual") and not args.override_manual)
+            will_skip = life_sub and (
+                is_manual
+                or (not args.force and (
+                    bool(existing)
+                    or life_sub.get("fvoci_not_found_count", 0) >= 3
+                ))
             )
             if life_sub and not will_skip:
                 logger.info(f"Sleeping {args.inter_call_sleep}s before next call...")
                 time.sleep(args.inter_call_sleep)
 
-        result = process_company(client, company, period, force=args.force, debug=args.debug)
+        result = process_company(
+            client, company, period,
+            force=args.force, debug=args.debug, override_manual=args.override_manual,
+        )
         counts[result] = counts.get(result, 0) + 1
         if result in ("updated", "not_found", "failed"):
             api_calls += 1

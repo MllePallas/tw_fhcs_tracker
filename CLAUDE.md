@@ -18,6 +18,7 @@ tw_fhcs_tracker/
 │   ├── parser.py               # HTML 解析器（規則 + LLM fallback，含 EPS）
 │   ├── news_summary.py         # 新聞摘要產生器（Claude API + web_search）
 │   ├── manual_news.py          # 手動補新聞摘要（自動撲空時人工寫入，標記 news_manual）
+│   ├── manual_fvoci.py         # 手動補壽險加計FVOCI後獲利（自動撲空時人工寫入，標記 manual）
 │   ├── fvoci_adjustment.py     # 壽險 IFRS 17：抓壽險子公司加計FVOCI後獲利（當月+累計）
 │   ├── market_summary.py       # 本月市場概況（FX/指數/殖利率，yfinance + TWSE）
 │   ├── bootstrap_history.py    # 一次性：批次爬取整年歸檔（YoY baseline）
@@ -288,6 +289,27 @@ python fvoci_adjustment.py --codes 2881 2883
 4. 若新聞僅揭露金控合併層級而未列出壽險子公司本身的調整後獲利 → not_found，欄位不寫
 5. **來源日期防呆**（`_extract_source_date` / `_announcement_month_start`）：要求新聞發布日 ≥ 公告月份第一天（N 月資料於 N+1 月公告，例 115/05 → 須 ≥ 2026-06-01）。擋掉公告前的「事前預估／掌握」稿（例：富邦/國泰常有 5/29 即報「前5月」的推估稿，數字未定）。**僅對 URL 帶日期的來源有效**（工商時報 ctee `/news/YYYYMMDD`）；cnyes/udn/ltn 的 URL 無日期 → 無法驗證、維持放行
 6. **區間/門檻型（`value_type: "lower_bound"`）**：少數壽險公司（目前**國泰人壽**）只揭露區間而非具體數字（例「累計調整後獲利突破1,000億」）。LLM 回傳 `value_kind: "lower_bound"` 時，存下界數值 + `display_prefix`（逾／突破／超過），**不寫 `delta_vs_original`、不算 YoY**（下界與去年精確值相除會得出假精度的百分比）。`main.compute_yoy` 偵測 `value_type=="lower_bound"` 自動跳過 YoY
+
+### 手動補 FVOCI（manual_fvoci.py）
+
+富邦人壽的加計 FVOCI 後獲利只揭露在 Yahoo 股市（allowed_domains 以外），`fvoci_adjustment.py` 每月都抓不到；此時人工寫入：
+
+```bash
+cd scraper
+# 具體數字（exact）：累計必填，當月選填（NT$m，億×100）
+python manual_fvoci.py --code 2881 --period 115/06 \
+    --cumulative 143240 \
+    --source "https://tw.stock.yahoo.com/news/xxx" \
+    --quote "富邦人壽…加計FVOCI股票處分損益後，上半年合計1,432.4億元" \
+    --original-text "1,432.4億元"
+# 門檻/區間型（國泰「對保留盈餘影響數突破X億」）
+python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 130000 ...
+```
+
+- 寫入 `fvoci_adjusted.manual=true`：`fvoci_adjustment.py` 一般執行與 `--force` **都跳過不覆蓋**，除非 `--override-manual`
+- 自動重算 YoY（lower_bound 自動跳過）、同步 latest↔歸檔
+- 合理性檢查：累計 > 壽險原始累計（否則報錯退出）；當月同理
+- **富邦人壽通常只揭露累計加計數、不揭露當月加計數** → `--monthly` 省略，前端當月顯示 `—`
 
 > **歷史備註**：舊版（< 2026-05-04）透過金控層級調整後獲利推算（`delta = adjusted_holding − holding_cumul` 全數歸給壽險子公司）。但金控合併 P&L 包含其他子公司、少數權益、內部交易抵銷，差額**不等於**壽險的 FVOCI 處份利益，數字會有差數。已停用。
 

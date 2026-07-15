@@ -1,8 +1,8 @@
 {
   "report_period": "115/06",
-  "last_updated": "2026-07-15T01:02:36.122211",
-  "success_count": 12,
-  "fail_count": 1,
+  "last_updated": "2026-07-15T16:34:44.383756",
+  "success_count": 13,
+  "fail_count": 0,
   "companies": [
     {
       "code": "2880",
@@ -67,14 +67,86 @@
     {
       "code": "2881",
       "name": "富邦金",
-      "error": "no_match",
-      "error_msg": "115/06 月自結損益尚未公告",
-      "available_titles": [
-        "富邦金控代富邦保險經紀人(菲律賓)股份有限公司公告\r\n董事長選任事宜",
-        "富邦金控代富邦保險經紀人(菲律賓)股份有限公司公告\r\n總經理選任事宜",
-        "公告本公司115年股東常會重要決議事項\r\n(補充115/06/12公告)",
-        "富邦金控代子公司富邦銀行(香港)有限公司公告完成\r\n美元3億元第二類次順位債券定價(補充115/5/26公告)"
-      ]
+      "announcement_date": "115/07/15",
+      "announcement_title": "公告本公司暨主要子公司115年6月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": 9490,
+        "cumulative_profit": 97340,
+        "monthly_eps": null,
+        "cumulative_eps": 6.67,
+        "cumulative_profit_yoy_pct": 89.6,
+        "cumulative_profit_yoy_abs": 46000
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 5200,
+          "cumulative_profit": 25730,
+          "monthly_eps": null,
+          "cumulative_eps": 1.5,
+          "cumulative_profit_yoy_pct": 31.7,
+          "cumulative_profit_yoy_abs": 6200
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 2600,
+          "cumulative_profit": 11020,
+          "monthly_eps": null,
+          "cumulative_eps": 6.78,
+          "cumulative_profit_yoy_pct": 172.1,
+          "cumulative_profit_yoy_abs": 6970
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 950,
+          "cumulative_profit": 5590,
+          "monthly_eps": null,
+          "cumulative_eps": 18.63,
+          "cumulative_profit_yoy_pct": 93.4,
+          "cumulative_profit_yoy_abs": 2700
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": 1690,
+          "cumulative_profit": 55580,
+          "monthly_eps": null,
+          "cumulative_eps": 4.69,
+          "cumulative_profit_yoy_pct": 126.5,
+          "cumulative_profit_yoy_abs": 31040,
+          "fvoci_adjusted": {
+            "cumulative_profit": 143240.0,
+            "delta_vs_original": 87660.0,
+            "source_url": "https://tw.stock.yahoo.com/news/%E9%9B%99%E5%86%A0%E7%8E%8B%EF%BC%81%E5%AF%8C%E9%82%A6%E9%87%91%E4%B8%8A%E5%8D%8A%E5%B9%B4%E8%B3%BA973%E5%84%84%E5%85%83-eps667%E5%85%83-082021909.html",
+            "source_quote": "富邦人壽上半年累計稅後淨利555.8億元；加計FVOCI股票處分損益後，上半年合計1,432.4億元",
+            "original_value_text": "1,432.4億元",
+            "manual": true,
+            "generated_at": "2026-07-15T16:37:59.850626",
+            "yoy_pct": 483.7,
+            "yoy_abs": 118700
+          }
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 140,
+          "cumulative_profit": 890,
+          "monthly_eps": null,
+          "cumulative_eps": 3.29
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/06",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n富邦金6月單月稅後純益94.9億元，累計上半年稅後純益973.4億元、創歷史同期新高，累計EPS 6.67元；若加計FVOCI股票處分損益，上半年合計1,884.1億元、總EPS達13.17元。獲利由壽險、銀行、證券三引擎齊揚，銀行與證券子公司成長尤為強勁。\n\n**子公司明細**\n- 富邦人壽：6月稅後16.9億元，上半年累計555.8億元；加計FVOCI股票處分損益後上半年合計1,432.4億元。\n- 台北富邦銀行：6月稅後52.0億元、年增36%，單月獲利首次突破50億元；上半年累計257.3億元、年增32%。\n- 富邦證券：6月稅後26.0億元，上半年累計110.2億元、年增172%。\n- 富邦投信：上半年累計8.9億元、年增75%。富邦產險：上半年累計55.9億元，創同期新高。",
+      "news_sources": [
+        {
+          "url": "https://tw.stock.yahoo.com/news/%E9%9B%99%E5%86%A0%E7%8E%8B%EF%BC%81%E5%AF%8C%E9%82%A6%E9%87%91%E4%B8%8A%E5%8D%8A%E5%B9%B4%E8%B3%BA973%E5%84%84%E5%85%83-eps667%E5%85%83-082021909.html",
+          "title": "雙冠王！富邦金上半年賺973億元、EPS 6.67元 | Yahoo股市"
+        }
+      ],
+      "news_generated_at": "2026-07-15T16:46:55.311667",
+      "news_manual": true
     },
     {
       "code": "2882",
