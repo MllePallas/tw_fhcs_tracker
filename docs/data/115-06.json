@@ -117,12 +117,13 @@
           "cumulative_profit_yoy_abs": 31040,
           "fvoci_adjusted": {
             "cumulative_profit": 143240.0,
+            "monthly_profit": 19780.0,
             "delta_vs_original": 87660.0,
             "source_url": "https://tw.stock.yahoo.com/news/%E9%9B%99%E5%86%A0%E7%8E%8B%EF%BC%81%E5%AF%8C%E9%82%A6%E9%87%91%E4%B8%8A%E5%8D%8A%E5%B9%B4%E8%B3%BA973%E5%84%84%E5%85%83-eps667%E5%85%83-082021909.html",
-            "source_quote": "富邦人壽上半年累計稅後淨利555.8億元；加計FVOCI股票處分損益後，上半年合計1,432.4億元",
-            "original_value_text": "1,432.4億元",
+            "source_quote": "富邦人壽6月稅後淨利16.9億元，累計前6月555.8億元；加計單6月及累計前6月FVOCI權益工具稅後處分損益180.9億元及876.6億元後，單6月及累計前6月本期淨利加計FVOCI後分別為197.8億元及1,432.4億元",
+            "original_value_text": "單6月197.8億元、累計前6月1,432.4億元",
             "manual": true,
-            "generated_at": "2026-07-15T16:37:59.850626",
+            "generated_at": "2026-07-15T17:10:19.263057",
             "yoy_pct": 483.7,
             "yoy_abs": 118700
           }
