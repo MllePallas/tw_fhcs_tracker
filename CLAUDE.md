@@ -17,6 +17,7 @@ tw_fhcs_tracker/
 │   ├── mops_client.py          # MOPS API 客戶端（2025 新版 gateway，含 retry）
 │   ├── parser.py               # HTML 解析器（規則 + LLM fallback，含 EPS）
 │   ├── news_summary.py         # 新聞摘要產生器（Claude API + web_search）
+│   ├── manual_news.py          # 手動補新聞摘要（自動撲空時人工寫入，標記 news_manual）
 │   ├── fvoci_adjustment.py     # 壽險 IFRS 17：抓壽險子公司加計FVOCI後獲利（當月+累計）
 │   ├── market_summary.py       # 本月市場概況（FX/指數/殖利率，yfinance + TWSE）
 │   ├── bootstrap_history.py    # 一次性：批次爬取整年歸檔（YoY baseline）
@@ -240,6 +241,25 @@ python news_summary.py --month 115/02  # 指定月份
 **格式一致化（2026-07-15 起）**：13 家摘要統一模板——恰好兩段，段落標題固定 `**重點**`、`**子公司明細**`（粗體），禁止 `##`/`###` 大標題、`---` 分隔線、判斷前言。除 prompt 約束外，`normalize_summary()` 於寫入前後處理（丟大標題/分隔線/前言、`#` 標題轉粗體），冪等。
 
 **來源日期防呆**：URL 帶日期的來源（ctee `/news/YYYYMMDD`）若發布日 < 公告月份第一天（N 月資料於 N+1 月公告）即剔除，擋掉去年同月與公告前的錯置文章；URL 無日期者放行。
+
+### 手動補新聞（manual_news.py）
+
+某些金控的月損益報導只出現在 `allowed_domains` 以外（Yahoo 股市、`udn.com` 一般新聞路徑等），或 web_search 索引延遲導致自動撲空／抓到錯月份。此時人工把正確摘要與來源直接寫進 JSON：
+
+```bash
+cd scraper
+# 摘要文字寫成檔案（兩段式：**重點** / **子公司明細**），來源可多筆
+python manual_news.py --code 2891 --period 115/06 \
+    --summary-file summary.txt \
+    --source "https://tw.stock.yahoo.com/news/xxx|標題文字 | Yahoo股市" \
+    --source "https://money.udn.com/money/story/xxx"     # 無標題時 title=URL
+# 摘要也可用 stdin 或 --summary 直接帶入
+```
+
+- `--source` 值格式：`URL` 或 `URL|標題`（第一個 `|` 分隔）
+- 摘要會套用 `normalize_summary()` 統一格式
+- 寫入後標記 `news_manual: true`：`news_summary.py` 一般執行與 `--force` **都會跳過不覆蓋**，除非明確 `python news_summary.py --override-manual`
+- 自動同步 `latest.json` ↔ 月份歸檔
 
 ---
 

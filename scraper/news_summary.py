@@ -319,6 +319,11 @@ def main():
         help="強制重新生成（即使已有 news_summary）",
     )
     ap.add_argument(
+        "--override-manual",
+        action="store_true",
+        help="連同人工補入（news_manual=true）的摘要一併重新生成；預設一律保留人工內容",
+    )
+    ap.add_argument(
         "--inter-call-sleep",
         type=int,
         default=30,
@@ -370,6 +375,13 @@ def main():
         name = company.get("name", "")
 
         if args.codes and code not in args.codes:
+            continue
+
+        # 人工補入的摘要（manual_news.py 寫入 news_manual=true）一律保留，
+        # 即使 --force 也不覆蓋；除非明確 --override-manual。
+        if company.get("news_manual") and not args.override_manual:
+            logger.info(f"[{name}] manual summary present, skip (use --override-manual to replace)")
+            skipped += 1
             continue
 
         # 跳過條件（除非 --force）：
