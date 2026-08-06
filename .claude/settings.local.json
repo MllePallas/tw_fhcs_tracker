@@ -63,7 +63,8 @@
       "WebFetch(domain:www.ctee.com.tw)",
       "WebFetch(domain:udn.com)",
       "WebFetch(domain:mllepallas.github.io)",
-      "WebFetch(domain:tw.stock.yahoo.com)"
+      "WebFetch(domain:tw.stock.yahoo.com)",
+      "Bash(tee /tmp/mops_run.log)"
     ]
   }
 }

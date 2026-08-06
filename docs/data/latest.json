@@ -77,7 +77,20 @@
         "monthly_eps": null,
         "cumulative_eps": 6.67,
         "cumulative_profit_yoy_pct": 89.6,
-        "cumulative_profit_yoy_abs": 46000
+        "cumulative_profit_yoy_abs": 46000,
+        "fvoci_adjusted": {
+          "cumulative_profit": 188410,
+          "monthly_profit": 29220,
+          "delta_vs_original": 91070,
+          "cumulative_eps": 13.17,
+          "source_quote": "富邦金控2026年6月自結合併稅前淨利133.4億元、稅後淨利94.9億元。累計今年前6月合併稅前淨利1,142.0億元、稅後淨利973.4億元，創下歷史同期新高紀錄，每股稅後盈餘(EPS)為6.67元。透過其他綜合損益按公允價值衡量(FVOCI)之股票處分損益，6月金控合計197.3億元，累計前6月金控合計910.7億元；金控6月本期淨利加計FVOCI權益工具稅後處分利益292.2億元，累計前6月共1,884.1億元，超越歷年全年獲利表現，總計之每股稅後盈餘為13.17元。",
+          "original_value_text": "單6月292.2億元、累計前6月1,884.1億元（總計EPS 13.17元）",
+          "source_url": "",
+          "manual": true,
+          "generated_at": "2026-08-06T09:27:58.322657",
+          "yoy_pct": 267.0,
+          "yoy_abs": 137070
+        }
       },
       "subsidiaries": [
         {
@@ -162,7 +175,19 @@
         "monthly_eps": null,
         "cumulative_eps": 4.95,
         "cumulative_profit_yoy_pct": 67.3,
-        "cumulative_profit_yoy_abs": 30770
+        "cumulative_profit_yoy_abs": 30770,
+        "fvoci_adjusted": {
+          "label": "對保留盈餘影響數",
+          "cumulative_profit": 165900,
+          "delta_vs_original": 89380,
+          "source_quote": "國泰金控（2882）公布自行結算2026年6月稅後淨利165.9億元，累計上半年稅後淨利達765.2億元，每股盈餘4.95元，年增率67%。國泰金強調，加計FVOCI股票處分損益，累計上半年對保留盈餘之影響數達1,659億元，已超越歷年全年水準，創下歷史新高。",
+          "original_value_text": "累計上半年對保留盈餘之影響數達1,659億元",
+          "source_url": "",
+          "manual": true,
+          "generated_at": "2026-08-06T09:27:58.322682",
+          "yoy_pct": 262.6,
+          "yoy_abs": 120150
+        }
       },
       "subsidiaries": [
         {
@@ -253,7 +278,19 @@
         "monthly_eps": null,
         "cumulative_eps": 1.64,
         "cumulative_profit_yoy_pct": 419.5,
-        "cumulative_profit_yoy_abs": 22966
+        "cumulative_profit_yoy_abs": 22966,
+        "fvoci_adjusted": {
+          "cumulative_profit": 67775,
+          "monthly_profit": 15447,
+          "delta_vs_original": 39335,
+          "source_quote": "凱基金控（2883）公布6月自結財務數據，單月稅後獲利61.1億元，今年上半年累計稅後獲利284.4億元，每股盈餘1.64元。若加計6月份的FVOCI股票處分利益，合計達到154.47億元，續創今年單月新高。同時今年上半年累計稅後獲利加計FVOCI股票處分利益則為677.75億元，亦創歷史同期新高。",
+          "original_value_text": "單月154.47億元、累計677.75億元",
+          "source_url": "",
+          "manual": true,
+          "generated_at": "2026-08-06T09:27:58.322686",
+          "yoy_pct": 1138.1,
+          "yoy_abs": 62301
+        }
       },
       "subsidiaries": [
         {

@@ -56,7 +56,8 @@ function formatYoY(pct, abs, status, sourceUnit, displayUnit) {
   return { disp: `${sign}${pct.toFixed(1)}%`, cls };
 }
 
-// 加計FVOCI股票處份利益後獲利顯示。多數金控（富邦、凱基）揭露具體數字 → 顯示數字 + YoY。
+// 加計FVOCI股票處分利益後獲利顯示（壽險子公司與金控合併層級共用）。
+// 多數金控（富邦、凱基）揭露具體數字 → 顯示數字 + YoY。
 // 少數（國泰，以「對保留盈餘影響數」揭露）僅給區間/門檻 → value_type==='lower_bound'，
 // 以「逾/突破 X」表示下界、不顯示 YoY（門檻值與去年精確值相除會得出假精度的百分比，語意誤導，故省略）。
 // 當月數（monthly_profit）為選填：新聞有揭露（如凱基）才有，缺漏顯示 —。
@@ -72,8 +73,16 @@ function fvociDisplay(a, sourceUnit, displayUnit) {
   return { monthlyDisp, cumulDisp: formatNum(v), yoyDisp, isBound: false };
 }
 
-// 壽險表格/卡片共用的 FVOCI 註腳文字
-const FVOCI_FOOTNOTE = '加計FVOCI股票處份利益後之當月／累計獲利，依各壽險公司新聞稿揭露數字，僅供與去年同期比較之參考。國泰人壽僅揭露「對保留盈餘影響數」門檻值，以「逾／突破」標示下界且不計 YoY。';
+// FVOCI 加計列的標籤：預設「加上FVOCI股票處分利益」；國泰金控以「對保留盈餘影響數」
+// 表述（data 內 fvoci_adjusted.label 欄位覆寫）
+function fvociRowLabel(a) {
+  return `（${(a && a.label) || '加上FVOCI股票處分利益'}）`;
+}
+
+// FVOCI 註腳文字（壽險視角＝壽險子公司揭露；金控總覽＝金控合併層級揭露）
+const FVOCI_FOOTNOTE = '加計FVOCI股票處分利益後之當月／累計獲利，依各壽險公司新聞稿揭露數字，僅供與去年同期比較之參考。國泰人壽僅揭露「對保留盈餘影響數」門檻值，以「逾／突破」標示下界且不計 YoY。';
+const FVOCI_FOOTNOTE_HOLDINGS = '金控合併稅後淨利加計FVOCI股票處分（稅後）利益，依各金控新聞稿揭露數字，僅供與去年同期比較之參考；YoY 以去年同期金控原始稅後淨利為基準。國泰金控以「對保留盈餘影響數」表述，未揭露單月加計數。';
+const FVOCI_FOOTNOTE_DETAIL = '加計FVOCI股票處分利益後之獲利（金控合併層級與壽險子公司分別揭露；國泰以「對保留盈餘影響數」表述），依各公司新聞稿揭露數字，僅供與去年同期比較之參考；未揭露之當月數以 — 表示。';
 
 // 金控層級併購／重大異動備註（前端靜態，不依賴爬蟲資料，重爬不會遺失）。
 // 顯示於詳情面板底部。key = 金控代號。
@@ -304,6 +313,13 @@ function renderTable() {
   const hint = document.getElementById('table-unit-hint');
   if (hint) hint.textContent = `單位：${unitFullLabel(state.displayUnit)}（EPS 為元）`;
 
+  // 依視角掛上 class，供 CSS 控制各欄等寬（金控總覽 vs 產業視角欄數不同）
+  const tableEl = document.getElementById('main-table');
+  if (tableEl) {
+    tableEl.classList.toggle('view-holdings', state.viewMode === 'holdings');
+    tableEl.classList.toggle('view-industry', state.viewMode !== 'holdings');
+  }
+
   if (state.viewMode === 'holdings') {
     renderHoldingsTable();
     renderHoldingsCards();
@@ -329,13 +345,20 @@ function renderHoldingsTable() {
       <th class="col-monthly">當月 (${period})</th>
       <th class="col-cumulative">累計</th>
       <th class="col-cumulative">累計 YoY</th>
-      <th class="col-monthly">當月</th>
-      <th class="col-cumulative">累計</th>
+      <th class="col-monthly col-eps">當月</th>
+      <th class="col-cumulative col-eps">累計</th>
     </tr>`;
   const companies = sortCompanies([...state.data.companies]);
   document.getElementById('main-tbody').innerHTML = companies.map(renderRow).join('');
+
+  // 金控層級 FVOCI 加計列註腳（有實際出現加計列才顯示）
   const tfoot = document.getElementById('main-tfoot');
-  if (tfoot) tfoot.innerHTML = '';
+  const hasFvoci = companies.some(c => !c.error && c.holding_company?.fvoci_adjusted?.cumulative_profit != null);
+  if (tfoot) {
+    tfoot.innerHTML = hasFvoci
+      ? `<tr><td colspan="9" class="table-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</td></tr>`
+      : '';
+  }
 }
 
 // 產業視角（銀行 / 壽險 / 證券）
@@ -393,13 +416,12 @@ function renderIndustryTable(industry) {
       const tip = a.source_quote
         ? ` title="${escapeHtml(a.source_quote)}"`
         : '';
-      const numStyle = 'color:#5568b8;font-size:12px;font-style:italic';
-      adj = `<tr class="fvoci-row" style="background:#fafaff">
+      adj = `<tr class="fvoci-row">
         <td></td>
-        <td style="padding-left:20px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
-        <td class="num" style="${numStyle}">${fd.monthlyDisp}</td>
-        <td class="num" style="${numStyle}">${fd.cumulDisp}</td>
-        <td class="num" style="${numStyle}">${fd.yoyDisp}</td>
+        <td class="fvoci-label"${tip}>${fvociRowLabel(a)}<sup>*</sup></td>
+        <td class="num fvoci-num">${fd.monthlyDisp}</td>
+        <td class="num fvoci-num">${fd.cumulDisp}</td>
+        <td class="num fvoci-num">${fd.yoyDisp}</td>
       </tr>`;
     }
 
@@ -410,9 +432,7 @@ function renderIndustryTable(industry) {
   const tfoot = document.getElementById('main-tfoot');
   if (tfoot) {
     if (industry === 'life' && hasFvoci) {
-      tfoot.innerHTML = `<tr><td colspan="5" style="padding:8px 12px;font-size:11px;color:#718096;border-top:1px solid #edf2f7">
-        <sup>*</sup> ${FVOCI_FOOTNOTE}
-      </td></tr>`;
+      tfoot.innerHTML = `<tr><td colspan="5" class="table-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE}</td></tr>`;
     } else {
       tfoot.innerHTML = '';
     }
@@ -498,6 +518,27 @@ function renderRow(c) {
 
   const nameCell = `<a class="company-link" onclick="showDetail('${c.code}')">${c.name}</a>`;
 
+  // 金控層級 FVOCI 加計列（115/06 起富邦／凱基揭露「加計FVOCI後獲利」、
+  // 國泰揭露「對保留盈餘影響數」，皆為金控合併層級數字；缺當月數顯示 —）
+  let adjRow = '';
+  const a = h.fvoci_adjusted;
+  if (a && a.cumulative_profit != null) {
+    const fd = fvociDisplay(a, c.unit, unit);
+    const tip = a.source_quote ? ` title="${escapeHtml(a.source_quote)}"` : '';
+    const adjEpsC = a.cumulative_eps != null ? formatEps(a.cumulative_eps) : '';
+    adjRow = `<tr class="fvoci-row">
+      <td></td>
+      <td class="fvoci-label"${tip}>${fvociRowLabel(a)}<sup>*</sup></td>
+      <td class="num fvoci-num">${fd.monthlyDisp}</td>
+      <td class="num fvoci-num">${fd.cumulDisp}</td>
+      <td class="num fvoci-num">${fd.yoyDisp}</td>
+      <td class="num fvoci-num"></td>
+      <td class="num fvoci-num">${adjEpsC}</td>
+      <td></td>
+      <td></td>
+    </tr>`;
+  }
+
   return `<tr>
     <td class="col-code">${c.code}</td>
     <td>${nameCell}</td>
@@ -508,7 +549,7 @@ function renderRow(c) {
     <td class="num ${epsCClass}">${epsCDisp}</td>
     <td class="center"><span class="status-tag status-ok">✓ 已取得</span></td>
     <td class="center">${sourceLink}</td>
-  </tr>`;
+  </tr>` + adjRow;
 }
 
 // EPS 用兩位小數顯示（負數用括號）
@@ -521,8 +562,14 @@ function formatEps(n) {
 // ── 手機卡片視圖（A2'） ──────────────────────────────────
 function renderHoldingsCards() {
   const companies = sortCompanies([...state.data.companies]);
-  document.getElementById('mobile-cards').innerHTML =
-    companies.map(renderHoldingCard).join('');
+  const el = document.getElementById('mobile-cards');
+  el.innerHTML = companies.map(renderHoldingCard).join('');
+
+  // 金控層級 FVOCI 註腳（有實際出現加計區塊才加）
+  if (companies.some(c => !c.error && c.holding_company?.fvoci_adjusted?.cumulative_profit != null)) {
+    el.insertAdjacentHTML('beforeend',
+      `<div class="m-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</div>`);
+  }
 }
 
 function renderHoldingCard(c) {
@@ -560,6 +607,24 @@ function renderHoldingCard(c) {
   const mClass = (monthly ?? 0) >= 0 ? 'positive' : 'negative';
   const cClass = (cumul   ?? 0) >= 0 ? 'positive' : 'negative';
 
+  // 金控層級 FVOCI 加計區塊（淡藍色弱化，不干擾主排序）
+  let adjBlock = '';
+  const a = h.fvoci_adjusted;
+  if (a && a.cumulative_profit != null) {
+    const fd = fvociDisplay(a, c.unit, unit);
+    const yoyPart = fd.isBound ? '' : `<div>YoY：${fd.yoyDisp}</div>`;
+    const monthlyPart = fd.monthlyDisp !== '—' ? `<div>當月：${fd.monthlyDisp}</div>` : '';
+    adjBlock = `
+    <div class="m-fvoci">
+      <div class="m-fvoci-label">${fvociRowLabel(a)}<sup>*</sup></div>
+      <div class="m-fvoci-vals">
+        ${monthlyPart}
+        <div>累計：${fd.cumulDisp}</div>
+        ${yoyPart}
+      </div>
+    </div>`;
+  }
+
   return `<div class="m-card" onclick="showDetail('${c.code}')">
     <div class="m-card-head">
       <div class="m-card-titles">
@@ -586,6 +651,7 @@ function renderHoldingCard(c) {
         <div class="m-cell-value ${epsCClass}">${epsCDisp}</div>
       </div>
     </div>
+    ${adjBlock}
   </div>`;
 }
 
@@ -623,9 +689,9 @@ function renderIndustryCards(industry) {
       const yoyPart = fd.isBound ? '' : `<div>YoY：${fd.yoyDisp}</div>`;
       const monthlyPart = fd.monthlyDisp !== '—' ? `<div>當月：${fd.monthlyDisp}</div>` : '';
       adjBlock = `
-      <div class="m-fvoci" style="margin-top:6px;padding-top:6px;border-top:1px dashed #d6d9e2;font-size:12px;color:#5568b8;font-style:italic">
-        <div style="margin-bottom:4px;font-style:normal">（加上FVOCI股票處份利益）<sup>*</sup></div>
-        <div style="display:flex;gap:14px;flex-wrap:wrap">
+      <div class="m-fvoci">
+        <div class="m-fvoci-label">${fvociRowLabel(a)}<sup>*</sup></div>
+        <div class="m-fvoci-vals">
           ${monthlyPart}
           <div>累計：${fd.cumulDisp}</div>
           ${yoyPart}
@@ -661,61 +727,79 @@ function renderIndustryCards(industry) {
 
   // 壽險手機卡片底部加註腳（只有實際出現 FVOCI 區塊時才加）
   if (industry === 'life' && rows.some(r => r.fvoci_adjusted && r.fvoci_adjusted.cumulative_profit != null)) {
-    el.insertAdjacentHTML('beforeend', `
-      <div style="font-size:11px;color:#718096;padding:8px 4px">
-        <sup>*</sup> ${FVOCI_FOOTNOTE}
-      </div>
-    `);
+    el.insertAdjacentHTML('beforeend',
+      `<div class="m-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE}</div>`);
   }
 }
 
-// ── 摘要卡片 ───────────────────────────────────────────
+// ── 摘要卡片：金控／壽險／銀行／證券「累計獲利第一」 ─────────
+// 壽險以原始 P&L（不含FVOCI加計數）排名，卡片標籤註明「不含FVOCI」。
+function leaderFromCompanies(companies, unit) {
+  let best = null;
+  for (const c of companies) {
+    const h = c.holding_company || {};
+    const v = h.cumulative_profit;
+    if (v == null) continue;
+    if (!best || v > best.raw) {
+      best = {
+        raw: v,
+        name: c.name,
+        amount: convertUnit(v, c.unit, unit),
+        yoy: formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs,
+                       h.cumulative_profit_yoy_status, c.unit, unit),
+      };
+    }
+  }
+  return best;
+}
+
+function leaderFromIndustry(industry, unit) {
+  let best = null;
+  for (const r of getIndustryRows(industry)) {
+    const v = r.cumulative_profit;
+    if (v == null) continue;
+    if (!best || v > best.raw) {
+      best = {
+        raw: v,
+        name: r.name,
+        amount: convertUnit(v, r.unit, unit),
+        yoy: formatYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs,
+                       r.cumulative_profit_yoy_status, r.unit, unit),
+      };
+    }
+  }
+  return best;
+}
+
+function leaderCard(label, leader, unit) {
+  if (!leader) {
+    return `<div class="card leader-card">
+      <div class="card-label">${label}</div>
+      <div class="card-value">—</div>
+      <div class="card-sub"></div>
+    </div>`;
+  }
+  const yoyHtml = leader.yoy.disp !== '—'
+    ? `YoY <span class="${leader.yoy.cls}">${leader.yoy.disp}</span>`
+    : 'YoY —';
+  return `<div class="card leader-card">
+    <div class="card-label">${label}</div>
+    <div class="card-value">${leader.name}</div>
+    <div class="card-sub"><span class="leader-amount">${formatNum(leader.amount)} ${unit}</span><span class="card-sub-sep">｜</span>${yoyHtml}</div>
+  </div>`;
+}
+
 function renderSummaryCards() {
   const d = state.data;
   const unit = state.displayUnit;
   const companies = d.companies.filter(c => !c.error && c.holding_company);
 
-  // 合計當月獲利
-  let totalMonthly = 0;
-  let totalCumul   = 0;
-  let top = null;
-
-  for (const c of companies) {
-    const h = c.holding_company;
-    const m = convertUnit(h.monthly_profit, c.unit, unit) || 0;
-    const cu = convertUnit(h.cumulative_profit, c.unit, unit) || 0;
-    totalMonthly += m;
-    totalCumul   += cu;
-    if (!top || m > convertUnit(top.holding_company.monthly_profit, top.unit, unit)) {
-      top = c;
-    }
-  }
-
-  const mClass = totalMonthly >= 0 ? 'positive' : 'negative';
-  const cClass = totalCumul   >= 0 ? 'positive' : 'negative';
-
-  document.getElementById('summary-cards').innerHTML = `
-    <div class="card">
-      <div class="card-label">已取得資料</div>
-      <div class="card-value">${companies.length} <span style="font-size:14px;font-weight:400">/ 13 家</span></div>
-      <div class="card-sub">成功率 ${Math.round(companies.length/13*100)}%</div>
-    </div>
-    <div class="card">
-      <div class="card-label">13 家合計當月獲利</div>
-      <div class="card-value ${mClass}">${formatNum(totalMonthly)}</div>
-      <div class="card-sub">${unit} ｜ ${d.report_period}</div>
-    </div>
-    <div class="card">
-      <div class="card-label">13 家合計累計獲利</div>
-      <div class="card-value ${cClass}">${formatNum(totalCumul)}</div>
-      <div class="card-sub">${unit} ｜ 本年累計</div>
-    </div>
-    <div class="card">
-      <div class="card-label">當月獲利第一</div>
-      <div class="card-value" style="font-size:18px">${top ? top.name : '—'}</div>
-      <div class="card-sub">${top ? formatNum(convertUnit(top.holding_company.monthly_profit, top.unit, unit)) + ' ' + unit : ''}</div>
-    </div>
-  `;
+  document.getElementById('summary-cards').innerHTML = [
+    leaderCard('金控累計獲利第一', leaderFromCompanies(companies, unit), unit),
+    leaderCard('壽險累計獲利第一（不含FVOCI）', leaderFromIndustry('life', unit), unit),
+    leaderCard('銀行累計獲利第一', leaderFromIndustry('bank', unit), unit),
+    leaderCard('證券累計獲利第一', leaderFromIndustry('securities', unit), unit),
+  ].join('');
 }
 
 // ── 簡易 markdown 渲染（**bold**、## 標題、段落） ────────
@@ -818,19 +902,32 @@ function showDetail(code) {
       const tip = s.fvoci.source_quote
         ? ` title="${escapeHtml(s.fvoci.source_quote)}"`
         : '';
-      const adj = `<tr style="border-bottom:1px solid #f0f0f0;background:#fafaff">
-        <td style="padding:4px 8px;padding-left:18px;color:#5568b8;font-size:12px"${tip}>（加上FVOCI股票處份利益）<sup>*</sup></td>
-        <td class="num" style="padding:4px 8px;white-space:nowrap;color:#5568b8;font-size:12px;font-style:italic">${fd.monthlyDisp}</td>
+      const adj = `<tr class="fvoci-row" style="border-bottom:1px solid #f0f0f0">
+        <td class="fvoci-label detail-fvoci-label"${tip}>${fvociRowLabel(s.fvoci)}<sup>*</sup></td>
+        <td class="num fvoci-num detail-fvoci-num">${fd.monthlyDisp}</td>
         <td></td>
-        <td class="num" style="padding:4px 8px;white-space:nowrap;color:#5568b8;font-size:12px;font-style:italic">${fd.cumulDisp}</td>
+        <td class="num fvoci-num detail-fvoci-num">${fd.cumulDisp}</td>
       </tr>`;
       return main + adj;
     }).join('');
 
+    // 金控合併層級 FVOCI 加計列（緊接「（合併）」列之後；國泰以「對保留盈餘影響數」表述）
+    let hAdjRow = '';
+    const hAdj = h.fvoci_adjusted;
+    if (hAdj && hAdj.cumulative_profit != null) {
+      hasFvoci = true;
+      const fd = fvociDisplay(hAdj, c.unit, unit);
+      const tip = hAdj.source_quote ? ` title="${escapeHtml(hAdj.source_quote)}"` : '';
+      hAdjRow = `<tr class="fvoci-row" style="border-bottom:1px solid #f0f0f0">
+        <td class="fvoci-label detail-fvoci-label"${tip}>${fvociRowLabel(hAdj)}<sup>*</sup></td>
+        <td class="num fvoci-num detail-fvoci-num">${fd.monthlyDisp}</td>
+        <td></td>
+        <td class="num fvoci-num detail-fvoci-num">${fd.cumulDisp}</td>
+      </tr>`;
+    }
+
     const fvociFootnote = hasFvoci
-      ? `<p style="font-size:11px;color:#718096;margin-top:6px">
-           <sup>*</sup> ${FVOCI_FOOTNOTE}
-         </p>`
+      ? `<p class="detail-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE_DETAIL}</p>`
       : '';
 
     tableHtml = `
@@ -854,6 +951,7 @@ function showDetail(code) {
               ${hcu!=null?formatNum(hcu):'—'}
             </td>
           </tr>
+          ${hAdjRow}
           ${rows}
         </tbody>
       </table>${fvociFootnote}`;
@@ -1090,12 +1188,14 @@ async function downloadExcel() {
     const unit = state.displayUnit;
     const wb = XLSX.utils.book_new();
 
-    // ── Sheet 1: 金控總覽 ──
-    const holdHeader = ['代號', '金控', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)', '當月 EPS (元)', '累計 EPS (元)', '公告日期', '資料來源 URL'];
+    // ── Sheet 1: 金控總覽（含金控層級加計 FVOCI 欄位，115/06 起富邦／國泰／凱基揭露） ──
+    const holdHeader = ['代號', '金控', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)', '當月 EPS (元)', '累計 EPS (元)',
+      `加計 FVOCI 當月獲利 (${unit})`, `加計 FVOCI 累計獲利 (${unit})`, '加計 FVOCI YoY (%)', 'FVOCI 表述', 'FVOCI 引用原文',
+      '公告日期', '資料來源 URL'];
     const holdRows = [holdHeader];
     for (const c of d.companies || []) {
       if (c.error) {
-        holdRows.push([c.code, c.name, null, null, null, null, null, c.announcement_date || '', c.error_msg || '資料未取得']);
+        holdRows.push([c.code, c.name, null, null, null, null, null, null, null, null, '', '', c.announcement_date || '', c.error_msg || '資料未取得']);
         continue;
       }
       const h = c.holding_company || {};
@@ -1106,15 +1206,32 @@ async function downloadExcel() {
         : (h.monthly_profit != null && h.cumulative_profit && h.cumulative_eps != null
             ? h.monthly_profit / h.cumulative_profit * h.cumulative_eps
             : null);
-      holdRows.push([
+      const row = [
         c.code, c.name,
         m, cu, h.cumulative_profit_yoy_pct ?? null,
         epsM, h.cumulative_eps ?? null,
-        c.announcement_date || '', c.source_url || '',
-      ]);
+      ];
+      const a = h.fvoci_adjusted;
+      if (a && a.cumulative_profit != null) {
+        const v = convertUnit(a.cumulative_profit, c.unit, unit);
+        const cumulCell = a.value_type === 'lower_bound'
+          ? `${a.display_prefix || '逾'} ${formatNum(v)}`
+          : v;
+        row.push(
+          convertUnit(a.monthly_profit, c.unit, unit),
+          cumulCell,
+          a.value_type === 'lower_bound' ? null : (a.yoy_pct ?? null),
+          a.label || '加計FVOCI股票處分利益',
+          a.source_quote || '',
+        );
+      } else {
+        row.push(null, null, null, '', '');
+      }
+      row.push(c.announcement_date || '', c.source_url || '');
+      holdRows.push(row);
     }
     const wsHold = XLSX.utils.aoa_to_sheet(holdRows);
-    wsHold['!cols'] = [{wch:8},{wch:14},{wch:16},{wch:16},{wch:14},{wch:14},{wch:14},{wch:14},{wch:60}];
+    wsHold['!cols'] = [{wch:8},{wch:14},{wch:16},{wch:16},{wch:14},{wch:14},{wch:14},{wch:20},{wch:20},{wch:18},{wch:20},{wch:60},{wch:14},{wch:60}];
     wsHold['!freeze'] = { ySplit: 1 };
     XLSX.utils.book_append_sheet(wb, wsHold, '金控總覽');
 

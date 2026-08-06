@@ -251,6 +251,16 @@ def compute_yoy(data: dict, target_period: str):
                 _write_yoy_fields(company["holding_company"], "cumulative_profit_yoy_pct", m)
                 populated += 1
 
+            # 金控層級加計 FVOCI 後獲利 YoY（115/06 起富邦／凱基揭露「金控稅後淨利＋FVOCI
+            # 股票處分利益」、國泰揭露「對保留盈餘影響數」）：今年加計數 vs 去年金控原始累計
+            # P&L（去年 FVOCI 仍計入 P&L，兩邊皆含 FVOCI 影響，apples-to-apples）。
+            # lower_bound（僅門檻值）不算 YoY，理由同壽險子公司。
+            hadj = company.get("holding_company", {}).get("fvoci_adjusted")
+            if hadj and hadj.get("value_type") != "lower_bound":
+                m_hadj = _yoy_metrics(hadj.get("cumulative_profit"), prev_cumul)
+                if m_hadj:
+                    _write_yoy_fields(hadj, "yoy_pct", m_hadj, abs_key="yoy_abs", status_key="yoy_status")
+
         # 子公司 YoY（用 name 對齊；cutoff 適用時僅算白名單子公司）
         prev_subs_by_name = {s.get("name", ""): s for s in prev.get("subsidiaries", []) if s.get("name")}
         for sub in company.get("subsidiaries", []):

@@ -17,6 +17,8 @@
   --text-muted:  #718096;
   --positive:    #065f46;
   --negative:    #9b1c1c;
+  --fvoci:       #5568b8;   /* FVOCI 加計列（弱化的靛藍） */
+  --fvoci-bg:    #fafaff;
   --radius:      8px;
   --shadow:      0 1px 3px rgba(0,0,0,.1), 0 1px 2px rgba(0,0,0,.06);
   --shadow-md:   0 4px 6px rgba(0,0,0,.07), 0 2px 4px rgba(0,0,0,.06);
@@ -256,6 +258,20 @@ main {
 .card-value.positive { color: var(--positive); }
 .card-value.negative { color: var(--negative); }
 
+/* 四大視角「累計獲利第一」卡片 */
+.leader-card { border-top: 3px solid var(--primary); }
+.leader-card .card-value { font-size: 20px; letter-spacing: .3px; }
+.leader-card .card-sub {
+  font-size: 12px;
+  margin-top: 6px;
+  font-variant-numeric: tabular-nums;
+  white-space: nowrap;
+}
+.leader-card .leader-amount { font-weight: 700; color: var(--text); }
+.leader-card .card-sub-sep { margin: 0 6px; color: var(--border); }
+.leader-card .card-sub .positive { color: var(--positive); font-weight: 700; }
+.leader-card .card-sub .negative { color: var(--negative); font-weight: 700; }
+
 /* ── Industry Tabs ────────────────────────────────────── */
 .industry-tabs {
   display: flex;
@@ -325,6 +341,23 @@ thead th {
 thead th.col-name,
 thead th.col-code { text-align: left; }
 
+/* 數字欄表頭右對齊，與下方數字切齊（當月／累計／累計 YoY／EPS） */
+thead th.col-monthly,
+thead th.col-cumulative { text-align: right; }
+
+/* 欄寬一致化：
+   金控總覽 — 合併稅後淨利三欄同寬、EPS 兩欄同寬
+   產業視角 — 當月／累計／累計 YoY 三欄同寬 */
+#main-table.view-holdings th.col-code       { width: 6%; }
+#main-table.view-holdings th.col-monthly,
+#main-table.view-holdings th.col-cumulative { width: 12%; }
+#main-table.view-holdings th.col-eps        { width: 9%; }
+#main-table.view-holdings th.col-status     { width: 8%; }
+#main-table.view-holdings th.col-source     { width: 11%; }
+#main-table.view-industry th.col-code       { width: 14%; }
+#main-table.view-industry th.col-monthly,
+#main-table.view-industry th.col-cumulative { width: 16%; }
+
 tbody tr {
   border-bottom: 1px solid var(--border);
   transition: background .1s;
@@ -378,6 +411,70 @@ td.col-code { font-weight: 700; color: var(--primary); }
   font-weight: 400;
   color: var(--text-muted);
   font-style: italic;
+}
+
+/* ── FVOCI 加計列（金控總覽、壽險視角、詳情面板共用） ──── */
+tr.fvoci-row { background: var(--fvoci-bg); }
+tr.fvoci-row:hover { background: var(--fvoci-bg); }
+tr.fvoci-row td {
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+td.fvoci-label {
+  padding-left: 26px;
+  color: var(--fvoci);
+  font-size: 12px;
+  white-space: nowrap;
+}
+td.num.fvoci-num {
+  color: var(--fvoci);
+  font-size: 12px;
+  font-style: italic;
+  font-weight: 500;
+}
+
+/* 詳情面板內的 FVOCI 列（表格 cell padding 較密） */
+#detail-content td.fvoci-label { padding: 4px 8px 4px 18px; }
+#detail-content td.fvoci-num   { padding: 4px 8px; white-space: nowrap; }
+.detail-footnote {
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-top: 6px;
+  line-height: 1.6;
+}
+
+/* 表格底部註腳（tfoot） */
+td.table-footnote {
+  padding: 8px 12px;
+  font-size: 11px;
+  font-weight: 400;
+  color: var(--text-muted);
+  border-top: 1px solid #edf2f7;
+  text-align: left;
+  line-height: 1.6;
+}
+
+/* 手機卡片 FVOCI 區塊與註腳 */
+.m-fvoci {
+  margin-top: 8px;
+  padding-top: 8px;
+  border-top: 1px dashed #d6d9e2;
+  font-size: 12px;
+  color: var(--fvoci);
+  font-style: italic;
+}
+.m-fvoci-label { margin-bottom: 4px; font-style: normal; }
+.m-fvoci-vals {
+  display: flex;
+  gap: 14px;
+  flex-wrap: wrap;
+  font-variant-numeric: tabular-nums;
+}
+.m-footnote {
+  font-size: 11px;
+  color: var(--text-muted);
+  padding: 8px 4px;
+  line-height: 1.6;
 }
 
 .loading-cell {
@@ -586,6 +683,12 @@ td.col-code { font-weight: 700; color: var(--primary); }
   font-size: 12px;
   line-height: 1.6;
 }
+
+/* ── 細部打磨（不變更版面結構） ─────────────────────── */
+thead th { letter-spacing: .02em; }                /* 表頭字距微調，多欄表更易掃讀 */
+.detail-panel { scroll-margin-top: 76px; }         /* 展開詳情捲動時不被 sticky header 蓋住 */
+select:focus-visible,
+button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
 
 /* ── Mobile Cards (A2'：手機卡片視圖，桌機隱藏) ──────── */
 .mobile-cards { display: none; }
