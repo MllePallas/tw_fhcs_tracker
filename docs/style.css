@@ -467,6 +467,9 @@ td.fvoci-label {
   font-size: 12px;
   white-space: nowrap;
 }
+/* FVOCI 標籤：桌機顯示完整文字，手機（固定欄位很窄）改用縮寫 */
+.fv-full { display: inline; }
+.fv-abbr { display: none; }
 td.num.fvoci-num {
   color: var(--fvoci);
   font-size: 12px;
@@ -783,13 +786,51 @@ td.table-footnote {
 select:focus-visible,
 button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
 
-/* ── Mobile Cards (A2'：手機卡片視圖，桌機隱藏) ──────── */
+/* ── Mobile Cards（手機卡片視圖；桌機與手機「總表」模式皆隱藏） ── */
 .mobile-cards { display: none; }
+
+/* ── 手機版型切換（總表／卡片）：僅手機顯示 ───────────── */
+.mobile-view-toggle {
+  display: none;
+  align-items: center;
+  gap: 2px;
+  padding: 2px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+}
+.mobile-view-toggle .mv-btn {
+  border: none;
+  background: transparent;
+  color: var(--text-2);
+  font-size: 12px;
+  font-weight: 600;
+  padding: 5px 14px;
+  border-radius: 999px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.mobile-view-toggle .mv-btn.active { background: var(--primary); color: #fff; }
+
+/* 表格上方那一列：單位提示（左）＋ 版型切換（右） */
+.table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  margin-bottom: 6px;
+}
+.table-toolbar .table-unit-hint { margin-bottom: 0; flex: 1; }
+.table-scroll-hint {
+  display: none;
+  font-size: 11px;
+  color: var(--text-muted);
+  margin-bottom: 6px;
+}
 
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 640px) {
   header h1  { font-size: 16px; }
-  .col-source { display: none; }
   .card-value { font-size: 18px; }
 
   /* 控制列：月份/排序/單位 響應式（月份占整行，排序+單位共用一行） */
@@ -829,9 +870,67 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
     padding: 9px 8px;
   }
 
-  /* A2'：主表手機改卡片佈局，隱藏原表格 */
-  .table-container { display: none; }
-  .mobile-cards {
+  /* ── 手機主表：預設「總表」＝與桌機相同的完整表格 ──────────
+     8 欄在手機放不下 → 容器橫向捲動，並把公司／子公司名稱欄 sticky 釘在左側，
+     左右滑動時仍看得到是哪一家。切到「卡片」時（body.ml-card）才改用卡片佈局。 */
+  .mobile-view-toggle { display: inline-flex; }
+  .table-scroll-hint { display: block; }
+
+  .table-container {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    overscroll-behavior-x: contain;
+  }
+  table { font-size: 12px; }
+  thead th { padding: 8px 8px; font-size: 11px; }
+  td { padding: 8px 8px; }
+  .yoy-note { font-size: 10px; }
+  /* 數字一律不換行（金額被拆成兩行極易誤讀）；YoY 的文字註記仍可換行 */
+  td.num { white-space: nowrap; }
+  td.num .yoy-note { white-space: normal; }
+  /* 產業視角的「集團」欄不要把公司名拆成兩行 */
+  #main-table.view-industry tbody td:first-child { white-space: nowrap; }
+
+  /* 名稱欄固定（thead 用 .col-name；tbody 一律第 2 欄，含 FVOCI 加計列的標籤欄） */
+  #main-table thead th.col-name {
+    position: sticky;
+    left: 0;
+    z-index: 3;
+    background: var(--surface-alt);
+    border-right: 1px solid var(--border-strong);
+    box-shadow: 3px 0 5px -3px rgba(16, 20, 24, .22);
+  }
+  #main-table tbody td:nth-child(2) {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--surface);
+    border-right: 1px solid var(--border-strong);
+    /* 陰影標示「右側還有欄位、數字會捲到此欄下方」，避免把被裁切的數字誤讀為完整值 */
+    box-shadow: 3px 0 5px -3px rgba(16, 20, 24, .22);
+  }
+  #main-table tbody tr.fvoci-row td:nth-child(2) { background: var(--fvoci-bg); }
+  #main-table tbody tr.error-row td:nth-child(2) { background: var(--surface-alt); }
+
+  /* 註腳：sticky 要下在內層 span（td 因 colspan 撐滿整個捲動寬度，本身無法 stick），
+     這樣橫向捲動時註腳仍固定在可視範圍內、完整可讀 */
+  td.table-footnote { padding-right: 0; }
+  td.table-footnote > span {
+    position: sticky;
+    left: 0;
+    display: inline-block;
+    max-width: calc(100vw - 66px);
+    white-space: normal;
+  }
+  /* FVOCI 標籤在窄欄位改用縮寫，避免撐開固定欄 */
+  .fv-full { display: none; }
+  .fv-abbr { display: inline; }
+
+  /* 卡片模式（使用者按「卡片」切換時） */
+  body.ml-card .table-container,
+  body.ml-card .table-scroll-hint { display: none; }
+  body.ml-card .mobile-cards {
     display: flex;
     flex-direction: column;
     gap: 10px;

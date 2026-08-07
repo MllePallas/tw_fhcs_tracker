@@ -90,10 +90,19 @@
       <button class="tab"        data-view="securities" onclick="setView('securities')">證券</button>
     </div>
 
-    <!-- 表格單位標示（跟著單位選單動態變化） -->
-    <div class="table-unit-hint" id="table-unit-hint"></div>
+    <!-- 表格上方工具列：單位標示 + 手機版型切換（總表／卡片） -->
+    <div class="table-toolbar">
+      <div class="table-unit-hint" id="table-unit-hint"></div>
+      <div class="mobile-view-toggle" id="mobile-view-toggle">
+        <button class="mv-btn active" data-mv="table" onclick="setMobileLayout('table')">總表</button>
+        <button class="mv-btn"        data-mv="card"  onclick="setMobileLayout('card')">卡片</button>
+      </div>
+    </div>
 
-    <!-- 主表格（桌機） -->
+    <!-- 手機橫向捲動提示（桌機隱藏） -->
+    <div class="table-scroll-hint" id="table-scroll-hint">← 左右滑動可看完整欄位（公司名固定）</div>
+
+    <!-- 主表格（桌機 + 手機「總表」模式） -->
     <div class="table-container">
       <table id="main-table">
         <thead id="main-thead"></thead>
@@ -104,7 +113,7 @@
       </table>
     </div>
 
-    <!-- 主表卡片（手機） -->
+    <!-- 主表卡片（手機「卡片」模式） -->
     <div class="mobile-cards" id="mobile-cards">
       <div class="m-empty">載入資料中...</div>
     </div>

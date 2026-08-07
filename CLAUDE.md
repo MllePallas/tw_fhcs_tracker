@@ -594,9 +594,16 @@ const MERGER_NOTE_CUTOFFS = { '2887': '115/07', '2890': '115/07' };
 
 ### 手機響應式（已驗證 375 / 390 / 430 / 768px）
 
-- ≤640px：主表改卡片（`.mobile-cards`）、產業 Tab 2×2、控制列堆疊；**市場概況與四張第一名卡片改 2×2 grid**，卡片內文字級距下調、`card-sub` 允許換行（避免金額與 YoY 溢出）
-- 圖表容器高度桌機 400px / 手機 330px（搭配 `maintainAspectRatio: false`）
-- 驗證方式：Playwright 逐一比對 `documentElement.scrollWidth` 與 `clientWidth`，確認四種寬度皆無水平溢出、無 console error
+**手機預設看到的是「總表」——與桌機相同的完整表格**（2026-08 調整；先前預設卡片，導致手機看不到全覽）：
+
+- 表格容器橫向捲動（`overflow-x: auto`），**公司／子公司名稱欄 sticky 釘在左側**（thead 用 `.col-name`、tbody 用 `td:nth-child(2)`，FVOCI 加計列的標籤欄剛好也是第 2 欄），右側邊緣加陰影提示「數字會捲到此欄下方」，避免把被裁切的金額誤讀為完整值
+- 手機表格總寬約 513px（8 欄），390px 螢幕約需右滑 160px；表格上方有橫向捲動提示，切換視角／月份時自動 `scrollLeft = 0`
+- 數字欄 `white-space: nowrap`（金額被拆兩行極易誤讀），YoY 的文字註記仍可換行；產業視角的「集團」欄同樣不換行
+- FVOCI 列標籤在手機縮寫為「＋FVOCI」：`fvociRowLabel()` 同時輸出 `.fv-full` / `.fv-abbr` 兩個 span，由 CSS media query 切換（不需重繪）。⚠️ Excel 匯出必須用純文字常數 `FVOCI_LABEL_TEXT`，不可用 `fvociRowLabel()`（會把 HTML 標籤寫進儲存格）
+- 表格註腳的 sticky 下在**內層 span**（`td.table-footnote > span`）——td 因 `colspan` 撐滿整個捲動寬度、本身無法 stick
+- **版型切換鈕（`.mobile-view-toggle`，僅手機顯示）**：「總表」／「卡片」。切到卡片時 `<body>` 加上 `.ml-card`，由 CSS 決定顯示哪一邊；`renderTable()` 只在卡片容器可見時才產生卡片 HTML，避免無謂運算
+- 其餘手機調整：產業 Tab 2×2、控制列堆疊、市場概況與四張第一名卡片 2×2 grid、圖表高度 330px（桌機 400px，搭配 `maintainAspectRatio: false`）
+- 驗證方式：Playwright 比對 `documentElement.scrollWidth` 與 `clientWidth`，確認各寬度皆無「整頁」水平溢出（表格內部的橫向捲動是刻意設計）、無 console error
 
 ---
 

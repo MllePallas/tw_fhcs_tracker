@@ -15,10 +15,22 @@ let state = {
   index: null,
   displayUnit: '百萬元',
   sortMode: 'code',
-  viewMode: 'holdings',  // 'holdings' | 'bank' | 'life' | 'securities'
+  viewMode: 'holdings',    // 'holdings' | 'bank' | 'life' | 'securities'
+  mobileLayout: 'table',   // 手機版型：'table'（預設，完整總表）| 'card'
   barChart: null,
   cumulChart: null,
 };
+
+// 手機版型切換：預設「總表」＝與桌機相同的完整表格（橫向捲動、公司名固定），
+// 使用者可切到「卡片」。桌機不受影響（切換鈕僅手機顯示）。
+function setMobileLayout(mode) {
+  state.mobileLayout = mode === 'card' ? 'card' : 'table';
+  document.body.classList.toggle('ml-card', state.mobileLayout === 'card');
+  document.querySelectorAll('.mobile-view-toggle .mv-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mv === state.mobileLayout);
+  });
+  renderTable();
+}
 
 // ── 年份顯示：資料內部一律民國年，顯示層一律西元年 ──────
 // 期別比較（如 period < '115/07'）務必用原始民國年字串，不可用轉換後的值。
@@ -66,6 +78,13 @@ function setView(mode) {
     btn.classList.toggle('active', btn.dataset.view === mode);
   });
   renderAll();
+  resetTableScroll();
+}
+
+// 手機的表格可橫向捲動；切換視角／月份後回到最左邊，避免停在上一個視角的捲動位置
+function resetTableScroll() {
+  const tc = document.querySelector('.table-container');
+  if (tc) tc.scrollLeft = 0;
 }
 
 // 產業分類（依子公司名稱判斷）
@@ -116,8 +135,10 @@ function fvociDisplay(a, sourceUnit, displayUnit) {
 // FVOCI 加計列的標籤：表格一律統一顯示「加上FVOCI股票處分利益」。
 // 國泰金控新聞稿實際用語為「對保留盈餘影響數」（存於 data 的 fvoci_adjusted.label，
 // 並於註腳說明），但表格上不逐家換字，以維持橫向比較的一致性。
+// 手機的固定欄位很窄 → 以 CSS 切換為縮寫（.fv-full / .fv-abbr），不需重繪。
+const FVOCI_LABEL_TEXT = '（加上FVOCI股票處分利益）';   // 純文字版（Excel 匯出用）
 function fvociRowLabel() {
-  return '（加上FVOCI股票處分利益）';
+  return `<span class="fv-full">${FVOCI_LABEL_TEXT}</span><span class="fv-abbr">＋FVOCI</span>`;
 }
 
 // FVOCI 註腳文字（壽險視角＝壽險子公司揭露；金控總覽＝金控合併層級揭露）
@@ -249,6 +270,7 @@ async function loadData(period) {
     // 換月時關閉詳情面板：面板內容屬於前一個月份，留著會與表頭月份不一致
     closeDetail();
     renderAll();
+    resetTableScroll();
   } catch (e) {
     showStatus('error', `⚠️ 無法載入資料：${e.message}`);
     document.getElementById('main-tbody').innerHTML =
@@ -398,12 +420,16 @@ function renderTable() {
     tableEl.classList.toggle('view-industry', state.viewMode !== 'holdings');
   }
 
+  // 卡片只在手機且切到卡片模式時才需要產生（桌機／總表模式下容器是隱藏的）
+  const cardsEl = document.getElementById('mobile-cards');
+  const needCards = cardsEl && getComputedStyle(cardsEl).display !== 'none';
+
   if (state.viewMode === 'holdings') {
     renderHoldingsTable();
-    renderHoldingsCards();
+    if (needCards) renderHoldingsCards();
   } else {
     renderIndustryTable(state.viewMode);
-    renderIndustryCards(state.viewMode);
+    if (needCards) renderIndustryCards(state.viewMode);
   }
 }
 
@@ -432,8 +458,9 @@ function renderHoldingsTable() {
   const tfoot = document.getElementById('main-tfoot');
   const hasFvoci = companies.some(c => !c.error && c.holding_company?.fvoci_adjusted?.cumulative_profit != null);
   if (tfoot) {
+    // 註腳包一層 span：手機橫向捲動時用它限制寬度，避免文字被推到可視範圍外
     tfoot.innerHTML = hasFvoci
-      ? `<tr><td colspan="8" class="table-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</td></tr>`
+      ? `<tr><td colspan="8" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</span></td></tr>`
       : '';
   }
 }
@@ -509,7 +536,7 @@ function renderIndustryTable(industry) {
   const tfoot = document.getElementById('main-tfoot');
   if (tfoot) {
     if (industry === 'life' && hasFvoci) {
-      tfoot.innerHTML = `<tr><td colspan="5" class="table-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE}</td></tr>`;
+      tfoot.innerHTML = `<tr><td colspan="5" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE}</span></td></tr>`;
     } else {
       tfoot.innerHTML = '';
     }
@@ -1579,7 +1606,7 @@ function fvociRowCells(a, sourceUnit, unit, cfg) {
   // 淺拷貝的樣式物件，避免共用參照。
   const fs = () => ({ ...XS.fvociNum });
   const cells = new Array(cfg.width).fill(null).map(() => ({ v: '', t: 's', z: 'General', s: { ...XS.fvociBlank } }));
-  cells[cfg.labelCols[1]] = { v: `${fvociRowLabel()}*`, t: 's', z: 'General', s: { ...XS.fvociLabel } };
+  cells[cfg.labelCols[1]] = { v: `${FVOCI_LABEL_TEXT}*`, t: 's', z: 'General', s: { ...XS.fvociLabel } };
 
   const mv = convertUnit(a.monthly_profit, sourceUnit, unit);
   cells[cfg.monthlyCol] = mv != null
