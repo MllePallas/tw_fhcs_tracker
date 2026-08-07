@@ -887,12 +887,29 @@ function leaderCard(label, leader, unit) {
   </div>`;
 }
 
+// 公告家數門檻：不到這個家數就不顯示「第一名」。
+// 月初只有少數幾家公告時，排名會隨當日公告順序跳動，容易被誤讀為當期真實排名。
+const LEADER_CARDS_MIN_COMPANIES = 10;
+
 function renderSummaryCards() {
   const d = state.data;
   const unit = state.displayUnit;
   const companies = d.companies.filter(c => !c.error && c.holding_company);
+  const el = document.getElementById('summary-cards');
 
-  document.getElementById('summary-cards').innerHTML = [
+  if (companies.length < LEADER_CARDS_MIN_COMPANIES) {
+    // 直接留白會讓人以為是壞掉了 → 說明「為什麼還沒出現」與還差幾家
+    el.classList.add('is-pending');
+    el.innerHTML = `<div class="summary-pending">
+      本月已取得 <strong>${companies.length} / 13</strong> 家金控公告。
+      待 ${LEADER_CARDS_MIN_COMPANIES} 家以上公告後，才顯示金控／壽險／銀行／證券的累計獲利第一名——
+      家數不足時的排名會隨公告先後跳動，容易誤導。下方表格與圖表不受影響，已公告者即時呈現。
+    </div>`;
+    return;
+  }
+
+  el.classList.remove('is-pending');
+  el.innerHTML = [
     leaderCard('金控累計獲利第一', leaderFromCompanies(companies, unit), unit),
     leaderCard('壽險累計獲利第一（不含FVOCI）', leaderFromIndustry('life', unit), unit),
     leaderCard('銀行累計獲利第一', leaderFromIndustry('bank', unit), unit),

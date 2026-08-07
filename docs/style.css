@@ -306,6 +306,24 @@ main {
 .leader-card .card-sub .positive { color: var(--positive); font-weight: 600; }
 .leader-card .card-sub .negative { color: var(--negative); font-weight: 600; }
 
+/* 公告家數未達門檻：以單一說明列取代四張卡片 */
+.summary-cards.is-pending { display: block; }
+.summary-pending {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-left: 2px solid var(--primary);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 12px 16px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.summary-pending strong {
+  color: var(--text);
+  font-variant-numeric: tabular-nums;
+}
+
 /* ── Industry Tabs ────────────────────────────────────── */
 .industry-tabs {
   display: flex;

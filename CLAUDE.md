@@ -593,6 +593,7 @@ fetch("./data/index.json") → renderMonthSelector() → loadData("115/03")
 - 單位切換：百萬元（NT$m）/ 億元（前端換算，JSON 存百萬元）
 - **本月市場概況**：表格上方獨立區塊，5 張卡片（FX、TAIEX、日均量、S&P、US 10Y）
 - **摘要卡片（2026-08 改版）**：四張「累計獲利第一」——金控 / 壽險（**不含FVOCI**，以原始 P&L 排名）/ 銀行 / 證券，各顯示公司名 + 金額（跟單位選單）+ 累計 YoY（`leaderFromCompanies` / `leaderFromIndustry` / `leaderCard`）
+  - **公告家數門檻 `LEADER_CARDS_MIN_COMPANIES = 10`**：已公告家數（`!error && holding_company`）未達 10 家時**不顯示排名**，改以一列說明取代（`.summary-cards.is-pending` + `.summary-pending`），並標示目前家數。理由：月初只有少數幾家公告時，「第一名」會隨公告先後跳動，容易被誤讀為當期真實排名。表格與圖表不受此門檻限制，已公告者即時呈現
 - **產業 Tab 切換**：金控總覽 / 銀行 / 壽險 / 證券。子公司依名稱 pattern matching 分類（含「銀行」/「人壽」/「證券」），表格、圖表、標題跟著切；產業 tab 無 EPS 欄位
 - 主表格（金控視角，**8 欄**）：代號、金控名、當月、累計、**累計 YoY**、當月 EPS、累計 EPS、**公告日期**（連結至 MOPS 原始公告）；2881/2882/2883 主列下方有金控層級 FVOCI 加計列。2026-08 起移除「狀態」欄（13/13 已成常態，資訊量低）
 - 主表格（產業視角）：集團、子公司、當月、累計、累計 YoY
