@@ -261,7 +261,15 @@ python manual_news.py --code 2891 --period 115/06 \
 - `--source` 值格式：`URL` 或 `URL|標題`（第一個 `|` 分隔）
 - 摘要會套用 `normalize_summary()` 統一格式
 - 寫入後標記 `news_manual: true`：`news_summary.py` 一般執行與 `--force` **都會跳過不覆蓋**，除非明確 `python news_summary.py --override-manual`
-- 自動同步 `latest.json` ↔ 月份歸檔
+- 自動同步 `latest.json` ↔ 月份歸檔（**僅在兩者 `report_period` 相同時才覆寫**，見下方「latest.json 同步」）
+
+### latest.json 同步規則（四支腳本共用，2026-08-07 修正）
+
+`news_summary.py` / `manual_news.py` / `fvoci_adjustment.py` / `manual_fvoci.py` 都有同一段 `latest.json` ↔ 月份歸檔互相同步的邏輯。**改寫任一支時務必四支一起改**。
+
+規則：**只有當另一個檔案的 `report_period` 與本次編輯的期別相同，才覆寫它**。
+
+⚠️ **曾有的 bug（2026-08-07 修正）**：原本條件寫成 `if other.exists() and other != latest_path:`，把 `latest.json` **排除在期別檢查之外**（註解寫「latest 永遠跟最新跑」）。此假設只在「永遠只編輯最新月份」時成立；一旦回頭補舊月份（例：latest 已是 115/07 時去修 115/06 的新聞來源），`latest.json` 就會被**整個覆寫成舊月份的內容**，連帶把新月份的公司資料與 `market_summary` 全部蓋掉。修正後 `latest.json` 一併納入期別檢查。
 
 ---
 

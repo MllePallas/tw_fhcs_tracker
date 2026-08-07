@@ -499,9 +499,10 @@ def main():
     latest_path = DATA_DIR / "latest.json"
     other = archive_path if period_file.name == "latest.json" else latest_path
     if other and other != period_file:
-        # 若另一檔存在且指向同一期，才覆寫；否則直接寫（latest 永遠跟最新跑）
+        # 只有另一檔「指向同一期」才覆寫。latest.json 同樣要檢查——回頭補舊月份時
+        # latest.json 指向的是更新的月份，無條件覆寫會把新月份資料整個蓋掉。
         write_other = True
-        if other.exists() and other != latest_path:
+        if other.exists():
             with open(other, encoding="utf-8") as f:
                 if json.load(f).get("report_period") != period:
                     write_other = False
