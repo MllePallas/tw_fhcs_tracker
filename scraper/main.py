@@ -618,6 +618,18 @@ def main():
         + "="*50
     )
 
+    # 資料一致性驗證（僅提示，不阻擋——無法自動分辨解析錯誤與公告本身重編）
+    try:
+        from validate import validate_period, report
+        unexplained = report(validate_period(target_month, output), f"（{target_month}）")
+        if unexplained:
+            logger.warning(
+                f"資料驗證發現 {unexplained} 筆未解釋異常——請對照 MOPS 原始公告確認後，"
+                f"修正資料或在 validate.py 的 KNOWN_EXCEPTIONS 登錄原因"
+            )
+    except Exception as e:
+        logger.error(f"資料驗證執行失敗: {e}", exc_info=True)
+
     # 如果有失敗，以非零 exit code 退出（讓 CI 知道有問題）
     if fail_count > 0:
         sys.exit(1)
