@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-08-06（新增：金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、表格欄寬/對齊一致化）
+> 最後更新：2026-08-06（新增：金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、表格欄寬/對齊一致化、**顯示層全面改西元年**、**圖表加入去年同期對照**、**配色系統重構**）
 
 ## 專案目的
 
@@ -374,7 +374,8 @@ python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 13
 注意：國泰**金控層級**的「對保留盈餘影響數」115/06 起為**精確數字**（達1,659億）→ exact + label，非 lower_bound；**壽險層級**（國泰人壽）仍是門檻型。
 
 **前端顯示**：
-- **金控總覽 tab**（115/06 起）：2881/2882/2883 主列下方加一行「（加上FVOCI股票處分利益）*」（國泰顯示「（對保留盈餘影響數）*」，依 `label` 欄位）+ 當月 + 累計 + YoY；富邦的加計後總計EPS（13.17）顯示於該列累計EPS欄。手機卡片、詳情面板（「（合併）」列下方）、Excel Sheet 1 同步呈現。註腳 `FVOCI_FOOTNOTE_HOLDINGS`
+- **金控總覽 tab**（115/06 起）：2881/2882/2883 主列下方加一行「（加上FVOCI股票處分利益）*」+ 當月 + 累計 + YoY；富邦的加計後總計EPS（13.17）顯示於該列累計EPS欄。手機卡片、詳情面板（「（合併）」列下方）、Excel Sheet 1 同步呈現。註腳 `FVOCI_FOOTNOTE_HOLDINGS`
+- **列標籤一律統一**為「加上FVOCI股票處分利益」（`fvociRowLabel()` 不吃 `label` 欄位）。國泰新聞稿用語「對保留盈餘影響數」仍存於資料的 `fvoci_adjusted.label`、於註腳與 Excel「FVOCI 新聞稿用語」欄呈現——表格上不逐家換字，以維持橫向比較的一致性
 - **壽險產業 tab、子公司展開面板**：於壽險子公司列下方加同樣一行，註腳 `FVOCI_FOOTNOTE`（詳情面板用 `FVOCI_FOOTNOTE_DETAIL` 涵蓋兩層級）
 - 其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入摘要卡片或圖表、不參與排序（子列跟著母列）
 - 前端 `fvociDisplay()` 統一格式化：`lower_bound` 顯示「逾／突破 X」且 YoY 欄為 `—`；具體值顯示數字 + YoY；當月數缺漏顯示 `—`（手機卡片則整項省略）。列標籤由 `fvociRowLabel()` 依 `label` 欄位決定。FVOCI 列樣式統一走 CSS class（`.fvoci-row` / `.fvoci-label` / `.fvoci-num`），色票 `--fvoci`
@@ -530,18 +531,72 @@ fetch("./data/index.json") → renderMonthSelector() → loadData("115/03")
 
 ### 功能清單
 
-- 月份選單（dropdown）：依 index.json 動態建立（含 114 baseline 月份）
+- 月份選單（dropdown）：依 index.json 動態建立（含去年 baseline 月份）
 - 排序：代號 / 當月↓ / 累計↓ / **累計 YoY↓** / 累計 EPS↓
 - 單位切換：百萬元（NT$m）/ 億元（前端換算，JSON 存百萬元）
 - **本月市場概況**：表格上方獨立區塊，5 張卡片（FX、TAIEX、日均量、S&P、US 10Y）
 - **摘要卡片（2026-08 改版）**：四張「累計獲利第一」——金控 / 壽險（**不含FVOCI**，以原始 P&L 排名）/ 銀行 / 證券，各顯示公司名 + 金額（跟單位選單）+ 累計 YoY（`leaderFromCompanies` / `leaderFromIndustry` / `leaderCard`）
 - **產業 Tab 切換**：金控總覽 / 銀行 / 壽險 / 證券。子公司依名稱 pattern matching 分類（含「銀行」/「人壽」/「證券」），表格、圖表、標題跟著切；產業 tab 無 EPS 欄位
-- 主表格（金控視角）：代號、金控名、當月、累計、**累計 YoY**、當月 EPS、累計 EPS；2881/2882/2883 主列下方有金控層級 FVOCI 加計列
+- 主表格（金控視角，**8 欄**）：代號、金控名、當月、累計、**累計 YoY**、當月 EPS、累計 EPS、**公告日期**（連結至 MOPS 原始公告）；2881/2882/2883 主列下方有金控層級 FVOCI 加計列。2026-08 起移除「狀態」欄（13/13 已成常態，資訊量低）
 - 主表格（產業視角）：集團、子公司、當月、累計、累計 YoY
-- **表格對齊（2026-08）**：數字欄表頭（當月／累計／累計YoY／EPS）右對齊與數字切齊；欄寬以 `#main-table.view-holdings` / `.view-industry` class 控制等寬（金控視角：淨利三欄各 12%、EPS 兩欄各 9%；產業視角：三欄各 16%）
-- 子公司展開：點金控名/集團名顯示子公司明細 + bar chart（金控合併列下方亦顯示金控層級 FVOCI 加計列）
+- **表格對齊**：數字欄表頭（當月／累計／累計YoY／EPS）右對齊與數字切齊；欄寬以 `#main-table.view-holdings` / `.view-industry` class 控制等寬
+- 子公司展開：點金控名/集團名顯示子公司明細 + bar chart（金控合併列下方亦顯示金控層級 FVOCI 加計列）。**換月時自動關閉**（`loadData` 呼叫 `closeDetail()`），避免面板停留在前一個月的內容
 - 新聞摘要：子公司面板底部顯示「延伸閱讀」清單
-- 雙圖表：當月獲利橫條圖（藍）+ 累計 YTD 橫條圖（綠），跟著 tab 切換資料源
+- **雙圖表（2026-08 改版）**：當月獲利、累計獲利各一張，皆為**本期 vs 去年同期**雙數列長條圖；排序依本期數值由大到小，四個視角皆適用
+
+### 年份顯示規則（2026-08 起）
+
+**資料內部一律民國年**（`report_period: "115/06"`、`announcement_date: "115/07/14"`，爬蟲與 JSON 格式不變），**顯示層一律西元年**。轉換集中在 `app.js` 頂端四個 helper：`periodAd()`（115/06 → 2026/06）、`periodLabel()`（→ 2026年6月）、`dateAd()`（115/07/14 → 2026/07/14）、`fmtDate()` / `fmtDateTime()`（ISO → 2026/07/15 16:34）。
+
+⚠️ **期別比較務必用原始民國年字串**（如 `period < '115/07'` 的 M&A cutoff 判斷），不可用轉換後的西元字串，否則字串比較會失效。
+
+### 圖表去年同期對照（`loadBaseline` / `chartSeries`）
+
+- `loadData()` 載入月份資料後，接著 `loadBaseline()` 抓 `docs/data/{去年同期}.json` 存入 `state.baseline`；檔案不存在（404）時靜默略過，圖表只畫本期
+- `chartRowsOf(src, kind)` 以 **key** 跨期對應：金控視角用 `code`、產業視角用 `parent_code|子公司名`
+- **基期不可比時不畫對照柱**：`CHART_PRIOR_CUTOFFS = { '2887': '115/07' }`（與 `main.py` 的 `YOY_CUTOFFS`、表格 YoY 一致）。台新新光金 115/07 之前的「去年同期」只有台新金單體，不同一實體 → 不列對照
+- 缺基期者（M&A、當年尚未納入公告的子公司）列於圖表下方 `.chart-note`，避免讀者誤以為去年為零
+- Chart.js 設定：`maintainAspectRatio: false` + `.chart-container` 固定高度（桌機 400px / 手機 330px），否則畫布會為維持長寬比而縮窄、右側留白
+
+### 併購註記顯示期間（`MERGER_NOTE_CUTOFFS`，2026-08 起）
+
+表格／卡片上的併購註記由前端常數控制，達到 cutoff 當期起不再顯示：
+
+```js
+const MERGER_NOTE_CUTOFFS = { '2887': '115/07', '2890': '115/07' };
+```
+
+- **2887 台新新光金**：2025/07 合併，115/07 起 YoY 基期已對齊、本來就會算出 YoY，註記自然消失
+- **2890 永豐金（京城銀）**：依需求 115/07 起一併停止標註。⚠️ 京城銀行實際上 2025/10 才併入獲利公告，**115/07–115/09 的 YoY 基期（114/07–09）仍未含京城，成長率會偏高**；此期間表格不再標註，說明保留在詳情面板的 `COMPANY_NOTES`。若要恢復標註至基期完全對齊，把 `'2890'` 改回 `'115/10'`
+- 後端 `main.py` 的 `YOY_CUTOFFS`（2887 → 115/07，控制是否計算 YoY）與圖表的 `CHART_PRIOR_CUTOFFS` **不受此常數影響**，維持原本的財務判斷
+
+### Excel 匯出樣式（2026-08 重構）
+
+改用 **xlsx-js-style**（`https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js`，與 SheetJS 同 API 但支援 `cell.s` 樣式），讓匯出檔與網頁四張表視覺一致：
+
+- 前四個工作表（金控總覽／銀行／壽險／證券子公司）**欄位與順序完全對應網頁的四個 tab**；金控總覽保留雙層合併表頭（合併稅後淨利 3 欄、稅後 EPS 2 欄）與 FVOCI 加計子列
+- 樣式對應 `style.css`：表頭底色 `FAFBFC` + 灰字、金額墨黑（負數 `A3312A`）、YoY 方向色（`1F6F54` / `A3312A`）、FVOCI 列淡藍底 `F7F8FC` + 靛藍斜體 `4A5A8F`、註腳列合併儲存格並設列高
+- 數字格式與網頁 `formatNum()` 規則一致（`#,##0` / `#,##0.0` / `0.00`）；YoY 以**數值 + `"+"0.0%;"-"0.0%`** 格式儲存（Excel 內可排序、篩選），跨零點（虧轉盈／盈轉虧）沿用網頁文字
+- 後兩個工作表（其他子公司／市場概況）為網頁未以表格呈現的補充資料，套用同一套表頭樣式
+- **新聞摘要不列入 Excel**（篇幅長、格式與數字表不一致）；網頁詳情面板仍可閱讀，資料保留在 JSON 的 `news_summary`
+- ⚠️ **凍結窗格無法寫入**：瀏覽器端的 SheetJS／xlsx-js-style 只能讀取 pane、不支援寫入（舊版的 `ws['!freeze']` 從未生效）。需要凍結請於 Excel 內自行設定
+- ⚠️ 樣式物件**不可跨儲存格共用參照**：xlsx-js-style 會以樣式物件識別 style id，數值與文字混用同一物件會讓文字格沿用到別格的 numFmt。故 `xText` / `xNum` / `fvociRowCells` 皆淺拷貝樣式並明確指定 `z`（文字用 `'General'`）
+
+### 配色系統（2026-08 重構）
+
+參考機構型財經網站的克制用色，`style.css` 頂端 `:root` 為單一色彩來源：
+
+- **金額一律墨黑**（`--text: #101418`），**只有負數**用紅（`--negative`）。方向色（綠/紅）**只保留給 YoY 欄**（`td.num.yoy.positive/.negative`、`.m-cell-value.yoy.*`）——改版前所有金額都是綠色，造成整片彩色的視覺噪音
+- **深藍 `--primary: #1a3fa0` 為唯一重點色**：頁首徽章、Tab、連結、下載鈕、卡片金額、圖表本期數列
+- 去年同期數列用中性灰 `rgba(154,163,178,.55)`，弱於本期
+- 頁首改白底黑字（原深藍漸層）；全站移除 emoji 圖示；表頭、卡片、面板統一走 CSS 變數，避免散落的 hard-coded 色碼
+- 四張「累計獲利第一」卡片的公司名 19px，與市場概況數值同級（不搶版面）
+
+### 手機響應式（已驗證 375 / 390 / 430 / 768px）
+
+- ≤640px：主表改卡片（`.mobile-cards`）、產業 Tab 2×2、控制列堆疊；**市場概況與四張第一名卡片改 2×2 grid**，卡片內文字級距下調、`card-sub` 允許換行（避免金額與 YoY 溢出）
+- 圖表容器高度桌機 400px / 手機 330px（搭配 `maintainAspectRatio: false`）
+- 驗證方式：Playwright 逐一比對 `documentElement.scrollWidth` 與 `clientWidth`，確認四種寬度皆無水平溢出、無 console error
 
 ---
 

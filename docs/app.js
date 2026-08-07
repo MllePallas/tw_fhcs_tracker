@@ -11,6 +11,7 @@ const CONFIG = {
 // ── 全域狀態 ───────────────────────────────────────────
 let state = {
   data: null,
+  baseline: null,        // 去年同期資料（圖表對照用；缺檔時為 null）
   index: null,
   displayUnit: '百萬元',
   sortMode: 'code',
@@ -18,6 +19,45 @@ let state = {
   barChart: null,
   cumulChart: null,
 };
+
+// ── 年份顯示：資料內部一律民國年，顯示層一律西元年 ──────
+// 期別比較（如 period < '115/07'）務必用原始民國年字串，不可用轉換後的值。
+function adYear(rocYear) {
+  return parseInt(rocYear, 10) + 1911;
+}
+// "115/06" → "2026/06"
+function periodAd(period) {
+  const m = String(period || '').match(/^(\d{2,3})\/(\d{1,2})$/);
+  return m ? `${adYear(m[1])}/${m[2].padStart(2, '0')}` : (period || '');
+}
+// "115/06" → "2026年6月"
+function periodLabel(period) {
+  const m = String(period || '').match(/^(\d{2,3})\/(\d{1,2})$/);
+  return m ? `${adYear(m[1])}年${parseInt(m[2], 10)}月` : (period || '');
+}
+// "115/07/14" → "2026/07/14"
+function dateAd(d) {
+  const m = String(d || '').match(/^(\d{2,3})\/(\d{1,2})\/(\d{1,2})$/);
+  return m ? `${adYear(m[1])}/${m[2].padStart(2, '0')}/${m[3].padStart(2, '0')}` : (d || '');
+}
+// ISO 時間字串 → "2026/07/15"（西元、補零）
+function fmtDate(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  return `${d.getFullYear()}/${String(d.getMonth() + 1).padStart(2, '0')}/${String(d.getDate()).padStart(2, '0')}`;
+}
+// ISO 時間字串 → "2026/07/15 16:34"
+function fmtDateTime(iso) {
+  const d = new Date(iso);
+  if (isNaN(d)) return '';
+  return `${fmtDate(iso)} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+}
+// "115/06" → "114/06"（去年同期，仍為民國年，供載入 baseline 檔用）
+function prevYearPeriod(period) {
+  const m = String(period || '').match(/^(\d{2,3})\/(\d{1,2})$/);
+  if (!m) return null;
+  return `${String(parseInt(m[1], 10) - 1).padStart(3, '0')}/${m[2].padStart(2, '0')}`;
+}
 
 // ── 視角切換 ───────────────────────────────────────────
 function setView(mode) {
@@ -73,22 +113,39 @@ function fvociDisplay(a, sourceUnit, displayUnit) {
   return { monthlyDisp, cumulDisp: formatNum(v), yoyDisp, isBound: false };
 }
 
-// FVOCI 加計列的標籤：預設「加上FVOCI股票處分利益」；國泰金控以「對保留盈餘影響數」
-// 表述（data 內 fvoci_adjusted.label 欄位覆寫）
-function fvociRowLabel(a) {
-  return `（${(a && a.label) || '加上FVOCI股票處分利益'}）`;
+// FVOCI 加計列的標籤：表格一律統一顯示「加上FVOCI股票處分利益」。
+// 國泰金控新聞稿實際用語為「對保留盈餘影響數」（存於 data 的 fvoci_adjusted.label，
+// 並於註腳說明），但表格上不逐家換字，以維持橫向比較的一致性。
+function fvociRowLabel() {
+  return '（加上FVOCI股票處分利益）';
 }
 
 // FVOCI 註腳文字（壽險視角＝壽險子公司揭露；金控總覽＝金控合併層級揭露）
-const FVOCI_FOOTNOTE = '加計FVOCI股票處分利益後之當月／累計獲利，依各壽險公司新聞稿揭露數字，僅供與去年同期比較之參考。國泰人壽僅揭露「對保留盈餘影響數」門檻值，以「逾／突破」標示下界且不計 YoY。';
-const FVOCI_FOOTNOTE_HOLDINGS = '金控合併稅後淨利加計FVOCI股票處分（稅後）利益，依各金控新聞稿揭露數字，僅供與去年同期比較之參考；YoY 以去年同期金控原始稅後淨利為基準。國泰金控以「對保留盈餘影響數」表述，未揭露單月加計數。';
-const FVOCI_FOOTNOTE_DETAIL = '加計FVOCI股票處分利益後之獲利（金控合併層級與壽險子公司分別揭露；國泰以「對保留盈餘影響數」表述），依各公司新聞稿揭露數字，僅供與去年同期比較之參考；未揭露之當月數以 — 表示。';
+const FVOCI_FOOTNOTE = '加計FVOCI股票處分利益後之當月／累計獲利，依各壽險公司新聞稿揭露數字，僅供與去年同期比較之參考。國泰人壽新聞稿以「對保留盈餘影響數」表述，且僅揭露門檻值，以「逾／突破」標示下界、不計 YoY。';
+const FVOCI_FOOTNOTE_HOLDINGS = '金控合併稅後淨利加計FVOCI股票處分（稅後）利益，依各金控新聞稿揭露數字，僅供與去年同期比較之參考；YoY 以去年同期金控原始稅後淨利為基準。國泰金控新聞稿以「對保留盈餘影響數」表述同一概念，未揭露單月加計數。';
+const FVOCI_FOOTNOTE_DETAIL = '加計FVOCI股票處分利益後之獲利（金控合併層級與壽險子公司分別揭露），依各公司新聞稿揭露數字，僅供與去年同期比較之參考；國泰新聞稿以「對保留盈餘影響數」表述同一概念，未揭露之當月數以 — 表示。';
+
+// 表格／卡片上的併購註記顯示期間（民國年月字串比較；達到 cutoff 當期起不再顯示）。
+// 2887 台新新光金：2025/07 合併，115/07 起 YoY 基期已對齊，本就會算出 YoY、註記自然消失。
+// 2890 永豐金（京城銀）：依需求 115/07 起一併停止標註，讓表格更乾淨。
+//   注意：京城銀行 2025/10 才併入獲利公告，115/07–115/09 的 YoY 基期（114/07–09）仍未含京城，
+//   成長率會偏高；此期間不再於表格標註，相關說明保留在詳情面板的 COMPANY_NOTES。
+//   若要恢復標註至基期完全對齊，把 '2890' 改回 '115/10' 即可。
+const MERGER_NOTE_CUTOFFS = {
+  '2887': '115/07',
+  '2890': '115/07',
+};
+
+function showMergerNote(code, period) {
+  const cutoff = MERGER_NOTE_CUTOFFS[code];
+  return !!cutoff && period < cutoff;
+}
 
 // 金控層級併購／重大異動備註（前端靜態，不依賴爬蟲資料，重爬不會遺失）。
 // 顯示於詳情面板底部。key = 金控代號。
 const COMPANY_NOTES = {
-  "2887": "元富證券於 2026/4/6（民國115/04/06）併入台新證券，台新證券數字自此含元富證券。",
-  "2890": "京城銀行自 114/10（2025年10月）起併入永豐金月自結獲利公告；115/01–115/09 的累計 YoY 比較基期（114/01–09）未含京城銀行，成長率會偏高。",
+  "2887": "元富證券於 2026/04/06 併入台新證券，台新證券數字自此含元富證券。",
+  "2890": "京城銀行自 2025/10 起併入永豐金月自結獲利公告；2026/01–2026/09 的累計 YoY 比較基期（2025/01–09）未含京城銀行，成長率會偏高。",
 };
 
 // YoY 排序鍵：虧轉盈 > 正成長 > 負成長 > 盈轉虧；同 tier 內依 pct 排序
@@ -105,10 +162,12 @@ function compareYoYDesc(aPct, aStatus, bPct, bStatus) {
   return (bPct ?? -Infinity) - (aPct ?? -Infinity);
 }
 
-// 取出某產業的所有子公司列（含父金控資訊）
-function getIndustryRows(industry) {
+// 取出某產業的所有子公司列（含父金控資訊）。src 預設本期資料，圖表對照時傳入 baseline。
+function getIndustryRows(industry, src) {
+  const source = src || state.data;
+  if (!source) return [];
   const rows = [];
-  for (const c of state.data.companies || []) {
+  for (const c of source.companies || []) {
     if (c.error) continue;
     for (const s of c.subsidiaries || []) {
       if (classifyIndustry(s.name) !== industry) continue;
@@ -164,7 +223,7 @@ function renderMonthSelector(months) {
     return;
   }
   sel.innerHTML = months.map((m, i) => {
-    const label = m.period.replace('/', '年') + '月';
+    const label = periodLabel(m.period);
     const tag   = i === 0 ? ' ★ 最新' : '';
     const count = m.success_count != null ? ` (${m.success_count}/13)` : '';
     return `<option value="${m.period}">${label}${count}${tag}</option>`;
@@ -186,6 +245,9 @@ async function loadData(period) {
     const resp = await fetch(url);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     state.data = await resp.json();
+    await loadBaseline(state.data.report_period);
+    // 換月時關閉詳情面板：面板內容屬於前一個月份，留著會與表頭月份不一致
+    closeDetail();
     renderAll();
   } catch (e) {
     showStatus('error', `⚠️ 無法載入資料：${e.message}`);
@@ -193,6 +255,22 @@ async function loadData(period) {
       `<tr><td colspan="6" class="loading-cell" style="color:#e53e3e">資料載入失敗</td></tr>`;
     document.getElementById('mobile-cards').innerHTML =
       `<div class="m-empty" style="color:#e53e3e">資料載入失敗</div>`;
+  }
+}
+
+// ── 去年同期資料（圖表對照用） ──────────────────────────
+// 檔案不存在（如最早的月份、或 baseline 尚未歸檔）時靜默略過，圖表只顯示本期。
+async function loadBaseline(period) {
+  state.baseline = null;
+  const prev = prevYearPeriod(period);
+  if (!prev) return;
+  try {
+    const resp = await fetch(`./data/${prev.replace('/', '-')}.json?_=${Date.now()}`);
+    if (!resp.ok) return;
+    const b = await resp.json();
+    if (b && Array.isArray(b.companies)) state.baseline = b;
+  } catch (e) {
+    // 無基期資料 → 圖表僅顯示本期
   }
 }
 
@@ -221,8 +299,8 @@ function renderMarketSummary() {
   section.classList.remove('hidden');
 
   const meta = document.getElementById('market-meta');
-  const period = (m.period || state.data.report_period || '').replace('/', '年') + '月底';
-  const ts = m.generated_at ? new Date(m.generated_at).toLocaleDateString('zh-TW') : '';
+  const period = periodLabel(m.period || state.data.report_period) + '底';
+  const ts = m.generated_at ? fmtDate(m.generated_at) : '';
   meta.textContent = `${period}收盤｜更新：${ts}｜資料：Yahoo Finance、TWSE`;
 
   const cards = [];
@@ -338,11 +416,10 @@ function renderHoldingsTable() {
       <th rowspan="2" class="col-name">金控</th>
       <th colspan="3" class="col-group">合併稅後淨利</th>
       <th colspan="2" class="col-group">稅後 EPS (元)</th>
-      <th rowspan="2" class="col-status">狀態</th>
-      <th rowspan="2" class="col-source">來源</th>
+      <th rowspan="2" class="col-source">公告日期</th>
     </tr>
     <tr>
-      <th class="col-monthly">當月 (${period})</th>
+      <th class="col-monthly">當月 (${periodAd(period)})</th>
       <th class="col-cumulative">累計</th>
       <th class="col-cumulative">累計 YoY</th>
       <th class="col-monthly col-eps">當月</th>
@@ -356,7 +433,7 @@ function renderHoldingsTable() {
   const hasFvoci = companies.some(c => !c.error && c.holding_company?.fvoci_adjusted?.cumulative_profit != null);
   if (tfoot) {
     tfoot.innerHTML = hasFvoci
-      ? `<tr><td colspan="9" class="table-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</td></tr>`
+      ? `<tr><td colspan="8" class="table-footnote"><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</td></tr>`
       : '';
   }
 }
@@ -369,14 +446,14 @@ function renderIndustryTable(industry) {
     <tr>
       <th class="col-code">集團</th>
       <th class="col-name">${VIEW_TITLES[industry]}子公司</th>
-      <th class="col-monthly">當月 (${period})</th>
+      <th class="col-monthly">當月 (${periodAd(period)})</th>
       <th class="col-cumulative">累計</th>
       <th class="col-cumulative">累計 YoY</th>
     </tr>`;
 
   if (rows.length === 0) {
     document.getElementById('main-tbody').innerHTML =
-      `<tr><td colspan="5" class="loading-cell" style="color:#718096">此期間無${VIEW_TITLES[industry]}資料</td></tr>`;
+      `<tr><td colspan="5" class="loading-cell">此期間無${VIEW_TITLES[industry]}資料</td></tr>`;
     return;
   }
 
@@ -391,19 +468,19 @@ function renderIndustryTable(industry) {
     const yi = formatYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs, r.cumulative_profit_yoy_status, r.unit, unit);
     let yoyClass = yi.cls;
     let yoyDisp = yi.disp;
-    if (yi.disp === '—' && r.parent_code === '2887' && period < '115/07') {
+    if (yi.disp === '—' && showMergerNote(r.parent_code, period)) {
       yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
     }
-    if (yi.disp === '—' && r.name.includes('京城') && period < '115/10') {
-      yoyDisp = '<span class="yoy-note">114/10 併入獲利公告</span>';
+    if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) {
+      yoyDisp = '<span class="yoy-note">2025/10 併入獲利公告</span>';
     }
 
     const main = `<tr>
       <td><a class="company-link" onclick="showDetail('${r.parent_code}')">${r.parent_name}</a></td>
-      <td style="font-weight:600">${r.name}</td>
+      <td class="col-entity">${r.name}</td>
       <td class="num ${mClass}">${m != null ? formatNum(m) : '—'}</td>
       <td class="num ${cClass}">${c != null ? formatNum(c) : '—'}</td>
-      <td class="num ${yoyClass}">${yoyDisp}</td>
+      <td class="num yoy ${yoyClass}">${yoyDisp}</td>
     </tr>`;
 
     // 壽險專屬：僅在有揭露 FVOCI 影響數的子公司下方加一行（目前富邦、凱基）
@@ -418,7 +495,7 @@ function renderIndustryTable(industry) {
         : '';
       adj = `<tr class="fvoci-row">
         <td></td>
-        <td class="fvoci-label"${tip}>${fvociRowLabel(a)}<sup>*</sup></td>
+        <td class="fvoci-label"${tip}>${fvociRowLabel()}<sup>*</sup></td>
         <td class="num fvoci-num">${fd.monthlyDisp}</td>
         <td class="num fvoci-num">${fd.cumulDisp}</td>
         <td class="num fvoci-num">${fd.yoyDisp}</td>
@@ -465,11 +542,8 @@ function renderRow(c) {
     return `<tr class="error-row">
       <td class="col-code">${c.code}</td>
       <td><span class="company-link">${c.name}</span></td>
-      <td colspan="5" class="center" style="color:#718096;font-size:12px">
-        ${c.error_msg || '資料待更新'}
-      </td>
-      <td class="center"><span class="status-tag status-error">未取得</span></td>
-      <td></td>
+      <td colspan="5" class="center row-note">${c.error_msg || '資料待更新'}</td>
+      <td class="center row-note">—</td>
     </tr>`;
   }
 
@@ -490,12 +564,12 @@ function renderRow(c) {
   const yi = formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs, h.cumulative_profit_yoy_status, c.unit, unit);
   let yoyClass = yi.cls;
   let yoyDisp = yi.disp;
-  if (yi.disp === '—' && c.code === '2887' && period < '115/07') {
+  if (yi.disp === '—' && c.code === '2887' && showMergerNote('2887', period)) {
     yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
   }
-  // 2890 永豐金：京城銀行 114/10 併入公告，115/01–09 的 YoY 基期未含京城 → 標註提醒
-  if (yi.disp !== '—' && c.code === '2890' && period < '115/10') {
-    yoyDisp += '<br><span class="yoy-note">京城銀 114/10 併入獲利公告</span>';
+  // 2890 永豐金：京城銀行 2025/10 併入公告，基期未含京城 → 標註提醒（115/07 起停止標註）
+  if (yi.disp !== '—' && c.code === '2890' && showMergerNote('2890', period)) {
+    yoyDisp += '<br><span class="yoy-note">京城銀 2025/10 併入獲利公告</span>';
   }
 
   // EPS：當月 EPS 公告通常沒列，可用 月損益/累計損益 × 累計EPS 推算
@@ -510,11 +584,10 @@ function renderRow(c) {
   const epsMDisp = epsM != null ? formatEps(epsM) : '—';
   const epsCDisp = epsC != null ? formatEps(epsC) : '—';
 
+  const annDate = dateAd(c.announcement_date) || '公告';
   const sourceLink = c.source_url
-    ? `<a class="source-link" href="${c.source_url}" target="_blank" rel="noopener">
-         📄 ${c.announcement_date || '公告'}
-       </a>`
-    : '—';
+    ? `<a class="source-link" href="${c.source_url}" target="_blank" rel="noopener" title="於公開資訊觀測站檢視原始公告">${annDate}</a>`
+    : (dateAd(c.announcement_date) || '—');
 
   const nameCell = `<a class="company-link" onclick="showDetail('${c.code}')">${c.name}</a>`;
 
@@ -528,13 +601,12 @@ function renderRow(c) {
     const adjEpsC = a.cumulative_eps != null ? formatEps(a.cumulative_eps) : '';
     adjRow = `<tr class="fvoci-row">
       <td></td>
-      <td class="fvoci-label"${tip}>${fvociRowLabel(a)}<sup>*</sup></td>
+      <td class="fvoci-label"${tip}>${fvociRowLabel()}<sup>*</sup></td>
       <td class="num fvoci-num">${fd.monthlyDisp}</td>
       <td class="num fvoci-num">${fd.cumulDisp}</td>
       <td class="num fvoci-num">${fd.yoyDisp}</td>
       <td class="num fvoci-num"></td>
       <td class="num fvoci-num">${adjEpsC}</td>
-      <td></td>
       <td></td>
     </tr>`;
   }
@@ -544,11 +616,10 @@ function renderRow(c) {
     <td>${nameCell}</td>
     <td class="num ${mClass}">${mDisplay}</td>
     <td class="num ${cClass}">${cDisplay}</td>
-    <td class="num ${yoyClass}">${yoyDisp}</td>
+    <td class="num yoy ${yoyClass}">${yoyDisp}</td>
     <td class="num ${epsMClass}">${epsMDisp}</td>
     <td class="num ${epsCClass}">${epsCDisp}</td>
-    <td class="center"><span class="status-tag status-ok">✓ 已取得</span></td>
-    <td class="center">${sourceLink}</td>
+    <td class="center col-source">${sourceLink}</td>
   </tr>` + adjRow;
 }
 
@@ -593,11 +664,11 @@ function renderHoldingCard(c) {
 
   const yi = formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs, h.cumulative_profit_yoy_status, c.unit, unit);
   let yoyClass = yi.cls, yoyDisp = yi.disp;
-  if (yi.disp === '—' && c.code === '2887' && period < '115/07') {
+  if (yi.disp === '—' && c.code === '2887' && showMergerNote('2887', period)) {
     yoyDisp = '合併前';
   }
-  if (yi.disp !== '—' && c.code === '2890' && period < '115/10') {
-    yoyDisp += '<span class="yoy-note" style="display:block">京城銀 114/10 併入</span>';
+  if (yi.disp !== '—' && c.code === '2890' && showMergerNote('2890', period)) {
+    yoyDisp += '<span class="yoy-note" style="display:block">京城銀 2025/10 併入</span>';
   }
 
   const epsC = h.cumulative_eps;
@@ -616,7 +687,7 @@ function renderHoldingCard(c) {
     const monthlyPart = fd.monthlyDisp !== '—' ? `<div>當月：${fd.monthlyDisp}</div>` : '';
     adjBlock = `
     <div class="m-fvoci">
-      <div class="m-fvoci-label">${fvociRowLabel(a)}<sup>*</sup></div>
+      <div class="m-fvoci-label">${fvociRowLabel()}<sup>*</sup></div>
       <div class="m-fvoci-vals">
         ${monthlyPart}
         <div>累計：${fd.cumulDisp}</div>
@@ -635,7 +706,7 @@ function renderHoldingCard(c) {
     </div>
     <div class="m-card-grid">
       <div class="m-cell">
-        <div class="m-cell-label">當月 (${period})</div>
+        <div class="m-cell-label">當月 (${periodAd(period)})</div>
         <div class="m-cell-value ${mClass}">${monthly != null ? formatNum(monthly) : '—'}</div>
       </div>
       <div class="m-cell">
@@ -644,7 +715,7 @@ function renderHoldingCard(c) {
       </div>
       <div class="m-cell">
         <div class="m-cell-label">累計 YoY</div>
-        <div class="m-cell-value ${yoyClass}">${yoyDisp}</div>
+        <div class="m-cell-value yoy ${yoyClass}">${yoyDisp}</div>
       </div>
       <div class="m-cell">
         <div class="m-cell-label">累計 EPS</div>
@@ -674,11 +745,11 @@ function renderIndustryCards(industry) {
 
     const yi = formatYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs, r.cumulative_profit_yoy_status, r.unit, unit);
     let yoyClass = yi.cls, yoyDisp = yi.disp;
-    if (yi.disp === '—' && r.parent_code === '2887' && period < '115/07') {
+    if (yi.disp === '—' && showMergerNote(r.parent_code, period)) {
       yoyDisp = '合併前';
     }
-    if (yi.disp === '—' && r.name.includes('京城') && period < '115/10') {
-      yoyDisp = '<span class="yoy-note">114/10 併入</span>';
+    if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) {
+      yoyDisp = '<span class="yoy-note">2025/10 併入</span>';
     }
 
     // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示（淡藍色弱化，不干擾主排序）
@@ -690,7 +761,7 @@ function renderIndustryCards(industry) {
       const monthlyPart = fd.monthlyDisp !== '—' ? `<div>當月：${fd.monthlyDisp}</div>` : '';
       adjBlock = `
       <div class="m-fvoci">
-        <div class="m-fvoci-label">${fvociRowLabel(a)}<sup>*</sup></div>
+        <div class="m-fvoci-label">${fvociRowLabel()}<sup>*</sup></div>
         <div class="m-fvoci-vals">
           ${monthlyPart}
           <div>累計：${fd.cumulDisp}</div>
@@ -709,7 +780,7 @@ function renderIndustryCards(industry) {
       </div>
       <div class="m-card-grid m-card-grid-3">
         <div class="m-cell">
-          <div class="m-cell-label">當月 (${period})</div>
+          <div class="m-cell-label">當月 (${periodAd(period)})</div>
           <div class="m-cell-value ${mClass}">${m != null ? formatNum(m) : '—'}</div>
         </div>
         <div class="m-cell">
@@ -718,7 +789,7 @@ function renderIndustryCards(industry) {
         </div>
         <div class="m-cell">
           <div class="m-cell-label">累計 YoY</div>
-          <div class="m-cell-value ${yoyClass}">${yoyDisp}</div>
+          <div class="m-cell-value yoy ${yoyClass}">${yoyDisp}</div>
         </div>
       </div>
       ${adjBlock}
@@ -851,13 +922,11 @@ function showDetail(code) {
           `<li><a href="${s.url}" target="_blank" rel="noopener noreferrer">${escapeHtml(s.title || s.url)}</a></li>`
         ).join('')}</ul></div>`
       : '';
-    const ts = c.news_generated_at
-      ? new Date(c.news_generated_at).toLocaleDateString('zh-TW')
-      : '';
+    const ts = c.news_generated_at ? fmtDate(c.news_generated_at) : '';
     newsHtml = `
       <div class="news-summary">
         <div class="news-summary-header">
-          <span>📰 媒體新聞摘要</span>
+          <span>媒體新聞摘要</span>
           ${ts ? `<span class="news-summary-time">${ts} 生成</span>` : ''}
         </div>
         <div class="news-summary-body">${renderMarkdown(c.news_summary)}</div>
@@ -868,7 +937,7 @@ function showDetail(code) {
   // ── 子公司表格區塊 ──
   let tableHtml = '';
   if (subs.length === 0) {
-    tableHtml = '<p style="color:#718096">無子公司明細資料</p>';
+    tableHtml = '<p class="detail-footnote">無子公司明細資料</p>';
   } else {
     const subEntries = subs.map(s => ({
       name: s.name,
@@ -885,25 +954,25 @@ function showDetail(code) {
       const mc = (s.monthly || 0) >= 0 ? 'positive' : 'negative';
       const cc = (s.cumul   || 0) >= 0 ? 'positive' : 'negative';
       const barPct = Math.abs((s.monthly || 0) / maxAbs * 100).toFixed(1);
-      const barColor = (s.monthly || 0) >= 0 ? '#276749' : '#9b1c1c';
-      const main = `<tr style="border-bottom:1px solid #f0f0f0">
-        <td style="padding:5px 8px;min-width:90px">${s.name}</td>
-        <td class="num ${mc}" style="padding:5px 8px;white-space:nowrap">${s.monthly != null ? formatNum(s.monthly) : '—'}</td>
-        <td style="padding:5px 8px;width:120px;padding-left:8px">
-          <div style="background:${barColor};height:10px;border-radius:3px;width:${barPct}%;min-width:2px;opacity:0.75"></div>
+      const barColor = (s.monthly || 0) >= 0 ? 'rgba(26,63,160,.55)' : 'rgba(163,49,42,.55)';
+      const main = `<tr>
+        <td style="min-width:90px">${s.name}</td>
+        <td class="num ${mc}">${s.monthly != null ? formatNum(s.monthly) : '—'}</td>
+        <td class="detail-bar-cell">
+          <div class="detail-bar" style="background:${barColor};width:${barPct}%"></div>
         </td>
-        <td class="num ${cc}" style="padding:5px 8px;white-space:nowrap">${s.cumul != null ? formatNum(s.cumul) : '—'}</td>
+        <td class="num ${cc}">${s.cumul != null ? formatNum(s.cumul) : '—'}</td>
       </tr>`;
 
-      // 僅在壽險子公司且有揭露 FVOCI 影響數時加一行（淡藍色弱化）
+      // 僅在壽險子公司且有揭露 FVOCI 影響數時加一行（淡靛藍弱化）
       if (!s.isLife || !s.fvoci || s.fvoci.cumulative_profit == null) return main;
       hasFvoci = true;
       const fd = fvociDisplay(s.fvoci, c.unit, unit);
       const tip = s.fvoci.source_quote
         ? ` title="${escapeHtml(s.fvoci.source_quote)}"`
         : '';
-      const adj = `<tr class="fvoci-row" style="border-bottom:1px solid #f0f0f0">
-        <td class="fvoci-label detail-fvoci-label"${tip}>${fvociRowLabel(s.fvoci)}<sup>*</sup></td>
+      const adj = `<tr class="fvoci-row">
+        <td class="fvoci-label detail-fvoci-label"${tip}>${fvociRowLabel()}<sup>*</sup></td>
         <td class="num fvoci-num detail-fvoci-num">${fd.monthlyDisp}</td>
         <td></td>
         <td class="num fvoci-num detail-fvoci-num">${fd.cumulDisp}</td>
@@ -911,15 +980,15 @@ function showDetail(code) {
       return main + adj;
     }).join('');
 
-    // 金控合併層級 FVOCI 加計列（緊接「（合併）」列之後；國泰以「對保留盈餘影響數」表述）
+    // 金控合併層級 FVOCI 加計列（緊接「（合併）」列之後）
     let hAdjRow = '';
     const hAdj = h.fvoci_adjusted;
     if (hAdj && hAdj.cumulative_profit != null) {
       hasFvoci = true;
       const fd = fvociDisplay(hAdj, c.unit, unit);
       const tip = hAdj.source_quote ? ` title="${escapeHtml(hAdj.source_quote)}"` : '';
-      hAdjRow = `<tr class="fvoci-row" style="border-bottom:1px solid #f0f0f0">
-        <td class="fvoci-label detail-fvoci-label"${tip}>${fvociRowLabel(hAdj)}<sup>*</sup></td>
+      hAdjRow = `<tr class="fvoci-row">
+        <td class="fvoci-label detail-fvoci-label"${tip}>${fvociRowLabel()}<sup>*</sup></td>
         <td class="num fvoci-num detail-fvoci-num">${fd.monthlyDisp}</td>
         <td></td>
         <td class="num fvoci-num detail-fvoci-num">${fd.cumulDisp}</td>
@@ -931,25 +1000,21 @@ function showDetail(code) {
       : '';
 
     tableHtml = `
-      <table style="width:100%;border-collapse:collapse;font-size:13px">
+      <table class="detail-table">
         <thead>
-          <tr style="border-bottom:1px solid #e2e8f0">
-            <th style="text-align:left;padding:4px 8px;font-weight:600;color:#4a5568">子公司</th>
-            <th style="text-align:right;padding:4px 8px;font-weight:600;color:#4a5568">當月 (${unit})</th>
-            <th style="padding:4px 8px"></th>
-            <th style="text-align:right;padding:4px 8px;font-weight:600;color:#4a5568">累計 (${unit})</th>
+          <tr>
+            <th class="th-left">子公司</th>
+            <th>當月 (${unit})</th>
+            <th></th>
+            <th>累計 (${unit})</th>
           </tr>
         </thead>
         <tbody>
-          <tr style="background:#ebf8ff;font-weight:700;border-bottom:2px solid #bee3f8">
-            <td style="padding:5px 8px">${c.name}（合併）</td>
-            <td class="num ${hm>=0?'positive':'negative'}" style="text-align:right;padding:5px 8px">
-              ${hm!=null?formatNum(hm):'—'}
-            </td>
+          <tr class="detail-total">
+            <td>${c.name}（合併）</td>
+            <td class="num">${hm != null ? formatNum(hm) : '—'}</td>
             <td></td>
-            <td class="num ${hcu>=0?'positive':'negative'}" style="text-align:right;padding:5px 8px">
-              ${hcu!=null?formatNum(hcu):'—'}
-            </td>
+            <td class="num">${hcu != null ? formatNum(hcu) : '—'}</td>
           </tr>
           ${hAdjRow}
           ${rows}
@@ -958,17 +1023,15 @@ function showDetail(code) {
   }
 
   const noteHtml = COMPANY_NOTES[c.code]
-    ? `<p style="font-size:11px;color:#9b6a1c;background:#fffbeb;border:1px solid #f6e3b4;border-radius:4px;padding:6px 8px;margin-top:8px">
-         <strong>備註：</strong>${escapeHtml(COMPANY_NOTES[c.code])}
-       </p>`
+    ? `<p class="detail-note"><strong>備註：</strong>${escapeHtml(COMPANY_NOTES[c.code])}</p>`
     : '';
 
   content.innerHTML = `
     ${newsHtml}
     ${tableHtml}
     ${noteHtml}
-    <p style="font-size:11px;color:#718096;margin-top:8px">
-      公告日期：${c.announcement_date || '—'} ｜ 來源：<a href="${c.source_url||'#'}" target="_blank" style="color:#3182ce">MOPS ↗</a>
+    <p class="detail-meta">
+      公告日期：${dateAd(c.announcement_date) || '—'} ｜ 來源：<a href="${c.source_url||'#'}" target="_blank" rel="noopener">公開資訊觀測站 ↗</a>
     </p>
   `;
 
@@ -980,93 +1043,181 @@ function closeDetail() {
   document.getElementById('detail-panel').classList.add('hidden');
 }
 
-// ── 長條圖 ─────────────────────────────────────────────
-function renderChart() {
-  const unit = state.displayUnit;
+// ── 長條圖（本期 vs 去年同期） ─────────────────────────
+// 排序仍依「本期數值」由大到小；去年同期為對照數列，缺基期（如尚未合併、
+// 子公司當年不存在）該欄留空，不以 0 補值以免誤讀為零獲利。
+const CHART_COLORS = {
+  current: 'rgba(26, 63, 160, .92)',   // brand blue：本期
+  prior:   'rgba(154, 163, 178, .55)', // 中性灰：去年同期
+};
 
-  // 依視角產生資料
-  let monthlyRows, cumulRows, scopeLabel;
-  if (state.viewMode === 'holdings') {
-    monthlyRows = (state.data.companies || [])
-      .filter(c => !c.error && c.holding_company?.monthly_profit != null)
-      .map(c => ({ name: c.name, value: convertUnit(c.holding_company.monthly_profit, c.unit, unit) || 0 }));
-    cumulRows = (state.data.companies || [])
-      .filter(c => !c.error && c.holding_company?.cumulative_profit != null)
-      .map(c => ({ name: c.name, value: convertUnit(c.holding_company.cumulative_profit, c.unit, unit) || 0 }));
-    scopeLabel = '金控';
-  } else {
-    const rows = getIndustryRows(state.viewMode);
-    monthlyRows = rows
-      .filter(r => r.monthly_profit != null)
-      .map(r => ({ name: r.name, value: convertUnit(r.monthly_profit, r.unit, unit) || 0 }));
-    cumulRows = rows
-      .filter(r => r.cumulative_profit != null)
-      .map(r => ({ name: r.name, value: convertUnit(r.cumulative_profit, r.unit, unit) || 0 }));
-    scopeLabel = VIEW_TITLES[state.viewMode];
-  }
+// M&A 造成基期不可比 → 不畫去年同期柱（與 main.py 的 YOY_CUTOFFS、表格 YoY 一致）。
+// 例：2887 台新新光金 2025/07 合併，115/07 之前的去年同期只有台新金單體，兩者不同一實體。
+const CHART_PRIOR_CUTOFFS = { '2887': '115/07' };
 
-  // 圖表標題同步
-  document.getElementById('bar-chart-title').textContent   = `📈 ${scopeLabel}當月獲利比較`;
-  document.getElementById('cumul-chart-title').textContent = `📊 ${scopeLabel}累計獲利比較（本年累計）`;
-
-  state.barChart   = renderBarChart('bar-chart',   state.barChart,   monthlyRows, `當月稅後淨利 (${unit})`, unit);
-  state.cumulChart = renderBarChart('cumul-chart', state.cumulChart, cumulRows,   `本年累計稅後淨利 (${unit})`, unit);
+function priorComparable(key, period) {
+  if (state.viewMode !== 'holdings') return true;
+  const cutoff = CHART_PRIOR_CUTOFFS[key];
+  return !(cutoff && period < cutoff);
 }
 
-function renderBarChart(canvasId, prevChart, rows, label, unit) {
-  rows = [...rows].sort((a, b) => b.value - a.value);
-  const labels = rows.map(r => r.name);
-  const values = rows.map(r => r.value);
-  const colors = values.map(v => v >= 0 ? 'rgba(5,122,85,.75)' : 'rgba(155,28,28,.75)');
+// 取某資料集在目前視角下的列（key 用於跨期對應）
+function chartRowsOf(src, kind) {
+  if (!src) return [];
+  const unit = state.displayUnit;
+  const field = kind === 'monthly' ? 'monthly_profit' : 'cumulative_profit';
+  if (state.viewMode === 'holdings') {
+    return (src.companies || [])
+      .filter(c => !c.error && c.holding_company && c.holding_company[field] != null)
+      .map(c => ({
+        key: c.code,
+        name: c.name,
+        value: convertUnit(c.holding_company[field], c.unit, unit),
+      }));
+  }
+  return getIndustryRows(state.viewMode, src)
+    .filter(r => r[field] != null)
+    .map(r => ({
+      key: `${r.parent_code}|${r.name}`,
+      name: r.name,
+      value: convertUnit(r[field], r.unit, unit),
+    }));
+}
 
+function chartSeries(kind) {
+  const period = state.data.report_period || '';
+  const cur = chartRowsOf(state.data, kind).sort((a, b) => b.value - a.value);
+  const prevMap = new Map(chartRowsOf(state.baseline, kind).map(r => [r.key, r.value]));
+  const missing = [];
+  const prior = cur.map(r => {
+    if (!priorComparable(r.key, period)) { missing.push(r.name); return null; }
+    if (!prevMap.has(r.key)) { missing.push(r.name); return null; }
+    return prevMap.get(r.key);
+  });
+  return { labels: cur.map(r => r.name), current: cur.map(r => r.value), prior, missing };
+}
+
+function renderChart() {
+  const unit = state.displayUnit;
+  const period = state.data.report_period || '';
+  const prevPeriod = prevYearPeriod(period);
+  const scopeLabel = state.viewMode === 'holdings' ? '金控' : VIEW_TITLES[state.viewMode];
+
+  const curLabel   = `${periodAd(period)} 當月`;
+  const priorLabel = prevPeriod ? `${periodAd(prevPeriod)} 當月（去年同期）` : '去年同期';
+  const curCumLabel   = `${adYear(period.split('/')[0])} 年累計`;
+  const priorCumLabel = prevPeriod ? `${adYear(prevPeriod.split('/')[0])} 年同期累計` : '去年同期累計';
+
+  document.getElementById('bar-chart-title').textContent =
+    `${scopeLabel}當月獲利比較（${periodAd(period)} vs 去年同期）`;
+  document.getElementById('cumul-chart-title').textContent =
+    `${scopeLabel}累計獲利比較（本年累計 vs 去年同期累計）`;
+
+  const monthly = chartSeries('monthly');
+  const cumulative = chartSeries('cumulative');
+
+  state.barChart = renderBarChart('bar-chart', state.barChart, monthly, curLabel, priorLabel, unit);
+  state.cumulChart = renderBarChart('cumul-chart', state.cumulChart, cumulative, curCumLabel, priorCumLabel, unit);
+
+  // 缺基期者揭露（M&A 尚未對齊、當年尚未納入公告等），避免讀者誤以為去年為零
+  setChartNote('bar-chart-note', monthly.missing);
+  setChartNote('cumul-chart-note', cumulative.missing);
+}
+
+function setChartNote(id, missing) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  if (!missing || missing.length === 0) {
+    el.textContent = '';
+    el.classList.add('hidden');
+    return;
+  }
+  el.textContent = `${missing.join('、')}：去年同期無可比基期（合併／併入公告時點不同），未列對照。`;
+  el.classList.remove('hidden');
+}
+
+function renderBarChart(canvasId, prevChart, series, curLabel, priorLabel, unit) {
   if (prevChart) prevChart.destroy();
+  const hasPrior = series.prior.some(v => v != null);
+
+  const datasets = [{
+    label: curLabel,
+    data: series.current,
+    backgroundColor: CHART_COLORS.current,
+    borderRadius: 2,
+    maxBarThickness: 34,
+  }];
+  if (hasPrior) {
+    datasets.push({
+      label: priorLabel,
+      data: series.prior,
+      backgroundColor: CHART_COLORS.prior,
+      borderRadius: 2,
+      maxBarThickness: 34,
+    });
+  }
 
   const ctx = document.getElementById(canvasId).getContext('2d');
   return new Chart(ctx, {
     type: 'bar',
-    data: {
-      labels,
-      datasets: [{
-        label,
-        data: values,
-        backgroundColor: colors,
-        borderRadius: 4,
-      }]
-    },
+    data: { labels: series.labels, datasets },
     options: {
       responsive: true,
-      maintainAspectRatio: true,
+      // false + 容器固定高度：讓畫布填滿整個卡片寬度
+      // （true 時 Chart.js 會為了維持長寬比而縮窄畫布，右側留下大片空白）
+      maintainAspectRatio: false,
+      layout: { padding: { top: 4 } },
       plugins: {
-        legend: { display: false },
+        legend: {
+          display: hasPrior,
+          position: 'top',
+          align: 'end',
+          labels: {
+            boxWidth: 10,
+            boxHeight: 10,
+            usePointStyle: true,
+            pointStyle: 'rect',
+            color: '#3d4653',
+            font: { size: 12 },
+          },
+        },
         tooltip: {
+          backgroundColor: 'rgba(16,20,24,.92)',
+          padding: 10,
+          titleFont: { size: 12 },
+          bodyFont: { size: 12 },
           callbacks: {
-            label: ctx => ` ${formatNum(ctx.raw)} ${unit}`
-          }
-        }
+            label: c => c.raw == null
+              ? ` ${c.dataset.label}：無基期資料`
+              : ` ${c.dataset.label}：${formatNum(c.raw)} ${unit}`,
+          },
+        },
       },
       scales: {
+        x: {
+          grid: { display: false },
+          ticks: { color: '#5a6472', font: { size: 11 } },
+        },
         y: {
-          ticks: {
-            callback: v => formatNum(v)
-          }
-        }
-      }
-    }
+          border: { display: false },
+          grid: { color: '#eceef2' },
+          ticks: { color: '#5a6472', font: { size: 11 }, callback: v => formatNum(v) },
+        },
+      },
+    },
   });
 }
 
 // ── 輔助函數 ───────────────────────────────────────────
 function updatePeriodBadge() {
-  const p = state.data?.report_period || '—';
-  document.getElementById('period-badge').textContent = `📅 ${p} 月報`;
+  const p = state.data?.report_period;
+  document.getElementById('period-badge').textContent = p ? `${periodLabel(p)}月報` : '—';
 }
 
 function updateLastUpdated() {
   const ts = state.data?.last_updated;
   if (!ts) return;
-  const d = new Date(ts);
-  document.getElementById('last-updated').textContent =
-    `最後更新：${d.toLocaleString('zh-TW')}`;
+  document.getElementById('last-updated').textContent = `最後更新：${fmtDateTime(ts)}`;
 }
 
 function showStatus(type, msg) {
@@ -1131,8 +1282,10 @@ function convertUnit(value, fromUnit, toUnit) {
 }
 
 // ── Excel 下載 ─────────────────────────────────────────
-// 動態載入 SheetJS（首次點擊才載入，避免初始 bundle 膨脹）
-const XLSX_CDN = 'https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js';
+// 動態載入 SheetJS（首次點擊才載入，避免初始 bundle 膨脹）。
+// 使用 xlsx-js-style：與 SheetJS 相同 API，但支援 cell.s 樣式（字型／底色／框線／對齊），
+// 以便匯出檔的表頭底色、負數紅字、YoY 方向色、FVOCI 淡藍斜體列與網頁完全一致。
+const XLSX_CDN = 'https://cdn.jsdelivr.net/npm/xlsx-js-style@1.2.0/dist/xlsx.bundle.js';
 let _xlsxLoading = null;
 function loadXlsxLib() {
   if (window.XLSX) return Promise.resolve(window.XLSX);
@@ -1145,6 +1298,167 @@ function loadXlsxLib() {
     document.head.appendChild(s);
   });
   return _xlsxLoading;
+}
+
+// ── Excel 樣式（對應 style.css 的色彩系統，色碼去掉 #） ──
+const XC = {
+  ink: '101418', ink2: '3D4653', muted: '6B7684',
+  pos: '1F6F54', neg: 'A3312A',
+  fvoci: '4A5A8F', fvociBg: 'F7F8FC',
+  headBg: 'FAFBFC', totalBg: 'EEF1F9',
+  border: 'E6E8EC', borderStrong: 'D5D9E0',
+  primary: '1A3FA0', white: 'FFFFFF',
+};
+const XFONT = 'Microsoft JhengHei';   // 對應網頁的中文無襯線字型
+
+const XB = {
+  bottom:  { bottom: { style: 'thin',   color: { rgb: XC.border } } },
+  bottomH: { bottom: { style: 'medium', color: { rgb: XC.borderStrong } } },
+  bottomG: { bottom: { style: 'thin',   color: { rgb: XC.border } } },
+  topNote: { top:    { style: 'thin',   color: { rgb: XC.border } } },
+};
+
+// 儲存格樣式產生器（對齊網頁：金額墨黑、負數紅、方向色只給 YoY、FVOCI 列淡藍斜體）
+const XS = {
+  headGroup: {
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: XC.ink2 } },
+    fill: { fgColor: { rgb: XC.headBg } },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: XB.bottomG,
+  },
+  headCol: (align) => ({
+    font: { name: XFONT, sz: 10, bold: true, color: { rgb: XC.muted } },
+    fill: { fgColor: { rgb: XC.headBg } },
+    alignment: { horizontal: align || 'right', vertical: 'center', wrapText: false },
+    border: XB.bottomH,
+  }),
+  code: {
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: XC.muted } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: XB.bottom,
+  },
+  name: {
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: XC.ink } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: XB.bottom,
+  },
+  text: {
+    font: { name: XFONT, sz: 11, color: { rgb: XC.ink2 } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: XB.bottom,
+  },
+  num: (v) => ({
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: (v != null && v < 0) ? XC.neg : XC.ink } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: XB.bottom,
+  }),
+  yoy: (v) => ({
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: (v != null && v < 0) ? XC.neg : XC.pos } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: XB.bottom,
+  }),
+  noteCell: {
+    font: { name: XFONT, sz: 10, italic: true, color: { rgb: XC.muted } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: XB.bottom,
+  },
+  date: {
+    font: { name: XFONT, sz: 11, color: { rgb: XC.primary } },
+    alignment: { horizontal: 'center', vertical: 'center' },
+    border: XB.bottom,
+  },
+  // FVOCI 加計列：淡藍底 + 靛藍斜體（與網頁 .fvoci-row 一致）
+  fvociLabel: {
+    font: { name: XFONT, sz: 10, color: { rgb: XC.fvoci } },
+    fill: { fgColor: { rgb: XC.fvociBg } },
+    alignment: { horizontal: 'left', vertical: 'center', indent: 1 },
+    border: XB.bottom,
+  },
+  fvociNum: {
+    font: { name: XFONT, sz: 10, italic: true, color: { rgb: XC.fvoci } },
+    fill: { fgColor: { rgb: XC.fvociBg } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: XB.bottom,
+  },
+  fvociBlank: {
+    fill: { fgColor: { rgb: XC.fvociBg } },
+    border: XB.bottom,
+  },
+  footnote: {
+    font: { name: XFONT, sz: 9, color: { rgb: XC.muted } },
+    alignment: { horizontal: 'left', vertical: 'top', wrapText: true },
+    border: XB.topNote,
+  },
+  totalName: {
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: XC.ink } },
+    fill: { fgColor: { rgb: XC.totalBg } },
+    alignment: { horizontal: 'left', vertical: 'center' },
+    border: XB.bottom,
+  },
+  totalNum: {
+    font: { name: XFONT, sz: 11, bold: true, color: { rgb: XC.ink } },
+    fill: { fgColor: { rgb: XC.totalBg } },
+    alignment: { horizontal: 'right', vertical: 'center' },
+    border: XB.bottom,
+  },
+};
+
+// 數字格式：與網頁 formatNum() 的小數位規則一致
+function xNumFmt(v) {
+  if (v == null) return '#,##0';
+  const a = Math.abs(v);
+  if (a >= 1000) return '#,##0';
+  if (a >= 10) return '#,##0.0';
+  if (a >= 0.1) return '0.00';
+  return '0.000';
+}
+const X_PCT_FMT = '"+"0.0%;"-"0.0%';   // 顯示 +89.6% / -12.3%
+const X_EPS_FMT = '0.00';
+
+// 儲存格快捷建構
+const xNum = (v, style) => (v == null
+  ? { v: '—', t: 's', z: 'General', s: { ...(style || XS.num(null)), alignment: { horizontal: 'right', vertical: 'center' } } }
+  : { v, t: 'n', z: xNumFmt(v), s: style || XS.num(v) });
+const xEps = (v) => (v == null
+  ? { v: '—', t: 's', z: 'General', s: XS.num(null) }
+  : { v, t: 'n', z: X_EPS_FMT, s: XS.num(v) });
+const xText = (v, style) => ({ v: v == null ? '' : v, t: 's', z: 'General', s: { ...(style || XS.text) } });
+
+// YoY 儲存格：同號用數值 + 百分比格式（Excel 可排序）；跨零點沿用網頁文字標籤
+function xYoY(pct, abs, status, sourceUnit, displayUnit) {
+  if (pct == null) return { v: '—', t: 's', z: 'General', s: { ...XS.noteCell } };
+  if (status === 'loss_to_profit' || status === 'profit_to_loss') {
+    const label = status === 'loss_to_profit' ? '虧轉盈' : '盈轉虧';
+    const a = abs != null ? convertUnit(abs, sourceUnit, displayUnit) : null;
+    const txt = a != null ? `${label} ${a >= 0 ? '+' : ''}${formatNum(a)}` : label;
+    return { v: txt, t: 's', z: 'General', s: XS.yoy(status === 'profit_to_loss' ? -1 : 1) };
+  }
+  return { v: pct / 100, t: 'n', z: X_PCT_FMT, s: XS.yoy(pct) };
+}
+
+// 由 matrix（二維 cell 物件，null = 空白）建立工作表
+function xSheet(matrix, opts = {}) {
+  const XLSX = window.XLSX;
+  const ws = {};
+  let maxC = 0;
+  matrix.forEach((row, R) => {
+    row.forEach((cell, C) => {
+      if (C > maxC) maxC = C;
+      if (cell == null) return;
+      const addr = XLSX.utils.encode_cell({ r: R, c: C });
+      const o = { t: cell.t || (typeof cell.v === 'number' ? 'n' : 's'), v: cell.v };
+      if (cell.z) o.z = cell.z;
+      if (cell.s) o.s = cell.s;
+      ws[addr] = o;
+    });
+  });
+  ws['!ref'] = XLSX.utils.encode_range({ s: { r: 0, c: 0 }, e: { r: Math.max(matrix.length - 1, 0), c: maxC } });
+  if (opts.cols) ws['!cols'] = opts.cols;
+  if (opts.rows) ws['!rows'] = opts.rows;
+  if (opts.merges) ws['!merges'] = opts.merges;
+  // 註：瀏覽器端的 SheetJS／xlsx-js-style 只能「讀」凍結窗格、無法寫入，
+  // 故不設 !freeze（舊版寫了也不會生效）。需要凍結請於 Excel 內自行設定。
+  return ws;
 }
 
 // 取得「不屬於 bank/life/securities」的子公司列（產險、投信、票券、創投…）
@@ -1170,6 +1484,237 @@ function getOtherSubsidiaryRows() {
   return rows;
 }
 
+// ── Sheet 1：金控總覽（對應網頁「金控總覽」表，含雙層表頭與 FVOCI 加計子列） ──
+function buildHoldingsSheet(d, unit) {
+  const XLSX = window.XLSX;
+  const period = d.report_period || '';
+  const m = [];
+
+  m.push([
+    xText('代號', XS.headCol('left')),
+    xText('金控', XS.headCol('left')),
+    xText('合併稅後淨利', XS.headGroup), null, null,
+    xText('稅後 EPS (元)', XS.headGroup), null,
+    xText('公告日期', XS.headCol('center')),
+  ]);
+  m.push([
+    xText('', XS.headCol('left')),
+    xText('', XS.headCol('left')),
+    xText(`當月 (${periodAd(period)})`, XS.headCol()),
+    xText('累計', XS.headCol()),
+    xText('累計 YoY', XS.headCol()),
+    xText('當月', XS.headCol()),
+    xText('累計', XS.headCol()),
+    xText('', XS.headCol('center')),
+  ]);
+
+  const companies = sortCompanies([...(d.companies || [])]);
+  let hasFvoci = false;
+
+  for (const c of companies) {
+    if (c.error) {
+      m.push([
+        xText(c.code, XS.code), xText(c.name, XS.name),
+        xText(c.error_msg || '資料待更新', XS.noteCell), null, null, null, null,
+        xText('—', XS.date),
+      ]);
+      continue;
+    }
+    const h = c.holding_company || {};
+    const mo = convertUnit(h.monthly_profit, c.unit, unit);
+    const cu = convertUnit(h.cumulative_profit, c.unit, unit);
+    const epsM = h.monthly_eps != null
+      ? h.monthly_eps
+      : (h.monthly_profit != null && h.cumulative_profit && h.cumulative_eps != null
+          ? h.monthly_profit / h.cumulative_profit * h.cumulative_eps
+          : null);
+    m.push([
+      xText(c.code, XS.code),
+      xText(c.name, XS.name),
+      xNum(mo), xNum(cu),
+      xYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs, h.cumulative_profit_yoy_status, c.unit, unit),
+      xEps(epsM), xEps(h.cumulative_eps),
+      xText(dateAd(c.announcement_date) || '—', XS.date),
+    ]);
+
+    const a = h.fvoci_adjusted;
+    if (a && a.cumulative_profit != null) {
+      hasFvoci = true;
+      m.push(fvociRowCells(a, c.unit, unit, {
+        labelCols: [null, 1],           // 標籤放第 2 欄
+        width: 8,
+        monthlyCol: 2, cumulCol: 3, yoyCol: 4,
+        epsCol: a.cumulative_eps != null ? 6 : null,
+        epsValue: a.cumulative_eps,
+      }));
+    }
+  }
+
+  if (hasFvoci) {
+    m.push([{ v: `* ${FVOCI_FOOTNOTE_HOLDINGS}`, t: 's', s: XS.footnote }, null, null, null, null, null, null, null]);
+  }
+
+  const merges = [
+    { s: { r: 0, c: 0 }, e: { r: 1, c: 0 } },
+    { s: { r: 0, c: 1 }, e: { r: 1, c: 1 } },
+    { s: { r: 0, c: 2 }, e: { r: 0, c: 4 } },
+    { s: { r: 0, c: 5 }, e: { r: 0, c: 6 } },
+    { s: { r: 0, c: 7 }, e: { r: 1, c: 7 } },
+  ];
+  if (hasFvoci) merges.push({ s: { r: m.length - 1, c: 0 }, e: { r: m.length - 1, c: 7 } });
+
+  const rows = [];
+  if (hasFvoci) rows[m.length - 1] = { hpx: 44 };
+
+  return xSheet(m, {
+    cols: [{ wch: 8 }, { wch: 14 }, { wch: 16 }, { wch: 16 }, { wch: 14 }, { wch: 11 }, { wch: 11 }, { wch: 14 }],
+    merges, rows,
+  });
+}
+
+// FVOCI 加計列（金控／壽險共用）：整列鋪淡藍底，標籤欄靛藍、數字欄斜體
+function fvociRowCells(a, sourceUnit, unit, cfg) {
+  // 註：xlsx-js-style 會以 style 物件識別樣式，同一個 s 物件混用數值／文字會讓
+  // 文字格互相沿用到別格的 numFmt。故每格都明確給 z（文字給 'General'），並用
+  // 淺拷貝的樣式物件，避免共用參照。
+  const fs = () => ({ ...XS.fvociNum });
+  const cells = new Array(cfg.width).fill(null).map(() => ({ v: '', t: 's', z: 'General', s: { ...XS.fvociBlank } }));
+  cells[cfg.labelCols[1]] = { v: `${fvociRowLabel()}*`, t: 's', z: 'General', s: { ...XS.fvociLabel } };
+
+  const mv = convertUnit(a.monthly_profit, sourceUnit, unit);
+  cells[cfg.monthlyCol] = mv != null
+    ? { v: mv, t: 'n', z: xNumFmt(mv), s: fs() }
+    : { v: '—', t: 's', z: 'General', s: fs() };
+
+  const cv = convertUnit(a.cumulative_profit, sourceUnit, unit);
+  cells[cfg.cumulCol] = a.value_type === 'lower_bound'
+    ? { v: `${a.display_prefix || '逾'} ${formatNum(cv)}`, t: 's', z: 'General', s: fs() }
+    : { v: cv, t: 'n', z: xNumFmt(cv), s: fs() };
+
+  if (cfg.yoyCol != null) {
+    cells[cfg.yoyCol] = (a.value_type === 'lower_bound' || a.yoy_pct == null)
+      ? { v: '—', t: 's', z: 'General', s: fs() }
+      : { v: a.yoy_pct / 100, t: 'n', z: X_PCT_FMT, s: fs() };
+  }
+  if (cfg.epsCol != null && cfg.epsValue != null) {
+    cells[cfg.epsCol] = { v: cfg.epsValue, t: 'n', z: X_EPS_FMT, s: fs() };
+  }
+  return cells;
+}
+
+// ── Sheet 2–4：銀行／壽險／證券子公司（對應網頁產業視角表） ──
+function buildIndustrySheet(industry, d, unit) {
+  const period = d.report_period || '';
+  const rows = sortIndustryRows(getIndustryRows(industry));
+  const m = [[
+    xText('集團', XS.headCol('left')),
+    xText(`${VIEW_TITLES[industry]}子公司`, XS.headCol('left')),
+    xText(`當月 (${periodAd(period)})`, XS.headCol()),
+    xText('累計', XS.headCol()),
+    xText('累計 YoY', XS.headCol()),
+  ]];
+
+  let hasFvoci = false;
+  for (const r of rows) {
+    const mo = convertUnit(r.monthly_profit, r.unit, unit);
+    const cu = convertUnit(r.cumulative_profit, r.unit, unit);
+    let yoyCell = xYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs, r.cumulative_profit_yoy_status, r.unit, unit);
+    if (r.cumulative_profit_yoy_pct == null && showMergerNote(r.parent_code, period)) {
+      yoyCell = xText('2025/07 正式合併', XS.noteCell);
+    }
+    if (r.cumulative_profit_yoy_pct == null && r.name.includes('京城') && showMergerNote('2890', period)) {
+      yoyCell = xText('2025/10 併入獲利公告', XS.noteCell);
+    }
+    m.push([xText(r.parent_name, XS.code), xText(r.name, XS.name), xNum(mo), xNum(cu), yoyCell]);
+
+    const a = r.fvoci_adjusted;
+    if (industry === 'life' && a && a.cumulative_profit != null) {
+      hasFvoci = true;
+      m.push(fvociRowCells(a, r.unit, unit, {
+        labelCols: [null, 1], width: 5, monthlyCol: 2, cumulCol: 3, yoyCol: 4,
+      }));
+    }
+  }
+
+  if (rows.length === 0) {
+    m.push([xText(`此期間無${VIEW_TITLES[industry]}資料`, XS.noteCell), null, null, null, null]);
+  }
+
+  const merges = [];
+  const rowHeights = [];
+  if (hasFvoci) {
+    m.push([{ v: `* ${FVOCI_FOOTNOTE}`, t: 's', s: XS.footnote }, null, null, null, null]);
+    merges.push({ s: { r: m.length - 1, c: 0 }, e: { r: m.length - 1, c: 4 } });
+    rowHeights[m.length - 1] = { hpx: 44 };
+  }
+
+  return xSheet(m, {
+    cols: [{ wch: 14 }, { wch: 20 }, { wch: 16 }, { wch: 16 }, { wch: 14 }],
+    merges, rows: rowHeights,
+  });
+}
+
+// ── Sheet 5：其他子公司（產險、投信、票券、創投…） ──
+function buildOtherSheet(unit, period) {
+  const rows = getOtherSubsidiaryRows();
+  if (rows.length === 0) return null;
+  const m = [[
+    xText('集團', XS.headCol('left')),
+    xText('子公司', XS.headCol('left')),
+    xText(`當月 (${periodAd(period)})`, XS.headCol()),
+    xText('累計', XS.headCol()),
+    xText('累計 YoY', XS.headCol()),
+  ]];
+  for (const r of rows) {
+    m.push([
+      xText(r.parent_name, XS.code), xText(r.name, XS.name),
+      xNum(convertUnit(r.monthly_profit, r.unit, unit)),
+      xNum(convertUnit(r.cumulative_profit, r.unit, unit)),
+      xYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs, r.cumulative_profit_yoy_status, r.unit, unit),
+    ]);
+  }
+  return xSheet(m, { cols: [{ wch: 14 }, { wch: 20 }, { wch: 16 }, { wch: 16 }, { wch: 14 }] });
+}
+
+// ── Sheet 6：市場概況 ──
+function buildMarketSheet(ms) {
+  if (!ms || !ms.items) return null;
+  const it = ms.items;
+  const m = [[
+    xText('指標', XS.headCol('left')),
+    xText('本月底', XS.headCol()),
+    xText('上月底', XS.headCol()),
+    xText('變動', XS.headCol()),
+    xText('備註', XS.headCol('left')),
+  ]];
+  const pctCell = (v) => (v == null
+    ? { v: '—', t: 's', s: XS.noteCell }
+    : { v: v / 100, t: 'n', z: '"+"0.00%;"-"0.00%', s: XS.yoy(v) });
+  const bpsCell = (v) => (v == null
+    ? { v: '—', t: 's', s: XS.noteCell }
+    : { v: `${v >= 0 ? '+' : ''}${v} bps`, t: 's', s: XS.yoy(v) });
+  const row = (label, v, pv, change, note) => m.push([
+    xText(label, XS.name), xNum(v), xNum(pv), change, xText(note, XS.text),
+  ]);
+  if (it.usdtwd) row('美元兌台幣', it.usdtwd.value, it.usdtwd.prev_value, pctCell(it.usdtwd.pct_change),
+    `${it.usdtwd.date || ''} vs ${it.usdtwd.prev_date || ''}`);
+  if (it.taiex) row('加權指數', it.taiex.value, it.taiex.prev_value, pctCell(it.taiex.pct_change),
+    `點｜${it.taiex.date || ''} vs ${it.taiex.prev_date || ''}`);
+  if (it.taiex_turnover) row('台股集中市場日均成交額', it.taiex_turnover.value_yi, it.taiex_turnover.prev_value_yi,
+    pctCell(it.taiex_turnover.pct_change),
+    `億元／日均（本月 ${it.taiex_turnover.trading_days || '?'} 日 / 上月 ${it.taiex_turnover.prev_trading_days || '?'} 日）`);
+  if (it.spx) row('美股 S&P 500', it.spx.value, it.spx.prev_value, pctCell(it.spx.pct_change),
+    `${it.spx.date || ''} vs ${it.spx.prev_date || ''}`);
+  if (it.us10y) row('美國 10Y 公債殖利率', it.us10y.value_pct, it.us10y.prev_value_pct, bpsCell(it.us10y.bps_change),
+    '%（變動以 bps 表示）');
+  if (it.tlt) row('TLT（20年期以上美債 ETF）', it.tlt.value, it.tlt.prev_value, pctCell(it.tlt.pct_change),
+    '壽險 FVTPL 境外長債部位代理指標');
+  return xSheet(m, { cols: [{ wch: 26 }, { wch: 14 }, { wch: 14 }, { wch: 14 }, { wch: 52 }] });
+}
+
+// 註：新聞摘要不列入 Excel（篇幅長、格式與四張數字表不一致）；
+// 網頁上點金控名展開的詳情面板仍可閱讀，資料本身保留在 JSON 的 news_summary 欄位。
+
 async function downloadExcel() {
   if (!state.data) {
     alert('資料尚未載入，請稍候再試');
@@ -1188,152 +1733,19 @@ async function downloadExcel() {
     const unit = state.displayUnit;
     const wb = XLSX.utils.book_new();
 
-    // ── Sheet 1: 金控總覽（含金控層級加計 FVOCI 欄位，115/06 起富邦／國泰／凱基揭露） ──
-    const holdHeader = ['代號', '金控', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)', '當月 EPS (元)', '累計 EPS (元)',
-      `加計 FVOCI 當月獲利 (${unit})`, `加計 FVOCI 累計獲利 (${unit})`, '加計 FVOCI YoY (%)', 'FVOCI 表述', 'FVOCI 引用原文',
-      '公告日期', '資料來源 URL'];
-    const holdRows = [holdHeader];
-    for (const c of d.companies || []) {
-      if (c.error) {
-        holdRows.push([c.code, c.name, null, null, null, null, null, null, null, null, '', '', c.announcement_date || '', c.error_msg || '資料未取得']);
-        continue;
-      }
-      const h = c.holding_company || {};
-      const m = convertUnit(h.monthly_profit, c.unit, unit);
-      const cu = convertUnit(h.cumulative_profit, c.unit, unit);
-      const epsM = h.monthly_eps != null
-        ? h.monthly_eps
-        : (h.monthly_profit != null && h.cumulative_profit && h.cumulative_eps != null
-            ? h.monthly_profit / h.cumulative_profit * h.cumulative_eps
-            : null);
-      const row = [
-        c.code, c.name,
-        m, cu, h.cumulative_profit_yoy_pct ?? null,
-        epsM, h.cumulative_eps ?? null,
-      ];
-      const a = h.fvoci_adjusted;
-      if (a && a.cumulative_profit != null) {
-        const v = convertUnit(a.cumulative_profit, c.unit, unit);
-        const cumulCell = a.value_type === 'lower_bound'
-          ? `${a.display_prefix || '逾'} ${formatNum(v)}`
-          : v;
-        row.push(
-          convertUnit(a.monthly_profit, c.unit, unit),
-          cumulCell,
-          a.value_type === 'lower_bound' ? null : (a.yoy_pct ?? null),
-          a.label || '加計FVOCI股票處分利益',
-          a.source_quote || '',
-        );
-      } else {
-        row.push(null, null, null, '', '');
-      }
-      row.push(c.announcement_date || '', c.source_url || '');
-      holdRows.push(row);
-    }
-    const wsHold = XLSX.utils.aoa_to_sheet(holdRows);
-    wsHold['!cols'] = [{wch:8},{wch:14},{wch:16},{wch:16},{wch:14},{wch:14},{wch:14},{wch:20},{wch:20},{wch:18},{wch:20},{wch:60},{wch:14},{wch:60}];
-    wsHold['!freeze'] = { ySplit: 1 };
-    XLSX.utils.book_append_sheet(wb, wsHold, '金控總覽');
+    // 四張主表：與網頁的四個 tab 一一對應（欄位、順序、樣式一致）
+    XLSX.utils.book_append_sheet(wb, buildHoldingsSheet(d, unit), '金控總覽');
+    XLSX.utils.book_append_sheet(wb, buildIndustrySheet('bank', d, unit), '銀行子公司');
+    XLSX.utils.book_append_sheet(wb, buildIndustrySheet('life', d, unit), '壽險子公司');
+    XLSX.utils.book_append_sheet(wb, buildIndustrySheet('securities', d, unit), '證券子公司');
 
-    // ── Sheet 2-4: 產業子公司 ──
-    const industryConfigs = [
-      { key: 'bank',       sheetName: '銀行子公司',  hasFvoci: false },
-      { key: 'life',       sheetName: '壽險子公司',  hasFvoci: true  },
-      { key: 'securities', sheetName: '證券子公司',  hasFvoci: false },
-    ];
-    for (const cfg of industryConfigs) {
-      const rows = getIndustryRows(cfg.key);
-      const header = ['集團代號', '集團', '子公司', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)'];
-      if (cfg.hasFvoci) {
-        header.push(`加計 FVOCI 當月獲利 (${unit})`, `加計 FVOCI 累計獲利 (${unit})`, '加計 FVOCI YoY (%)', 'FVOCI 引用原文', 'FVOCI 來源 URL');
-      }
-      const sheetData = [header];
-      for (const r of rows) {
-        const m = convertUnit(r.monthly_profit, r.unit, unit);
-        const cu = convertUnit(r.cumulative_profit, r.unit, unit);
-        const row = [r.parent_code, r.parent_name, r.name, m, cu, r.cumulative_profit_yoy_pct ?? null];
-        if (cfg.hasFvoci) {
-          const a = r.fvoci_adjusted;
-          if (a && a.cumulative_profit != null) {
-            const v = convertUnit(a.cumulative_profit, r.unit, unit);
-            // 區間/門檻型（國泰「對保留盈餘影響數」）：以「逾 X」字串表示下界、YoY 留空
-            const cumulCell = a.value_type === 'lower_bound'
-              ? `${a.display_prefix || '逾'} ${formatNum(v)}`
-              : v;
-            row.push(
-              convertUnit(a.monthly_profit, r.unit, unit),
-              cumulCell,
-              a.value_type === 'lower_bound' ? null : (a.yoy_pct ?? null),
-              a.source_quote || '',
-              a.source_url || '',
-            );
-          } else {
-            row.push(null, null, null, '', '');
-          }
-        }
-        sheetData.push(row);
-      }
-      const ws = XLSX.utils.aoa_to_sheet(sheetData);
-      ws['!cols'] = cfg.hasFvoci
-        ? [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14},{wch:20},{wch:20},{wch:18},{wch:60},{wch:50}]
-        : [{wch:10},{wch:14},{wch:18},{wch:16},{wch:16},{wch:14}];
-      ws['!freeze'] = { ySplit: 1 };
-      XLSX.utils.book_append_sheet(wb, ws, cfg.sheetName);
-    }
+    // 補充資料（網頁未以表格呈現，但保留於檔案中）
+    const wsOther = buildOtherSheet(unit, period);
+    if (wsOther) XLSX.utils.book_append_sheet(wb, wsOther, '其他子公司');
+    const wsMkt = buildMarketSheet(d.market_summary);
+    if (wsMkt) XLSX.utils.book_append_sheet(wb, wsMkt, '市場概況');
 
-    // ── Sheet 5: 其他子公司（產險、投信、票券、創投…） ──
-    const otherRows = getOtherSubsidiaryRows();
-    if (otherRows.length > 0) {
-      const otherData = [['集團代號', '集團', '子公司', `當月獲利 (${unit})`, `累計獲利 (${unit})`, '累計 YoY (%)']];
-      for (const r of otherRows) {
-        otherData.push([
-          r.parent_code, r.parent_name, r.name,
-          convertUnit(r.monthly_profit, r.unit, unit),
-          convertUnit(r.cumulative_profit, r.unit, unit),
-          r.cumulative_profit_yoy_pct ?? null,
-        ]);
-      }
-      const wsOther = XLSX.utils.aoa_to_sheet(otherData);
-      wsOther['!cols'] = [{wch:10},{wch:14},{wch:20},{wch:16},{wch:16},{wch:14}];
-      wsOther['!freeze'] = { ySplit: 1 };
-      XLSX.utils.book_append_sheet(wb, wsOther, '其他子公司');
-    }
-
-    // ── Sheet 6: 市場概況 ──
-    const ms = d.market_summary;
-    if (ms && ms.items) {
-      const it = ms.items;
-      const mkt = [['指標', '本月底', '上月底', '變動', '備註']];
-      const fmtPct = v => v == null ? null : `${v >= 0 ? '+' : ''}${v.toFixed(2)}%`;
-      const fmtBps = v => v == null ? null : `${v >= 0 ? '+' : ''}${v} bps`;
-      if (it.usdtwd)         mkt.push(['美元兌台幣',          it.usdtwd.value, it.usdtwd.prev_value, fmtPct(it.usdtwd.pct_change), `TWD｜${it.usdtwd.date || ''} vs ${it.usdtwd.prev_date || ''}`]);
-      if (it.taiex)          mkt.push(['加權指數',            it.taiex.value, it.taiex.prev_value, fmtPct(it.taiex.pct_change), `點｜${it.taiex.date || ''} vs ${it.taiex.prev_date || ''}`]);
-      if (it.taiex_turnover) mkt.push(['台股集中市場日均成交額',      it.taiex_turnover.value_yi, it.taiex_turnover.prev_value_yi, fmtPct(it.taiex_turnover.pct_change), `億元 / 日均（本月 ${it.taiex_turnover.trading_days || '?'} 日 / 上月 ${it.taiex_turnover.prev_trading_days || '?'} 日）`]);
-      if (it.spx)            mkt.push(['美股 S&P 500',        it.spx.value, it.spx.prev_value, fmtPct(it.spx.pct_change), `${it.spx.date || ''} vs ${it.spx.prev_date || ''}`]);
-      if (it.us10y)          mkt.push(['美國 10Y 公債殖利率', it.us10y.value_pct, it.us10y.prev_value_pct, fmtBps(it.us10y.bps_change), `%（變動以 bps 表示）`]);
-      const wsMkt = XLSX.utils.aoa_to_sheet(mkt);
-      wsMkt['!cols'] = [{wch:24},{wch:14},{wch:14},{wch:14},{wch:60}];
-      wsMkt['!freeze'] = { ySplit: 1 };
-      XLSX.utils.book_append_sheet(wb, wsMkt, '市場概況');
-    }
-
-    // ── Sheet 7: 新聞摘要 ──
-    const newsData = [['代號', '金控', '新聞摘要', '來源 URL', '生成時間']];
-    for (const c of d.companies || []) {
-      if (!c.news_summary) continue;
-      const sources = (c.news_sources || []).map(s => s.url).filter(Boolean).join('\n');
-      const ts = c.news_generated_at ? new Date(c.news_generated_at).toLocaleString('zh-TW') : '';
-      newsData.push([c.code, c.name, c.news_summary, sources, ts]);
-    }
-    if (newsData.length > 1) {
-      const wsNews = XLSX.utils.aoa_to_sheet(newsData);
-      wsNews['!cols'] = [{wch:8},{wch:14},{wch:90},{wch:50},{wch:22}];
-      wsNews['!freeze'] = { ySplit: 1 };
-      XLSX.utils.book_append_sheet(wb, wsNews, '新聞摘要');
-    }
-
-    // ── 寫入並下載 ──
-    const filename = `taiwan-fhcs-${period.replace('/', '-') || 'data'}.xlsx`;
+    const filename = `taiwan-fhcs-${periodAd(period).replace('/', '-') || 'data'}.xlsx`;
     XLSX.writeFile(wb, filename);
 
     textEl.textContent = '✓ 已下載';

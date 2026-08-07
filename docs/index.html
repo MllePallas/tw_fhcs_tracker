@@ -17,7 +17,7 @@
   <header>
     <div class="header-inner">
       <div class="header-title">
-        <h1>🏦 台灣金控月自結獲利</h1>
+        <h1>台灣金控月自結獲利</h1>
         <p class="subtitle">13 家上市金控 ｜ 資料來源：公開資訊觀測站</p>
       </div>
       <div class="header-actions">
@@ -64,7 +64,6 @@
         </div>
         <div class="ctrl-group ctrl-download">
           <button id="btn-download" class="btn-download" onclick="downloadExcel()" title="下載當前月份完整內容（xlsx）">
-            <span class="btn-download-icon">📥</span>
             <span class="btn-download-text">下載 Excel</span>
           </button>
         </div>
@@ -74,7 +73,7 @@
     <!-- 本月市場概況 -->
     <div class="market-section hidden" id="market-section">
       <div class="market-header">
-        <span class="market-title">📊 本月市場概況</span>
+        <span class="market-title">本月市場概況</span>
         <span class="market-meta" id="market-meta"></span>
       </div>
       <div class="market-cards" id="market-cards"></div>
@@ -85,10 +84,10 @@
 
     <!-- 視角 Tab -->
     <div class="industry-tabs" id="industry-tabs">
-      <button class="tab active" data-view="holdings" onclick="setView('holdings')">🏦 金控總覽</button>
-      <button class="tab"        data-view="bank"     onclick="setView('bank')">💰 銀行</button>
-      <button class="tab"        data-view="life"     onclick="setView('life')">🛡️ 壽險</button>
-      <button class="tab"        data-view="securities" onclick="setView('securities')">📊 證券</button>
+      <button class="tab active" data-view="holdings" onclick="setView('holdings')">金控總覽</button>
+      <button class="tab"        data-view="bank"     onclick="setView('bank')">銀行</button>
+      <button class="tab"        data-view="life"     onclick="setView('life')">壽險</button>
+      <button class="tab"        data-view="securities" onclick="setView('securities')">證券</button>
     </div>
 
     <!-- 表格單位標示（跟著單位選單動態變化） -->
@@ -99,7 +98,7 @@
       <table id="main-table">
         <thead id="main-thead"></thead>
         <tbody id="main-tbody">
-          <tr><td colspan="9" class="loading-cell">載入資料中...</td></tr>
+          <tr><td colspan="8" class="loading-cell">載入資料中...</td></tr>
         </tbody>
         <tfoot id="main-tfoot"></tfoot>
       </table>
@@ -119,16 +118,18 @@
       <div id="detail-content"></div>
     </div>
 
-    <!-- 歷史趨勢圖表 -->
-    <div class="section-title" id="bar-chart-title">📈 當月獲利比較</div>
+    <!-- 獲利比較圖表（本期 vs 去年同期） -->
+    <div class="section-title" id="bar-chart-title">當月獲利比較</div>
     <div class="chart-container">
       <canvas id="bar-chart"></canvas>
     </div>
+    <div class="chart-note hidden" id="bar-chart-note"></div>
 
-    <div class="section-title" id="cumul-chart-title">📊 累計獲利比較（本年累計）</div>
+    <div class="section-title" id="cumul-chart-title">累計獲利比較（本年累計）</div>
     <div class="chart-container">
       <canvas id="cumul-chart"></canvas>
     </div>
+    <div class="chart-note hidden" id="cumul-chart-note"></div>
 
   </main>
 
