@@ -66,7 +66,12 @@
       "WebFetch(domain:tw.stock.yahoo.com)",
       "Bash(tee /tmp/mops_run.log)",
       "Bash(echo \"strict exit code: $?\")",
-      "Bash(echo \"exit=$?\")"
+      "Bash(echo \"exit=$?\")",
+      "Read(//c/Users/ether/OneDrive/**)",
+      "Bash(pwd -P)",
+      "Bash(echo \"repo 實際路徑: $\\(pwd -P\\)\")",
+      "Skill(update-config)",
+      "Bash(jq --version)"
     ]
   }
 }

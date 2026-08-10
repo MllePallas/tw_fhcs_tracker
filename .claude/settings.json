@@ -1,0 +1,16 @@
+{
+  "hooks": {
+    "PreToolUse": [
+      {
+        "matcher": "Write",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "python -c \"import json,sys,os;d=json.load(sys.stdin);p=(d.get('tool_input') or {}).get('file_path') or '';m={'hookSpecificOutput':{'hookEventName':'PreToolUse','permissionDecision':'deny','permissionDecisionReason':'Blocked: full-file Write on CLAUDE.md has twice erased sections other sessions had added. Use Edit for targeted changes. If a full rewrite is genuinely needed, re-read the file first and get the user to confirm.'}};os.path.basename(p).lower()=='claude.md' and print(json.dumps(m))\"",
+            "timeout": 15
+          }
+        ]
+      }
+    ]
+  }
+}
