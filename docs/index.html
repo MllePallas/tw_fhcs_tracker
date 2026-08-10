@@ -97,6 +97,7 @@
         <button class="mv-btn active" data-mv="table" onclick="setMobileLayout('table')">總表</button>
         <button class="mv-btn"        data-mv="card"  onclick="setMobileLayout('card')">卡片</button>
       </div>
+      <button class="btn-snapshot" id="btn-snapshot" onclick="openSnapshot()">存成圖片</button>
     </div>
 
     <!-- 手機橫向捲動提示（桌機隱藏） -->
@@ -116,6 +117,26 @@
     <!-- 主表卡片（手機「卡片」模式） -->
     <div class="mobile-cards" id="mobile-cards">
       <div class="m-empty">載入資料中...</div>
+    </div>
+
+    <!-- 表格圖片（手機「存成圖片」用；依當前月份／視角／單位即時繪製） -->
+    <div class="snapshot-overlay hidden" id="snapshot-overlay" onclick="closeSnapshot(event)">
+      <div class="snapshot-box" onclick="event.stopPropagation()">
+        <div class="snapshot-head">
+          <span class="snapshot-title">表格圖片</span>
+          <button class="btn btn-close" onclick="closeSnapshot()" aria-label="關閉">✕</button>
+        </div>
+        <div class="snapshot-body">
+          <img id="snapshot-img" alt="金控月自結獲利總表" onclick="toggleSnapshotZoom()" />
+        </div>
+        <div class="snapshot-actions">
+          <span class="snapshot-hint">長按圖片可儲存或分享；點圖片可放大</span>
+          <div class="snapshot-btns">
+            <button class="btn-snapshot-action" id="snapshot-share" onclick="shareSnapshot()">分享</button>
+            <button class="btn-snapshot-action primary" onclick="downloadSnapshot()">下載圖片</button>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- 子公司明細（展開用） -->

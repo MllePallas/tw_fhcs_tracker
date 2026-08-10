@@ -64,7 +64,9 @@
       "WebFetch(domain:udn.com)",
       "WebFetch(domain:mllepallas.github.io)",
       "WebFetch(domain:tw.stock.yahoo.com)",
-      "Bash(tee /tmp/mops_run.log)"
+      "Bash(tee /tmp/mops_run.log)",
+      "Bash(echo \"strict exit code: $?\")",
+      "Bash(echo \"exit=$?\")"
     ]
   }
 }

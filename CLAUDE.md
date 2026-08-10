@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-08-07（新增：**`validate.py` 資料一致性驗證**。前次：金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
+> 最後更新：2026-08-10（新增：**手機「存成圖片」總表分享**。前次：`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
 
 ## 專案目的
 
@@ -668,6 +668,18 @@ const MERGER_NOTE_CUTOFFS = { '2887': '115/07', '2890': '115/07' };
 - FVOCI 列標籤在手機縮寫為「＋FVOCI」：`fvociRowLabel()` 同時輸出 `.fv-full` / `.fv-abbr` 兩個 span，由 CSS media query 切換（不需重繪）。⚠️ Excel 匯出必須用純文字常數 `FVOCI_LABEL_TEXT`，不可用 `fvociRowLabel()`（會把 HTML 標籤寫進儲存格）
 - 表格註腳的 sticky 下在**內層 span**（`td.table-footnote > span`）——td 因 `colspan` 撐滿整個捲動寬度、本身無法 stick
 - **版型切換鈕（`.mobile-view-toggle`，僅手機顯示）**：「總表」／「卡片」。切到卡片時 `<body>` 加上 `.ml-card`，由 CSS 決定顯示哪一邊；`renderTable()` 只在卡片容器可見時才產生卡片 HTML，避免無謂運算
+
+### 「存成圖片」（手機分享用，2026-08 新增）
+
+管理層需要把當月總表截圖分享，但手機螢幕放不下整張表 → 工具列的 **`#btn-snapshot`（僅手機顯示）** 以 Canvas 依「當前月份／視角／單位」即時繪製一張完整表格圖。
+
+- 實作在 `renderTableImage()`（`snapBuildModel()` 組模型、`snapDrawText()` / `snapWrap()` 繪製），資料來源與網頁表格同一份，數字必定一致
+- **不含公告日期欄**（分享用不到，且會擠壓數字欄）；其餘欄位、FVOCI 加計列、YoY 方向色、合併註記、註腳皆比照網頁
+- 四個視角都能出圖，標題（`model.title`）依視角為「金控月獲利總覽」「銀行／壽險／證券子公司月獲利總覽」；圖片含期別徽章、單位、資料來源、產生時間與網站網址
+- 輸出 1100×N CSS px、`scale: 2`（實際約 2200px 寬），手機放大看仍清晰
+- 未採用 html2canvas：sticky 欄位與陰影在截圖函式庫下容易變形，且可省一個外部相依
+- 檢視視窗（`#snapshot-overlay`）：點圖片可切換「符合寬度／原始大小」、長按可儲存、`下載圖片`、以及 `分享`（`navigator.share` 檔案分享；不支援的瀏覽器自動隱藏並退回下載）
+- ⚠️ 繪製 FVOCI 標籤時用 `FVOCI_LABEL_TEXT`（已含全形括號），不要再包一層括號
 - 其餘手機調整：產業 Tab 2×2、控制列堆疊、市場概況與四張第一名卡片 2×2 grid、圖表高度 330px（桌機 400px，搭配 `maintainAspectRatio: false`）
 - 驗證方式：Playwright 比對 `documentElement.scrollWidth` 與 `clientWidth`，確認各寬度皆無「整頁」水平溢出（表格內部的橫向捲動是刻意設計）、無 console error
 

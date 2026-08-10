@@ -846,6 +846,100 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
   margin-bottom: 6px;
 }
 
+/* ── 存成圖片（手機） ─────────────────────────────────── */
+.btn-snapshot {
+  display: none;               /* 僅手機顯示；桌機可直接截圖 */
+  align-items: center;
+  border: 1px solid var(--primary);
+  background: var(--surface);
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 6px 14px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.btn-snapshot:active { background: var(--primary-bg); }
+
+.snapshot-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  background: rgba(16, 20, 24, .72);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 12px;
+}
+.snapshot-box {
+  background: var(--surface);
+  border-radius: var(--radius);
+  box-shadow: 0 12px 40px rgba(16, 20, 24, .3);
+  width: min(960px, 100%);
+  max-height: 92vh;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+.snapshot-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 8px 10px 16px;
+  border-bottom: 1px solid var(--border);
+}
+.snapshot-title { font-size: 14px; font-weight: 700; }
+.snapshot-body {
+  flex: 1;
+  overflow: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 12px;
+  background: var(--surface-alt);
+}
+.snapshot-body img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border: 1px solid var(--border);
+  border-radius: 4px;
+  background: #fff;
+  cursor: zoom-in;
+}
+/* 點圖片放大到原始寬度（容器可捲動），再點縮回 */
+.snapshot-body img.zoom {
+  width: 1100px;
+  max-width: none;
+  cursor: zoom-out;
+}
+.snapshot-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 10px 14px;
+  border-top: 1px solid var(--border);
+  flex-wrap: wrap;
+}
+.snapshot-hint { font-size: 11px; color: var(--text-muted); }
+.snapshot-btns { display: flex; gap: 8px; }
+.btn-snapshot-action {
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-2);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+}
+.btn-snapshot-action.primary {
+  background: var(--primary);
+  border-color: var(--primary);
+  color: #fff;
+}
+.btn-snapshot-action:active { transform: scale(.98); }
+
 /* ── Responsive ───────────────────────────────────────── */
 @media (max-width: 640px) {
   header h1  { font-size: 16px; }
@@ -892,7 +986,11 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
      8 欄在手機放不下 → 容器橫向捲動，並把公司／子公司名稱欄 sticky 釘在左側，
      左右滑動時仍看得到是哪一家。切到「卡片」時（body.ml-card）才改用卡片佈局。 */
   .mobile-view-toggle { display: inline-flex; }
+  .btn-snapshot { display: inline-flex; }
   .table-scroll-hint { display: block; }
+  /* 工具列在窄螢幕換行：單位提示獨佔一行，切換鈕與「存成圖片」並排靠右 */
+  .table-toolbar { flex-wrap: wrap; }
+  .table-toolbar .table-unit-hint { flex: 1 0 100%; margin-bottom: 2px; }
 
   .table-container {
     display: block;

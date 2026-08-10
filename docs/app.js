@@ -1325,6 +1325,413 @@ function convertUnit(value, fromUnit, toUnit) {
   return (value * from) / to;
 }
 
+// ── 表格圖片輸出（手機「存成圖片」） ─────────────────────
+// 目的：管理層要把當月總表直接截圖分享，但手機螢幕放不下整張表。
+// 作法：用 Canvas 依「當前月份／視角／單位」即時重繪一張完整表格圖，
+//       版面比照桌機表格，但**不含公告日期欄**（分享時用不到，且會擠壓數字欄）。
+// 不使用 html2canvas：sticky 欄位與陰影在截圖函式庫下容易變形，且省一個外部相依。
+
+const SNAP = {
+  scale: 2,                 // 輸出 2 倍解析度，手機上放大看仍清晰
+  width: 1100,              // CSS px（實際輸出 2200px 寬）
+  padX: 40,
+  font: '"Noto Sans TC", "PingFang TC", "Microsoft JhengHei", -apple-system, sans-serif',
+  // 色票與 style.css 的色彩系統一致
+  c: {
+    bg: '#ffffff', surfaceAlt: '#fafbfc', border: '#e6e8ec', borderStrong: '#d5d9e0',
+    ink: '#101418', ink2: '#3d4653', muted: '#6b7684',
+    primary: '#1a3fa0', primaryBg: '#eef1f9',
+    pos: '#1f6f54', neg: '#a3312a',
+    fvoci: '#4a5a8f', fvociBg: '#f7f8fc',
+  },
+};
+
+let _snapshotBlob = null;   // 供下載／分享重複使用
+
+function snapFont(weight, size, italic) {
+  return `${italic ? 'italic ' : ''}${weight} ${size}px ${SNAP.font}`;
+}
+
+function snapDrawText(ctx, text, x, y, font, color, align) {
+  ctx.font = font;
+  ctx.fillStyle = color;
+  ctx.textAlign = align || 'left';
+  ctx.textBaseline = 'middle';
+  ctx.fillText(text, x, y);
+}
+
+// 中文無空白可斷 → 逐字量測換行
+function snapWrap(ctx, text, maxWidth, font) {
+  ctx.font = font;
+  const lines = [];
+  let line = '';
+  for (const ch of String(text)) {
+    if (ch === '\n') { lines.push(line); line = ''; continue; }
+    const test = line + ch;
+    if (ctx.measureText(test).width > maxWidth && line) {
+      lines.push(line);
+      line = ch;
+    } else {
+      line = test;
+    }
+  }
+  if (line) lines.push(line);
+  return lines;
+}
+
+// 取得目前視角要畫的欄位定義與資料列（與網頁表格同來源，故數字必定一致）
+function snapBuildModel() {
+  const d = state.data;
+  const unit = state.displayUnit;
+  const period = d.report_period || '';
+  const inner = SNAP.width - SNAP.padX * 2;
+
+  if (state.viewMode === 'holdings') {
+    const cols = [
+      { key: 'code',    title: '代號',  w: 88,  align: 'left' },
+      { key: 'name',    title: '金控',  w: 152, align: 'left' },
+      { key: 'monthly', title: `當月 (${periodAd(period)})`, w: 180, align: 'right', group: '合併稅後淨利' },
+      { key: 'cumul',   title: '累計',  w: 180, align: 'right', group: '合併稅後淨利' },
+      { key: 'yoy',     title: '累計 YoY', w: 180, align: 'right', group: '合併稅後淨利' },
+      { key: 'epsM',    title: '當月',  w: 120, align: 'right', group: '稅後 EPS (元)' },
+      { key: 'epsC',    title: '累計',  w: 120, align: 'right', group: '稅後 EPS (元)' },
+    ];
+    const rows = [];
+    for (const c of sortCompanies([...(d.companies || [])])) {
+      if (c.error) {
+        rows.push({ type: 'error', code: c.code, name: c.name, msg: c.error_msg || '資料待更新' });
+        continue;
+      }
+      const h = c.holding_company || {};
+      const epsM = h.monthly_eps != null
+        ? h.monthly_eps
+        : (h.monthly_profit != null && h.cumulative_profit && h.cumulative_eps != null
+            ? h.monthly_profit / h.cumulative_profit * h.cumulative_eps : null);
+      const yi = formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs,
+                           h.cumulative_profit_yoy_status, c.unit, unit);
+      let note = null, yoyDisp = yi.disp, yoyCls = yi.cls;
+      if (yi.disp === '—' && c.code === '2887' && showMergerNote('2887', period)) {
+        yoyDisp = ''; note = '2025/07 正式合併';
+      }
+      if (yi.disp !== '—' && c.code === '2890' && showMergerNote('2890', period)) {
+        note = '京城銀 2025/10 併入獲利公告';
+      }
+      rows.push({
+        type: 'main',
+        code: c.code,
+        name: c.name,
+        monthly: formatNumOrDash(convertUnit(h.monthly_profit, c.unit, unit)),
+        monthlyNeg: (convertUnit(h.monthly_profit, c.unit, unit) ?? 0) < 0,
+        cumul: formatNumOrDash(convertUnit(h.cumulative_profit, c.unit, unit)),
+        cumulNeg: (convertUnit(h.cumulative_profit, c.unit, unit) ?? 0) < 0,
+        yoy: yoyDisp, yoyCls, note,
+        epsM: epsM != null ? formatEps(epsM) : '—',
+        epsC: h.cumulative_eps != null ? formatEps(h.cumulative_eps) : '—',
+      });
+      const a = h.fvoci_adjusted;
+      if (a && a.cumulative_profit != null) {
+        const fd = fvociDisplay(a, c.unit, unit);
+        rows.push({
+          type: 'fvoci',
+          label: FVOCI_LABEL_TEXT,
+          monthly: fd.monthlyDisp, cumul: fd.cumulDisp, yoy: fd.yoyDisp,
+          epsC: a.cumulative_eps != null ? formatEps(a.cumulative_eps) : '',
+        });
+      }
+    }
+    const totalW = cols.reduce((s, c) => s + c.w, 0);
+    cols.forEach(c => { c.w = c.w / totalW * inner; });
+    return { cols, rows, hasGroups: true, title: '金控月獲利總覽', hasFvoci: rows.some(r => r.type === 'fvoci') };
+  }
+
+  // 產業視角（銀行／壽險／證券）
+  const cols = [
+    { key: 'parent',  title: '集團', w: 170, align: 'left' },
+    { key: 'name',    title: `${VIEW_TITLES[state.viewMode]}子公司`, w: 240, align: 'left' },
+    { key: 'monthly', title: `當月 (${periodAd(period)})`, w: 210, align: 'right' },
+    { key: 'cumul',   title: '累計', w: 200, align: 'right' },
+    { key: 'yoy',     title: '累計 YoY', w: 200, align: 'right' },
+  ];
+  const rows = [];
+  for (const r of sortIndustryRows(getIndustryRows(state.viewMode))) {
+    const yi = formatYoY(r.cumulative_profit_yoy_pct, r.cumulative_profit_yoy_abs,
+                         r.cumulative_profit_yoy_status, r.unit, unit);
+    let note = null, yoyDisp = yi.disp;
+    if (yi.disp === '—' && showMergerNote(r.parent_code, period)) { yoyDisp = ''; note = '2025/07 正式合併'; }
+    if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) { yoyDisp = ''; note = '2025/10 併入獲利公告'; }
+    const mv = convertUnit(r.monthly_profit, r.unit, unit);
+    const cv = convertUnit(r.cumulative_profit, r.unit, unit);
+    rows.push({
+      type: 'main', code: r.parent_name, name: r.name,
+      monthly: formatNumOrDash(mv), monthlyNeg: (mv ?? 0) < 0,
+      cumul: formatNumOrDash(cv), cumulNeg: (cv ?? 0) < 0,
+      yoy: yoyDisp, yoyCls: yi.cls, note,
+    });
+    const a = r.fvoci_adjusted;
+    if (state.viewMode === 'life' && a && a.cumulative_profit != null) {
+      const fd = fvociDisplay(a, r.unit, unit);
+      rows.push({ type: 'fvoci', label: FVOCI_LABEL_TEXT, monthly: fd.monthlyDisp, cumul: fd.cumulDisp, yoy: fd.yoyDisp });
+    }
+  }
+  const totalW = cols.reduce((s, c) => s + c.w, 0);
+  cols.forEach(c => { c.w = c.w / totalW * inner; });
+  return {
+    cols, rows, hasGroups: false,
+    title: `${VIEW_TITLES[state.viewMode]}子公司月獲利總覽`,
+    hasFvoci: rows.some(r => r.type === 'fvoci'),
+  };
+}
+
+function formatNumOrDash(v) {
+  return v != null ? formatNum(v) : '—';
+}
+
+function snapFootnoteText(model) {
+  if (!model.hasFvoci) return '';
+  return state.viewMode === 'holdings'
+    ? `* ${FVOCI_FOOTNOTE_HOLDINGS}`
+    : `* ${FVOCI_FOOTNOTE}`;
+}
+
+function renderTableImage() {
+  const model = snapBuildModel();
+  const period = state.data.report_period || '';
+  const { c } = SNAP;
+  const W = SNAP.width;
+  const padX = SNAP.padX;
+
+  // 先用暫時 canvas 量測，算出總高度
+  const measure = document.createElement('canvas').getContext('2d');
+  const footnote = snapFootnoteText(model);
+  const footLines = footnote ? snapWrap(measure, footnote, W - padX * 2, snapFont(400, 13)) : [];
+
+  const H_TITLE = 108;                       // 標題區
+  const H_GROUP = model.hasGroups ? 34 : 0;  // 群組表頭
+  const H_HEAD = 38;                         // 欄位表頭
+  const rowH = r => (r.type === 'fvoci' ? 34 : (r.note ? 56 : 42));
+  const bodyH = model.rows.reduce((s, r) => s + rowH(r), 0);
+  const H_FOOT = (footLines.length ? footLines.length * 20 + 14 : 0) + 34;   // 註腳 + 出處列
+  const H = H_TITLE + H_GROUP + H_HEAD + bodyH + H_FOOT + 24;
+
+  const canvas = document.createElement('canvas');
+  canvas.width = W * SNAP.scale;
+  canvas.height = H * SNAP.scale;
+  const ctx = canvas.getContext('2d');
+  ctx.scale(SNAP.scale, SNAP.scale);
+  ctx.fillStyle = c.bg;
+  ctx.fillRect(0, 0, W, H);
+
+  // ── 標題區 ──
+  snapDrawText(ctx, model.title, padX, 40, snapFont(700, 24), c.ink);
+  snapDrawText(ctx,
+    `單位：${unitFullLabel(state.displayUnit)}${state.viewMode === 'holdings' ? '（EPS 為元）' : ''}　｜　資料來源：公開資訊觀測站（MOPS）`,
+    padX, 70, snapFont(400, 14), c.muted);
+
+  // 期別徽章（右上）
+  const badge = `${periodLabel(period)}月報`;
+  ctx.font = snapFont(700, 15);
+  const bw = ctx.measureText(badge).width + 28;
+  const bx = W - padX - bw, by = 26, bh = 30;
+  ctx.fillStyle = c.primaryBg;
+  ctx.strokeStyle = '#d7dff1';
+  ctx.lineWidth = 1;
+  if (ctx.roundRect) { ctx.beginPath(); ctx.roundRect(bx, by, bw, bh, 15); ctx.fill(); ctx.stroke(); }
+  else ctx.fillRect(bx, by, bw, bh);
+  snapDrawText(ctx, badge, bx + bw / 2, by + bh / 2 + 1, snapFont(700, 15), c.primary, 'center');
+
+  // ── 欄位 x 座標 ──
+  let x = padX;
+  model.cols.forEach(col => { col.x = x; col.right = x + col.w; x += col.w; });
+  const colOf = k => model.cols.find(cc => cc.key === k);
+  const cellX = col => (col.align === 'right' ? col.right - 14 : col.x + 6);
+
+  let y = H_TITLE;
+
+  // ── 群組表頭（金控總覽的「合併稅後淨利」「稅後 EPS (元)」） ──
+  if (model.hasGroups) {
+    ctx.fillStyle = c.surfaceAlt;
+    ctx.fillRect(padX, y, W - padX * 2, H_GROUP);
+    const groups = [];
+    model.cols.forEach(col => {
+      if (!col.group) return;
+      const g = groups.find(gg => gg.name === col.group);
+      if (g) { g.right = col.right; } else { groups.push({ name: col.group, left: col.x, right: col.right }); }
+    });
+    groups.forEach(g => {
+      snapDrawText(ctx, g.name, (g.left + g.right) / 2, y + H_GROUP / 2, snapFont(600, 15), c.ink2, 'center');
+      ctx.strokeStyle = c.border;
+      ctx.beginPath();
+      ctx.moveTo(g.left + 10, y + H_GROUP - 0.5);
+      ctx.lineTo(g.right - 10, y + H_GROUP - 0.5);
+      ctx.stroke();
+    });
+    y += H_GROUP;
+  }
+
+  // ── 欄位表頭 ──
+  ctx.fillStyle = c.surfaceAlt;
+  ctx.fillRect(padX, y, W - padX * 2, H_HEAD);
+  model.cols.forEach(col => {
+    snapDrawText(ctx, col.title, cellX(col), y + H_HEAD / 2, snapFont(600, 14), c.muted, col.align);
+  });
+  ctx.strokeStyle = c.borderStrong;
+  ctx.lineWidth = 1;
+  ctx.beginPath();
+  ctx.moveTo(padX, y + H_HEAD - 0.5);
+  ctx.lineTo(W - padX, y + H_HEAD - 0.5);
+  ctx.stroke();
+  y += H_HEAD;
+
+  // ── 資料列 ──
+  for (const r of model.rows) {
+    const h = rowH(r);
+    if (r.type === 'fvoci') {
+      ctx.fillStyle = c.fvociBg;
+      ctx.fillRect(padX, y, W - padX * 2, h);
+      const nameCol = colOf('name');
+      // r.label 已含全形括號（FVOCI_LABEL_TEXT），不要再包一層
+      snapDrawText(ctx, `${r.label} *`, nameCol.x + 6, y + h / 2, snapFont(400, 13), c.fvoci);
+      const put = (key, val) => {
+        const col = colOf(key);
+        if (col && val) snapDrawText(ctx, val, cellX(col), y + h / 2, snapFont(500, 13, true), c.fvoci, 'right');
+      };
+      put('monthly', r.monthly); put('cumul', r.cumul); put('yoy', r.yoy); put('epsC', r.epsC);
+    } else if (r.type === 'error') {
+      snapDrawText(ctx, r.code, colOf('code').x + 6, y + h / 2, snapFont(600, 14), c.muted);
+      snapDrawText(ctx, r.name, colOf('name').x + 6, y + h / 2, snapFont(700, 15), c.ink);
+      snapDrawText(ctx, r.msg, colOf('cumul').right - 14, y + h / 2, snapFont(400, 13), c.muted, 'right');
+    } else {
+      // 有 YoY 數值又有註記時，數值置上、註記置下；只有註記（如合併前）則置中
+      const noteOnly = !!r.note && !r.yoy;
+      const midY = (r.note && !noteOnly) ? y + 22 : y + h / 2;
+      const c1 = colOf('code');
+      if (c1) snapDrawText(ctx, r.code, c1.x + 6, midY, snapFont(600, 14), c.muted);
+      const cp = colOf('parent');
+      if (cp) snapDrawText(ctx, r.code, cp.x + 6, midY, snapFont(600, 14), c.muted);
+      snapDrawText(ctx, r.name, colOf('name').x + 6, midY, snapFont(700, 15), c.ink);
+      snapDrawText(ctx, r.monthly, cellX(colOf('monthly')), midY, snapFont(600, 15), r.monthlyNeg ? c.neg : c.ink, 'right');
+      snapDrawText(ctx, r.cumul, cellX(colOf('cumul')), midY, snapFont(600, 15), r.cumulNeg ? c.neg : c.ink, 'right');
+      if (r.yoy) {
+        const col = r.yoyCls === 'negative' ? c.neg : (r.yoyCls === 'positive' ? c.pos : c.muted);
+        snapDrawText(ctx, r.yoy, cellX(colOf('yoy')), midY, snapFont(600, 15), col, 'right');
+      }
+      if (r.note) {
+        snapDrawText(ctx, r.note, cellX(colOf('yoy')), noteOnly ? y + h / 2 : y + 42,
+                     snapFont(400, 12, true), c.muted, 'right');
+      }
+      const ce = colOf('epsM');
+      if (ce) {
+        snapDrawText(ctx, r.epsM, cellX(ce), midY, snapFont(600, 15), c.ink, 'right');
+        snapDrawText(ctx, r.epsC, cellX(colOf('epsC')), midY, snapFont(600, 15), c.ink, 'right');
+      }
+    }
+    ctx.strokeStyle = c.border;
+    ctx.beginPath();
+    ctx.moveTo(padX, y + h - 0.5);
+    ctx.lineTo(W - padX, y + h - 0.5);
+    ctx.stroke();
+    y += h;
+  }
+
+  // ── 註腳 ──
+  y += 10;
+  if (footLines.length) {
+    footLines.forEach((ln, i) => {
+      snapDrawText(ctx, ln, padX, y + i * 20 + 8, snapFont(400, 13), c.muted);
+    });
+    y += footLines.length * 20 + 6;
+  }
+
+  // ── 出處列 ──
+  const src = `${location.origin}${location.pathname}`.replace(/index\.html$/, '');
+  snapDrawText(ctx, `產生時間：${fmtDateTime(new Date().toISOString())}`, padX, y + 14, snapFont(400, 12), c.muted);
+  snapDrawText(ctx, src, W - padX, y + 14, snapFont(400, 12), c.muted, 'right');
+
+  return canvas;
+}
+
+// ── 圖片視窗 ───────────────────────────────────────────
+function openSnapshot() {
+  if (!state.data) { alert('資料尚未載入，請稍候再試'); return; }
+  try {
+    const canvas = renderTableImage();
+    const img = document.getElementById('snapshot-img');
+    img.src = canvas.toDataURL('image/png');
+    _snapshotBlob = null;
+    canvas.toBlob(b => { _snapshotBlob = b; }, 'image/png');
+
+    // 不支援原生分享時隱藏「分享」鈕（桌機瀏覽器多半不支援檔案分享）
+    const shareBtn = document.getElementById('snapshot-share');
+    const canShare = !!(navigator.canShare && navigator.share);
+    shareBtn.style.display = canShare ? '' : 'none';
+
+    document.getElementById('snapshot-overlay').classList.remove('hidden');
+    document.body.style.overflow = 'hidden';
+  } catch (e) {
+    console.error('snapshot failed:', e);
+    alert(`產生圖片失敗：${e.message || e}`);
+  }
+}
+
+function closeSnapshot(evt) {
+  // 點遮罩才關閉；點視窗內部（已 stopPropagation）與按 ✕（無 evt）都會走到這裡
+  if (evt && evt.target && evt.target.id !== 'snapshot-overlay') return;
+  const img = document.getElementById('snapshot-img');
+  img.classList.remove('zoom');
+  document.getElementById('snapshot-overlay').classList.add('hidden');
+  document.body.style.overflow = '';
+}
+
+// 預覽時點圖片切換「符合寬度／原始大小」，方便分享前先核對數字
+function toggleSnapshotZoom() {
+  const img = document.getElementById('snapshot-img');
+  img.classList.toggle('zoom');
+  const hint = document.querySelector('.snapshot-hint');
+  if (hint) {
+    hint.textContent = img.classList.contains('zoom')
+      ? '已放大，可左右捲動；再點一次縮回'
+      : '長按圖片可儲存或分享；點圖片可放大';
+  }
+}
+
+function snapshotFilename() {
+  const period = periodAd(state.data.report_period || '').replace('/', '-');
+  const scope = state.viewMode === 'holdings' ? 'holdings' : state.viewMode;
+  return `taiwan-fhcs-${period}-${scope}.png`;
+}
+
+function downloadSnapshot() {
+  const img = document.getElementById('snapshot-img');
+  const a = document.createElement('a');
+  a.href = img.src;
+  a.download = snapshotFilename();
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+}
+
+async function shareSnapshot() {
+  try {
+    if (!_snapshotBlob) {
+      const res = await fetch(document.getElementById('snapshot-img').src);
+      _snapshotBlob = await res.blob();
+    }
+    const file = new File([_snapshotBlob], snapshotFilename(), { type: 'image/png' });
+    if (navigator.canShare && navigator.canShare({ files: [file] })) {
+      await navigator.share({
+        files: [file],
+        title: `台灣金控月自結獲利 ${periodLabel(state.data.report_period)}`,
+      });
+    } else {
+      downloadSnapshot();
+    }
+  } catch (e) {
+    if (e && e.name === 'AbortError') return;   // 使用者取消分享
+    console.error('share failed:', e);
+    downloadSnapshot();
+  }
+}
+
 // ── Excel 下載 ─────────────────────────────────────────
 // 動態載入 SheetJS（首次點擊才載入，避免初始 bundle 膨脹）。
 // 使用 xlsx-js-style：與 SheetJS 相同 API，但支援 cell.s 樣式（字型／底色／框線／對齊），
