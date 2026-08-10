@@ -1,8 +1,8 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-07T17:19:58.938937",
-  "success_count": 2,
-  "fail_count": 11,
+  "last_updated": "2026-08-10T17:27:11.781522",
+  "success_count": 3,
+  "fail_count": 10,
   "companies": [
     {
       "code": "2880",
@@ -199,11 +199,57 @@
     {
       "code": "2890",
       "name": "永豐金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "永豐金控代子公司永豐金證券公告114年度股利配發基準日"
-      ]
+      "announcement_date": "115/08/10",
+      "announcement_title": "永豐金控公告其與子公司115年7月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "永豐金控",
+        "monthly_profit": 4381,
+        "cumulative_profit": 28932,
+        "monthly_eps": 0.3,
+        "cumulative_eps": 1.96,
+        "cumulative_profit_yoy_pct": 89.3,
+        "cumulative_profit_yoy_abs": 13649
+      },
+      "subsidiaries": [
+        {
+          "name": "永豐銀行",
+          "monthly_profit": 1994,
+          "cumulative_profit": 15518,
+          "monthly_eps": 0.18,
+          "cumulative_eps": 1.4,
+          "cumulative_profit_yoy_pct": 20.7,
+          "cumulative_profit_yoy_abs": 2660
+        },
+        {
+          "name": "京城銀行",
+          "monthly_profit": 567,
+          "cumulative_profit": 4323,
+          "monthly_eps": 0.51,
+          "cumulative_eps": 3.89
+        },
+        {
+          "name": "永豐金證券",
+          "monthly_profit": 1416,
+          "cumulative_profit": 8764,
+          "monthly_eps": 0.84,
+          "cumulative_eps": 5.19,
+          "cumulative_profit_yoy_pct": 187.7,
+          "cumulative_profit_yoy_abs": 5718
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n永豐金控公布 2026 年 7 月自結損益，單月稅後淨利 43.8 億元，累計前七月稅後淨利 289.32 億元，較去年同期成長 89%。\n累計每股稅後盈餘為 1.96 元，年化股東權益報酬率達 19.00%。獲利成長主要受惠於經紀與泛財管手續費淨收益成長，以及較高的資本利得。\n\n**子公司明細**\n- 永豐銀行：累計前七月稅後淨利 155.18 億元，年增 21%，連續第六年創獲利新高；由利息淨收益與手續費淨收益增長帶動，年增幅各為 26% 與 13%。\n\n- 永豐金證券：累計前七月稅後淨利 87.64 億元，年增 188%，創歷史同期新高；手續費淨收益年成長 132%。\n\n- 京城銀行：累計前七月稅後淨利 43.23 億元；扣除 1 月京城銀國際租賃處分利得 2.88 億元後，實質貢獻 38.70 億元。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20260810701388-430304",
+          "title": "太會賺！永豐金前七月獲利成長近9成 EPS衝上1.96元 - 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-08-10T17:28:09.889168",
+      "news_manual": true
     },
     {
       "code": "2891",
