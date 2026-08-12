@@ -1,8 +1,8 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-11T11:36:04.585206",
-  "success_count": 3,
-  "fail_count": 10,
+  "last_updated": "2026-08-12T18:44:55.858558",
+  "success_count": 5,
+  "fail_count": 8,
   "companies": [
     {
       "code": "2880",
@@ -119,11 +119,77 @@
     {
       "code": "2885",
       "name": "元大金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "元大金控代子公司元大證券公告取得\r\n板信商業銀行股份有限公司115年度第1期次順位金融債券"
-      ]
+      "announcement_date": "115/08/12",
+      "announcement_title": "元大金控公告115年7月份自結合併損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "元大金控",
+        "monthly_profit": 6359,
+        "cumulative_profit": 42931,
+        "monthly_eps": null,
+        "cumulative_eps": 3.22,
+        "cumulative_profit_yoy_pct": 120.8,
+        "cumulative_profit_yoy_abs": 23486
+      },
+      "subsidiaries": [
+        {
+          "name": "元大證券",
+          "monthly_profit": 4800,
+          "cumulative_profit": 29328,
+          "monthly_eps": null,
+          "cumulative_eps": 4.12,
+          "cumulative_profit_yoy_pct": 154.0,
+          "cumulative_profit_yoy_abs": 17783
+        },
+        {
+          "name": "元大銀行",
+          "monthly_profit": 1535,
+          "cumulative_profit": 9227,
+          "monthly_eps": null,
+          "cumulative_eps": 1.0,
+          "cumulative_profit_yoy_pct": 44.3,
+          "cumulative_profit_yoy_abs": 2831
+        },
+        {
+          "name": "元大期貨",
+          "monthly_profit": 438,
+          "cumulative_profit": 1982,
+          "monthly_eps": null,
+          "cumulative_eps": 5.39,
+          "cumulative_profit_yoy_pct": 25.8,
+          "cumulative_profit_yoy_abs": 407
+        },
+        {
+          "name": "元大人壽",
+          "monthly_profit": 3,
+          "cumulative_profit": 2444,
+          "monthly_eps": null,
+          "cumulative_eps": 0.84,
+          "cumulative_profit_yoy_pct": 3158.7,
+          "cumulative_profit_yoy_abs": 2369
+        },
+        {
+          "name": "元大投信",
+          "monthly_profit": 612,
+          "cumulative_profit": 3579,
+          "monthly_eps": null,
+          "cumulative_eps": 15.77,
+          "cumulative_profit_yoy_pct": 47.5,
+          "cumulative_profit_yoy_abs": 1152
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n元大金控公布 2026 年 7 月自結損益，單月稅後純益 63.59 億元，累計前七月稅後純益 429.31 億元。\n累計每股稅後盈餘為 3.22 元，再創同期新高；若未適用外匯價格變動準備金，累計每股稅後盈餘為 3.24 元。獲利主要由證券與銀行事業挹注，台股交易量及資產管理需求維持高檔。\n\n**子公司明細**\n- 元大證券：7 月稅後純益 48.00 億元，累計前七月 293.28 億元，累計每股稅後盈餘 4.12 元，占金控淨利近 68%。\n\n- 元大銀行：7 月稅後純益 15.35 億元，累計前七月 92.27 億元，累計每股稅後盈餘 1.00 元。\n\n- 元大投信：7 月稅後純益 6.12 億元，累計前七月 35.79 億元，累計每股稅後盈餘 15.77 元。\n\n- 元大期貨：7 月稅後純益 4.38 億元，累計前七月 19.82 億元，累計每股稅後盈餘 5.39 元。\n\n- 元大人壽：7 月稅後純益 0.03 億元，累計前七月 24.44 億元，累計每股稅後盈餘 0.84 元（未適用外匯價格變動準備金為 0.93 元）。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9687230",
+          "title": "元大金獲利／前7月賺429.31億元 EPS達3.22元再創同期新高 | 經濟日報"
+        }
+      ],
+      "news_generated_at": "2026-08-12T18:46:32.233575",
+      "news_manual": true
     },
     {
       "code": "2886",
@@ -254,14 +320,50 @@
     {
       "code": "2891",
       "name": "中信金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司中國信託資產管理股份有限公司公告向關係人取得使用權資產",
-        "代子公司中國信託資產管理股份有限公司公告\r\n向關係人處分使用權資產(補充115/05/22公告)",
-        "代子公司中國信託商業銀行股份有限公司公告\r\n向台灣人壽保險股份有限公司取得不動產使用權資產",
-        "代子公司中國信託商業銀行公告授信資產之轉讓"
-      ]
+      "announcement_date": "115/08/12",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n115年度七月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 4410,
+        "cumulative_profit": 43948,
+        "monthly_eps": null,
+        "cumulative_eps": 2.19,
+        "cumulative_profit_yoy_pct": 5.4,
+        "cumulative_profit_yoy_abs": 2268
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 4507,
+          "cumulative_profit": 35685,
+          "monthly_eps": null,
+          "cumulative_eps": 2.08,
+          "cumulative_profit_yoy_pct": 10.9,
+          "cumulative_profit_yoy_abs": 3505
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 301,
+          "cumulative_profit": 10578,
+          "monthly_eps": null,
+          "cumulative_eps": 1.7,
+          "cumulative_profit_yoy_pct": 18.1,
+          "cumulative_profit_yoy_abs": 1620
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n中信金控公布 2026 年 7 月自結損益，單月稅後純益 44.1 億元，累計前七月稅後純益 439.48 億元。\n累計每股稅後盈餘為 2.19 元。獲利以中信銀行為主要來源，台灣人壽亦維持雙位數成長。\n\n**子公司明細**\n- 中國信託銀行：7 月稅後純益 45.07 億元，累計前七月 356.85 億元，年增 11%；受惠淨利差擴大及核心業務動能成長，財富管理業務手續費收入年增逾四成，存、放款餘額及刷卡消費金額均維持雙位數增長。\n\n- 台灣人壽：7 月稅後純益 3.01 億元，累計前七月 105.78 億元；獲利來自過往累積 CSM 攤銷、基金評價利益及投資型保單重新衡量之效益，在分紅及投資型保單銷售帶動下，新契約保費達 750 億元、年增 123%。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9687326",
+          "title": "中信金獲利／自結前7月稅後純益439.48億元 EPS 為2.19元 | 經濟日報"
+        }
+      ],
+      "news_generated_at": "2026-08-12T18:46:32.351116",
+      "news_manual": true
     },
     {
       "code": "2892",
