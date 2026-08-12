@@ -1,6 +1,6 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-12T18:44:55.858558",
+  "last_updated": "2026-08-12T11:37:43.652672",
   "success_count": 5,
   "fail_count": 8,
   "companies": [
@@ -349,7 +349,8 @@
           "monthly_eps": null,
           "cumulative_eps": 1.7,
           "cumulative_profit_yoy_pct": 18.1,
-          "cumulative_profit_yoy_abs": 1620
+          "cumulative_profit_yoy_abs": 1620,
+          "fvoci_not_found_count": 1
         }
       ],
       "unit": "百萬元",
