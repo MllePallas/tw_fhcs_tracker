@@ -1,8 +1,8 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-12T11:37:43.652672",
-  "success_count": 5,
-  "fail_count": 8,
+  "last_updated": "2026-08-13T16:54:55.150833",
+  "success_count": 7,
+  "fail_count": 6,
   "companies": [
     {
       "code": "2880",
@@ -33,11 +33,90 @@
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司國泰人壽補充說明115年5月14日公告\r\n以公開募集方式發行十年(含)期以上累積次順位普通公司債"
-      ]
+      "announcement_date": "115/08/13",
+      "announcement_title": "公告本公司暨主要子公司115年07月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 10820,
+        "cumulative_profit": 87340,
+        "monthly_eps": null,
+        "cumulative_eps": 5.68,
+        "cumulative_profit_yoy_pct": 59.5,
+        "cumulative_profit_yoy_abs": 32570,
+        "fvoci_adjusted": {
+          "cumulative_profit": 187000.0,
+          "monthly_profit": 21080.0,
+          "delta_vs_original": 99660.0,
+          "label": "對保留盈餘影響數",
+          "source_url": "https://www.ctee.com.tw/news/20260813701544-430304",
+          "source_quote": "加計FVOCI股票處分利益102.6億元後，對單月保留盈餘影響數為210.8億，累積前七月對保留盈餘影響數達1,870億",
+          "original_value_text": "單月210.8億元、累計前七月1,870億元",
+          "manual": true,
+          "generated_at": "2026-08-13T16:58:08.134766",
+          "yoy_pct": 241.4,
+          "yoy_abs": 132230
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 5420,
+          "cumulative_profit": 51670,
+          "monthly_eps": null,
+          "cumulative_eps": 8.12,
+          "cumulative_profit_yoy_pct": 124.3,
+          "cumulative_profit_yoy_abs": 28630
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4310,
+          "cumulative_profit": 31300,
+          "monthly_eps": null,
+          "cumulative_eps": 2.26,
+          "cumulative_profit_yoy_pct": 13.4,
+          "cumulative_profit_yoy_abs": 3710
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 520,
+          "cumulative_profit": 2860,
+          "monthly_eps": null,
+          "cumulative_eps": 14.32,
+          "cumulative_profit_yoy_pct": 28.8,
+          "cumulative_profit_yoy_abs": 640
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 990,
+          "cumulative_profit": 5400,
+          "monthly_eps": null,
+          "cumulative_eps": 6.94,
+          "cumulative_profit_yoy_pct": 155.9,
+          "cumulative_profit_yoy_abs": 3290
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 470,
+          "cumulative_profit": 2120,
+          "monthly_eps": null,
+          "cumulative_eps": 14.15,
+          "cumulative_profit_yoy_pct": 35.0,
+          "cumulative_profit_yoy_abs": 550
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n國泰金7月稅後純益108.2億元，累計前七月873.4億元，每股稅後盈餘（EPS）5.68元。加計FVOCI股票處分利益102.6億元後，7月單月對保留盈餘影響數為210.8億元，累計前七月對保留盈餘影響數達1,870億元。\n\n**子公司明細**\n\n- 國泰人壽：7月稅後純益54.2億元，累計516.7億元。持續有穩定之CSM釋出及正利差貢獻，又逢7月股息旺季認列股息收入。\n- 國泰世華銀行：7月合併稅後純益43.1億元，累計313億元、年成長13%。受惠放款動能強勁、財務資產部位成長以及去年降息帶動外幣資金成本下降；淨手續費收入年成長13%。\n- 國泰產險、國泰證券、國泰投信：累計稅後純益均創歷年同期新高。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20260813701544-430304",
+          "title": "國泰金獲利出爐！7月大賺108.2億元、前七月873.4億元 | 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-08-13T16:58:01.183331",
+      "news_manual": true
     },
     {
       "code": "2883",
@@ -194,15 +273,59 @@
     {
       "code": "2886",
       "name": "兆豐金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "本公司將於115/06/29參與高盛(Goldman Sachs)\r\n舉辦之線上外資法人投資說明會",
-        "公告本公司之子公司兆豐證券(股)公司獨立董事異動",
-        "代本公司之子公司兆豐證券(股)公司公告\r\n審計委員會成員異動",
-        "公告本公司暨主要子公司115年5月份自結合併盈餘",
-        "代本公司之子公司兆豐國際商業銀行公告董事會決議\r\n解除經理人競業禁止之限制案。"
-      ]
+      "announcement_date": "115/08/13",
+      "announcement_title": "公告本公司暨主要子公司115年7月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "兆豐金控",
+        "monthly_profit": 4352,
+        "cumulative_profit": 25659,
+        "monthly_eps": null,
+        "cumulative_eps": 1.73,
+        "cumulative_profit_yoy_pct": 14.3,
+        "cumulative_profit_yoy_abs": 3219
+      },
+      "subsidiaries": [
+        {
+          "name": "兆豐銀行",
+          "monthly_profit": 4212,
+          "cumulative_profit": 20078,
+          "monthly_eps": null,
+          "cumulative_eps": 2.01,
+          "cumulative_profit_yoy_pct": 7.3,
+          "cumulative_profit_yoy_abs": 1364
+        },
+        {
+          "name": "兆豐證券",
+          "monthly_profit": -393,
+          "cumulative_profit": 3132,
+          "monthly_eps": null,
+          "cumulative_eps": 2.62,
+          "cumulative_profit_yoy_pct": 171.6,
+          "cumulative_profit_yoy_abs": 1979
+        },
+        {
+          "name": "兆豐票券",
+          "monthly_profit": 350,
+          "cumulative_profit": 2151,
+          "monthly_eps": null,
+          "cumulative_eps": 1.42,
+          "cumulative_profit_yoy_pct": 43.4,
+          "cumulative_profit_yoy_abs": 651
+        },
+        {
+          "name": "兆豐產險",
+          "monthly_profit": 101,
+          "cumulative_profit": 663,
+          "monthly_eps": null,
+          "cumulative_eps": 2.02,
+          "cumulative_profit_yoy_pct": 39.3,
+          "cumulative_profit_yoy_abs": 187
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm"
     },
     {
       "code": "2887",
