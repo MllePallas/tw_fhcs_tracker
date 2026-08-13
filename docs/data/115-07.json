@@ -1,21 +1,56 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-13T16:54:55.150833",
-  "success_count": 7,
-  "fail_count": 6,
+  "last_updated": "2026-08-13T18:29:41.242919",
+  "success_count": 9,
+  "fail_count": 4,
   "companies": [
     {
       "code": "2880",
       "name": "華南金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "公告本公司法人董事(臺灣銀行股份有限公司)代表人異動",
-        "代子公司華南永昌證券控股有限公司公告董事會決議\r\n解散清算事宜",
-        "代子公司華南永昌綜合證券股份有限公司公告董事會決議\r\n其子公司華南永昌證券控股有限公司解散清算事宜",
-        "代子公司華南永昌證券投資信託股份有限公司公告\r\n臨時董事會代行股東會重要決議事項",
-        "代子公司華南產物保險股份有限公司公告董事會代行股東會\r\n重要決議事項"
-      ]
+      "announcement_date": "115/08/13",
+      "announcement_title": "公告本公司115年7月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "華南金控",
+        "monthly_profit": 3288,
+        "cumulative_profit": 20652,
+        "monthly_eps": null,
+        "cumulative_eps": 1.48,
+        "cumulative_profit_yoy_pct": 37.5,
+        "cumulative_profit_yoy_abs": 5637
+      },
+      "subsidiaries": [
+        {
+          "name": "華南銀行",
+          "monthly_profit": 2942,
+          "cumulative_profit": 16200,
+          "monthly_eps": null,
+          "cumulative_eps": 1.52,
+          "cumulative_profit_yoy_pct": 14.9,
+          "cumulative_profit_yoy_abs": 2096
+        },
+        {
+          "name": "華南永昌證券",
+          "monthly_profit": 297,
+          "cumulative_profit": 3531,
+          "monthly_eps": null,
+          "cumulative_eps": 5.39,
+          "cumulative_profit_yoy_pct": 285.1,
+          "cumulative_profit_yoy_abs": 2614
+        },
+        {
+          "name": "華南產險",
+          "monthly_profit": 222,
+          "cumulative_profit": 1321,
+          "monthly_eps": null,
+          "cumulative_eps": 6.6,
+          "cumulative_profit_yoy_pct": 37.7,
+          "cumulative_profit_yoy_abs": 362
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm"
     },
     {
       "code": "2881",
@@ -342,12 +377,68 @@
     {
       "code": "2887",
       "name": "台新新光金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "本公司代子公司台新銀行公告金融監督管理委員會核准\r\n台新銀行與新光銀行合併案",
-        "本公司代子公司新光銀行公告金融監督管理委員會核准\r\n台新銀行與新光銀行合併案"
-      ]
+      "announcement_date": "115/08/13",
+      "announcement_title": "公告本公司暨主要子公司115年7月份合併自結業績資料",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "台新新光金控",
+        "monthly_profit": 8930,
+        "cumulative_profit": 52730,
+        "monthly_eps": null,
+        "cumulative_eps": 2.04,
+        "cumulative_profit_yoy_pct": 281.3,
+        "cumulative_profit_yoy_abs": 38900
+      },
+      "subsidiaries": [
+        {
+          "name": "台新銀行",
+          "monthly_profit": 2510,
+          "cumulative_profit": 14910,
+          "monthly_eps": null,
+          "cumulative_eps": 1.21,
+          "cumulative_profit_yoy_pct": 29.0,
+          "cumulative_profit_yoy_abs": 3350
+        },
+        {
+          "name": "新光銀行",
+          "monthly_profit": 1290,
+          "cumulative_profit": 6060,
+          "monthly_eps": null,
+          "cumulative_eps": 1.22,
+          "cumulative_profit_yoy_pct": 1793.8,
+          "cumulative_profit_yoy_abs": 5740
+        },
+        {
+          "name": "新光人壽",
+          "monthly_profit": 5770,
+          "cumulative_profit": 28270,
+          "monthly_eps": null,
+          "cumulative_eps": 3.07,
+          "cumulative_profit_yoy_pct": 1470.6,
+          "cumulative_profit_yoy_abs": 26470
+        },
+        {
+          "name": "台新證券",
+          "monthly_profit": -30,
+          "cumulative_profit": 5510,
+          "monthly_eps": null,
+          "cumulative_eps": 2.2,
+          "cumulative_profit_yoy_pct": 665.3,
+          "cumulative_profit_yoy_abs": 4790
+        },
+        {
+          "name": "元富證券",
+          "monthly_profit": null,
+          "cumulative_profit": 1570,
+          "monthly_eps": null,
+          "cumulative_eps": 0.98,
+          "cumulative_profit_yoy_pct": 647.6,
+          "cumulative_profit_yoy_abs": 1360
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm"
     },
     {
       "code": "2889",
