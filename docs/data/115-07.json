@@ -70,12 +70,14 @@
           "fvoci_adjusted": {
             "value_type": "lower_bound",
             "cumulative_profit": 140000.0,
+            "monthly_profit": 16000.0,
             "display_prefix": "突破",
+            "monthly_display_prefix": "逾",
             "source_url": "https://www.ctee.com.tw/news/20260813701544-430304",
             "source_quote": "國泰人壽7月單月稅後純益54.2億元，累計稅後純益516.7億元，加計FVOCI股票處分利益，單月對保留盈餘影響數逾160億元，累計前七月對保留盈餘影響數已突破1,400億元。",
             "original_value_text": "突破1,400億元（單月逾160億元）",
             "manual": true,
-            "generated_at": "2026-08-13T17:14:06.061701"
+            "generated_at": "2026-08-13T17:22:42.588032"
           }
         },
         {

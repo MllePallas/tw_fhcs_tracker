@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-08-13（新增：**月度 AI 分析報告頁 `docs/report.html`**。前次：手機「存成圖片」總表分享、`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
+> 最後更新：2026-08-13（新增：**門檻型 FVOCI 支援當月數＋獨立前綴**（`monthly_display_prefix`，115/07 國泰人壽「單月逾160億」起用）。前次：月度 AI 分析報告頁 `docs/report.html`、手機「存成圖片」總表分享、`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
 
 > ⚠️ **修改本檔的規則：一律逐段 `Edit`，禁止整檔覆寫（`Write`）。**
 > 本檔每個 session 開場即載入 context，但那份副本會隨其他 session 的 commit 逐漸過時；此時整檔覆寫＝把自己沒讀過的段落一併抹掉。已發生兩次（2026-08-07、2026-08-10），第二次一口氣刪掉 `validate.py` 與 `latest.json` 同步規則共 69 行。
@@ -336,6 +336,10 @@ python manual_fvoci.py --code 2882 --period 115/06 --holding \
     --original-text "累計上半年1,659億元"
 # 門檻/區間型（國泰人壽「對保留盈餘影響數突破X億」）
 python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 130000 ...
+# 門檻型的當月數（115/07 起國泰開始揭露「單月逾160億」）：--monthly + --monthly-prefix
+# （當月與累計用字可不同；省略 --monthly-prefix 時沿用 --prefix）
+python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 140000 \
+    --monthly 16000 --monthly-prefix 逾 ...
 ```
 
 - 寫入 `fvoci_adjusted.manual=true`：`fvoci_adjustment.py` 一般執行與 `--force` **都跳過不覆蓋**，除非 `--override-manual`
@@ -377,11 +381,15 @@ python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 13
   "value_type": "lower_bound",
   "cumulative_profit": 130000,         // NT$m，門檻下界（突破1,300億 → 130000）
   "display_prefix": "突破",            // 新聞用字（逾／突破／超過）
+  "monthly_profit": 16000,             // 選填：當月門檻下界（115/07 起國泰揭露「單月逾160億」）
+  "monthly_display_prefix": "逾",      // 選填：當月門檻用字（可與累計不同；缺漏時前端沿用 display_prefix）
   "source_url": "https://news.cnyes.com/...",
   "source_quote": "國泰人壽…加計 FVOCI 股票處分損益，累計前六月對保留盈餘影響數已突破 1300 億元…",
   "original_value_text": "突破1300億元",
   "generated_at": "2026-07-14T..."
-  // 無 delta_vs_original、無 yoy_*；monthly_profit 通常亦無（國泰未揭露當月加計數）
+  // 無 delta_vs_original、無 yoy_*。115/06 以前國泰未揭露當月加計數 → 無 monthly_*
+  // monthly_display_prefix 目前僅 manual_fvoci.py（--monthly-prefix）會寫；
+  // fvoci_adjustment.py 自動路徑不寫（撲空時前端 fallback 到 display_prefix，仍安全）
 }
 ```
 注意：國泰**金控層級**的「對保留盈餘影響數」115/06 起為**精確數字**（達1,659億）→ exact + label，非 lower_bound；**壽險層級**（國泰人壽）仍是門檻型。
@@ -391,7 +399,7 @@ python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 13
 - **列標籤一律統一**為「加上FVOCI股票處分利益」（`fvociRowLabel()` 不吃 `label` 欄位）。國泰新聞稿用語「對保留盈餘影響數」仍存於資料的 `fvoci_adjusted.label`、於註腳與 Excel「FVOCI 新聞稿用語」欄呈現——表格上不逐家換字，以維持橫向比較的一致性
 - **壽險產業 tab、子公司展開面板**：於壽險子公司列下方加同樣一行，註腳 `FVOCI_FOOTNOTE`（詳情面板用 `FVOCI_FOOTNOTE_DETAIL` 涵蓋兩層級）
 - 其他產業 tab 不顯示。資料缺漏顯示 `—`。**不**併入摘要卡片或圖表、不參與排序（子列跟著母列）
-- 前端 `fvociDisplay()` 統一格式化：`lower_bound` 顯示「逾／突破 X」且 YoY 欄為 `—`；具體值顯示數字 + YoY；當月數缺漏顯示 `—`（手機卡片則整項省略）。列標籤由 `fvociRowLabel()` 依 `label` 欄位決定。FVOCI 列樣式統一走 CSS class（`.fvoci-row` / `.fvoci-label` / `.fvoci-num`），色票 `--fvoci`
+- 前端 `fvociDisplay()` 統一格式化：`lower_bound` 顯示「逾／突破 X」且 YoY 欄為 `—`（**當月門檻同樣帶前綴**，用 `monthly_display_prefix`、缺漏時沿用 `display_prefix`——門檻值不加前綴會被誤讀為精確值；Excel 匯出 `fvociRowCells()` 同規則，該格轉為文字型）；具體值顯示數字 + YoY；當月數缺漏顯示 `—`（手機卡片則整項省略）。列標籤由 `fvociRowLabel()` 依 `label` 欄位決定。FVOCI 列樣式統一走 CSS class（`.fvoci-row` / `.fvoci-label` / `.fvoci-num`），色票 `--fvoci`
 
 ---
 

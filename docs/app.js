@@ -121,13 +121,17 @@ function formatYoY(pct, abs, status, sourceUnit, displayUnit) {
 // 少數（國泰，以「對保留盈餘影響數」揭露）僅給區間/門檻 → value_type==='lower_bound'，
 // 以「逾/突破 X」表示下界、不顯示 YoY（門檻值與去年精確值相除會得出假精度的百分比，語意誤導，故省略）。
 // 當月數（monthly_profit）為選填：新聞有揭露（如凱基）才有，缺漏顯示 —。
+// lower_bound 的當月數也是門檻值，須帶前綴（monthly_display_prefix，可與累計用字不同，
+// 例：國泰人壽 115/07「單月逾160億、累計突破1,400億」），否則會被誤讀為精確值。
 function fvociDisplay(a, sourceUnit, displayUnit) {
   const v = convertUnit(a.cumulative_profit, sourceUnit, displayUnit);
   const mv = convertUnit(a.monthly_profit, sourceUnit, displayUnit);
   const monthlyDisp = mv != null ? formatNum(mv) : '—';
   if (a.value_type === 'lower_bound') {
     const prefix = a.display_prefix || '逾';
-    return { monthlyDisp, cumulDisp: `${prefix} ${formatNum(v)}`, yoyDisp: '—', isBound: true };
+    const mPrefix = a.monthly_display_prefix || prefix;
+    const boundMonthly = mv != null ? `${mPrefix} ${formatNum(mv)}` : '—';
+    return { monthlyDisp: boundMonthly, cumulDisp: `${prefix} ${formatNum(v)}`, yoyDisp: '—', isBound: true };
   }
   const yoyDisp = formatYoY(a.yoy_pct, a.yoy_abs, a.yoy_status, sourceUnit, displayUnit).disp;
   return { monthlyDisp, cumulDisp: formatNum(v), yoyDisp, isBound: false };
@@ -2074,9 +2078,11 @@ function fvociRowCells(a, sourceUnit, unit, cfg) {
   cells[cfg.labelCols[1]] = { v: `${FVOCI_LABEL_TEXT}*`, t: 's', z: 'General', s: { ...XS.fvociLabel } };
 
   const mv = convertUnit(a.monthly_profit, sourceUnit, unit);
-  cells[cfg.monthlyCol] = mv != null
-    ? { v: mv, t: 'n', z: xNumFmt(mv), s: fs() }
-    : { v: '—', t: 's', z: 'General', s: fs() };
+  cells[cfg.monthlyCol] = mv == null
+    ? { v: '—', t: 's', z: 'General', s: fs() }
+    : a.value_type === 'lower_bound'
+      ? { v: `${a.monthly_display_prefix || a.display_prefix || '逾'} ${formatNum(mv)}`, t: 's', z: 'General', s: fs() }
+      : { v: mv, t: 'n', z: xNumFmt(mv), s: fs() };
 
   const cv = convertUnit(a.cumulative_profit, sourceUnit, unit);
   cells[cfg.cumulCol] = a.value_type === 'lower_bound'

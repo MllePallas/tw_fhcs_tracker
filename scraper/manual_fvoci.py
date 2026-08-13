@@ -32,6 +32,8 @@
 #   # 門檻/區間型（lower_bound，如國泰人壽「對保留盈餘影響數突破1,300億」）
 #   python manual_fvoci.py --code 2882 --period 115/06 --lower-bound --prefix 突破 \
 #       --cumulative 130000 --source "..." --quote "..." --original-text "突破1,300億元"
+#     當月門檻與累計用字可不同（115/07「單月逾160億、累計突破1,400億」）：
+#       --monthly 16000 --monthly-prefix 逾（省略 --monthly-prefix 時沿用 --prefix）
 #
 # 數字單位：NT$m（百萬元）。億元 × 100 = 百萬元（1,432.4億 → 143240）。
 
@@ -82,6 +84,8 @@ def main():
                     help="加計FVOCI後總計EPS（元，選填；目前僅富邦金控層級揭露，如 13.17）")
     ap.add_argument("--lower-bound", action="store_true", help="門檻/區間型（如「突破X億」），不算 YoY")
     ap.add_argument("--prefix", default="逾", help="門檻型顯示字（逾／突破／超過），僅 --lower-bound 時用")
+    ap.add_argument("--monthly-prefix", default=None,
+                    help="當月門檻顯示字（僅 --lower-bound 且有 --monthly 時用）；省略則沿用 --prefix")
     ap.add_argument("--source", default="", help="來源 URL")
     ap.add_argument("--quote", default="", help="引用原句（需含對應層級的公司名與數字）")
     ap.add_argument("--original-text", default="", help="新聞原始字樣，例 '1,432.4億元'")
@@ -143,6 +147,8 @@ def main():
         adj["monthly_profit"] = round(args.monthly, 1)
     if args.lower_bound:
         adj["display_prefix"] = args.prefix
+        if args.monthly is not None:
+            adj["monthly_display_prefix"] = args.monthly_prefix or args.prefix
     else:
         if orig_cumul is not None:
             adj["delta_vs_original"] = round(args.cumulative - orig_cumul, 1)
