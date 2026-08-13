@@ -1,6 +1,6 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-13T11:07:57.796481",
+  "last_updated": "2026-08-13T11:36:39.829936",
   "success_count": 10,
   "fail_count": 3,
   "companies": [
@@ -53,8 +53,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-08-13T11:08:15.712346",
-      "news_retry_count": 1
+      "news_generated_at": "2026-08-13T11:36:57.781534",
+      "news_retry_count": 2
     },
     {
       "code": "2881",
@@ -183,7 +183,7 @@
         "cumulative_eps": 1.77,
         "cumulative_profit_yoy_pct": 187.3,
         "cumulative_profit_yoy_abs": 19904,
-        "fvoci_not_found_count": 1
+        "fvoci_not_found_count": 2
       },
       "subsidiaries": [
         {
@@ -194,7 +194,7 @@
           "cumulative_eps": 1.99,
           "cumulative_profit_yoy_pct": 112.8,
           "cumulative_profit_yoy_abs": 5514,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "凱基銀行",
@@ -230,8 +230,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-08-13T11:09:01.311077",
-      "news_retry_count": 1
+      "news_generated_at": "2026-08-13T11:37:48.029750",
+      "news_retry_count": 2
     },
     {
       "code": "2884",
@@ -430,8 +430,8 @@
       "parse_method": "llm",
       "news_summary": "無相關說明",
       "news_sources": [],
-      "news_generated_at": "2026-08-13T11:09:46.348028",
-      "news_retry_count": 1
+      "news_generated_at": "2026-08-13T11:38:32.231628",
+      "news_retry_count": 2
     },
     {
       "code": "2887",
@@ -475,7 +475,7 @@
           "cumulative_eps": 3.07,
           "cumulative_profit_yoy_pct": 1470.6,
           "cumulative_profit_yoy_abs": 26470,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "台新證券",
@@ -639,7 +639,7 @@
           "cumulative_eps": 1.7,
           "cumulative_profit_yoy_pct": 18.1,
           "cumulative_profit_yoy_abs": 1620,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         }
       ],
       "unit": "百萬元",
