@@ -13,6 +13,7 @@ let state = {
   data: null,
   baseline: null,        // 去年同期資料（圖表對照用；缺檔時為 null）
   index: null,
+  reports: [],           // 月度分析報告索引（docs/reports/index.json）
   displayUnit: '百萬元',
   sortMode: 'code',
   viewMode: 'holdings',    // 'holdings' | 'bank' | 'life' | 'securities'
@@ -222,6 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
 // ── 月份索引載入 ────────────────────────────────────────
 async function loadIndex() {
+  await loadReportIndex();
   try {
     const resp = await fetch(CONFIG.indexUrl + '?_=' + Date.now());
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
@@ -280,6 +282,44 @@ async function loadData(period) {
   }
 }
 
+// ── 月度分析報告索引 ───────────────────────────────────
+// 報告放在 docs/reports/，由 docs/reports/index.json 索引；此處只負責決定
+// 「這個月份有沒有報告」與連結網址，內容渲染在 report.html。索引不存在時靜默略過。
+async function loadReportIndex() {
+  state.reports = [];
+  try {
+    const resp = await fetch(`./reports/index.json?_=${Date.now()}`);
+    if (!resp.ok) return;
+    const idx = await resp.json();
+    if (idx && Array.isArray(idx.reports)) state.reports = idx.reports;
+  } catch (e) {
+    // 尚未建立報告索引 → 不顯示連結
+  }
+}
+
+function reportForPeriod(period) {
+  const want = String(period || '').replace('-', '/');
+  return (state.reports || []).find(r => String(r.period || '').replace('-', '/') === want) || null;
+}
+
+// 連結顯示於金控總覽表格右下方；其他產業視角不顯示（報告為全月綜觀）
+function renderReportLink() {
+  const row = document.getElementById('report-link-row');
+  if (!row) return;
+  const entry = state.viewMode === 'holdings' ? reportForPeriod(state.data?.report_period) : null;
+  if (!entry) {
+    row.classList.add('hidden');
+    row.innerHTML = '';
+    return;
+  }
+  const href = `./report.html?period=${String(entry.period).replace('/', '-')}`;
+  const tip = `${periodLabel(state.data.report_period)}分析報告（另開新頁）`;
+  row.innerHTML = `<a class="report-link" href="${href}" target="_blank" rel="noopener" title="${escapeHtml(tip)}">
+      <span class="rl-tag">AI</span>生成分析報告 ↗
+    </a>`;
+  row.classList.remove('hidden');
+}
+
 // ── 去年同期資料（圖表對照用） ──────────────────────────
 // 檔案不存在（如最早的月份、或 baseline 尚未歸檔）時靜默略過，圖表只顯示本期。
 async function loadBaseline(period) {
@@ -307,6 +347,7 @@ function renderAll() {
   renderMarketSummary();
   renderSummaryCards();
   renderTable();
+  renderReportLink();
   renderChart();
 }
 

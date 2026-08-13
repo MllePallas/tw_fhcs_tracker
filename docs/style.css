@@ -780,6 +780,207 @@ td.table-footnote {
 }
 .news-sources-list a:hover { text-decoration: underline; }
 
+/* ── 分析報告連結（金控總覽表格右下方） ───────────────── */
+.report-link-row {
+  display: flex;
+  justify-content: flex-end;
+  margin: -14px 0 24px;      /* 貼齊表格下緣 */
+}
+.report-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--primary);
+  background: var(--surface);
+  color: var(--primary);
+  border-radius: 999px;
+  padding: 7px 16px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  transition: background .15s;
+}
+.report-link:hover { background: var(--primary-bg); }
+.report-link .rl-tag {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .04em;
+  background: var(--primary);
+  color: #fff;
+  border-radius: 3px;
+  padding: 1px 5px;
+}
+
+/* ── 報告頁（report.html） ────────────────────────────── */
+.report-back {
+  color: var(--primary);
+  text-decoration: none;
+  font-size: 13px;
+  font-weight: 600;
+}
+.report-back:hover { text-decoration: underline; }
+
+.report-main {
+  max-width: 900px;
+  margin: 20px auto;
+  padding: 0 16px 40px;
+}
+.report-sheet {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+  padding: 28px 36px 32px;
+}
+.report-topline {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  padding-bottom: 14px;
+  margin-bottom: 22px;
+  border-bottom: 1px solid var(--border);
+}
+.report-meta {
+  font-size: 12px;
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+.report-draft {
+  font-size: 11px;
+  font-weight: 600;
+  color: var(--warning);
+  background: var(--warning-bg);
+  border: 1px solid #f0e2bd;
+  border-radius: 999px;
+  padding: 3px 10px;
+}
+
+/* 內文排版：字級與行距以長文閱讀為準 */
+.report-body {
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-2);
+}
+.report-body h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--text);
+  letter-spacing: -.01em;
+  margin: 34px 0 12px;
+  padding-left: 12px;
+  border-left: 3px solid var(--primary);
+}
+.report-body h2:first-child { margin-top: 0; }
+.report-body h3 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--text);
+  margin: 26px 0 8px;
+}
+.report-body h4, .report-body h5 {
+  font-size: 14px;
+  font-weight: 700;
+  color: var(--text-2);
+  margin: 20px 0 6px;
+}
+.report-body p { margin: 0 0 14px; }
+.report-body strong { color: var(--text); font-weight: 700; }
+.report-body em { font-style: italic; }
+/* 單位／口徑說明的小字列（整段斜體者） */
+.report-caption {
+  font-size: 12.5px;
+  color: var(--text-muted);
+  margin: 0 0 8px !important;
+}
+.report-body code {
+  font-size: 13px;
+  background: var(--surface-alt);
+  border: 1px solid var(--border);
+  border-radius: 3px;
+  padding: 1px 5px;
+  font-variant-numeric: tabular-nums;
+}
+.report-body a { color: var(--primary); }
+.report-body ul, .report-body ol { margin: 0 0 16px; padding-left: 22px; }
+.report-body li { margin: 5px 0; }
+.report-body li::marker { color: var(--text-muted); }
+.report-body blockquote {
+  margin: 0 0 16px;
+  padding: 12px 16px;
+  background: var(--surface-alt);
+  border-left: 2px solid var(--primary);
+  border-radius: 0 4px 4px 0;
+  font-size: 14px;
+  color: var(--text-2);
+}
+.report-body hr {
+  border: none;
+  border-top: 1px solid var(--border);
+  margin: 26px 0;
+}
+
+/* 報告內的表格：沿用總表的視覺語言（表頭淺灰、數字 tabular） */
+.report-table-wrap { overflow-x: auto; margin: 0 0 18px; }
+.report-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 13px;
+  font-variant-numeric: tabular-nums;
+}
+.report-table th {
+  background: var(--surface-alt);
+  color: var(--text-muted);
+  font-weight: 600;
+  font-size: 12px;
+  text-align: left;
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border-strong);
+  white-space: nowrap;
+}
+.report-table td {
+  padding: 9px 12px;
+  border-bottom: 1px solid var(--border);
+  color: var(--text);
+}
+.report-table td.ta-right, .report-table th.ta-right { text-align: right; }
+.report-table td.ta-center, .report-table th.ta-center { text-align: center; }
+.report-table tbody tr:last-child td { border-bottom: none; }
+.report-table tbody tr:hover { background: var(--surface-alt); }
+/* 帶正負號的數字沿用總表方向色 */
+.report-table td.num-pos { color: var(--positive); font-weight: 600; }
+.report-table td.num-neg { color: var(--negative); font-weight: 600; }
+.report-table td:first-child { font-weight: 600; color: var(--text); white-space: nowrap; }
+
+.report-footnote {
+  margin-top: 26px;
+  padding-top: 14px;
+  border-top: 1px solid var(--border);
+  font-size: 11px;
+  line-height: 1.7;
+  color: var(--text-muted);
+}
+.report-loading { color: var(--text-muted); }
+.report-empty { padding: 40px 0; text-align: center; }
+.report-empty-title { font-size: 15px; font-weight: 700; color: var(--text); margin-bottom: 8px; }
+.report-empty-sub { font-size: 13px; color: var(--text-muted); margin: 4px 0; }
+.report-empty-sub a { color: var(--primary); text-decoration: none; }
+
+.report-actions { margin-top: 18px; }
+.report-back-btn {
+  display: inline-block;
+  border: 1px solid var(--border-strong);
+  background: var(--surface);
+  color: var(--text-2);
+  border-radius: 999px;
+  padding: 8px 18px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+}
+.report-back-btn:hover { background: var(--surface-alt); }
+
 /* ── Site Footer ──────────────────────────────────────── */
 .site-footer {
   margin: 40px auto 0;
@@ -1161,6 +1362,20 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
   .leader-card .card-sub-sep { margin: 0 4px; }
 
   .chart-note { font-size: 10px; margin-bottom: 18px; }
+
+  /* 報告頁：手機收窄留白、字級略降，表格可橫向捲動 */
+  .report-main { padding: 0 12px 32px; }
+  .report-sheet { padding: 18px 16px 22px; }
+  .report-body { font-size: 14.5px; line-height: 1.8; }
+  .report-body h2 { font-size: 17px; margin: 26px 0 10px; padding-left: 10px; }
+  .report-body h3 { font-size: 15px; margin: 20px 0 6px; }
+  .report-body ul, .report-body ol { padding-left: 20px; }
+  .report-table-wrap { margin-left: -16px; margin-right: -16px; padding: 0 16px; }
+  .report-table { font-size: 12px; }
+  .report-table th, .report-table td { padding: 8px 10px; white-space: nowrap; }
+  .report-table td:last-child { white-space: normal; min-width: 180px; }
+  .report-topline { padding-bottom: 10px; margin-bottom: 16px; }
+
   .site-footer { padding: 16px 16px 24px; margin-top: 32px; }
   .site-footer .copyright { font-size: 12px; }
   .site-footer .disclaimer { font-size: 11px; }

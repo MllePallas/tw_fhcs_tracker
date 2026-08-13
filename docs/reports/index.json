@@ -1,0 +1,11 @@
+{
+  "_readme": "月獲利分析報告索引。新增一份報告：把 Markdown 檔放進 docs/reports/（檔名可自訂），並在 reports 陣列最前面加一筆（由新到舊）。首頁金控總覽表格右下方會自動出現連結。欄位：period 民國年/月（必填）、file 檔名（必填，需與實際檔名完全一致）、title 頁面標題（省略時取內文第一個 # 標題）、generated_at 報告產生日期（選填，YYYY-MM-DD）、source 產製方式（選填）、draft 設為 true 時頁面會標示為排版範例（選填）。",
+  "reports": [
+    {
+      "period": "115/06",
+      "file": "2026-06_金控自結獲利分析.md",
+      "title": "2026 年 6 月金控自結獲利 AI 分析報告",
+      "source": "AI 生成"
+    }
+  ]
+}
