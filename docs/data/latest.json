@@ -69,7 +69,20 @@
         "monthly_eps": null,
         "cumulative_eps": 6.54,
         "cumulative_profit_yoy_pct": 53.2,
-        "cumulative_profit_yoy_abs": 33210
+        "cumulative_profit_yoy_abs": 33210,
+        "fvoci_adjusted": {
+          "cumulative_profit": 196250.0,
+          "monthly_profit": 7850.0,
+          "delta_vs_original": 100670.0,
+          "cumulative_eps": 13.73,
+          "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+          "source_quote": "公告本公司暨主要子公司115年7月合併自結損益…本期淨利加計透過其他綜合損益按公允價值衡量(FVOCI)權益工具稅後處分損益：富邦金控 7月78.5億元、累計1-7月1,962.5億元、基本EPS 13.73元",
+          "original_value_text": "單月78.5億元、累計1,962.5億元",
+          "manual": true,
+          "generated_at": "2026-08-14T17:31:40.818195",
+          "yoy_pct": 214.7,
+          "yoy_abs": 133880
+        }
       },
       "subsidiaries": [
         {
@@ -106,7 +119,19 @@
           "monthly_eps": null,
           "cumulative_eps": 4.05,
           "cumulative_profit_yoy_pct": 57.2,
-          "cumulative_profit_yoy_abs": 17440
+          "cumulative_profit_yoy_abs": 17440,
+          "fvoci_adjusted": {
+            "cumulative_profit": 143920.0,
+            "monthly_profit": 680.0,
+            "delta_vs_original": 96000.0,
+            "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+            "source_quote": "公告本公司暨主要子公司115年7月合併自結損益…本期淨利加計透過其他綜合損益按公允價值衡量(FVOCI)權益工具稅後處分損益：富邦人壽 7月6.8億元、累計1-7月1,439.2億元、基本EPS 12.15元",
+            "original_value_text": "單月6.8億元、累計1,439.2億元",
+            "manual": true,
+            "generated_at": "2026-08-14T17:31:49.019787",
+            "yoy_pct": 372.2,
+            "yoy_abs": 113440
+          }
         },
         {
           "name": "富邦投信",
