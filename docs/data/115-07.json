@@ -1,6 +1,6 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-13T11:36:39.829936",
+  "last_updated": "2026-08-14T10:07:41.422875",
   "success_count": 10,
   "fail_count": 3,
   "companies": [
@@ -183,7 +183,19 @@
         "cumulative_eps": 1.77,
         "cumulative_profit_yoy_pct": 187.3,
         "cumulative_profit_yoy_abs": 19904,
-        "fvoci_not_found_count": 2
+        "fvoci_adjusted": {
+          "cumulative_profit": 75374.0,
+          "monthly_profit": 7599.0,
+          "delta_vs_original": 44845.0,
+          "label": "對保留盈餘貢獻",
+          "source_url": "https://money.udn.com/money/story/5613/9690039",
+          "source_quote": "7月以來，雖股市呈現修正格局，仍適時調節，FVOCI股票處分利益約55.1億元，加計單月稅後獲利，合計對保留盈餘貢獻達75.99億元；今年累計實現股票處分利益448.5億元，加計稅後獲利，合計對保留盈餘貢獻達753.74億元，續創歷史同期新高。",
+          "original_value_text": "單月75.99億元、累計753.74億元",
+          "manual": true,
+          "generated_at": "2026-08-14T10:55:19.633526",
+          "yoy_pct": 609.4,
+          "yoy_abs": 64749
+        }
       },
       "subsidiaries": [
         {
@@ -194,7 +206,18 @@
           "cumulative_eps": 1.99,
           "cumulative_profit_yoy_pct": 112.8,
           "cumulative_profit_yoy_abs": 5514,
-          "fvoci_not_found_count": 2
+          "fvoci_adjusted": {
+            "cumulative_profit": 54960.0,
+            "monthly_profit": 6710.0,
+            "delta_vs_original": 44557.0,
+            "source_url": "https://money.udn.com/money/story/5613/9690039",
+            "source_quote": "凱基人壽秉持穩健投資原則，審慎因應市場變化，適時實現股票資本利得，7月份稅後純益12.01億元，加計FVOCI股票處分利益約55.1億元，單月對保留盈餘貢獻為67.1億元；前七月累計稅後純益104.03億元，加計FVOCI股票處分利益約445.6億元，合計對保留盈餘貢獻達549.6億元。",
+            "original_value_text": "單月67.1億元、累計前七月549.6億元",
+            "manual": true,
+            "generated_at": "2026-08-14T10:16:41.931494",
+            "yoy_pct": 1024.2,
+            "yoy_abs": 50071
+          }
         },
         {
           "name": "凱基銀行",

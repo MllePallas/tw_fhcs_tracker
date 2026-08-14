@@ -300,18 +300,7 @@
           "monthly_eps": null,
           "cumulative_eps": 1.76,
           "cumulative_profit_yoy_pct": 759.3,
-          "cumulative_profit_yoy_abs": 8132,
-          "fvoci_adjusted": {
-            "cumulative_profit": 67775,
-            "monthly_profit": 15447,
-            "delta_vs_original": 58572,
-            "source_url": "https://www.ctee.com.tw/news/20260714701833-430304",
-            "source_quote": "旗下凱基人壽若加計6月FVOCI股票處分利益，合計達154.47億元，續創今年單月新高；今年上半年累計稅後獲利加計FVOCI股票處分利益則為677.75億元",
-            "original_value_text": "當月154.47億元；累計677.75億元",
-            "generated_at": "2026-07-15T10:10:04.079601",
-            "yoy_pct": 6228.2,
-            "yoy_abs": 66704
-          }
+          "cumulative_profit_yoy_abs": 8132
         },
         {
           "name": "凱基銀行",
