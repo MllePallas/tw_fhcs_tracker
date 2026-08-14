@@ -1,8 +1,8 @@
 {
   "report_period": "115/07",
-  "last_updated": "2026-08-14T17:20:18.026503",
-  "success_count": 11,
-  "fail_count": 2,
+  "last_updated": "2026-08-14T11:34:18.796264",
+  "success_count": 13,
+  "fail_count": 0,
   "companies": [
     {
       "code": "2880",
@@ -51,10 +51,9 @@
       "unit": "百萬元",
       "report_month": "115/07",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
+      "news_summary": "**重點**\n\n華南金（2880）於 8 月 13 日公布 2026 年 7 月自結獲利，單月稅後純益達 32.88 億元；累計前 7 月稅後純益 206.51 億元，較去年同期大增 56.36 億元，年增 37.54%，每股稅後純益（EPS）為 1.48 元，累計稅後純益與 EPS 均雙雙改寫歷史同期新高。\n華南銀行 7 月在股利收入大舉入帳帶動下，單月金融操作利益顯著躍升，成為拉動金控獲利的核心引擎。\n\n**子公司明細**\n- 華南銀行：7 月單月稅後純益 29.42 億元，月增 4.85 億元，主因股利收入挹注，整體金融操作利益月增 5.42 億元；累計前 7 月稅後純益 162 億元，年增 15%，占金控整體獲利比重達 76%。利息淨收益年增 11%，財富管理手收突破百億元大關、年增 26%，高資產客戶數已突破 3,200 戶、AUM 逾 2,600 億元。\n\n- 華南永昌證券：7 月稅後純益 2.97 億元；累計前 7 月稅後純益達 35.31 億元，年成長 285%，主因台股交易持續熱絡，經紀、承銷及自營三大核心業務均較去年同期大幅增長。\n\n- 華南產險：前 7 月稅後純益達 13.21 億元，年增 38%，主要得益於商業火險與工程險持續成長，加上損失率顯著改善，推升核保利潤創下新高。",
       "news_sources": [],
-      "news_generated_at": "2026-08-13T11:36:57.781534",
-      "news_retry_count": 2
+      "news_generated_at": "2026-08-14T11:34:35.780663"
     },
     {
       "code": "2881",
@@ -336,10 +335,14 @@
       "unit": "百萬元",
       "report_month": "115/07",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
-      "news_sources": [],
-      "news_generated_at": "2026-08-13T11:37:48.029750",
-      "news_retry_count": 2
+      "news_summary": "**重點**\n\n凱基金（2883）2026年7月單月稅後獲利20.89億元，累計前7月稅後獲利305.29億元，每股稅後盈餘（EPS）1.77元，已超越去年全年度獲利表現。\n7月以來股市呈現修正格局，但FVOCI股票處分利益仍達55.1億元，加計單月稅後獲利，合計對保留盈餘貢獻達75.99億元；統計今年以來，已實現股票處分利益448.5億元，加計稅後獲利，合計對保留盈餘貢獻達753.74億元，續創歷史同期新高。\n\n**子公司明細**\n- **凱基人壽**：\n7月稅後獲利12.01億元，加計FVOCI股票處分利益約55.1億元，單月對保留盈餘貢獻為67.1億元；前7月累計稅後獲利104.03億元，加計FVOCI股票處分利益約445.6億元，合計對保留盈餘貢獻達549.6億元。\n\n- **凱基銀行**：\n受惠於存放款規模擴張，淨利息收益及財富管理業務帶動手續費收入持續走揚，7月稅後獲利6.78億元，今年前7月累計稅後獲利49.54億元，較去年同期成長22%。\n\n- **凱基證券**：\n因台股回檔整理影響自營操作及投資評價表現，但經紀及財富管理、期貨衍生性商品等業務表現相對平穩，7月稅後獲利7.21億元；今年前7月累計稅後獲利186.57億元，續創同期累計新高，較去年同期成長264%。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20260814700073-439901",
+          "title": "金控前七月狂賺 國泰金暫居冠 - 日報 - 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-08-14T11:35:24.040613"
     },
     {
       "code": "2884",
@@ -536,10 +539,18 @@
       "unit": "百萬元",
       "report_month": "115/07",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
-      "news_sources": [],
-      "news_generated_at": "2026-08-13T11:38:32.231628",
-      "news_retry_count": 2
+      "news_summary": "**重點**\n\n兆豐金 2026 年 7 月單月稅後純益 43.52 億元，月增 33.01%，年增 2.45%；累計前 7 月稅後純益 256.59 億元，年增 14.45%，續創歷史同期新高，EPS 達 1.73 元。\n兆豐金指出，累計前 7 月獲利創新高，主因核心業務持續成長，加上台股行情走揚挹注股利收入所帶動。\n\n**子公司明細**\n- 兆豐銀行：\n7 月稅後純益 42.12 億元，月增 55.42%，年增 25.91%；累計前 7 月稅後純益 200.78 億元，年增 7.29%。7 月獲利大幅成長主要受惠於股利收入進帳約 15 億元；累計獲利增長則靠財富管理與放款業務帶動，推升利息與手續費淨收益，惟 SWAP 獲利減少，使財務操作表現略遜於去年同期。\n\n- 兆豐證券：\n7 月受台股回檔約 3,000 點及成交量縮影響，單月虧損 3.93 億元；累計前 7 月稅後純益仍達 31.32 億元，年增 171.62%，創歷史同期新高。7 月市場震盪導致自營業務表現轉弱，台股日均成交量減少約 4,000 億元至 1.2 兆元，致經紀手續費收入相應縮減。\n\n- 兆豐票券：\n7 月稅後純益 3.5 億元，月增 1.16%，年增 31.28%；累計前 7 月稅後純益 21.51 億元，年增 43.37%，主要受惠台幣債券部位增加、利差擴大、外幣債券利息費用減少及股利收入增加逾 1 億元。\n\n- 兆豐產險：\n7 月稅後純益 1.01 億元，年增 27.94%；累計前 7 月稅後純益 6.63 億元，年增 45.46%，主因意外險保費收入成長，且隨著防疫險理賠虧損弭平，逐步建立投資部位，帶動股利收入較去年同期增加逾 6,000 萬元。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/12040/9374536",
+          "title": "兆豐金配息有機會1.7元嗎？金融股多點開花下的2026年展望 | 個人理財 | 理財 | 經濟日報"
+        },
+        {
+          "url": "https://www.ctee.com.tw/news/20260814700073-439901",
+          "title": "金控前七月狂賺 國泰金暫居冠 - 日報 - 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-08-14T11:36:14.524325"
     },
     {
       "code": "2887",
@@ -583,7 +594,7 @@
           "cumulative_eps": 3.07,
           "cumulative_profit_yoy_pct": 1470.6,
           "cumulative_profit_yoy_abs": 26470,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         },
         {
           "name": "台新證券",
@@ -766,28 +777,134 @@
     {
       "code": "2892",
       "name": "第一金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司第一金人壽公告擬投資台北富邦商業銀行\r\n無到期日非累積次順位金融債券",
-        "代子公司第一銀行公告發行金融債券額度新臺幣壹拾伍億元",
-        "代子公司第一金證券公告擬取得第一商業銀行股份有限公司\r\n115年度第1期無擔保一般順位金融債券",
-        "公告本公司受邀參加高盛證券金融企業日",
-        "代子公司第一金投信公告董事會代行股東常會重要決議事項"
-      ]
+      "announcement_date": "115/08/14",
+      "announcement_title": "公告本公司暨主要子公司115年7月份自結合併盈餘數",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "第一金控",
+        "monthly_profit": 3139,
+        "cumulative_profit": 20937,
+        "monthly_eps": null,
+        "cumulative_eps": 1.46,
+        "cumulative_profit_yoy_pct": 23.6,
+        "cumulative_profit_yoy_abs": 3997
+      },
+      "subsidiaries": [
+        {
+          "name": "第一銀行",
+          "monthly_profit": 3202,
+          "cumulative_profit": 18658,
+          "monthly_eps": null,
+          "cumulative_eps": 1.49,
+          "cumulative_profit_yoy_pct": 12.7,
+          "cumulative_profit_yoy_abs": 2096
+        },
+        {
+          "name": "第一金證券",
+          "monthly_profit": 121,
+          "cumulative_profit": 1531,
+          "monthly_eps": null,
+          "cumulative_eps": 2.22,
+          "cumulative_profit_yoy_pct": 262.8,
+          "cumulative_profit_yoy_abs": 1109
+        },
+        {
+          "name": "第一金人壽",
+          "monthly_profit": 175,
+          "cumulative_profit": 593,
+          "monthly_eps": null,
+          "cumulative_eps": 0.87,
+          "cumulative_profit_yoy_pct": 97.7,
+          "cumulative_profit_yoy_abs": 293
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-08-14T11:37:01.396605",
+      "news_retry_count": 1
     },
     {
       "code": "5880",
       "name": "合庫金",
-      "error": "no_match",
-      "error_msg": "115/07 月自結損益尚未公告",
-      "available_titles": [
-        "公告本公司暨主要子公司115年5月份自結合併盈餘",
-        "代子公司合作金庫商業銀行公告獨立董事辭任",
-        "代子公司合作金庫商業銀行公告獨立董事\r\n辭任審計委員會及薪資報酬委員會委員",
-        "代子公司合作金庫人壽保險股份有限公司公告\r\n115年股東常會重要決議事項",
-        "代子公司合作金庫人壽保險股份有限公司公告115年股東會\r\n通過解除董事競業禁止之限制"
-      ]
+      "announcement_date": "115/08/14",
+      "announcement_title": "公告本公司暨主要子公司115年7月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "合庫金控",
+        "monthly_profit": 2677,
+        "cumulative_profit": 15518,
+        "monthly_eps": null,
+        "cumulative_eps": 0.99,
+        "cumulative_profit_yoy_pct": 24.7,
+        "cumulative_profit_yoy_abs": 3073
+      },
+      "subsidiaries": [
+        {
+          "name": "合庫銀行",
+          "monthly_profit": 2751,
+          "cumulative_profit": 14255,
+          "monthly_eps": null,
+          "cumulative_eps": 1.09,
+          "cumulative_profit_yoy_pct": 12.5,
+          "cumulative_profit_yoy_abs": 1589
+        },
+        {
+          "name": "合庫資產",
+          "monthly_profit": 40,
+          "cumulative_profit": 238,
+          "monthly_eps": null,
+          "cumulative_eps": 0.76,
+          "cumulative_profit_yoy_pct": 5.8,
+          "cumulative_profit_yoy_abs": 13
+        },
+        {
+          "name": "合庫票券",
+          "monthly_profit": 43,
+          "cumulative_profit": 366,
+          "monthly_eps": null,
+          "cumulative_eps": 0.75,
+          "cumulative_profit_yoy_pct": 67.1,
+          "cumulative_profit_yoy_abs": 147
+        },
+        {
+          "name": "合庫證券",
+          "monthly_profit": -27,
+          "cumulative_profit": 1361,
+          "monthly_eps": null,
+          "cumulative_eps": 2.61,
+          "cumulative_profit_yoy_pct": 4593.1,
+          "cumulative_profit_yoy_abs": 1332
+        },
+        {
+          "name": "合庫人壽",
+          "monthly_profit": 94,
+          "cumulative_profit": 1128,
+          "monthly_eps": null,
+          "cumulative_eps": 1.64,
+          "cumulative_profit_yoy_pct": 857.0,
+          "cumulative_profit_yoy_abs": 1277,
+          "cumulative_profit_yoy_status": "loss_to_profit"
+        },
+        {
+          "name": "合庫投信",
+          "monthly_profit": 2,
+          "cumulative_profit": 4,
+          "monthly_eps": null,
+          "cumulative_eps": 0.12,
+          "cumulative_profit_yoy_pct": -55.6,
+          "cumulative_profit_yoy_abs": -5
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/07",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-08-14T11:37:46.206654",
+      "news_retry_count": 1
     }
   ],
   "market_summary": {
