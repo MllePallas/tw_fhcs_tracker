@@ -1380,3 +1380,138 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
   .site-footer .copyright { font-size: 12px; }
   .site-footer .disclaimer { font-size: 11px; }
 }
+
+
+/* ══════════ 草稿新增（2026-08）：期間比較 ＋ MoM 拆解 ══════════ */
+
+/* 模式切換（單月月報｜期間比較） */
+.mode-toggle {
+  display: inline-flex;
+  border: 1px solid var(--border-strong);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background: var(--surface);
+}
+.mode-btn {
+  padding: 5px 13px;
+  font-size: 13px;
+  border: 0;
+  background: transparent;
+  color: var(--text-2);
+  cursor: pointer;
+  font-family: inherit;
+}
+.mode-btn + .mode-btn { border-left: 1px solid var(--border-strong); }
+.mode-btn.active { background: var(--primary); color: #fff; font-weight: 600; }
+
+/* 期間比較模式：隱藏單月專屬控制項與第二張圖 */
+body.pm-period .ctrl-month,
+body.pm-period .ctrl-download,
+body.pm-period #btn-snapshot,
+body.pm-period .mobile-view-toggle,
+body.pm-period .mobile-cards,
+body.pm-period #cumul-chart-title,
+body.pm-period #cumul-chart-container,
+body.pm-period #cumul-chart-note { display: none !important; }
+body.pm-period .table-container { display: block !important; }
+
+/* 期間比較表格 */
+.th-sub { font-weight: 400; font-size: 11px; color: var(--text-muted); }
+.rank-cell { color: var(--text-muted); font-variant-numeric: tabular-nums; }
+.rank-cell.rank-top { color: var(--primary); font-weight: 700; }
+.pd-base { color: var(--text-muted); }
+.pd-resid td { color: var(--text-muted); font-size: 12.5px; background: var(--surface-alt); }
+#main-table.view-period th { white-space: nowrap; }
+
+/* MoM 拆解面板（詳情內） */
+.mom-panel {
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface-alt);
+  padding: 14px 16px 10px;
+  margin-bottom: 16px;
+}
+.mom-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px 16px;
+  flex-wrap: wrap;
+}
+.mom-title { font-size: 14px; font-weight: 700; }
+.mom-total { font-size: 12.5px; color: var(--text-2); }
+.mom-rows { margin-top: 10px; }
+.mom-row {
+  display: grid;
+  grid-template-columns: minmax(96px, 170px) 110px minmax(60px, 1fr) 150px;
+  gap: 10px;
+  align-items: center;
+  padding: 3.5px 0;
+  font-size: 13px;
+  border-bottom: 1px dashed var(--border);
+}
+.mom-row:last-child { border-bottom: 0; }
+.mom-name { color: var(--text); }
+.mom-tag {
+  display: inline-block;
+  margin-left: 6px;
+  font-size: 10.5px;
+  color: var(--warning);
+  background: var(--warning-bg);
+  border-radius: 3px;
+  padding: 0 5px;
+}
+.mom-delta { text-align: right; font-variant-numeric: tabular-nums; font-weight: 600; }
+.mom-delta.positive { color: var(--positive); }
+.mom-delta.negative { color: var(--negative); }
+.mom-bar-wrap { position: relative; height: 12px; }
+.mom-bar { position: absolute; top: 1px; bottom: 1px; left: 0; border-radius: 2px; min-width: 2px; }
+.mom-bar.pos { background: rgba(31, 111, 84, .55); }
+.mom-bar.neg { background: rgba(163, 49, 42, .5); }
+.mom-vals { text-align: right; font-size: 12px; color: var(--text-muted); font-variant-numeric: tabular-nums; white-space: nowrap; }
+.mom-row-resid .mom-name { color: var(--text-muted); font-size: 12.5px; }
+.mom-row-resid .mom-delta { font-weight: 400; color: var(--text-2); }
+.mom-row-resid .mom-bar.pos, .mom-row-resid .mom-bar.neg { background: rgba(107, 118, 132, .35); }
+.mom-note { margin-top: 8px; font-size: 11px; color: var(--text-muted); line-height: 1.5; }
+
+/* 手機：MoM 拆解列縮欄；模式切換撐滿一列 */
+@media (max-width: 640px) {
+  .mom-row { grid-template-columns: minmax(80px, 120px) 90px 1fr; }
+  .mom-vals { display: none; }
+  .ctrl-mode { width: 100%; }
+}
+
+/* 手機：期間比較表格 → 與月報總表相同的橫向捲動邏輯，名稱欄（第 3 欄）釘左 */
+@media (max-width: 768px) {
+  body.pm-period .table-scroll-hint { display: block !important; }
+  #main-table.view-period { min-width: 720px; }
+  #main-table.view-period tbody td:nth-child(2) {
+    position: static;
+    box-shadow: none;
+    border-right: 0;
+    background: transparent;
+  }
+  #main-table.view-period tbody td:nth-child(3) {
+    position: sticky;
+    left: 0;
+    z-index: 2;
+    background: var(--surface);
+    border-right: 1px solid var(--border-strong);
+    box-shadow: 3px 0 5px -3px rgba(16, 20, 24, .22);
+    white-space: nowrap;
+  }
+}
+
+/* MoM 拆解表頭列 */
+.mom-row-head {
+  border-bottom: 1px solid var(--border-strong);
+  padding: 2px 0 5px;
+}
+.mom-row-head .mom-name,
+.mom-row-head .mom-delta,
+.mom-row-head .mom-vals {
+  font-size: 10.5px;
+  color: var(--text-muted);
+  font-weight: 500;
+  white-space: nowrap;
+}

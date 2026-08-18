@@ -38,11 +38,21 @@
         <span class="last-updated" id="last-updated"></span>
       </div>
       <div class="controls-right">
+        <div class="ctrl-group ctrl-mode">
+          <div class="mode-toggle" id="mode-toggle">
+            <button class="mode-btn active" data-pm="monthly" onclick="setPageMode('monthly')">單月月報</button>
+            <button class="mode-btn" data-pm="period" onclick="setPageMode('period')">期間比較</button>
+          </div>
+        </div>
         <div class="ctrl-group ctrl-month">
           <label>月份：</label>
           <select id="month-select" onchange="onMonthChange()">
             <option value="">載入中...</option>
           </select>
+        </div>
+        <div class="ctrl-group ctrl-period hidden" id="ctrl-period">
+          <label>期間：</label>
+          <select id="period-select" onchange="onPeriodChange()"></select>
         </div>
         <div class="ctrl-group">
           <label>排序：</label>
@@ -50,6 +60,7 @@
             <option value="code">代號</option>
             <option value="monthly_desc">當月獲利 ↓</option>
             <option value="monthly_asc">當月獲利 ↑</option>
+            <option value="mom_desc">當月 MoM ↓</option>
             <option value="cumulative_desc">累計獲利 ↓</option>
             <option value="cumul_yoy_desc">累計 YoY ↓</option>
             <option value="eps_cumul_desc">累計 EPS ↓</option>
@@ -159,7 +170,7 @@
     <div class="chart-note hidden" id="bar-chart-note"></div>
 
     <div class="section-title" id="cumul-chart-title">累計獲利比較（本年累計）</div>
-    <div class="chart-container">
+    <div class="chart-container" id="cumul-chart-container">
       <canvas id="cumul-chart"></canvas>
     </div>
     <div class="chart-note hidden" id="cumul-chart-note"></div>

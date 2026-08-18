@@ -20,6 +20,11 @@ let state = {
   mobileLayout: 'table',   // 手機版型：'table'（預設，完整總表）| 'card'
   barChart: null,
   cumulChart: null,
+  // ── 草稿新增 ──
+  pageMode: 'monthly',     // 'monthly'（單月月報）| 'period'（期間比較）
+  periodSel: null,         // 期間比較目前選取的期間（buildPeriodOptions 產生）
+  periodOptions: [],       // 期間選項清單
+  prevMonth: null,         // 上月資料（MoM 欄與變動拆解用；缺檔為 null）
 };
 
 // 手機版型切換：預設「總表」＝與桌機相同的完整表格（橫向捲動、公司名固定），
@@ -233,6 +238,8 @@ async function loadIndex() {
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     state.index = await resp.json();
     renderMonthSelector(state.index.months);
+    buildPeriodOptions();        // 草稿新增：期間比較選項
+    renderPeriodSelector();
     // 預設載入最新月份
     await loadData(state.index.latest);
   } catch (e) {
@@ -272,7 +279,9 @@ async function loadData(period) {
     const resp = await fetch(url);
     if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
     state.data = await resp.json();
+    monthCache[state.data.report_period] = state.data;   // 草稿新增：共用月份快取
     await loadBaseline(state.data.report_period);
+    await loadPrevMonth(state.data.report_period);       // 草稿新增：MoM 基期
     // 換月時關閉詳情面板：面板內容屬於前一個月份，留著會與表頭月份不一致
     closeDetail();
     renderAll();
@@ -345,6 +354,9 @@ function renderAll() {
   if (!state.data) return;
   state.displayUnit = document.getElementById('unit-select').value;
   state.sortMode    = document.getElementById('sort-select').value;
+
+  // 草稿新增：期間比較模式走獨立渲染流程
+  if (state.pageMode === 'period') { renderPeriodAll(); return; }
 
   updatePeriodBadge();
   updateLastUpdated();
@@ -456,7 +468,12 @@ function renderTable() {
   state.sortMode    = document.getElementById('sort-select').value;
 
   const hint = document.getElementById('table-unit-hint');
-  if (hint) hint.textContent = `單位：${unitFullLabel(state.displayUnit)}（EPS 為元）`;
+  if (hint) {
+    const prevPer = state.prevMonth?.report_period;
+    const momHint = (state.viewMode === 'holdings' && prevPer)
+      ? `｜MoM＝與上月（${periodAd(prevPer)}）自結比較` : '';
+    hint.textContent = `單位：${unitFullLabel(state.displayUnit)}（EPS 為元）${momHint}`;
+  }
 
   // 依視角掛上 class，供 CSS 控制各欄等寬（金控總覽 vs 產業視角欄數不同）
   const tableEl = document.getElementById('main-table');
@@ -485,12 +502,13 @@ function renderHoldingsTable() {
     <tr>
       <th rowspan="2" class="col-code">代號</th>
       <th rowspan="2" class="col-name">金控</th>
-      <th colspan="3" class="col-group">合併稅後淨利</th>
+      <th colspan="4" class="col-group">合併稅後淨利</th>
       <th colspan="2" class="col-group">稅後 EPS (元)</th>
       <th rowspan="2" class="col-source">公告日期</th>
     </tr>
     <tr>
       <th class="col-monthly">當月 (${periodAd(period)})</th>
+      <th class="col-monthly">當月 MoM</th>
       <th class="col-cumulative">累計</th>
       <th class="col-cumulative">累計 YoY</th>
       <th class="col-monthly col-eps">當月</th>
@@ -505,7 +523,7 @@ function renderHoldingsTable() {
   if (tfoot) {
     // 註腳包一層 span：手機橫向捲動時用它限制寬度，避免文字被推到可視範圍外
     tfoot.innerHTML = hasFvoci
-      ? `<tr><td colspan="8" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</span></td></tr>`
+      ? `<tr><td colspan="9" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</span></td></tr>`
       : '';
   }
 }
@@ -614,7 +632,7 @@ function renderRow(c) {
     return `<tr class="error-row">
       <td class="col-code">${c.code}</td>
       <td><span class="company-link">${c.name}</span></td>
-      <td colspan="5" class="center row-note">${c.error_msg || '資料待更新'}</td>
+      <td colspan="6" class="center row-note">${c.error_msg || '資料待更新'}</td>
       <td class="center row-note">—</td>
     </tr>`;
   }
@@ -663,6 +681,9 @@ function renderRow(c) {
 
   const nameCell = `<a class="company-link" onclick="showDetail('${c.code}')">${c.name}</a>`;
 
+  // 草稿新增：當月 MoM（與上月自結比較；併購跨期不比較）
+  const momI = holdingMomInfo(c);
+
   // 金控層級 FVOCI 加計列（115/06 起富邦／凱基揭露「加計FVOCI後獲利」、
   // 國泰揭露「對保留盈餘影響數」，皆為金控合併層級數字；缺當月數顯示 —）
   let adjRow = '';
@@ -675,6 +696,7 @@ function renderRow(c) {
       <td></td>
       <td class="fvoci-label"${tip}>${fvociRowLabel()}<sup>*</sup></td>
       <td class="num fvoci-num">${fd.monthlyDisp}</td>
+      <td class="num fvoci-num"></td>
       <td class="num fvoci-num">${fd.cumulDisp}</td>
       <td class="num fvoci-num">${fd.yoyDisp}</td>
       <td class="num fvoci-num"></td>
@@ -687,6 +709,7 @@ function renderRow(c) {
     <td class="col-code">${c.code}</td>
     <td>${nameCell}</td>
     <td class="num ${mClass}">${mDisplay}</td>
+    <td class="num mom ${momI.cls}">${momI.disp}</td>
     <td class="num ${cClass}">${cDisplay}</td>
     <td class="num yoy ${yoyClass}">${yoyDisp}</td>
     <td class="num ${epsMClass}">${epsMDisp}</td>
@@ -746,6 +769,7 @@ function renderHoldingCard(c) {
   const epsC = h.cumulative_eps;
   const epsCDisp = epsC != null ? formatEps(epsC) : '—';
   const epsCClass = (epsC ?? 0) >= 0 ? 'positive' : 'negative';
+  const momI2 = holdingMomInfo(c);   // 草稿新增
 
   const mClass = (monthly ?? 0) >= 0 ? 'positive' : 'negative';
   const cClass = (cumul   ?? 0) >= 0 ? 'positive' : 'negative';
@@ -792,6 +816,10 @@ function renderHoldingCard(c) {
       <div class="m-cell">
         <div class="m-cell-label">累計 EPS</div>
         <div class="m-cell-value ${epsCClass}">${epsCDisp}</div>
+      </div>
+      <div class="m-cell">
+        <div class="m-cell-label">當月 MoM</div>
+        <div class="m-cell-value yoy ${momI2.cls}">${momI2.disp}</div>
       </div>
     </div>
     ${adjBlock}
@@ -1115,7 +1143,11 @@ function showDetail(code) {
     ? `<p class="detail-note"><strong>備註：</strong>${escapeHtml(COMPANY_NOTES[c.code])}</p>`
     : '';
 
+  // 草稿新增：單月獲利變動拆解（MoM 歸因）
+  const momHtml = momAttributionHtml(c);
+
   content.innerHTML = `
+    ${momHtml}
     ${newsHtml}
     ${tableHtml}
     ${noteHtml}
@@ -1299,6 +1331,10 @@ function renderBarChart(canvasId, prevChart, series, curLabel, priorLabel, unit)
 
 // ── 輔助函數 ───────────────────────────────────────────
 function updatePeriodBadge() {
+  if (state.pageMode === 'period' && state.periodSel) {
+    document.getElementById('period-badge').textContent = `${state.periodSel.label}｜期間比較`;
+    return;
+  }
   const p = state.data?.report_period;
   document.getElementById('period-badge').textContent = p ? `${periodLabel(p)}月報` : '—';
 }
@@ -1350,6 +1386,12 @@ function sortCompanies(arr) {
         b.holding_company?.cumulative_profit_yoy_pct,
         b.holding_company?.cumulative_profit_yoy_status,
       ));
+    case 'mom_desc': {   // 草稿新增：當月 MoM（轉盈 > 正 > 負 > 轉虧）
+      return arr.sort((a, b) => {
+        const am = holdingMomInfo(a), bm = holdingMomInfo(b);
+        return compareYoYDesc(am.pct, am.status, bm.pct, bm.status);
+      });
+    }
     case 'code':
     default:
       return arr.sort((a, b) => a.code.localeCompare(b.code));
@@ -2274,4 +2316,694 @@ function formatNum(n) {
     formatted = n.toFixed(3);
   }
   return formatted;
+}
+
+/* ═══════════════════════════════════════════════════════════════════
+   草稿新增（2026-08）：
+   1. 期間比較模式（季度／年度 YTD，跨公司比較）
+   2. 單月獲利變動拆解（金控 MoM 歸因至子公司）＋ 總表「當月 MoM」欄
+   ═══════════════════════════════════════════════════════════════════ */
+
+// ── 月份資料共用快取（期間比較與 MoM 皆按需載入歷史月份） ──────────
+const monthCache = {};
+async function fetchMonth(period) {
+  if (!period) return null;
+  if (monthCache[period] !== undefined) return monthCache[period];
+  try {
+    const resp = await fetch(`./data/${period.replace('/', '-')}.json?_=${Date.now()}`);
+    if (!resp.ok) { monthCache[period] = null; return null; }
+    const d = await resp.json();
+    monthCache[period] = (d && Array.isArray(d.companies)) ? d : null;
+  } catch (e) {
+    monthCache[period] = null;
+  }
+  return monthCache[period];
+}
+function monthInIndex(period) {
+  return !!(state.index && (state.index.months || []).some(m => m.period === period));
+}
+
+// "115/01" → "114/12"（上一個月，民國年字串）
+function prevMonthPeriod(period) {
+  const m = String(period || '').match(/^(\d{2,3})\/(\d{1,2})$/);
+  if (!m) return null;
+  let y = parseInt(m[1], 10), mo = parseInt(m[2], 10) - 1;
+  if (mo === 0) { y -= 1; mo = 12; }
+  return `${y}/${String(mo).padStart(2, '0')}`;
+}
+
+// ── MoM（與上月自結比較） ───────────────────────────────────────────
+// 併購跨期（上月非同一實體）不作 MoM 比較。2887：114/07 台新新光合併首月。
+const MOM_INCOMPARABLE = { '2887': ['114/07'] };
+function momComparable(code, period) {
+  return !(MOM_INCOMPARABLE[code] || []).includes(period);
+}
+
+// 子公司更名（同一實體，跨月對應用）：現名 → 上月可能的舊名
+const SUB_PREV_ALIAS = { '玉山投信': '保德信投信' };
+
+async function loadPrevMonth(period) {
+  state.prevMonth = null;
+  const prev = prevMonthPeriod(period);
+  if (!prev || !monthInIndex(prev)) return;
+  state.prevMonth = await fetchMonth(prev);
+}
+
+// MoM 顯示：同號給 %；跨零用 轉盈/轉虧＋絕對差額（單位跟隨顯示設定）；缺基期 —
+function momInfo(cur, prev, sourceUnit, displayUnit) {
+  if (cur == null || prev == null) return { pct: null, status: null, disp: '—', cls: '' };
+  const dAbs = cur - prev;
+  const dDisp = convertUnit(dAbs, sourceUnit, displayUnit);
+  if (prev <= 0 && cur > 0) {
+    return { pct: null, status: 'loss_to_profit', disp: `轉盈 +${formatNum(Math.abs(dDisp))}`, cls: 'positive' };
+  }
+  if (prev >= 0 && cur < 0) {
+    return { pct: null, status: 'profit_to_loss', disp: `轉虧 -${formatNum(Math.abs(dDisp))}`, cls: 'negative' };
+  }
+  if (prev === 0) return { pct: null, status: null, disp: '—', cls: '' };
+  const pct = dAbs / Math.abs(prev) * 100;
+  const sign = pct >= 0 ? '+' : '';
+  return { pct, status: null, disp: `${sign}${pct.toFixed(1)}%`, cls: pct >= 0 ? 'positive' : 'negative' };
+}
+
+// 金控層級 MoM（總表欄位／排序共用）
+function holdingMomInfo(c) {
+  const dash = { pct: null, status: null, disp: '—', cls: '' };
+  if (!state.prevMonth || c.error || !c.holding_company) return dash;
+  const period = state.data?.report_period || '';
+  if (!momComparable(c.code, period)) return dash;
+  const pc = (state.prevMonth.companies || []).find(x => x.code === c.code);
+  if (!pc || pc.error || !pc.holding_company) return dash;
+  return momInfo(c.holding_company.monthly_profit, pc.holding_company.monthly_profit, c.unit, state.displayUnit);
+}
+
+// 詳情面板：單月獲利變動拆解（金控 MoM 歸因至子公司）
+function momAttributionHtml(c) {
+  const d = state.data, prevD = state.prevMonth;
+  if (!d || !prevD || c.error || !c.holding_company) return '';
+  const period = d.report_period || '';
+  const prevPer = prevD.report_period || '';
+  if (!momComparable(c.code, period)) {
+    return `<div class="mom-panel"><div class="mom-head"><span class="mom-title">單月獲利變動拆解</span></div>
+      <p class="mom-note">${escapeHtml(periodAd(period))} 為合併首月，上月基期非同一實體，不作 MoM 比較。</p></div>`;
+  }
+  const pc = (prevD.companies || []).find(x => x.code === c.code);
+  if (!pc || pc.error || !pc.holding_company) return '';
+  const curH = c.holding_company.monthly_profit;
+  const prevH = pc.holding_company.monthly_profit;
+  if (curH == null || prevH == null) return '';
+
+  const unit = state.displayUnit;
+  const su = c.unit;                     // 來源單位（百萬元）
+  const dH = curH - prevH;               // 金控增減（來源單位）
+  const hMom = momInfo(curH, prevH, su, unit);
+
+  // 子公司增減：本月清單為主，上月以名稱（含更名別名）對應
+  const prevSubs = new Map((pc.subsidiaries || []).map(s => [s.name, s]));
+  const usedPrev = new Set();
+  const rows = [];
+  for (const s of (c.subsidiaries || [])) {
+    const pName = prevSubs.has(s.name) ? s.name : (SUB_PREV_ALIAS[s.name] && prevSubs.has(SUB_PREV_ALIAS[s.name]) ? SUB_PREV_ALIAS[s.name] : null);
+    const p = pName ? prevSubs.get(pName) : null;
+    if (pName) usedPrev.add(pName);
+    if (s.monthly_profit == null) continue;
+    if (p && p.monthly_profit != null) {
+      rows.push({ name: s.name, prev: p.monthly_profit, cur: s.monthly_profit, delta: s.monthly_profit - p.monthly_profit, tag: null });
+    } else {
+      rows.push({ name: s.name, prev: null, cur: s.monthly_profit, delta: s.monthly_profit, tag: '上月未列' });
+    }
+  }
+  for (const [name, p] of prevSubs) {
+    if (usedPrev.has(name) || p.monthly_profit == null) continue;
+    rows.push({ name, prev: p.monthly_profit, cur: null, delta: -p.monthly_profit, tag: '本月未列' });
+  }
+  const sumSub = rows.reduce((a, r) => a + r.delta, 0);
+  const resid = dH - sumSub;
+  rows.sort((a, b) => b.delta - a.delta);
+
+  const maxAbs = Math.max(...rows.map(r => Math.abs(r.delta)), Math.abs(resid), 1);
+  const fmtD = v => {
+    const x = convertUnit(v, su, unit);
+    return `${x >= 0 ? '+' : '-'}${formatNum(Math.abs(x))}`;
+  };
+  const fmtV = v => v == null ? '—' : formatNum(convertUnit(v, su, unit));
+
+  const rowHtml = (r, extraCls, nameHtml) => {
+    const pos = r.delta >= 0;
+    const w = (Math.abs(r.delta) / maxAbs * 100).toFixed(1);
+    return `<div class="mom-row ${extraCls || ''}">
+      <div class="mom-name">${nameHtml}${r.tag ? `<span class="mom-tag">${r.tag}</span>` : ''}</div>
+      <div class="mom-delta ${pos ? 'positive' : 'negative'}">${fmtD(r.delta)}</div>
+      <div class="mom-bar-wrap"><div class="mom-bar ${pos ? 'pos' : 'neg'}" style="width:${w}%"></div></div>
+      <div class="mom-vals">${fmtV(r.prev)} → ${fmtV(r.cur)}</div>
+    </div>`;
+  };
+
+  const headRow = `<div class="mom-row mom-row-head">
+    <div class="mom-name">子公司</div>
+    <div class="mom-delta">增減額</div>
+    <div></div>
+    <div class="mom-vals">上月 → 本月</div>
+  </div>`;
+  const subRows = rows.map(r => rowHtml(r, '', escapeHtml(r.name))).join('');
+  const residRow = rowHtml({ name: '', prev: null, cur: null, delta: resid, tag: null }, 'mom-row-resid',
+    '母公司及其他（軋差）');
+
+  return `<div class="mom-panel">
+    <div class="mom-head">
+      <span class="mom-title">單月獲利變動拆解（${periodAd(period)} vs ${periodAd(prevPer)}）</span>
+      <span class="mom-total">金控 ${fmtV(prevH)} → ${fmtV(curH)}（<span class="${dH >= 0 ? 'positive' : 'negative'}">${fmtD(dH)}</span>、MoM <span class="${hMom.cls}">${hMom.disp}</span>）</span>
+    </div>
+    <div class="mom-rows">${headRow}${subRows}${residRow}</div>
+    <p class="mom-note">單位：${unitFullLabel(unit)}。子公司增減合計與金控增減之差額列為「母公司及其他（軋差）」，含母公司本身損益、合併沖銷與未揭露項目。MoM 比較之基準為各月自結公告數。</p>
+  </div>`;
+}
+
+// ── 期間比較模式 ────────────────────────────────────────────────────
+
+// 期間選項：由 index.json 月份清單產生「季度 + 年度（YTD）」，不提供任意起訖月
+function buildPeriodOptions() {
+  const months = (state.index?.months || []).map(m => m.period).sort();   // 舊→新
+  const set = new Set(months);
+  const opts = [];
+
+  const byYQ = {};
+  for (const p of months) {
+    const [y, m] = p.split('/');
+    const q = Math.ceil(parseInt(m, 10) / 3);
+    (byYQ[`${y}-${q}`] ||= []).push(p);
+  }
+  for (const k of Object.keys(byYQ).sort().reverse()) {          // 新→舊
+    const [y, q] = k.split('-');
+    const ms = byYQ[k];
+    const full = ms.length === 3;
+    const lastM = parseInt(ms[ms.length - 1].split('/')[1], 10);
+    const base = ms.map(p => prevYearPeriod(p));
+    opts.push({
+      key: `q-${k}`, kind: 'quarter', partial: !full,
+      label: `${q}Q${String(adYear(y)).slice(-2)}${full ? '' : `（至${lastM}月）`}`,
+      months: ms,
+      baseMonths: base.every(b => set.has(b)) ? base : null,
+    });
+  }
+
+  const byY = {};
+  for (const p of months) (byY[p.split('/')[0]] ||= []).push(p);
+  for (const y of Object.keys(byY).sort().reverse()) {
+    const ms = byY[y];
+    const full = ms.length === 12;
+    const lastM = parseInt(ms[ms.length - 1].split('/')[1], 10);
+    const base = ms.map(p => prevYearPeriod(p));
+    opts.push({
+      key: `y-${y}`, kind: 'year', partial: !full,
+      label: full ? `${adYear(y)} 全年` : `${adYear(y)} YTD（1–${lastM}月）`,
+      months: ms,
+      baseMonths: base.every(b => set.has(b)) ? base : null,
+    });
+  }
+  state.periodOptions = opts;
+}
+
+function renderPeriodSelector() {
+  const sel = document.getElementById('period-select');
+  if (!sel || !state.periodOptions.length) return;
+  const group = (kind, label) => {
+    const items = state.periodOptions.filter(o => o.kind === kind)
+      .map(o => `<option value="${o.key}">${o.label}</option>`).join('');
+    return items ? `<optgroup label="${label}">${items}</optgroup>` : '';
+  };
+  sel.innerHTML = group('quarter', '季度') + group('year', '年度');
+  // 預設：最新的「完整」季度（進行中的季度另可自行選取）
+  const def = state.periodOptions.find(o => o.kind === 'quarter' && !o.partial) || state.periodOptions[0];
+  sel.value = def.key;
+  state.periodSel = def;
+}
+
+async function ensurePeriodData(opt) {
+  const need = new Set();
+  const addBoundary = (ms) => {
+    if (!ms) return;
+    need.add(ms[ms.length - 1]);                                  // 期末
+    if (!ms[0].endsWith('/01')) need.add(prevMonthPeriod(ms[0])); // 期初前月
+  };
+  addBoundary(opt.months);
+  addBoundary(opt.baseMonths);
+  await Promise.all([...need].map(fetchMonth));
+}
+
+async function onPeriodChange() {
+  const sel = document.getElementById('period-select');
+  const opt = state.periodOptions.find(o => o.key === sel.value) || state.periodOptions[0];
+  if (!opt) return;
+  state.periodSel = opt;
+  await ensurePeriodData(opt);
+  closeDetail();
+  renderAll();
+  resetTableScroll();
+}
+
+// 期間彙總核心：期間獲利＝期末累計 − 期初前月累計（各公司公告自結數）。
+// 一月起算的期間直接用期末累計（累計每年一月歸零）。EPS 同法軋差，屬推算值。
+// 子公司以名稱對應（含更名別名）；期初前月未列之子公司（如新併入者）以 0 起算。
+function periodAggCompany(months, code) {
+  if (!months || !months.length) return null;
+  const endD = monthCache[months[months.length - 1]];
+  if (!endD) return null;
+  const c = (endD.companies || []).find(x => x.code === code);
+  if (!c || c.error || !c.holding_company || c.holding_company.cumulative_profit == null) return null;
+
+  let baseC = null;
+  if (!months[0].endsWith('/01')) {
+    const bD = monthCache[prevMonthPeriod(months[0])];
+    baseC = bD ? (bD.companies || []).find(x => x.code === code) : null;
+    if (!baseC || baseC.error || !baseC.holding_company || baseC.holding_company.cumulative_profit == null) return null;
+  }
+
+  const toM = (v, u) => convertUnit(v, u || '百萬元', '百萬元');
+  const endCum = toM(c.holding_company.cumulative_profit, c.unit);
+  const baseCum = baseC ? toM(baseC.holding_company.cumulative_profit, baseC.unit) : 0;
+  const endEps = c.holding_company.cumulative_eps;
+  const baseEps = baseC ? baseC.holding_company.cumulative_eps : 0;
+  const eps = (endEps != null && baseEps != null) ? endEps - baseEps : null;
+
+  const baseSubs = new Map(((baseC && baseC.subsidiaries) || []).map(s => [s.name, s]));
+  const subs = [];
+  for (const s of (c.subsidiaries || [])) {
+    if (s.cumulative_profit == null) continue;
+    const bName = baseSubs.has(s.name) ? s.name
+      : (SUB_PREV_ALIAS[s.name] && baseSubs.has(SUB_PREV_ALIAS[s.name]) ? SUB_PREV_ALIAS[s.name] : null);
+    const b = bName ? baseSubs.get(bName) : null;
+    const bCum = (b && b.cumulative_profit != null) ? toM(b.cumulative_profit, baseC.unit) : 0;
+    subs.push({ name: s.name, profit: toM(s.cumulative_profit, c.unit) - bCum });
+  }
+  return { code, name: c.name, profit: endCum - baseCum, eps, subs };
+}
+
+// 期間 YoY 判定；2887 台新新光金：期間任一月早於 115/07 → 去年同期非合併實體，不比較
+function periodYoyOf(opt, code, curProfit) {
+  if (!opt.baseMonths) return { pct: null, status: null, abs: null, base: null };
+  // 與正式站一致：2887 自 115/07（期末）起才與去年同期比較（詳 MERGER_NOTE_CUTOFFS）
+  if (code === '2887' && opt.months[opt.months.length - 1] < '115/07') return { pct: null, status: 'merger', abs: null, base: null };
+  const b = periodAggCompany(opt.baseMonths, code);
+  if (!b || curProfit == null) return { pct: null, status: null, abs: null, base: b ? b.profit : null };
+  const base = b.profit;
+  if (base === 0) return { pct: null, status: null, abs: null, base };
+  const rawPct = (curProfit - base) / Math.abs(base) * 100;
+  if (base < 0 && curProfit >= 0) return { pct: rawPct, status: 'loss_to_profit', abs: curProfit - base, base };
+  if (base > 0 && curProfit < 0) return { pct: rawPct, status: 'profit_to_loss', abs: curProfit - base, base };
+  return { pct: (curProfit - base) / Math.abs(base) * 100, status: null, abs: curProfit - base, base };
+}
+
+function periodRangeText(months) {
+  if (!months || !months.length) return '';
+  const a = periodAd(months[0]), b = periodAd(months[months.length - 1]);
+  return months.length === 1 ? a : `${a}–${b.split('/')[1]}`;
+}
+
+// 期間比較的排序
+function sortPeriodRows(rows) {
+  const m = state.sortMode;
+  const arr = [...rows];
+  switch (m) {
+    case 'pprofit_asc':  return arr.sort((a, b) => (a.profit ?? Infinity) - (b.profit ?? Infinity));
+    case 'pyoy_desc':    return arr.sort((a, b) => compareYoYDesc(a.yoy.pct, a.yoy.status, b.yoy.pct, b.yoy.status));
+    case 'peps_desc':    return arr.sort((a, b) => (b.eps ?? -Infinity) - (a.eps ?? -Infinity));
+    case 'code':         return arr.sort((a, b) => String(a.code || a.parent_code).localeCompare(String(b.code || b.parent_code)));
+    case 'pprofit_desc':
+    default:             return arr.sort((a, b) => (b.profit ?? -Infinity) - (a.profit ?? -Infinity));
+  }
+}
+
+// 期間 YoY 顯示（沿用 formatYoY 慣例；merger 顯示註記）
+function periodYoyDisp(yoy, sourceUnit, unit) {
+  if (yoy.status === 'merger') return { disp: '<span class="yoy-note">基期為合併前</span>', cls: '' };
+  return formatYoY(yoy.pct, yoy.abs, yoy.status, sourceUnit, unit);
+}
+
+// ── 期間比較：主渲染 ──
+function renderPeriodAll() {
+  const opt = state.periodSel;
+  if (!opt) return;
+
+  updatePeriodBadge();
+  const lu = document.getElementById('last-updated');
+  if (lu) {
+    const baseTxt = opt.baseMonths ? `｜去年同期：${periodRangeText(opt.baseMonths)}` : '｜無去年同期資料';
+    lu.textContent = `本期：${periodRangeText(opt.months)}${baseTxt}`;
+  }
+  document.getElementById('market-section').classList.add('hidden');
+  const rl = document.getElementById('report-link-row');
+  if (rl) { rl.classList.add('hidden'); rl.innerHTML = ''; }
+
+  const holdRows = buildPeriodHoldingRows(opt);
+  renderPeriodSummaryCards(opt, holdRows);
+  if (state.viewMode === 'holdings') renderPeriodHoldingsTable(opt, holdRows);
+  else renderPeriodIndustryTable(opt, state.viewMode);
+  renderPeriodChart(opt, holdRows);
+}
+
+function buildPeriodHoldingRows(opt) {
+  const endD = monthCache[opt.months[opt.months.length - 1]];
+  if (!endD) return [];
+  const rows = [];
+  for (const c of (endD.companies || [])) {
+    if (c.error) continue;
+    const agg = periodAggCompany(opt.months, c.code);
+    if (!agg) continue;
+    rows.push({ code: c.code, name: c.name, profit: agg.profit, eps: agg.eps, subs: agg.subs, yoy: periodYoyOf(opt, c.code, agg.profit) });
+  }
+  const byProfit = [...rows].sort((a, b) => (b.profit ?? -Infinity) - (a.profit ?? -Infinity));
+  byProfit.forEach((r, i) => { r.rank = i + 1; });
+  return rows;
+}
+
+function renderPeriodSummaryCards(opt, holdRows) {
+  const el = document.getElementById('summary-cards');
+  const unit = state.displayUnit;
+  el.classList.remove('is-pending');
+  const mk = (label, best) => leaderCard(label, best, unit);
+  const bestHold = holdRows.reduce((b, r) => (!b || r.profit > b.raw) ? {
+    raw: r.profit, name: r.name,
+    amount: convertUnit(r.profit, '百萬元', unit),
+    yoy: periodYoyDisp(r.yoy, '百萬元', unit),
+  } : b, null);
+  const bestInd = (ind) => {
+    let b = null;
+    for (const r of buildPeriodIndustryRows(opt, ind)) {
+      if (r.profit == null) continue;
+      if (!b || r.profit > b.raw) b = {
+        raw: r.profit, name: r.name,
+        amount: convertUnit(r.profit, '百萬元', unit),
+        yoy: periodYoyDisp(r.yoy, '百萬元', unit),
+      };
+    }
+    return b;
+  };
+  el.innerHTML = [
+    mk(`金控${opt.label}獲利第一`, bestHold),
+    mk(`壽險${opt.label}獲利第一（不含FVOCI）`, bestInd('life')),
+    mk(`銀行${opt.label}獲利第一`, bestInd('bank')),
+    mk(`證券${opt.label}獲利第一`, bestInd('securities')),
+  ].join('');
+}
+
+function renderPeriodHoldingsTable(opt, holdRows) {
+  const unit = state.displayUnit;
+  const tableEl = document.getElementById('main-table');
+  if (tableEl) { tableEl.classList.remove('view-holdings', 'view-industry'); tableEl.classList.add('view-period'); }
+
+  const hint = document.getElementById('table-unit-hint');
+  if (hint) hint.textContent = `單位：${unitFullLabel(unit)}（EPS 為元）｜期間獲利＝期末累計 − 期初前月累計（公告自結數）`;
+
+  document.getElementById('main-thead').innerHTML = `
+    <tr>
+      <th class="col-code">排名</th>
+      <th class="col-code">代號</th>
+      <th class="col-name">金控</th>
+      <th class="col-monthly">期間稅後淨利<br><span class="th-sub">${periodRangeText(opt.months)}</span></th>
+      <th class="col-monthly">去年同期<br><span class="th-sub">${opt.baseMonths ? periodRangeText(opt.baseMonths) : '—'}</span></th>
+      <th class="col-cumulative">期間 YoY</th>
+      <th class="col-cumulative">期間 EPS（推算）</th>
+    </tr>`;
+
+  const rows = sortPeriodRows(holdRows);
+  document.getElementById('main-tbody').innerHTML = rows.map(r => {
+    const v = convertUnit(r.profit, '百萬元', unit);
+    const bv = r.yoy.base != null ? convertUnit(r.yoy.base, '百萬元', unit) : null;
+    const yi = periodYoyDisp(r.yoy, '百萬元', unit);
+    let yoyDisp = yi.disp;
+    if (yi.disp !== '—' && r.code === '2890' && opt.months[opt.months.length - 1] < '115/07') {
+      yoyDisp += '<br><span class="yoy-note">京城銀 2025/10 併入獲利公告</span>';
+    }
+    return `<tr>
+      <td class="center rank-cell${r.rank === 1 ? ' rank-top' : ''}">${r.rank}</td>
+      <td class="col-code">${r.code}</td>
+      <td><a class="company-link" onclick="showPeriodDetail('${r.code}')">${r.name}</a></td>
+      <td class="num ${v >= 0 ? 'positive' : 'negative'}">${formatNum(v)}</td>
+      <td class="num pd-base">${bv != null ? formatNum(bv) : '—'}</td>
+      <td class="num yoy ${yi.cls}">${yoyDisp}</td>
+      <td class="num">${r.eps != null ? formatEps(r.eps) : '—'}</td>
+    </tr>`;
+  }).join('');
+
+  document.getElementById('main-tfoot').innerHTML =
+    `<tr><td colspan="7" class="table-footnote"><span>${PERIOD_FOOTNOTE}${opt.partial ? ` 本期間尚未結束（${periodRangeText(opt.months)}），去年同期取相同月份比較。` : ''}</span></td></tr>`;
+}
+
+const PERIOD_FOOTNOTE = '期間獲利＝期末累計 − 期初前月累計（各公司公告自結數，含公告重編之影響）；合庫金公告之單月數為合併基準、累計數為母公司業主基準，期間數一律以累計軋差為準。期間 EPS 為累計 EPS 軋差之推算值，增資／換股月份或有失真。期間比較不含加計 FVOCI 之揭露數。';
+
+function buildPeriodIndustryRows(opt, industry) {
+  const endD = monthCache[opt.months[opt.months.length - 1]];
+  if (!endD) return [];
+  const rows = [];
+  for (const c of (endD.companies || [])) {
+    if (c.error) continue;
+    const agg = periodAggCompany(opt.months, c.code);
+    if (!agg) continue;
+    const baseAgg = (opt.baseMonths && !(c.code === '2887' && opt.months[opt.months.length - 1] < '115/07'))
+      ? periodAggCompany(opt.baseMonths, c.code) : null;
+    const baseSubs = new Map(((baseAgg && baseAgg.subs) || []).map(s => [s.name, s.profit]));
+    for (const s of agg.subs) {
+      if (classifyIndustry(s.name) !== industry) continue;
+      const hasBase = baseSubs.has(s.name);
+      const base = hasBase ? baseSubs.get(s.name) : null;
+      let yoy;
+      if (opt.baseMonths && c.code === '2887' && opt.months[opt.months.length - 1] < '115/07') yoy = { pct: null, status: 'merger', abs: null, base: null };
+      else if (base == null || base === 0) yoy = { pct: null, status: null, abs: null, base };
+      else {
+        const rawPct = (s.profit - base) / Math.abs(base) * 100;
+        if (base < 0 && s.profit >= 0) yoy = { pct: rawPct, status: 'loss_to_profit', abs: s.profit - base, base };
+        else if (base > 0 && s.profit < 0) yoy = { pct: rawPct, status: 'profit_to_loss', abs: s.profit - base, base };
+        else yoy = { pct: rawPct, status: null, abs: s.profit - base, base };
+      }
+      rows.push({ parent_code: c.code, parent_name: c.name, code: c.code, name: s.name, profit: s.profit, eps: null, yoy });
+    }
+  }
+  return rows;
+}
+
+function renderPeriodIndustryTable(opt, industry) {
+  const unit = state.displayUnit;
+  const tableEl = document.getElementById('main-table');
+  if (tableEl) { tableEl.classList.remove('view-holdings', 'view-industry'); tableEl.classList.add('view-period'); }
+
+  const hint = document.getElementById('table-unit-hint');
+  if (hint) hint.textContent = `單位：${unitFullLabel(unit)}｜期間獲利＝期末累計 − 期初前月累計（公告自結數）`;
+
+  document.getElementById('main-thead').innerHTML = `
+    <tr>
+      <th class="col-code">排名</th>
+      <th class="col-code">集團</th>
+      <th class="col-name">${VIEW_TITLES[industry]}子公司</th>
+      <th class="col-monthly">期間稅後淨利<br><span class="th-sub">${periodRangeText(opt.months)}</span></th>
+      <th class="col-monthly">去年同期<br><span class="th-sub">${opt.baseMonths ? periodRangeText(opt.baseMonths) : '—'}</span></th>
+      <th class="col-cumulative">期間 YoY</th>
+    </tr>`;
+
+  const raw = buildPeriodIndustryRows(opt, industry);
+  if (!raw.length) {
+    document.getElementById('main-tbody').innerHTML =
+      `<tr><td colspan="6" class="loading-cell">此期間無${VIEW_TITLES[industry]}資料</td></tr>`;
+    document.getElementById('main-tfoot').innerHTML = '';
+    return;
+  }
+  const byProfit = [...raw].sort((a, b) => (b.profit ?? -Infinity) - (a.profit ?? -Infinity));
+  byProfit.forEach((r, i) => { r.rank = i + 1; });
+  const rows = sortPeriodRows(raw);
+
+  document.getElementById('main-tbody').innerHTML = rows.map(r => {
+    const v = convertUnit(r.profit, '百萬元', unit);
+    const bv = r.yoy.base != null ? convertUnit(r.yoy.base, '百萬元', unit) : null;
+    const yi = periodYoyDisp(r.yoy, '百萬元', unit);
+    let yoyDisp = yi.disp;
+    if (yi.disp === '—' && r.name.includes('京城')) {
+      yoyDisp = '<span class="yoy-note">2025/10 併入獲利公告</span>';
+    }
+    return `<tr>
+      <td class="center rank-cell${r.rank === 1 ? ' rank-top' : ''}">${r.rank}</td>
+      <td><a class="company-link" onclick="showPeriodDetail('${r.parent_code}')">${r.parent_name}</a></td>
+      <td class="col-entity">${r.name}</td>
+      <td class="num ${v >= 0 ? 'positive' : 'negative'}">${formatNum(v)}</td>
+      <td class="num pd-base">${bv != null ? formatNum(bv) : '—'}</td>
+      <td class="num yoy ${yi.cls}">${yoyDisp}</td>
+    </tr>`;
+  }).join('');
+
+  const lifeNote = industry === 'life' ? ' 壽險列示為原始稅後損益，不含加計 FVOCI 之揭露數。' : '';
+  document.getElementById('main-tfoot').innerHTML =
+    `<tr><td colspan="6" class="table-footnote"><span>${PERIOD_FOOTNOTE}${lifeNote}</span></td></tr>`;
+}
+
+function renderPeriodChart(opt, holdRows) {
+  const unit = state.displayUnit;
+  const scopeLabel = state.viewMode === 'holdings' ? '金控' : VIEW_TITLES[state.viewMode];
+  document.getElementById('bar-chart-title').textContent =
+    `${scopeLabel}期間獲利比較（${opt.label}${opt.baseMonths ? ' vs 去年同期' : ''}）`;
+
+  const src = state.viewMode === 'holdings' ? holdRows : buildPeriodIndustryRows(opt, state.viewMode);
+  const cur = [...src].filter(r => r.profit != null).sort((a, b) => b.profit - a.profit);
+  const missing = [];
+  const prior = cur.map(r => {
+    if (!opt.baseMonths) return null;
+    if (r.yoy.base == null) { missing.push(r.name); return null; }
+    return convertUnit(r.yoy.base, '百萬元', unit);
+  });
+  const series = {
+    labels: cur.map(r => r.name),
+    current: cur.map(r => convertUnit(r.profit, '百萬元', unit)),
+    prior,
+    missing: opt.baseMonths ? missing : [],
+  };
+  state.barChart = renderBarChart('bar-chart', state.barChart, series, `${opt.label}`, '去年同期', unit);
+
+  const note = document.getElementById('bar-chart-note');
+  if (!opt.baseMonths) {
+    note.textContent = `${opt.label} 無去年同期資料（本站資料自 2025/01 起），僅顯示本期。`;
+    note.classList.remove('hidden');
+  } else {
+    setChartNote('bar-chart-note', series.missing);
+  }
+}
+
+// 期間比較：子公司拆解面板
+function showPeriodDetail(code) {
+  const opt = state.periodSel;
+  if (!opt) return;
+  const agg = periodAggCompany(opt.months, code);
+  if (!agg) return;
+  const unit = state.displayUnit;
+  const baseAgg = (opt.baseMonths && !(code === '2887' && opt.months[opt.months.length - 1] < '115/07'))
+    ? periodAggCompany(opt.baseMonths, code) : null;
+  const baseSubs = new Map(((baseAgg && baseAgg.subs) || []).map(s => [s.name, s.profit]));
+
+  const panel = document.getElementById('detail-panel');
+  const title = document.getElementById('detail-title');
+  const content = document.getElementById('detail-content');
+  title.textContent = `${agg.name} (${code}) — ${opt.label} 子公司拆解`;
+
+  const subSum = agg.subs.reduce((a, s) => a + (s.profit ?? 0), 0);
+  const resid = agg.profit - subSum;
+  const baseResid = baseAgg ? baseAgg.profit - baseAgg.subs.reduce((a, s) => a + (s.profit ?? 0), 0) : null;
+  const maxAbs = Math.max(...agg.subs.map(s => Math.abs(s.profit)), Math.abs(resid), 1);
+
+  const yoyCell = (curV, baseV) => {
+    if (baseV == null) {
+      return (opt.baseMonths && code === '2887' && opt.months[opt.months.length - 1] < '115/07')
+        ? '<span class="yoy-note">基期為合併前</span>' : '—';
+    }
+    if (baseV === 0) return '—';
+    const rawPct = (curV - baseV) / Math.abs(baseV) * 100;
+    let yi;
+    if (baseV < 0 && curV >= 0) yi = formatYoY(rawPct, curV - baseV, 'loss_to_profit', '百萬元', unit);
+    else if (baseV > 0 && curV < 0) yi = formatYoY(rawPct, curV - baseV, 'profit_to_loss', '百萬元', unit);
+    else yi = formatYoY(rawPct, curV - baseV, null, '百萬元', unit);
+    return `<span class="${yi.cls}">${yi.disp}</span>`;
+  };
+
+  const rows = [...agg.subs].sort((a, b) => b.profit - a.profit).map(s => {
+    const v = convertUnit(s.profit, '百萬元', unit);
+    const bRaw = baseSubs.has(s.name) ? baseSubs.get(s.name) : null;
+    const b = bRaw != null ? convertUnit(bRaw, '百萬元', unit) : null;
+    const w = (Math.abs(s.profit) / maxAbs * 100).toFixed(1);
+    const color = s.profit >= 0 ? 'rgba(26,63,160,.55)' : 'rgba(163,49,42,.55)';
+    return `<tr>
+      <td style="min-width:90px">${escapeHtml(s.name)}</td>
+      <td class="num ${s.profit >= 0 ? 'positive' : 'negative'}">${formatNum(v)}</td>
+      <td class="detail-bar-cell"><div class="detail-bar" style="background:${color};width:${w}%"></div></td>
+      <td class="num pd-base">${b != null ? formatNum(b) : '—'}</td>
+      <td class="num">${yoyCell(s.profit, bRaw)}</td>
+    </tr>`;
+  }).join('');
+
+  const residRow = `<tr class="pd-resid">
+    <td>母公司及其他（軋差）</td>
+    <td class="num">${formatNum(convertUnit(resid, '百萬元', unit))}</td>
+    <td></td>
+    <td class="num pd-base">${baseResid != null ? formatNum(convertUnit(baseResid, '百萬元', unit)) : '—'}</td>
+    <td class="num">—</td>
+  </tr>`;
+
+  const hv = convertUnit(agg.profit, '百萬元', unit);
+  const hb = baseAgg ? convertUnit(baseAgg.profit, '百萬元', unit) : null;
+  content.innerHTML = `
+    <table class="detail-table">
+      <thead>
+        <tr>
+          <th class="th-left">子公司</th>
+          <th>${opt.label} (${unit})</th>
+          <th></th>
+          <th>去年同期 (${unit})</th>
+          <th>期間 YoY</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="detail-total">
+          <td>${agg.name}（合併）</td>
+          <td class="num">${formatNum(hv)}</td>
+          <td></td>
+          <td class="num">${hb != null ? formatNum(hb) : '—'}</td>
+          <td class="num">${yoyCell(agg.profit, baseAgg ? baseAgg.profit : null)}</td>
+        </tr>
+        ${rows}
+        ${residRow}
+      </tbody>
+    </table>
+    <p class="detail-footnote">${PERIOD_FOOTNOTE}</p>
+  `;
+  panel.classList.remove('hidden');
+  panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ── 模式切換 ──
+const SORT_OPTIONS_BY_MODE = {
+  monthly: [
+    ['code', '代號'],
+    ['monthly_desc', '當月獲利 ↓'],
+    ['monthly_asc', '當月獲利 ↑'],
+    ['mom_desc', '當月 MoM ↓'],
+    ['cumulative_desc', '累計獲利 ↓'],
+    ['cumul_yoy_desc', '累計 YoY ↓'],
+    ['eps_cumul_desc', '累計 EPS ↓'],
+  ],
+  period: [
+    ['pprofit_desc', '期間獲利 ↓'],
+    ['pprofit_asc', '期間獲利 ↑'],
+    ['pyoy_desc', '期間 YoY ↓'],
+    ['peps_desc', '期間 EPS ↓'],
+    ['code', '代號'],
+  ],
+};
+const _sortMemo = { monthly: 'code', period: 'pprofit_desc' };
+
+function setSortOptionsForMode(mode) {
+  const sel = document.getElementById('sort-select');
+  if (!sel) return;
+  const opts = SORT_OPTIONS_BY_MODE[mode] || SORT_OPTIONS_BY_MODE.monthly;
+  sel.innerHTML = opts.map(([v, l]) => `<option value="${v}">${l}</option>`).join('');
+  const want = _sortMemo[mode];
+  sel.value = opts.some(([v]) => v === want) ? want : opts[0][0];
+}
+
+function setPageMode(mode) {
+  // 記住目前模式的排序選擇
+  const sel = document.getElementById('sort-select');
+  if (sel && sel.value) _sortMemo[state.pageMode] = sel.value;
+
+  state.pageMode = (mode === 'period') ? 'period' : 'monthly';
+  document.body.classList.toggle('pm-period', state.pageMode === 'period');
+  document.querySelectorAll('.mode-toggle .mode-btn').forEach(b => {
+    b.classList.toggle('active', b.dataset.pm === state.pageMode);
+  });
+  const cp = document.getElementById('ctrl-period');
+  if (cp) cp.classList.toggle('hidden', state.pageMode !== 'period');
+  setSortOptionsForMode(state.pageMode);
+  closeDetail();
+
+  if (state.pageMode === 'period') {
+    if (!state.periodOptions.length) { buildPeriodOptions(); renderPeriodSelector(); }
+    onPeriodChange();
+  } else {
+    renderAll();
+    resetTableScroll();
+  }
 }
