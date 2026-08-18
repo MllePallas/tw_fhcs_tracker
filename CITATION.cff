@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+message: "使用本專案或其資料時請引用如下（資料採 CC BY 4.0，標示來源為授權條件；另見 LICENSE-DATA）。"
+title: "台灣金控月自結獲利追蹤（Taiwan Financial Holdings Monthly Earnings Tracker）"
+type: dataset
+authors:
+  - family-names: "Chao"
+    given-names: "Mandy"
+repository-code: "https://github.com/MllePallas/tw_fhcs_tracker"
+url: "https://mllepallas.github.io/tw_fhcs_tracker/"
+license:
+  - MIT
+  - CC-BY-4.0
+keywords:
+  - Taiwan
+  - financial holdings
+  - monthly earnings
+  - MOPS
+  - open data

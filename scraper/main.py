@@ -15,6 +15,7 @@ sys.path.insert(0, str(Path(__file__).parent))
 from companies import FINANCIAL_HOLDINGS, ANNOUNCEMENT_KEYWORDS, HOLDINGS_BY_CODE
 from mops_client import MopsClient, gregorian_to_roc
 from parser import parse_profit_announcement, find_profit_announcement
+from provenance import with_meta   # 資料集來源聲明（_meta 區塊，見 provenance.py 與 LICENSE-DATA）
 
 # ── 日誌設定 ─────────────────────────────────────────────
 logging.basicConfig(
@@ -130,6 +131,9 @@ def save_data(data: dict, report_period: str):
                 data["market_summary"] = old_latest["market_summary"]
         except Exception as e:
             logger.warning(f"Failed to preserve market_summary from latest.json: {e}")
+
+    # 夾帶資料集來源聲明（_meta 置於最前；靜態內容，重跑不產生 diff）
+    data = with_meta(data)
 
     with open(latest_path, "w", encoding="utf-8") as f:
         json.dump(data, f, ensure_ascii=False, indent=2)
@@ -338,7 +342,7 @@ def update_index(data: dict, report_period: str):
     index["latest"] = index["months"][0]["period"] if index["months"] else ""
 
     with open(index_path, "w", encoding="utf-8") as f:
-        json.dump(index, f, ensure_ascii=False, indent=2)
+        json.dump(with_meta(index), f, ensure_ascii=False, indent=2)
     logger.info(f"Updated index.json: {len(index['months'])} months available")
 
 

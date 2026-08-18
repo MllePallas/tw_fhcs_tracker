@@ -1,0 +1,25 @@
+資料授權（Data License）
+========================
+
+本專案採雙授權：
+
+1. 程式碼（scraper/、docs/ 之 HTML／JS／CSS）
+   MIT License — 見 LICENSE。
+
+2. 資料與分析內容（docs/data/ 下所有 JSON、docs/reports/ 下分析報告）
+   Creative Commons 姓名標示 4.0 國際（CC BY 4.0）
+   條款全文：https://creativecommons.org/licenses/by/4.0/legalcode.zh-hant
+   摘要：https://creativecommons.org/licenses/by/4.0/deed.zh-hant
+
+依 CC BY 4.0，任何使用本專案資料之行為（包含但不限於：衍生工具、內部系統、
+儀表板、報表、再散布），均須以使用情境下合理可見的方式標示來源。建議格式：
+
+    資料來源：台灣金控月自結獲利追蹤（Mandy Chao），
+    https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0
+
+補充說明：
+- 原始數據為公開資訊觀測站（MOPS）之公開公告與 Yahoo Finance／TWSE 之公開行情，
+  該等原始事實不屬本授權範圍、亦不因本專案而受限制。
+- 本授權涵蓋本專案之加工成果：資料選編與結構設計、清洗與校正、FVOCI 揭露之
+  彙整補充、資料一致性驗證、新聞摘要與月度分析報告等。
+- 每份資料 JSON 之 _meta 區塊即為機器可讀之來源聲明，請於再散布時保留。

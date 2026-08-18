@@ -14,6 +14,17 @@
 - 網頁按鈕手動觸發更新
 - GitHub Pages 靜態網站部署
 
+## 資料授權與引用
+
+- **程式碼**：MIT License（見 [LICENSE](LICENSE)）
+- **資料與分析內容**（`docs/data/` 全部 JSON、`docs/reports/` 分析報告）：[CC BY 4.0](https://creativecommons.org/licenses/by/4.0/deed.zh-hant) — **使用須標示來源**（詳見 [LICENSE-DATA](LICENSE-DATA)）
+
+任何使用本專案資料的工具、系統、儀表板或報表（**包含公司或組織內部使用**），請以可見方式標示：
+
+> 資料來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0
+
+每份資料 JSON 開頭均有機器可讀的 `_meta` 來源聲明（由 `scraper/main.py` 自動寫入、`scraper/validate.py` C7 檢查），再散布時請保留。原始數據為公開資訊觀測站（MOPS）之公開公告，原始事實本身不受本授權限制。
+
 ## 13 家金控
 
 | 代號 | 名稱 | 代號 | 名稱 |

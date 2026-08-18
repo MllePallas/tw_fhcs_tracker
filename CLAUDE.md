@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-08-18（前端新增**「期間比較」模式**——季度／YTD 跨公司比較，期間數以「期末累計−期初前月累計」軋差——與金控詳情**「單月獲利變動拆解」**（MoM 歸因至子公司）、金控總覽新增「當月 MoM」欄（8→9 欄）；詳見「期間比較模式與單月 MoM 拆解」章節。前次 2026-08-14：凱基 115/07 起 FVOCI 用語改「對保留盈餘貢獻」；修正 115/06 凱基人壽層級 FVOCI 誤植——金控數字被掛到人壽層級，已移除，詳見 FVOCI 章節警語。前次 2026-08-13：**門檻型 FVOCI 支援當月數＋獨立前綴**（`monthly_display_prefix`，115/07 國泰人壽「單月逾160億」起用）。前次：月度 AI 分析報告頁 `docs/report.html`、手機「存成圖片」總表分享、`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
+> 最後更新：2026-08-18（**資料授權與來源聲明**：每份 JSON 自動夾帶 `_meta` 區塊（`provenance.py` / `add_provenance.py` 回填 / validate C7）、資料改採 CC BY 4.0（LICENSE-DATA、CITATION.cff、README 與網頁 footer 引用行、JSON-LD），詳見「資料授權與來源聲明」章節。同日稍早：前端新增**「期間比較」模式**——季度／YTD 跨公司比較，期間數以「期末累計−期初前月累計」軋差——與金控詳情**「單月獲利變動拆解」**（MoM 歸因至子公司）、金控總覽新增「當月 MoM」欄（8→9 欄）；詳見「期間比較模式與單月 MoM 拆解」章節。前次 2026-08-14：凱基 115/07 起 FVOCI 用語改「對保留盈餘貢獻」；修正 115/06 凱基人壽層級 FVOCI 誤植——金控數字被掛到人壽層級，已移除，詳見 FVOCI 章節警語。前次 2026-08-13：**門檻型 FVOCI 支援當月數＋獨立前綴**（`monthly_display_prefix`，115/07 國泰人壽「單月逾160億」起用）。前次：月度 AI 分析報告頁 `docs/report.html`、手機「存成圖片」總表分享、`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
 
 > ⚠️ **修改本檔的規則：一律逐段 `Edit`，禁止整檔覆寫（`Write`）。**
 > 本檔每個 session 開場即載入 context，但那份副本會隨其他 session 的 commit 逐漸過時；此時整檔覆寫＝把自己沒讀過的段落一併抹掉。已發生兩次（2026-08-07、2026-08-10），第二次一口氣刪掉 `validate.py` 與 `latest.json` 同步規則共 69 行。
@@ -106,6 +106,8 @@ MOPS 在 2025 年改版為 SPA，舊的直接 POST `ajax_t05st02` 已失效。
 月份依**新到舊**排序，`latest` 指向最新期間。
 
 ### docs/data/115-03.json（月份資料結構）
+
+> 2026-08-18 起，每份資料 JSON（月份檔、latest.json、index.json）**最前面**多一個 `_meta` 來源聲明區塊（dataset／author／repository／data_license／attribution／raw_source），由 `provenance.py` 的 `with_meta()` 統一產生——內容為**靜態常數（不含時間戳）**，重跑不產生 diff。下方結構示意省略 `_meta`。
 
 ```json
 {
@@ -424,6 +426,7 @@ python manual_fvoci.py --code 2882 --lower-bound --prefix 突破 --cumulative 14
 | C4 | FVOCI 合理性 | warn | 加計後累計應大於同層級原始累計 |
 | C5 | 累計 EPS 單調性 | info | 累計獲利上升時 EPS 不應下降（增資／換股會合理下降，故僅提示） |
 | C6 | 量級跳動 | info | 累計獲利跳動 > 20 倍（疑似單位換算錯誤） |
+| C7 | 來源聲明 | warn | 檔案層級：`_meta` 區塊（含 attribution）不應缺漏（2026-08-18 新增） |
 
 **容差 `TOLERANCE_NTM = 15.0`**：公告以「億元」報到小數一位 → 換算 NT$m 後粒度為 10。C1 用到三個各自四捨五入的值，最壞誤差 3 × 0.05 億 = **15 NT$m**。實測子公司層級的雜訊全部恰為 ±10，此容差可完全濾除且仍能攔下真實錯誤（實測注入 +20 即攔下）。
 
@@ -596,6 +599,24 @@ python bootstrap_history.py --year 114
 - **設定**：Settings → Pages → Branch: `main`, Folder: `/docs`
 - **部署**：push 到 main 後自動更新（約 1 分鐘）
 - **更新按鈕**：已移除（網站為唯讀展示，更新由 Actions 負責）
+
+---
+
+## 資料授權與來源聲明（2026-08-18 新增）
+
+**背景**：專案開源，且已有公司內部其他單位取用本站資料建自己的工具；目標是讓「標示來源」成為預設、拿掉標示成為明知故犯的主動行為。
+
+**雙授權**：程式碼 MIT（`LICENSE`）；資料與分析內容（`docs/data/` 全部 JSON、`docs/reports/` 報告）CC BY 4.0（`LICENSE-DATA`）——使用（含內部工具）須標示來源。標準引用行：「資料來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0」。⚠️ MOPS 原始數字為公開事實，不屬授權範圍；受保護的是選編結構、清洗校正、FVOCI 彙整、驗證與摘要等加工成果（LICENSE-DATA 有明文）。
+
+**機器可讀來源章（`_meta`）**：
+- `scraper/provenance.py`：`DATASET_META` 常數＋`with_meta()`（把 `_meta` 放到 dict 最前；冪等，既有 `_meta` 以現行內容覆蓋）。**單一事實來源——要改聲明內容只改這裡**，改完重跑 `add_provenance.py` 讓歷史檔同步。
+- 注入點：`main.py save_data()`（latest.json＋月份檔）與 `update_index()`（index.json）。其餘寫檔腳本（news_summary / fvoci_adjustment / manual_* / market_summary）皆 read-merge-write，`_meta` 自然保留，**毋須修改**。market_summary.py 每月 5 號建的新月份檔會暫時無 `_meta`，11 號 main.py 跑完即補上（validate C7 會盯）。
+- `scraper/add_provenance.py`：冪等回填歷史檔；內容已最新的檔案**不重寫**（git 乾淨）。DATASET_META 不含時間戳，重跑零 diff。
+- `validate.py` C7（warn，檔案層級）：`_meta.attribution` 缺漏即警告。
+
+**站上可見聲明**：index.html／report.html footer 改為「© ｜ 程式碼 MIT；資料 CC BY 4.0 使用須標示來源」＋引用格式行（樣式 `.citation-line` / `.footer-link`）；index.html `<head>` 加 `<link rel="license">` 與 schema.org **Dataset JSON-LD**（含 license 與 data/index.json 之 distribution，利於 Google Dataset Search 確立本站為正典出處）。GitHub 端：`CITATION.cff`（repo 頁會出現「Cite this repository」）、README「資料授權與引用」章節。
+
+**事實指紋（舉證用，非程式功能）**：news_summary 原創文字、manual_fvoci 手工登錄值、合庫金累計基準選擇、known-exception 校正——這些組合僅存在本 pipeline，第三方工具若原樣重現即資料出自本站之證據。
 
 ---
 

@@ -270,6 +270,15 @@ def _check_magnitude(company, prev_company, period, findings):
 
 # ── 主流程 ───────────────────────────────────────────────
 
+def _check_meta(data, period, findings):
+    """C7 來源聲明：檔案應含 _meta 區塊（main.py save_data 自動夾帶；歷史檔用 add_provenance.py 回填）。"""
+    meta = data.get("_meta")
+    if not isinstance(meta, dict) or not meta.get("attribution"):
+        findings.append(Finding(
+            "warn", "C7", "—", "（檔案層級）", "_meta", period,
+            "缺少 _meta 來源聲明——執行 `python add_provenance.py` 回填，或確認 main.py 為含 with_meta 的版本"))
+
+
 def validate_period(period, data=None):
     """驗證單一期別，回傳 list[Finding]。"""
     if data is None:
@@ -279,6 +288,7 @@ def validate_period(period, data=None):
         return []
 
     findings = []
+    _check_meta(data, period, findings)
     prev = prev_period(period)
     prev_data = load_period(prev) if prev else None
     prev_by_code = {}

@@ -1,4 +1,14 @@
 {
+  "_meta": {
+    "dataset": "台灣金控月自結獲利追蹤",
+    "author": "Mandy Chao",
+    "repository": "https://github.com/MllePallas/tw_fhcs_tracker",
+    "site": "https://mllepallas.github.io/tw_fhcs_tracker/",
+    "data_license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/deed.zh-hant",
+    "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
+    "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
+  },
   "report_period": "114/01",
   "last_updated": "2026-04-28T14:51:22.024870",
   "success_count": 13,

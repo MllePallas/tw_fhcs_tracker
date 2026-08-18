@@ -1515,3 +1515,16 @@ body.pm-period .table-container { display: block !important; }
   font-weight: 500;
   white-space: nowrap;
 }
+
+/* 來源聲明列（footer；2026-08-18 資料授權新增） */
+.citation-line {
+  font-size: 11.5px;
+  color: var(--text-muted);
+  margin-top: 2px;
+}
+.site-footer .footer-link {
+  color: var(--text-muted);
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.site-footer .footer-link:hover { color: var(--primary); }
