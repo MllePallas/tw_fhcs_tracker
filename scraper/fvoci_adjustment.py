@@ -57,8 +57,10 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "docs" / "data"
 
-ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
+ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
 MODEL = "claude-sonnet-4-6"
+# 撲空永久跳過前的重試上限（以「跑的次數」計）。2026-09 起排程一天兩跑，6 次 ≈ 3 天。
+FVOCI_RETRY_CAP = 6
 
 # 有壽險子公司的金控代號（IFRS 17 適用）
 LIFE_INSURANCE_CODES = {"2881", "2882", "2883", "2887", "2891"}
@@ -304,7 +306,7 @@ def _level_needs(target, force=False, override_manual=False):
         return True
     if existing:
         return False
-    if target.get("fvoci_not_found_count", 0) >= 3:
+    if target.get("fvoci_not_found_count", 0) >= FVOCI_RETRY_CAP:
         return False
     return True
 
@@ -333,7 +335,7 @@ def _apply_level(parsed_level, target, entity_name, original_cumul, original_mon
     """
     def _miss(msg, level="warning"):
         target["fvoci_not_found_count"] = target.get("fvoci_not_found_count", 0) + 1
-        getattr(logger, level)(f"[{entity_name}] {msg} (retry {target['fvoci_not_found_count']}/3)")
+        getattr(logger, level)(f"[{entity_name}] {msg} (retry {target['fvoci_not_found_count']}/{FVOCI_RETRY_CAP})")
         return "not_found"
 
     if not isinstance(parsed_level, dict):

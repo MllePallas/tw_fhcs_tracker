@@ -28,19 +28,21 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "docs" / "data"
 
-ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
+ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
+# udn.com（一般新聞路徑）2026-09 加入：富邦 115/07 月損益報導僅見於 udn.com/news/，money.udn.com 未刊
 MODEL = "claude-sonnet-4-6"
 
-# 「無相關說明」永久跳過前的 retry 上限。
-# 預設 3；大型金控媒體必定報導，撲空幾乎都是 web_search 索引延遲（偽陰性），
-# 故拉高到 6，避免新聞還沒被索引時就提前永久放棄。
-NEWS_RETRY_CAP_DEFAULT = 3
+# 「無相關說明」永久跳過前的 retry 上限（以「跑的次數」計）。
+# 2026-09 起排程一天兩跑（16:07 / 19:07），故上限翻倍以維持原本的天數容忍：
+# 預設 6 次 ≈ 3 天；大型金控媒體必定報導，撲空幾乎都是 web_search 索引延遲（偽陰性），
+# 故拉高到 12 次 ≈ 6 天，避免新聞還沒被索引時就提前永久放棄。
+NEWS_RETRY_CAP_DEFAULT = 6
 NEWS_RETRY_CAP_OVERRIDE = {
-    "2881": 6,  # 富邦金
-    "2882": 6,  # 國泰金
-    "2883": 6,  # 凱基金
-    "2887": 6,  # 台新新光金
-    "2891": 6,  # 中信金
+    "2881": 12,  # 富邦金
+    "2882": 12,  # 國泰金
+    "2883": 12,  # 凱基金
+    "2887": 12,  # 台新新光金
+    "2891": 12,  # 中信金
 }
 
 
