@@ -287,5 +287,59 @@
         "公告本公司董事會決議114年度股利配發基準日"
       ]
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/08",
+    "generated_at": "2026-09-08T16:49:36.880331",
+    "items": {
+      "usdtwd": {
+        "value": 31.626,
+        "date": "2026-08-31",
+        "prev_value": 32.395,
+        "prev_date": "2026-07-31",
+        "pct_change": -2.37,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 46128.47,
+        "date": "2026-08-31",
+        "prev_value": 43119.75,
+        "prev_date": "2026-07-31",
+        "pct_change": 6.98,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 9478.3,
+        "trading_days": 21,
+        "prev_value_yi": 10419.3,
+        "prev_trading_days": 22,
+        "pct_change": -9.03,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 7686.14,
+        "date": "2026-08-31",
+        "prev_value": 7489.72,
+        "prev_date": "2026-07-31",
+        "pct_change": 2.62,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 4.758,
+        "date": "2026-08-31",
+        "prev_value_pct": 4.745,
+        "prev_date": "2026-07-31",
+        "bps_change": 1,
+        "source": "Yahoo Finance (^TNX)"
+      },
+      "tlt": {
+        "value": 82.52,
+        "date": "2026-08-31",
+        "prev_value": 82.25,
+        "prev_date": "2026-07-31",
+        "pct_change": 0.33,
+        "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+      }
+    }
+  }
 }
