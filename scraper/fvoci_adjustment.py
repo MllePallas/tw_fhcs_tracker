@@ -59,8 +59,8 @@ DATA_DIR = BASE_DIR / "docs" / "data"
 
 ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
 MODEL = "claude-sonnet-4-6"
-# 撲空永久跳過前的重試上限（以「跑的次數」計）。2026-09 起排程一天兩跑，6 次 ≈ 3 天。
-FVOCI_RETRY_CAP = 6
+# 撲空永久跳過前的重試上限（以「跑的次數」計）。2026-09 起排程一天三跑，9 次 ≈ 3 天。
+FVOCI_RETRY_CAP = 9
 
 # 有壽險子公司的金控代號（IFRS 17 適用）
 LIFE_INSURANCE_CODES = {"2881", "2882", "2883", "2887", "2891"}

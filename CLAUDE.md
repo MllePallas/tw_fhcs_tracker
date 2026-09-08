@@ -1,6 +1,6 @@
 # CLAUDE.md — Taiwan Financial Holdings Tracker
 
-> 最後更新：2026-09-07（**排程改一天兩跑**：8~17 日 16:07/19:07、市場概況移至 8 日、新聞與 FVOCI 重試上限翻倍、新聞網域加 udn.com，詳見「GitHub Actions」章節）。前次 2026-08-18（**資料授權與來源聲明**：每份 JSON 自動夾帶 `_meta` 區塊（`provenance.py` / `add_provenance.py` 回填 / validate C7）、資料改採 CC BY 4.0（LICENSE-DATA、CITATION.cff、README 與網頁 footer 引用行、JSON-LD），詳見「資料授權與來源聲明」章節。同日稍早：前端新增**「期間比較」模式**——季度／YTD 跨公司比較，期間數以「期末累計−期初前月累計」軋差——與金控詳情**「單月獲利變動拆解」**（MoM 歸因至子公司）、金控總覽新增「當月 MoM」欄（8→9 欄）；詳見「期間比較模式與單月 MoM 拆解」章節。前次 2026-08-14：凱基 115/07 起 FVOCI 用語改「對保留盈餘貢獻」；修正 115/06 凱基人壽層級 FVOCI 誤植——金控數字被掛到人壽層級，已移除，詳見 FVOCI 章節警語。前次 2026-08-13：**門檻型 FVOCI 支援當月數＋獨立前綴**（`monthly_display_prefix`，115/07 國泰人壽「單月逾160億」起用）。前次：月度 AI 分析報告頁 `docs/report.html`、手機「存成圖片」總表分享、`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
+> 最後更新：2026-09-08（**排程改一天三跑**：8~17 日 07:07/16:07/19:07、市場概況移至 8 日、新聞與 FVOCI 重試上限翻倍、新聞網域加 udn.com，詳見「GitHub Actions」章節）。前次 2026-08-18（**資料授權與來源聲明**：每份 JSON 自動夾帶 `_meta` 區塊（`provenance.py` / `add_provenance.py` 回填 / validate C7）、資料改採 CC BY 4.0（LICENSE-DATA、CITATION.cff、README 與網頁 footer 引用行、JSON-LD），詳見「資料授權與來源聲明」章節。同日稍早：前端新增**「期間比較」模式**——季度／YTD 跨公司比較，期間數以「期末累計−期初前月累計」軋差——與金控詳情**「單月獲利變動拆解」**（MoM 歸因至子公司）、金控總覽新增「當月 MoM」欄（8→9 欄）；詳見「期間比較模式與單月 MoM 拆解」章節。前次 2026-08-14：凱基 115/07 起 FVOCI 用語改「對保留盈餘貢獻」；修正 115/06 凱基人壽層級 FVOCI 誤植——金控數字被掛到人壽層級，已移除，詳見 FVOCI 章節警語。前次 2026-08-13：**門檻型 FVOCI 支援當月數＋獨立前綴**（`monthly_display_prefix`，115/07 國泰人壽「單月逾160億」起用）。前次：月度 AI 分析報告頁 `docs/report.html`、手機「存成圖片」總表分享、`validate.py` 資料一致性驗證、金控合併層級加計 FVOCI 擷取與顯示、首頁四產業「累計獲利第一」卡片、顯示層全面改西元年、圖表加入去年同期對照、配色系統重構）
 
 > ⚠️ **修改本檔的規則：一律逐段 `Edit`，禁止整檔覆寫（`Write`）。**
 > 本檔每個 session 開場即載入 context，但那份副本會隨其他 session 的 commit 逐漸過時；此時整檔覆寫＝把自己沒讀過的段落一併抹掉。已發生兩次（2026-08-07、2026-08-10），第二次一口氣刪掉 `validate.py` 與 `latest.json` 同步規則共 69 行。
@@ -40,7 +40,7 @@ tw_fhcs_tracker/
 │       ├── 115-02.json
 │       └── 115-03.json
 ├── .github/workflows/
-│   ├── update_data.yml         # 每月 8~17 日、一天兩跑 MOPS 爬蟲（含 short-circuit）
+│   ├── update_data.yml         # 每月 8~17 日、一天三跑 MOPS 爬蟲（含 short-circuit）
 │   └── update_market.yml       # 每月 8 號市場概況（yfinance + TWSE）
 ├── .env                        # 本地用（ANTHROPIC_API_KEY），已加入 .gitignore
 ├── requirements.txt
@@ -574,10 +574,11 @@ python bootstrap_history.py --year 114
 
 ### update_data.yml（MOPS 月損益 + 新聞摘要 + FVOCI 調整）
 
-- **排程**（2026-09 起）：每月 **8~17 日**，UTC 08:07 與 11:07（台灣時間 **16:07、19:07**）**一天兩跑**。分鐘刻意避開 :00（GitHub 排程整點最常延遲 10-30 分鐘）。
+- **排程**（2026-09 起）：每月 **8~17 日**，台灣時間 **07:07、16:07、19:07** **一天三跑**（UTC 前日 23:07 / 08:07 / 11:07）。分鐘刻意避開 :00（GitHub 排程整點最常延遲 10-30 分鐘）。
+  - 07:07 那跑接前一晚的新聞週期（工商／經濟日報傍晚到凌晨線上稿）與 FVOCI，讓上班時資料已補齊。⚠️ GitHub cron 以 UTC 計日：台北 07:07 = UTC 前一日 23:07，yml 內日期範圍寫 `7-16` 才等於台北 8~17，改排程時勿「修正」成 8-17
   - 為何 8 日起：實測 115 年公告日曆——玉山／國票／永豐固定 5~10 日公告（早鳥），其餘 10 家 11~15 日；整體較 114 年晚約 3 天（第 13 家從 10 日左右移到 13~15 日），故尾端延至 17 日。舊設定 11 日才開始，導致 8 月 7~10 日全靠手動補早鳥
   - 撲空不花錢：`main.py` 只對有公告的家呼叫 LLM；前端已對部分月份做好呈現（缺的家顯示待更新、`LEADER_CARDS_MIN_COMPANIES=10` 擋排名），舊註解「假性成功」的顧慮已不成立
-  - **一天兩跑連帶調整**：`news_summary.py` 重試上限 3→6（大型金控 6→12）、`fvoci_adjustment.py` 新增 `FVOCI_RETRY_CAP = 6`，維持原本「約 3 天」的容忍天數
+  - **一天三跑連帶調整**：`news_summary.py` 重試上限 3→9（大型金控 6→18）、`fvoci_adjustment.py` 新增 `FVOCI_RETRY_CAP = 9`，維持原本「約 3 天」的容忍天數。上限以「跑的次數」計，日後再改每日跑數要同步換算
   - **操作紀律**：公告當天不要手動補新聞／FVOCI。115/07 手動填的 13 筆裡 12 筆來源在允許網域內，撲空是新聞尚未上線／索引的時間差；同日手動填會標 `manual`，自動路徑就永遠不再嘗試，等於自動化從未被測試。讓它跑兩天再補仍缺的
 - **Short-circuit**：schedule 觸發時，若 `latest.json` 已顯示目標月份 `success_count >= 13`，直接跳過所有步驟（節省 API 費用）
 - **手動觸發**：Actions → Run workflow（不受 short-circuit 限制，方便補跑）
@@ -589,7 +590,7 @@ python bootstrap_history.py --year 114
 - **排程**（2026-09 起）：每月 **8 號** UTC 12:37（台灣時間 20:37）。與 MOPS 排程同日，排在當日兩跑之後。會自己建立月份 stub 檔。
 - 設計考量：本網站主軸為月獲利公告，市場概況排在 MOPS 當日兩跑之後，避免新月份只有市場概況、公司列空白的觀感。市場數據其他管道可取得，不需提前。
 - 執行 `scraper/market_summary.py` → commit + push
-- MOPS 後續各跑（16:07 / 19:07）的 `save_data()` 會保留 `market_summary` 欄位（read-merge-write）
+- MOPS 後續各跑（07:07 / 16:07 / 19:07）的 `save_data()` 會保留 `market_summary` 欄位（read-merge-write）
 
 ### Secret
 
