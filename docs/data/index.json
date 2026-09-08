@@ -9,8 +9,14 @@
     "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
-  "latest": "115/07",
+  "latest": "115/08",
   "months": [
+    {
+      "period": "115/08",
+      "file": "115-08.json",
+      "success_count": 3,
+      "last_updated": "2026-09-08T12:55:13.893380"
+    },
     {
       "period": "115/07",
       "file": "115-07.json",
