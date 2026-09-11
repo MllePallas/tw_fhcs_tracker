@@ -10,18 +10,69 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-10T12:59:59.242586",
-  "success_count": 3,
-  "fail_count": 10,
+  "last_updated": "2026-09-11T01:04:38.852041",
+  "success_count": 5,
+  "fail_count": 8,
   "companies": [
     {
       "code": "2880",
       "name": "華南金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司華南產物保險股份有限公司公告法人董事代表人逝世"
-      ]
+      "announcement_date": "115/09/10",
+      "announcement_title": "公告本公司115年8月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "華南金控",
+        "monthly_profit": 3371,
+        "cumulative_profit": 24022,
+        "monthly_eps": null,
+        "cumulative_eps": 1.71,
+        "cumulative_profit_yoy_pct": 39.2,
+        "cumulative_profit_yoy_abs": 6769
+      },
+      "subsidiaries": [
+        {
+          "name": "華南銀行",
+          "monthly_profit": 2790,
+          "cumulative_profit": 18991,
+          "monthly_eps": null,
+          "cumulative_eps": 1.78,
+          "cumulative_profit_yoy_pct": 16.7,
+          "cumulative_profit_yoy_abs": 2724
+        },
+        {
+          "name": "華南永昌證券",
+          "monthly_profit": 454,
+          "cumulative_profit": 3985,
+          "monthly_eps": null,
+          "cumulative_eps": 6.09,
+          "cumulative_profit_yoy_pct": 260.0,
+          "cumulative_profit_yoy_abs": 2878
+        },
+        {
+          "name": "華南產險",
+          "monthly_profit": 185,
+          "cumulative_profit": 1506,
+          "monthly_eps": null,
+          "cumulative_eps": 7.52,
+          "cumulative_profit_yoy_pct": 33.3,
+          "cumulative_profit_yoy_abs": 376
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n華南金（2880）於 9 月 10 日率先公布 8 月自結獲利，單月稅後純益 33.71 億元，累計前 8 月稅後純益達 240.22 億元，年增 67.69 億元，年增率 39.24%，EPS 為 1.71 元，金控本體及旗下四大子公司前 8 月稅後純益與 EPS 同步刷新歷史同期新高。\n獲利動能強勁，主要受惠於核心銀行業務穩健成長，加上\n非銀行子公司（證券、產險、投信、創投及 AMC）合計獲利年增 190%，占集團獲利比重升至 24%，較去年同期提高 13 個百分點。\n\n**子公司明細**\n- 華南銀行：\n8 月單月稅後純益 27.9 億元，累計前 8 月稅後純益 189.91 億元，年增 16.7%，占集團獲利比重 76%；主因積極調整存放款結構，帶動 NIM 拉升 5 個基點，利息淨收益年增 12%；財富管理業務前 8 月強勁成長 31%，手續費淨收益突破 122 億元、年增 28%，投資淨收益年增 9%；OBU 及海外分行前 8 月合計獲利 39.97 億元，年增 82.62%，其中 OBU 獲利更猛增 156%。\n\n- 華南永昌證券：\n8 月稅後純益 4.54 億元，月增 53%；累計前 8 月稅後純益 39.85 億元，年增 260%；受惠台股大盤量能活絡，經紀、承銷及自營三大核心業務全面爆發，自營業務前 8 月獲利年增 143%，複委託交易量突破 2,386 億元、年增 140%。\n\n- 華南產險：\n前 8 月稅後純益 15.05 億元、年增 33%，主要受惠商業火險、工程險損失率改善及資金運用收益挹注。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9746747",
+          "title": "華南金獲利／前八月逾240億元、年增39.2% 續創同期新高 | 個股情報 | 股市 | 聯合新聞網"
+        },
+        {
+          "url": "https://udn.com/news/story/7252/9747104",
+          "title": "華南金獲利／前八月賺逾240億元、年增近4成 四子公司齊創高 | 個股情報 | 股市 | 聯合新聞網"
+        }
+      ],
+      "news_generated_at": "2026-09-11T01:04:58.978864"
     },
     {
       "code": "2881",
@@ -120,15 +171,80 @@
     {
       "code": "2885",
       "name": "元大金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "元大金控代子公司元大證金公告董事異動",
-        "元大金控補充公告認購子公司元大期貨115年度現金增資事宜",
-        "元大金控代子公司元大證券(柬埔寨)公告股東臨時會\r\n重要決議事項",
-        "元大金控代子公司元大證券公告獨立董事異動",
-        "元大金控代子公司元大證券公告審計委員會成員異動"
-      ]
+      "announcement_date": "115/09/10",
+      "announcement_title": "元大金控公告115年8月份自結合併損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "元大金控",
+        "monthly_profit": 7010,
+        "cumulative_profit": 49941,
+        "monthly_eps": null,
+        "cumulative_eps": 3.6,
+        "cumulative_profit_yoy_pct": 114.6,
+        "cumulative_profit_yoy_abs": 26664
+      },
+      "subsidiaries": [
+        {
+          "name": "元大證券",
+          "monthly_profit": 4506,
+          "cumulative_profit": 33835,
+          "monthly_eps": null,
+          "cumulative_eps": 4.75,
+          "cumulative_profit_yoy_pct": 141.4,
+          "cumulative_profit_yoy_abs": 19819
+        },
+        {
+          "name": "元大銀行",
+          "monthly_profit": 1532,
+          "cumulative_profit": 10759,
+          "monthly_eps": null,
+          "cumulative_eps": 1.17,
+          "cumulative_profit_yoy_pct": 44.1,
+          "cumulative_profit_yoy_abs": 3291
+        },
+        {
+          "name": "元大期貨",
+          "monthly_profit": 345,
+          "cumulative_profit": 2327,
+          "monthly_eps": null,
+          "cumulative_eps": 6.32,
+          "cumulative_profit_yoy_pct": 30.1,
+          "cumulative_profit_yoy_abs": 538
+        },
+        {
+          "name": "元大人壽",
+          "monthly_profit": 355,
+          "cumulative_profit": 2799,
+          "monthly_eps": null,
+          "cumulative_eps": 0.96,
+          "cumulative_profit_yoy_pct": 9896.4,
+          "cumulative_profit_yoy_abs": 2771
+        },
+        {
+          "name": "元大投信",
+          "monthly_profit": 639,
+          "cumulative_profit": 4218,
+          "monthly_eps": null,
+          "cumulative_eps": 18.59,
+          "cumulative_profit_yoy_pct": 51.2,
+          "cumulative_profit_yoy_abs": 1428
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n元大金控（2885）8月稅後純益為70.1億元，累計前八月稅後純益為499.41億元，每股稅後純益（EPS）3.6元；若未適用外匯價格變動準備金，前八月EPS為3.69元。\n前八月獲利年增114.6%，創歷史同期新高，\n主要驅動力為\n台股8月上漲逾3,000點、日均量突破1.1兆元\n，帶動證券經紀手收與各子公司獲利全面走強。\n\n**子公司明細**\n- 元大證券：\n8月稅後純益為45億元；累計前八月稅後純益為338.3億元，年增141%，每股稅後純益4.75元，證券業務獲利占比達68%，持續為金控獲利主力。\n\n- 元大銀行：\n8月稅後純益為15.3億元，前八月稅後純益為107.5億元，年增44%，EPS為1.17元，銀行本業維持穩定獲利動能，來源為利息淨收益及財管手收。\n\n- 元大人壽：\n8月稅後純益為3.55億元，保險本業穩定貢獻獲利，前八月稅後純益為27.99億元，EPS為0.96元；若未適用外匯價格變動準備金，前八月EPS為1.39元。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9746816",
+          "title": "元大金獲利／前八月近500億元、創同期新高 EPS達3.6元 | 個股情報 | 股市 | 聯合新聞網"
+        },
+        {
+          "url": "https://udn.com/news/story/7252/9747477",
+          "title": "元大金、華南金前八月犀利 稅後純益寫同期新高 | 個股情報 | 股市 | 聯合新聞網"
+        }
+      ],
+      "news_generated_at": "2026-09-11T01:05:43.215661"
     },
     {
       "code": "2886",
