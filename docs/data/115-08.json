@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-11T12:04:17.310087",
-  "success_count": 6,
-  "fail_count": 7,
+  "last_updated": "2026-09-11T12:49:08.678050",
+  "success_count": 7,
+  "fail_count": 6,
   "companies": [
     {
       "code": "2880",
@@ -109,7 +109,17 @@
         "cumulative_eps": 2.11,
         "cumulative_profit_yoy_pct": 149.9,
         "cumulative_profit_yoy_abs": 21767,
-        "fvoci_not_found_count": 1
+        "fvoci_adjusted": {
+          "cumulative_profit": 86200,
+          "monthly_profit": 10922,
+          "delta_vs_original": 49910,
+          "source_url": "https://ec.ltn.com.tw/article/breakingnews/5571002",
+          "source_quote": "凱基金指出，8月FVOCI股票處分利益約51.61億元，加計單月稅後獲利，合計對保留盈餘貢獻達109.22億元；累計今年前8月凱基金實現股票處分利益...合計對保留盈餘貢獻達862億元",
+          "original_value_text": "109.22 億元（當月）；862 億元（累計）",
+          "generated_at": "2026-09-11T12:51:01.661435",
+          "yoy_pct": 493.5,
+          "yoy_abs": 71677
+        }
       },
       "subsidiaries": [
         {
@@ -120,7 +130,17 @@
           "cumulative_eps": 2.42,
           "cumulative_profit_yoy_pct": 95.9,
           "cumulative_profit_yoy_abs": 6195,
-          "fvoci_not_found_count": 1
+          "fvoci_adjusted": {
+            "cumulative_profit": 62370,
+            "monthly_profit": 7411,
+            "delta_vs_original": 49717,
+            "source_url": "https://ec.ltn.com.tw/article/breakingnews/5571002",
+            "source_quote": "凱基人壽8月稅後獲利達22.49億元，加計FVOCI股票處分利益51.62億元，單月對保留盈餘貢獻為74.11億元，今年前8月累計稅後獲利126.53億元，加計FVOCI股票處分利益約497.17億元，合計對保留盈餘貢獻達623.7億元",
+            "original_value_text": "623.7 億元（累計）；74.11 億元（當月）",
+            "generated_at": "2026-09-11T12:51:01.661303",
+            "yoy_pct": 865.8,
+            "yoy_abs": 55912
+          }
         },
         {
           "name": "凱基銀行",
@@ -153,10 +173,18 @@
       "unit": "百萬元",
       "report_month": "115/08",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
-      "news_sources": [],
-      "news_generated_at": "2026-09-11T12:04:33.447511",
-      "news_retry_count": 1
+      "news_summary": "**重點**\n\n凱基金控（2883）公布 2026 年 8 月自結財務數據，單月稅後純益 57.61 億元，今年前八月累計稅後純益 362.9 億元，每股盈餘 2.11 元，超越歷年全年度獲利。\n主要驅動力來自壽險子公司大量實現 FVOCI 股票資本利得，以及證券業務強勁表現，惟凱基銀行因綠能授信增提準備，單月出現虧損，成為拖累項目。\n8 月 FVOCI 股票處分利益約 51.61 億元\n，加計後金控層級對保留盈餘貢獻大幅提升。\n\n**子公司明細**\n- **凱基人壽**：\n8 月稅後純益達 22.49 億元，加計 FVOCI 股票處分利益 51.62 億元，單月對保留盈餘貢獻為 74.11 億元；今年前八月累計稅後純益 126.53 億元，加計 FVOCI 股票處分利益約 497.17 億元，合計對保留盈餘貢獻達 623.7 億元。\n另，\n8 月新契約保費收入 161 億元，較去年同期成長 201%，累計新契約保費收入 913 億元，年成長 94%；其中投資型新契約保費年成長 602%，分紅保單保費年成長 1,630%。\n\n- **凱基銀行**：\n8 月因綠能授信風險評估增提準備，單月稅後虧損 2.99 億元；累計前 8 月提存前淨利 67.89 億元，較去年同期成長 16%，稅後獲利 46.55 億元；財管手續費收入較去年同期成長 30% 以上。\n\n- **凱基證券**：依新聞整體描述，\n銀行業務方面，凱基銀行對於達成年度獲利目標仍具高度信心。\n（新聞未單獨列出凱基證券 8 月數字，惟依公告資料，單月稅後純益 40.96 億元、累計前八月 227.54 億元，為集團獲利最大貢獻來源。）",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9749238",
+          "title": "凱基金獲利／前八月賣股進帳500億元 加計達862億元續創新高 | 個股情報 | 股市 | 聯合新聞網"
+        },
+        {
+          "url": "https://ec.ltn.com.tw/article/breakingnews/5571002",
+          "title": "凱基金前8月大賺362.9億 銀行踩綠能地雷單月虧損近3億 - 自由財經"
+        }
+      ],
+      "news_generated_at": "2026-09-11T12:49:32.160936"
     },
     {
       "code": "2884",
@@ -437,11 +465,62 @@
     {
       "code": "2892",
       "name": "第一金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "代孫公司公告美國第一銀行財務主管異動"
-      ]
+      "announcement_date": "115/09/11",
+      "announcement_title": "公告本公司暨主要子公司115年8月份自結合併盈餘數",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "第一金控",
+        "monthly_profit": 2913,
+        "cumulative_profit": 23850,
+        "monthly_eps": null,
+        "cumulative_eps": 1.66,
+        "cumulative_profit_yoy_pct": 21.3,
+        "cumulative_profit_yoy_abs": 4195
+      },
+      "subsidiaries": [
+        {
+          "name": "第一銀行",
+          "monthly_profit": 2452,
+          "cumulative_profit": 21110,
+          "monthly_eps": null,
+          "cumulative_eps": 1.68,
+          "cumulative_profit_yoy_pct": 12.5,
+          "cumulative_profit_yoy_abs": 2344
+        },
+        {
+          "name": "第一金證券",
+          "monthly_profit": 223,
+          "cumulative_profit": 1754,
+          "monthly_eps": null,
+          "cumulative_eps": 2.54,
+          "cumulative_profit_yoy_pct": 191.4,
+          "cumulative_profit_yoy_abs": 1152
+        },
+        {
+          "name": "第一金人壽",
+          "monthly_profit": 71,
+          "cumulative_profit": 664,
+          "monthly_eps": null,
+          "cumulative_eps": 0.97,
+          "cumulative_profit_yoy_pct": 36.1,
+          "cumulative_profit_yoy_abs": 176
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n第一金（2892）於9月11日公布8月自結獲利，單月稅後純益29.13億元，月減7.2%，獲利表現略微放緩；累計前八月稅後純益達238.5億元，續創歷史同期新高，年增21.3%，每股純益（EPS）達1.66元。\n主要拖累因素為第一銀行一次性股利收入遞減，以及為維護資產品質主動增提備抵呆帳，惟台股8月交投熱絡帶動第一金證券大幅回升，部分抵銷銀行端壓力。\n\n**子公司明細**\n- 第一銀行：\n8月稅後純益24.51億元，月減23.4%，主因一次性股利收入減少與增加提存；淨利息收益依舊穩定，覆蓋率為860.65%，逾放比維持在0.16%；累計前八月稅後純益達211.1億元，年增12.5%，創歷年同期新高。\n\n- 第一金證券：\n受惠於8月台股交投熱絡，單月稅後純益達2.22億元，月增84.4%，主因投資收益增加；累計稅後純益為17.54億元，年增191.6%。\n\n- 第一金人壽：\n因8月財務服務結果下滑，單月稅後純益降至0.71億元，月減59.1%；累計前八月稅後純益為6.64億元。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9749138",
+          "title": "第一金獲利／前八月238億元續創新高 EPS 1.66元 | 個股情報 | 股市 | 聯合新聞網"
+        },
+        {
+          "url": "https://news.cnyes.com/news/id/4952116",
+          "title": "15家金控前8月賺3100億元 4家獲利腰斬、僅1家守住正成長 | 鉅亨網 - 台股新聞"
+        }
+      ],
+      "news_generated_at": "2026-09-11T12:50:20.014965"
     },
     {
       "code": "5880",
