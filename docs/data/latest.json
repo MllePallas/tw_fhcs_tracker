@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-14T17:19:26.297486",
-  "success_count": 10,
-  "fail_count": 3,
+  "last_updated": "2026-09-14T14:06:57.157555",
+  "success_count": 11,
+  "fail_count": 2,
   "companies": [
     {
       "code": "2880",
@@ -479,22 +479,88 @@
       "unit": "百萬元",
       "report_month": "115/08",
       "parse_method": "llm",
-      "news_summary": "無相關說明",
-      "news_sources": [],
-      "news_generated_at": "2026-09-14T17:20:50.381733",
-      "news_retry_count": 1
+      "news_summary": "**重點**\n\n兆豐金（2886）公布 2026 年 8 月自結獲利，單月稅後純益 35.6 億元，較 7 月減少 18.2%，但較去年同期成長 16.92%；累計前八月稅後純益 292.19 億元，較去年同期增加 37.54 億元、年增 14.74%，每股稅後純益（EPS）1.97 元，兆豐金控及兆豐證券累計獲利均創歷年同期新高。\n金控副總暨發言人丁涵茵指出，主要是 7 月為股利收入高峰，進入 8 月後相關收益減少，形成單月獲利落差。\n整體獲利結構仍以銀行核心收益穩定成長為主軸，並由證券業務大幅增長提供重要支撐。\n\n**子公司明細**\n- 兆豐銀行：\n8 月稅後純益 25.34 億元，月減 39.84%、年增 8.26%；累計前八月稅後純益 226.12 億元，年增 7.39%。銀行 8 月獲利較 7 月減少主因是 7 月為股利收入高峰期，8 月股利收入回落所致；不過前八月利息淨收益及手續費淨收益分別增加近 29 億元及 13 億元，帶動整體累計獲利成長。\n此外，\n外界關注的森崴子公司富崴能源百億聯貸案，兆豐銀行評估尚未需要增提呆帳準備，未影響 8 月獲利。\n\n- 兆豐證券：\n8 月稅後純益 7.25 億元，較 7 月增加 11.18 億元，年增 57.26%；累計前八月稅後純益 38.57 億元，年增 138.96%，為各子公司中獲利成長幅度最為明顯。由於 8 月台股上漲約 3,000 點，帶動自營及承銷業務動能增加，累計獲利增加則受益於台股交投熱絡、上揚動能強勁。\n\n- 兆豐票券：\n8 月稅後純益 2.22 億元，月減 36.57%、年增 9.77%；累計前八月稅後純益 23.73 億元，年增 39.37%。8 月獲利較前月減少主因為股利收入較 7 月減少；累計獲利則受惠利差提升，加上外幣債券利息費用減少，帶動整體利息淨收益增加。\n\n- 兆豐產險：\n8 月稅後純益 0.82 億元，月減 18.81%、年減 16.29%；累計前八月稅後純益 7.46 億元，年增 34.53%。8 月保險收入增加，雖然股利收入略減，但財務費用也同步下降，整體財務結果僅小幅減少。",
+      "news_sources": [
+        {
+          "url": "https://ec.ltn.com.tw/article/breakingnews/5168613",
+          "title": "兆豐金8月獲利年增近3成 年底前有望追平去年表現 - 自由財經"
+        },
+        {
+          "url": "https://news.cnyes.com/news/id/5712011",
+          "title": "兆豐金:公告本公司暨主要子公司113年8月份自結合併盈餘 | 鉅亨網 - 台股公告"
+        }
+      ],
+      "news_generated_at": "2026-09-14T14:07:22.292230"
     },
     {
       "code": "2887",
       "name": "台新新光金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "本公司代子公司台新證保險代理人股份有限公司公告\r\n董事長選任事宜",
-        "本公司代子公司台新證保險代理人股份有限公司公告\r\n會計主管異動",
-        "本公司代子公司元富證券投資顧問股份有限公司公告\r\n董事長選任事宜",
-        "公告本公司受邀赴歐洲於115年9月7日至9月9日會晤當地投資機構，說明營運概況"
-      ]
+      "announcement_date": "115/09/14",
+      "announcement_title": "公告本公司暨主要子公司115年8月份合併自結業績資料",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "台新新光金控",
+        "monthly_profit": 6960,
+        "cumulative_profit": 59700,
+        "monthly_eps": null,
+        "cumulative_eps": 2.31,
+        "cumulative_profit_yoy_pct": 222.4,
+        "cumulative_profit_yoy_abs": 41180
+      },
+      "subsidiaries": [
+        {
+          "name": "台新銀行",
+          "monthly_profit": 2510,
+          "cumulative_profit": 17420,
+          "monthly_eps": null,
+          "cumulative_eps": 1.42,
+          "cumulative_profit_yoy_pct": 28.5,
+          "cumulative_profit_yoy_abs": 3860
+        },
+        {
+          "name": "新光銀行",
+          "monthly_profit": 850,
+          "cumulative_profit": 6910,
+          "monthly_eps": null,
+          "cumulative_eps": 1.39,
+          "cumulative_profit_yoy_pct": 444.1,
+          "cumulative_profit_yoy_abs": 5640
+        },
+        {
+          "name": "新光人壽",
+          "monthly_profit": 2080,
+          "cumulative_profit": 30350,
+          "monthly_eps": null,
+          "cumulative_eps": 3.29,
+          "cumulative_profit_yoy_pct": 3310.1,
+          "cumulative_profit_yoy_abs": 29460,
+          "fvoci_not_found_count": 1
+        },
+        {
+          "name": "台新證券",
+          "monthly_profit": 1550,
+          "cumulative_profit": 7060,
+          "monthly_eps": null,
+          "cumulative_eps": 2.82,
+          "cumulative_profit_yoy_pct": 451.6,
+          "cumulative_profit_yoy_abs": 5780
+        },
+        {
+          "name": "元富證券",
+          "monthly_profit": null,
+          "cumulative_profit": 1570,
+          "monthly_eps": null,
+          "cumulative_eps": 0.98,
+          "cumulative_profit_yoy_pct": 60.2,
+          "cumulative_profit_yoy_abs": 590
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n台新新光金（2887）於 9 月 14 日公布 8 月自結稅後純益約 69.7 億元，較去年同期成長 48%；累計前八月稅後純益為 597.5 億元，較去年同期成長 222%，每股稅後純益（EPS）為 2.31 元，續創歷史新高。\n壽險核心子公司新光人壽受惠於 CSM 持續穩定釋放與經常性投資收益的雙重挹注，營運績效維持穩健，1～8 月保險業務動能強勁，FYP 達 957.4 億元，年成長 33.3%。\n\n**子公司明細**\n- 台新銀行：8 月稅後純益 25.1 億元，累計 174.2 億元，較去年同期增加 29%，續創歷年同期新高；受惠核心業務動能強勁，淨利差較去年同期增加，帶動淨利收及淨手收均呈近 3 成成長；8 月底逾放比 0.12%，備抵呆帳覆蓋率 1,041%，資產品質穩健。\n\n- 新光銀行：8 月稅後純益 8.5 億元，累計 69.1 億元，較去年同期增加 110%，續創歷年同期新高；累計淨手續費收入較去年同期成長 28%，保險與基金等財富管理商品銷售動能強勁；8 月底逾放比 0.13%，備抵呆帳覆蓋率 926%。\n\n- 新光人壽：8 月稅後純益 20.8 億元，累計 303.5 億元；CSM 穩定釋放與經常性投資收益雙重挹注，營運績效穩健；1～8 月 FYP 達 957.4 億元，年成長 33.3%。\n\n- 台新證券：8 月稅後純益 15.5 億元，累計 86.3 億元（含元富證券今年 1 月 1 日至 4 月 5 日獲利），創歷年同期新高，主要受惠自營投資部位擴大，且證券市場指數上升、交易熱絡，帶動營業證券處分利益與經紀手續費收入增加。",
+      "news_sources": [],
+      "news_generated_at": "2026-09-14T14:08:14.878327"
     },
     {
       "code": "2889",
