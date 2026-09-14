@@ -578,18 +578,22 @@ def main():
     result_by_code = {r["code"]: r for r in results}
     all_codes = {c["code"] for c in FINANCIAL_HOLDINGS}
 
+    # existing 來自 latest.json，未必是本次目標期別（月初第一跑時 latest 仍指上個月）。
+    # 新聞摘要必須同期別才可沿用，否則會把上個月的摘要掛到新月份資料上。
+    existing_same_period = existing.get("report_period") == target_month
+
     for code in [c["code"] for c in FINANCIAL_HOLDINGS]:
         new_result = result_by_code.get(code)
         old_result = existing_by_code.get(code)
 
         if new_result and "error" not in new_result:
             # 重新爬取覆寫財報數字，但保留新聞摘要等不可重新生成的欄位
-            if old_result:
+            if old_result and existing_same_period:
                 for k in ("news_summary", "news_sources", "news_generated_at"):
                     if k in old_result:
                         new_result[k] = old_result[k]
             final_companies.append(new_result)
-        elif old_result and existing.get("report_period") == target_month:
+        elif old_result and existing_same_period:
             # 舊數據同一期間，沿用
             logger.info(f"[{HOLDINGS_BY_CODE[code]['name']}] Using cached data")
             final_companies.append(old_result)

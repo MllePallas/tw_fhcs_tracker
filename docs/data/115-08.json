@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-14T01:00:53.822650",
-  "success_count": 7,
-  "fail_count": 6,
+  "last_updated": "2026-09-14T17:19:26.297486",
+  "success_count": 10,
+  "fail_count": 3,
   "companies": [
     {
       "code": "2880",
@@ -88,12 +88,104 @@
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "國泰金控代子公司國泰投信公告受金管會裁罰案說明",
-        "本公司代子公司國泰人壽公告取得The Resolute Fund VII, L.P."
-      ]
+      "announcement_date": "115/09/14",
+      "announcement_title": "公告本公司暨主要子公司115年08月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=2&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 11300,
+        "cumulative_profit": 98640,
+        "monthly_eps": null,
+        "cumulative_eps": 6.47,
+        "cumulative_profit_yoy_pct": 51.6,
+        "cumulative_profit_yoy_abs": 33590,
+        "fvoci_adjusted": {
+          "cumulative_profit": 207400,
+          "monthly_profit": 20410,
+          "delta_vs_original": 108760,
+          "label": "對保留盈餘影響數",
+          "cumulative_eps": 13.89,
+          "source_url": "https://udn.com/news/story/7252/9753883",
+          "source_quote": "國泰金（2882）2026年8月稅後純益113億元，累計稅後純益達986.4億元，每股純益（EPS）6.47元，加計FVOCI股票處分利益91.1億元後，對單月保留盈餘影響數為204.1億元，累計前8月對保留盈餘影響數近2,074億元，續創歷史新高，累計前8月調整後EPS為13.89元",
+          "original_value_text": "近2,074億元（累計）；204.1億元（當月）",
+          "generated_at": "2026-09-14T17:22:02.239264",
+          "yoy_pct": 218.8,
+          "yoy_abs": 142350
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 6740,
+          "cumulative_profit": 58410,
+          "monthly_eps": null,
+          "cumulative_eps": 9.18,
+          "cumulative_profit_yoy_pct": 105.9,
+          "cumulative_profit_yoy_abs": 30040,
+          "fvoci_adjusted": {
+            "cumulative_profit": 163170,
+            "monthly_profit": 15740,
+            "delta_vs_original": 104760,
+            "source_url": "https://udn.com/news/story/7252/9753883",
+            "source_quote": "國泰人壽8月單月稅後純益67.4億元，累計稅後純益584.1億元，加計FVOCI股票處分利益90億元後，單月對保留盈餘影響數為157.4億元，累計前八月對保留盈餘影響數達1,631.7億元",
+            "original_value_text": "1,631.7億元（累計）；157.4億元（當月）",
+            "generated_at": "2026-09-14T17:22:02.237252",
+            "yoy_pct": 475.1,
+            "yoy_abs": 134800
+          }
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 3710,
+          "cumulative_profit": 35000,
+          "monthly_eps": null,
+          "cumulative_eps": 2.55,
+          "cumulative_profit_yoy_pct": 11.9,
+          "cumulative_profit_yoy_abs": 3720
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 320,
+          "cumulative_profit": 3190,
+          "monthly_eps": null,
+          "cumulative_eps": 15.94,
+          "cumulative_profit_yoy_pct": 25.1,
+          "cumulative_profit_yoy_abs": 640
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 890,
+          "cumulative_profit": 6290,
+          "monthly_eps": null,
+          "cumulative_eps": 7.96,
+          "cumulative_profit_yoy_pct": 145.7,
+          "cumulative_profit_yoy_abs": 3730
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 370,
+          "cumulative_profit": 2500,
+          "monthly_eps": null,
+          "cumulative_eps": 16.63,
+          "cumulative_profit_yoy_pct": 38.1,
+          "cumulative_profit_yoy_abs": 690
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n國泰金控（2882）於9月14日公布2026年8月稅後純益113億元，累計前8月稅後純益達986.4億元，每股稅後純益（EPS）6.47元；加計FVOCI股票處分損益後，累計前8月對保留盈餘之影響數突破2,000億元、達2,074億元，續創歷史新高。\n主要子公司獲利表現亮眼，國泰世華銀行、國泰產險、國泰證券及國泰投信累計稅後純益均續創歷年同期新高；國泰金控及國泰人壽累計前八月對保留盈餘之影響數亦再創歷史新高。\n\n**子公司明細**\n- 國泰人壽：\n8月稅後純益67.4億元，累計稅後純益584.1億元，加計FVOCI股票處分損益，累計前八月對保留盈餘影響數已突破1,600億元，創歷史新高，淨值亦上升至近兆元之歷史新高。單月獲利表現穩健，主要反映CSM穩定攤銷與良好利差貢獻。\n\n- 國泰世華銀行：\n8月稅後純益37.1億元，累計稅後純益350億元，再創同期新高，年成長12%。淨利息收入受惠於放款業務動能強勁及降息帶動外幣資金成本下降，維持雙位數成長；財富管理業務維持強勁成長，帶動淨手續費收入持續成長。\n\n- 國泰產險：\n8月稅後純益3.2億元，累計稅後純益達31.9億元，續創同期新高，加計FVOCI股票處分損益17.1億元，累計前8月對保留盈餘之影響數達49億元。\n\n- 國泰證券：\n8月稅後純益8.9億元，累計稅後純益62.9億元，較去年同期大幅成長146%，已超越2025年全年獲利水準，主要受惠台股交易熱絡帶動經紀業務顯著成長，並把握市場機會增加自營資本利得貢獻。\n\n- 國泰投信：\n8月稅後純益3.7億元，累計稅後純益25億元，年成長38%，總管理資產規模為新台幣3.5兆元，年成長57%。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9753883",
+          "title": "國泰金獲利／前八月賺近千億元 加計賣股貢獻近2074億元創新高 | 聯合新聞網"
+        },
+        {
+          "url": "https://news.cnyes.com/news/id/6605778",
+          "title": "國泰金前8月賺近千億 對保留盈餘影響數突破2000億元再創新高 | 鉅亨網"
+        }
+      ],
+      "news_generated_at": "2026-09-14T17:20:02.626945"
     },
     {
       "code": "2883",
@@ -240,14 +332,18 @@
       "unit": "百萬元",
       "report_month": "115/08",
       "parse_method": "llm",
-      "news_summary": "**重點**\n\n玉山金控公布 2026 年 7 月自結盈餘，單月稅後純益 30.1 億元，累計前七月稅後純益 244.4 億元，創歷年同期最高紀錄。\n累計每股稅後盈餘為 1.51 元，較去年同期成長 20.95%。\n\n**子公司明細**\n- 玉山銀行：累計前七月稅後純益 218.3 億元，較去年同期成長 8.75%，為集團獲利主要來源。\n\n- 玉山證券：累計前七月稅後純益 32.5 億元。\n\n- 玉山創投：累計前七月稅後純益 4.2 億元；玉山投信累計前七月稅後純益 3.2 億元。",
+      "news_summary": "**重點**\n\n玉山金控（2884）公布 2026 年 8 月自結盈餘，單月稅後純益 36 億元，累計稅後純益 280.4 億元，創歷年同期獲利最高，較去年同期增加 20.32%，EPS 為 1.73 元。\n今年以來每月獲利皆改寫歷史同期新高，除銀行核心子公司維持強健動能外，證券、投信亦呈穩健成長；玉山銀行 8 月獲利成長主要驅動力來自淨利收及手續費收入均維持強健成長動能。\n\n**子公司明細**\n- 玉山銀行：8 月單月稅後純益 30.1 億元，累計稅後純益 248.4 億元，較去年同期成長 10.2%。\n\n- 玉山證券：8 月單月稅後純益 4.2 億元，前 8 月累計稅後純益 36.6 億元，年增 146%。\n\n- 玉山創投：8 月因資本市場回穩，帶動投資評價回升，單月稅後純益 3.8 億元，累計稅後純益 8 億元。\n\n- 玉山投信：前 8 月累計稅後純益 3.6 億元。\n\n- 此外，玉山金控 9 月 1 日完成與三商壽之股權交割程序，三商壽正式成為玉山金控子公司，金控版圖正式邁入「金控 2.0」新階段，躍升為國內資產規模第 5 大上市金控公司，資產規模逾 6.6 兆元。",
       "news_sources": [
         {
-          "url": "https://www.ctee.com.tw/news/20260807701486-430201",
-          "title": "玉山金前七月獲利244.4億元 同期最高 - 工商時報"
+          "url": "https://udn.com/news/story/7252/9739625",
+          "title": "玉山金獲利／前八月280億元續創歷年新高、年增20% EPS 1.73元 | 個股情報 | 股市 | 聯合新聞網"
+        },
+        {
+          "url": "https://news.cnyes.com/news/id/6599463",
+          "title": "玉山金:公告本公司暨子公司115年8月自結盈餘 | 鉅亨網 - 台股公告"
         }
       ],
-      "news_generated_at": "2026-08-07T17:38:08.599262"
+      "news_generated_at": "2026-09-14T17:23:56.722879"
     },
     {
       "code": "2885",
@@ -330,11 +426,63 @@
     {
       "code": "2886",
       "name": "兆豐金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "代本公司之子公司兆豐國際證券投資信託股份有限公司公告\r\n董事會推選張傳章先生擔任董事長"
-      ]
+      "announcement_date": "115/09/14",
+      "announcement_title": "公告本公司暨主要子公司115年8月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "兆豐金控",
+        "monthly_profit": 3560,
+        "cumulative_profit": 29219,
+        "monthly_eps": null,
+        "cumulative_eps": 1.97,
+        "cumulative_profit_yoy_pct": 14.7,
+        "cumulative_profit_yoy_abs": 3754
+      },
+      "subsidiaries": [
+        {
+          "name": "兆豐銀行",
+          "monthly_profit": 2534,
+          "cumulative_profit": 22612,
+          "monthly_eps": null,
+          "cumulative_eps": 2.26,
+          "cumulative_profit_yoy_pct": 7.4,
+          "cumulative_profit_yoy_abs": 1557
+        },
+        {
+          "name": "兆豐證券",
+          "monthly_profit": 725,
+          "cumulative_profit": 3857,
+          "monthly_eps": null,
+          "cumulative_eps": 3.22,
+          "cumulative_profit_yoy_pct": 139.0,
+          "cumulative_profit_yoy_abs": 2243
+        },
+        {
+          "name": "兆豐票券",
+          "monthly_profit": 222,
+          "cumulative_profit": 2373,
+          "monthly_eps": null,
+          "cumulative_eps": 1.57,
+          "cumulative_profit_yoy_pct": 39.3,
+          "cumulative_profit_yoy_abs": 670
+        },
+        {
+          "name": "兆豐產險",
+          "monthly_profit": 82,
+          "cumulative_profit": 746,
+          "monthly_eps": null,
+          "cumulative_eps": 2.27,
+          "cumulative_profit_yoy_pct": 34.4,
+          "cumulative_profit_yoy_abs": 191
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "無相關說明",
+      "news_sources": [],
+      "news_generated_at": "2026-09-14T17:20:50.381733",
+      "news_retry_count": 1
     },
     {
       "code": "2887",
@@ -386,14 +534,18 @@
       "unit": "百萬元",
       "report_month": "115/08",
       "parse_method": "llm",
-      "news_summary": "**重點**\n\n國票金控 2026 年 7 月單月自結稅後純益 1.89 億元，累計前七月稅後純益 29.72 億元，創歷年同期新高，\n較去年同期增加 19.97 億元、年增 204.82%，累計每股稅後盈餘 0.82 元，7 月底每股淨值 12.84 元。\n獲利成長主要受台股走強帶動子公司投資收益大幅增長，以及核心業務穩健成長所挹注。\n\n**子公司明細**\n- 國際票券：7 月單月稅後純益 1.86 億元，累計前七月 17.45 億元，較去年同期成長 65.47%。\n\n- 國票證券：7 月單月稅後純益 2.46 億元，累計前七月 22.89 億元，較去年同期成長 390.94%，為本期獲利成長主要來源。\n\n- 國票創投：累計前七月稅後虧損 3,161 萬元。",
+      "news_summary": "**重點**\n\n國票金控（2889）公布 2026 年 8 月自結稅後純益 3 億 7,466 萬元，累計 1 至 8 月稅後純益 33 億 4,688 萬元，續創同期新高，年增 157.89%；每股稅後純益 0.92 元，8 月底每股淨值 12.95 元。\n獲利雙引擎為國際票券與國票證券，\n核心子公司國票證券前 8 月獲利年增 3.3 倍，國際票券亦在外幣債券養券收益由負轉正及股權投資挹注下，累計獲利年增近 6 成，成為金控獲利雙引擎。\n\n**子公司明細**\n- 國際票券：\n8 月稅後純益 2 億 1,548 萬元，累計前 8 月稅後純益達 19 億 6,090 萬元，較去年同期成長 59.57%。票券、債券及股權三大業務皆維持向上增長動能，其中債券業務受惠於外幣債券養券收益由負轉正，加上買賣斷操作得宜；股權業務則因 AI、電子產業股價表現亮眼，挹注相關股票、可轉債部位投資收益，輔以股息收益貢獻入帳，獲利顯著提升。\n\n- 國票證券：\n8 月稅後純益 5 億 1,357 萬元，累計前 8 月稅後純益達 28 億 300 萬元，較去年同期成長 328.10%，獲利成長續創歷史新高。受惠台股日均成交值再創紀錄，帶動經紀業務手續費收入及融資、不限用途借貸利息收入顯著成長；自營業務聚焦 AI、半導體產業，期貨衍生性商品、股票及權證等部位操作績效優異。\n\n- 國票創投：\n115 年 1 至 8 月持續虧損，稅後損失 1.41 億元，較前 7 月稅後虧損 3,161 萬元大增逾億元，遭轉投資中國的國旺租賃拖累，為今年國票金獲利最大變數。",
       "news_sources": [
         {
-          "url": "https://money.udn.com/money/story/5613/9677228",
-          "title": "國票金獲利／前七月稅後純益29.7億元創同期新高 EPS 0.82元 - 經濟日報"
+          "url": "https://news.cnyes.com/news/id/6599290",
+          "title": "國票金:公告本公司115年8月份自結盈餘 | 鉅亨網 - 台股公告"
+        },
+        {
+          "url": "https://udn.com/news/story/7252/9739312",
+          "title": "國票金獲利／前八月賺33.46億元、續創同期新高 EPS 0.92元 | 個股情報 | 股市 | 聯合新聞網"
         }
       ],
-      "news_generated_at": "2026-08-07T17:25:34.794235"
+      "news_generated_at": "2026-09-14T17:24:48.124916"
     },
     {
       "code": "2890",
@@ -440,14 +592,18 @@
       "unit": "百萬元",
       "report_month": "115/08",
       "parse_method": "llm",
-      "news_summary": "**重點**\n\n永豐金控公布 2026 年 7 月自結損益，單月稅後淨利 43.8 億元，累計前七月稅後淨利 289.32 億元，較去年同期成長 89%。\n累計每股稅後盈餘為 1.96 元，年化股東權益報酬率達 19.00%。獲利成長主要受惠於經紀與泛財管手續費淨收益成長，以及較高的資本利得。\n\n**子公司明細**\n- 永豐銀行：累計前七月稅後淨利 155.18 億元，年增 21%，連續第六年創獲利新高；由利息淨收益與手續費淨收益增長帶動，年增幅各為 26% 與 13%。\n\n- 永豐金證券：累計前七月稅後淨利 87.64 億元，年增 188%，創歷史同期新高；手續費淨收益年成長 132%。\n\n- 京城銀行：累計前七月稅後淨利 43.23 億元；扣除 1 月京城銀國際租賃處分利得 2.88 億元後，實質貢獻 38.70 億元。",
+      "news_summary": "**重點**\n\n永豐金（2890）公布 2026 年前八月自結累計稅後純益達 333.44 億元，較前一年度成長 84%，前八月累計每股盈餘（EPS）為 2.26 元，年化股東權益報酬率達 8.83%，各財務結果皆創下公司歷史同期新高。8 月單月金控稅後純益為 44.12 億元（月增 1%），月度間增長主因證券及創投子公司資本利得較上月增加，以及較低的所得稅費用。\n\n**子公司明細**\n- 永豐銀行：\n8 月稅後純益 17.27 億元（月減 13%），月度間減降主因手續費淨收益及金融交易淨收益較上月減少；前八月累計稅後純益達 172.45 億元（年增 19%），淨收益成長由利息淨收益及手續費淨收益帶動，年增各為 26% 與 13%，逾放比率維持 0.19%。\n\n- 京城銀行：\n8 月稅後純益 4.96 億元（月減 13%），主因利息淨收益及金融交易淨收益較上月減少，部分被手續費淨收益成長抵銷；前八月累計稅後純益 48.19 億元，扣除 1 月國際租賃處分利得 2.88 億元及可辨認無形資產攤銷後，對金控獲利貢獻為 42.60 億元，逾放比率 0.14%。\n\n- 永豐金證券：\n8 月稅後純益 14.39 億元（月增 2%），月度間成長主因自營及承銷業務資本利得較上月顯著增加，抵銷了手續費淨收益的減降。",
       "news_sources": [
         {
-          "url": "https://www.ctee.com.tw/news/20260810701388-430304",
-          "title": "太會賺！永豐金前七月獲利成長近9成 EPS衝上1.96元 - 工商時報"
+          "url": "https://udn.com/news/story/7239/9742503",
+          "title": "永豐金前八月獲利創高 稅後純益333億年增84% | 金融要聞 | 產經 | 聯合新聞網"
+        },
+        {
+          "url": "https://udn.com/news/story/7252/9741720",
+          "title": "永豐金獲利／前八月稅後純益333億元、EPS達2.26元 再創同期新高 | 個股情報 | 股市 | 聯合新聞網"
         }
       ],
-      "news_generated_at": "2026-08-10T17:28:09.889168"
+      "news_generated_at": "2026-09-14T17:25:36.262786"
     },
     {
       "code": "2891",
@@ -514,10 +670,6 @@
         {
           "url": "https://udn.com/news/story/7252/9749138",
           "title": "第一金獲利／前八月238億元續創新高 EPS 1.66元 | 個股情報 | 股市 | 聯合新聞網"
-        },
-        {
-          "url": "https://news.cnyes.com/news/id/4952116",
-          "title": "15家金控前8月賺3100億元 4家獲利腰斬、僅1家守住正成長 | 鉅亨網 - 台股新聞"
         }
       ],
       "news_generated_at": "2026-09-11T12:50:20.014965"
@@ -525,15 +677,86 @@
     {
       "code": "5880",
       "name": "合庫金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "公告本公司法人董事代表人異動",
-        "公告本公司暨主要子公司115年6月份自結合併盈餘",
-        "代子公司合作金庫證券股份有限公司公告\r\n新任總經理資格業經金管會核准",
-        "代子公司合作金庫人壽保險股份有限公司\r\n公告董事會決議114年度股利配發基準日",
-        "公告本公司董事會決議114年度股利配發基準日"
-      ]
+      "announcement_date": "115/09/14",
+      "announcement_title": "公告本公司暨主要子公司115年8月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "合庫金控",
+        "monthly_profit": 2248,
+        "cumulative_profit": 17725,
+        "monthly_eps": null,
+        "cumulative_eps": 1.1,
+        "cumulative_profit_yoy_pct": 23.3,
+        "cumulative_profit_yoy_abs": 3350
+      },
+      "subsidiaries": [
+        {
+          "name": "合庫銀行",
+          "monthly_profit": 1952,
+          "cumulative_profit": 16207,
+          "monthly_eps": null,
+          "cumulative_eps": 1.15,
+          "cumulative_profit_yoy_pct": 12.6,
+          "cumulative_profit_yoy_abs": 1815
+        },
+        {
+          "name": "合庫資產",
+          "monthly_profit": 35,
+          "cumulative_profit": 273,
+          "monthly_eps": null,
+          "cumulative_eps": 0.87,
+          "cumulative_profit_yoy_pct": 5.4,
+          "cumulative_profit_yoy_abs": 14
+        },
+        {
+          "name": "合庫票券",
+          "monthly_profit": 30,
+          "cumulative_profit": 396,
+          "monthly_eps": null,
+          "cumulative_eps": 0.81,
+          "cumulative_profit_yoy_pct": 64.3,
+          "cumulative_profit_yoy_abs": 155
+        },
+        {
+          "name": "合庫證券",
+          "monthly_profit": 238,
+          "cumulative_profit": 1599,
+          "monthly_eps": null,
+          "cumulative_eps": 3.07,
+          "cumulative_profit_yoy_pct": 980.4,
+          "cumulative_profit_yoy_abs": 1451
+        },
+        {
+          "name": "合庫人壽",
+          "monthly_profit": 81,
+          "cumulative_profit": 1210,
+          "monthly_eps": null,
+          "cumulative_eps": 1.76,
+          "cumulative_profit_yoy_pct": 1152.2,
+          "cumulative_profit_yoy_abs": 1325,
+          "cumulative_profit_yoy_status": "loss_to_profit"
+        },
+        {
+          "name": "合庫投信",
+          "monthly_profit": 2,
+          "cumulative_profit": 6,
+          "monthly_eps": null,
+          "cumulative_eps": 0.19,
+          "cumulative_profit_yoy_pct": -33.3,
+          "cumulative_profit_yoy_abs": -3
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n合庫金（5880）2026年8月合併稅後淨利為22.48億元，累計至8月合併稅後淨利為183.25億元，較去年同期成長31.92%，續創歷年同期新高紀錄。\n主要獲利動能來自銀行核心業務穩健擴張，以及證券與人壽子公司的高速成長，三大主要子公司累計獲利均同步刷新歷年同期最高紀錄。\n\n**子公司明細**\n- 合庫銀行：\n累計至8月合併稅後淨利為162.07億元，較去年同期增加18.15億元，成長12.61%。\n\n- 合庫證券：\n累計至8月合併稅後淨利為15.99億元，較去年同期增加14.51億元，獲利大幅成長。\n\n- 合庫人壽：\n累計至8月稅後淨利為12.10億元，較去年同期增加9.8億元，獲利成長動能佳。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9753875",
+          "title": "合庫金獲利／前八月183億元續創歷年新高 年成長31% | 個股情報 | 股市 | 聯合新聞網"
+        }
+      ],
+      "news_generated_at": "2026-09-14T17:21:32.454791"
     }
   ],
   "market_summary": {
