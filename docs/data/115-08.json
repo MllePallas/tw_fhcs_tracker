@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-14T14:06:57.157555",
-  "success_count": 11,
-  "fail_count": 2,
+  "last_updated": "2026-09-14T14:59:17.196242",
+  "success_count": 12,
+  "fail_count": 1,
   "companies": [
     {
       "code": "2880",
@@ -534,7 +534,7 @@
           "cumulative_eps": 3.29,
           "cumulative_profit_yoy_pct": 3310.1,
           "cumulative_profit_yoy_abs": 29460,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         },
         {
           "name": "台新證券",
@@ -674,15 +674,45 @@
     {
       "code": "2891",
       "name": "中信金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司Land and Houses Securities Public Company\r\nLimited公告會計主管異動",
-        "代子公司中國信託商業銀行公告授信資產之轉讓",
-        "代台灣人壽公告核准投資\r\nLightspeed Platinum, L.P.",
-        "代子公司CTBC Asia Limited公告董事辭任",
-        "代子公司中國信託商業銀行股份有限公司公告\r\n與支付寶支付科技有限公司合作支付寶支付續約"
-      ]
+      "announcement_date": "115/09/14",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n115年度八月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 9931,
+        "cumulative_profit": 53879,
+        "monthly_eps": null,
+        "cumulative_eps": 2.7,
+        "cumulative_profit_yoy_pct": 8.7,
+        "cumulative_profit_yoy_abs": 4298
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 6911,
+          "cumulative_profit": 42596,
+          "monthly_eps": null,
+          "cumulative_eps": 2.28,
+          "cumulative_profit_yoy_pct": 14.6,
+          "cumulative_profit_yoy_abs": 5421
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 3059,
+          "cumulative_profit": 13636,
+          "monthly_eps": null,
+          "cumulative_eps": 2.19,
+          "cumulative_profit_yoy_pct": 20.2,
+          "cumulative_profit_yoy_abs": 2296,
+          "fvoci_not_found_count": 1
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n\n中信金（2891）於14日公告2026年8月份自結盈餘，單月稅後盈餘99.31億元，累計前八月合併稅後盈餘538.79億元，每股稅後盈餘（EPS）為2.7元。\n獲利動能主要由中信銀行核心業務帶動，\n子公司中國信託銀行8月份核心業務動能穩健，財富管理業務持續強勁\n；壽險端則受債券及基金評價利益挹注。在金控層級FVOCI揭露方面，\n8月FVOCI之權益工具稅後處分利益金控合計160.97億元，累計前八月合計505.88億元；金控8月本期淨利加計FVOCI權益工具稅後處分利益為260.28億元，累計前八月共1,044.67億元，超越歷年全年獲利表現，兩者合計對保留盈餘影響為每股5.29元。\n\n**子公司明細**\n- 中國信託銀行：\n單月稅後獲利69.11億元，累計前8月稅後獲利425.96億元，較去年同期成長15%，再創歷年同期獲利新高；除淨利差擴大外，財富管理業務手續費收入年增近4成，刷卡消費金額成長逾2成，存、放款餘額均維持雙位數增長。\n\n- 台灣人壽：\n8月份受債券及基金評價利益挹注，單月稅後獲利30.59億元；累計前八月稅後獲利為136.36億元，主要來自過往累積CSM攤銷、基金評價利益及投資型保單以國際財務報導準則第15號重新衡量之影響。\n保險業務動能方面，在分紅及投資型保單銷售帶動下，累計新契約保費達826億元，較去年同期成長107%。",
+      "news_sources": [],
+      "news_generated_at": "2026-09-14T14:59:39.007602"
     },
     {
       "code": "2892",
