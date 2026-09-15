@@ -772,7 +772,19 @@
         "monthly_eps": null,
         "cumulative_eps": 2.7,
         "cumulative_profit_yoy_pct": 8.7,
-        "cumulative_profit_yoy_abs": 4298
+        "cumulative_profit_yoy_abs": 4298,
+        "fvoci_adjusted": {
+          "cumulative_profit": 104467,
+          "monthly_profit": 26028,
+          "delta_vs_original": 50588,
+          "cumulative_eps": 5.29,
+          "source_url": "https://ec.ltn.com.tw/article/breakingnews/5573892",
+          "source_quote": "金控8月本期淨利加計FVOCI權益工具稅後處分利益為260.28億元，累計前8月共1044.67億元，超越歷年全年獲利表現，兩者合計對保留盈餘影響為每股5.29元",
+          "original_value_text": "累計前八月共1,044.67億元",
+          "generated_at": "2026-09-15T17:43:28.739361",
+          "yoy_pct": 110.7,
+          "yoy_abs": 54886
+        }
       },
       "subsidiaries": [
         {
@@ -792,7 +804,7 @@
           "cumulative_eps": 2.19,
           "cumulative_profit_yoy_pct": 20.2,
           "cumulative_profit_yoy_abs": 2296,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         }
       ],
       "unit": "百萬元",
