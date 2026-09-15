@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-15T01:23:49.226109",
-  "success_count": 12,
-  "fail_count": 1,
+  "last_updated": "2026-09-15T17:40:32.192201",
+  "success_count": 13,
+  "fail_count": 0,
   "companies": [
     {
       "code": "2880",
@@ -77,13 +77,101 @@
     {
       "code": "2881",
       "name": "富邦金",
-      "error": "no_match",
-      "error_msg": "115/08 月自結損益尚未公告",
-      "available_titles": [
-        "公告本公司受邀參加投資人會議",
-        "富邦金控代子公司富邦證券公告發行115年度第二期無擔保\r\n次順位普通公司債(補充115/05/20公告)",
-        "富邦金控代子公司富邦證券公告發行115年度第三期無擔保\r\n主順位普通公司債(補充115/05/20公告)"
-      ]
+      "announcement_date": "115/09/15",
+      "announcement_title": "公告本公司暨主要子公司115年8月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": 24680,
+        "cumulative_profit": 120260,
+        "monthly_eps": null,
+        "cumulative_eps": 8.3,
+        "cumulative_profit_yoy_pct": 63.7,
+        "cumulative_profit_yoy_abs": 46780,
+        "fvoci_adjusted": {
+          "cumulative_profit": 233680.0,
+          "monthly_profit": 37430.0,
+          "delta_vs_original": 113420.0,
+          "label": "對保留盈餘影響數",
+          "cumulative_eps": 16.4,
+          "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+          "source_quote": "公告本公司暨主要子公司115年8月合併自結損益…對保留盈餘影響數(註3)：富邦金控 8月374.3億元、累計1-8月2,336.8億元、基本EPS 16.40元",
+          "original_value_text": "單月374.3億元、累計2,336.8億元",
+          "manual": true,
+          "generated_at": "2026-09-15T17:42:03.921731",
+          "yoy_pct": 218.0,
+          "yoy_abs": 160200
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 4320,
+          "cumulative_profit": 33690,
+          "monthly_eps": null,
+          "cumulative_eps": 1.96,
+          "cumulative_profit_yoy_pct": 30.9,
+          "cumulative_profit_yoy_abs": 7950
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 2320,
+          "cumulative_profit": 15500,
+          "monthly_eps": null,
+          "cumulative_eps": 9.54,
+          "cumulative_profit_yoy_pct": 139.6,
+          "cumulative_profit_yoy_abs": 9030
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 720,
+          "cumulative_profit": 7140,
+          "monthly_eps": null,
+          "cumulative_eps": 23.79,
+          "cumulative_profit_yoy_pct": 69.2,
+          "cumulative_profit_yoy_abs": 2920
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": 17250,
+          "cumulative_profit": 65170,
+          "monthly_eps": null,
+          "cumulative_eps": 5.5,
+          "cumulative_profit_yoy_pct": 79.6,
+          "cumulative_profit_yoy_abs": 28890,
+          "fvoci_adjusted": {
+            "cumulative_profit": 173240.0,
+            "monthly_profit": 29320.0,
+            "delta_vs_original": 108070.0,
+            "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+            "source_quote": "公告本公司暨主要子公司115年8月合併自結損益…對保留盈餘影響數(註3)：富邦人壽 8月293.2億元、累計1-8月1,732.4億元、基本EPS 14.63元",
+            "original_value_text": "單月293.2億元、累計1,732.4億元",
+            "manual": true,
+            "generated_at": "2026-09-15T17:42:06.794826",
+            "yoy_pct": 377.5,
+            "yoy_abs": 136960
+          }
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 190,
+          "cumulative_profit": 1230,
+          "monthly_eps": null,
+          "cumulative_eps": 4.56
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/08",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n富邦金8月稅後淨利246.8億元，累計前8月1,202.6億元、EPS 8.30元。加計FVOCI股票處分利益後，單月對保留盈餘影響數374.3億元、累計前8月2,336.8億元（每股16.40元），超越歷年全年獲利表現，主要受惠於股票處分收益。\n\n**子公司明細**\n富邦人壽8月稅後淨利172.5億元、累計前8月651.7億元，單月與累計對保留盈餘影響數分別為293.2億元、1,732.4億元，皆創歷年同期新高；北富銀8月43.2億元、年增32%，累計336.9億元、年增31%，受營收較去年同期成長25%帶動，單月與累計獲利均創歷年同期新高；富邦證券累計155.0億元、年增140%；富邦產險累計71.4億元，超越歷年全年獲利表現；富邦投信累計12.3億元。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20260915701534-430304",
+          "title": "富邦金獲利出爐 前八月稅後純益1,202.6億元 EPS達8.3元 | 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-09-15T17:42:00.993330",
+      "news_manual": true
     },
     {
       "code": "2882",
