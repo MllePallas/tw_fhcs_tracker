@@ -10,7 +10,7 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/08",
-  "last_updated": "2026-09-14T14:59:17.196242",
+  "last_updated": "2026-09-15T01:23:49.226109",
   "success_count": 12,
   "fail_count": 1,
   "companies": [
@@ -534,7 +534,7 @@
           "cumulative_eps": 3.29,
           "cumulative_profit_yoy_pct": 3310.1,
           "cumulative_profit_yoy_abs": 29460,
-          "fvoci_not_found_count": 2
+          "fvoci_not_found_count": 3
         },
         {
           "name": "台新證券",
@@ -704,7 +704,7 @@
           "cumulative_eps": 2.19,
           "cumulative_profit_yoy_pct": 20.2,
           "cumulative_profit_yoy_abs": 2296,
-          "fvoci_not_found_count": 1
+          "fvoci_not_found_count": 2
         }
       ],
       "unit": "百萬元",
