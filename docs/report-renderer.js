@@ -19,8 +19,8 @@ function render(md) {
   const splitRow = (s) => s.replace(/^\s*\|/, '').replace(/\|\s*$/, '').split('|').map(c => c.trim());
   // 純粹的帶正負號數字（含 % 與 *、† 註記符）→ 沿用站內方向色，讓報告表格與總表讀起來一致
   const signClass = (cell) => {
-    const m = /^([+-])[\d,.]+\s*%?\s*[*†]?$/.exec(cell);
-    return m ? (m[1] === '-' ? ' num-neg' : ' num-pos') : '';
+    const m = /^([+−-])[\d,.]+\s*%?\s*[*†]?$/.exec(cell);
+    return m ? (['-', '−'].includes(m[1]) ? ' num-neg' : ' num-pos') : '';
   };
 
   while (i < lines.length) {

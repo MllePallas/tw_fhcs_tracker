@@ -13,6 +13,11 @@ on:
       - 'docs/comparison-rules.json'
       - 'scripts/build-analysis-pack.cjs'
       - 'scraper/monthly_report*'
+      - 'scraper/report_sources.py'
+      - 'scripts/render-report.cjs'
+      - 'docs/report-design.css'
+      - 'docs/report-renderer.js'
+      - 'docs/reports/*.md'
       - '.github/workflows/monthly_report.yml'
   workflow_dispatch:
     inputs:
@@ -48,7 +53,7 @@ jobs:
         with:
           python-version: '3.11'
       - name: Install report dependency
-        run: pip install 'anthropic>=0.28,<1'
+        run: pip install 'anthropic>=0.28,<1' 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5'
       - name: Verify calculations and report publishing
         run: |
           node tests/analytics.test.cjs

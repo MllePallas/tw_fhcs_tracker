@@ -1,0 +1,173 @@
+{
+  "news-2026-07-2881": {
+    "title": "富邦金當月獲利報導摘要",
+    "url": "https://udn.com/news/story/7252/9692092",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2881",
+    "period": "2026/07",
+    "content_hash": "6ad80234b6271dcea96fee2e45ff4026aea128f24226b95d26a62354a8964e67"
+  },
+  "news-2026-07-2882": {
+    "title": "國泰金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260813701544-430304",
+    "published_at": "2026-08-13",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2882",
+    "period": "2026/07",
+    "content_hash": "10c4505e712ac738bcec84ef8e921fcae4124b6873cdef0ef37062c0cdbde5a0"
+  },
+  "news-2026-07-2883": {
+    "title": "凱基金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260814700073-439901",
+    "published_at": "2026-08-14",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2883",
+    "period": "2026/07",
+    "content_hash": "99a83f2905caba3392f0a484a128beb9533e793f72298fdc2e018fcb35e36898"
+  },
+  "news-2026-07-2884": {
+    "title": "玉山金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260807701486-430201",
+    "published_at": "2026-08-07",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2884",
+    "period": "2026/07",
+    "content_hash": "3615b23de5d3a98076efd0a304e819f2b6dd5d2e029a7df7faf4a4f897f4c701"
+  },
+  "news-2026-07-2885": {
+    "title": "元大金當月獲利報導摘要",
+    "url": "https://money.udn.com/money/story/5613/9687230",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2885",
+    "period": "2026/07",
+    "content_hash": "e9436c981fe7d938072c36c9ac0a80493428f41b556fa0f80935ed10884bbc5e"
+  },
+  "news-2026-07-2886": {
+    "title": "兆豐金當月獲利報導摘要",
+    "url": "https://money.udn.com/money/story/12040/9374536",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2886",
+    "period": "2026/07",
+    "content_hash": "cd5a833399dabf00453ec90224bb36ff37512a2afb8fc259238ee4e7a68356ba"
+  },
+  "news-2026-07-2889": {
+    "title": "國票金當月獲利報導摘要",
+    "url": "https://money.udn.com/money/story/5613/9677228",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2889",
+    "period": "2026/07",
+    "content_hash": "7796cad0391a193b031111363d0483a9838fc07f4627d61bad9200339e5a0b23"
+  },
+  "news-2026-07-2890": {
+    "title": "永豐金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260810701388-430304",
+    "published_at": "2026-08-10",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2890",
+    "period": "2026/07",
+    "content_hash": "5ed41b725a82e691d2bbba8f34a7c40448497bb6742bab2aa50663b956f88950"
+  },
+  "news-2026-07-2891": {
+    "title": "中信金當月獲利報導摘要",
+    "url": "https://money.udn.com/money/story/5613/9687326",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2891",
+    "period": "2026/07",
+    "content_hash": "4ad6fbf596057a7e773f43e2f6304720da41859fd7eb2a933a6a48e3da1fd922"
+  },
+  "article-0": {
+    "url": "https://udn.com/news/story/7252/9692092",
+    "title": "富邦金獲利／前七月955億元、EPS 6.54元 加計股票處分利益大賺1962億",
+    "published_at": "2026-08-14T17:24:17+08:00",
+    "kind": "媒體報導",
+    "code": "2881",
+    "period": "2026/07",
+    "content_hash": "d02cdc3f7c826b7aa8d83d1dbc2b7ed2aaa620f95e39f4539b92ec7c2e953289"
+  },
+  "article-1": {
+    "url": "https://www.ctee.com.tw/news/20260813701544-430304",
+    "title": "國泰金獲利出爐！7月大賺108.2億元、前七月873.4億元",
+    "published_at": "2026-08-13 16:30:31",
+    "kind": "媒體報導",
+    "code": "2882",
+    "period": "2026/07",
+    "content_hash": "bb51bc7aa5b08908242b077644d930a9ce58e2a05cd0bf8a592517c5663a6ea8"
+  },
+  "article-2": {
+    "url": "https://www.ctee.com.tw/news/20260814700073-439901",
+    "title": "金控前七月狂賺 國泰金暫居冠",
+    "published_at": "2026-08-14 03:00:00",
+    "kind": "媒體報導",
+    "code": "2883",
+    "period": "2026/07",
+    "content_hash": "2adccb8b737f278275123f0a53a2c42d28da4789049934f9433fa802e56ec8e3"
+  },
+  "article-3": {
+    "url": "https://www.ctee.com.tw/news/20260807701486-430201",
+    "title": "玉山金前七月獲利244.4億元 同期最高",
+    "published_at": "2026-08-07 16:35:40",
+    "kind": "媒體報導",
+    "code": "2884",
+    "period": "2026/07",
+    "content_hash": "cb8e07c2fbb02765842dff9847eeca2b249f0e8d930d158be258c7bd08a7b204"
+  },
+  "article-4": {
+    "url": "https://money.udn.com/money/story/5613/9687230",
+    "title": "元大金獲利／前7月賺429.31億元 EPS 達3.22元再創同期新高",
+    "published_at": "",
+    "kind": "媒體報導",
+    "code": "2885",
+    "period": "2026/07",
+    "content_hash": "c99e0e158e9e153972801ced9e98ffa221438d733924800562812058e55de405"
+  },
+  "article-5": {
+    "url": "https://money.udn.com/money/story/12040/9374536",
+    "title": "兆豐金配息有機會1.7元嗎？金融股多點開花下的2026年展望",
+    "published_at": "",
+    "kind": "媒體報導",
+    "code": "2886",
+    "period": "2026/07",
+    "content_hash": "13a1ce0298d5169ce3fed580e8f5f8d8e2da5b61a5dbf7ebd70af059b44d197b"
+  },
+  "article-6": {
+    "url": "https://www.ctee.com.tw/news/20260814700073-439901",
+    "title": "金控前七月狂賺 國泰金暫居冠",
+    "published_at": "2026-08-14 03:00:00",
+    "kind": "媒體報導",
+    "code": "2886",
+    "period": "2026/07",
+    "content_hash": "2adccb8b737f278275123f0a53a2c42d28da4789049934f9433fa802e56ec8e3"
+  },
+  "article-7": {
+    "url": "https://money.udn.com/money/story/5613/9677228",
+    "title": "國票金獲利／前七月稅後純益29.7億元創同期新高 EPS 0.82元",
+    "published_at": "",
+    "kind": "媒體報導",
+    "code": "2889",
+    "period": "2026/07",
+    "content_hash": "e05e2c8a5583ee5ab0e958a7651be783f2e9a1f64d1b1abd222184aa681b60ef"
+  },
+  "article-8": {
+    "url": "https://www.ctee.com.tw/news/20260810701388-430304",
+    "title": "太會賺！永豐金前七月獲利成長近9成 EPS衝上1.96元",
+    "published_at": "2026-08-10 17:09:10",
+    "kind": "媒體報導",
+    "code": "2890",
+    "period": "2026/07",
+    "content_hash": "505673726440dd984d9badb4d62adb9876fcff2482edaf784180946ab35a150c"
+  },
+  "article-9": {
+    "url": "https://money.udn.com/money/story/5613/9687326",
+    "title": "中信金獲利／自結前7月稅後純益439.48億元 EPS 為2.19元",
+    "published_at": "",
+    "kind": "媒體報導",
+    "code": "2891",
+    "period": "2026/07",
+    "content_hash": "2d74f0cd19d04674a6ac3bca2d500d2a57075c47972af270275701ddaac1b37b"
+  }
+}

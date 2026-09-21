@@ -3,7 +3,7 @@
 # 透過 Claude API + web_search 工具，限定 工商時報 / 經濟日報 / 鉅亨網
 # 查詢各家當月損益相關報導並產生 ~150 字繁體中文摘要。
 #
-# 冪等：已有 news_summary 的 entry 預設跳過；--force 才重做。
+# 已有摘要在公告月8–20日最多每24小時補抓一次；人工摘要仍保留。
 
 import os
 import re
@@ -28,7 +28,7 @@ logger = logging.getLogger(__name__)
 BASE_DIR = Path(__file__).parent.parent
 DATA_DIR = BASE_DIR / "docs" / "data"
 
-ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "udn.com", "news.cnyes.com", "ec.ltn.com.tw"]
+ALLOWED_DOMAINS = ["ctee.com.tw", "money.udn.com", "udn.com", "news.cnyes.com", "ec.ltn.com.tw", "nownews.com", "fubon.com", "cathayholdings.com", "kgi.com", "sinopac.com"]
 # udn.com（一般新聞路徑）2026-09 加入：富邦 115/07 月損益報導僅見於 udn.com/news/，money.udn.com 未刊
 MODEL = "claude-sonnet-4-6"
 
@@ -48,6 +48,20 @@ NEWS_RETRY_CAP_OVERRIDE = {
 
 def _retry_cap(code):
     return NEWS_RETRY_CAP_OVERRIDE.get(code, NEWS_RETRY_CAP_DEFAULT)
+
+
+def refresh_due(company, period, now=None):
+    """Catch later media/PR details without requerying on every scheduled run."""
+    now = now or datetime.now()
+    start = _announcement_month_start(period)
+    if (now.year, now.month) != (start.year, start.month) or not 8 <= now.day <= 20:
+        return False
+    stamp = company.get('news_checked_at') or company.get('news_generated_at')
+    try:
+        previous = datetime.fromisoformat(stamp).replace(tzinfo=None)
+        return (now.replace(tzinfo=None)-previous).total_seconds() >= 86400
+    except (TypeError, ValueError):
+        return True
 
 
 def _load_dotenv():
@@ -167,7 +181,7 @@ def _build_prompt(name, code, period, monthly, cumul, subs):
 
     return f"""你是台灣金融分析師。請查詢「{name}（{code}）」**民國 {roc_year} 年 {m} 月（西元 {western_year} 年 {m} 月）月自結損益**新聞報導，並產生繁體中文摘要。
 
-搜尋限制：工商時報、經濟日報、鉅亨網、自由財經（透過 allowed_domains 限制，你不需要在 query 加 site:）。
+搜尋以工商時報、經濟日報、鉅亨網、自由財經、NOWnews為主；富邦、國泰、凱基官網新聞稿作補充。不是每家公司都有官網新聞稿，也可能晚於媒體；不得等待官網，不得因缺官網文章就排除媒體已載明的公司說明。區分媒體引述與記者推論，保留單月變化的具體原因，不能只列數字。（allowed_domains 已限制，不需加 site:。）
 
 【搜尋策略】請至少嘗試以下查詢字串：
 1. `{name} {m}月 自結 稅後`
@@ -400,11 +414,11 @@ def main():
         if not args.force:
             summary_val = company.get("news_summary")
             retry_count = company.get("news_retry_count", 0)
-            if summary_val and summary_val != "無相關說明":
+            if summary_val and summary_val != "無相關說明" and not refresh_due(company, period):
                 logger.info(f"[{name}] already has summary, skip")
                 skipped += 1
                 continue
-            if summary_val == "無相關說明" and retry_count >= _retry_cap(code):
+            if summary_val == "無相關說明" and retry_count >= _retry_cap(code) and not refresh_due(company, period):
                 logger.info(
                     f"[{name}] no relevant news (retried {retry_count}x, cap {_retry_cap(code)}), permanently skip"
                 )
@@ -423,6 +437,7 @@ def main():
 
         logger.info(f"[{name}] generating news summary...")
         try:
+            company['news_checked_at'] = datetime.now().isoformat()
             raw, sources = summarize_one(client, name, code, period, monthly, cumul, subs, debug=args.debug)
             if not raw:
                 logger.warning(f"[{name}] empty summary returned")
@@ -460,6 +475,9 @@ def main():
                 logger.warning(f"[{name}] no marker found, treating as IRRELEVANT")
 
             if not relevant:
+                if company.get('news_summary') and company['news_summary'] != '無相關說明':
+                    logger.info(f"[{name}] refresh found no usable replacement; preserving prior summary")
+                    continue
                 # 標記「無相關說明」+ 累加 retry_count（上限由 skip 邏輯把關）
                 new_count = company.get("news_retry_count", 0) + 1
                 company["news_summary"] = "無相關說明"
@@ -482,7 +500,11 @@ def main():
                     if d and d < ann_start:
                         logger.warning(f"[{name}] dropping stale source dated {d}: {s['url']}")
                         continue
+                    if d:s['published_at'] = d.isoformat()
                     kept_sources.append(s)
+                if not kept_sources:
+                    logger.info(f"[{name}] no usable sources; preserving prior summary")
+                    continue
                 company["news_summary"] = summary
                 company["news_sources"] = kept_sources
                 company["news_generated_at"] = datetime.now().isoformat()

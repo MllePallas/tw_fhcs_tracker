@@ -1,0 +1,128 @@
+{
+  "news-2026-06-2884": {
+    "title": "玉山金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260708700165-439901",
+    "published_at": "2026-07-08",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2884",
+    "period": "2026/06",
+    "content_hash": "84e6e8cbfbe79b83e2492b25e58dae4eacedbb7955e4900e54d3f1866e66a41d"
+  },
+  "news-2026-06-2885": {
+    "title": "元大金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260713701619-430304",
+    "published_at": "2026-07-13",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2885",
+    "period": "2026/06",
+    "content_hash": "bd946b5045280920e33f7e59c202c7c2cfd60ca3838d4ce0b52cd3359666179d"
+  },
+  "news-2026-06-2886": {
+    "title": "兆豐金當月獲利報導摘要",
+    "url": "https://udn.com/news/story/7252/9627451",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2886",
+    "period": "2026/06",
+    "content_hash": "8f7597e8ee3c38072672da8ac4c8e0098423a77da184ebc2c2279bbfc59bdfee"
+  },
+  "news-2026-06-2889": {
+    "title": "國票金當月獲利報導摘要",
+    "url": "https://news.cnyes.com/news/id/6527706",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2889",
+    "period": "2026/06",
+    "content_hash": "9570623da889f71e64ffb6bd4ccf5da525cef6fb561926d20dd1821d142a9e3a"
+  },
+  "news-2026-06-2890": {
+    "title": "永豐金當月獲利報導摘要",
+    "url": "https://www.ctee.com.tw/news/20260705700161-439903",
+    "published_at": "2026-07-05",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2890",
+    "period": "2026/06",
+    "content_hash": "a78c243b5e7ab59a2f7fbdd0194295086aa41bce7fce2e86e59f0837393352aa"
+  },
+  "news-2026-06-2892": {
+    "title": "第一金當月獲利報導摘要",
+    "url": "https://ec.ltn.com.tw/article/breakingnews/5505297",
+    "published_at": "",
+    "kind": "既有媒體摘要（原文未核實）",
+    "code": "2892",
+    "period": "2026/06",
+    "content_hash": "9967eb9b453b76044c3e711598687eebcd2289a2133402d3b70e6cf886ee6309"
+  },
+  "article-0": {
+    "url": "https://www.ctee.com.tw/news/20260708700165-439901",
+    "title": "玉山金H1大賺214億 締新猷",
+    "published_at": "2026-07-08 03:00:00",
+    "kind": "媒體報導",
+    "code": "2884",
+    "period": "2026/06",
+    "content_hash": "c9a5e3abd39c3f1b31bfe7d484cd98cd8b64f5bb793fe51e08f8380896f5e0bc"
+  },
+  "article-1": {
+    "url": "https://www.ctee.com.tw/news/20260707701646-430301",
+    "title": "同期新高！玉山金H1大賺逾214億 EPS 1.32元",
+    "published_at": "2026-07-07 17:36:35",
+    "kind": "媒體報導",
+    "code": "2884",
+    "period": "2026/06",
+    "content_hash": "c59c75316d9914864348c15445913e8703f2ef50fd86772d9521c8c705e6b952"
+  },
+  "article-2": {
+    "url": "https://www.ctee.com.tw/news/20260713701619-430304",
+    "title": "元大金上半年大賺365.72億元 已超越去年整年！",
+    "published_at": "2026-07-13 18:39:41",
+    "kind": "媒體報導",
+    "code": "2885",
+    "period": "2026/06",
+    "content_hash": "0f6e89361f97506328fbb77041cc980ab831ecaf8e28e79157759152bc98bef9"
+  },
+  "article-3": {
+    "url": "https://udn.com/news/story/7252/9627451",
+    "title": "兆豐金獲利／上半年賺213.07億元創歷史同期新高 EPS 1.44元",
+    "published_at": "2026-07-14T17:56:02+08:00",
+    "kind": "媒體報導",
+    "code": "2886",
+    "period": "2026/06",
+    "content_hash": "daab61a0e0da4f53ac41f19fc0b6282ad9f72f77e25daef766ff133f6344489f"
+  },
+  "article-4": {
+    "url": "https://news.cnyes.com/news/id/6527706",
+    "title": "3金控上半年獲利大爆發！永豐、玉山創歷史新高 國票年增飆323%",
+    "published_at": "2026-07-08T10:43:27.000Z",
+    "kind": "媒體報導",
+    "code": "2889",
+    "period": "2026/06",
+    "content_hash": "ee937604e3748682c46ed320153b45c2cb95c2c926d02c17901dec50db5c3be5"
+  },
+  "article-5": {
+    "url": "https://www.ctee.com.tw/news/20260705700161-439903",
+    "title": "永豐金 併購效益挹注",
+    "published_at": "2026-07-05 03:00:00",
+    "kind": "媒體報導",
+    "code": "2890",
+    "period": "2026/06",
+    "content_hash": "1be50df9659be6dfc8b158fc1bab66e3082996e54e5c0e86d8a29d1cb0aeb22d"
+  },
+  "article-6": {
+    "url": "https://ec.ltn.com.tw/article/breakingnews/5505297",
+    "title": "公股三金報喜！華南金、第一金、合庫金上半年獲利皆創歷年同期新高",
+    "published_at": "2026-07-14T20:14:54+08:00",
+    "kind": "媒體報導",
+    "code": "2892",
+    "period": "2026/06",
+    "content_hash": "efc3b96d5b8f549ad053c6c39964d452d886e1c046bde5d52b528cb685fb269b"
+  },
+  "article-7": {
+    "url": "https://money.udn.com/money/story/5613/9625445",
+    "title": "元大金、第一金上半年獲利靚 雙創歷年新高",
+    "published_at": "",
+    "kind": "媒體報導",
+    "code": "2892",
+    "period": "2026/06",
+    "content_hash": "c74f22464c04f6b883e4c3c4c0ebc3261edc7585885e1e5c6c472aa592465ea5"
+  }
+}

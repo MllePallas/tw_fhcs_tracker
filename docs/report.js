@@ -85,6 +85,10 @@ async function loadReport() {
   }
 
   const period = normalizePeriod(entry.period);
+  if (entry.html_file && /^\d{4}-\d{2}\.html$/.test(entry.html_file)) {
+    location.replace(`./reports/${entry.html_file}`);
+    return;
+  }
   document.getElementById('period-badge').textContent = `${periodLabel(period)}月報`;
 
   // 上緣資訊列
