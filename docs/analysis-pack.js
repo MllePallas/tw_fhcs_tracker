@@ -8,8 +8,9 @@
   const ad = p => String(p || '').replace(/^(\d{2,3})[/-](\d{1,2})/, (_,y,m) => `${Number(y)+1911}/${m.padStart(2,'0')}`);
   const roc = p => String(p).replace(/^(\d{4})[/-](\d{1,2})$/,(_,y,m)=>`${Number(y)-1911}/${m.padStart(2,'0')}`);
   function dates(text) {
-    return String(text || '').replace(/(?<!\d)(?:民國\s*)?(\d{3})年/g,(_,y)=>`${Number(y)+1911}年`)
-      .replace(/(?<!\d)(\d{3})\/(\d{1,2})(?!\d)/g,(_,y,m)=>`${Number(y)+1911}/${m.padStart(2,'0')}`);
+    return String(text ?? '').split(/(https?:\/\/\S+)/).map(part=>/^https?:\/\//.test(part)?part:part
+      .replace(/(?<!\d)(?:民國\s*)?(\d{3})年/g,(_,y)=>`${Number(y)+1911}年`)
+      .replace(/(?<!\d)(\d{3})\/(\d{1,2})(?!\d)/g,(_,y,m)=>`${Number(y)+1911}/${m.padStart(2,'0')}`)).join('');
   }
   const yi = (v,u) => { const n=A.toNTM(v,u); return n===null?null:n/100; };
   const kind = name => /人壽/.test(name)?'life':/銀行/.test(name)?'bank':/證券/.test(name)?'securities':'other';

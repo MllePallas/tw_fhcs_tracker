@@ -10,7 +10,7 @@ from types import SimpleNamespace
 
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scraper'))
-from monthly_report import publish, render_report, validate_commentary, evidence
+from monthly_report import publish, render_report, validate_commentary, evidence, generate_commentary
 from periods import storage_period
 
 
@@ -74,6 +74,20 @@ class MonthlyReportTest(unittest.TestCase):
             self.assertTrue(text.startswith('# '+period))
             for heading in ['1. 金控','2. 壽險','3. 銀行','4. 證券']:self.assertIn(heading,text)
             self.assertNotIn('NaN',text)
+
+    def test_model_format_repair_is_bounded_and_keeps_citations(self):
+        key=next(iter(evidence(self.pack)))
+        valid={'sections':[[{'text':'依既有新聞摘要，原因仍需核對公司說明。','sources':[key]}],[],[],[]]}
+        bad=copy.deepcopy(valid);bad['sections'][0][0]['text']='增加999億元'
+        class Responses:
+            calls=0
+            def create(self,**kwargs):
+                self.calls+=1
+                return SimpleNamespace(content=[SimpleNamespace(type='text',text=json.dumps(bad if self.calls==1 else valid))])
+        messages=Responses()
+        output=generate_commentary(self.pack,SimpleNamespace(messages=messages))
+        self.assertEqual(messages.calls,2)
+        self.assertEqual(output[0][0]['sources'],[key])
 
 
 if __name__=='__main__':unittest.main()

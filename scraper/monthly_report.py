@@ -17,6 +17,11 @@ ROOT = Path(__file__).resolve().parents[1]
 REPORTS = ROOT / 'docs' / 'reports'
 MODEL = os.environ.get('MONTHLY_REPORT_MODEL', 'claude-sonnet-4-6')
 SECTION_NAMES = ['金控獲利綜觀', '壽險子公司', '銀行子公司', '證券子公司']
+MARKET_NAMES = {'taiex':'台股加權指數（點）','spx':'S&P 500（點）','us10y':'美國10年公債殖利率（%）','usdtwd':'美元兌新台幣（元／美元）','taiex_turnover':'台股月日均成交額（億元）','tlt':'TLT（美元）'}
+
+
+class CommentaryValidationError(ValueError):
+    """Safe, fixed validation messages; never includes model text or credentials."""
 
 
 def digest(value):
@@ -67,32 +72,40 @@ def evidence(pack):
 
 def validate_commentary(value, sources):
     if not isinstance(value, dict) or set(value) != {'sections'} or len(value['sections']) != 4:
-        raise ValueError('Invalid commentary sections')
+        raise CommentaryValidationError('sections 必須為四個陣列，依序為金控、壽險、銀行、證券')
     for section in value['sections']:
         if not isinstance(section, list) or len(section) > 3:
-            raise ValueError('Invalid paragraph count')
+            raise CommentaryValidationError('每個段落必須為零至三個項目的陣列')
         for item in section:
             if not isinstance(item, dict) or set(item) != {'text', 'sources'}:
-                raise ValueError('Invalid commentary item')
+                raise CommentaryValidationError('每個項目只能有 text 與 sources 兩個欄位')
             if not isinstance(item['text'], str) or not 1 <= len(item['text']) <= 350:
-                raise ValueError('Invalid commentary length')
+                raise CommentaryValidationError('每個 text 必須為一至三百五十字')
             if not isinstance(item['sources'], list) or not item['sources'] or any(s not in sources for s in item['sources']):
-                raise ValueError('Unknown evidence reference')
+                raise CommentaryValidationError('sources 必須逐字引用 evidence 的 key，不可使用網址、標題或自創識別碼')
             # Numbers are in generated tables. Prose cannot invent/recompute them.
+            item['text']=re.sub(r'S&P\s*500', '標普五百指數', item['text'])
+            item['text']=re.sub(r'IFRS\s*17', '保險合約新制', item['text'])
+            item['text']=re.sub(r'IFRS\s*9', '金融工具會計準則', item['text'])
             if re.search(r'\d|https?://|[<>]', item['text']):
-                raise ValueError('Commentary must use qualitative text and provided references')
+                raise CommentaryValidationError('text 不可含阿拉伯數字、年份、來源代碼、網址或 HTML；來源代碼只放 sources，財務數字只由程式表格提供')
     return value['sections']
 
 
 def generate_commentary(pack, client):
     sources = evidence(pack)
     prompt = (ROOT / 'scraper' / 'monthly_report_prompt.txt').read_text(encoding='utf-8')
-    response = client.messages.create(model=MODEL, max_tokens=4000, temperature=0,
-        system=prompt,
-        messages=[{'role': 'user', 'content': json.dumps({'period': pack['period'], 'limitations': pack['limitations'], 'evidence': sources}, ensure_ascii=False)}])
-    text = ''.join(block.text for block in response.content if getattr(block, 'type', '') == 'text').strip()
-    text = re.sub(r'^```(?:json)?\s*|\s*```$', '', text)
-    return validate_commentary(json.loads(text), sources)
+    messages=[{'role':'user','content':json.dumps({'period':pack['period'],'limitations':pack['limitations'],'evidence':sources},ensure_ascii=False)}]
+    for attempt in range(2):
+        response=client.messages.create(model=MODEL,max_tokens=4000,temperature=0,system=prompt,messages=messages)
+        text=''.join(block.text for block in response.content if getattr(block,'type','')=='text').strip()
+        text=re.sub(r'^```(?:json)?\s*|\s*```$', '', text)
+        try:
+            return validate_commentary(json.loads(text),sources)
+        except (CommentaryValidationError,json.JSONDecodeError) as exc:
+            if attempt:raise
+            reason=str(exc) if isinstance(exc,CommentaryValidationError) else '必須輸出合法 JSON，不可有前言或後記'
+            messages += [{'role':'assistant','content':text},{'role':'user','content':'請修正輸出格式，保留有依據的內容。檢查失敗原因：'+reason}]
 
 
 def render_report(pack, commentary=None):
@@ -166,7 +179,7 @@ def render_report(pack, commentary=None):
         if news:
             lines += ['', '相關公司新聞：'+ '、'.join(sorted({n['name'] for n in news}))+'；摘要與來源見下方，需核對子公司及損益期間。']
     lines += ['', '## 本月市場對照', '', table(['指標','月底值／月日均值','變動','資料日期','來源'],
-        [[m['key'],number(m.get('value',m.get('value_pct',m.get('value_yi')))),number(m.get('bps_change'),' bps') if m['key']=='us10y' else pct(m.get('pct_change')),m.get('date',pack['period']),m.get('source','')] for m in market.values()]), '',
+        [[MARKET_NAMES.get(m['key'],m['key']),number(m.get('value',m.get('value_pct',m.get('value_yi')))),number(m.get('bps_change'),' bps') if m['key']=='us10y' else pct(m.get('pct_change')),m.get('date',pack['period']),m.get('source','')] for m in market.values()]), '',
         '市場指標僅提供方向背景；債券、匯率與股票變化的實際損益影響須以公司揭露為據。', '', '## 公司新聞摘要與來源', '']
     for item in pack['news']:
         if item['period']!=pack['period']:
@@ -207,7 +220,7 @@ def publish(pack, output=REPORTS, client=None, overwrite_manual=False):
                 commentary=generate_commentary(pack,client);status='generated'
             except Exception as exc:
                 # No secrets, response text or endpoint headers in public output/logs.
-                error=type(exc).__name__;status='fallback'
+                error=type(exc).__name__+(': '+str(exc) if isinstance(exc,CommentaryValidationError) else '');status='fallback'
         text,headline=render_report(pack,commentary)
         md.write_text(text,encoding='utf-8')
         meta={'period':pack['period'],'input_hash':input_hash,'output_hash':digest(text),'headline':headline,

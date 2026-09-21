@@ -346,7 +346,7 @@ function renderReportLink() {
   const href = `./report.html?period=${String(entry.period).replace('/', '-')}`;
   const tip = `${periodLabel(state.data.report_period)}分析報告（另開新頁）`;
   row.innerHTML = `<a class="report-link" href="${href}" target="_blank" rel="noopener" title="${escapeHtml(tip)}">
-      <span class="rl-tag">AI</span>生成分析報告 ↗
+      <span class="rl-tag">月報</span>每月分析報告 ↗
     </a>`;
   row.classList.remove('hidden');
 }
@@ -1009,7 +1009,7 @@ function renderSummaryCards() {
 
 // ── 簡易 markdown 渲染（**bold**、## 標題、段落） ────────
 function escapeHtml(s) {
-  return String(s)
+  return (typeof AnalysisPack === 'undefined' ? String(s) : AnalysisPack.dates(s))
     .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
 }
 function renderMarkdown(md) {
