@@ -1,0 +1,83 @@
+name: Generate Monthly Analysis
+
+on:
+  workflow_run:
+    workflows: [Update Financial Holdings Data, Update Market Summary]
+    types: [completed]
+  push:
+    branches: [main]
+    paths:
+      - 'docs/data/**'
+      - 'docs/analysis-pack.js'
+      - 'docs/analytics.js'
+      - 'docs/comparison-rules.json'
+      - 'scripts/build-analysis-pack.cjs'
+      - 'scraper/monthly_report*'
+      - '.github/workflows/monthly_report.yml'
+  workflow_dispatch:
+    inputs:
+      period:
+        description: '西元月份 YYYY/MM，例如 2026/08；留空為最新月份'
+        required: false
+        type: string
+      overwrite_manual:
+        description: '重新產生並覆蓋此月份人工修改（預設保留）'
+        default: false
+        type: boolean
+  schedule:
+    - cron: '43 12 8-20 * *'
+
+concurrency:
+  group: finhold-data-write
+  cancel-in-progress: false
+
+permissions:
+  contents: write
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+        with:
+          ref: main
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+      - name: Install report dependency
+        run: pip install 'anthropic>=0.28,<1'
+      - name: Verify calculations and report publishing
+        run: |
+          node tests/analytics.test.cjs
+          node tests/analysis-pack.test.cjs
+          python -m unittest discover -s tests -p 'test_*.py'
+      - name: Generate and publish report files
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          REPORT_PERIOD: ${{ inputs.period }}
+          OVERWRITE_MANUAL: ${{ inputs.overwrite_manual }}
+        run: |
+          ARGS=()
+          if [ -n "$REPORT_PERIOD" ]; then ARGS+=(--period "$REPORT_PERIOD"); else ARGS+=(--all); fi
+          if [ "$OVERWRITE_MANUAL" = "true" ]; then
+            if [ -z "$REPORT_PERIOD" ]; then echo 'Specify one period before overwriting manual edits.'; exit 1; fi
+            ARGS+=(--overwrite-manual)
+          fi
+          python scraper/monthly_report.py "${ARGS[@]}"
+      - name: Save reports automatically
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/reports/
+          if ! git diff --staged --quiet; then
+            git commit -m 'chore: publish monthly analysis and source pack'
+            git pull --rebase origin main
+            git push origin HEAD:main
+          fi
+      - name: Run summary
+        run: |
+          echo 'Monthly reports published automatically; manually edited Markdown is preserved.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Read docs/reports/index.json for the report period, AI status and revision status.' >> "$GITHUB_STEP_SUMMARY"

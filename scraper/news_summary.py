@@ -315,7 +315,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--period",
-        help="目標月份 民國年/月，例 115/03。預設讀 latest.json",
+        help="目標月份 西元年/月，例 2026/03。預設讀 latest.json",
         default=None,
     )
     ap.add_argument("--codes", nargs="+", help="只處理特定代號", default=None)
@@ -341,6 +341,9 @@ def main():
         help="印出 LLM 實際的搜尋 query 與所有結果",
     )
     args = ap.parse_args()
+    if args.period:
+        from periods import storage_period
+        args.period = storage_period(args.period)
 
     api_key = os.environ.get("ANTHROPIC_API_KEY")
     if not api_key:

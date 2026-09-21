@@ -1,0 +1,39 @@
+{
+  "version": 1,
+  "tolerance_ntm": 15,
+  "low_base_fraction": 0.1,
+  "mergers": {
+    "2887": {
+      "month": "114/07",
+      "partial_month": true,
+      "label": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份",
+      "source": "https://www.taishinbank.com.tw/TSB/personal/common/important-notice/TSBankImportantNotice-001358/",
+      "unchanged_subsidiaries": ["台新銀行"]
+    },
+    "2890": {
+      "month": "114/10",
+      "partial_month": false,
+      "label": "2025/10/01 京城銀行納入永豐金控",
+      "source": "https://www.sinopac.com/News/20220503183151553480/20251001165238484217.html",
+      "unchanged_subsidiaries": ["永豐銀行", "永豐金租賃"]
+    }
+  },
+  "subsidiary_events": [
+    {"code": "2887", "names": ["台新證券", "元富證券"], "month": "115/04", "partial_month": true, "label": "2026/04 元富證券併入台新證券"},
+    {"code": "2887", "names": ["新光人壽", "台新人壽"], "month": "115/01", "partial_month": false, "label": "2026/01 壽險子公司整併"}
+  ],
+  "accounting": {
+    "month": "115/01",
+    "codes": ["2881", "2882", "2883", "2885", "2887", "2891", "2892", "5880"],
+    "label": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+    "source": "https://law.fsc.gov.tw/LawContent.aspx?id=GL004066"
+  },
+  "aliases": {"玉山投信": "保德信投信"},
+  "basis_notes": {
+    "5880": "合庫金單月為合併稅後淨利（含非控制權益），累計為歸屬母公司業主；單月加總與累計軋差不同口徑。"
+  },
+  "revisions": {
+    "2887|114/10": "公告累計數有合併相關調整，保留各月原公告數。",
+    "2887|114/11": "公告累計數有合併相關重編，保留各月原公告數。"
+  }
+}

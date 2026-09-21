@@ -1,0 +1,8025 @@
+{
+  "schema_version": 1,
+  "period": "2025/02",
+  "unit": "新台幣億元",
+  "source": "MOPS 月自結",
+  "data_updated_at": "2026-04-28T14:57:14.677235",
+  "coverage": {
+    "expected": 13,
+    "available": 13,
+    "missing": []
+  },
+  "holdings": [
+    {
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": 16.98,
+      "cumulative": 36.76,
+      "monthly_eps": null,
+      "cumulative_eps": 0.27,
+      "mom": {
+        "base": 19.77,
+        "delta": -2.789999999999999,
+        "pct": -14.112291350531104,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": 148,
+      "cumulative": 300,
+      "monthly_eps": null,
+      "cumulative_eps": 2.2,
+      "mom": {
+        "base": 152.1,
+        "delta": -4.099999999999994,
+        "pct": -2.6955950032873077,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": 77.9,
+      "cumulative": 222.8,
+      "monthly_eps": null,
+      "cumulative_eps": 1.53,
+      "mom": {
+        "base": 144.9,
+        "delta": -67,
+        "pct": -46.238785369220146,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": 34.62,
+      "cumulative": 71.18,
+      "monthly_eps": null,
+      "cumulative_eps": 0.42,
+      "mom": {
+        "base": 36.56,
+        "delta": -1.9400000000000048,
+        "pct": -5.306345733041589,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": 27.24,
+      "cumulative": 57.49,
+      "monthly_eps": null,
+      "cumulative_eps": 0.36,
+      "mom": {
+        "base": 30.24,
+        "delta": -3,
+        "pct": -9.920634920634921,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/06",
+      "fvoci": null
+    },
+    {
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": 25.11,
+      "cumulative": 51.17,
+      "monthly_eps": null,
+      "cumulative_eps": 0.4,
+      "mom": {
+        "base": 26.06,
+        "delta": -0.9499999999999993,
+        "pct": -3.6454336147352238,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": 30.23,
+      "cumulative": 62.4,
+      "monthly_eps": null,
+      "cumulative_eps": 0.42,
+      "mom": {
+        "base": 32.17,
+        "delta": -1.9400000000000013,
+        "pct": -6.030463164438922,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": 20.1,
+      "cumulative": 36,
+      "monthly_eps": null,
+      "cumulative_eps": 0.25,
+      "mom": {
+        "base": 15.9,
+        "delta": 4.200000000000001,
+        "pct": 26.415094339622648,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": 1.68,
+      "cumulative": 3.24,
+      "monthly_eps": null,
+      "cumulative_eps": 0.09,
+      "mom": {
+        "base": 1.55,
+        "delta": 0.1299999999999999,
+        "pct": 8.387096774193541,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=8&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": 24.42,
+      "cumulative": 53.45,
+      "monthly_eps": 0.19,
+      "cumulative_eps": 0.42,
+      "mom": {
+        "base": 29.03,
+        "delta": -4.609999999999999,
+        "pct": -15.880124009645192,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": 49.11,
+      "cumulative": 117.38,
+      "monthly_eps": null,
+      "cumulative_eps": 0.6,
+      "mom": {
+        "base": 68.27,
+        "delta": -19.159999999999997,
+        "pct": -28.06503588691958,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": 24.05,
+      "cumulative": 49.49,
+      "monthly_eps": null,
+      "cumulative_eps": 0.35,
+      "mom": {
+        "base": 25.45,
+        "delta": -1.3999999999999986,
+        "pct": -5.500982318271115,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": 16.5,
+      "cumulative": 30.51,
+      "monthly_eps": null,
+      "cumulative_eps": 0.2,
+      "mom": {
+        "base": 14.37,
+        "delta": 2.130000000000001,
+        "pct": 14.822546972860131,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    }
+  ],
+  "subsidiaries": [
+    {
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南銀行",
+      "industry": "bank",
+      "monthly": 16.06,
+      "cumulative": 35.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.34,
+      "mom": {
+        "base": 19.24,
+        "delta": -3.1799999999999997,
+        "pct": -16.528066528066528,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南永昌證券",
+      "industry": "securities",
+      "monthly": 1.02,
+      "cumulative": 1.84,
+      "monthly_eps": null,
+      "cumulative_eps": 0.28,
+      "mom": {
+        "base": 0.83,
+        "delta": 0.19000000000000006,
+        "pct": 22.89156626506025,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南產險",
+      "industry": "other",
+      "monthly": 1.13,
+      "cumulative": 2.06,
+      "monthly_eps": null,
+      "cumulative_eps": 1.03,
+      "mom": {
+        "base": 0.93,
+        "delta": 0.19999999999999984,
+        "pct": 21.505376344086002,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "台北富邦銀行",
+      "industry": "bank",
+      "monthly": 31.5,
+      "cumulative": 70.5,
+      "monthly_eps": null,
+      "cumulative_eps": 0.49,
+      "mom": {
+        "base": 38.9,
+        "delta": -7.399999999999999,
+        "pct": -19.023136246786628,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦證券",
+      "industry": "securities",
+      "monthly": 8.4,
+      "cumulative": 13,
+      "monthly_eps": null,
+      "cumulative_eps": 0.8,
+      "mom": {
+        "base": 4.6,
+        "delta": 3.8000000000000007,
+        "pct": 82.60869565217394,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦產險",
+      "industry": "other",
+      "monthly": 4.6,
+      "cumulative": 11.9,
+      "monthly_eps": null,
+      "cumulative_eps": 3.96,
+      "mom": {
+        "base": 7.3,
+        "delta": -2.7,
+        "pct": -36.986301369863014,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦人壽",
+      "industry": "life",
+      "monthly": 95,
+      "cumulative": 181.8,
+      "monthly_eps": null,
+      "cumulative_eps": 1.53,
+      "mom": {
+        "base": 86.8,
+        "delta": 8.200000000000003,
+        "pct": 9.447004608294934,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰人壽",
+      "industry": "life",
+      "monthly": 31.3,
+      "cumulative": 125.6,
+      "monthly_eps": null,
+      "cumulative_eps": 2,
+      "mom": {
+        "base": 94.3,
+        "delta": -63,
+        "pct": -66.80805938494167,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰世華銀行",
+      "industry": "bank",
+      "monthly": 39.2,
+      "cumulative": 81.6,
+      "monthly_eps": null,
+      "cumulative_eps": 0.68,
+      "mom": {
+        "base": 42.5,
+        "delta": -3.299999999999997,
+        "pct": -7.764705882352935,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰產險",
+      "industry": "other",
+      "monthly": 2.3,
+      "cumulative": 7.6,
+      "monthly_eps": null,
+      "cumulative_eps": 3.79,
+      "mom": {
+        "base": 5.3,
+        "delta": -3,
+        "pct": -56.60377358490566,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰證券",
+      "industry": "securities",
+      "monthly": 4,
+      "cumulative": 6.4,
+      "monthly_eps": null,
+      "cumulative_eps": 0.83,
+      "mom": {
+        "base": 2.4,
+        "delta": 1.6,
+        "pct": 66.66666666666667,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰投信",
+      "industry": "other",
+      "monthly": 2.6,
+      "cumulative": 5.3,
+      "monthly_eps": null,
+      "cumulative_eps": 3.56,
+      "mom": {
+        "base": 2.7,
+        "delta": -0.10000000000000009,
+        "pct": -3.703703703703707,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/10",
+      "fvoci": null
+    },
+    {
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基人壽",
+      "industry": "life",
+      "monthly": 26.6,
+      "cumulative": 50.01,
+      "monthly_eps": null,
+      "cumulative_eps": 0.99,
+      "mom": {
+        "base": 23.4,
+        "delta": 3.200000000000003,
+        "pct": 13.675213675213687,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基銀行",
+      "industry": "bank",
+      "monthly": 5.02,
+      "cumulative": 12.29,
+      "monthly_eps": null,
+      "cumulative_eps": 0.26,
+      "mom": {
+        "base": 7.27,
+        "delta": -2.25,
+        "pct": -30.94910591471802,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "中華開發資本",
+      "industry": "other",
+      "monthly": 0.71,
+      "cumulative": 3.17,
+      "monthly_eps": null,
+      "cumulative_eps": 0.16,
+      "mom": {
+        "base": 2.45,
+        "delta": -1.7400000000000002,
+        "pct": -71.02040816326532,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基證券",
+      "industry": "securities",
+      "monthly": 6.38,
+      "cumulative": 13.43,
+      "monthly_eps": null,
+      "cumulative_eps": 0.74,
+      "mom": {
+        "base": 7.05,
+        "delta": -0.6699999999999999,
+        "pct": -9.50354609929078,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山銀行",
+      "industry": "bank",
+      "monthly": 23.52,
+      "cumulative": 54.2,
+      "monthly_eps": null,
+      "cumulative_eps": 0.42,
+      "mom": {
+        "base": 30.68,
+        "delta": -7.16,
+        "pct": -23.33767926988266,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/06",
+      "fvoci": null
+    },
+    {
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山證券",
+      "industry": "securities",
+      "monthly": 1.72,
+      "cumulative": 3.02,
+      "monthly_eps": null,
+      "cumulative_eps": 0.75,
+      "mom": {
+        "base": 1.3,
+        "delta": 0.41999999999999993,
+        "pct": 32.3076923076923,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/06",
+      "fvoci": null
+    },
+    {
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山創投",
+      "industry": "other",
+      "monthly": 3.36,
+      "cumulative": 2.82,
+      "monthly_eps": null,
+      "cumulative_eps": 0.51,
+      "mom": {
+        "base": -0.54,
+        "delta": 3.9,
+        "pct": 722.2222222222222,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "虧轉盈",
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/06",
+      "fvoci": null
+    },
+    {
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大證券",
+      "industry": "securities",
+      "monthly": 13.91,
+      "cumulative": 26.7,
+      "monthly_eps": null,
+      "cumulative_eps": 0.41,
+      "mom": {
+        "base": 12.8,
+        "delta": 1.1099999999999994,
+        "pct": 8.671874999999996,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大銀行",
+      "industry": "bank",
+      "monthly": 7.59,
+      "cumulative": 16.88,
+      "monthly_eps": null,
+      "cumulative_eps": 0.21,
+      "mom": {
+        "base": 9.3,
+        "delta": -1.7100000000000009,
+        "pct": -18.387096774193555,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大期貨",
+      "industry": "other",
+      "monthly": 1.65,
+      "cumulative": 3.7,
+      "monthly_eps": null,
+      "cumulative_eps": 1.28,
+      "mom": {
+        "base": 2.05,
+        "delta": -0.3999999999999999,
+        "pct": -19.51219512195122,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大人壽",
+      "industry": "life",
+      "monthly": 1.02,
+      "cumulative": 1.21,
+      "monthly_eps": null,
+      "cumulative_eps": 0.04,
+      "mom": {
+        "base": 0.19,
+        "delta": 0.8300000000000001,
+        "pct": 436.842105263158,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大投信",
+      "industry": "other",
+      "monthly": 3.01,
+      "cumulative": 6.72,
+      "monthly_eps": null,
+      "cumulative_eps": 2.96,
+      "mom": {
+        "base": 3.71,
+        "delta": -0.7000000000000002,
+        "pct": -18.86792452830189,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐銀行",
+      "industry": "bank",
+      "monthly": 27.15,
+      "cumulative": 54.45,
+      "monthly_eps": null,
+      "cumulative_eps": 0.57,
+      "mom": {
+        "base": 27.3,
+        "delta": -0.15000000000000213,
+        "pct": -0.5494505494505573,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐證券",
+      "industry": "securities",
+      "monthly": 1.3,
+      "cumulative": 4.36,
+      "monthly_eps": null,
+      "cumulative_eps": 0.38,
+      "mom": {
+        "base": 3.06,
+        "delta": -1.76,
+        "pct": -57.51633986928104,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐票券",
+      "industry": "other",
+      "monthly": 1.81,
+      "cumulative": 3.43,
+      "monthly_eps": null,
+      "cumulative_eps": 0.23,
+      "mom": {
+        "base": 1.62,
+        "delta": 0.18999999999999995,
+        "pct": 11.728395061728392,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐產險",
+      "industry": "other",
+      "monthly": 0.24,
+      "cumulative": 1.06,
+      "monthly_eps": null,
+      "cumulative_eps": 0.24,
+      "mom": {
+        "base": 0.82,
+        "delta": -0.58,
+        "pct": -70.73170731707317,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新銀行",
+      "industry": "bank",
+      "monthly": 16.1,
+      "cumulative": 32.1,
+      "monthly_eps": null,
+      "cumulative_eps": 0.32,
+      "mom": {
+        "base": 16,
+        "delta": 0.10000000000000142,
+        "pct": 0.6250000000000089,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新證券",
+      "industry": "securities",
+      "monthly": 4,
+      "cumulative": 5.5,
+      "monthly_eps": null,
+      "cumulative_eps": 0.8,
+      "mom": {
+        "base": 1.5,
+        "delta": 2.5,
+        "pct": 166.66666666666669,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新人壽",
+      "industry": "life",
+      "monthly": 0.6,
+      "cumulative": 1.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.12,
+      "mom": {
+        "base": 0.8,
+        "delta": -0.20000000000000007,
+        "pct": -25.000000000000007,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國際票券",
+      "industry": "other",
+      "monthly": 1.15,
+      "cumulative": 2.77,
+      "monthly_eps": null,
+      "cumulative_eps": 0.15,
+      "mom": {
+        "base": 1.62,
+        "delta": -0.4700000000000002,
+        "pct": -29.01234567901236,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=8&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票證券",
+      "industry": "securities",
+      "monthly": 1.04,
+      "cumulative": 1.21,
+      "monthly_eps": null,
+      "cumulative_eps": 0.1,
+      "mom": {
+        "base": 0.16,
+        "delta": 0.88,
+        "pct": 550,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=8&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐銀行",
+      "industry": "bank",
+      "monthly": 17.22,
+      "cumulative": 42.59,
+      "monthly_eps": 0.17,
+      "cumulative_eps": 0.41,
+      "mom": {
+        "base": 25.38,
+        "delta": -8.16,
+        "pct": -32.15130023640662,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金證券",
+      "industry": "securities",
+      "monthly": 7.87,
+      "cumulative": 10.42,
+      "monthly_eps": 0.47,
+      "cumulative_eps": 0.63,
+      "mom": {
+        "base": 2.55,
+        "delta": 5.32,
+        "pct": 208.62745098039218,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中國信託銀行",
+      "industry": "bank",
+      "monthly": 42.34,
+      "cumulative": 82.58,
+      "monthly_eps": null,
+      "cumulative_eps": 0.52,
+      "mom": {
+        "base": 40.24,
+        "delta": 2.1000000000000014,
+        "pct": 5.218687872763423,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2891",
+      "parent": "中信金",
+      "name": "台灣人壽",
+      "industry": "life",
+      "monthly": 4.67,
+      "cumulative": 29.32,
+      "monthly_eps": null,
+      "cumulative_eps": 0.47,
+      "mom": {
+        "base": 24.66,
+        "delta": -19.990000000000002,
+        "pct": -81.0624493106245,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一銀行",
+      "industry": "bank",
+      "monthly": 22.09,
+      "cumulative": 45.13,
+      "monthly_eps": null,
+      "cumulative_eps": 0.41,
+      "mom": {
+        "base": 23.04,
+        "delta": -0.9499999999999993,
+        "pct": -4.123263888888886,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金證券",
+      "industry": "securities",
+      "monthly": 0.85,
+      "cumulative": 1.05,
+      "monthly_eps": null,
+      "cumulative_eps": 0.16,
+      "mom": {
+        "base": 0.2,
+        "delta": 0.6499999999999999,
+        "pct": 324.99999999999994,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金人壽",
+      "industry": "life",
+      "monthly": 1.31,
+      "cumulative": 3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.51,
+      "mom": {
+        "base": 1.68,
+        "delta": -0.3699999999999999,
+        "pct": -22.02380952380952,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫銀行",
+      "industry": "bank",
+      "monthly": 15.92,
+      "cumulative": 30.58,
+      "monthly_eps": null,
+      "cumulative_eps": 0.25,
+      "mom": {
+        "base": 14.66,
+        "delta": 1.2599999999999998,
+        "pct": 8.594815825375168,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫資產",
+      "industry": "other",
+      "monthly": 0.29,
+      "cumulative": 0.53,
+      "monthly_eps": null,
+      "cumulative_eps": 0.17,
+      "mom": {
+        "base": 0.24,
+        "delta": 0.04999999999999999,
+        "pct": 20.83333333333333,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫票券",
+      "industry": "other",
+      "monthly": 0.19,
+      "cumulative": 0.47,
+      "monthly_eps": null,
+      "cumulative_eps": 0.1,
+      "mom": {
+        "base": 0.28,
+        "delta": -0.09000000000000002,
+        "pct": -32.14285714285715,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫證券",
+      "industry": "securities",
+      "monthly": -0.003,
+      "cumulative": -0.13,
+      "monthly_eps": null,
+      "cumulative_eps": -0.03,
+      "mom": {
+        "base": -0.13,
+        "delta": 0.127,
+        "pct": 97.6923076923077,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫人壽",
+      "industry": "life",
+      "monthly": 0.66,
+      "cumulative": 0.87,
+      "monthly_eps": null,
+      "cumulative_eps": 0.13,
+      "mom": {
+        "base": 0.21,
+        "delta": 0.45000000000000007,
+        "pct": 214.28571428571433,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [
+        "MoM 達 ±15%"
+      ],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    },
+    {
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫投信",
+      "industry": "other",
+      "monthly": 0.01,
+      "cumulative": 0.02,
+      "monthly_eps": null,
+      "cumulative_eps": 0.08,
+      "mom": {
+        "base": 0.01,
+        "delta": 0,
+        "pct": 0,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "monthly_yoy": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "average3": null,
+      "deviation": {
+        "base": null,
+        "delta": null,
+        "pct": null,
+        "status": "missing",
+        "note": "比較月份資料不足"
+      },
+      "rolling3": {
+        "current": null,
+        "base": null,
+        "pct": null,
+        "note": "比較月份資料不足"
+      },
+      "yoy_rank_eligible": false,
+      "rank_note": "",
+      "markers": [],
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "announcement_date": "2025/03/07",
+      "fvoci": null
+    }
+  ],
+  "attribution": [
+    {
+      "code": "2880",
+      "name": "華南金",
+      "delta": -2.789999999999999,
+      "life": 0,
+      "bank": -3.1799999999999997,
+      "securities": 0.19000000000000006,
+      "other": 0.2000000000000005,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "delta": -4.099999999999994,
+      "life": 8.200000000000003,
+      "bank": -7.399999999999999,
+      "securities": 3.8000000000000007,
+      "other": -8.7,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "delta": -67,
+      "life": -63,
+      "bank": -3.299999999999997,
+      "securities": 1.6,
+      "other": -2.300000000000003,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "delta": -1.9400000000000048,
+      "life": 3.200000000000003,
+      "bank": -2.25,
+      "securities": -0.6699999999999999,
+      "other": -2.2200000000000077,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "delta": -3,
+      "life": 0,
+      "bank": -7.16,
+      "securities": 0.41999999999999993,
+      "other": 3.74,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "delta": -0.9499999999999993,
+      "life": 0.8300000000000001,
+      "bank": -1.7100000000000009,
+      "securities": 1.1099999999999994,
+      "other": -1.179999999999998,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2886",
+      "name": "兆豐金",
+      "delta": -1.9400000000000013,
+      "life": 0,
+      "bank": -0.15000000000000213,
+      "securities": -1.76,
+      "other": -0.02999999999999914,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "delta": 4.200000000000001,
+      "life": -0.20000000000000007,
+      "bank": 0.10000000000000142,
+      "securities": 2.5,
+      "other": 1.7999999999999998,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2889",
+      "name": "國票金",
+      "delta": 0.1299999999999999,
+      "life": 0,
+      "bank": 0,
+      "securities": 0.88,
+      "other": -0.7500000000000001,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "delta": -4.609999999999999,
+      "life": 0,
+      "bank": -8.16,
+      "securities": 5.32,
+      "other": -1.7699999999999996,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "delta": -19.159999999999997,
+      "life": -19.990000000000002,
+      "bank": 2.1000000000000014,
+      "securities": 0,
+      "other": -1.269999999999996,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "delta": -1.3999999999999986,
+      "life": -0.3699999999999999,
+      "bank": -0.9499999999999993,
+      "securities": 0.6499999999999999,
+      "other": -0.7299999999999993,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    },
+    {
+      "code": "5880",
+      "name": "合庫金",
+      "delta": 2.130000000000001,
+      "life": 0.45000000000000007,
+      "bank": 1.2599999999999998,
+      "securities": 0.127,
+      "other": 0.2930000000000008,
+      "note": "其他含母公司費用、合併沖銷、非主要子公司及持股差異；為觀察殘差。"
+    }
+  ],
+  "history": [
+    {
+      "period": "2023/03",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": 19.77,
+      "cumulative": 19.77,
+      "monthly_eps": null,
+      "cumulative_eps": 0.14,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南銀行",
+      "industry": "bank",
+      "monthly": 19.24,
+      "cumulative": 19.24,
+      "monthly_eps": null,
+      "cumulative_eps": 0.18,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南永昌證券",
+      "industry": "securities",
+      "monthly": 0.83,
+      "cumulative": 0.83,
+      "monthly_eps": null,
+      "cumulative_eps": 0.13,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南產險",
+      "industry": "other",
+      "monthly": 0.93,
+      "cumulative": 0.93,
+      "monthly_eps": null,
+      "cumulative_eps": 0.46,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南金",
+      "industry": "holding",
+      "monthly": 16.98,
+      "cumulative": 36.76,
+      "monthly_eps": null,
+      "cumulative_eps": 0.27,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南銀行",
+      "industry": "bank",
+      "monthly": 16.06,
+      "cumulative": 35.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.34,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南永昌證券",
+      "industry": "securities",
+      "monthly": 1.02,
+      "cumulative": 1.84,
+      "monthly_eps": null,
+      "cumulative_eps": 0.28,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2880",
+      "parent": "華南金",
+      "name": "華南產險",
+      "industry": "other",
+      "monthly": 1.13,
+      "cumulative": 2.06,
+      "monthly_eps": null,
+      "cumulative_eps": 1.03,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2880&seq_no=3&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": 152.1,
+      "cumulative": 152.1,
+      "monthly_eps": 1.11,
+      "cumulative_eps": 1.11,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "台北富邦銀行",
+      "industry": "bank",
+      "monthly": 38.9,
+      "cumulative": 38.9,
+      "monthly_eps": 0.27,
+      "cumulative_eps": 0.27,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦證券",
+      "industry": "securities",
+      "monthly": 4.6,
+      "cumulative": 4.6,
+      "monthly_eps": 0.28,
+      "cumulative_eps": 0.28,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦產險",
+      "industry": "other",
+      "monthly": 7.3,
+      "cumulative": 7.3,
+      "monthly_eps": 2.42,
+      "cumulative_eps": 2.42,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦人壽",
+      "industry": "life",
+      "monthly": 86.8,
+      "cumulative": 86.8,
+      "monthly_eps": 0.73,
+      "cumulative_eps": 0.73,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦金",
+      "industry": "holding",
+      "monthly": 148,
+      "cumulative": 300,
+      "monthly_eps": null,
+      "cumulative_eps": 2.2,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "台北富邦銀行",
+      "industry": "bank",
+      "monthly": 31.5,
+      "cumulative": 70.5,
+      "monthly_eps": null,
+      "cumulative_eps": 0.49,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦證券",
+      "industry": "securities",
+      "monthly": 8.4,
+      "cumulative": 13,
+      "monthly_eps": null,
+      "cumulative_eps": 0.8,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦產險",
+      "industry": "other",
+      "monthly": 4.6,
+      "cumulative": 11.9,
+      "monthly_eps": null,
+      "cumulative_eps": 3.96,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2881",
+      "parent": "富邦金",
+      "name": "富邦人壽",
+      "industry": "life",
+      "monthly": 95,
+      "cumulative": 181.8,
+      "monthly_eps": null,
+      "cumulative_eps": 1.53,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": 144.9,
+      "cumulative": 144.9,
+      "monthly_eps": 0.99,
+      "cumulative_eps": 0.99,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰人壽",
+      "industry": "life",
+      "monthly": 94.3,
+      "cumulative": 94.3,
+      "monthly_eps": 1.47,
+      "cumulative_eps": 1.47,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰世華銀行",
+      "industry": "bank",
+      "monthly": 42.5,
+      "cumulative": 42.5,
+      "monthly_eps": 0.36,
+      "cumulative_eps": 0.36,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰產險",
+      "industry": "other",
+      "monthly": 5.3,
+      "cumulative": 5.3,
+      "monthly_eps": 2.63,
+      "cumulative_eps": 2.63,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰證券",
+      "industry": "securities",
+      "monthly": 2.4,
+      "cumulative": 2.4,
+      "monthly_eps": 0.31,
+      "cumulative_eps": 0.31,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰投信",
+      "industry": "other",
+      "monthly": 2.7,
+      "cumulative": 2.7,
+      "monthly_eps": 1.81,
+      "cumulative_eps": 1.81,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰金",
+      "industry": "holding",
+      "monthly": 77.9,
+      "cumulative": 222.8,
+      "monthly_eps": null,
+      "cumulative_eps": 1.53,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰人壽",
+      "industry": "life",
+      "monthly": 31.3,
+      "cumulative": 125.6,
+      "monthly_eps": null,
+      "cumulative_eps": 2,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰世華銀行",
+      "industry": "bank",
+      "monthly": 39.2,
+      "cumulative": 81.6,
+      "monthly_eps": null,
+      "cumulative_eps": 0.68,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰產險",
+      "industry": "other",
+      "monthly": 2.3,
+      "cumulative": 7.6,
+      "monthly_eps": null,
+      "cumulative_eps": 3.79,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰證券",
+      "industry": "securities",
+      "monthly": 4,
+      "cumulative": 6.4,
+      "monthly_eps": null,
+      "cumulative_eps": 0.83,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2882",
+      "parent": "國泰金",
+      "name": "國泰投信",
+      "industry": "other",
+      "monthly": 2.6,
+      "cumulative": 5.3,
+      "monthly_eps": null,
+      "cumulative_eps": 3.56,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": 36.56,
+      "cumulative": 36.56,
+      "monthly_eps": null,
+      "cumulative_eps": 0.22,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基人壽",
+      "industry": "life",
+      "monthly": 23.4,
+      "cumulative": 23.4,
+      "monthly_eps": null,
+      "cumulative_eps": 0.46,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基銀行",
+      "industry": "bank",
+      "monthly": 7.27,
+      "cumulative": 7.27,
+      "monthly_eps": null,
+      "cumulative_eps": 0.15,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "中華開發資本",
+      "industry": "other",
+      "monthly": 2.45,
+      "cumulative": 2.45,
+      "monthly_eps": null,
+      "cumulative_eps": 0.12,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基證券",
+      "industry": "securities",
+      "monthly": 7.05,
+      "cumulative": 7.05,
+      "monthly_eps": null,
+      "cumulative_eps": 0.39,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基金",
+      "industry": "holding",
+      "monthly": 34.62,
+      "cumulative": 71.18,
+      "monthly_eps": null,
+      "cumulative_eps": 0.42,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基人壽",
+      "industry": "life",
+      "monthly": 26.6,
+      "cumulative": 50.01,
+      "monthly_eps": null,
+      "cumulative_eps": 0.99,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基銀行",
+      "industry": "bank",
+      "monthly": 5.02,
+      "cumulative": 12.29,
+      "monthly_eps": null,
+      "cumulative_eps": 0.26,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "中華開發資本",
+      "industry": "other",
+      "monthly": 0.71,
+      "cumulative": 3.17,
+      "monthly_eps": null,
+      "cumulative_eps": 0.16,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2883",
+      "parent": "凱基金",
+      "name": "凱基證券",
+      "industry": "securities",
+      "monthly": 6.38,
+      "cumulative": 13.43,
+      "monthly_eps": null,
+      "cumulative_eps": 0.74,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": 30.24,
+      "cumulative": 30.24,
+      "monthly_eps": null,
+      "cumulative_eps": 0.19,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山銀行",
+      "industry": "bank",
+      "monthly": 30.68,
+      "cumulative": 30.68,
+      "monthly_eps": null,
+      "cumulative_eps": 0.24,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山證券",
+      "industry": "securities",
+      "monthly": 1.3,
+      "cumulative": 1.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.33,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山創投",
+      "industry": "other",
+      "monthly": -0.54,
+      "cumulative": -0.54,
+      "monthly_eps": null,
+      "cumulative_eps": -0.1,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山金",
+      "industry": "holding",
+      "monthly": 27.24,
+      "cumulative": 57.49,
+      "monthly_eps": null,
+      "cumulative_eps": 0.36,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山銀行",
+      "industry": "bank",
+      "monthly": 23.52,
+      "cumulative": 54.2,
+      "monthly_eps": null,
+      "cumulative_eps": 0.42,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山證券",
+      "industry": "securities",
+      "monthly": 1.72,
+      "cumulative": 3.02,
+      "monthly_eps": null,
+      "cumulative_eps": 0.75,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2884",
+      "parent": "玉山金",
+      "name": "玉山創投",
+      "industry": "other",
+      "monthly": 3.36,
+      "cumulative": 2.82,
+      "monthly_eps": null,
+      "cumulative_eps": 0.51,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": 26.06,
+      "cumulative": 26.06,
+      "monthly_eps": null,
+      "cumulative_eps": 0.2,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大證券",
+      "industry": "securities",
+      "monthly": 12.8,
+      "cumulative": 12.8,
+      "monthly_eps": null,
+      "cumulative_eps": 0.19,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大銀行",
+      "industry": "bank",
+      "monthly": 9.3,
+      "cumulative": 9.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.12,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大期貨",
+      "industry": "other",
+      "monthly": 2.05,
+      "cumulative": 2.05,
+      "monthly_eps": null,
+      "cumulative_eps": 0.71,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大人壽",
+      "industry": "life",
+      "monthly": 0.19,
+      "cumulative": 0.19,
+      "monthly_eps": null,
+      "cumulative_eps": 0.01,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大投信",
+      "industry": "other",
+      "monthly": 3.71,
+      "cumulative": 3.71,
+      "monthly_eps": null,
+      "cumulative_eps": 1.63,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大金",
+      "industry": "holding",
+      "monthly": 25.11,
+      "cumulative": 51.17,
+      "monthly_eps": null,
+      "cumulative_eps": 0.4,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大證券",
+      "industry": "securities",
+      "monthly": 13.91,
+      "cumulative": 26.7,
+      "monthly_eps": null,
+      "cumulative_eps": 0.41,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大銀行",
+      "industry": "bank",
+      "monthly": 7.59,
+      "cumulative": 16.88,
+      "monthly_eps": null,
+      "cumulative_eps": 0.21,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大期貨",
+      "industry": "other",
+      "monthly": 1.65,
+      "cumulative": 3.7,
+      "monthly_eps": null,
+      "cumulative_eps": 1.28,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大人壽",
+      "industry": "life",
+      "monthly": 1.02,
+      "cumulative": 1.21,
+      "monthly_eps": null,
+      "cumulative_eps": 0.04,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2885",
+      "parent": "元大金",
+      "name": "元大投信",
+      "industry": "other",
+      "monthly": 3.01,
+      "cumulative": 6.72,
+      "monthly_eps": null,
+      "cumulative_eps": 2.96,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": 32.17,
+      "cumulative": 32.17,
+      "monthly_eps": null,
+      "cumulative_eps": 0.22,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐銀行",
+      "industry": "bank",
+      "monthly": 27.3,
+      "cumulative": 27.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.28,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐證券",
+      "industry": "securities",
+      "monthly": 3.06,
+      "cumulative": 3.06,
+      "monthly_eps": null,
+      "cumulative_eps": 0.26,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐票券",
+      "industry": "other",
+      "monthly": 1.62,
+      "cumulative": 1.62,
+      "monthly_eps": null,
+      "cumulative_eps": 0.11,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐產險",
+      "industry": "other",
+      "monthly": 0.82,
+      "cumulative": 0.82,
+      "monthly_eps": null,
+      "cumulative_eps": 0.18,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐金",
+      "industry": "holding",
+      "monthly": 30.23,
+      "cumulative": 62.4,
+      "monthly_eps": null,
+      "cumulative_eps": 0.42,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐銀行",
+      "industry": "bank",
+      "monthly": 27.15,
+      "cumulative": 54.45,
+      "monthly_eps": null,
+      "cumulative_eps": 0.57,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐證券",
+      "industry": "securities",
+      "monthly": 1.3,
+      "cumulative": 4.36,
+      "monthly_eps": null,
+      "cumulative_eps": 0.38,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐票券",
+      "industry": "other",
+      "monthly": 1.81,
+      "cumulative": 3.43,
+      "monthly_eps": null,
+      "cumulative_eps": 0.23,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2886",
+      "parent": "兆豐金",
+      "name": "兆豐產險",
+      "industry": "other",
+      "monthly": 0.24,
+      "cumulative": 1.06,
+      "monthly_eps": null,
+      "cumulative_eps": 0.24,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": 15.9,
+      "cumulative": 15.9,
+      "monthly_eps": 0.11,
+      "cumulative_eps": 0.11,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新銀行",
+      "industry": "bank",
+      "monthly": 16,
+      "cumulative": 16,
+      "monthly_eps": 0.16,
+      "cumulative_eps": 0.16,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新證券",
+      "industry": "securities",
+      "monthly": 1.5,
+      "cumulative": 1.5,
+      "monthly_eps": 0.21,
+      "cumulative_eps": 0.21,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新人壽",
+      "industry": "life",
+      "monthly": 0.8,
+      "cumulative": 0.8,
+      "monthly_eps": 0.07,
+      "cumulative_eps": 0.07,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新新光金",
+      "industry": "holding",
+      "monthly": 20.1,
+      "cumulative": 36,
+      "monthly_eps": null,
+      "cumulative_eps": 0.25,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新銀行",
+      "industry": "bank",
+      "monthly": 16.1,
+      "cumulative": 32.1,
+      "monthly_eps": null,
+      "cumulative_eps": 0.32,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新證券",
+      "industry": "securities",
+      "monthly": 4,
+      "cumulative": 5.5,
+      "monthly_eps": null,
+      "cumulative_eps": 0.8,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2887",
+      "parent": "台新新光金",
+      "name": "台新人壽",
+      "industry": "life",
+      "monthly": 0.6,
+      "cumulative": 1.3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.12,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": 1.55,
+      "cumulative": 1.55,
+      "monthly_eps": null,
+      "cumulative_eps": 0.04,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國際票券",
+      "industry": "other",
+      "monthly": 1.62,
+      "cumulative": 1.62,
+      "monthly_eps": null,
+      "cumulative_eps": 0.09,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票證券",
+      "industry": "securities",
+      "monthly": 0.16,
+      "cumulative": 0.16,
+      "monthly_eps": null,
+      "cumulative_eps": 0.01,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票金",
+      "industry": "holding",
+      "monthly": 1.68,
+      "cumulative": 3.24,
+      "monthly_eps": null,
+      "cumulative_eps": 0.09,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=8&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國際票券",
+      "industry": "other",
+      "monthly": 1.15,
+      "cumulative": 2.77,
+      "monthly_eps": null,
+      "cumulative_eps": 0.15,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=8&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2889",
+      "parent": "國票金",
+      "name": "國票證券",
+      "industry": "securities",
+      "monthly": 1.04,
+      "cumulative": 1.21,
+      "monthly_eps": null,
+      "cumulative_eps": 0.1,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=8&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": 29.03,
+      "cumulative": 29.03,
+      "monthly_eps": 0.23,
+      "cumulative_eps": 0.23,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐銀行",
+      "industry": "bank",
+      "monthly": 25.38,
+      "cumulative": 25.38,
+      "monthly_eps": 0.24,
+      "cumulative_eps": 0.24,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金證券",
+      "industry": "securities",
+      "monthly": 2.55,
+      "cumulative": 2.55,
+      "monthly_eps": 0.15,
+      "cumulative_eps": 0.15,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金",
+      "industry": "holding",
+      "monthly": 24.42,
+      "cumulative": 53.45,
+      "monthly_eps": 0.19,
+      "cumulative_eps": 0.42,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐銀行",
+      "industry": "bank",
+      "monthly": 17.22,
+      "cumulative": 42.59,
+      "monthly_eps": 0.17,
+      "cumulative_eps": 0.41,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2890",
+      "parent": "永豐金",
+      "name": "永豐金證券",
+      "industry": "securities",
+      "monthly": 7.87,
+      "cumulative": 10.42,
+      "monthly_eps": 0.47,
+      "cumulative_eps": 0.63,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": 68.27,
+      "cumulative": 68.27,
+      "monthly_eps": 0.35,
+      "cumulative_eps": 0.35,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中國信託銀行",
+      "industry": "bank",
+      "monthly": 40.24,
+      "cumulative": 40.24,
+      "monthly_eps": 0.25,
+      "cumulative_eps": 0.25,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "台灣人壽",
+      "industry": "life",
+      "monthly": 24.66,
+      "cumulative": 24.66,
+      "monthly_eps": 0.4,
+      "cumulative_eps": 0.4,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中信金",
+      "industry": "holding",
+      "monthly": 49.11,
+      "cumulative": 117.38,
+      "monthly_eps": null,
+      "cumulative_eps": 0.6,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "中國信託銀行",
+      "industry": "bank",
+      "monthly": 42.34,
+      "cumulative": 82.58,
+      "monthly_eps": null,
+      "cumulative_eps": 0.52,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2891",
+      "parent": "中信金",
+      "name": "台灣人壽",
+      "industry": "life",
+      "monthly": 4.67,
+      "cumulative": 29.32,
+      "monthly_eps": null,
+      "cumulative_eps": 0.47,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": 25.45,
+      "cumulative": 25.45,
+      "monthly_eps": null,
+      "cumulative_eps": 0.18,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一銀行",
+      "industry": "bank",
+      "monthly": 23.04,
+      "cumulative": 23.04,
+      "monthly_eps": null,
+      "cumulative_eps": 0.21,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金證券",
+      "industry": "securities",
+      "monthly": 0.2,
+      "cumulative": 0.2,
+      "monthly_eps": null,
+      "cumulative_eps": 0.03,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金人壽",
+      "industry": "life",
+      "monthly": 1.68,
+      "cumulative": 1.68,
+      "monthly_eps": null,
+      "cumulative_eps": 0.29,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金",
+      "industry": "holding",
+      "monthly": 24.05,
+      "cumulative": 49.49,
+      "monthly_eps": null,
+      "cumulative_eps": 0.35,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一銀行",
+      "industry": "bank",
+      "monthly": 22.09,
+      "cumulative": 45.13,
+      "monthly_eps": null,
+      "cumulative_eps": 0.41,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金證券",
+      "industry": "securities",
+      "monthly": 0.85,
+      "cumulative": 1.05,
+      "monthly_eps": null,
+      "cumulative_eps": 0.16,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "2892",
+      "parent": "第一金",
+      "name": "第一金人壽",
+      "industry": "life",
+      "monthly": 1.31,
+      "cumulative": 3,
+      "monthly_eps": null,
+      "cumulative_eps": 0.51,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=2&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2023/03",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/04",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/05",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/06",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/07",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/08",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/09",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/10",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/11",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2023/12",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/03",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/04",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/05",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/06",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/07",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/08",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/09",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/10",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/11",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2024/12",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": null,
+      "cumulative": null,
+      "status": "資料不足"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": 14.37,
+      "cumulative": 14.37,
+      "monthly_eps": null,
+      "cumulative_eps": 0.09,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫銀行",
+      "industry": "bank",
+      "monthly": 14.66,
+      "cumulative": 14.66,
+      "monthly_eps": null,
+      "cumulative_eps": 0.12,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫資產",
+      "industry": "other",
+      "monthly": 0.24,
+      "cumulative": 0.24,
+      "monthly_eps": null,
+      "cumulative_eps": 0.08,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫票券",
+      "industry": "other",
+      "monthly": 0.28,
+      "cumulative": 0.28,
+      "monthly_eps": null,
+      "cumulative_eps": 0.06,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫證券",
+      "industry": "securities",
+      "monthly": -0.13,
+      "cumulative": -0.13,
+      "monthly_eps": null,
+      "cumulative_eps": -0.03,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫人壽",
+      "industry": "life",
+      "monthly": 0.21,
+      "cumulative": 0.21,
+      "monthly_eps": null,
+      "cumulative_eps": 0.03,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/01",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫投信",
+      "industry": "other",
+      "monthly": 0.01,
+      "cumulative": 0.01,
+      "monthly_eps": null,
+      "cumulative_eps": 0.04,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫金",
+      "industry": "holding",
+      "monthly": 16.5,
+      "cumulative": 30.51,
+      "monthly_eps": null,
+      "cumulative_eps": 0.2,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫銀行",
+      "industry": "bank",
+      "monthly": 15.92,
+      "cumulative": 30.58,
+      "monthly_eps": null,
+      "cumulative_eps": 0.25,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫資產",
+      "industry": "other",
+      "monthly": 0.29,
+      "cumulative": 0.53,
+      "monthly_eps": null,
+      "cumulative_eps": 0.17,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫票券",
+      "industry": "other",
+      "monthly": 0.19,
+      "cumulative": 0.47,
+      "monthly_eps": null,
+      "cumulative_eps": 0.1,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫證券",
+      "industry": "securities",
+      "monthly": -0.003,
+      "cumulative": -0.13,
+      "monthly_eps": null,
+      "cumulative_eps": -0.03,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫人壽",
+      "industry": "life",
+      "monthly": 0.66,
+      "cumulative": 0.87,
+      "monthly_eps": null,
+      "cumulative_eps": 0.13,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    },
+    {
+      "period": "2025/02",
+      "code": "5880",
+      "parent": "合庫金",
+      "name": "合庫投信",
+      "industry": "other",
+      "monthly": 0.01,
+      "cumulative": 0.02,
+      "monthly_eps": null,
+      "cumulative_eps": 0.08,
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "status": "原始公告數"
+    }
+  ],
+  "markets": [
+    {
+      "period": "2025/01",
+      "key": "usdtwd",
+      "value": 32.9385,
+      "date": "2025-01-31",
+      "prev_value": 32.76,
+      "prev_date": "2024-12-31",
+      "pct_change": 0.54,
+      "source": "Yahoo Finance (TWD=X)"
+    },
+    {
+      "period": "2025/01",
+      "key": "taiex",
+      "value": 23525.41,
+      "date": "2025-01-22",
+      "prev_value": 23035.1,
+      "prev_date": "2024-12-31",
+      "pct_change": 2.13,
+      "source": "Yahoo Finance (^TWII)"
+    },
+    {
+      "period": "2025/01",
+      "key": "taiex_turnover",
+      "value_yi": 3533.8,
+      "trading_days": 15,
+      "prev_value_yi": 3610.1,
+      "prev_trading_days": 22,
+      "pct_change": -2.11,
+      "source": "TWSE FMTQIK"
+    },
+    {
+      "period": "2025/01",
+      "key": "spx",
+      "value": 6040.53,
+      "date": "2025-01-31",
+      "prev_value": 5881.63,
+      "prev_date": "2024-12-31",
+      "pct_change": 2.7,
+      "source": "Yahoo Finance (^GSPC)"
+    },
+    {
+      "period": "2025/01",
+      "key": "us10y",
+      "value_pct": 4.569,
+      "date": "2025-01-31",
+      "prev_value_pct": 4.573,
+      "prev_date": "2024-12-31",
+      "bps_change": 0,
+      "source": "Yahoo Finance (^TNX)"
+    },
+    {
+      "period": "2025/01",
+      "key": "tlt",
+      "value": 87.76,
+      "date": "2025-01-31",
+      "prev_value": 87.33,
+      "prev_date": "2024-12-31",
+      "pct_change": 0.49,
+      "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+    },
+    {
+      "period": "2025/02",
+      "key": "usdtwd",
+      "value": 32.9017,
+      "date": "2025-02-28",
+      "prev_value": 32.9385,
+      "prev_date": "2025-01-31",
+      "pct_change": -0.11,
+      "source": "Yahoo Finance (TWD=X)"
+    },
+    {
+      "period": "2025/02",
+      "key": "taiex",
+      "value": 23053.18,
+      "date": "2025-02-27",
+      "prev_value": 23525.41,
+      "prev_date": "2025-01-22",
+      "pct_change": -2.01,
+      "source": "Yahoo Finance (^TWII)"
+    },
+    {
+      "period": "2025/02",
+      "key": "taiex_turnover",
+      "value_yi": 3942.8,
+      "trading_days": 19,
+      "prev_value_yi": null,
+      "prev_trading_days": null,
+      "pct_change": null,
+      "source": "TWSE FMTQIK"
+    },
+    {
+      "period": "2025/02",
+      "key": "spx",
+      "value": 5954.5,
+      "date": "2025-02-28",
+      "prev_value": 6040.53,
+      "prev_date": "2025-01-31",
+      "pct_change": -1.42,
+      "source": "Yahoo Finance (^GSPC)"
+    },
+    {
+      "period": "2025/02",
+      "key": "us10y",
+      "value_pct": 4.231,
+      "date": "2025-02-28",
+      "prev_value_pct": 4.569,
+      "prev_date": "2025-01-31",
+      "bps_change": -34,
+      "source": "Yahoo Finance (^TNX)"
+    },
+    {
+      "period": "2025/02",
+      "key": "tlt",
+      "value": 92.43,
+      "date": "2025-02-28",
+      "prev_value": 87.76,
+      "prev_date": "2025-01-31",
+      "pct_change": 5.32,
+      "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+    }
+  ],
+  "news": [
+    {
+      "id": "news-2025-01-2880",
+      "period": "2025/01",
+      "code": "2880",
+      "name": "華南金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2880",
+      "period": "2025/02",
+      "code": "2880",
+      "name": "華南金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2881",
+      "period": "2025/01",
+      "code": "2881",
+      "name": "富邦金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2881",
+      "period": "2025/02",
+      "code": "2881",
+      "name": "富邦金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2882",
+      "period": "2025/01",
+      "code": "2882",
+      "name": "國泰金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2882",
+      "period": "2025/02",
+      "code": "2882",
+      "name": "國泰金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2883",
+      "period": "2025/01",
+      "code": "2883",
+      "name": "凱基金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2883",
+      "period": "2025/02",
+      "code": "2883",
+      "name": "凱基金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2884",
+      "period": "2025/01",
+      "code": "2884",
+      "name": "玉山金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2884",
+      "period": "2025/02",
+      "code": "2884",
+      "name": "玉山金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2885",
+      "period": "2025/01",
+      "code": "2885",
+      "name": "元大金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2885",
+      "period": "2025/02",
+      "code": "2885",
+      "name": "元大金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2886",
+      "period": "2025/01",
+      "code": "2886",
+      "name": "兆豐金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2886",
+      "period": "2025/02",
+      "code": "2886",
+      "name": "兆豐金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2887",
+      "period": "2025/01",
+      "code": "2887",
+      "name": "台新新光金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2887",
+      "period": "2025/02",
+      "code": "2887",
+      "name": "台新新光金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2889",
+      "period": "2025/01",
+      "code": "2889",
+      "name": "國票金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2889",
+      "period": "2025/02",
+      "code": "2889",
+      "name": "國票金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2890",
+      "period": "2025/01",
+      "code": "2890",
+      "name": "永豐金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2890",
+      "period": "2025/02",
+      "code": "2890",
+      "name": "永豐金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2891",
+      "period": "2025/01",
+      "code": "2891",
+      "name": "中信金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2891",
+      "period": "2025/02",
+      "code": "2891",
+      "name": "中信金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-2892",
+      "period": "2025/01",
+      "code": "2892",
+      "name": "第一金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-2892",
+      "period": "2025/02",
+      "code": "2892",
+      "name": "第一金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-01-5880",
+      "period": "2025/01",
+      "code": "5880",
+      "name": "合庫金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    },
+    {
+      "id": "news-2025-02-5880",
+      "period": "2025/02",
+      "code": "5880",
+      "name": "合庫金",
+      "summary": "略",
+      "generated_at": "",
+      "manual": false,
+      "sources": []
+    }
+  ],
+  "limitations": [
+    "新聞來源發布日期未提供者列為未取得；摘要生成時間不等同發布時間。"
+  ],
+  "methodology": [
+    "金額為新台幣億元；顯示小數一位，計算保留原始精度。EPS 為元。",
+    "YoY 與 MoM＝（本期－基期）÷基期絕對值；零基期及缺值不計百分比。跨零另註轉盈／轉虧。",
+    "前3月平均不含當月；近3月合計與再前3月合計不重疊；缺任一必要月份不計算。",
+    "原始稅後淨利 YoY 照列；合併或認列起點變動排除未調整 YoY 排名，單純更名不排除。",
+    "金控與壽險加計 FVOCI 累計 YoY 留白；下界不作精確差額。",
+    "子公司變動為公告稅後淨利變化，不等同母公司持股加權貢獻；其他為觀察殘差，不認定費用原因。",
+    "新聞摘要為二次整理，未經原文逐句核實；與公告數字矛盾時以公告為準並列待核對。",
+    "市場同向不代表因果；手續費、VaR、避險成本等未揭露項目需財報／管理帳。"
+  ]
+}

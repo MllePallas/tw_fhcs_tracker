@@ -7,7 +7,7 @@ on:
   # 8 日起跑：玉山／國票／永豐固定 5-10 日公告（早鳥），其餘 10 家 11-15 日；115 年整體較 114 年晚約 3 天，尾端延至 17 日
   # 分鐘刻意避開 :00（GitHub 排程整點最容易延遲 10-30 分鐘）
   # 撲空不花錢：main.py 只對有公告的家呼叫 LLM；前端已對部分月份做好呈現（缺的家顯示待更新、<10 家不排名）
-  # 13 家收齊後，其餘排程由 short-circuit 直接 skip
+  # 金額擷取仍採增量；收齊後持續補新聞與 FVOCI，月報由後續工作流程產出
   schedule:
     - cron: '7 8,11 8-17 * *'   # 台北 16:07、19:07
     - cron: '7 23 7-16 * *'     # 台北 07:07（UTC 前一日）
@@ -16,7 +16,7 @@ on:
   workflow_dispatch:
     inputs:
       target_month:
-        description: '目標月份（民國年/月，例如 115/03）；留空則自動判斷'
+        description: '目標月份（西元年/月，例如 2026/03）；留空則自動判斷'
         required: false
         default: ''
       stock_codes:
@@ -32,6 +32,10 @@ on:
         required: false
         default: 'false'
 
+concurrency:
+  group: finhold-data-write
+  cancel-in-progress: false
+
 jobs:
   scrape:
     runs-on: ubuntu-latest
@@ -45,116 +49,73 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-      # ── 2. Short-circuit：若該月已收齊 13 家，直接結束 ──
-      # 只在 schedule 觸發時檢查；workflow_dispatch 不檢查，方便重跑
-      - name: Check if target month already complete
-        id: check
-        if: github.event_name == 'schedule'
-        run: |
-          # 計算目標月份 = 上個月（以該月 15 日為基準避開月底邊界），轉成民國年/月
-          PREV=$(date -u -d "$(date -u +%Y-%m-15) -1 month" +'%Y-%m')
-          PREV_Y=${PREV%-*}
-          PREV_M=${PREV#*-}
-          TARGET=$(printf '%03d/%02d' $((PREV_Y - 1911)) $((10#$PREV_M)))
-          PERIOD=$(jq -r '.report_period // ""' docs/data/latest.json 2>/dev/null || echo "")
-          SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
-          echo "Target month: $TARGET"
-          echo "Latest period: $PERIOD, success_count: $SUCCESS"
-          if [ "$PERIOD" = "$TARGET" ] && [ "$SUCCESS" -ge 13 ]; then
-            echo "skip=true" >> $GITHUB_OUTPUT
-            echo "✅ Target month $TARGET already collected ($SUCCESS/13) — skipping"
-          else
-            echo "skip=false" >> $GITHUB_OUTPUT
-          fi
-
       # ── 3. Python 環境 ───────────────────────────────
       - name: Set up Python 3.11
-        if: steps.check.outputs.skip != 'true'
         uses: actions/setup-python@v6
         with:
           python-version: '3.11'
           cache: 'pip'
 
       - name: Install Python dependencies
-        if: steps.check.outputs.skip != 'true'
         run: |
           pip install -r requirements.txt
 
       # ── 4. 執行爬蟲 ──────────────────────────────────
       - name: Run scraper
-        if: steps.check.outputs.skip != 'true'
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TARGET_MONTH: ${{ inputs.target_month }}
+          STOCK_CODES: ${{ inputs.stock_codes }}
+          ENABLE_LLM: ${{ inputs.enable_llm }}
+          FORCE_REFRESH: ${{ inputs.force_refresh }}
         run: |
           cd scraper
 
-          # 組裝參數
-          ARGS=""
-
-          # 指定月份
-          if [ -n "${{ github.event.inputs.target_month }}" ]; then
-            ARGS="$ARGS --month ${{ github.event.inputs.target_month }}"
+          ARGS=()
+          if [ -n "$TARGET_MONTH" ]; then ARGS+=(--month "$TARGET_MONTH"); fi
+          if [ -n "$STOCK_CODES" ]; then
+            read -ra CODES <<< "$STOCK_CODES"
+            ARGS+=(--codes "${CODES[@]}")
           fi
-
-          # 指定公司
-          if [ -n "${{ github.event.inputs.stock_codes }}" ]; then
-            ARGS="$ARGS --codes ${{ github.event.inputs.stock_codes }}"
-          fi
-
-          # LLM 設定
-          if [ "${{ github.event.inputs.enable_llm }}" = "false" ]; then
-            ARGS="$ARGS --no-llm"
-          fi
-
-          # 強制重爬（手動觸發專用）
-          if [ "${{ github.event.inputs.force_refresh }}" = "true" ]; then
-            ARGS="$ARGS --force"
-          fi
-
-          python main.py $ARGS
+          if [ "$ENABLE_LLM" = "false" ]; then ARGS+=(--no-llm); fi
+          if [ "$FORCE_REFRESH" = "true" ]; then ARGS+=(--force); fi
+          python main.py "${ARGS[@]}"
 
       # ── 4b. 補上新聞摘要（每家公告即可跑，不需等 13 家收齊）──
       # 兩腳本皆冪等 + 有上限重試（無相關說明 retry 上限 3 次），增量處理
       # 用 always() 確保 scraper 即使 exit 1（部分失敗）也仍會嘗試補新聞
       - name: Generate news summaries
-        if: always() && steps.check.outputs.skip != 'true'
+        if: always()
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TARGET_MONTH: ${{ inputs.target_month }}
         run: |
-          SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
-          if [ "$SUCCESS" -ge 1 ]; then
-            echo "Collected $SUCCESS companies — generating news summaries (idempotent + bounded retry)..."
-            cd scraper
-            python news_summary.py
-          else
-            echo "No companies collected yet; skipping news summaries"
-          fi
+          ARGS=()
+          if [ -n "$TARGET_MONTH" ]; then ARGS+=(--period "$TARGET_MONTH"); fi
+          python scraper/news_summary.py "${ARGS[@]}"
 
       # ── 4c. 補上壽險 FVOCI 調整後獲利（每家公告即可跑）──
       - name: Generate FVOCI adjustment
-        if: always() && steps.check.outputs.skip != 'true'
+        if: always()
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          TARGET_MONTH: ${{ inputs.target_month }}
         run: |
-          SUCCESS=$(jq -r '.success_count // 0' docs/data/latest.json 2>/dev/null || echo "0")
-          if [ "$SUCCESS" -ge 1 ]; then
-            echo "Collected $SUCCESS companies — generating FVOCI adjustments (idempotent + bounded retry)..."
-            cd scraper
-            python fvoci_adjustment.py
-          else
-            echo "No companies collected yet; skipping FVOCI adjustment"
-          fi
+          ARGS=()
+          if [ -n "$TARGET_MONTH" ]; then ARGS+=(--period "$TARGET_MONTH"); fi
+          python scraper/fvoci_adjustment.py "${ARGS[@]}"
 
       # ── 5. 提交更新的資料 ─────────────────────────────
       # always() 確保部分失敗時仍會推上已成功的家（main.py 在 sys.exit(1) 之前已 save_data，JSON 是 consistent 狀態）
       - name: Commit updated data
-        if: always() && steps.check.outputs.skip != 'true'
+        if: always()
         run: |
           git config --global user.name 'github-actions[bot]'
           git config --global user.email 'github-actions[bot]@users.noreply.github.com'
           git add docs/data/
           # 如果沒有變更就跳過
           git diff --staged --quiet || git commit -m "chore: update financial data $(date +'%Y-%m-%d %H:%M')"
+          git pull --rebase
           git push
 
       # ── 6. 失敗通知（可選）────────────────────────────

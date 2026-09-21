@@ -188,115 +188,20 @@ def _write_yoy_fields(target: dict, pct_key: str, metrics, abs_key=None, status_
 
 
 def compute_yoy(data: dict, target_period: str):
-    """
-    讀去年同期歸檔，計算 holding_company.cumulative_profit 的 YoY 變化，
-    寫入 cumulative_profit_yoy_pct / _abs / _status 欄位（M&A 期間 / 缺資料則略過）。
-
-    公式：(curr - prev) / abs(prev) × 100
-    跨零點（虧轉盈 / 盈轉虧）會在 _status 標記，前端據此切換顯示。
-    """
-    # 合併日期 → 第一個可算 YoY 的目標月份。target_period < cutoff 時略過此公司。
-    # 例：2887 合併於 2025/07，114/07 起為合併後資料 → 115/07 起才能對齊 YoY。
-    YOY_CUTOFFS = {
-        "2887": "115/07",  # 台新新光金（台新金+新光金合併於 2025-07-24）
-    }
-    # 即使 holding-level cutoff 適用，這些子公司仍可算 YoY（尚未正式整併、baseline 對得齊）
-    # 例：2887 旗下台新銀行尚未與新光銀行合併，114 年資料以「台新銀行」獨立存在
-    YOY_SUB_ALLOWED_PRE_CUTOFF = {
-        "2887": {"台新銀行"},
-    }
-
-    roc_year, roc_month = target_period.split("/")
-    prev_year = int(roc_year) - 1
-    prev_period = f"{prev_year:03d}/{roc_month}"
-    baseline_file = DATA_DIR / f"{prev_period.replace('/', '-')}.json"
-
-    if not baseline_file.exists():
-        logger.info(f"YoY baseline {baseline_file.name} not found, skipping YoY")
-        return
-
-    try:
-        with open(baseline_file, encoding="utf-8") as f:
-            baseline = json.load(f)
-    except Exception as e:
-        logger.warning(f"Failed to read YoY baseline {baseline_file.name}: {e}")
-        return
-
-    baseline_by_code = {c["code"]: c for c in baseline.get("companies", []) if "code" in c}
-    populated = 0
-    sub_populated = 0
-    skipped_merger = 0
-
-    for company in data.get("companies", []):
-        if "error" in company:
-            continue
-        code = company.get("code", "")
-        cutoff = YOY_CUTOFFS.get(code)
-        skip_parent = bool(cutoff and target_period < cutoff)
-        sub_whitelist = YOY_SUB_ALLOWED_PRE_CUTOFF.get(code, set()) if skip_parent else None
-
-        # holding-level cutoff 適用、又無任何白名單子公司 → 整家略過
-        if skip_parent and not sub_whitelist:
-            skipped_merger += 1
-            continue
-
-        prev = baseline_by_code.get(code)
-        if not prev or "error" in prev:
-            continue
-
-        # 母公司 YoY（cutoff 適用時跳過母公司）
-        if skip_parent:
-            skipped_merger += 1
-        else:
-            curr_cumul = company.get("holding_company", {}).get("cumulative_profit")
-            prev_cumul = prev.get("holding_company", {}).get("cumulative_profit")
-            m = _yoy_metrics(curr_cumul, prev_cumul)
-            if m:
-                _write_yoy_fields(company["holding_company"], "cumulative_profit_yoy_pct", m)
-                populated += 1
-
-            # 金控層級加計 FVOCI 後獲利 YoY（115/06 起富邦／凱基揭露「金控稅後淨利＋FVOCI
-            # 股票處分利益」、國泰揭露「對保留盈餘影響數」）：今年加計數 vs 去年金控原始累計
-            # P&L（去年 FVOCI 仍計入 P&L，兩邊皆含 FVOCI 影響，apples-to-apples）。
-            # lower_bound（僅門檻值）不算 YoY，理由同壽險子公司。
-            hadj = company.get("holding_company", {}).get("fvoci_adjusted")
-            if hadj and hadj.get("value_type") != "lower_bound":
-                m_hadj = _yoy_metrics(hadj.get("cumulative_profit"), prev_cumul)
-                if m_hadj:
-                    _write_yoy_fields(hadj, "yoy_pct", m_hadj, abs_key="yoy_abs", status_key="yoy_status")
-
-        # 子公司 YoY（用 name 對齊；cutoff 適用時僅算白名單子公司）
-        prev_subs_by_name = {s.get("name", ""): s for s in prev.get("subsidiaries", []) if s.get("name")}
-        for sub in company.get("subsidiaries", []):
-            name = sub.get("name", "")
-            if not name:
-                continue
-            if skip_parent and name not in sub_whitelist:
-                continue
-            prev_sub = prev_subs_by_name.get(name)
-            if not prev_sub:
-                continue
-            ps = prev_sub.get("cumulative_profit")
-            cs = sub.get("cumulative_profit")
-            m_sub = _yoy_metrics(cs, ps)
-            if m_sub:
-                _write_yoy_fields(sub, "cumulative_profit_yoy_pct", m_sub)
-                sub_populated += 1
-
-            # FVOCI 調整後獲利 YoY：今年「加計 FVOCI」 vs 去年原始 P&L（去年含 FVOCI 計入 P&L）
-            # 區間/門檻型（value_type=='lower_bound'，如國泰僅揭露「逾1,000億」）不算 YoY：
-            # 下界與去年精確值相除會得出假精度的百分比，語意誤導。
-            adj = sub.get("fvoci_adjusted")
-            if adj and adj.get("value_type") != "lower_bound":
-                ca = adj.get("cumulative_profit")
-                m_adj = _yoy_metrics(ca, ps)
-                if m_adj:
-                    _write_yoy_fields(adj, "yoy_pct", m_adj, abs_key="yoy_abs", status_key="yoy_status")
-
-    msg = f"YoY populated: {populated} parents, {sub_populated} subsidiaries (baseline: {prev_period})"
-    if skipped_merger:
-        msg += f"; skipped {skipped_merger} parents due to M&A cutoff"
-    logger.info(msg)
+    """Rebuild derived YoY fields using the site's full-window comparison rules."""
+    from comparison_policy import apply_yoy_policy
+    year, month = target_period.split('/')
+    previous = f"{int(year)-1:03d}/{month}"
+    file = DATA_DIR / f"{previous.replace('/', '-')}.json"
+    baseline = None
+    if file.exists():
+        try:
+            baseline = json.loads(file.read_text(encoding='utf-8'))
+            if baseline.get('report_period') != previous:
+                baseline = None
+        except (OSError, ValueError) as error:
+            logger.warning(f"Cannot read YoY baseline: {error}")
+    apply_yoy_policy(data, baseline, target_period)
 
 
 def update_index(data: dict, report_period: str):
@@ -472,7 +377,7 @@ def main():
     )
     parser.add_argument(
         "--month",
-        help="指定目標月份，格式：115/03（預設：自動偵測上個月）",
+        help="指定目標月份，格式：2026/03（預設：自動偵測上個月）",
         default=None,
     )
     parser.add_argument(
@@ -492,6 +397,9 @@ def main():
         help="請求間隔秒數（預設 3.0）",
     )
     args = parser.parse_args()
+    if args.month:
+        from periods import storage_period
+        args.month = storage_period(args.month)
 
     # API Key
     api_key = None if args.no_llm else os.environ.get("ANTHROPIC_API_KEY")

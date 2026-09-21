@@ -339,7 +339,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument(
         "--period",
-        help="目標月份 民國年/月，例 115/04。預設為上個月。",
+        help="目標月份 西元年/月，例 2026/04。預設為上個月。",
         default=None,
     )
     ap.add_argument(
@@ -348,6 +348,9 @@ def main():
         help="只印出結果，不寫檔",
     )
     args = ap.parse_args()
+    if args.period:
+        from periods import storage_period
+        args.period = storage_period(args.period)
 
     period = args.period or default_period()
     summary = build_market_summary(period)

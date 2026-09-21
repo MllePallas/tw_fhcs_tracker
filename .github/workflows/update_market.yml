@@ -11,9 +11,13 @@ on:
   workflow_dispatch:
     inputs:
       target_period:
-        description: '目標月份（民國年/月，例如 115/04）；留空則自動判斷上個月'
+        description: '目標月份（西元年/月，例如 2026/04）；留空則自動判斷上個月'
         required: false
         default: ''
+
+concurrency:
+  group: finhold-data-write
+  cancel-in-progress: false
 
 jobs:
   market:
@@ -38,13 +42,13 @@ jobs:
           pip install requests yfinance
 
       - name: Run market summary
+        env:
+          TARGET_PERIOD: ${{ inputs.target_period }}
         run: |
           cd scraper
-          ARGS=""
-          if [ -n "${{ github.event.inputs.target_period }}" ]; then
-            ARGS="--period ${{ github.event.inputs.target_period }}"
-          fi
-          python market_summary.py $ARGS
+          ARGS=()
+          if [ -n "$TARGET_PERIOD" ]; then ARGS+=(--period "$TARGET_PERIOD"); fi
+          python market_summary.py "${ARGS[@]}"
 
       - name: Commit updated data
         run: |

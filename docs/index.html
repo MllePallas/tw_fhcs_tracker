@@ -30,6 +30,7 @@
   }
   </script>
   <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="trends.css" />
 </head>
 <body>
 
@@ -60,13 +61,14 @@
       <div class="controls-right">
         <div class="ctrl-group ctrl-mode">
           <div class="mode-toggle" id="mode-toggle">
-            <button class="mode-btn active" data-pm="monthly" onclick="setPageMode('monthly')">單月月報</button>
+            <button class="mode-btn active" data-pm="monthly" onclick="setPageMode('monthly')">完整月報</button>
+            <button class="mode-btn" data-pm="trend" onclick="setPageMode('trend')">趨勢重點</button>
             <button class="mode-btn" data-pm="period" onclick="setPageMode('period')">期間比較</button>
           </div>
         </div>
         <div class="ctrl-group ctrl-month">
           <label>月份：</label>
-          <select id="month-select" onchange="onMonthChange()">
+          <select id="month-select" aria-label="月份" onchange="onMonthChange()">
             <option value="">載入中...</option>
           </select>
         </div>
@@ -76,7 +78,11 @@
         </div>
         <div class="ctrl-group">
           <label>排序：</label>
-          <select id="sort-select" onchange="renderAll()">
+          <select id="sort-select" aria-label="排序" onchange="renderAll()">
+            <option value="trend_deviation">偏離觀察基準最大</option>
+            <option value="trend_up">月增加金額最多</option>
+            <option value="trend_down">月減少金額最多</option>
+            <option value="trend_amount">當月獲利最高</option>
             <option value="code">代號</option>
             <option value="monthly_desc">當月獲利 ↓</option>
             <option value="monthly_asc">當月獲利 ↑</option>
@@ -88,12 +94,13 @@
         </div>
         <div class="ctrl-group">
           <label>單位：</label>
-          <select id="unit-select" onchange="renderAll()">
+          <select id="unit-select" aria-label="單位" onchange="renderAll()">
             <option value="百萬元" selected>百萬元 (NT$m)</option>
             <option value="億元">億元</option>
           </select>
         </div>
         <div class="ctrl-group ctrl-download">
+          <button class="trend-save" onclick="openSnapshot()">存成圖片</button>
           <button id="btn-download" class="btn-download" onclick="downloadExcel()" title="下載當前月份完整內容（xlsx）">
             <span class="btn-download-text">下載 Excel</span>
           </button>
@@ -101,6 +108,10 @@
       </div>
     </div>
 
+    <div id="trend-root" aria-live="polite"><p class="loading-cell">正在載入歷史月份與比較口徑…</p></div>
+
+    <details id="market-context" class="market-context">
+      <summary>市場背景與獲利排名</summary>
     <!-- 本月市場概況 -->
     <div class="market-section hidden" id="market-section">
       <div class="market-header">
@@ -112,6 +123,7 @@
 
     <!-- 摘要卡片 -->
     <div class="summary-cards" id="summary-cards"></div>
+    </details>
 
     <!-- 視角 Tab -->
     <div class="industry-tabs" id="industry-tabs">
@@ -130,6 +142,7 @@
       </div>
       <button class="btn-snapshot" id="btn-snapshot" onclick="openSnapshot()">存成圖片</button>
     </div>
+    <p class="monthly-policy-note">稅後淨利 YoY 依各期公告數列示變動率，會計新制與合併事件另註說明。金控與壽險加計 FVOCI 的累計 YoY 留白。單月 EPS 僅列公告值，未揭露為 —。</p>
 
     <!-- 手機橫向捲動提示（桌機隱藏） -->
     <div class="table-scroll-hint" id="table-scroll-hint">← 左右滑動可看完整欄位（公司名固定）</div>
@@ -184,7 +197,7 @@
 
     <!-- 獲利比較圖表（本期 vs 去年同期） -->
     <div class="section-title" id="bar-chart-title">當月獲利比較</div>
-    <div class="chart-container">
+    <div class="chart-container" id="bar-chart-container">
       <canvas id="bar-chart"></canvas>
     </div>
     <div class="chart-note hidden" id="bar-chart-note"></div>
@@ -205,6 +218,11 @@
 
   <!-- ── Scripts ── -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.min.js"></script>
+  <script src="analytics.js"></script>
+  <script src="analysis-pack.js"></script>
+  <script src="report-renderer.js"></script>
   <script src="app.js"></script>
+  <script src="trends.js"></script>
+  <script src="analysis-ui.js"></script>
 </body>
 </html>

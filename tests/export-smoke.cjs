@@ -1,0 +1,53 @@
+// Run with the site's pinned xlsx-js-style bundle: node tests/export-smoke.cjs path/to/xlsx.cjs
+const fs=require('node:fs'),path=require('node:path'),vm=require('node:vm'),assert=require('node:assert/strict');
+const library=vm.createContext({console,Buffer});
+vm.runInContext(fs.readFileSync(path.resolve(process.argv[2]),'utf8'),library);
+const XLSX=library.XLSX;
+const root=path.resolve(__dirname,'..');
+const history=Object.fromEntries(fs.readdirSync(path.join(root,'docs/data')).filter(f=>/^\d+-\d+\.json$/.test(f)).map(f=>{const d=JSON.parse(fs.readFileSync(path.join(root,'docs/data',f),'utf8'));return[d.report_period,d];}));
+const ctx=vm.createContext({console,AnalysisPack:require('../docs/analysis-pack.js'),ProfitAnalytics:require('../docs/analytics.js'),document:{addEventListener(){}},window:{XLSX},XLSX,Intl,Map,Set,Date,Math,Number,Array,Object,JSON,history,rules:require('../docs/comparison-rules.json')});
+for(const file of ['app.js','trends.js','analysis-ui.js'])vm.runInContext(fs.readFileSync(path.join(root,'docs',file),'utf8'),ctx,{filename:file});
+const book=vm.runInContext(`
+Object.assign(monthCache,history);comparisonRules=rules;state.data=monthCache['115/08'];state.index={months:Object.keys(history).map(period=>({period}))};
+Object.values(monthCache).forEach(applyComparisonPolicy);state.displayUnit='億元';state.sortMode='trend_deviation';
+const wb=XLSX.utils.book_new();appendTrendSheets(wb,XLSX);
+XLSX.utils.book_append_sheet(wb,buildHoldingsSheet(state.data,state.displayUnit),'金控總覽');
+for(const [kind,name] of [['bank','銀行子公司'],['life','壽險子公司'],['securities','證券子公司']])XLSX.utils.book_append_sheet(wb,buildIndustrySheet(kind,state.data,state.displayUnit),name);
+const other=buildOtherSheet(state.displayUnit,state.data.report_period);if(other)XLSX.utils.book_append_sheet(wb,other,'其他子公司');
+appendAnalysisSheets(wb,XLSX);
+const market=buildMarketSheet(state.data.market_summary);if(market)XLSX.utils.book_append_sheet(wb,market,'市場概況');wb;`,ctx);
+const out=path.join(root,'.test-output','taiwan-fhcs-2026-08.xlsx');
+fs.mkdirSync(path.dirname(out),{recursive:true});fs.writeFileSync(out,XLSX.write(book,{type:'buffer',bookType:'xlsx'}));
+const restored=XLSX.read(fs.readFileSync(out),{type:'buffer',cellStyles:true});
+const rows=XLSX.utils.sheet_to_json(restored.Sheets['趨勢重點']);
+assert.equal(rows.length,13);
+const row=rows.find(r=>r['代號']==='2889');
+assert.equal(row['當月 2026/08 (億元)'],3.75);
+assert.ok(Math.abs(row.MoM-.984126984)<1e-7);
+assert.equal(typeof row.MoM,'number');
+assert.equal(rows.find(r=>r['代號']==='2881').MoM,'虧轉盈');
+assert.equal(typeof rows.find(r=>r['代號']==='2887')['單月YoY'],'number');
+const full=XLSX.utils.sheet_to_json(restored.Sheets['金控總覽']);
+assert.equal(full.find(r=>r['代號']==='2881')['公告單月 EPS'],'—');
+assert.equal(typeof full.find(r=>r['代號']==='2887')['累計 YoY'],'number');
+const holdingAdjusted=full.filter(r=>String(r['金控']).includes('FVOCI'));
+assert.ok(holdingAdjusted.length>0);
+for(const r of holdingAdjusted) assert.ok(r['累計 YoY'] == null || r['累計 YoY'] === '');
+const life=XLSX.utils.sheet_to_json(restored.Sheets['壽險子公司']);
+const adjusted=life.filter(r=>String(r['壽險子公司']).includes('FVOCI'));
+assert.ok(adjusted.length>0);
+for(const r of adjusted) assert.ok(r['累計 YoY'] == null || r['累計 YoY'] === '');
+assert.equal(typeof life.find(r=>r['壽險子公司']==='富邦人壽')['累計 YoY'],'number');
+const news=XLSX.utils.sheet_to_json(restored.Sheets['新聞摘要']);
+assert.ok(news.some(r=>r['月份']==='2026/08'&&r['代號']==='2883'&&r['摘要'].includes('綠能')));
+assert.ok(news.every(r=>/^20\d{2}\/\d{2}$/.test(r['月份'])));
+const sources=XLSX.utils.sheet_to_json(restored.Sheets['新聞來源']);assert.ok(sources.some(r=>r['網址'].startsWith('https://')));
+assert.ok(XLSX.utils.sheet_to_json(restored.Sheets['近24月金控與子公司']).some(r=>r['類別']==='bank'));
+const metrics=XLSX.utils.sheet_to_json(restored.Sheets['分析金控指標']);assert.equal(metrics.find(r=>r['代號']==='2889')['單月億元'],3.75);
+for(const name of restored.SheetNames) for(const [address,cell] of Object.entries(restored.Sheets[name])) {
+  if(address.startsWith('!'))continue;
+  assert.notEqual(cell.t,'e',`${name}!${address}`);
+  if(cell.t==='n')assert.ok(Number.isFinite(cell.v));
+}
+assert.ok(restored.Sheets['比較口徑']['!rows'].some(r=>r.hpt>40));
+console.log(JSON.stringify({file:out,sheets:restored.SheetNames,companies:rows.length,checks:'typed numbers, comparison statuses, missing EPS, formatting and read-back passed'}));
