@@ -110,21 +110,6 @@
 
     <div id="trend-root" aria-live="polite"><p class="loading-cell">正在載入歷史月份與比較口徑…</p></div>
 
-    <details id="market-context" class="market-context">
-      <summary>市場背景與獲利排名</summary>
-    <!-- 本月市場概況 -->
-    <div class="market-section hidden" id="market-section">
-      <div class="market-header">
-        <span class="market-title">本月市場概況</span>
-        <span class="market-meta" id="market-meta"></span>
-      </div>
-      <div class="market-cards" id="market-cards"></div>
-    </div>
-
-    <!-- 摘要卡片 -->
-    <div class="summary-cards" id="summary-cards"></div>
-    </details>
-
     <!-- 視角 Tab -->
     <div class="industry-tabs" id="industry-tabs">
       <button class="tab active" data-view="holdings" onclick="setView('holdings')">金控總覽</button>
@@ -163,8 +148,17 @@
       <div class="m-empty">載入資料中...</div>
     </div>
 
-    <!-- 分析報告連結（該月份有報告且在金控總覽時才顯示） -->
-    <div class="report-link-row hidden" id="report-link-row"></div>
+    <!-- 市場概況緊接月報表格，直接展開，方便對照獲利變化。 -->
+    <div id="market-context" class="market-context">
+      <section class="market-section hidden" id="market-section" aria-labelledby="market-title">
+        <div class="market-header">
+          <h2 class="market-title" id="market-title">本月市場概況</h2>
+          <span class="market-meta" id="market-meta"></span>
+        </div>
+        <div class="market-cards" id="market-cards"></div>
+      </section>
+      <div class="summary-cards" id="summary-cards"></div>
+    </div>
 
     <!-- 表格圖片（手機「存成圖片」用；依當前月份／視角／單位即時繪製） -->
     <div class="snapshot-overlay hidden" id="snapshot-overlay" onclick="closeSnapshot(event)">

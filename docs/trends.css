@@ -4,11 +4,9 @@ body.pm-trend #trend-root { display:block; }
 body.pm-trend #industry-tabs, body.pm-trend .table-toolbar, body.pm-trend .table-scroll-hint,
 body.pm-trend > main > .table-container, body.pm-trend #mobile-cards,
 body.pm-trend #bar-chart-title, body.pm-trend #bar-chart-container, body.pm-trend #bar-chart-note,
-body.pm-trend #cumul-chart-title, body.pm-trend #cumul-chart-container, body.pm-trend #cumul-chart-note,
-body.pm-trend #report-link-row { display:none!important; }
+body.pm-trend #cumul-chart-title, body.pm-trend #cumul-chart-container, body.pm-trend #cumul-chart-note { display:none!important; }
 #btn-snapshot { display:none!important; }
 main { display:flex; flex-direction:column; min-width:0; }
-#market-context { order:10; }
 .controls { gap:14px; }
 .controls-right { flex-wrap:wrap; }
 button, select { font:inherit; }
@@ -87,7 +85,7 @@ button.company-link { border:0; background:transparent; padding:0; text-align:le
 .basis-explanation { background:var(--warning-bg); color:var(--warning); }
 .reconciliation { background:var(--surface-alt); color:var(--text-2); }
 .history-data { margin:16px 20px; font-size:12px; }
-.history-data summary, .methodology summary, .market-context>summary { cursor:pointer; padding:12px 0; font-weight:600; }
+.history-data summary, .methodology summary { cursor:pointer; padding:12px 0; font-weight:600; }
 .history-data table { min-width:540px; }
 .history-data th { text-align:left; }
 .history-data p { margin:10px 0; }

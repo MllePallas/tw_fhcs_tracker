@@ -333,24 +333,6 @@ function reportForPeriod(period) {
   return (state.reports || []).find(r => periodAd(String(r.period || '').replace('-', '/')) === want) || null;
 }
 
-// 連結顯示於金控總覽表格右下方；其他產業視角不顯示（報告為全月綜觀）
-function renderReportLink() {
-  const row = document.getElementById('report-link-row');
-  if (!row) return;
-  const entry = state.viewMode === 'holdings' ? reportForPeriod(state.data?.report_period) : null;
-  if (!entry) {
-    row.classList.add('hidden');
-    row.innerHTML = '';
-    return;
-  }
-  const href = `./report.html?period=${String(entry.period).replace('/', '-')}`;
-  const tip = `${periodLabel(state.data.report_period)}分析報告（另開新頁）`;
-  row.innerHTML = `<a class="report-link" href="${href}" target="_blank" rel="noopener" title="${escapeHtml(tip)}">
-      <span class="rl-tag">月報</span>每月分析報告 ↗
-    </a>`;
-  row.classList.remove('hidden');
-}
-
 // ── 去年同期資料（圖表對照用） ──────────────────────────
 // 檔案不存在（如最早的月份、或 baseline 尚未歸檔）時靜默略過，圖表只顯示本期。
 async function loadBaseline(period) {
@@ -384,7 +366,6 @@ function renderAll() {
   renderMarketSummary();
   renderSummaryCards();
   renderTable();
-  renderReportLink();
   renderChart();
 }
 
@@ -2580,8 +2561,6 @@ function renderPeriodAll() {
     lu.textContent = `本期：${periodRangeText(opt.months)}${baseTxt}`;
   }
   document.getElementById('market-section').classList.add('hidden');
-  const rl = document.getElementById('report-link-row');
-  if (rl) { rl.classList.add('hidden'); rl.innerHTML = ''; }
 
   const holdRows = buildPeriodHoldingRows(opt);
   renderPeriodSummaryCards(opt, holdRows);
