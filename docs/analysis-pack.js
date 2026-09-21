@@ -9,7 +9,7 @@
   const roc = p => String(p).replace(/^(\d{4})[/-](\d{1,2})$/,(_,y,m)=>`${Number(y)-1911}/${m.padStart(2,'0')}`);
   function dates(text) {
     return String(text ?? '').split(/(https?:\/\/\S+)/).map(part=>/^https?:\/\//.test(part)?part:part
-      .replace(/(?<!\d)(?:民國\s*)?(\d{3})年/g,(_,y)=>`${Number(y)+1911}年`)
+      .replace(/(?<!\d)(?:民國\s*)?(\d{3})\s*年/g,(_,y)=>`${Number(y)+1911}年`)
       .replace(/(?<!\d)(\d{3})\/(\d{1,2})(?!\d)/g,(_,y,m)=>`${Number(y)+1911}/${m.padStart(2,'0')}`)).join('');
   }
   const yi = (v,u) => { const n=A.toNTM(v,u); return n===null?null:n/100; };
@@ -103,6 +103,17 @@
     for(const key of ['taiex','spx','us10y','usdtwd','taiex_turnover'])if(!marketKeys.includes(key))pack.limitations.push(`本月市場資料缺少 ${key}。`);
     const missingNews=pack.holdings.filter(h=>!pack.news.some(n=>n.period===pack.period&&n.code===h.code)).map(h=>h.name);
     if(missingNews.length)pack.limitations.push(`本月新聞摘要未取得：${missingNews.join('、')}；不推測原因。`);
+    for(const news of pack.news){
+      const target=Number(news.period.slice(0,4));
+      // A title explicitly announcing another year's monthly result is not current evidence.
+      const stale=news.sources.filter(s=>{
+        const stated=s.title.match(/(20\d{2})\s*年\s*(\d{1,2})\s*月/);
+        return stated&&/自結|盈餘|獲利/.test(s.title)&&(Number(stated[1])!==target||Number(stated[2])!==Number(news.period.slice(5)));
+      });
+      news.analysis_eligible=stale.length===0;
+      news.quality_note=stale.length?'待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。':'';
+      if(news.period===pack.period&&news.quality_note)pack.limitations.push(`${news.name}新聞${news.quality_note}`);
+    }
     pack.limitations.push('新聞來源發布日期未提供者列為未取得；摘要生成時間不等同發布時間。');
     return pack;
   }

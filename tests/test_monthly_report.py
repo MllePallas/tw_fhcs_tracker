@@ -75,6 +75,12 @@ class MonthlyReportTest(unittest.TestCase):
             for heading in ['1. 金控','2. 壽險','3. 銀行','4. 證券']:self.assertIn(heading,text)
             self.assertNotIn('NaN',text)
 
+    def test_stale_news_is_not_model_evidence(self):
+        self.assertNotIn('news-2026-08-2886',evidence(self.pack))
+        text,_=render_report(self.pack)
+        self.assertIn('來源標題的獲利期間與所選月份不符',text)
+        self.assertNotIn('115 年',text)
+
     def test_model_format_repair_is_bounded_and_keeps_citations(self):
         key=next(iter(evidence(self.pack)))
         valid={'sections':[[{'text':'依既有新聞摘要，原因仍需核對公司說明。','sources':[key]}],[],[],[]]}

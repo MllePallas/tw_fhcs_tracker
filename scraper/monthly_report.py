@@ -62,7 +62,7 @@ def evidence(pack):
     for item in pack['attribution']:
         result[item['code']+'-attribution']={'text':json.dumps(item,ensure_ascii=False),'url':'','type':'公告數字計算的子公司變化及其他殘差'}
     for item in pack['news']:
-        if item['period'] == pack['period']:
+        if item['period'] == pack['period'] and item.get('analysis_eligible', True):
             result[item['id']] = {'text': item['summary'], 'url': next((s['url'] for s in item['sources'] if s.get('url')), ''), 'type': '既有新聞摘要，非逐句核實的原文'}
     for item in pack['markets']:
         if item['period'] == pack['period']:
@@ -184,7 +184,10 @@ def render_report(pack, commentary=None):
     for item in pack['news']:
         if item['period']!=pack['period']:
             continue
-        lines += [f"### {item['name']}", '', '以下為既有新聞摘要（二次整理，未逐句核實）；摘要生成時間：'+item['generated_at'], '', item['summary'], '']
+        lines += [f"### {item['name']}", '', '以下為既有新聞摘要（二次整理，未逐句核實）；摘要生成時間：'+item['generated_at'], '']
+        if item.get('quality_note'):
+            lines += [item['quality_note'], '']
+        lines += [item['summary'], '']
         for s in item['sources']:
             url=s.get('url','')
             if url.startswith(('https://','http://')):

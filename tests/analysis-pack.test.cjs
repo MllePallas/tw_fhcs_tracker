@@ -26,5 +26,11 @@ test('lower bound FVOCI never creates an exact disposal gain',()=>{
   const h=structuredClone(history);h['115/08'].companies.find(c=>c.code==='2881').holding_company.fvoci_adjusted.value_type='lower_bound';
   const a=P.build(h,rules,'2026/08').holdings.find(r=>r.code==='2881').fvoci;
   assert.equal(a.disposal_monthly,null);assert.equal(a.value_type,'lower_bound');
-  assert.equal(P.dates('115年8月及115/07'), '2026年8月及2026/07');
+  assert.equal(P.dates('115 年8月及115/07'), '2026年8月及2026/07');
+});
+test('news from another reporting period is retained but excluded from analysis',()=>{
+  const p=P.build(history,rules,'2026/08');
+  const stale=p.news.find(n=>n.period===p.period&&n.code==='2886');
+  assert.equal(stale.analysis_eligible,false);assert.match(stale.quality_note,/待核對/);
+  assert.ok(stale.summary.length>0);assert.ok(p.limitations.some(s=>s.includes('兆豐金新聞')));
 });
