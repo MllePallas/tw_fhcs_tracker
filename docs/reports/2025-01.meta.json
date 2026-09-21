@@ -1,9 +1,9 @@
 {
   "period": "2025/01",
-  "input_hash": "73b863f1e26746d0a2e84cb731b78173714bcae15174e63a641b93fcf07ba3f0",
+  "input_hash": "94b9abf2e3f999cff6a05933cf3f91fa9bdce1c5e1a7942c0fb3eeed8ccace4f",
   "output_hash": "f9bf1ca04f861870abbcfb8ec9aea0f7ba312956152411246a5f4cc6ebe4caf2",
   "headline": "2025/01 已取得 13/13 家完整單月與累計資料，前期資料不足或存在比較限制，尚無法辨識最大月變化。",
-  "generated_at": "2026-09-21T03:57:36.421942+00:00",
+  "generated_at": "2026-09-21T05:30:12.144957+00:00",
   "ai_status": "data-and-news",
   "ai_error_type": "",
   "attempts": 0,

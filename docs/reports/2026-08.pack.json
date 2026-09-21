@@ -21560,7 +21560,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2880",
@@ -21570,7 +21572,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2880",
@@ -21580,7 +21584,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2880",
@@ -21590,7 +21596,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2880",
@@ -21600,7 +21608,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2880",
@@ -21610,7 +21620,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2880",
@@ -21620,7 +21632,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2880",
@@ -21630,7 +21644,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2880",
@@ -21640,7 +21656,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2880",
@@ -21650,7 +21668,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2880",
@@ -21660,7 +21680,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2880",
@@ -21670,7 +21692,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2880",
@@ -21693,7 +21717,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2880",
@@ -21710,7 +21736,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2880",
@@ -21733,7 +21761,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2880",
@@ -21743,7 +21773,9 @@
       "summary": "**重點**\n\n華南金（2880）於 8 月 13 日公布 2026 年 7 月自結獲利，單月稅後純益達 32.88 億元；累計前 7 月稅後純益 206.51 億元，較去年同期大增 56.36 億元，年增 37.54%，每股稅後純益（EPS）為 1.48 元，累計稅後純益與 EPS 均雙雙改寫歷史同期新高。\n華南銀行 7 月在股利收入大舉入帳帶動下，單月金融操作利益顯著躍升，成為拉動金控獲利的核心引擎。\n\n**子公司明細**\n- 華南銀行：7 月單月稅後純益 29.42 億元，月增 4.85 億元，主因股利收入挹注，整體金融操作利益月增 5.42 億元；累計前 7 月稅後純益 162 億元，年增 15%，占金控整體獲利比重達 76%。利息淨收益年增 11%，財富管理手收突破百億元大關、年增 26%，高資產客戶數已突破 3,200 戶、AUM 逾 2,600 億元。\n\n- 華南永昌證券：7 月稅後純益 2.97 億元；累計前 7 月稅後純益達 35.31 億元，年成長 285%，主因台股交易持續熱絡，經紀、承銷及自營三大核心業務均較去年同期大幅增長。\n\n- 華南產險：前 7 月稅後純益達 13.21 億元，年增 38%，主要得益於商業火險與工程險持續成長，加上損失率顯著改善，推升核保利潤創下新高。",
       "generated_at": "2026-08-14T11:34:35.780663",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2880",
@@ -21766,7 +21798,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2881",
@@ -21776,7 +21810,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2881",
@@ -21786,7 +21822,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2881",
@@ -21796,7 +21834,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2881",
@@ -21806,7 +21846,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2881",
@@ -21816,7 +21858,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2881",
@@ -21826,7 +21870,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2881",
@@ -21836,7 +21882,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2881",
@@ -21846,7 +21894,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2881",
@@ -21856,7 +21906,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2881",
@@ -21866,7 +21918,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2881",
@@ -21876,7 +21930,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2881",
@@ -21886,7 +21942,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2881",
@@ -21903,7 +21961,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2881",
@@ -21926,7 +21986,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2881",
@@ -21949,7 +22011,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2881",
@@ -21972,7 +22036,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2881",
@@ -22001,7 +22067,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2881",
@@ -22018,7 +22086,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2881",
@@ -22035,7 +22105,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2881",
@@ -22052,7 +22124,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2882",
@@ -22062,7 +22136,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2882",
@@ -22072,7 +22148,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2882",
@@ -22082,7 +22160,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2882",
@@ -22092,7 +22172,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2882",
@@ -22102,7 +22184,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2882",
@@ -22112,7 +22196,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2882",
@@ -22122,7 +22208,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2882",
@@ -22132,7 +22220,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2882",
@@ -22142,7 +22232,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2882",
@@ -22152,7 +22244,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2882",
@@ -22162,7 +22256,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2882",
@@ -22172,7 +22268,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2882",
@@ -22189,7 +22287,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2882",
@@ -22199,7 +22299,9 @@
       "summary": "**重點**\n\n國泰金控於 2026 年 4 月 15 日公布 2026 年 3 月稅後純益 50.3 億元，前 3 月累計稅後純益 316.6 億元，EPS 為 2.15 元；各子公司核心業務動能強健，國泰世華銀行、國泰產險、國泰證券及國泰投信累計稅後純益皆創歷年同期新高。\n國泰人壽 3 月雖逢中東戰事影響牽動金融資產評價，惟受惠過往厚實 CSM 之穩定攤銷、經常性收益挹注，維繫投資操作平穩表現，保險本業動能強勁，整體營運持穩。\n\n**子公司明細**\n\n- **國泰人壽：**\n3 月稅後純益 7.2 億元，累計稅後純益達 173.7 億元；3 月初年度保費（FYP）及初年度等價保費（FYPE）分別為 362 億元及 82 億元，均維持強勁增長態勢；因 2 月適逢春節假期，基期較低，3 月 FYP 月成長 73%，A&H 及投資型商品 FYP 分別月成長 87% 及 73%。\n\n- **國泰世華銀行：**\n3 月稅後純益 40.6 億元，累計稅後純益 132 億元，年成長 8%；放款持續擴張，降息帶動外幣資金成本下降，累計淨利息收入呈雙位數成長；財富管理銷售動能延續，信用卡簽帳金額穩健成長，逾放比率為 0.16%，備抵呆帳覆蓋率為 1,031%。\n\n- **國泰產險：**\n3 月稅後純益 4.2 億元，累計稅後純益 10.6 億元，創歷史同期新高；3 月簽單保費達 34.1 億元，累計 100.5 億元，健康險與工程險累計簽單保費分別較去年同期成長 55% 及 12%。\n\n- **國泰投信：**\n3 月稅後純益 3 億元，累計稅後純益 8.6 億元，年成長 16%，總管理資產規模為新台幣 2.8 兆元，較去年同期成長 29%。",
       "generated_at": "2026-04-27T15:18:40.632033",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2882",
@@ -22222,7 +22324,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-04-2882",
@@ -22245,7 +22349,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2882",
@@ -22262,7 +22368,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2882",
@@ -22291,7 +22399,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2882",
@@ -22308,7 +22418,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2882",
@@ -22331,7 +22443,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2883",
@@ -22341,7 +22455,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2883",
@@ -22351,7 +22467,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2883",
@@ -22361,7 +22479,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2883",
@@ -22371,7 +22491,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2883",
@@ -22381,7 +22503,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2883",
@@ -22391,7 +22515,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2883",
@@ -22401,7 +22527,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2883",
@@ -22411,7 +22539,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2883",
@@ -22421,7 +22551,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2883",
@@ -22431,7 +22563,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2883",
@@ -22441,7 +22575,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2883",
@@ -22451,7 +22587,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2883",
@@ -22468,7 +22606,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2883",
@@ -22491,7 +22631,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-03-2883",
@@ -22514,7 +22656,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2883",
@@ -22537,7 +22681,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2883",
@@ -22566,7 +22712,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2883",
@@ -22589,7 +22737,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2883",
@@ -22606,7 +22756,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2883",
@@ -22629,7 +22781,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2884",
@@ -22639,7 +22793,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2884",
@@ -22649,7 +22805,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2884",
@@ -22659,7 +22817,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2884",
@@ -22669,7 +22829,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2884",
@@ -22679,7 +22841,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2884",
@@ -22689,7 +22853,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2884",
@@ -22699,7 +22865,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2884",
@@ -22709,7 +22877,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2884",
@@ -22719,7 +22889,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2884",
@@ -22729,7 +22901,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2884",
@@ -22739,7 +22913,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2884",
@@ -22749,7 +22925,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2884",
@@ -22766,7 +22944,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2884",
@@ -22783,7 +22963,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2884",
@@ -22800,7 +22982,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2884",
@@ -22817,7 +23001,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2884",
@@ -22840,7 +23026,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2884",
@@ -22863,7 +23051,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2884",
@@ -22880,7 +23070,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2884",
@@ -22903,7 +23095,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2885",
@@ -22913,7 +23107,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2885",
@@ -22923,7 +23119,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2885",
@@ -22933,7 +23131,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2885",
@@ -22943,7 +23143,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2885",
@@ -22953,7 +23155,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2885",
@@ -22963,7 +23167,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2885",
@@ -22973,7 +23179,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2885",
@@ -22983,7 +23191,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2885",
@@ -22993,7 +23203,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2885",
@@ -23003,7 +23215,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2885",
@@ -23013,7 +23227,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2885",
@@ -23023,7 +23239,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2885",
@@ -23046,7 +23264,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2885",
@@ -23063,7 +23283,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2885",
@@ -23086,7 +23308,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2885",
@@ -23109,7 +23333,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2885",
@@ -23126,7 +23352,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2885",
@@ -23143,7 +23371,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2885",
@@ -23166,7 +23396,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2886",
@@ -23176,7 +23408,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2886",
@@ -23186,7 +23420,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2886",
@@ -23196,7 +23432,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2886",
@@ -23206,7 +23444,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2886",
@@ -23216,7 +23456,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2886",
@@ -23226,7 +23468,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2886",
@@ -23236,7 +23480,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2886",
@@ -23246,7 +23492,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2886",
@@ -23256,7 +23504,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2886",
@@ -23266,7 +23516,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2886",
@@ -23276,7 +23528,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2886",
@@ -23286,7 +23540,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2886",
@@ -23309,7 +23565,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2886",
@@ -23338,7 +23596,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2886",
@@ -23361,7 +23621,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-04-2886",
@@ -23378,7 +23640,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2886",
@@ -23395,7 +23659,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2886",
@@ -23418,7 +23684,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2886",
@@ -23441,7 +23709,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2025-01-2887",
@@ -23451,7 +23721,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2887",
@@ -23461,7 +23733,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2887",
@@ -23471,7 +23745,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2887",
@@ -23481,7 +23757,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2887",
@@ -23491,7 +23769,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2887",
@@ -23501,7 +23781,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2887",
@@ -23511,7 +23793,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2887",
@@ -23521,7 +23805,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2887",
@@ -23531,7 +23817,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2887",
@@ -23541,7 +23829,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2887",
@@ -23551,7 +23841,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2887",
@@ -23561,7 +23853,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2887",
@@ -23590,7 +23884,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2887",
@@ -23613,7 +23909,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2887",
@@ -23630,7 +23928,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2887",
@@ -23647,7 +23947,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2887",
@@ -23664,7 +23966,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2887",
@@ -23693,7 +23997,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2887",
@@ -23703,7 +24009,9 @@
       "summary": "**重點**\n\n台新新光金控公布2026年7月自結稅後淨利為新台幣89.4億元，較去年同期成長147%，累計稅後淨利為527.8億元，較去年同期成長281%，每股稅後淨利（EPS）為2.04元，創歷史新高。\n獲利動能主要來自台新銀行核心業務淨利差擴張、新光人壽CSM穩定釋放與7月上市櫃現金股利發放高峰帶動的經常性投資收益，惟7月台股下跌使台新證券單月出現虧損。\n\n**子公司明細**\n- 台新銀行：7月單月稅後淨利25.1億元，累計149.1億元，較去年同期增加29%，續創歷年同期新高；受惠核心業務動能強勁，淨利差較去年同期增加，帶動淨利息收入及淨手續費收入均呈約3成成長；7月底逾放比0.12%，備抵呆帳覆蓋率1,061%，資產品質穩健。\n\n- 新光銀行：7月單月稅後淨利12.9億元，累計60.7億元，較去年同期增加159%，續創歷年同期新高；累計淨手續費收入較去年同期成長28%，保險與基金等財富管理商品銷量動能強勁；7月底逾放比0.13%，備抵呆帳覆蓋率926%。\n\n- 新光人壽：7月單月稅後淨利57.7億元，累計前7月稅後淨利282.7億元；在CSM獲利效益的穩定釋放與經常性投資收益的雙重挹注下，加上本月適逢上市櫃公司現金股利發放高峰，營運維持穩健擴張；1至7月FYP達871.9億，年成長35.6%。\n\n- 台新證券：因7月股市下跌，單月稅後淨損0.3億元；累計稅後淨利70.8億元（含元富證券今年1月1日至4月5日獲利），創歷年同期新高，主因自營投資部位擴大及經紀手續費收入增加。",
       "generated_at": "2026-08-13T11:10:36.921106",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2887",
@@ -23713,7 +24021,9 @@
       "summary": "**重點**\n\n台新新光金（2887）於 9 月 14 日公布 8 月自結稅後純益約 69.7 億元，較去年同期成長 48%；累計前八月稅後純益為 597.5 億元，較去年同期成長 222%，每股稅後純益（EPS）為 2.31 元，續創歷史新高。\n壽險核心子公司新光人壽受惠於 CSM 持續穩定釋放與經常性投資收益的雙重挹注，營運績效維持穩健，1～8 月保險業務動能強勁，FYP 達 957.4 億元，年成長 33.3%。\n\n**子公司明細**\n- 台新銀行：8 月稅後純益 25.1 億元，累計 174.2 億元，較去年同期增加 29%，續創歷年同期新高；受惠核心業務動能強勁，淨利差較去年同期增加，帶動淨利收及淨手收均呈近 3 成成長；8 月底逾放比 0.12%，備抵呆帳覆蓋率 1,041%，資產品質穩健。\n\n- 新光銀行：8 月稅後純益 8.5 億元，累計 69.1 億元，較去年同期增加 110%，續創歷年同期新高；累計淨手續費收入較去年同期成長 28%，保險與基金等財富管理商品銷售動能強勁；8 月底逾放比 0.13%，備抵呆帳覆蓋率 926%。\n\n- 新光人壽：8 月稅後純益 20.8 億元，累計 303.5 億元；CSM 穩定釋放與經常性投資收益雙重挹注，營運績效穩健；1～8 月 FYP 達 957.4 億元，年成長 33.3%。\n\n- 台新證券：8 月稅後純益 15.5 億元，累計 86.3 億元（含元富證券今年 1 月 1 日至 4 月 5 日獲利），創歷年同期新高，主要受惠自營投資部位擴大，且證券市場指數上升、交易熱絡，帶動營業證券處分利益與經紀手續費收入增加。",
       "generated_at": "2026-09-14T14:08:14.878327",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2889",
@@ -23723,7 +24033,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2889",
@@ -23733,7 +24045,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2889",
@@ -23743,7 +24057,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2889",
@@ -23753,7 +24069,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2889",
@@ -23763,7 +24081,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2889",
@@ -23773,7 +24093,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2889",
@@ -23783,7 +24105,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2889",
@@ -23793,7 +24117,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2889",
@@ -23803,7 +24129,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2889",
@@ -23813,7 +24141,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2889",
@@ -23823,7 +24153,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2889",
@@ -23833,7 +24165,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2889",
@@ -23856,7 +24190,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2889",
@@ -23879,7 +24215,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2889",
@@ -23902,7 +24240,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-04-2889",
@@ -23919,14 +24259,16 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2889",
       "period": "2026/05",
       "code": "2889",
       "name": "國票金",
-      "summary": "**重點**\n\n國票金（2889）公告自結獲利，115 年 5 月自結稅後盈餘 6.14 億元，累計 1 至 5 月稅後盈餘達 20.1 億元，較去年同期增加 16.58 億元、年增 470.7%；每股稅後盈餘 0.55 元，5 月底每股淨值 12.8 元。\n獲利動能主要來自降息環境帶動外幣債券養券收益由負轉正、債券買賣斷操作貢獻，以及台股日均成交量超過兆元推升證券子公司經紀與自營雙收。\n\n**子公司明細**\n\n- **國際票券**：\n受惠於美國聯準會於 114 年全年降息 3 碼，115 年外幣債券養券收益由負轉正，挹注整體獲利；加上債券買賣斷操作貢獻收益、股權業務收益大幅提升，115 年 1 至 5 月稅後盈餘 12.69 億元，較去年同期成長 89.4%。\n\n- **國票證券**：\n受益於台股近來日均成交量超過兆元以上，115 年 1 至 5 月經紀業務收益較去年同期成長近 2.5 倍；此外，泛自營業務於期貨衍生性商品、股票及權證部位操作績效良好，投資收益顯著提升，115 年 1 至 5 月稅後盈餘達 15.7 億元。\n\n- **國票創投**：\n因投資部位評價利益增加及實現出售利益，截至 115 年 5 月底，本業累計獲利較去年同期由虧轉盈，但仍受轉投資中國的國旺租賃拖累（中國景氣不佳，持續提存授信壞帳準備），使整體獲利略受影響，115 年 1 至 5 月稅後盈餘為 5,286 萬元。\n\n> 📌 **備註**：新聞所揭露之金控合併稅後盈餘當月數為 **6.14 億元**、累計為 **20.1 億元**，與本次財報公告數字（601 百萬元／2011 百萬元）大致吻合，差異屬四捨五入。子公司國際票券累計 12.69 億元、國票證券累計 15.7 億元與財報揭露數字（1269 百萬元、1570 百萬元）完全一致。",
+      "summary": "**重點**\n\n國票金（2889）公告自結獲利，2026年 5 月自結稅後盈餘 6.14 億元，累計 1 至 5 月稅後盈餘達 20.1 億元，較去年同期增加 16.58 億元、年增 470.7%；每股稅後盈餘 0.55 元，5 月底每股淨值 12.8 元。\n獲利動能主要來自降息環境帶動外幣債券養券收益由負轉正、債券買賣斷操作貢獻，以及台股日均成交量超過兆元推升證券子公司經紀與自營雙收。\n\n**子公司明細**\n\n- **國際票券**：\n受惠於美國聯準會於 2025年全年降息 3 碼，2026年外幣債券養券收益由負轉正，挹注整體獲利；加上債券買賣斷操作貢獻收益、股權業務收益大幅提升，2026年 1 至 5 月稅後盈餘 12.69 億元，較去年同期成長 89.4%。\n\n- **國票證券**：\n受益於台股近來日均成交量超過兆元以上，2026年 1 至 5 月經紀業務收益較去年同期成長近 2.5 倍；此外，泛自營業務於期貨衍生性商品、股票及權證部位操作績效良好，投資收益顯著提升，2026年 1 至 5 月稅後盈餘達 15.7 億元。\n\n- **國票創投**：\n因投資部位評價利益增加及實現出售利益，截至 2026年 5 月底，本業累計獲利較去年同期由虧轉盈，但仍受轉投資中國的國旺租賃拖累（中國景氣不佳，持續提存授信壞帳準備），使整體獲利略受影響，2026年 1 至 5 月稅後盈餘為 5,286 萬元。\n\n> 📌 **備註**：新聞所揭露之金控合併稅後盈餘當月數為 **6.14 億元**、累計為 **20.1 億元**，與本次財報公告數字（601 百萬元／2011 百萬元）大致吻合，差異屬四捨五入。子公司國際票券累計 12.69 億元、國票證券累計 15.7 億元與財報揭露數字（1269 百萬元、1570 百萬元）完全一致。",
       "generated_at": "2026-06-09T10:20:22.262208",
       "manual": false,
       "sources": [
@@ -23942,7 +24284,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2889",
@@ -23959,7 +24303,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2889",
@@ -23976,14 +24322,16 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2889",
       "period": "2026/08",
       "code": "2889",
       "name": "國票金",
-      "summary": "**重點**\n\n國票金控（2889）公布 2026 年 8 月自結稅後純益 3 億 7,466 萬元，累計 1 至 8 月稅後純益 33 億 4,688 萬元，續創同期新高，年增 157.89%；每股稅後純益 0.92 元，8 月底每股淨值 12.95 元。\n獲利雙引擎為國際票券與國票證券，\n核心子公司國票證券前 8 月獲利年增 3.3 倍，國際票券亦在外幣債券養券收益由負轉正及股權投資挹注下，累計獲利年增近 6 成，成為金控獲利雙引擎。\n\n**子公司明細**\n- 國際票券：\n8 月稅後純益 2 億 1,548 萬元，累計前 8 月稅後純益達 19 億 6,090 萬元，較去年同期成長 59.57%。票券、債券及股權三大業務皆維持向上增長動能，其中債券業務受惠於外幣債券養券收益由負轉正，加上買賣斷操作得宜；股權業務則因 AI、電子產業股價表現亮眼，挹注相關股票、可轉債部位投資收益，輔以股息收益貢獻入帳，獲利顯著提升。\n\n- 國票證券：\n8 月稅後純益 5 億 1,357 萬元，累計前 8 月稅後純益達 28 億 300 萬元，較去年同期成長 328.10%，獲利成長續創歷史新高。受惠台股日均成交值再創紀錄，帶動經紀業務手續費收入及融資、不限用途借貸利息收入顯著成長；自營業務聚焦 AI、半導體產業，期貨衍生性商品、股票及權證等部位操作績效優異。\n\n- 國票創投：\n115 年 1 至 8 月持續虧損，稅後損失 1.41 億元，較前 7 月稅後虧損 3,161 萬元大增逾億元，遭轉投資中國的國旺租賃拖累，為今年國票金獲利最大變數。",
+      "summary": "**重點**\n\n國票金控（2889）公布 2026 年 8 月自結稅後純益 3 億 7,466 萬元，累計 1 至 8 月稅後純益 33 億 4,688 萬元，續創同期新高，年增 157.89%；每股稅後純益 0.92 元，8 月底每股淨值 12.95 元。\n獲利雙引擎為國際票券與國票證券，\n核心子公司國票證券前 8 月獲利年增 3.3 倍，國際票券亦在外幣債券養券收益由負轉正及股權投資挹注下，累計獲利年增近 6 成，成為金控獲利雙引擎。\n\n**子公司明細**\n- 國際票券：\n8 月稅後純益 2 億 1,548 萬元，累計前 8 月稅後純益達 19 億 6,090 萬元，較去年同期成長 59.57%。票券、債券及股權三大業務皆維持向上增長動能，其中債券業務受惠於外幣債券養券收益由負轉正，加上買賣斷操作得宜；股權業務則因 AI、電子產業股價表現亮眼，挹注相關股票、可轉債部位投資收益，輔以股息收益貢獻入帳，獲利顯著提升。\n\n- 國票證券：\n8 月稅後純益 5 億 1,357 萬元，累計前 8 月稅後純益達 28 億 300 萬元，較去年同期成長 328.10%，獲利成長續創歷史新高。受惠台股日均成交值再創紀錄，帶動經紀業務手續費收入及融資、不限用途借貸利息收入顯著成長；自營業務聚焦 AI、半導體產業，期貨衍生性商品、股票及權證等部位操作績效優異。\n\n- 國票創投：\n2026年 1 至 8 月持續虧損，稅後損失 1.41 億元，較前 7 月稅後虧損 3,161 萬元大增逾億元，遭轉投資中國的國旺租賃拖累，為今年國票金獲利最大變數。",
       "generated_at": "2026-09-14T17:24:48.124916",
       "manual": false,
       "sources": [
@@ -23999,7 +24347,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2890",
@@ -24009,7 +24359,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2890",
@@ -24019,7 +24371,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2890",
@@ -24029,7 +24383,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2890",
@@ -24039,7 +24395,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2890",
@@ -24049,7 +24407,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2890",
@@ -24059,7 +24419,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2890",
@@ -24069,7 +24431,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2890",
@@ -24079,7 +24443,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2890",
@@ -24089,7 +24455,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2890",
@@ -24099,7 +24467,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2890",
@@ -24109,7 +24479,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2890",
@@ -24119,7 +24491,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2890",
@@ -24129,7 +24503,9 @@
       "summary": "**重點**\n\n永豐金控於2026年4月10日公布3月自結稅後純益27.49億元，月減11%、年增48%；月度間獲利下滑**主要歸因於資本市場波動**。\n第一季累計稅後純益109.41億元、年增52%，主要由核心子公司獲利創歷史新高的成果所驅動，累計EPS為0.75元，年化ROE達17.0%。\n\n**子公司明細**\n\n- **永豐銀行**：\n3月稅後純益19.69億元、月增4%，成長主因為核心淨收益仍維持強勁的成長動能。\n首季累計稅後純益73.49億元、年增18%，淨收益成長由利息淨收益（年增24%）及手續費淨收益（年增6%）帶動，金融交易相關淨收益亦增加；逾放比率維持在0.11%。\n\n- **京城銀行**：\n3月稅後純益4.20億元、月減14%，獲利減少係因資本利得減少，抵銷了利息淨收益與手續費淨收益的成長。\n首季累計稅後純益15.39億元，其中1月認列京城銀國際租賃處分利得2.87億元，逾放比率穩定於0.06%。\n\n- **永豐金證券**：\n3月稅後純益5.49億元、月減7%，獲利減少受資本利得減少與所得稅費用增加影響，抵銷了手續費淨收益的成長。\n首季累計稅後純益23.62億元、年增96%，創歷史同期新高，主要受惠於經紀與泛財管手續費淨收益成長（年增85%）及較高的資本利得。",
       "generated_at": "2026-04-27T15:35:49.555664",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-02-2890",
@@ -24152,7 +24528,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2890",
@@ -24169,7 +24547,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2890",
@@ -24186,7 +24566,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2890",
@@ -24209,7 +24591,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2890",
@@ -24226,7 +24610,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2890",
@@ -24243,7 +24629,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2890",
@@ -24266,7 +24654,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2891",
@@ -24276,7 +24666,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2891",
@@ -24286,7 +24678,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2891",
@@ -24296,7 +24690,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2891",
@@ -24306,7 +24702,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2891",
@@ -24316,7 +24714,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2891",
@@ -24326,7 +24726,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2891",
@@ -24336,7 +24738,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2891",
@@ -24346,7 +24750,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2891",
@@ -24356,7 +24762,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2891",
@@ -24366,7 +24774,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2891",
@@ -24376,7 +24786,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2891",
@@ -24386,7 +24798,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2891",
@@ -24403,7 +24817,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-03-2891",
@@ -24426,7 +24842,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-2891",
@@ -24449,7 +24867,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-05-2891",
@@ -24466,7 +24886,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-2891",
@@ -24483,7 +24905,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-07-2891",
@@ -24500,7 +24924,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2891",
@@ -24510,7 +24936,9 @@
       "summary": "**重點**\n\n中信金（2891）於14日公告2026年8月份自結盈餘，單月稅後盈餘99.31億元，累計前八月合併稅後盈餘538.79億元，每股稅後盈餘（EPS）為2.7元。\n獲利動能主要由中信銀行核心業務帶動，\n子公司中國信託銀行8月份核心業務動能穩健，財富管理業務持續強勁\n；壽險端則受債券及基金評價利益挹注。在金控層級FVOCI揭露方面，\n8月FVOCI之權益工具稅後處分利益金控合計160.97億元，累計前八月合計505.88億元；金控8月本期淨利加計FVOCI權益工具稅後處分利益為260.28億元，累計前八月共1,044.67億元，超越歷年全年獲利表現，兩者合計對保留盈餘影響為每股5.29元。\n\n**子公司明細**\n- 中國信託銀行：\n單月稅後獲利69.11億元，累計前8月稅後獲利425.96億元，較去年同期成長15%，再創歷年同期獲利新高；除淨利差擴大外，財富管理業務手續費收入年增近4成，刷卡消費金額成長逾2成，存、放款餘額均維持雙位數增長。\n\n- 台灣人壽：\n8月份受債券及基金評價利益挹注，單月稅後獲利30.59億元；累計前八月稅後獲利為136.36億元，主要來自過往累積CSM攤銷、基金評價利益及投資型保單以國際財務報導準則第15號重新衡量之影響。\n保險業務動能方面，在分紅及投資型保單銷售帶動下，累計新契約保費達826億元，較去年同期成長107%。",
       "generated_at": "2026-09-14T14:59:39.007602",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2892",
@@ -24520,7 +24948,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-2892",
@@ -24530,7 +24960,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-2892",
@@ -24540,7 +24972,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-2892",
@@ -24550,7 +24984,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-2892",
@@ -24560,7 +24996,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-2892",
@@ -24570,7 +25008,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-2892",
@@ -24580,7 +25020,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-2892",
@@ -24590,7 +25032,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-2892",
@@ -24600,7 +25044,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-2892",
@@ -24610,7 +25056,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-2892",
@@ -24620,7 +25068,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-2892",
@@ -24630,7 +25080,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-01-2892",
@@ -24653,7 +25105,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-02-2892",
@@ -24676,7 +25130,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-03-2892",
@@ -24699,7 +25155,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": false,
+      "quality_note": "待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。"
     },
     {
       "id": "news-2026-06-2892",
@@ -24722,7 +25180,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-2892",
@@ -24739,7 +25199,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-5880",
@@ -24749,7 +25211,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-02-5880",
@@ -24759,7 +25223,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-03-5880",
@@ -24769,7 +25235,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-04-5880",
@@ -24779,7 +25247,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-05-5880",
@@ -24789,7 +25259,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-06-5880",
@@ -24799,7 +25271,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-07-5880",
@@ -24809,7 +25283,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-08-5880",
@@ -24819,7 +25295,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-09-5880",
@@ -24829,7 +25307,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-10-5880",
@@ -24839,7 +25319,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-11-5880",
@@ -24849,7 +25331,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-12-5880",
@@ -24859,7 +25343,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-04-5880",
@@ -24882,7 +25368,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-06-5880",
@@ -24899,7 +25387,9 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2026-08-5880",
@@ -24916,10 +25406,13 @@
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
-      ]
+      ],
+      "analysis_eligible": true,
+      "quality_note": ""
     }
   ],
   "limitations": [
+    "兆豐金新聞待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。",
     "新聞來源發布日期未提供者列為未取得；摘要生成時間不等同發布時間。"
   ],
   "methodology": [

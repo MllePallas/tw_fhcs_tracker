@@ -6984,7 +6984,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2881",
@@ -6994,7 +6996,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2882",
@@ -7004,7 +7008,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2883",
@@ -7014,7 +7020,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2884",
@@ -7024,7 +7032,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2885",
@@ -7034,7 +7044,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2886",
@@ -7044,7 +7056,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2887",
@@ -7054,7 +7068,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2889",
@@ -7064,7 +7080,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2890",
@@ -7074,7 +7092,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2891",
@@ -7084,7 +7104,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-2892",
@@ -7094,7 +7116,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     },
     {
       "id": "news-2025-01-5880",
@@ -7104,7 +7128,9 @@
       "summary": "略",
       "generated_at": "",
       "manual": false,
-      "sources": []
+      "sources": [],
+      "analysis_eligible": true,
+      "quality_note": ""
     }
   ],
   "limitations": [
