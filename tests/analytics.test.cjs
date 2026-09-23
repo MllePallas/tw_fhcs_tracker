@@ -131,6 +131,43 @@ test('period YoY shows reported change, and missing intermediate month blocks ag
   vm.runInContext("delete monthCache['115/07']",ctx);
   assert.equal(vm.runInContext("periodAggCompany(['115/06','115/07','115/08'],'2880')",ctx),null);
 });
+test('quarter comparison defaults to current quarter and matches equal-length windows', () => {
+  const {ctx,element}=context();
+  vm.runInContext('buildPeriodOptions();renderPeriodSelector()',ctx);
+  const opt=vm.runInContext('state.periodSel',ctx);
+  assert.equal(opt.label,'2026/07–08（Q3，未完）');
+  assert.deepEqual(Array.from(opt.months),['115/07','115/08']);
+  assert.deepEqual(Array.from(opt.priorMonths),['115/04','115/05']);
+  assert.deepEqual(Array.from(opt.baseMonths),['114/07','114/08']);
+  assert.ok(vm.runInContext('state.periodOptions.every(o=>o.kind===\'quarter\')',ctx));
+  const rows=vm.runInContext('buildPeriodHoldingRows(state.periodSel)',ctx);
+  const fubon=rows.find(r=>r.code==='2881');
+  near(fubon.delta,fubon.profit-fubon.prior);
+  assert.equal(fubon.rank,rows.filter(r=>r.delta!=null&&r.delta>fubon.delta).length+1);
+  vm.runInContext('renderPeriodHoldingsTable(state.periodSel,buildPeriodHoldingRows(state.periodSel))',ctx);
+  const heading=element('main-thead').innerHTML;
+  assert.match(heading,/上季等長/);
+  assert.match(heading,/去年同季/);
+  assert.doesNotMatch(heading,/EPS|YTD/);
+  vm.runInContext("showPeriodDetail('2881')",ctx);
+  const detail=element('detail-content').innerHTML;
+  assert.match(detail,/銀行/);assert.match(detail,/壽險/);assert.match(detail,/證券/);
+  assert.match(detail,/其他（含母公司與合併調整）/);
+  vm.runInContext("state.pageMode='period';state.viewMode='holdings';renderAll()",ctx);
+  assert.equal(element('market-context').classList.contains('hidden'),false);
+  assert.match(element('summary-cards').innerHTML,/較上季增額最大/);
+  vm.runInContext("state.viewMode='bank';renderAll()",ctx);
+  assert.match(element('summary-cards').innerHTML,/銀行/);
+});
+test('quarter changes with missing or changed basis are excluded from rankings', () => {
+  const {ctx}=context();
+  vm.runInContext('buildPeriodOptions()',ctx);
+  assert.equal(vm.runInContext("periodQoqOf(state.periodOptions.find(o=>o.key==='q-115-1'),'2881',100,90).status",ctx),'incomparable');
+  vm.runInContext("delete monthCache['115/05']",ctx);
+  const row=vm.runInContext("buildPeriodHoldingRows(state.periodOptions[0]).find(r=>r.code==='2880')",ctx);
+  assert.equal(row.delta,null);
+  assert.equal(row.rank,undefined);
+});
 test('dashboard renders all companies, touch-accessible heatmap and empty filter state', () => {
   const {ctx,element}=context();
   vm.runInContext('renderTrendDashboard()',ctx);

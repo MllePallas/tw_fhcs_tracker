@@ -1484,7 +1484,7 @@ body.pm-period .table-container { display: block !important; }
 /* 手機：期間比較表格 → 與月報總表相同的橫向捲動邏輯，名稱欄（第 3 欄）釘左 */
 @media (max-width: 768px) {
   body.pm-period .table-scroll-hint { display: block !important; }
-  #main-table.view-period { min-width: 720px; }
+  #main-table.view-period { min-width: 1080px; }
   #main-table.view-period tbody td:nth-child(2) {
     position: static;
     box-shadow: none;
