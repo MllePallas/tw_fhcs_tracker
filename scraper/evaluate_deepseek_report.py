@@ -24,13 +24,17 @@ def main():
     for period in PERIODS:
         stem=period.replace('/','-')
         stage='build-pack'
+        rejected=[]
         try:
             pack=json.loads(subprocess.check_output(
                 ['node',str(ROOT/'scripts/build-analysis-pack.cjs'),period],encoding='utf-8',cwd=ROOT))
             stage='collect-sources'
             sources=collect(pack)
             stage='generate-and-review'
-            commentary=generate_commentary(pack,writer,sources,reviewer,writer_model,reviewer_model)
+            def remember_review(draft,issues):
+                if issues:rejected.append({'draft':draft,'issues':issues})
+            commentary=generate_commentary(pack,writer,sources,reviewer,writer_model,reviewer_model,
+                                            on_review=remember_review)
             stage='render'
             markdown,_=render_report(pack,commentary,sources)
             (OUTPUT/f'{stem}.md').write_text(markdown,encoding='utf-8')
@@ -40,6 +44,16 @@ def main():
                             'reference':f'docs/reports/{stem}.md','draft':f'{stem}.md'})
         except Exception as exc:
             # Do not write API responses or credentials into the downloadable artifact.
+            if rejected:
+                (OUTPUT/f'{stem}.rejected.analysis.json').write_text(
+                    json.dumps({'period':period,'review_attempts':rejected},ensure_ascii=False,indent=2)+'\n',
+                    encoding='utf-8')
+                try:
+                    rejected_markdown,_=render_report(pack,rejected[-1]['draft'],sources)
+                    (OUTPUT/f'{stem}.rejected.md').write_text(
+                        '# 未通過語意複核：僅供診斷，不可發布\n\n'+rejected_markdown,encoding='utf-8')
+                except Exception:
+                    pass
             results.append({'period':period,'status':'failed','stage':stage,'error_type':type(exc).__name__,
                             'error_detail':str(exc).replace('\n',' ')[:120] if isinstance(exc,ValidationError) else None,
                             'http_status':getattr(exc,'status_code',None)})

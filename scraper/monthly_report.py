@@ -58,7 +58,8 @@ def report_content(pack):
     return content
 
 
-def generate_commentary(pack, client, sources=None, reviewer=None, writer_model=MODEL, reviewer_model=MODEL):
+def generate_commentary(pack, client, sources=None, reviewer=None, writer_model=MODEL, reviewer_model=MODEL,
+                        on_review=None):
     from monthly_report_v2 import context, validate, ValidationError
     from report_sources import collect
     sources = collect(pack) if sources is None else sources
@@ -73,6 +74,7 @@ def generate_commentary(pack, client, sources=None, reviewer=None, writer_model=
         try:
             value=validate(model_json(text),ctx)
             issues=review_commentary(value,ctx,reviewer or client,reviewer_model)
+            if on_review:on_review(value,issues)
             if issues:
                 if attempt==2:raise ValidationError('語意核對未通過')
                 messages += [{'role':'assistant','content':text},{'role':'user','content':'逐項核對並修正以下問題。仍須遵守原本格式及數字代碼規則：'+json.dumps(issues,ensure_ascii=False)}]

@@ -90,8 +90,12 @@ class MonthlyReportTest(unittest.TestCase):
                 self.calls+=1
                 v={'issues':['群體合計不等於增減額，請修正。']} if self.calls==2 else {'issues':[]} if self.calls==4 else response()
                 return SimpleNamespace(content=[SimpleNamespace(type='text',text=json.dumps(v))])
-        messages=Responses();generate_commentary(self.pack,SimpleNamespace(messages=messages),{})
+        reviews=[]
+        messages=Responses();generate_commentary(self.pack,SimpleNamespace(messages=messages),{},
+                                                  on_review=lambda draft,issues:reviews.append(issues))
         self.assertEqual(messages.calls,4)
+        self.assertEqual(len(reviews),2)
+        self.assertEqual(reviews[0],['群體合計不等於增減額，請修正。'])
     def test_deepseek_drafts_and_anthropic_reviews_only(self):
         class Responses:
             def __init__(self,result):self.result=result;self.calls=[]
