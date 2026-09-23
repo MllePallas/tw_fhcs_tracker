@@ -45,6 +45,9 @@ def main():
     summary=['| 月份 | 結果 | 階段 | 錯誤類型 | HTTP 狀態 |','| --- | --- | --- | --- | --- |']
     for result in results:
         print(f"{result['period']}: {result['status']}",flush=True)
+        notice='; '.join(f'{key}={result.get(key) or "—"}' for key in
+                         ('status','stage','error_type','http_status'))
+        print(f"::notice title=DeepSeek Flash {result['period']}::{notice}",flush=True)
         summary.append('| '+ ' | '.join(str(result.get(k) or '—') for k in
                        ('period','status','stage','error_type','http_status'))+' |')
     if os.environ.get('GITHUB_STEP_SUMMARY'):
