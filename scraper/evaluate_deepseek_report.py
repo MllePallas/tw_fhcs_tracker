@@ -1,7 +1,11 @@
 """Generate unpublished DeepSeek report drafts for comparison with existing reports."""
 import json
+import os
 import subprocess
 from pathlib import Path
+
+# The legacy deepseek-v4-flash alias now routes to this canonical Flash model.
+os.environ.setdefault('MONTHLY_REPORT_DEEPSEEK_MODEL','deepseek-flash')
 
 from monthly_report import ROOT, generate_commentary, render_report, report_clients
 from news_summary import _load_dotenv

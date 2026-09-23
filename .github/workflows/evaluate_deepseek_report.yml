@@ -2,6 +2,10 @@ name: Evaluate DeepSeek Monthly Report
 
 on:
   workflow_dispatch:
+  push:
+    branches: [main]
+    paths:
+      - 'scraper/evaluate_deepseek_report.py'
 
 permissions:
   contents: read
