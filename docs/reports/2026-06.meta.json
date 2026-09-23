@@ -3,7 +3,7 @@
   "input_hash": "a42f46820437ecab3f55fdf0d1551268bd960ee533478fdacaca1b6ba43c1428",
   "output_hash": "0fa7e18c1fa4ab4a1a6a8654a8c04e0b4cf64652a5a1ee1a995ba22bb20b86c3",
   "headline": "2026/06金控單月獲利734.8億元，月減3.2%；富邦人壽回落是主要拖累，國泰金、台新新光金及凱基金反向走強。銀行與證券合計仍成長，但券商增量集中於凱基證券。",
-  "generated_at": "2026-09-21T08:23:07.124836+00:00",
+  "generated_at": "2026-09-23T03:46:05.619875+00:00",
   "ai_status": "generated",
   "ai_error_type": "",
   "attempts": 1,
@@ -13,6 +13,6 @@
   "data_changed": false,
   "data_hash": "a6ce29aecbfbc2fcd61ed15dac8a827cb7e4b3da2f9dd28f8528c91a2c56b2cd",
   "quality_check": "passed",
-  "manual_output_hash": "b353cf357420ca95629d48e31619d9f455270ff3bb298c2ee50bbd143c06e0b3",
+  "manual_output_hash": "1a1feb48102a5596a16b8423837c6bb348aa67c8de95ccc6dce102db361c8b47",
   "data_hash_schema": 2
 }

@@ -354,8 +354,8 @@ function renderAll() {
   if (!state.data || state.loading) return;
   state.displayUnit = document.getElementById('unit-select').value;
   state.sortMode    = document.getElementById('sort-select').value;
-  renderMarketSummary();
-  renderSummaryCards();
+  const showOverview = state.pageMode === 'monthly' && state.viewMode === 'holdings';
+  document.getElementById('market-context').classList.toggle('hidden', !showOverview);
   if (state.pageMode === 'trend') { renderTrendDashboard(); return; }
 
   // 草稿新增：期間比較模式走獨立渲染流程
@@ -363,8 +363,7 @@ function renderAll() {
 
   updatePeriodBadge();
   updateLastUpdated();
-  renderMarketSummary();
-  renderSummaryCards();
+  if (showOverview) { renderMarketSummary(); renderSummaryCards(); }
   renderTable();
   renderChart();
 }
@@ -505,7 +504,7 @@ function renderHoldingsTable() {
       <th rowspan="2" class="col-code">代號</th>
       <th rowspan="2" class="col-name">金控</th>
       <th colspan="4" class="col-group">稅後淨利（公告口徑）</th>
-      <th colspan="2" class="col-group">稅後 EPS (元)</th>
+      <th class="col-group">稅後 EPS (元)</th>
       <th rowspan="2" class="col-source">公告日期</th>
     </tr>
     <tr>
@@ -513,7 +512,6 @@ function renderHoldingsTable() {
       <th class="col-monthly">當月 MoM</th>
       <th class="col-cumulative">累計</th>
       <th class="col-cumulative">累計 YoY</th>
-      <th class="col-monthly col-eps">當月</th>
       <th class="col-cumulative col-eps">累計</th>
     </tr>`;
   const companies = sortCompanies([...state.data.companies]);
@@ -525,7 +523,7 @@ function renderHoldingsTable() {
   if (tfoot) {
     // 註腳包一層 span：手機橫向捲動時用它限制寬度，避免文字被推到可視範圍外
     tfoot.innerHTML = hasFvoci
-      ? `<tr><td colspan="9" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</span></td></tr>`
+      ? `<tr><td colspan="8" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</span></td></tr>`
       : '';
   }
 }
@@ -634,7 +632,7 @@ function renderRow(c) {
     return `<tr class="error-row">
       <td class="col-code">${c.code}</td>
       <td><span class="company-link">${c.name}</span></td>
-      <td colspan="6" class="center row-note">${c.error_msg || '資料待更新'}</td>
+      <td colspan="5" class="center row-note">${c.error_msg || '資料待更新'}</td>
       <td class="center row-note">—</td>
     </tr>`;
   }
@@ -664,12 +662,8 @@ function renderRow(c) {
     yoyDisp += '<br><span class="yoy-note">京城銀 2025/10 併入獲利公告</span>';
   }
 
-  // 單月 EPS 僅使用公告值，未揭露留空。
-  const epsM = h.monthly_eps ?? null;
   const epsC = h.cumulative_eps;
-  const epsMClass = (epsM ?? 0) >= 0 ? 'positive' : 'negative';
   const epsCClass = (epsC ?? 0) >= 0 ? 'positive' : 'negative';
-  const epsMDisp = epsM != null ? formatEps(epsM) : '—';
   const epsCDisp = epsC != null ? formatEps(epsC) : '—';
 
   const annDate = dateAd(c.announcement_date) || '公告';
@@ -697,7 +691,6 @@ function renderRow(c) {
       <td class="num fvoci-num"></td>
       <td class="num fvoci-num">${fd.cumulDisp}</td>
       <td class="num fvoci-num">${fd.yoyDisp}</td>
-      <td class="num fvoci-num"></td>
       <td class="num fvoci-num">${adjEpsC}</td>
       <td></td>
     </tr>`;
@@ -710,7 +703,6 @@ function renderRow(c) {
     <td class="num mom ${momI.cls}">${momI.disp}</td>
     <td class="num ${cClass}">${cDisplay}</td>
     <td class="num yoy ${yoyClass}">${yoyDisp}</td>
-    <td class="num ${epsMClass}">${epsMDisp}</td>
     <td class="num ${epsCClass}">${epsCDisp}</td>
     <td class="center col-source">${sourceLink}</td>
   </tr>` + adjRow;
@@ -1479,7 +1471,6 @@ function snapBuildModel() {
       { key: 'mom', title: 'MoM', w: 180, align: 'right', group: '稅後淨利（公告口徑）' },
       { key: 'cumul',   title: '累計',  w: 180, align: 'right', group: '稅後淨利（公告口徑）' },
       { key: 'yoy',     title: '累計 YoY', w: 180, align: 'right', group: '稅後淨利（公告口徑）' },
-      { key: 'epsM',    title: '當月',  w: 120, align: 'right', group: '稅後 EPS (元)' },
       { key: 'epsC',    title: '累計',  w: 120, align: 'right', group: '稅後 EPS (元)' },
     ];
     const rows = [];
@@ -1489,7 +1480,6 @@ function snapBuildModel() {
         continue;
       }
       const h = c.holding_company || {};
-      const epsM = h.monthly_eps ?? null;
       const yi = formatYoY(h.cumulative_profit_yoy_pct, h.cumulative_profit_yoy_abs,
                            h.cumulative_profit_yoy_status, c.unit, unit);
       let note = null, yoyDisp = yi.disp, yoyCls = yi.cls;
@@ -1508,7 +1498,6 @@ function snapBuildModel() {
         cumul: formatNumOrDash(convertUnit(h.cumulative_profit, c.unit, unit)),
         cumulNeg: (convertUnit(h.cumulative_profit, c.unit, unit) ?? 0) < 0,
         yoy: yoyDisp, yoyCls, note, mom: holdingMomInfo(c).disp,
-        epsM: epsM != null ? formatEps(epsM) : '—',
         epsC: h.cumulative_eps != null ? formatEps(h.cumulative_eps) : '—',
       });
       const a = h.fvoci_adjusted;
@@ -1704,9 +1693,8 @@ function renderTableImage() {
         snapDrawText(ctx, r.note, cellX(colOf('yoy')), noteOnly ? y + h / 2 : y + 42,
                      snapFont(400, 12, true), c.muted, 'right');
       }
-      const ce = colOf('epsM');
+      const ce = colOf('epsC');
       if (ce) {
-        snapDrawText(ctx, r.epsM, cellX(ce), midY, snapFont(600, 15), c.ink, 'right');
         snapDrawText(ctx, r.epsC, cellX(colOf('epsC')), midY, snapFont(600, 15), c.ink, 'right');
       }
     }
@@ -2025,23 +2013,23 @@ function getOtherSubsidiaryRows() {
 
 // ── Sheet 1：金控總覽（對應網頁「金控總覽」表，含雙層表頭與 FVOCI 加計子列） ──
 function buildHoldingsSheet(d, unit) {
-  const headings = ['代號','金控',`當月 ${periodAd(d.report_period)} (${unit})`,'當月 MoM','累計','累計 YoY','公告單月 EPS','累計 EPS','公告日期','比較口徑'];
+  const headings = ['代號','金控',`當月 ${periodAd(d.report_period)} (${unit})`,'當月 MoM','累計','累計 YoY','累計 EPS','公告日期','比較口徑'];
   const matrix = [headings.map(t => xText(t, XS.headCol()))];
   for (const c of sortCompanies([...d.companies])) {
     const h = c.holding_company || {};
     const cmp = A.comparison(monthCache, comparisonRules, c.code, [d.report_period], [A.shift(d.report_period,-1)]);
     matrix.push([xText(c.code),xText(c.name),xNum(convertUnit(h.monthly_profit,c.unit,unit)),comparisonExcel(cmp),
       xNum(convertUnit(h.cumulative_profit,c.unit,unit)),xYoY(h.cumulative_profit_yoy_pct,h.cumulative_profit_yoy_abs,h.cumulative_profit_yoy_status,c.unit,unit),
-      xEps(h.monthly_eps),xEps(h.cumulative_eps),xText(dateAd(c.announcement_date)||'—'),xText(c.error ? c.error_msg || '未取得資料' : [h.cumulative_profit_yoy_reason,comparisonRules.basis_notes[c.code]].filter(Boolean).join('；'))]);
+      xEps(h.cumulative_eps),xText(dateAd(c.announcement_date)||'—'),xText(c.error ? c.error_msg || '未取得資料' : [h.cumulative_profit_yoy_reason,comparisonRules.basis_notes[c.code]].filter(Boolean).join('；'))]);
     const a = h.fvoci_adjusted;
     if (a) {
       const fd = fvociDisplay(a,c.unit,unit);
       const bound = a.value_type === 'lower_bound';
       matrix.push([null,xText(FVOCI_LABEL_TEXT),bound?xText(fd.monthlyDisp):xNum(convertUnit(a.monthly_profit,c.unit,unit)),null,
-        bound?xText(fd.cumulDisp):xNum(convertUnit(a.cumulative_profit,c.unit,unit)),xText(''),null,xEps(a.cumulative_eps),null,xText(FVOCI_FOOTNOTE_HOLDINGS)]);
+        bound?xText(fd.cumulDisp):xNum(convertUnit(a.cumulative_profit,c.unit,unit)),xText(''),xEps(a.cumulative_eps),null,xText(FVOCI_FOOTNOTE_HOLDINGS)]);
     }
   }
-  return trendSheet(matrix,{cols:[{wch:9},{wch:30},{wch:24},{wch:24},{wch:20},{wch:25},{wch:17},{wch:15},{wch:15},{wch:80}]});
+  return trendSheet(matrix,{cols:[{wch:9},{wch:30},{wch:24},{wch:24},{wch:20},{wch:25},{wch:17},{wch:15},{wch:80}]});
 }
 
 // FVOCI 加計列（金控／壽險共用）：整列鋪淡藍底，標籤欄靛藍、數字欄斜體

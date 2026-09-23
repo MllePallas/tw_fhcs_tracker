@@ -200,9 +200,6 @@ def render(pack,commentary=None,sources=None):
         if key=='holding':
             lines += ['### 金控獲利總覽','',table(['金控','單月淨利','MoM','月增減','累計淨利','累計YoY','累計EPS'],
                 [[r['name'],number(r['monthly']),mom(r),signed(r['mom']['delta']),number(r['cumulative']),pct(r['yoy']['pct']),f"{r['cumulative_eps']:.2f}" if r['cumulative_eps'] is not None else '—'] for r in rows]),'']
-            eligible=[r for r in rows if r['yoy_rank_eligible'] and r['yoy']['pct'] is not None]
-            if eligible:
-                best=max(eligible,key=lambda r:r['yoy']['pct']);lines += [f"可比公司累計YoY最高：{best['name']} {pct(best['yoy']['pct'])}。",'']
             excluded=[r['name']+'：'+r['rank_note'] for r in rows if r['rank_note']]
             lines += ['*基期或認列範圍影響：'+('；'.join(excluded) if excluded else '無已知異動')+'。相關公司原始YoY照列，不納入未調整的跨公司成長率排名。*','']
             att=sorted([r for r in pack['attribution'] if r['delta'] is not None],key=lambda r:abs(r['delta']),reverse=True)[:6]
@@ -220,11 +217,6 @@ def render(pack,commentary=None,sources=None):
                     x,y,z=values;direction='連續回升' if x<y<z else '連續回落' if x>y>z else '回升但未回到前期' if z>y and z<x else '回落但仍高於前期' if z<y and z>x else '單月反向變動或持平'
                 trend.append([r['name']]+[number(v) for v in values]+[direction])
             lines += ['### 最近三個月趨勢','',table(['金控']+periods+['判讀'],trend),'']
-            market=[m for m in pack['markets'] if m['period']==pack['period'] and m['key'] in MARKETS]
-            lines += ['### 本月市場概況','',table(['指標','前月','本月','月變動'],[[MARKETS[m['key']]+'（'+{'taiex':'點','spx':'點','us10y':'%','usdtwd':'元／美元','taiex_turnover':'億元'}[m['key']]+'）',
-                market_value(m,True),market_value(m),
-                signed(market_change(m))+' bps' if m['key']=='us10y' else pct(market_change(m))] for m in market]),'',
-                '*指數、匯率及殖利率為月底值；成交額為集中市場日均值（億元）。殖利率變動以bps表示，美元兌台幣下跌表示台幣升值。來源：Yahoo Finance、TWSE。*','']
         elif key=='life':
             def adjusted(r,field):
                 a=r['fvoci'] or {};value=a.get(field)

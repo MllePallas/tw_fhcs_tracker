@@ -3,7 +3,7 @@
   "input_hash": "ffbde6c583cc76cc213b6f999a94ffc111f3cf7c80241d8d6e7f11526cccd6f6",
   "output_hash": "50d1394eba60cf4f346ecf2b10089af65e2e6dc91e80276524ee95ea0e1c871b",
   "headline": "金控月增66.0%，富邦占整體淨增量77.2%",
-  "generated_at": "2026-09-21T08:03:48.655758+00:00",
+  "generated_at": "2026-09-23T03:46:55.316350+00:00",
   "ai_status": "generated",
   "ai_error_type": "",
   "attempts": 1,
@@ -11,6 +11,6 @@
   "manual": true,
   "data_changed": false,
   "data_hash": "638cf65cbdd8259af98b6ab0bca4f14036bc84fffac660e2d55d320f82f6143b",
-  "manual_output_hash": "4c42155bfaaf67bfccee9a8a18fd0c5f643cdd3507e04e2643de4fcd1a05c6ea",
+  "manual_output_hash": "df3e0ab321d10ce08492b77f1727d89ea7165512b17fa6979a91540b917b4326",
   "data_hash_schema": 2
 }

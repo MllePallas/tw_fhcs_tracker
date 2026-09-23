@@ -12,10 +12,11 @@ async function loadMonthReport(period) {
 function monthlyReportHtml(period) {
   const report=monthReports[period];
   const entry=report?.entry;
-  const text=report?.text||'';
-  const headline=AnalysisPack.dates(entry?.headline||'每月依公告、子公司獲利、市場資料與新聞摘要自動整理。');
-  const body=text.replace(/^# [^\n]+\n/,'');
-  return `<section class="trend-section monthly-analysis"><p class="eyebrow">${periodAd(period)} · 每月分析報告</p><h2>本月重點</h2><p>${escapeHtml(headline)}</p><p class="report-meta">${entry?`${escapeHtml(entry.source||'自動產製')} · ${entry.generated_at?fmtDateTime(entry.generated_at):''}${entry.manual?' · 人工修訂版':''}`:'本月報告尚未生成；下方可查看即時計算數字。'}</p>${entry?.data_changed?'<p class="report-warning">資料已有更新；目前報告保留人工修訂，請核對新版分析資料包。</p>':''}${entry?.ai_status==='fallback'?'<p>AI 解讀暫不可用，已自動提供數據分析與既有新聞摘要。</p>':''}${report?.error?`<p>${report.error}</p>`:''}${text?`<a class="btn" href="report.html?period=${periodAd(period).replace('/','-')}">開啟完整報告 ↗</a><details class="monthly-report-content"><summary>展開四段分析、公司新聞與來源</summary><article class="report-body">${ReportMarkdown.render(body)}</article></details>`:''}<p>「下載 Excel」包含本月報告、近 24 月金控／子公司、新聞摘要與來源、市場歷史及計算說明；不受趨勢篩選影響。</p></section>`;
+  if (!entry) return '';
+  const month=periodAd(period);
+  const href=/^\d{4}-\d{2}\.html$/.test(entry.html_file||'')
+    ? `./reports/${entry.html_file}` : `./report.html?period=${month.replace('/','-')}`;
+  return `<section class="trend-section monthly-analysis"><a class="monthly-report-link" href="${href}">${month} 金控自結獲利分析 ↗</a>${entry.data_changed?'<p class="report-warning">資料已有更新，報告文字保留人工修訂；請核對數字。</p>':''}</section>`;
 }
 function appendAnalysisSheets(wb,XLSX) {
   const pack=AnalysisPack.build(monthCache,comparisonRules,state.data.report_period);

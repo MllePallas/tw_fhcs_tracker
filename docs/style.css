@@ -404,7 +404,7 @@ thead th.col-monthly,
 thead th.col-cumulative { text-align: right; }
 
 /* 欄寬一致化：
-   金控總覽 — 合併稅後淨利三欄同寬、EPS 兩欄同寬
+   金控總覽 — 合併稅後淨利欄同寬、EPS 顯示累計值
    產業視角 — 當月／累計／累計 YoY 三欄同寬 */
 #main-table.view-holdings th.col-code       { width: 7%; }
 #main-table.view-holdings th.col-monthly,

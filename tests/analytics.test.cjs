@@ -89,7 +89,14 @@ test('full-report and image models follow the same comparison and EPS policies',
   const {ctx}=context();
   const model=vm.runInContext('snapBuildModel()',ctx);
   assert.ok(model.cols.some(c=>c.key==='mom'));
-  assert.equal(model.rows.find(r=>r.code==='2881').epsM,'—');
+  assert.ok(!model.cols.some(c=>c.key==='epsM'));
+  assert.equal(model.rows.find(r=>r.code==='2881').epsC,'8.30');
+  vm.runInContext("window.XLSX={utils:{encode_cell:({r,c})=>String.fromCharCode(65+c)+(r+1),encode_range:({s,e})=>String.fromCharCode(65+s.c)+(s.r+1)+':'+String.fromCharCode(65+e.c)+(e.r+1)}}",ctx);
+  const sheet=vm.runInContext('buildHoldingsSheet(state.data,state.displayUnit)',ctx);
+  assert.equal(sheet['!cols'].length,9);
+  assert.ok(!Object.values(sheet).some(cell=>cell?.v==='公告單月 EPS'));
+  const fubonRow=Object.entries(sheet).find(([addr,cell])=>/^B\d+$/.test(addr)&&cell.v==='富邦金')[0].slice(1);
+  assert.equal(sheet[`G${fubonRow}`].v,8.3);
   assert.match(model.rows.find(r=>r.code==='2887').yoy,/^[+-]?[\d.]+%$/);
   assert.ok(model.rows.some(r=>r.type==='fvoci'));
   for(const r of model.rows.filter(r=>r.type==='fvoci')) assert.equal(r.yoy,'');
