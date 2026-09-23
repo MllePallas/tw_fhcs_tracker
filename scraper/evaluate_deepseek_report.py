@@ -8,10 +8,11 @@ from pathlib import Path
 os.environ.setdefault('MONTHLY_REPORT_DEEPSEEK_MODEL','deepseek-flash')
 
 from monthly_report import ROOT, generate_commentary, render_report, report_clients
+from monthly_report_v2 import ValidationError
 from news_summary import _load_dotenv
 from report_sources import collect
 
-PERIODS=('2026/06','2026/07','2026/08')
+PERIODS=tuple(p.strip() for p in os.environ.get('REPORT_PERIODS','2026/06,2026/07,2026/08').split(',') if p.strip())
 OUTPUT=ROOT/'.test-output'/'deepseek-evaluation'
 
 
@@ -40,13 +41,14 @@ def main():
         except Exception as exc:
             # Do not write API responses or credentials into the downloadable artifact.
             results.append({'period':period,'status':'failed','stage':stage,'error_type':type(exc).__name__,
+                            'error_detail':str(exc).replace('\n',' ')[:120] if isinstance(exc,ValidationError) else None,
                             'http_status':getattr(exc,'status_code',None)})
     (OUTPUT/'results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     summary=['| 月份 | 結果 | 階段 | 錯誤類型 | HTTP 狀態 |','| --- | --- | --- | --- | --- |']
     for result in results:
         print(f"{result['period']}: {result['status']}",flush=True)
         notice='; '.join(f'{key}={result.get(key) or "—"}' for key in
-                         ('status','stage','error_type','http_status'))
+                         ('status','stage','error_type','error_detail','http_status'))
         print(f"::notice title=DeepSeek Flash {result['period']}::{notice}",flush=True)
         summary.append('| '+ ' | '.join(str(result.get(k) or '—') for k in
                        ('period','status','stage','error_type','http_status'))+' |')

@@ -27,6 +27,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          REPORT_PERIODS: 2026/06,2026/08
         run: python scraper/evaluate_deepseek_report.py
       - name: Save comparison drafts
         if: always()
