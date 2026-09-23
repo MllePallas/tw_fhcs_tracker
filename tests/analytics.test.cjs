@@ -78,13 +78,30 @@ test('negative and missing values cannot fabricate a new high or streak', () => 
 });
 function context() {
   const elements = new Map();
-  const element = id => { if(!elements.has(id)) elements.set(id,{value:'',innerHTML:'',textContent:'',classList:{add(){},remove(){},toggle(){}},scrollIntoView(){},querySelector(){return {textContent:''}}}); return elements.get(id); };
-  const ctx=vm.createContext({console,ProfitAnalytics:A,document:{addEventListener(){},getElementById:element,querySelectorAll(){return []},body:{classList:{toggle(){}}}},window:{},Intl,Map,Set,Date,Math,Number,Array,Object,JSON,structuredClone,location:{origin:'http://localhost',pathname:'/'}});
+  const element = id => { if(!elements.has(id)) { const classes=new Set(); elements.set(id,{value:'',innerHTML:'',textContent:'',classList:{add(c){classes.add(c)},remove(c){classes.delete(c)},toggle(c,force){if(force??!classes.has(c))classes.add(c);else classes.delete(c)},contains(c){return classes.has(c)}},scrollIntoView(){},querySelector(){return {textContent:''}}}); } return elements.get(id); };
+  const ctx=vm.createContext({console,ProfitAnalytics:A,document:{addEventListener(){},getElementById:element,querySelector:element,querySelectorAll(){return []},body:{classList:{toggle(){}}}},window:{},Intl,Map,Set,Date,Math,Number,Array,Object,JSON,structuredClone,location:{origin:'http://localhost',pathname:'/'}});
   for(const file of ['app.js','trends.js'])vm.runInContext(fs.readFileSync(path.join(root,'docs',file),'utf8'),ctx,{filename:file});
   ctx.testHistory=structuredClone(history);ctx.testRules=rules;
   vm.runInContext(`Object.assign(monthCache,testHistory); comparisonRules=testRules; state.data=monthCache['115/08']; state.index={months:Object.keys(monthCache).sort().reverse().map(period=>({period}))}; Object.values(monthCache).forEach(applyComparisonPolicy); state.displayUnit='億元'; state.sortMode='trend_deviation';`,ctx);
   return {ctx,element};
 }
+test('export and image controls appear only in monthly holdings overview', () => {
+  const {ctx,element}=context();
+  vm.runInContext('renderMarketSummary=()=>{};renderSummaryCards=()=>{};renderTable=()=>{};renderChart=()=>{};renderTrendDashboard=()=>{};renderPeriodAll=()=>{};updatePeriodBadge=()=>{};updateLastUpdated=()=>{};',ctx);
+  vm.runInContext("state.pageMode='monthly';state.viewMode='holdings';renderAll()",ctx);
+  assert.equal(element('.ctrl-download').classList.contains('hidden'),false);
+  for(const [page,view] of [['trend','holdings'],['monthly','bank'],['monthly','life'],['monthly','securities'],['period','holdings']]) {
+    vm.runInContext(`state.pageMode='${page}';state.viewMode='${view}';renderAll()`,ctx);
+    assert.equal(element('.ctrl-download').classList.contains('hidden'),true,`${page}/${view}`);
+  }
+});
+test('monthly Excel contains only the first six worksheets', () => {
+  const {ctx}=context();
+  ctx.window.XLSX={utils:{book_new:()=>({SheetNames:[],Sheets:{}}),book_append_sheet:(wb,ws,name)=>{wb.SheetNames.push(name);wb.Sheets[name]=ws},encode_cell:({r,c})=>String.fromCharCode(65+c)+(r+1),encode_range:({s,e})=>String.fromCharCode(65+s.c)+(s.r+1)+':'+String.fromCharCode(65+e.c)+(e.r+1)}};
+  const book=vm.runInContext('buildMonthlyWorkbook(window.XLSX,state.data,state.displayUnit)',ctx);
+  assert.deepEqual(Array.from(book.SheetNames),['金控總覽','銀行子公司','壽險子公司','證券子公司','其他子公司','市場概況']);
+  assert.ok(!book.SheetNames.some(name=>/趨勢|新聞|分析|比較口徑/.test(name)));
+});
 test('full-report and image models follow the same comparison and EPS policies', () => {
   const {ctx}=context();
   const model=vm.runInContext('snapBuildModel()',ctx);

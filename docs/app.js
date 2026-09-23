@@ -356,6 +356,7 @@ function renderAll() {
   state.sortMode    = document.getElementById('sort-select').value;
   const showOverview = state.pageMode === 'monthly' && state.viewMode === 'holdings';
   document.getElementById('market-context').classList.toggle('hidden', !showOverview);
+  document.querySelector('.ctrl-download').classList.toggle('hidden', !showOverview);
   if (state.pageMode === 'trend') { renderTrendDashboard(); return; }
 
   // 草稿新增：期間比較模式走獨立渲染流程
@@ -1566,7 +1567,6 @@ function snapFootnoteText(model) {
 }
 
 function renderTableImage() {
-  if (state.pageMode === 'trend') return trendSnapshot();
   const model = snapBuildModel();
   const period = state.data.report_period || '';
   const { c } = SNAP;
@@ -1725,6 +1725,7 @@ function renderTableImage() {
 
 // ── 圖片視窗 ───────────────────────────────────────────
 function openSnapshot() {
+  if (state.pageMode !== 'monthly' || state.viewMode !== 'holdings') return;
   if (!state.data || state.loading) { alert('資料尚未載入，請稍候再試'); return; }
   try {
     const canvas = renderTableImage();
@@ -2177,7 +2178,25 @@ function buildMarketSheet(ms) {
 // 註：新聞摘要不列入 Excel（篇幅長、格式與四張數字表不一致）；
 // 網頁上點金控名展開的詳情面板仍可閱讀，資料本身保留在 JSON 的 news_summary 欄位。
 
+function buildMonthlyWorkbook(XLSX, d, unit) {
+  const period = d.report_period || '';
+  const wb = XLSX.utils.book_new();
+
+  XLSX.utils.book_append_sheet(wb, buildHoldingsSheet(d, unit), '金控總覽');
+  XLSX.utils.book_append_sheet(wb, buildIndustrySheet('bank', d, unit), '銀行子公司');
+  XLSX.utils.book_append_sheet(wb, buildIndustrySheet('life', d, unit), '壽險子公司');
+  XLSX.utils.book_append_sheet(wb, buildIndustrySheet('securities', d, unit), '證券子公司');
+
+  const wsOther = buildOtherSheet(unit, period);
+  if (wsOther) XLSX.utils.book_append_sheet(wb, wsOther, '其他子公司');
+  const wsMkt = buildMarketSheet(d.market_summary);
+  if (wsMkt) XLSX.utils.book_append_sheet(wb, wsMkt, '市場概況');
+
+  return wb;
+}
+
 async function downloadExcel() {
+  if (state.pageMode !== 'monthly' || state.viewMode !== 'holdings') return;
   if (!state.data || state.loading) {
     alert('資料尚未載入，請稍候再試');
     return;
@@ -2192,24 +2211,7 @@ async function downloadExcel() {
     const XLSX = await loadXlsxLib();
     const d = state.data;
     const period = d.report_period || '';
-    const unit = state.displayUnit;
-    const wb = XLSX.utils.book_new();
-
-
-    // 四張主表：與網頁的四個 tab 一一對應（欄位、順序、樣式一致）
-    XLSX.utils.book_append_sheet(wb, buildHoldingsSheet(d, unit), '金控總覽');
-    XLSX.utils.book_append_sheet(wb, buildIndustrySheet('bank', d, unit), '銀行子公司');
-    XLSX.utils.book_append_sheet(wb, buildIndustrySheet('life', d, unit), '壽險子公司');
-    XLSX.utils.book_append_sheet(wb, buildIndustrySheet('securities', d, unit), '證券子公司');
-
-    // 補充資料（網頁未以表格呈現，但保留於檔案中）
-    const wsOther = buildOtherSheet(unit, period);
-    if (wsOther) XLSX.utils.book_append_sheet(wb, wsOther, '其他子公司');
-    const wsMkt = buildMarketSheet(d.market_summary);
-    if (wsMkt) XLSX.utils.book_append_sheet(wb, wsMkt, '市場概況');
-
-    appendTrendSheets(wb, XLSX);
-    appendAnalysisSheets(wb, XLSX);
+    const wb = buildMonthlyWorkbook(XLSX, d, state.displayUnit);
 
     const filename = `taiwan-fhcs-${periodAd(period).replace('/', '-') || 'data'}.xlsx`;
     XLSX.writeFile(wb, filename);
