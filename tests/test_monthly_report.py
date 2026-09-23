@@ -31,12 +31,30 @@ class MonthlyReportTest(unittest.TestCase):
             path=out/'2026-08.md';manual=path.read_text(encoding='utf-8')+'\n人工修訂測試\n';path.write_text(manual,encoding='utf-8')
             meta=publish(self.pack,out)
             self.assertTrue(meta['manual']);self.assertFalse(meta['data_changed'])
+            self.assertTrue(publish(self.pack,out)['manual'])
             pack=copy.deepcopy(self.pack);pack['holdings'][0]['monthly']+=1
             meta=publish(pack,out)
             self.assertTrue(meta['data_changed']);self.assertEqual(path.read_text(encoding='utf-8'),manual)
             self.assertIn('人工修訂測試',(out/'2026-08.html').read_text(encoding='utf-8'))
+            path.write_text(manual+'已核對更新資料。\n',encoding='utf-8')
+            meta=publish(pack,out)
+            self.assertFalse(meta['data_changed'])
+            self.assertTrue(meta['manual'])
             publish(pack,out,overwrite_manual=True)
             self.assertNotIn('人工修訂測試',path.read_text(encoding='utf-8'))
+    def test_approved_markdown_is_rendered_without_ai_and_never_replaced(self):
+        with report_output() as out:
+            path=out/'2026-08.md'
+            path.write_text('# 2026/08 金控自結獲利分析\n\n## 本月重點\n\n核准內容。\n',encoding='utf-8')
+            meta=publish(self.pack,out)
+            self.assertTrue(meta['manual'])
+            self.assertEqual(meta.get('ai_status'),None)
+            self.assertIn('核准內容。',(out/'2026-08.html').read_text(encoding='utf-8'))
+            pack=copy.deepcopy(self.pack);pack['holdings'][0]['monthly']+=1
+            meta=publish(pack,out)
+            self.assertTrue(meta['manual'])
+            self.assertTrue(meta['data_changed'])
+            self.assertIn('核准內容。',path.read_text(encoding='utf-8'))
     def test_stable_inputs_do_not_call_model(self):
         with report_output() as out:
             first=publish(self.pack,out)

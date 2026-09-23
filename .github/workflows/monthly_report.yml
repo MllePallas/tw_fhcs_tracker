@@ -1,36 +1,16 @@
-name: Generate Monthly Analysis
+name: Publish Approved Monthly Analysis
 
 on:
-  workflow_run:
-    workflows: [Update Financial Holdings Data, Update Market Summary]
-    types: [completed]
   push:
     branches: [main]
     paths:
-      - 'docs/data/**'
-      - 'docs/analysis-pack.js'
-      - 'docs/analytics.js'
-      - 'docs/comparison-rules.json'
-      - 'scripts/build-analysis-pack.cjs'
-      - 'scraper/monthly_report*'
-      - 'scraper/report_sources.py'
-      - 'scripts/render-report.cjs'
-      - 'docs/report-design.css'
-      - 'docs/report-renderer.js'
       - 'docs/reports/*.md'
-      - '.github/workflows/monthly_report.yml'
   workflow_dispatch:
     inputs:
       period:
-        description: '西元月份 YYYY/MM，例如 2026/08；留空為最新月份'
-        required: false
+        description: '重新排版已核准的 Markdown；西元月份 YYYY/MM'
+        required: true
         type: string
-      overwrite_manual:
-        description: '重新產生並覆蓋此月份人工修改（預設保留）'
-        default: false
-        type: boolean
-  schedule:
-    - cron: '43 12 8-20 * *'
 
 concurrency:
   group: finhold-data-write
@@ -46,45 +26,53 @@ jobs:
       - uses: actions/checkout@v5
         with:
           ref: main
+          fetch-depth: 0
       - uses: actions/setup-node@v4
         with:
           node-version: '22'
       - uses: actions/setup-python@v6
         with:
           python-version: '3.11'
-      - name: Install report dependency
+      - name: Install test dependencies
         run: pip install 'anthropic>=0.28,<1' 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5'
       - name: Verify calculations and report publishing
         run: |
           node tests/analytics.test.cjs
           node tests/analysis-pack.test.cjs
           python -m unittest discover -s tests -p 'test_*.py'
-      - name: Generate and publish report files
+      - name: Render approved report files without AI
         env:
-          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
-          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          MONTHLY_REPORT_WRITER: ${{ vars.MONTHLY_REPORT_WRITER || 'anthropic' }}
           REPORT_PERIOD: ${{ inputs.period }}
-          OVERWRITE_MANUAL: ${{ inputs.overwrite_manual }}
+          BEFORE_SHA: ${{ github.event.before }}
+          AFTER_SHA: ${{ github.sha }}
         run: |
-          ARGS=()
-          if [ -n "$REPORT_PERIOD" ]; then ARGS+=(--period "$REPORT_PERIOD"); else ARGS+=(--all); fi
-          if [ "$OVERWRITE_MANUAL" = "true" ]; then
-            if [ -z "$REPORT_PERIOD" ]; then echo 'Specify one period before overwriting manual edits.'; exit 1; fi
-            ARGS+=(--overwrite-manual)
+          periods=()
+          if [ "${{ github.event_name }}" = 'workflow_dispatch' ]; then
+            periods+=("$REPORT_PERIOD")
+          else
+            mapfile -t files < <(git diff --name-only --diff-filter=AM "$BEFORE_SHA" "$AFTER_SHA" -- 'docs/reports/*.md')
+            for file in "${files[@]}"; do
+              stem="${file##*/}"
+              stem="${stem%.md}"
+              if [[ "$stem" =~ ^20[0-9]{2}-(0[1-9]|1[0-2])$ ]]; then periods+=("${stem:0:4}/${stem:5:2}"); fi
+            done
           fi
-          python scraper/monthly_report.py "${ARGS[@]}"
-      - name: Save reports automatically
+          for period in "${periods[@]}"; do
+            if [[ ! "$period" =~ ^20[0-9]{2}/(0[1-9]|1[0-2])$ ]]; then echo "Invalid report period: $period"; exit 1; fi
+            stem="${period:0:4}-${period:5:2}"
+            if [ ! -f "docs/reports/$stem.md" ]; then echo "Approved Markdown missing: $stem.md"; exit 1; fi
+            python scraper/monthly_report.py --period "$period" --no-ai
+          done
+      - name: Save rendered reports
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email 'github-actions[bot]@users.noreply.github.com'
           git add docs/reports/
           if ! git diff --staged --quiet; then
-            git commit -m 'chore: publish monthly analysis and source pack'
+            git commit -m 'chore: render approved monthly analysis'
             git pull --rebase origin main
             git push origin HEAD:main
           fi
       - name: Run summary
         run: |
-          echo 'Monthly reports published automatically; manually edited Markdown is preserved.' >> "$GITHUB_STEP_SUMMARY"
-          echo 'Read docs/reports/index.json for the report period, AI status and revision status.' >> "$GITHUB_STEP_SUMMARY"
+          echo 'Only submitted Markdown reports were rendered; no AI analysis was generated.' >> "$GITHUB_STEP_SUMMARY"

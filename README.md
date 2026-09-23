@@ -12,7 +12,7 @@
 
 新版比較與缺值規則、原始公告口徑及測試方式見 [COMPARISON_POLICY.md](COMPARISON_POLICY.md)。
 
-GitHub 自動產生月報，無審查關卡；人工修改會保留。每月 Excel 附近 24 月數據、子公司、新聞摘要與來源、市場資料及分析報告，期間一律顯示西元年月。操作方式見 [AUTOMATED_REPORTS.md](AUTOMATED_REPORTS.md)。
+GitHub 自動更新月自結、新聞與市場資料；完整月報、趨勢重點數字及季度比較隨資料更新。自結獲利分析報告須先人工確認 Markdown，提交後才由 GitHub 排版發布。期間一律顯示西元年月。操作方式見 [AUTOMATED_REPORTS.md](AUTOMATED_REPORTS.md)。
 
 - 每月 8~15 日自動從 MOPS 爬取 13 家金控公告
 - 解析金控本體及各子公司當月/累計稅後淨利
@@ -60,12 +60,12 @@ cd taiwan-finhold-tracker
 
 | Secret 名稱 | 說明 |
 |------------|------|
-| `ANTHROPIC_API_KEY` | Anthropic API Key（用於 LLM 兜底解析） |
-| `DEEPSEEK_API_KEY` | 僅供金控自結獲利分析報告的 DeepSeek 撰稿對照測試使用；資料擷取仍用原設定 |
+| `ANTHROPIC_API_KEY` | Anthropic API Key（用於資料擷取兜底解析、新聞摘要及 FVOCI 補充擷取） |
+| `DEEPSEEK_API_KEY` | 僅供未發布的 DeepSeek 報告對照測試使用；正式報告發布不需此金鑰 |
 
 若不使用 LLM，可在 workflow 中加 `--no-llm`。
 
-金控月報的 DeepSeek 對照測試：於 `Settings → Secrets and variables → Actions → Repository secrets` 新增 `DEEPSEEK_API_KEY`，再到 `Actions → Evaluate DeepSeek Monthly Report → Run workflow`。工作流程會產出 2026/06–08 的未發布草稿，從該次執行的 `deepseek-report-comparison` artifact 下載；原網站與既有報告不會因此修改。撰稿使用 DeepSeek，複核仍使用 `ANTHROPIC_API_KEY`。確認品質後，才在同一設定頁的 `Variables` 新增 `MONTHLY_REPORT_WRITER=deepseek` 供正式月報排程使用；未設定時仍由 Anthropic 撰稿。**金鑰不要貼到程式碼、Vercel 或對話中。**
+`DEEPSEEK_API_KEY` 目前只供 `Evaluate DeepSeek Monthly Report` 的未發布模型對照測試使用，不控制正式網站報告。正式發布流程不呼叫 AI，無需設定 `MONTHLY_REPORT_WRITER`。**金鑰不要貼到程式碼、Vercel 或對話中。**
 
 ### 3. 啟用 GitHub Pages
 

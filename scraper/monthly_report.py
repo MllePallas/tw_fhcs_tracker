@@ -151,12 +151,17 @@ def publish(pack, output=REPORTS, client=None, overwrite_manual=False, reviewer=
     # Re-read article bodies daily during announcement season, even if a short summary is unchanged.
     input_hash=digest(json.dumps(content,ensure_ascii=False,sort_keys=True)+version+refresh_day+writer_model+reviewer_model)
     (output/f'{stem}.pack.json').write_text(serialized,encoding='utf-8')
-    manual=md.exists() and digest(md.read_text(encoding='utf-8'))!=previous.get('output_hash')
+    # An approved Markdown report stays manual after its first render, even if
+    # data or template inputs change later.
+    manual_hash=digest(md.read_text(encoding='utf-8')) if md.exists() else None
+    manual=md.exists() and (previous.get('manual',False) or manual_hash!=previous.get('output_hash'))
     if manual and not overwrite_manual:
-        meta={**previous,'period':pack['period'],'manual':True,'data_hash':old_data_hash or data_hash,'data_changed':bool(old_data_hash and old_data_hash!=data_hash)}
+        content_changed=manual_hash!=(previous.get('manual_output_hash') or previous.get('output_hash'))
+        report_data_hash=data_hash if content_changed else (old_data_hash or data_hash)
+        meta={**previous,'period':pack['period'],'manual':True,'data_hash':report_data_hash,
+              'data_changed':bool(report_data_hash!=data_hash)}
         headline=re.search(r'## (?:本月一句話重點|本月重點)\s*\n+([^\n]+)',md.read_text(encoding='utf-8'))
         if headline:meta['headline']=re.sub(r'\*\*','',headline.group(1).strip())
-        manual_hash=digest(md.read_text(encoding='utf-8'))
         if previous.get('manual_output_hash')!=manual_hash:meta['generated_at']=datetime.now(timezone.utc).isoformat()
         meta['manual_output_hash']=manual_hash
     elif not overwrite_manual and md.exists() and ((previous.get('input_hash')==input_hash and (previous.get('ai_status')=='generated' or client is None)) or (previous.get('attempt_input_hash')==input_hash and previous.get('attempts',0)>=3)):
@@ -198,10 +203,10 @@ def publish(pack, output=REPORTS, client=None, overwrite_manual=False, reviewer=
     meta_path.write_text(json.dumps(meta,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     index_file=output/'index.json'
     index=json.loads(index_file.read_text(encoding='utf-8')) if index_file.exists() else {'reports':[]}
-    entry={**meta,'file':md.name,'html_file':f'{stem}.html','pack_file':f'{stem}.pack.json','title':f"{pack['period']} 金控月獲利分析報告",'source':'人工修訂（自動排程保留）' if meta.get('manual') else '自動產製（數據＋新聞）'+('＋AI 解讀' if meta.get('ai_status')=='generated' else '')}
+    entry={**meta,'file':md.name,'html_file':f'{stem}.html','pack_file':f'{stem}.pack.json','title':f"{pack['period']} 金控月獲利分析報告",'source':'人工審閱後發布' if meta.get('manual') else '自動產製（數據＋新聞）'+('＋AI 解讀' if meta.get('ai_status')=='generated' else '')}
     index['reports']=[entry]+[r for r in index.get('reports',[]) if r['period']>= '2026/06' and r['period'] not in [pack['period'], f"{int(pack['period'][:4])-1911}{pack['period'][4:]}"]]
     index['reports'].sort(key=lambda r:r['period'],reverse=True)
-    index['_readme']='報告期間使用西元 YYYY/MM。編輯月份 .md 後，排程自動保留人工修改；meta 標示資料是否已更新。'
+    index['_readme']='報告期間使用西元 YYYY/MM。只有提交核准的月份 Markdown 後才發布；meta 標示資料是否已更新。'
     index_file.write_text(json.dumps(index,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
     return meta
 
