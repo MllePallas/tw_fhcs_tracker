@@ -22,11 +22,15 @@ def main():
     results=[]
     for period in PERIODS:
         stem=period.replace('/','-')
+        stage='build-pack'
         try:
             pack=json.loads(subprocess.check_output(
                 ['node',str(ROOT/'scripts/build-analysis-pack.cjs'),period],encoding='utf-8',cwd=ROOT))
+            stage='collect-sources'
             sources=collect(pack)
+            stage='generate-and-review'
             commentary=generate_commentary(pack,writer,sources,reviewer,writer_model,reviewer_model)
+            stage='render'
             markdown,_=render_report(pack,commentary,sources)
             (OUTPUT/f'{stem}.md').write_text(markdown,encoding='utf-8')
             (OUTPUT/f'{stem}.analysis.json').write_text(
@@ -35,9 +39,17 @@ def main():
                             'reference':f'docs/reports/{stem}.md','draft':f'{stem}.md'})
         except Exception as exc:
             # Do not write API responses or credentials into the downloadable artifact.
-            results.append({'period':period,'status':'failed','error_type':type(exc).__name__})
+            results.append({'period':period,'status':'failed','stage':stage,'error_type':type(exc).__name__,
+                            'http_status':getattr(exc,'status_code',None)})
     (OUTPUT/'results.json').write_text(json.dumps(results,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
-    for result in results:print(f"{result['period']}: {result['status']}")
+    summary=['| 月份 | 結果 | 階段 | 錯誤類型 | HTTP 狀態 |','| --- | --- | --- | --- | --- |']
+    for result in results:
+        print(f"{result['period']}: {result['status']}",flush=True)
+        summary.append('| '+ ' | '.join(str(result.get(k) or '—') for k in
+                       ('period','status','stage','error_type','http_status'))+' |')
+    if os.environ.get('GITHUB_STEP_SUMMARY'):
+        with open(os.environ['GITHUB_STEP_SUMMARY'],'a',encoding='utf-8') as handle:
+            handle.write('## DeepSeek Flash 未發布報告測試\n\n'+'\n'.join(summary)+'\n')
     if any(r['status']!='validated' for r in results):raise SystemExit(1)
 
 
