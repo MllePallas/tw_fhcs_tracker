@@ -58,6 +58,8 @@ class MonthlyReportTest(unittest.TestCase):
             self.assertIn('MOPS 月自結',(out/'2026-08.md').read_text(encoding='utf-8'))
     def test_numbers_must_use_valid_tokens_and_sources(self):
         ctx=context(self.pack,{})
+        holding=next(r for r in ctx['rows'] if r['industry']=='holding' and r['code']=='5880')
+        self.assertIn('歸屬母公司業主',holding['cumulative_basis_note'])
         valid=response();valid['headline']['text']='單月{{r0.monthly}}億元。'
         validate(valid,ctx)
         for text in ['獲利999億元','{{invented}}億元','<script>','因提存增加而下降。']:

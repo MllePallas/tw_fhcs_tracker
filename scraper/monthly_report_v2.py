@@ -81,7 +81,9 @@ def context(pack,sources):
         rows.append({'id':rid,'name':row['name'],'code':row['code'],'industry':row['industry'],
             'raw':{'monthly':row['monthly'],'base':row['mom']['base'],'delta':row['mom']['delta'],'mom':row['mom']['pct']},
             'values':values,'markers':row['markers'],'rank_note':row['rank_note'],
-            'mom_note':row['mom']['note'],'yoy_rank_eligible':row['yoy_rank_eligible']})
+            'mom_note':row['mom']['note'],'yoy_rank_eligible':row['yoy_rank_eligible'],
+            'cumulative_basis_note':('合庫金控累計稅後淨利採公告註記之歸屬母公司業主數；新聞若列含非控制權益的合併總數，兩者不是同一口徑。'
+                                     if row['industry']=='holding' and row['code']=='5880' else '')})
     totals={}
     exclusions={}
     for key,label in GROUPS:

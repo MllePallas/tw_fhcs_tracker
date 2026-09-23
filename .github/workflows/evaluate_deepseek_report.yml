@@ -2,10 +2,12 @@ name: Evaluate DeepSeek Monthly Report
 
 on:
   workflow_dispatch:
-  push:
-    branches: [main]
-    paths:
-      - 'scraper/evaluate_deepseek_report.py'
+    inputs:
+      periods:
+        description: '測試月份，以逗號分隔；預設 2026/06–08'
+        default: '2026/06,2026/07,2026/08'
+        required: true
+        type: string
 
 permissions:
   contents: read
@@ -27,7 +29,7 @@ jobs:
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
-          REPORT_PERIODS: 2026/08
+          REPORT_PERIODS: ${{ inputs.periods }}
         run: python scraper/evaluate_deepseek_report.py
       - name: Save comparison drafts
         if: always()
