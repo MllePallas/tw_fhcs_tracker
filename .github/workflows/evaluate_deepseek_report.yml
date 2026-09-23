@@ -25,7 +25,7 @@ jobs:
           python-version: '3.11'
       - name: Install report dependency
         run: pip install 'anthropic>=0.28,<1' 'requests>=2.31,<3' 'beautifulsoup4>=4.12,<5'
-      - name: Generate unpublished June-August comparisons
+      - name: Compare unpublished Flash and Pro drafts
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
           DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
