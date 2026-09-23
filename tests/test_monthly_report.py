@@ -7,7 +7,7 @@ from uuid import uuid4
 from datetime import datetime
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'scraper'))
-from monthly_report import publish,render_report,generate_commentary,model_json,report_content
+from monthly_report import publish,render_report,generate_commentary,model_json,report_content,report_clients
 from monthly_report_v2 import context,validate,aggregate,security_direction,market_change
 from report_sources import allowed,collect
 from news_summary import refresh_due
@@ -92,6 +92,25 @@ class MonthlyReportTest(unittest.TestCase):
                 return SimpleNamespace(content=[SimpleNamespace(type='text',text=json.dumps(v))])
         messages=Responses();generate_commentary(self.pack,SimpleNamespace(messages=messages),{})
         self.assertEqual(messages.calls,4)
+    def test_deepseek_drafts_and_anthropic_reviews_only(self):
+        class Responses:
+            def __init__(self,result):self.result=result;self.calls=[]
+            def create(self,**kwargs):
+                self.calls.append(kwargs)
+                return SimpleNamespace(content=[SimpleNamespace(type='text',text=json.dumps(self.result))])
+        drafts=Responses(response());reviews=Responses({'issues':[]})
+        generate_commentary(self.pack,SimpleNamespace(messages=drafts),{},
+                            SimpleNamespace(messages=reviews),'deepseek-v4-pro','claude-sonnet-4-6')
+        self.assertEqual([c['model'] for c in drafts.calls],['deepseek-v4-pro'])
+        self.assertEqual([c['model'] for c in reviews.calls],['claude-sonnet-4-6'])
+    @patch.dict('os.environ',{'ANTHROPIC_API_KEY':'test-anthropic','DEEPSEEK_API_KEY':'test-deepseek'})
+    @patch('anthropic.Anthropic')
+    def test_deepseek_credentials_are_confined_to_report_writer(self,anthropic_client):
+        writer,reviewer,writer_model,reviewer_model=report_clients('deepseek')
+        self.assertEqual((writer_model,reviewer_model),('deepseek-v4-pro','claude-sonnet-4-6'))
+        self.assertEqual(anthropic_client.call_args_list[0].kwargs['api_key'],'test-anthropic')
+        self.assertEqual(anthropic_client.call_args_list[1].kwargs['api_key'],'test-deepseek')
+        self.assertEqual(anthropic_client.call_args_list[1].kwargs['base_url'],'https://api.deepseek.com/anthropic')
     def test_review_json_can_follow_a_preface_with_metric_braces(self):
         raw='檢查{{r39.delta}}與來源。\n```json\n{"issues":["金額不是月增額"]}\n```'
         self.assertEqual(model_json(raw),{'issues':['金額不是月增額']})

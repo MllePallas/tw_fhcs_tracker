@@ -62,6 +62,8 @@ jobs:
       - name: Generate and publish report files
         env:
           ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DEEPSEEK_API_KEY: ${{ secrets.DEEPSEEK_API_KEY }}
+          MONTHLY_REPORT_WRITER: ${{ vars.MONTHLY_REPORT_WRITER || 'anthropic' }}
           REPORT_PERIOD: ${{ inputs.period }}
           OVERWRITE_MANUAL: ${{ inputs.overwrite_manual }}
         run: |

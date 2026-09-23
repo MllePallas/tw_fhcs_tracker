@@ -61,8 +61,11 @@ cd taiwan-finhold-tracker
 | Secret 名稱 | 說明 |
 |------------|------|
 | `ANTHROPIC_API_KEY` | Anthropic API Key（用於 LLM 兜底解析） |
+| `DEEPSEEK_API_KEY` | 僅供金控自結獲利分析報告的 DeepSeek 撰稿對照測試使用；資料擷取仍用原設定 |
 
 若不使用 LLM，可在 workflow 中加 `--no-llm`。
+
+金控月報的 DeepSeek 對照測試：於 `Settings → Secrets and variables → Actions → Repository secrets` 新增 `DEEPSEEK_API_KEY`，再到 `Actions → Evaluate DeepSeek Monthly Report → Run workflow`。工作流程會產出 2026/06–08 的未發布草稿，從該次執行的 `deepseek-report-comparison` artifact 下載；原網站與既有報告不會因此修改。撰稿使用 DeepSeek，複核仍使用 `ANTHROPIC_API_KEY`。確認品質後，才在同一設定頁的 `Variables` 新增 `MONTHLY_REPORT_WRITER=deepseek` 供正式月報排程使用；未設定時仍由 Anthropic 撰稿。**金鑰不要貼到程式碼、Vercel 或對話中。**
 
 ### 3. 啟用 GitHub Pages
 
