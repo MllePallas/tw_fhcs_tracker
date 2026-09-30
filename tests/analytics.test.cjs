@@ -82,7 +82,7 @@ function context() {
   const ctx=vm.createContext({console,ProfitAnalytics:A,document:{addEventListener(){},getElementById:element,querySelector:element,querySelectorAll(){return []},body:{classList:{toggle(){}}}},window:{},Intl,Map,Set,Date,Math,Number,Array,Object,JSON,structuredClone,location:{origin:'http://localhost',pathname:'/'}});
   for(const file of ['app.js','trends.js'])vm.runInContext(fs.readFileSync(path.join(root,'docs',file),'utf8'),ctx,{filename:file});
   ctx.testHistory=structuredClone(history);ctx.testRules=rules;
-  vm.runInContext(`Object.assign(monthCache,testHistory); comparisonRules=testRules; state.data=monthCache['115/08']; state.index={months:Object.keys(monthCache).sort().reverse().map(period=>({period}))}; Object.values(monthCache).forEach(applyComparisonPolicy); state.displayUnit='億元'; state.sortMode='trend_deviation';`,ctx);
+  vm.runInContext(`Object.assign(monthCache,testHistory); comparisonRules=testRules; state.data=monthCache['115/08']; state.index={months:Object.keys(monthCache).sort().reverse().map(period=>({period}))}; Object.values(monthCache).forEach(applyComparisonPolicy); state.displayUnit='億元'; state.sortMode='trend_change';`,ctx);
   return {ctx,element};
 }
 test('export and image controls appear only in monthly holdings overview', () => {
@@ -177,7 +177,53 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   vm.runInContext("trendFilter='turn';renderTrendDashboard()",ctx);
   assert.equal((element('trend-root').innerHTML.match(/id="trend-row-/g)||[]).length,1);
   vm.runInContext("renderTrendDetail('2889')",ctx);
-  assert.ok(element('trend-detail').innerHTML.includes('-28.0%'));
+  assert.ok(element('trend-detail').innerHTML.includes('+98.4%'));
+  assert.match(element('trend-detail').innerHTML,/2026\/07 前月獲利/);
+  assert.doesNotMatch(html+element('trend-detail').innerHTML,/均值|平均|各月原始|本月增減集中|近 3 月 vs/);
+});
+
+test('trend sorting and highlights use monthly amounts, including profit/loss turns', () => {
+  const {ctx}=context();
+  const rows=vm.runInContext("state.sortMode='trend_change';visibleTrendRows()",ctx);
+  const deltas=Array.from(rows,r=>Math.abs(r.mom.delta));
+  assert.deepEqual(deltas,[...deltas].sort((a,b)=>b-a));
+  const highlights=vm.runInContext('trendHighlights(allTrendRows())',ctx);
+  assert.equal(new Set(highlights.map(r=>r.code)).size,highlights.length);
+  assert.ok(highlights.length<=4);
+  assert.ok(highlights.some(r=>r.code==='2881' && r.mom.status==='loss_to_profit'));
+  const max=Math.max(...rows.map(r=>r.mom.delta));
+  const min=Math.min(...rows.map(r=>r.mom.delta));
+  assert.equal(highlights[0].mom.delta,max);
+  assert.equal(highlights[1].mom.delta,min);
+});
+
+test('heatmap compares adjacent months and a missing older month does not block current MoM', () => {
+  const {ctx}=context();
+  const html=vm.runInContext("heatmap(allTrendRows().filter(r=>r.code==='2889'))",ctx);
+  assert.match(html,/2026\/08 \+98.4%/);
+  vm.runInContext("delete monthCache['115/06'];trendFilter='missing'",ctx);
+  assert.ok(!vm.runInContext("visibleTrendRows().some(r=>r.code==='2889')",ctx));
+  const mock=vm.runInContext(`trendHighlights([
+    {code:'missing',mom:{status:'missing',delta:null}},
+    {code:'boundary',mom:{status:'incomparable',delta:99999}},
+    {code:'flat',mom:{status:'normal',delta:0}}
+  ])`,ctx);
+  assert.equal(mock.length,0);
+});
+
+test('source navigation preserves the selected historical month and opens holdings details', async () => {
+  const {ctx,element}=context();
+  vm.runInContext(`var opened=null;
+    loadData=async p=>{state.data=monthCache[p];};
+    setPageMode=mode=>{state.pageMode=mode;};
+    showDetail=code=>{opened=code;};
+    state.pageMode='trend';state.viewMode='life';`,ctx);
+  await vm.runInContext("openTrendOverview('2889','115/07')",ctx);
+  assert.equal(element('month-select').value,'115/07');
+  assert.equal(vm.runInContext('state.data.report_period',ctx),'115/07');
+  assert.equal(vm.runInContext('state.pageMode',ctx),'monthly');
+  assert.equal(vm.runInContext('state.viewMode',ctx),'holdings');
+  assert.equal(vm.runInContext('opened',ctx),'2889');
 });
 test('all historical company windows produce finite outputs or explicit unavailable states', () => {
   for(const [p,d] of Object.entries(history))for(const c of d.companies){

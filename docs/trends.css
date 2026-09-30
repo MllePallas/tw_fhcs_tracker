@@ -43,7 +43,7 @@ button:focus-visible, a:focus-visible, select:focus-visible, summary:focus-visib
 .trend-table th:first-child { min-width:118px; text-align:left; }
 .trend-table td.num { white-space:nowrap; font-variant-numeric:tabular-nums; font-size:15px; }
 .trend-table small, .history-data small { display:block; font-size:11px; font-weight:400; color:var(--text-muted); margin-top:4px; }
-.trend-table thead th:nth-child(n+2):nth-child(-n+4) { text-align:right; }
+.trend-table thead th:nth-child(n+2):nth-child(-n+5) { text-align:right; }
 .trend-table tbody th, .heat-table tbody th { border-bottom:1px solid var(--border); font-weight:600; }
 .trend-table tr:hover td, .trend-table tr:hover th { background:var(--surface-alt); }
 .trend-table th:first-child, .heat-table th:first-child { position:sticky; left:0; z-index:2; background:var(--surface); border-right:1px solid var(--border); }
@@ -89,7 +89,7 @@ button.company-link { border:0; background:transparent; padding:0; text-align:le
 .history-data table { min-width:540px; }
 .history-data th { text-align:left; }
 .history-data p { margin:10px 0; }
-.trend-full-detail { margin-left:20px; border:1px solid var(--border-strong); }
+.trend-full-detail { margin:20px; border:1px solid var(--border-strong); }
 .methodology, .market-context { border-top:1px solid var(--border); padding:8px 0; margin-bottom:20px; color:var(--text-2); font-size:13px; }
 .methodology ul { padding:10px 20px 10px 25px; line-height:1.9; }
 .methodology li { margin-bottom:8px; }

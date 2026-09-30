@@ -125,10 +125,6 @@
       if (monthly > Math.max(...six.slice(0, -1))) labels.push('近 6 月新高');
       if (monthly < Math.min(...six.slice(0, -1))) labels.push('近 6 月新低');
     }
-    if (mom.direction > 0 && average.direction < 0) labels.push('月增，仍低於前 3 月均值');
-    if (mom.direction < 0 && average.direction > 0) labels.push('月減，仍高於前 3 月均值');
-    if (average.pct >= 20) labels.push('高於前 3 月均值 ≥20%');
-    if (average.pct <= -20) labels.push('低於前 3 月均值 ≥20%');
     const reconciliation = reconcile(history, rules, code, yearMonths(period));
     const notes = [...new Set([mom, average, rolling, yoy].filter(x => x.reason && x.status !== 'missing').map(x => x.reason))];
     if (reconciliation.note) notes.push(reconciliation.note);

@@ -2828,7 +2828,7 @@ function showPeriodDetail(code) {
 // ── 模式切換 ──
 const SORT_OPTIONS_BY_MODE = {
   trend: [
-    ['trend_deviation', '偏離觀察基準最大'], ['trend_up', '月增加金額最多'],
+    ['trend_change', '月增減金額最大'], ['trend_up', '月增加金額最多'],
     ['trend_down', '月減少金額最多'], ['trend_amount', '當月獲利最高'], ['code', '代號'],
   ],
   monthly: [
@@ -2848,7 +2848,7 @@ const SORT_OPTIONS_BY_MODE = {
     ['code', '代號'],
   ],
 };
-const _sortMemo = { trend: 'trend_deviation', monthly: 'code', period: 'pdelta_desc' };
+const _sortMemo = { trend: 'trend_change', monthly: 'code', period: 'pdelta_desc' };
 
 function setSortOptionsForMode(mode) {
   const sel = document.getElementById('sort-select');
