@@ -546,8 +546,18 @@ def main():
     except Exception as e:
         logger.error(f"資料驗證執行失敗: {e}", exc_info=True)
 
-    # 如果有失敗，以非零 exit code 退出（讓 CI 知道有問題）
-    if fail_count > 0:
+    # 「尚未公告」是月初常態，不算失敗：只留一則 notice（不寄失敗信）。
+    # 只有抓取／解析／例外這類真正的錯誤才以非零 exit code 退出，讓紅叉 = 真的有事。
+    pending_errors = {"no_announcements", "no_match"}
+    pending = [r for r in results if r.get("error") in pending_errors]
+    broken = [r for r in results if "error" in r and r["error"] not in pending_errors]
+    if pending:
+        names = "、".join(r["name"] for r in pending)
+        print(f"::notice title=尚未公告 {len(pending)} 家::{names}")
+    for r in broken:
+        msg = str(r.get("error_msg", "")).replace("\n", " ").replace("::", ":")
+        print(f"::error title={r['name']} {r['error']}::{msg}")
+    if broken:
         sys.exit(1)
 
 
