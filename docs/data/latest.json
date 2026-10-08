@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/09",
-  "last_updated": "2026-10-08T01:19:33.660713",
-  "success_count": 1,
-  "fail_count": 12,
+  "last_updated": "2026-10-08T15:38:36.771501",
+  "success_count": 2,
+  "fail_count": 11,
   "companies": [
     {
       "code": "2880",
@@ -161,15 +161,71 @@
     {
       "code": "2890",
       "name": "永豐金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "永豐金控代子公司永豐金證券公告114年度股利配發基準日",
-        "永豐金控公告其與子公司115年7月合併自結損益",
-        "永豐金控公告115年第二季法人說明會相關資訊",
-        "永豐金控代子公司永豐商業銀行公告聯合授信資產之轉讓",
-        "公告本公司115年第2季合併財務報告董事會預計召開日期為\r\n115年8月21日"
-      ]
+      "announcement_date": "115/10/08",
+      "announcement_title": "永豐金控公告其與子公司115年9月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "永豐金控",
+        "monthly_profit": 3432,
+        "cumulative_profit": 36776,
+        "monthly_eps": 0.23,
+        "cumulative_eps": 2.49,
+        "cumulative_profit_yoy_pct": 79.0,
+        "cumulative_profit_yoy_abs": 16232.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "2025/10/01 京城銀行納入永豐金控"
+      },
+      "subsidiaries": [
+        {
+          "name": "永豐銀行",
+          "monthly_profit": 1728,
+          "cumulative_profit": 18973,
+          "monthly_eps": 0.15,
+          "cumulative_eps": 1.59,
+          "cumulative_profit_yoy_pct": 17.6,
+          "cumulative_profit_yoy_abs": 2843.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "京城銀行",
+          "monthly_profit": 285,
+          "cumulative_profit": 5104,
+          "monthly_eps": 0.26,
+          "cumulative_eps": 4.59,
+          "cumulative_profit_yoy_pct": null,
+          "cumulative_profit_yoy_abs": null,
+          "cumulative_profit_yoy_status": "missing",
+          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行納入永豐金控"
+        },
+        {
+          "name": "永豐金證券",
+          "monthly_profit": 1444,
+          "cumulative_profit": 11646,
+          "monthly_eps": 0.83,
+          "cumulative_eps": 6.72,
+          "cumulative_profit_yoy_pct": 141.5,
+          "cumulative_profit_yoy_abs": 6824.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行納入永豐金控"
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_checked_at": "2026-10-08T15:38:37.425099",
+      "news_summary": "**重點**\n\n永豐金控於2026年10月8日公布2026年9月自結稅後淨利34.32億元，月減22%，年成長39%；累計前9月稅後淨利達367.76億元，年成長79%，累計EPS為2.49元，年化ROE達18.36%，各財務指標皆創下公司歷史同期新高。\n月度獲利月減22%的主因，在於創投子公司資本利得減少，以及京城銀行提存費用增加，導致獲利相較上月下滑。\n\n**子公司明細**\n- 永豐銀行：\n單月稅後淨利17.28億元，月增0.1%，主因所得稅費用減少，抵銷了金融交易淨收益減少的影響。累計前9月稅後淨利達189.73億元，年增18%，連續第六年創獲利新高，淨收益成長由利息淨收益及手續費淨收益增長帶動，年增長各為25%與11%。\n\n- 永豐金證券：\n單月稅後淨利14.44億元，月增0.4%，主因所得稅費用減少與承銷手續費淨收益大幅增加，抵銷了資本利得的減少。累計前9月稅後淨利達116.46億元，年增142%，創歷史同期新高，主要受惠於經紀與泛財管手續費淨收益成長及較高的資本利得，手續費淨收益年成長達122%。\n\n- 京城銀行：\n累計前9月稅後淨利為51.04億元，扣除1月京城銀國際租賃處分利得2.88億元及可辨認無形資產攤銷費用後，對金控獲利貢獻為44.33億元，其中利息淨收益、手續費淨收益與金融交易淨收益成長顯著。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9803374",
+          "title": "永豐金獲利／9月自結賺367.7億元 前三季再創新高 EPS 達2.49元"
+        },
+        {
+          "url": "https://udn.com/news/story/7239/9803374",
+          "title": "永豐金獲利／9月自結賺367.7億元 前三季再創新高 EPS 達2.49元"
+        }
+      ],
+      "news_generated_at": "2026-10-08T15:38:55.299664"
     },
     {
       "code": "2891",
