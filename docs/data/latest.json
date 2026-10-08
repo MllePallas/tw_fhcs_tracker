@@ -255,5 +255,59 @@
         "補充說明本公司115年5月25日公告發行無擔保主順位普通公司債"
       ]
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/09",
+    "generated_at": "2026-10-08T18:59:44.078874",
+    "items": {
+      "usdtwd": {
+        "value": 31.85,
+        "date": "2026-09-30",
+        "prev_value": 31.626,
+        "prev_date": "2026-08-31",
+        "pct_change": 0.71,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 47940.13,
+        "date": "2026-09-30",
+        "prev_value": 46128.47,
+        "prev_date": "2026-08-31",
+        "pct_change": 3.93,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 8811.8,
+        "trading_days": 20,
+        "prev_value_yi": 9478.3,
+        "prev_trading_days": 21,
+        "pct_change": -7.03,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 7651.54,
+        "date": "2026-09-30",
+        "prev_value": 7686.14,
+        "prev_date": "2026-08-31",
+        "pct_change": -0.45,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 5.293,
+        "date": "2026-09-30",
+        "prev_value_pct": 4.758,
+        "prev_date": "2026-08-31",
+        "bps_change": 54,
+        "source": "Yahoo Finance (^TNX)"
+      },
+      "tlt": {
+        "value": 77.78,
+        "date": "2026-09-30",
+        "prev_value": 82.52,
+        "prev_date": "2026-08-31",
+        "pct_change": -5.74,
+        "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+      }
+    }
+  }
 }
