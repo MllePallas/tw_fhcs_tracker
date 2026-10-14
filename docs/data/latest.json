@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/09",
-  "last_updated": "2026-10-14T00:36:38.773001",
-  "success_count": 5,
-  "fail_count": 8,
+  "last_updated": "2026-10-14T13:40:31.877787",
+  "success_count": 10,
+  "fail_count": 3,
   "companies": [
     {
       "code": "2880",
@@ -108,15 +108,106 @@
     {
       "code": "2883",
       "name": "凱基金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司凱基證券公告取得凱基金融控股股份有限公司\r\n115年度第1次無擔保普通公司債",
-        "代子公司中華開發資本公告捐贈新臺幣參佰伍拾萬元予\r\n財團法人中華開發文教基金會",
-        "代子公司開發資本所屬之CI II公告董事會決議轉讓Artisan Holdings\r\n及Artisan Partners發行之可轉換公司債",
-        "代子公司開發資本所屬GM公告董事會決議轉讓Connexium Holdings及\r\nConnexium Investments發行可轉換公司債",
-        "代子公司開發資本所屬之GM公告董事會決議投資NexGen Buyout \r\nPartners Fund II, L.P."
-      ]
+      "announcement_date": "115/10/14",
+      "announcement_title": "公告本公司暨主要子公司115年9月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "凱基金控",
+        "monthly_profit": 2641,
+        "cumulative_profit": 38931,
+        "monthly_eps": null,
+        "cumulative_eps": 2.26,
+        "cumulative_profit_yoy_pct": 104.4,
+        "cumulative_profit_yoy_abs": 19881.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+        "fvoci_adjusted": {
+          "cumulative_profit": 93626,
+          "monthly_profit": 7330,
+          "delta_vs_original": 54695,
+          "source_url": "https://ec.ltn.com.tw/article/breakingnews/5606436",
+          "source_quote": "凱基金前3季累計股票處分利益共546.96億元，加計稅後獲利，合計對保留盈餘貢獻達936.26億元，續創歷史同期新高",
+          "original_value_text": "936.26 億元（累計）；73.3 億元（當月）",
+          "generated_at": "2026-10-14T13:44:33.387161",
+          "yoy_pct": null,
+          "yoy_abs": null,
+          "yoy_status": "not_presented"
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "凱基人壽",
+          "monthly_profit": 799,
+          "cumulative_profit": 13451,
+          "monthly_eps": null,
+          "cumulative_eps": 2.55,
+          "cumulative_profit_yoy_pct": 45.2,
+          "cumulative_profit_yoy_abs": 4188.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+          "fvoci_adjusted": {
+            "cumulative_profit": 67859,
+            "monthly_profit": 5489,
+            "delta_vs_original": 54408,
+            "source_url": "https://ec.ltn.com.tw/article/breakingnews/5606436",
+            "source_quote": "凱基人壽…累計前三季稅後獲利134.51億元，加計FVOCI股票處分利益約544.07億元，合計對保留盈餘貢獻達678.59億元",
+            "original_value_text": "678.59 億元（累計）；54.89 億元（當月）",
+            "generated_at": "2026-10-14T13:44:33.387057",
+            "yoy_pct": null,
+            "yoy_abs": null,
+            "yoy_status": "not_presented"
+          }
+        },
+        {
+          "name": "凱基銀行",
+          "monthly_profit": 614,
+          "cumulative_profit": 5269,
+          "monthly_eps": null,
+          "cumulative_eps": 1.12,
+          "cumulative_profit_yoy_pct": -0.5,
+          "cumulative_profit_yoy_abs": -25.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "中華開發資本",
+          "monthly_profit": 405,
+          "cumulative_profit": 1371,
+          "monthly_eps": null,
+          "cumulative_eps": 0.67,
+          "cumulative_profit_yoy_pct": 164.2,
+          "cumulative_profit_yoy_abs": 852.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "凱基證券",
+          "monthly_profit": 1473,
+          "cumulative_profit": 24226,
+          "monthly_eps": null,
+          "cumulative_eps": 11.44,
+          "cumulative_profit_yoy_pct": 196.7,
+          "cumulative_profit_yoy_abs": 16062.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_checked_at": "2026-10-14T13:40:32.431990",
+      "news_summary": "**重點**\n\n凱基金控於2026年10月14日公布9月自結稅後獲利26.41億元，前3季累計稅後獲利389.31億元、EPS 2.26元，超越歷年全年度獲利。\n單月獲利受市場利率波動及台股成交量萎縮影響，\n凱基金控指出9月獲利受到市場利率波動影響，但子公司核心動能表現依然強勁，銀行財管、證券承銷及壽險新契約保費等關鍵業務指標均持續優於去年同期。\n金控合併層級方面，\n9月FVOCI股票處分利益約46.89億元，加計單月稅後獲利合計對保留盈餘貢獻達73.3億元；前3季累計股票處分利益共546.96億元，加計稅後獲利合計對保留盈餘貢獻達936.26億元，續創歷史同期新高。\n\n**子公司明細**\n- **凱基人壽**：\n9月新契約業務維持強勁成長，單月新契約保費收入達165億元，較去年同期成長188%，創近5年單月新高，累計前9月新契約保費收入1,079億元，較去年同期成長105%；投資及獲利方面，凱基人壽適時實現部分資本利得，9月稅後獲利7.99億元，加計FVOCI股票處分利益稅後金額約46.9億元，單月對保留盈餘貢獻達54.89億元，累計前3季稅後獲利134.51億元，加計FVOCI股票處分利益約544.07億元，合計對保留盈餘貢獻達678.59億元。\n\n- **凱基銀行**：\n財管業務成長動能強勁，財管手續費收入較去年同期成長30%以上，帶動9月稅後獲利6.14億元，前3季累計提存前淨利75.82億元，較去年同期成長15%，累計前3季稅後獲利52.69億元。\n\n- **凱基證券**：\n9月因市場震盪壓縮自營操作空間，且台股成交量亦較前月萎縮，單月稅後獲利14.73億元；前三季累計稅後獲利達242.26億元，續創同期新高，較去年同期大幅成長197%，累計年化股東權益報酬率逾四成；承銷手續費收入亦較去年同期成長逾六成。",
+      "news_sources": [
+        {
+          "url": "https://www.nownews.com/news/6883440",
+          "title": "超越歷年全年獲利！凱基金今年前9月賺389.31億、EPS 2.26元"
+        },
+        {
+          "url": "https://udn.com/news/story/7252/9814864",
+          "title": "凱基金獲利／前三季389億元、EPS 2.26元 超越歷年全年度獲利"
+        }
+      ],
+      "news_generated_at": "2026-10-14T13:40:52.966480"
     },
     {
       "code": "2884",
@@ -221,21 +312,162 @@
     {
       "code": "2886",
       "name": "兆豐金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "兆豐國際商業銀行公告授信資產之轉讓。"
-      ]
+      "announcement_date": "115/10/14",
+      "announcement_title": "公告本公司暨主要子公司115年9月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2886&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "兆豐金控",
+        "monthly_profit": 3629,
+        "cumulative_profit": 32848,
+        "monthly_eps": null,
+        "cumulative_eps": 2.21,
+        "cumulative_profit_yoy_pct": 16.1,
+        "cumulative_profit_yoy_abs": 4563.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": ""
+      },
+      "subsidiaries": [
+        {
+          "name": "兆豐銀行",
+          "monthly_profit": 2206,
+          "cumulative_profit": 24818,
+          "monthly_eps": null,
+          "cumulative_eps": 2.48,
+          "cumulative_profit_yoy_pct": 6.1,
+          "cumulative_profit_yoy_abs": 1418.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "兆豐證券",
+          "monthly_profit": 1176,
+          "cumulative_profit": 5033,
+          "monthly_eps": null,
+          "cumulative_eps": 4.2,
+          "cumulative_profit_yoy_pct": 173.4,
+          "cumulative_profit_yoy_abs": 3192.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "兆豐票券",
+          "monthly_profit": 170,
+          "cumulative_profit": 2543,
+          "monthly_eps": null,
+          "cumulative_eps": 1.68,
+          "cumulative_profit_yoy_pct": 33.4,
+          "cumulative_profit_yoy_abs": 637.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "兆豐產險",
+          "monthly_profit": 114,
+          "cumulative_profit": 860,
+          "monthly_eps": null,
+          "cumulative_eps": 2.62,
+          "cumulative_profit_yoy_pct": 31.5,
+          "cumulative_profit_yoy_abs": 206.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_checked_at": "2026-10-14T13:41:22.967027",
+      "news_summary": "**重點**\n兆豐金（2886）2026年9月單月稅後純益36.29億元，在公股六家中唯一呈現月增，累計前三季稅後純益達328.48億元、年增16.14%，再創歷年同期新高，EPS 2.21元。\n單月獲利成長主要受惠兆豐證券自營與承銷獲利較上月增加逾5億元帶動；兆豐銀行9月增加呆帳及其他各項提存，抵銷部分證券獲利增幅，金控單月獲利仍維持微幅上升。\n\n**子公司明細**\n- 兆豐銀行：\n9月稅後純益22.06億元，較去年同期23.45億元略減5.93%，累計前9月稅後獲利248.18億元、年增6.06%。\n\n- 兆豐證券：\n9月稅後純益11.76億元，較去年同期大增420.35%；累計前3季稅後獲利50.33億元、年增173.38%，\n為本月最大驅動引擎。\n- 兆豐票券：\n9月稅後獲利1.70億元，累計前9月稅後獲利25.43億元、年增33.42%。\n\n- 兆豐產險：\n9月單月獲利1.14億元、年增15.15%，累計前9月獲利8.60億元，年增31.50%。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9058106",
+          "title": "兆豐金公布9月自結 累計前九月EPS 1.91元"
+        },
+        {
+          "url": "https://money.udn.com/money/story/5613/9058106",
+          "title": "兆豐金公布9月自結 累計前九月 EPS 1.91元"
+        }
+      ],
+      "news_generated_at": "2026-10-14T13:41:43.108871"
     },
     {
       "code": "2887",
       "name": "台新新光金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "本公司代子公司新光金保代公告公司更名",
-        "本公司代子公司新光金保代公告董事會代行股東臨時會\r\n重要決議事項"
-      ]
+      "announcement_date": "115/10/14",
+      "announcement_title": "公告本公司暨主要子公司115年9月份合併自結業績資料",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "台新新光金控",
+        "monthly_profit": 4420,
+        "cumulative_profit": 64120,
+        "monthly_eps": null,
+        "cumulative_eps": 2.47,
+        "cumulative_profit_yoy_pct": 146.5,
+        "cumulative_profit_yoy_abs": 38110.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+      },
+      "subsidiaries": [
+        {
+          "name": "台新銀行",
+          "monthly_profit": 1920,
+          "cumulative_profit": 19340,
+          "monthly_eps": null,
+          "cumulative_eps": 1.57,
+          "cumulative_profit_yoy_pct": 25.1,
+          "cumulative_profit_yoy_abs": 3880.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "新光銀行",
+          "monthly_profit": 630,
+          "cumulative_profit": 7550,
+          "monthly_eps": null,
+          "cumulative_eps": 1.51,
+          "cumulative_profit_yoy_pct": 273.8,
+          "cumulative_profit_yoy_abs": 5530.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        },
+        {
+          "name": "新光人壽",
+          "monthly_profit": 1870,
+          "cumulative_profit": 32220,
+          "monthly_eps": null,
+          "cumulative_eps": 3.49,
+          "cumulative_profit_yoy_pct": 3402.2,
+          "cumulative_profit_yoy_abs": 31300.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份",
+          "fvoci_not_found_count": 1
+        },
+        {
+          "name": "台新證券",
+          "monthly_profit": 330,
+          "cumulative_profit": 7390,
+          "monthly_eps": null,
+          "cumulative_eps": 2.95,
+          "cumulative_profit_yoy_pct": 389.4,
+          "cumulative_profit_yoy_abs": 5880.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        },
+        {
+          "name": "元富證券",
+          "monthly_profit": null,
+          "cumulative_profit": 1570,
+          "monthly_eps": null,
+          "cumulative_eps": 0.98,
+          "cumulative_profit_yoy_pct": 23.6,
+          "cumulative_profit_yoy_abs": 300.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_checked_at": "2026-10-14T13:42:13.109299"
     },
     {
       "code": "2889",
@@ -367,12 +599,62 @@
     {
       "code": "2891",
       "name": "中信金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司The Tokyo Star Bank, Limited公告董事辭世",
-        "代台灣人壽公告核准投資\r\nBrookfield Infrastructure Fund VI-A, L.P."
-      ]
+      "announcement_date": "115/10/14",
+      "announcement_title": "中國信託金融控股股份有限公司公告本公司暨主要子公司\r\n115年度九月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2891&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "中信金控",
+        "monthly_profit": 9358,
+        "cumulative_profit": 63237,
+        "monthly_eps": null,
+        "cumulative_eps": 3.18,
+        "cumulative_profit_yoy_pct": 4.1,
+        "cumulative_profit_yoy_abs": 2478.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+        "fvoci_adjusted": {
+          "cumulative_profit": 131462,
+          "monthly_profit": 26995,
+          "delta_vs_original": 68225,
+          "cumulative_eps": 6.68,
+          "source_url": "https://ec.ltn.com.tw/article/breakingnews/5606390",
+          "source_quote": "金控9月本期淨利加計FVOCI權益工具稅後處分利益為269.95億元，累計前9月共1314.62億元，超越歷年全年獲利表現，兩者合計對保留盈餘影響為每股6.68元",
+          "original_value_text": "累計前9月共1,314.62億元",
+          "generated_at": "2026-10-14T13:46:25.597658",
+          "yoy_pct": null,
+          "yoy_abs": null,
+          "yoy_status": "not_presented"
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "中國信託銀行",
+          "monthly_profit": 6929,
+          "cumulative_profit": 49525,
+          "monthly_eps": null,
+          "cumulative_eps": 2.65,
+          "cumulative_profit_yoy_pct": 17.8,
+          "cumulative_profit_yoy_abs": 7468.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "台灣人壽",
+          "monthly_profit": 1292,
+          "cumulative_profit": 14928,
+          "monthly_eps": null,
+          "cumulative_eps": 2.4,
+          "cumulative_profit_yoy_pct": -15.9,
+          "cumulative_profit_yoy_abs": -2812.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+          "fvoci_not_found_count": 1
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_checked_at": "2026-10-14T13:43:06.191121"
     },
     {
       "code": "2892",
@@ -443,11 +725,104 @@
     {
       "code": "5880",
       "name": "合庫金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "補充說明本公司115年5月25日公告發行無擔保主順位普通公司債"
-      ]
+      "announcement_date": "115/10/14",
+      "announcement_title": "公告本公司暨主要子公司115年9月份自結合併盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=5880&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "合庫金控",
+        "monthly_profit": 1924,
+        "cumulative_profit": 19608,
+        "monthly_eps": null,
+        "cumulative_eps": 1.22,
+        "cumulative_profit_yoy_pct": 21.1,
+        "cumulative_profit_yoy_abs": 3417.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+      },
+      "subsidiaries": [
+        {
+          "name": "合庫銀行",
+          "monthly_profit": 1777,
+          "cumulative_profit": 17984,
+          "monthly_eps": null,
+          "cumulative_eps": 1.27,
+          "cumulative_profit_yoy_pct": 12.1,
+          "cumulative_profit_yoy_abs": 1939.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "合庫資產",
+          "monthly_profit": 31,
+          "cumulative_profit": 304,
+          "monthly_eps": null,
+          "cumulative_eps": 0.97,
+          "cumulative_profit_yoy_pct": 5.2,
+          "cumulative_profit_yoy_abs": 15.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "合庫票券",
+          "monthly_profit": 31,
+          "cumulative_profit": 427,
+          "monthly_eps": null,
+          "cumulative_eps": 0.88,
+          "cumulative_profit_yoy_pct": 57.0,
+          "cumulative_profit_yoy_abs": 155.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "合庫證券",
+          "monthly_profit": 123,
+          "cumulative_profit": 1722,
+          "monthly_eps": null,
+          "cumulative_eps": 3.31,
+          "cumulative_profit_yoy_pct": 856.7,
+          "cumulative_profit_yoy_abs": 1542.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "合庫人壽",
+          "monthly_profit": 85,
+          "cumulative_profit": 1295,
+          "monthly_eps": null,
+          "cumulative_eps": 1.88,
+          "cumulative_profit_yoy_pct": 1750.0,
+          "cumulative_profit_yoy_abs": 1225.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        {
+          "name": "合庫投信",
+          "monthly_profit": 2,
+          "cumulative_profit": 8,
+          "monthly_eps": null,
+          "cumulative_eps": 0.24,
+          "cumulative_profit_yoy_pct": -20.0,
+          "cumulative_profit_yoy_abs": -2.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_checked_at": "2026-10-14T13:43:51.932273",
+      "news_summary": "**重點**\n\n合庫金（5880）2026年9月合併稅後淨利為19.24億元，累計至9月合併稅後淨利為202.49億元，較去年同期成長26.8%，續創歷年同期新高紀錄。\n前三季累計每股稅後純益（EPS）為1.22元。\n獲利動能主要來自銀行核心業務穩健成長、台股交投熱絡帶動證券子公司獲利大幅躍升，以及人壽子公司獲利成長動能回升，整體集團呈現多元驅動格局。\n\n**子公司明細**\n- 合庫銀行：\n前三季累計稅後淨利179.84億元，年增12.07%。\n\n- 合庫證券：\n累計稅後淨利17.22億元，較去年同期大增15.42億元。\n受惠台股交投熱絡，為本期獲利增長最主要貢獻來源。\n- 合庫人壽：\n累計至9月稅後淨利為12.95億元，較去年同期增加5.73億元，獲利成長動能佳。\n\n- 合庫票券、合庫資產管理及其他子公司：\n累計稅後淨利皆較去年同期增加，獲利持續穩健成長。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9814710",
+          "title": "合庫金獲利／前九月突破200億元續創新高、年增26.8% 銀保證同創新高"
+        },
+        {
+          "url": "https://money.udn.com/money/story/5613/9814710",
+          "title": "合庫金獲利／前九月突破200億元續創新高、年增26.8% 銀保證同創新高"
+        }
+      ],
+      "news_generated_at": "2026-10-14T13:44:04.618723"
     }
   ],
   "market_summary": {
