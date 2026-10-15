@@ -679,8 +679,8 @@
         "cumulative_profit": 64120,
         "monthly_eps": null,
         "cumulative_eps": 2.47,
-        "cumulative_profit_yoy_pct": 146.5,
-        "cumulative_profit_yoy_abs": 38110.0,
+        "cumulative_profit_yoy_pct": 183.6,
+        "cumulative_profit_yoy_abs": 41510.0,
         "cumulative_profit_yoy_status": "normal",
         "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
       },
@@ -717,17 +717,7 @@
           "cumulative_profit_yoy_abs": 31300.0,
           "cumulative_profit_yoy_status": "normal",
           "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份",
-          "fvoci_adjusted": {
-            "cumulative_profit": 93620,
-            "delta_vs_original": 61400,
-            "source_url": "https://udn.com/news/story/7239/9815175",
-            "source_quote": "另前九月FVOCI股票處分利益546.9億元，加計稅後純益後，對保留盈餘貢獻936.2億元，創歷年同期新高。（新光人壽）",
-            "original_value_text": "936.2億元",
-            "generated_at": "2026-10-15T00:07:32.783297",
-            "yoy_pct": null,
-            "yoy_abs": null,
-            "yoy_status": "not_presented"
-          }
+          "fvoci_not_found_count": 3
         },
         {
           "name": "台新證券",

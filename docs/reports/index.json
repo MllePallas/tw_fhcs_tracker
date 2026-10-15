@@ -1,6 +1,21 @@
 {
-  "_readme": "報告期間使用西元 YYYY/MM。編輯月份 .md 後，排程自動保留人工修改；meta 標示資料是否已更新。",
+  "_readme": "報告期間使用西元 YYYY/MM。只有提交核准的月份 Markdown 後才發布；meta 標示資料是否已更新。",
   "reports": [
+    {
+      "period": "2026/09",
+      "manual": true,
+      "data_hash": "78b43adcb13183c421fc098cb61fcdd4b82dfc03566fd055da915b0a1b5dfbe9",
+      "data_changed": false,
+      "headline": "13家金控單月獲利月減38.5%；富邦人壽回落是最大單一減項，但券商與銀行亦普遍走弱。",
+      "generated_at": "2026-10-15T09:47:30.785487+00:00",
+      "manual_output_hash": "c8adc00cebc34151d56b30c24012edddf0fee76ff7034a7f800f0d5f996f0b1a",
+      "data_hash_schema": 2,
+      "file": "2026-09.md",
+      "html_file": "2026-09.html",
+      "pack_file": "2026-09.pack.json",
+      "title": "2026/09 金控月獲利分析報告",
+      "source": "人工審閱後發布"
+    },
     {
       "period": "2026/08",
       "input_hash": "ffbde6c583cc76cc213b6f999a94ffc111f3cf7c80241d8d6e7f11526cccd6f6",

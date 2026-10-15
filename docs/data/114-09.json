@@ -377,12 +377,15 @@
       "announcement_date": "114/10/13",
       "announcement_title": "公告本公司暨主要子公司114年9月份合併自結業績資料",
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=4&TYPEK=all",
+      "correction_date": "114/11/27",
+      "correction_source_url": "https://www.moneydj.com/kmdj/news/newsviewer.aspx?a=61b71733-b9ea-43aa-96c2-56f590ef42ac&c=MB06",
+      "correction_note": "2025/11/27 更正 2025/09 台新新光金控單月、累計獲利與累計 EPS；歸母數採更正公告。",
       "holding_company": {
         "name": "台新新光金控",
-        "monthly_profit": 7500,
-        "cumulative_profit": 26010,
+        "monthly_profit": 4090,
+        "cumulative_profit": 22610,
         "monthly_eps": null,
-        "cumulative_eps": 1.51
+        "cumulative_eps": 1.3
       },
       "subsidiaries": [
         {
