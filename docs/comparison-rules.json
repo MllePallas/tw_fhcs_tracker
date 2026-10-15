@@ -13,14 +13,18 @@
     "2890": {
       "month": "114/10",
       "partial_month": false,
-      "label": "2025/10/01 京城銀行納入永豐金控",
+      "label": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列",
       "source": "https://www.sinopac.com/News/20220503183151553480/20251001165238484217.html",
       "unchanged_subsidiaries": ["永豐銀行", "永豐金租賃"]
     }
   },
   "subsidiary_events": [
-    {"code": "2887", "names": ["台新證券", "元富證券"], "month": "115/04", "partial_month": true, "label": "2026/04 元富證券併入台新證券"},
+    {"code": "2887", "names": ["台新證券", "元富證券"], "month": "115/04", "partial_month": true, "label": "2026/04/06 元富證券併入台新證券；4 月為過渡月份", "source": "https://www.twse.com.tw/staticFiles/product/publication/0005000109.pdf"},
+    {"code": "2890", "names": ["永豐銀行", "京城銀行"], "month": "116/01", "partial_month": false, "label": "永豐銀行與京城銀行預定於 2027/01/01 合併；銀行層級跨期基礎不同", "source": "https://bank.sinopac.com/sinopacBT/about/news-center/news/content/2026101402.html"},
     {"code": "2887", "names": ["新光人壽", "台新人壽"], "month": "115/01", "partial_month": false, "label": "2026/01 壽險子公司整併"}
+  ],
+  "retired_subsidiaries": [
+    {"code": "2887", "name": "元富證券", "last_report_month": "115/04", "successor": "台新證券", "source": "https://www.twse.com.tw/staticFiles/product/publication/0005000109.pdf"}
   ],
   "accounting": {
     "month": "115/01",

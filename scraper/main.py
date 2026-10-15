@@ -521,6 +521,10 @@ def main():
         "companies": final_companies,
     }
 
+    # 先排除已併入他家、之後不再獨立公告的子公司占位列；歷史公告保留。
+    from corporate_events import normalize_subsidiaries
+    normalize_subsidiaries(output, target_month)
+
     # 計算 YoY 變化（讀去年同期歸檔）
     compute_yoy(output, target_month)
 

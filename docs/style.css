@@ -367,6 +367,19 @@ main {
   margin-bottom: 6px;
 }
 
+.corporate-event-note {
+  margin: 0 0 12px;
+  padding: 10px 14px;
+  border-left: 3px solid var(--primary);
+  background: var(--primary-bg);
+  color: var(--text-2);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.corporate-event-note a { color: var(--primary); font-weight: 600; }
+body.pm-trend #corporate-event-note,
+body.pm-period #corporate-event-note { display: none !important; }
+
 /* ── Table ────────────────────────────────────────────── */
 .table-container {
   background: var(--surface);

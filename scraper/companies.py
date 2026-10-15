@@ -64,7 +64,7 @@ FINANCIAL_HOLDINGS = [
         "name": "台新新光金",
         "full_name": "台新新光金控",
         "short": "tsnsfhc",
-        "subsidiaries_hint": ["台新銀行", "新光銀行", "新光人壽", "台新證券", "元富證券", "台新投信"],
+        "subsidiaries_hint": ["台新銀行", "新光銀行", "新光人壽", "台新證券", "台新投信"],
     },
     {
         "code": "2889",
@@ -78,7 +78,7 @@ FINANCIAL_HOLDINGS = [
         "name": "永豐金",
         "full_name": "永豐金控",
         "short": "sinopac",
-        "subsidiaries_hint": ["永豐銀行", "永豐金證券", "永豐產險"],
+        "subsidiaries_hint": ["永豐銀行", "京城銀行", "永豐金證券", "永豐產險"],
     },
     {
         "code": "2891",

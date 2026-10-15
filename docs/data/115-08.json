@@ -632,15 +632,6 @@
           "cumulative_eps": 2.82,
           "cumulative_profit_yoy_pct": 451.6,
           "cumulative_profit_yoy_abs": 5780
-        },
-        {
-          "name": "元富證券",
-          "monthly_profit": null,
-          "cumulative_profit": 1570,
-          "monthly_eps": null,
-          "cumulative_eps": 0.98,
-          "cumulative_profit_yoy_pct": 60.2,
-          "cumulative_profit_yoy_abs": 590
         }
       ],
       "unit": "百萬元",

@@ -171,8 +171,8 @@ function showMergerNote(code, period) {
 // 金控層級併購／重大異動備註（前端靜態，不依賴爬蟲資料，重爬不會遺失）。
 // 顯示於詳情面板底部。key = 金控代號。
 const COMPANY_NOTES = {
-  "2887": "元富證券於 2026/04/06 併入台新證券，台新證券數字自此含元富證券。",
-  "2890": "京城銀行自 2025/10 起併入永豐金月自結獲利公告；2026 年累計與 2025 年累計合併範圍不同；YoY 仍依各期公告數計算。",
+  "2887": "元富證券於 2026/04/06 併入台新證券；2026/04 為過渡月份，2026/05 起不再單列元富證券獲利，台新證券為合併後數字。",
+  "2890": "京城銀行自 2025/10/01 起為永豐金控 100% 持股子公司，與永豐銀行分列獲利；兩銀行預定 2027/01/01 合併，由永豐銀行存續。永豐金累計 YoY 仍依各期公告數計算，並留意 2025/10 起合併範圍變動。",
 };
 
 // YoY 排序鍵：虧轉盈 > 正成長 > 負成長 > 盈轉虧；同 tier 內依 pct 排序
@@ -196,7 +196,7 @@ function getIndustryRows(industry, src) {
   const rows = [];
   for (const c of source.companies || []) {
     if (c.error) continue;
-    for (const s of c.subsidiaries || []) {
+    for (const s of A.activeSubsidiaries(c.subsidiaries, comparisonRules, c.code, source.report_period)) {
       if (classifyIndustry(s.name) !== industry) continue;
       rows.push({
         parent_name: c.name,
@@ -469,6 +469,23 @@ function renderTable() {
   state.displayUnit = document.getElementById('unit-select').value;
   state.sortMode    = document.getElementById('sort-select').value;
 
+  const eventNote = document.getElementById('corporate-event-note');
+  if (eventNote) {
+    const period = state.data.report_period;
+    let note = '';
+    if (state.viewMode === 'securities' && period >= '115/04') {
+      note = period === '115/04'
+        ? '元富證券於 2026/04/06 併入台新證券；2026/04 為合併過渡月，公告仍有分列數字。'
+        : '元富證券於 2026/04/06 併入台新證券；2026/05 起不再單列元富證券，台新證券顯示合併後獲利。';
+      note += ' <a href="https://www.twse.com.tw/staticFiles/product/publication/0005000109.pdf" target="_blank" rel="noopener noreferrer">證交所公告 ↗</a>';
+    } else if (state.viewMode === 'bank' && period >= '114/10') {
+      note = '京城銀行自 2025/10/01 起為永豐金控全資子公司，目前與永豐銀行分列獲利；兩銀行預定 2027/01/01 合併，由永豐銀行存續。';
+      note += ' <a href="https://bank.sinopac.com/sinopacBT/about/news-center/news/content/2026101402.html" target="_blank" rel="noopener noreferrer">永豐銀行公告 ↗</a>';
+    }
+    eventNote.innerHTML = note;
+    eventNote.classList.toggle('hidden', !note);
+  }
+
   const hint = document.getElementById('table-unit-hint');
   if (hint) {
     const prevPer = state.prevMonth?.report_period;
@@ -563,7 +580,7 @@ function renderIndustryTable(industry) {
       yoyDisp = '<span class="yoy-note">2025/07 正式合併</span>';
     }
     if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) {
-      yoyDisp = '<span class="yoy-note">2025/10 併入獲利公告</span>';
+      yoyDisp = '<span class="yoy-note">2025/10 納入金控、銀行未合併</span>';
     }
 
     const main = `<tr>
@@ -660,7 +677,7 @@ function renderRow(c) {
   }
   // 永豐金的累計合併範圍不同時保留醒目提示。
   if (yi.disp !== '—' && c.code === '2890' && showMergerNote('2890', period)) {
-    yoyDisp += '<br><span class="yoy-note">京城銀 2025/10 併入獲利公告</span>';
+    yoyDisp += '<br><span class="yoy-note">京城銀 2025/10 納入金控</span>';
   }
 
   const epsC = h.cumulative_eps;
@@ -754,7 +771,7 @@ function renderHoldingCard(c) {
     yoyDisp = '合併前';
   }
   if (yi.disp !== '—' && c.code === '2890' && showMergerNote('2890', period)) {
-    yoyDisp += '<span class="yoy-note" style="display:block">京城銀 2025/10 併入</span>';
+    yoyDisp += '<span class="yoy-note" style="display:block">京城銀 2025/10 納入金控</span>';
   }
 
   const epsC = h.cumulative_eps;
@@ -840,7 +857,7 @@ function renderIndustryCards(industry) {
       yoyDisp = '合併前';
     }
     if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) {
-      yoyDisp = '<span class="yoy-note">2025/10 併入</span>';
+      yoyDisp = '<span class="yoy-note">2025/10 納入金控</span>';
     }
 
     // 壽險專屬：僅在有揭露 FVOCI 影響數時顯示（淡藍色弱化，不干擾主排序）
@@ -1015,7 +1032,7 @@ function showDetail(code) {
 
   title.textContent = `${c.name} (${c.code}) — 詳細資訊`;
 
-  const subs = c.subsidiaries || [];
+  const subs = A.activeSubsidiaries(c.subsidiaries, comparisonRules, c.code, state.data.report_period);
   const unit = state.displayUnit;
   const h = c.holding_company || {};
   const hm  = convertUnit(h.monthly_profit,  c.unit, unit);
@@ -1490,7 +1507,7 @@ function snapBuildModel() {
         yoyDisp = ''; note = '2025/07 正式合併';
       }
       if (yi.disp !== '—' && c.code === '2890' && showMergerNote('2890', period)) {
-        note = '京城銀 2025/10 併入獲利公告';
+        note = '京城銀 2025/10 納入金控';
       }
       rows.push({
         type: 'main',
@@ -1533,7 +1550,7 @@ function snapBuildModel() {
                          r.cumulative_profit_yoy_status, r.unit, unit);
     let note = null, yoyDisp = yi.disp;
     if (yi.disp === '—' && showMergerNote(r.parent_code, period)) { yoyDisp = ''; note = '2025/07 正式合併'; }
-    if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) { yoyDisp = ''; note = '2025/10 併入獲利公告'; }
+    if (yi.disp === '—' && r.name.includes('京城') && showMergerNote('2890', period)) { yoyDisp = ''; note = '2025/10 納入金控'; }
     const mv = convertUnit(r.monthly_profit, r.unit, unit);
     const cv = convertUnit(r.cumulative_profit, r.unit, unit);
     rows.push({
@@ -1996,7 +2013,7 @@ function getOtherSubsidiaryRows() {
   const rows = [];
   for (const c of state.data.companies || []) {
     if (c.error) continue;
-    for (const s of c.subsidiaries || []) {
+    for (const s of A.activeSubsidiaries(c.subsidiaries, comparisonRules, c.code, state.data.report_period)) {
       if (classifyIndustry(s.name) != null) continue;
       rows.push({
         parent_code: c.code,
@@ -2088,7 +2105,7 @@ function buildIndustrySheet(industry, d, unit) {
       yoyCell = xText('2025/07 正式合併', XS.noteCell);
     }
     if (r.cumulative_profit_yoy_pct == null && r.name.includes('京城') && showMergerNote('2890', period)) {
-      yoyCell = xText('2025/10 併入獲利公告', XS.noteCell);
+      yoyCell = xText('2025/10 納入金控', XS.noteCell);
     }
     m.push([xText(r.parent_name, XS.code), xText(r.name, XS.name), xNum(mo), xNum(cu), yoyCell]);
 
@@ -2318,16 +2335,19 @@ function momAttributionHtml(c) {
   const hMom = momInfo(curH, prevH, su, unit);
 
   // 子公司增減：本月清單為主，上月以名稱（含更名別名）對應
-  const prevSubs = new Map((pc.subsidiaries || []).map(s => [s.name, s]));
+  const prevSubs = new Map(A.activeSubsidiaries(pc.subsidiaries, comparisonRules, c.code, period).map(s => [s.name, s]));
   const usedPrev = new Set();
   const rows = [];
-  for (const s of (c.subsidiaries || [])) {
+  for (const s of A.activeSubsidiaries(c.subsidiaries, comparisonRules, c.code, period)) {
     const pName = prevSubs.has(s.name) ? s.name : (SUB_PREV_ALIAS[s.name] && prevSubs.has(SUB_PREV_ALIAS[s.name]) ? SUB_PREV_ALIAS[s.name] : null);
     const p = pName ? prevSubs.get(pName) : null;
     if (pName) usedPrev.add(pName);
     if (s.monthly_profit == null) continue;
-    if (p && p.monthly_profit != null) {
+    const subReason = A.reason(comparisonRules, c.code, [period], [prevPer], s.name);
+    if (p && p.monthly_profit != null && !subReason) {
       rows.push({ name: s.name, prev: p.monthly_profit, cur: s.monthly_profit, delta: s.monthly_profit - p.monthly_profit, tag: null });
+    } else if (subReason) {
+      rows.push({ name: s.name, prev: p?.monthly_profit ?? null, cur: s.monthly_profit, delta: null, tag: subReason });
     } else {
       rows.push({ name: s.name, prev: null, cur: s.monthly_profit, delta: null, tag: '上月未列，不計增減' });
     }
@@ -2472,9 +2492,9 @@ function periodAggCompany(months, code) {
   const endCum = toM(c.holding_company.cumulative_profit, c.unit);
   const baseCum = baseC ? toM(baseC.holding_company.cumulative_profit, baseC.unit) : 0;
 
-  const baseSubs = new Map(((baseC && baseC.subsidiaries) || []).map(s => [s.name, s]));
+  const baseSubs = new Map(A.activeSubsidiaries(baseC?.subsidiaries, comparisonRules, code, prevMonthPeriod(months[0])).map(s => [s.name, s]));
   const subs = [];
-  for (const s of (c.subsidiaries || [])) {
+  for (const s of A.activeSubsidiaries(c.subsidiaries, comparisonRules, code, months.at(-1))) {
     if (s.cumulative_profit == null) continue;
     const bName = baseSubs.has(s.name) ? s.name
       : (SUB_PREV_ALIAS[s.name] && baseSubs.has(SUB_PREV_ALIAS[s.name]) ? SUB_PREV_ALIAS[s.name] : null);
@@ -2713,7 +2733,7 @@ function renderPeriodIndustryTable(opt, industry) {
     const yi = periodYoyDisp(r.yoy, '百萬元', unit);
     let yoyDisp = yi.disp;
     if (yi.disp === '—' && r.name.includes('京城')) {
-      yoyDisp = '<span class="yoy-note">2025/10 併入獲利公告</span>';
+      yoyDisp = '<span class="yoy-note">2025/10 納入金控</span>';
     }
     return `<tr>
       <td class="center rank-cell${r.rank === 1 ? ' rank-top' : ''}">${r.rank ?? '—'}</td>

@@ -87,14 +87,20 @@ test('subsidiary month changes reconcile only when every disclosed row is compar
   near(kgi.residual,-54);
 
   const taishin=A.monthlyAttribution(history,rules,'115/08','2887');
-  assert.equal(taishin.status,'partial');
-  assert.equal(taishin.residual,null);
-  assert.equal(taishin.rows.find(r=>r.name==='元富證券').delta,null);
+  assert.equal(taishin.status,'complete');
+  assert.ok(Number.isFinite(taishin.residual));
+  assert.equal(taishin.rows.some(r=>r.name==='元富證券'),false);
   near(taishin.rows.find(r=>r.name==='新光人壽').delta,-3690);
+  const transition=A.monthlyAttribution(history,rules,'115/04','2887');
+  assert.equal(transition.status,'partial');
+  assert.equal(transition.rows.find(r=>r.name==='台新證券').delta,null);
+  assert.ok(history['115/04'].companies.find(c=>c.code==='2887').subsidiaries.some(s=>s.name==='元富證券'));
 });
 
 test('attribution respects missing filings, aliases, changing units and merger boundaries', () => {
-  assert.equal(A.monthlyAttribution(history,rules,'115/09','2881').status,'missing');
+  const missing=structuredClone(history);
+  missing['115/09'].companies=missing['115/09'].companies.filter(c=>c.code!=='2881');
+  assert.equal(A.monthlyAttribution(missing,rules,'115/09','2881').status,'missing');
   assert.equal(A.monthlyAttribution(history,rules,'114/07','2887').status,'incomparable');
   const h={
     '115/07':{report_period:'115/07',companies:[{code:'2884',unit:'百萬元',holding_company:{monthly_profit:100},subsidiaries:[{name:'保德信投信',monthly_profit:50}]}]},
@@ -226,13 +232,24 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   assert.doesNotMatch(html+element('trend-detail').innerHTML,/均值|平均|各月原始|本月增減集中|近 3 月 vs/);
 });
 
-test('partial subsidiary detail names the gap without presenting a residual', () => {
+test('merged broker no longer appears as a missing subsidiary in later months', () => {
   const {ctx,element}=context();
   vm.runInContext("renderTrendDetail('2887')",ctx);
   const detail=element('trend-detail').innerHTML;
-  assert.match(detail,/元富證券.*月獲利未揭露/);
-  assert.match(detail,/不計算母公司及其他差額/);
-  assert.doesNotMatch(detail,/母公司及其他（差額）/);
+  assert.doesNotMatch(detail,/元富證券.*月獲利未揭露/);
+  assert.match(detail,/母公司及其他（差額）/);
+});
+
+test('monthly sector views retain merger-month history and separate SinoPac banks', () => {
+  const {ctx,element}=context();
+  ctx.getComputedStyle=()=>({display:'none'});
+  assert.equal(vm.runInContext("getIndustryRows('securities').some(r=>r.name==='元富證券')",ctx),false);
+  assert.equal(vm.runInContext("getIndustryRows('securities',monthCache['115/04']).some(r=>r.name==='元富證券')",ctx),true);
+  assert.equal(vm.runInContext("getIndustryRows('bank').filter(r=>r.parent_code==='2890').length",ctx),2);
+  vm.runInContext("state.viewMode='bank';renderTable()",ctx);
+  assert.match(element('corporate-event-note').innerHTML,/2025\/10\/01.*2027\/01\/01/);
+  vm.runInContext("state.viewMode='securities';renderTable()",ctx);
+  assert.match(element('corporate-event-note').innerHTML,/2026\/05 起不再單列/);
 });
 
 test('trend sorting and highlights use monthly amounts, including profit/loss turns', () => {

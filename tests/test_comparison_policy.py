@@ -7,6 +7,7 @@ import unittest
 ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT / 'scraper'))
 from comparison_policy import apply_yoy_policy, metrics, months, reason, reported_yoy
+from corporate_events import normalize_subsidiaries
 
 
 class ComparisonPolicyTest(unittest.TestCase):
@@ -27,6 +28,24 @@ class ComparisonPolicyTest(unittest.TestCase):
         self.assertTrue(reason('2887', months('115/08'), months('114/08')))
         self.assertTrue(reason('2890', months('115/12'), months('114/12')))
         self.assertFalse(reason('2890', months('116/08'), months('115/08')))
+        self.assertFalse(reason('2890', ['115/09'], ['115/08'], '永豐銀行'))
+        self.assertIn('2027/01/01', reason('2890', ['116/01'], ['115/12'], '永豐銀行'))
+
+    def test_retired_broker_and_independent_banks(self):
+        april = json.loads((ROOT / 'docs/data/115-04.json').read_text(encoding='utf-8'))
+        normalize_subsidiaries(april, '115/04')
+        self.assertTrue(any(s['name'] == '元富證券' for c in april['companies'] if c['code'] == '2887' for s in c['subsidiaries']))
+        may = copy.deepcopy(april)
+        for company in may['companies']:
+            if company['code'] == '2887':
+                next(s for s in company['subsidiaries'] if s['name'] == '元富證券')['monthly_profit'] = None
+        normalize_subsidiaries(may, '115/05')
+        self.assertFalse(any(s['name'] == '元富證券' for c in may['companies'] if c['code'] == '2887' for s in c['subsidiaries']))
+        with self.assertRaisesRegex(ValueError, 'post-merger monthly profit'):
+            normalize_subsidiaries(copy.deepcopy(april), '115/05')
+        september = json.loads((ROOT / 'docs/data/115-09.json').read_text(encoding='utf-8'))
+        banks = {s['name'] for c in september['companies'] if c['code'] == '2890' for s in c['subsidiaries']}
+        self.assertTrue({'永豐銀行', '京城銀行'} <= banks)
 
     def test_preserve_announcement_amounts_and_clear_stale_yoy(self):
         data = json.loads((ROOT / 'docs/data/115-08.json').read_text(encoding='utf-8'))

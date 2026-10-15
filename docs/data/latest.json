@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/09",
-  "last_updated": "2026-10-15T00:04:27.219182",
-  "success_count": 10,
-  "fail_count": 3,
+  "last_updated": "2026-10-15T17:22:09.226184",
+  "success_count": 13,
+  "fail_count": 0,
   "companies": [
     {
       "code": "2880",
@@ -83,24 +83,230 @@
     {
       "code": "2881",
       "name": "富邦金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "富邦金控代子公司富邦人壽公告取得「富邦產物保險股份有限公司」使用權資產",
-        "代富邦現代人壽公告取得MIRAE ASSET GLOBAL INFRASTRUCTURE\r\nDEBT PRIVATELY PLACED INVESTMENT TRUST 1-4"
-      ]
+      "announcement_date": "115/10/15",
+      "announcement_title": "公告本公司暨主要子公司115年9月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": 6960,
+        "cumulative_profit": 127220,
+        "monthly_eps": null,
+        "cumulative_eps": 8.8,
+        "cumulative_profit_yoy_pct": 39.9,
+        "cumulative_profit_yoy_abs": 36300.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+        "fvoci_adjusted": {
+          "cumulative_profit": 249960.0,
+          "monthly_profit": 16290.0,
+          "delta_vs_original": 122740.0,
+          "label": "對保留盈餘影響數",
+          "cumulative_eps": 17.56,
+          "source_url": "https://www.ctee.com.tw/news/20261015701602-430304",
+          "source_quote": "富邦金9月稅後純益69.6億元，FVOCI股票處分損益93.2億元，本期淨利加計FVOCI後對保留盈餘影響數162.9億元；累計前九月對保留盈餘影響數2,499.6億元、每股17.56元",
+          "original_value_text": "單月162.9億元、累計2,499.6億元",
+          "manual": true,
+          "generated_at": "2026-10-15T17:22:43.854291",
+          "yoy_pct": null,
+          "yoy_abs": null,
+          "yoy_status": "not_presented"
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 3510,
+          "cumulative_profit": 37200,
+          "monthly_eps": null,
+          "cumulative_eps": 2.16,
+          "cumulative_profit_yoy_pct": 27.5,
+          "cumulative_profit_yoy_abs": 8030.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 2390,
+          "cumulative_profit": 17900,
+          "monthly_eps": null,
+          "cumulative_eps": 11.01,
+          "cumulative_profit_yoy_pct": 134.6,
+          "cumulative_profit_yoy_abs": 10270.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 820,
+          "cumulative_profit": 7960,
+          "monthly_eps": null,
+          "cumulative_eps": 26.53,
+          "cumulative_profit_yoy_pct": 56.1,
+          "cumulative_profit_yoy_abs": 2860.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": 670,
+          "cumulative_profit": 65850,
+          "monthly_eps": null,
+          "cumulative_eps": 5.56,
+          "cumulative_profit_yoy_pct": 37.6,
+          "cumulative_profit_yoy_abs": 18000.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+          "fvoci_adjusted": {
+            "cumulative_profit": 182880.0,
+            "monthly_profit": 9630.0,
+            "delta_vs_original": 117030.0,
+            "source_url": "https://www.ctee.com.tw/news/20261015701602-430304",
+            "source_quote": "富邦人壽9月對保留盈餘影響數96.3億元，累計前九月對保留盈餘影響數1,828.8億元，續創歷年新高",
+            "original_value_text": "單月96.3億元、累計1,828.8億元",
+            "manual": true,
+            "generated_at": "2026-10-15T17:22:44.246524",
+            "yoy_pct": null,
+            "yoy_abs": null,
+            "yoy_status": "not_presented"
+          }
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 150,
+          "cumulative_profit": 1380,
+          "monthly_eps": null,
+          "cumulative_eps": 5.1,
+          "cumulative_profit_yoy_pct": null,
+          "cumulative_profit_yoy_abs": null,
+          "cumulative_profit_yoy_status": "missing",
+          "cumulative_profit_yoy_reason": "比較月份資料不足"
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n富邦金9月稅後純益69.6億元，累計前9月1,272.2億元、EPS 8.80元，獲利與EPS雙創同期次高。9月FVOCI股票處分損益93.2億元，加計後單月對保留盈餘影響數162.9億元；累計前9月FVOCI股票處分損益1,227.4億元，對保留盈餘影響數2,499.6億元、每股17.56元。\n\n**子公司明細**\n- 富邦人壽：9月稅後淨利6.7億元、累計658.5億元；9月FVOCI處分損益89.6億元、累計1,170.3億元，單月與累計對保留盈餘影響數分別為96.3億元、1,828.8億元，累計續創歷年新高。\n- 台北富邦銀行：9月35.1億元，累計372億元、年增28%；累計營收成長22%，利息淨收益成長29%、手續費成長37%，存放款分別成長17%、18%。\n- 富邦證券：9月23.9億元，累計179.0億元、年增135%，經紀及財管收入成長111%、金融資產部位收入成長226%。\n- 富邦產險：9月8.2億元，累計79.6億元；9月簽單保費60.5億元、年增20%（火險成長429%），累計簽單保費577.7億元、年增9%。\n- 富邦投信：9月1.5億元、累計13.8億元（分別年增26%、67%），9月資產管理規模1.6兆元、年增59%。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20261015701602-430304",
+          "title": "富邦金前三季獲利、EPS雙創同期次高 子公司營運續創佳績 | 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-10-15T17:23:05.022255",
+      "news_manual": true
     },
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司國泰人壽公告董事會決議，擬經主管機關同意後，\r\n贖回國泰人壽保險股份有限公司105年第一期無到期日\r\n非累積次順位債券",
-        "代子公司國泰人壽公告董事會代行股東會\r\n決議私募發行普通股",
-        "本公司擬全數認購子公司國泰人壽私募現金增資發行之新股",
-        "本公司代子公司國泰人壽公告取得\r\nCoatue Growth VI Offshore Feeder Fund LP"
-      ]
+      "announcement_date": "115/10/15",
+      "announcement_title": "公告本公司暨主要子公司115年09月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 6720,
+        "cumulative_profit": 105360,
+        "monthly_eps": null,
+        "cumulative_eps": 6.94,
+        "cumulative_profit_yoy_pct": 40.9,
+        "cumulative_profit_yoy_abs": 30580.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+        "fvoci_adjusted": {
+          "cumulative_profit": 223700.0,
+          "delta_vs_original": 118340.0,
+          "label": "對保留盈餘影響數",
+          "source_url": "https://www.ctee.com.tw/news/20261015701669-430304",
+          "source_quote": "國泰金加計FVOCI股票處分損益後，累計前九月對保留盈餘影響數達2,237億元，每股逾15元，續創歷史新高",
+          "original_value_text": "累計前九月2,237億元",
+          "manual": true,
+          "generated_at": "2026-10-15T17:22:44.624452",
+          "yoy_pct": null,
+          "yoy_abs": null,
+          "yoy_status": "not_presented"
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 1760,
+          "cumulative_profit": 60170,
+          "monthly_eps": null,
+          "cumulative_eps": 9.46,
+          "cumulative_profit_yoy_pct": 74.9,
+          "cumulative_profit_yoy_abs": 25770.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+          "fvoci_adjusted": {
+            "value_type": "lower_bound",
+            "cumulative_profit": 170000.0,
+            "display_prefix": "突破",
+            "source_url": "https://www.ctee.com.tw/news/20261015701669-430304",
+            "source_quote": "國泰人壽加計FVOCI股票處分損益，累計前九月對保留盈餘影響數已突破1,700億元，續創歷史新高",
+            "original_value_text": "突破1,700億元",
+            "manual": true,
+            "generated_at": "2026-10-15T17:22:44.965507",
+            "yoy_pct": null,
+            "yoy_abs": null,
+            "yoy_status": "not_presented"
+          }
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4170,
+          "cumulative_profit": 39170,
+          "monthly_eps": null,
+          "cumulative_eps": 2.86,
+          "cumulative_profit_yoy_pct": 12.9,
+          "cumulative_profit_yoy_abs": 4480.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 400,
+          "cumulative_profit": 3590,
+          "monthly_eps": null,
+          "cumulative_eps": 17.93,
+          "cumulative_profit_yoy_pct": 28.2,
+          "cumulative_profit_yoy_abs": 790.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 670,
+          "cumulative_profit": 6960,
+          "monthly_eps": null,
+          "cumulative_eps": 8.71,
+          "cumulative_profit_yoy_pct": 126.7,
+          "cumulative_profit_yoy_abs": 3890.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 390,
+          "cumulative_profit": 2890,
+          "monthly_eps": null,
+          "cumulative_eps": 19.26,
+          "cumulative_profit_yoy_pct": 42.4,
+          "cumulative_profit_yoy_abs": 860.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n國泰金前9月累計稅後純益1,053.6億元、EPS 6.94元。加計FVOCI股票處分損益後，累計前9月對保留盈餘影響數達2,237億元、每股逾15元，續創歷史新高。\n\n**子公司明細**\n- 國泰人壽：累計稅後淨利601.7億元；年迄今累計稅後FVOCI股票處分利得逾1,100億元，加計後累計前9月對保留盈餘影響數突破1,700億元，續創歷史新高。\n- 國泰世華銀行：累計稅後淨利391.7億元、年增13%，淨利息收入維持雙位數成長。\n- 國泰證券：累計稅後淨利69.6億元、年增127%，再創歷史新高。\n- 國泰產險：累計稅後淨利35.9億元，續創同期新高；加計FVOCI股票處分損益18.1億元，累計前9月對保留盈餘影響數54.0億元。\n- 國泰投信：累計稅後淨利28.9億元、年增42%，管理資產規模3.6兆元、年增56%。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20261015701669-430304",
+          "title": "國泰金前九月稅後純益1,053.6億元 對保留盈餘影響數達2,237億元 | 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-10-15T17:23:05.179723",
+      "news_manual": true
     },
     {
       "code": "2883",
@@ -209,11 +415,89 @@
     {
       "code": "2884",
       "name": "玉山金",
-      "error": "no_match",
-      "error_msg": "115/09 月自結損益尚未公告",
-      "available_titles": [
-        "公告本公司取得三商美邦保險代理人股份有限公司100%\r\n股權案之股份買賣交割基準日"
-      ]
+      "announcement_date": "115/10/15",
+      "announcement_title": "公告本公司暨子公司115年9月自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "玉山金控",
+        "monthly_profit": 3806,
+        "cumulative_profit": 31846,
+        "monthly_eps": null,
+        "cumulative_eps": 1.95,
+        "cumulative_profit_yoy_pct": 21.5,
+        "cumulative_profit_yoy_abs": 5644.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": ""
+      },
+      "subsidiaries": [
+        {
+          "name": "玉山銀行",
+          "monthly_profit": 3104,
+          "cumulative_profit": 27951,
+          "monthly_eps": null,
+          "cumulative_eps": 1.91,
+          "cumulative_profit_yoy_pct": 10.8,
+          "cumulative_profit_yoy_abs": 2723.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "三商人壽",
+          "monthly_profit": 144,
+          "cumulative_profit": 144,
+          "monthly_eps": null,
+          "cumulative_eps": 0.02,
+          "cumulative_profit_yoy_pct": null,
+          "cumulative_profit_yoy_abs": null,
+          "cumulative_profit_yoy_status": "missing",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        {
+          "name": "玉山證券",
+          "monthly_profit": 373,
+          "cumulative_profit": 4043,
+          "monthly_eps": null,
+          "cumulative_eps": 7.32,
+          "cumulative_profit_yoy_pct": 128.0,
+          "cumulative_profit_yoy_abs": 2270.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "玉山創投",
+          "monthly_profit": 224,
+          "cumulative_profit": 1029,
+          "monthly_eps": null,
+          "cumulative_eps": 1.87,
+          "cumulative_profit_yoy_pct": 433.2,
+          "cumulative_profit_yoy_abs": 836.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "玉山投信",
+          "monthly_profit": 84,
+          "cumulative_profit": 451,
+          "monthly_eps": null,
+          "cumulative_eps": 15.02,
+          "cumulative_profit_yoy_pct": 246.9,
+          "cumulative_profit_yoy_abs": 321.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/09",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n玉山金完成併購三商美邦人壽後首份合併成績單：9月自結稅後純益38.1億元，前9月累計318.5億元、年增21.54%，累計EPS 1.95元創同期新高，總資產規模6.65兆元。\n\n**子公司明細**\n- 玉山銀行：9月稅後純益31億元，累計279.5億元、年增10.79%；總資產5.04兆元（個體4.91兆元）。\n- 玉山證券：9月3.73億元，累計40.43億元、年增128%。\n- 三商人壽：個體9月稅後純益19.11億元、前9月累計60.23億元、EPS 1.02元；前9月初年度保費（FYP）431億元、年增66.23%。併入金控合併損益者僅限併購後部分（自結公告列1.44億元）。\n- 玉山創投：累計10.29億元、EPS 1.87元；玉山投信：累計4.51億元、EPS 15.02元。",
+      "news_sources": [
+        {
+          "url": "https://news.cnyes.com/news/id/6631196",
+          "title": "玉山金併三商壽首張成績單揭曉 前9月賺318.5億元EPS達1.95元創高 | 鉅亨網"
+        }
+      ],
+      "news_generated_at": "2026-10-15T17:23:05.358254",
+      "news_manual": true
     },
     {
       "code": "2885",
@@ -455,17 +739,6 @@
           "cumulative_profit_yoy_abs": 5880.0,
           "cumulative_profit_yoy_status": "normal",
           "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
-        },
-        {
-          "name": "元富證券",
-          "monthly_profit": null,
-          "cumulative_profit": 1570,
-          "monthly_eps": null,
-          "cumulative_eps": 0.98,
-          "cumulative_profit_yoy_pct": 23.6,
-          "cumulative_profit_yoy_abs": 300.0,
-          "cumulative_profit_yoy_status": "normal",
-          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
         }
       ],
       "unit": "百萬元",
@@ -558,7 +831,7 @@
         "cumulative_profit_yoy_pct": 79.0,
         "cumulative_profit_yoy_abs": 16232.0,
         "cumulative_profit_yoy_status": "normal",
-        "cumulative_profit_yoy_reason": "2025/10/01 京城銀行納入永豐金控"
+        "cumulative_profit_yoy_reason": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
       },
       "subsidiaries": [
         {
@@ -581,7 +854,7 @@
           "cumulative_profit_yoy_pct": null,
           "cumulative_profit_yoy_abs": null,
           "cumulative_profit_yoy_status": "missing",
-          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行納入永豐金控"
+          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
         },
         {
           "name": "永豐金證券",
@@ -592,7 +865,7 @@
           "cumulative_profit_yoy_pct": 141.5,
           "cumulative_profit_yoy_abs": 6824.0,
           "cumulative_profit_yoy_status": "normal",
-          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行納入永豐金控"
+          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
         }
       ],
       "unit": "百萬元",

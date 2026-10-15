@@ -146,8 +146,7 @@ class MonthlyReportTest(unittest.TestCase):
     def test_cross_zero_securities_not_treated_as_missing(self):
         row=next(r for r in self.pack['subsidiaries'] if r['name']=='台新證券')
         self.assertIn('轉盈',security_direction(row,-9))
-        row=next(r for r in self.pack['subsidiaries'] if r['name']=='元富證券')
-        self.assertIn('缺單月',security_direction(row,-9))
+        self.assertFalse(any(r['name']=='元富證券' for r in self.pack['subsidiaries']))
     def test_refresh_window_and_daily_limit(self):
         c={'news_generated_at':'2026-09-10T00:00:00'}
         self.assertTrue(refresh_due(c,'115/08',datetime(2026,9,11,1)))

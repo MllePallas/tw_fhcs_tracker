@@ -33,8 +33,8 @@
         '子公司變動為公告稅後淨利變化，不等同母公司持股加權貢獻；其他為觀察殘差，不認定費用原因。',
         '新聞摘要為二次整理，未經原文逐句核實；與公告數字矛盾時以公告為準並列待核對。',
         '市場同向不代表因果；手續費、VaR、避險成本等未揭露項目需財報／管理帳。']};
-    const entity=(c,name)=>name?c?.subsidiaries?.find(s=>s.name===name||s.name===rules.aliases?.[name]):c?.holding_company;
-    const get=(p,code,name)=>{const c=A.company(history,p,code);return {c,h:entity(c,name)};};
+    const entity=(c,p,name)=>name?A.activeSubsidiaries(c?.subsidiaries,rules,c?.code,p).find(s=>s.name===name||s.name===rules.aliases?.[name]):c?.holding_company;
+    const get=(p,code,name)=>{const c=A.company(history,p,code);return {c,h:entity(c,p,name)};};
     function row(code,name=null) {
       const {c,h}=get(period,code,name),prev=get(before,code,name),old=get(prior,code,name);
       const monthly=yi(h?.monthly_profit,c?.unit),cumulative=yi(h?.cumulative_profit,c?.unit);
@@ -74,11 +74,11 @@
       pack.holdings.push(h);
       if(h.monthly!==null&&h.cumulative!==null)pack.coverage.available++;
       else pack.coverage.missing.push(`${h.name}：${c?'單月或累計缺值':'未公告／擷取失敗／期別不符'}`);
-      for(const sub of c?.subsidiaries||[]) pack.subsidiaries.push(row(code,sub.name));
+      for(const sub of A.activeSubsidiaries(c?.subsidiaries,rules,code,period)) pack.subsidiaries.push(row(code,sub.name));
       const prev=A.company(history,before,code);
-      const currentSubs=c?.subsidiaries||[],previousSubs=prev?.subsidiaries||[];
-      const matched=currentSubs.map(s=>({s,b:entity(prev,s.name)}));
-      const complete=!!c&&!!prev&&currentSubs.length>0&&matched.every(({s,b})=>A.finite(s.monthly_profit)&&A.finite(b?.monthly_profit))&&previousSubs.every(b=>currentSubs.some(s=>s.name===b.name||rules.aliases?.[s.name]===b.name));
+      const currentSubs=A.activeSubsidiaries(c?.subsidiaries,rules,code,period),previousSubs=A.activeSubsidiaries(prev?.subsidiaries,rules,code,period);
+      const matched=currentSubs.map(s=>({s,b:entity(prev,before,s.name)}));
+      const complete=!!c&&!!prev&&currentSubs.length>0&&matched.every(({s,b})=>A.finite(s.monthly_profit)&&A.finite(b?.monthly_profit)&&!A.reason(rules,code,[period],[before],s.name))&&previousSubs.every(b=>currentSubs.some(s=>s.name===b.name||rules.aliases?.[s.name]===b.name));
       const groups={life:0,bank:0,securities:0};
       if(complete)for(const {s,b} of matched){const k=kind(s.name);if(k in groups)groups[k]+=yi(s.monthly_profit,c.unit)-yi(b.monthly_profit,prev.unit);}
       const ok=complete&&h.mom.delta!==null&&!h.mom.note;
@@ -87,7 +87,7 @@
       for(const p of months) {
         const d=A.company(history,p,code);
         if(!d){pack.history.push({period:ad(p),code,parent:name,name,industry:'holding',monthly:null,cumulative:null,status:'資料不足'});continue;}
-        for(const [e,k] of [[d.holding_company,'holding'],...(d.subsidiaries||[]).map(s=>[s,kind(s.name)])])if(e){
+        for(const [e,k] of [[d.holding_company,'holding'],...A.activeSubsidiaries(d.subsidiaries,rules,code,p).map(s=>[s,kind(s.name)])])if(e){
           pack.history.push({period:ad(p),code,parent:d.name,name:k==='holding'?d.name:e.name,industry:k,monthly:yi(e.monthly_profit,d.unit),cumulative:yi(e.cumulative_profit,d.unit),monthly_eps:e.monthly_eps??null,cumulative_eps:e.cumulative_eps??null,source_url:d.source_url||'',status:'原始公告數'});
         }
         if(d.news_summary&&d.news_summary!=='無相關說明')pack.news.push({id:`news-${ad(p).replace('/','-')}-${code}`,period:ad(p),code,name:d.name,

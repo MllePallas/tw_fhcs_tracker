@@ -11,6 +11,10 @@ test('report pack uses Gregorian periods and original amounts, with no future in
   const old=P.build(history,rules,'2025/07');assert.ok(old.news.every(r=>r.period<='2025/07'));
   assert.ok(old.markets.every(r=>r.period<='2025/07'));
   assert.equal(p.holdings.find(r=>r.code==='2887').yoy_rank_eligible,false);
+  assert.ok(!p.subsidiaries.some(r=>r.name==='元富證券'));
+  assert.ok(P.build(history,rules,'2026/04').subsidiaries.some(r=>r.name==='元富證券'));
+  assert.ok(p.subsidiaries.some(r=>r.name==='京城銀行'&&r.parent==='永豐金'));
+  assert.equal(P.build(history,rules,'2026/05').attribution.find(r=>r.code==='2887').other,null);
   assert.equal(p.holdings.find(r=>r.code==='2883').yoy_rank_eligible,true);
   for(const r of p.holdings.filter(r=>r.fvoci))assert.equal(r.fvoci.yoy,null);
 });

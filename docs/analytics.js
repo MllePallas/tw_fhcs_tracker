@@ -23,9 +23,13 @@
     const c = (d.companies || []).find(c => c.code === code);
     return c && !c.error && (!c.report_month || c.report_month === period) ? c : null;
   }
+  function activeSubsidiaries(subs, rules, code, period) {
+    return (subs || []).filter(s => !(rules.retired_subsidiaries || []).some(event =>
+      event.code === code && event.name === s.name && period > event.last_report_month));
+  }
   function value(history, period, code, field = 'monthly_profit', name = null, rules = {}) {
     const c = company(history, period, code);
-    const h = name ? c?.subsidiaries?.find(s => s.name === name || s.name === rules.aliases?.[name]) : c?.holding_company;
+    const h = name ? activeSubsidiaries(c?.subsidiaries, rules, code, period).find(s => s.name === name || s.name === rules.aliases?.[name]) : c?.holding_company;
     return toNTM(h?.[field], c?.unit);
   }
   function median(values) {
@@ -105,8 +109,9 @@
       result.reason = '金控本月或上月公告資料不足';
       return result;
     }
-    const currentSubs = current.subsidiaries || [];
-    const previousSubs = previous.subsidiaries || [];
+    const currentSubs = activeSubsidiaries(current.subsidiaries, rules, code, period);
+    // A retired legal entity is absorbed into its successor, not an unreported current row.
+    const previousSubs = activeSubsidiaries(previous.subsidiaries, rules, code, period);
     if (!currentSubs.length || !previousSubs.length) {
       result.reason = '本月或上月沒有可比較的子公司明細';
       return result;
@@ -182,5 +187,5 @@
     if (reconciliation.note) notes.push(reconciliation.note);
     return { code, name, period, periods, values, monthly, mom, average, rolling, yoy, labels, notes, reconciliation };
   }
-  return { finite, shift, range, yearMonths, toNTM, company, value, median, complete, reason, compare, reportedYoY, comparison, monthlyAttribution, reconcile, row };
+  return { finite, shift, range, yearMonths, toNTM, company, activeSubsidiaries, value, median, complete, reason, compare, reportedYoY, comparison, monthlyAttribution, reconcile, row };
 });
