@@ -87,6 +87,58 @@
     });
     return { ...out, currentPeriods, basePeriods, missing: [...cur.missing, ...base.missing] };
   }
+  // Month-to-month changes in disclosed subsidiary profits. Amounts are NT$m;
+  // the residual is observable only when every disclosed subsidiary is matched.
+  function monthlyAttribution(history, rules, period, code) {
+    const before = shift(period, -1);
+    const current = company(history, period, code);
+    const previous = company(history, before, code);
+    const parentReason = reason(rules, code, [period], [before]);
+    const parentCurrent = toNTM(current?.holding_company?.monthly_profit, current?.unit);
+    const parentPrevious = toNTM(previous?.holding_company?.monthly_profit, previous?.unit);
+    const parentDelta = !parentReason && finite(parentCurrent) && finite(parentPrevious)
+      ? parentCurrent - parentPrevious : null;
+    const result = { period, before, code, status: 'missing', reason: '',
+      parentCurrent, parentPrevious, parentDelta, rows: [], residual: null };
+    if (parentReason) { result.status = 'incomparable'; result.reason = parentReason; return result; }
+    if (!current || !previous || parentDelta === null) {
+      result.reason = '金控本月或上月公告資料不足';
+      return result;
+    }
+    const currentSubs = current.subsidiaries || [];
+    const previousSubs = previous.subsidiaries || [];
+    if (!currentSubs.length || !previousSubs.length) {
+      result.reason = '本月或上月沒有可比較的子公司明細';
+      return result;
+    }
+    const prior = new Map(previousSubs.map(s => [s.name, s]));
+    const matched = new Set();
+    for (const sub of currentSubs) {
+      const previousName = prior.has(sub.name) ? sub.name : rules.aliases?.[sub.name];
+      const old = previousName ? prior.get(previousName) : null;
+      if (old) matched.add(previousName);
+      const cur = toNTM(sub.monthly_profit, current.unit);
+      const base = toNTM(old?.monthly_profit, previous.unit);
+      const subReason = reason(rules, code, [period], [before], sub.name);
+      result.rows.push({ name: sub.name, previous: base, current: cur,
+        delta: !subReason && finite(cur) && finite(base) ? cur - base : null,
+        note: subReason || (!old ? '上月未列' : !finite(cur) || !finite(base) ? '月獲利未揭露' : '') });
+    }
+    for (const old of previousSubs) if (!matched.has(old.name)) {
+      result.rows.push({ name: old.name, previous: toNTM(old.monthly_profit, previous.unit),
+        current: null, delta: null, note: '本月未列' });
+    }
+    result.rows.sort((a,b) => (b.delta === null ? -Infinity : Math.abs(b.delta))
+      - (a.delta === null ? -Infinity : Math.abs(a.delta)) || a.name.localeCompare(b.name));
+    if (result.rows.some(r => r.delta === null)) {
+      result.status = 'partial';
+      result.reason = '部分子公司缺值、未列或口徑不同；僅列可比較項目';
+    } else {
+      result.status = 'complete';
+      result.residual = parentDelta - result.rows.reduce((sum, row) => sum + row.delta, 0);
+    }
+    return result;
+  }
   function reconcile(history, rules, code, periods) {
     const raw = complete(history, periods, code);
     const end = periods.at(-1), start = periods[0];
@@ -130,5 +182,5 @@
     if (reconciliation.note) notes.push(reconciliation.note);
     return { code, name, period, periods, values, monthly, mom, average, rolling, yoy, labels, notes, reconciliation };
   }
-  return { finite, shift, range, yearMonths, toNTM, company, value, median, complete, reason, compare, reportedYoY, comparison, reconcile, row };
+  return { finite, shift, range, yearMonths, toNTM, company, value, median, complete, reason, compare, reportedYoY, comparison, monthlyAttribution, reconcile, row };
 });

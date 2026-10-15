@@ -70,6 +70,46 @@ test('reconciliation distinguishes known basis differences and revisions from mi
   assert.match(A.reconcile(history,rules,'2887',A.yearMonths('114/11')).note,/重編|調整/);
   assert.equal(A.reconcile(history,rules,'2880',['114/12','115/01']).cumulative,null);
 });
+
+test('subsidiary month changes reconcile only when every disclosed row is comparable', () => {
+  const fubon=A.monthlyAttribution(history,rules,'115/08','2881');
+  assert.equal(fubon.status,'complete');
+  near(fubon.parentDelta,26440);
+  assert.equal(fubon.rows[0].name,'富邦人壽');
+  near(fubon.rows[0].delta,24910);
+  near(fubon.residual,780);
+  near(fubon.rows.reduce((n,r)=>n+r.delta,0)+fubon.residual,fubon.parentDelta);
+
+  const kgi=A.monthlyAttribution(history,rules,'115/08','2883');
+  near(kgi.parentDelta,3672);
+  near(kgi.rows.find(r=>r.name==='凱基證券').delta,3375);
+  near(kgi.rows.find(r=>r.name==='凱基銀行').delta,-977);
+  near(kgi.residual,-54);
+
+  const taishin=A.monthlyAttribution(history,rules,'115/08','2887');
+  assert.equal(taishin.status,'partial');
+  assert.equal(taishin.residual,null);
+  assert.equal(taishin.rows.find(r=>r.name==='元富證券').delta,null);
+  near(taishin.rows.find(r=>r.name==='新光人壽').delta,-3690);
+});
+
+test('attribution respects missing filings, aliases, changing units and merger boundaries', () => {
+  assert.equal(A.monthlyAttribution(history,rules,'115/09','2881').status,'missing');
+  assert.equal(A.monthlyAttribution(history,rules,'114/07','2887').status,'incomparable');
+  const h={
+    '115/07':{report_period:'115/07',companies:[{code:'2884',unit:'百萬元',holding_company:{monthly_profit:100},subsidiaries:[{name:'保德信投信',monthly_profit:50}]}]},
+    '115/08':{report_period:'115/08',companies:[{code:'2884',unit:'億元',holding_company:{monthly_profit:2},subsidiaries:[{name:'玉山投信',monthly_profit:1}]}]},
+  };
+  const result=A.monthlyAttribution(h,rules,'115/08','2884');
+  assert.equal(result.status,'complete');
+  assert.equal(result.rows.length,1);
+  near(result.rows[0].delta,50);
+  near(result.residual,50);
+  h['115/08'].companies[0].subsidiaries[0].monthly_profit=null;
+  const partial=A.monthlyAttribution(h,rules,'115/08','2884');
+  assert.equal(partial.status,'partial');
+  assert.equal(partial.residual,null);
+});
 test('negative and missing values cannot fabricate a new high or streak', () => {
   const h={};
   for(let m=1;m<=6;m++)h[`115/0${m}`]={report_period:`115/0${m}`,companies:[{code:'x',unit:'百萬元',holding_company:{monthly_profit:100*m}}]};
@@ -135,21 +175,21 @@ test('quarter comparison defaults to current quarter and matches equal-length wi
   const {ctx,element}=context();
   vm.runInContext('buildPeriodOptions();renderPeriodSelector()',ctx);
   const opt=vm.runInContext('state.periodSel',ctx);
-  assert.equal(opt.label,'2026/07–08（Q3，未完）');
-  assert.deepEqual(Array.from(opt.months),['115/07','115/08']);
-  assert.deepEqual(Array.from(opt.priorMonths),['115/04','115/05']);
-  assert.deepEqual(Array.from(opt.baseMonths),['114/07','114/08']);
+  assert.equal(opt.label,'2026/07–09（Q3）');
+  assert.deepEqual(Array.from(opt.months),['115/07','115/08','115/09']);
+  assert.deepEqual(Array.from(opt.priorMonths),['115/04','115/05','115/06']);
+  assert.deepEqual(Array.from(opt.baseMonths),['114/07','114/08','114/09']);
   assert.ok(vm.runInContext('state.periodOptions.every(o=>o.kind===\'quarter\')',ctx));
   const rows=vm.runInContext('buildPeriodHoldingRows(state.periodSel)',ctx);
-  const fubon=rows.find(r=>r.code==='2881');
-  near(fubon.delta,fubon.profit-fubon.prior);
-  assert.equal(fubon.rank,rows.filter(r=>r.delta!=null&&r.delta>fubon.delta).length+1);
+  const kgi=rows.find(r=>r.code==='2883');
+  near(kgi.delta,kgi.profit-kgi.prior);
+  assert.equal(kgi.rank,rows.filter(r=>r.delta!=null&&r.delta>kgi.delta).length+1);
   vm.runInContext('renderPeriodHoldingsTable(state.periodSel,buildPeriodHoldingRows(state.periodSel))',ctx);
   const heading=element('main-thead').innerHTML;
   assert.match(heading,/上季等長/);
   assert.match(heading,/去年同季/);
   assert.doesNotMatch(heading,/EPS|YTD/);
-  vm.runInContext("showPeriodDetail('2881')",ctx);
+  vm.runInContext("showPeriodDetail('2883')",ctx);
   const detail=element('detail-content').innerHTML;
   assert.match(detail,/銀行/);assert.match(detail,/壽險/);assert.match(detail,/證券/);
   assert.match(detail,/其他（含母公司與合併調整）/);
@@ -179,7 +219,20 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   vm.runInContext("renderTrendDetail('2889')",ctx);
   assert.ok(element('trend-detail').innerHTML.includes('+98.4%'));
   assert.match(element('trend-detail').innerHTML,/2026\/07 前月獲利/);
+  assert.match(html,/主要子公司增減/);
+  assert.match(html,/富邦人壽.*\+249\.1/);
+  assert.match(element('trend-detail').innerHTML,/子公司單月獲利增減/);
+  assert.match(element('trend-detail').innerHTML,/母公司及其他（差額）/);
   assert.doesNotMatch(html+element('trend-detail').innerHTML,/均值|平均|各月原始|本月增減集中|近 3 月 vs/);
+});
+
+test('partial subsidiary detail names the gap without presenting a residual', () => {
+  const {ctx,element}=context();
+  vm.runInContext("renderTrendDetail('2887')",ctx);
+  const detail=element('trend-detail').innerHTML;
+  assert.match(detail,/元富證券.*月獲利未揭露/);
+  assert.match(detail,/不計算母公司及其他差額/);
+  assert.doesNotMatch(detail,/母公司及其他（差額）/);
 });
 
 test('trend sorting and highlights use monthly amounts, including profit/loss turns', () => {
