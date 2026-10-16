@@ -15,6 +15,8 @@
 
 ## 自結獲利分析報告：先確認再發布
 
+Codex 在新視窗或新電腦起稿時，先讀 [正式分析指令](docs/MONTHLY_ANALYSIS_INSTRUCTIONS.md)。其中定義了數字核對、表格、來源標註、FVOCI／FVTPL 口徑及人工補強規則；既有 `scraper/monthly_report_prompt.txt` 是舊的程式化 AI 產稿提示詞，不代表目前經人工審閱的正式流程。
+
 1. 確認 13 家金控、主要子公司、新聞及市場資料已取得。新聞摘要是線索，撰寫時仍須核對原始報導／公司新聞稿及其報導月份。
 2. 在 Codex 指定西元月份，請 Codex依當月資料撰寫四段分析。先在對話中檢視、修訂；不由 GitHub 排程自動寫作。
 3. 核准後將最終稿提交為 `docs/reports/YYYY-MM.md`。若是修改舊月，編輯同一檔案即可。
