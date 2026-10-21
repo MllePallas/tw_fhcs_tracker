@@ -97,6 +97,22 @@ test('subsidiary month changes reconcile only when every disclosed row is compar
   assert.ok(history['115/04'].companies.find(c=>c.code==='2887').subsidiaries.some(s=>s.name==='元富證券'));
 });
 
+test('newly acquired subsidiary is identified separately from missing data', () => {
+  const acquired=A.monthlyAttribution(history,rules,'115/09','2884');
+  assert.equal(acquired.status,'partial');
+  assert.equal(acquired.warning,'三商人壽 9 月新納入，無 8 月可比數');
+  assert.equal(acquired.rows.find(r=>r.name==='三商人壽').note,'9 月新納入，無 8 月可比數');
+  assert.equal(acquired.rows.find(r=>r.name==='三商人壽').delta,null);
+  assert.equal(acquired.residual,null);
+  const missing=structuredClone(history);
+  missing['115/09'].companies.find(c=>c.code==='2884').subsidiaries.find(s=>s.name==='玉山銀行').monthly_profit=null;
+  const unavailable=A.monthlyAttribution(missing,rules,'115/09','2884');
+  assert.equal(unavailable.warning,null);
+  assert.match(unavailable.reason,/缺值/);
+  missing['115/09'].companies.find(c=>c.code==='2884').subsidiaries.find(s=>s.name==='三商人壽').monthly_profit=null;
+  assert.equal(A.monthlyAttribution(missing,rules,'115/09','2884').warning,null);
+});
+
 test('attribution respects missing filings, aliases, changing units and merger boundaries', () => {
   const missing=structuredClone(history);
   missing['115/09'].companies=missing['115/09'].companies.filter(c=>c.code!=='2881');
@@ -230,6 +246,16 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   assert.match(element('trend-detail').innerHTML,/子公司單月獲利增減/);
   assert.match(element('trend-detail').innerHTML,/母公司及其他（差額）/);
   assert.doesNotMatch(html+element('trend-detail').innerHTML,/均值|平均|各月原始|本月增減集中|近 3 月 vs/);
+});
+
+test('September YuShan trend card and detail explain the new life subsidiary', () => {
+  const {ctx,element}=context();
+  vm.runInContext("state.data=monthCache['115/09'];renderTrendDashboard()",ctx);
+  assert.match(element('trend-root').innerHTML,/三商人壽 9 月新納入，無 8 月可比數/);
+  vm.runInContext("renderTrendDetail('2884')",ctx);
+  const detail=element('trend-detail').innerHTML;
+  assert.match(detail,/三商人壽.*9 月新納入，無 8 月可比數/);
+  assert.doesNotMatch(detail,/部分子公司缺值/);
 });
 
 test('merged broker no longer appears as a missing subsidiary in later months', () => {

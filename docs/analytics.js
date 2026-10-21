@@ -102,7 +102,7 @@
     const parentPrevious = toNTM(previous?.holding_company?.monthly_profit, previous?.unit);
     const parentDelta = !parentReason && finite(parentCurrent) && finite(parentPrevious)
       ? parentCurrent - parentPrevious : null;
-    const result = { period, before, code, status: 'missing', reason: '',
+    const result = { period, before, code, status: 'missing', reason: '', warning: null,
       parentCurrent, parentPrevious, parentDelta, rows: [], residual: null };
     if (parentReason) { result.status = 'incomparable'; result.reason = parentReason; return result; }
     if (!current || !previous || parentDelta === null) {
@@ -125,9 +125,13 @@
       const cur = toNTM(sub.monthly_profit, current.unit);
       const base = toNTM(old?.monthly_profit, previous.unit);
       const subReason = reason(rules, code, [period], [before], sub.name);
+      const newlyIncluded = !old && finite(cur) && (rules.subsidiary_events || []).some(event =>
+        event.code === code && event.month === period && event.names.includes(sub.name));
+      const newNote = `${Number(period.split('/')[1])} 月新納入，無 ${Number(before.split('/')[1])} 月可比數`;
       result.rows.push({ name: sub.name, previous: base, current: cur,
         delta: !subReason && finite(cur) && finite(base) ? cur - base : null,
-        note: subReason || (!old ? '上月未列' : !finite(cur) || !finite(base) ? '月獲利未揭露' : '') });
+        note: newlyIncluded ? newNote : subReason || (!old ? '上月未列' : !finite(cur) || !finite(base) ? '月獲利未揭露' : ''),
+        newlyIncluded });
     }
     for (const old of previousSubs) if (!matched.has(old.name)) {
       result.rows.push({ name: old.name, previous: toNTM(old.monthly_profit, previous.unit),
@@ -135,9 +139,15 @@
     }
     result.rows.sort((a,b) => (b.delta === null ? -Infinity : Math.abs(b.delta))
       - (a.delta === null ? -Infinity : Math.abs(a.delta)) || a.name.localeCompare(b.name));
-    if (result.rows.some(r => r.delta === null)) {
+    const unavailable = result.rows.filter(r => r.delta === null);
+    if (unavailable.length) {
       result.status = 'partial';
-      result.reason = '部分子公司缺值、未列或口徑不同；僅列可比較項目';
+      if (unavailable.every(r => r.newlyIncluded)) {
+        result.warning = `${unavailable.map(r => r.name).join('、')} ${Number(period.split('/')[1])} 月新納入，無 ${Number(before.split('/')[1])} 月可比數`;
+        result.reason = `${result.warning}；其餘子公司按可比資料列示`;
+      } else {
+        result.reason = '部分子公司缺值、未列或口徑不同；僅列可比較項目';
+      }
     } else {
       result.status = 'complete';
       result.residual = parentDelta - result.rows.reduce((sum, row) => sum + row.delta, 0);

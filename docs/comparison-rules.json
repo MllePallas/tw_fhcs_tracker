@@ -19,6 +19,7 @@
     }
   },
   "subsidiary_events": [
+    {"code": "2884", "names": ["三商人壽"], "month": "115/09", "partial_month": false, "label": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數", "source": "https://www.esunfhc.com/zh-tw/news-center/news-center/news/detail?id=D0565FF2DAE34916B079E1F26A048B1C&p=148DB1EBDC2B47629ED09DC9820A2155"},
     {"code": "2887", "names": ["台新證券", "元富證券"], "month": "115/04", "partial_month": true, "label": "2026/04/06 元富證券併入台新證券；4 月為過渡月份", "source": "https://www.twse.com.tw/staticFiles/product/publication/0005000109.pdf"},
     {"code": "2890", "names": ["永豐銀行", "京城銀行"], "month": "116/01", "partial_month": false, "label": "永豐銀行與京城銀行預定於 2027/01/01 合併；銀行層級跨期基礎不同", "source": "https://bank.sinopac.com/sinopacBT/about/news-center/news/content/2026101402.html"},
     {"code": "2887", "names": ["新光人壽", "台新人壽"], "month": "115/01", "partial_month": false, "label": "2026/01 壽險子公司整併"}

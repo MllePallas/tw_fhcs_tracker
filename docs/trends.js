@@ -93,7 +93,7 @@ function subsidiaryChangeHtml(attribution, limit = 2) {
   if (attribution.status === 'incomparable') return '<span class="muted">口徑不同</span>';
   const top = attribution.rows.filter(r => r.delta !== null && r.delta !== 0).slice(0, limit);
   const parts = top.map(r => `<span class="subsidiary-change">${escapeHtml(r.name)} <strong class="${r.delta > 0 ? 'up' : 'down'}">${signedNumber(r.delta)}</strong></span>`);
-  if (attribution.status === 'partial') parts.push('<span class="subsidiary-warning">部分資料未齊</span>');
+  if (attribution.status === 'partial') parts.push(`<span class="subsidiary-warning">${escapeHtml(attribution.warning || '部分資料未齊')}</span>`);
   return parts.join('') || '<span class="muted">已列子公司無月增減</span>';
 }
 function subsidiaryBreakdownHtml(attribution) {
