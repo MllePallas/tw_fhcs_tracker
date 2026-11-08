@@ -207,5 +207,59 @@
         "代子公司合作金庫商業銀行公告資安長異動"
       ]
     }
-  ]
+  ],
+  "market_summary": {
+    "period": "115/10",
+    "generated_at": "2026-11-08T18:03:24.810780",
+    "items": {
+      "usdtwd": {
+        "value": 32.5669,
+        "date": "2026-10-30",
+        "prev_value": 31.85,
+        "prev_date": "2026-09-30",
+        "pct_change": 2.25,
+        "source": "Yahoo Finance (TWD=X)"
+      },
+      "taiex": {
+        "value": 45211.83,
+        "date": "2026-10-30",
+        "prev_value": 47940.13,
+        "prev_date": "2026-09-30",
+        "pct_change": -5.69,
+        "source": "Yahoo Finance (^TWII)"
+      },
+      "taiex_turnover": {
+        "value_yi": 9730.3,
+        "trading_days": 19,
+        "prev_value_yi": 8811.8,
+        "prev_trading_days": 20,
+        "pct_change": 10.42,
+        "source": "TWSE FMTQIK"
+      },
+      "spx": {
+        "value": 7580.07,
+        "date": "2026-10-30",
+        "prev_value": 7651.54,
+        "prev_date": "2026-09-30",
+        "pct_change": -0.93,
+        "source": "Yahoo Finance (^GSPC)"
+      },
+      "us10y": {
+        "value_pct": 4.929,
+        "date": "2026-10-30",
+        "prev_value_pct": 5.293,
+        "prev_date": "2026-09-30",
+        "bps_change": -36,
+        "source": "Yahoo Finance (^TNX)"
+      },
+      "tlt": {
+        "value": 81.84,
+        "date": "2026-10-30",
+        "prev_value": 77.78,
+        "prev_date": "2026-09-30",
+        "pct_change": 5.22,
+        "source": "Yahoo Finance (TLT) — 壽險FVTPL境外債券ETF代理指標"
+      }
+    }
+  }
 }
