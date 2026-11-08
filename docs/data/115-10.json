@@ -1,0 +1,211 @@
+{
+  "_meta": {
+    "dataset": "台灣金控月自結獲利追蹤",
+    "author": "Mandy Chao",
+    "repository": "https://github.com/MllePallas/tw_fhcs_tracker",
+    "site": "https://mllepallas.github.io/tw_fhcs_tracker/",
+    "data_license": "CC BY 4.0",
+    "license_url": "https://creativecommons.org/licenses/by/4.0/deed.zh-hant",
+    "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
+    "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
+  },
+  "report_period": "115/10",
+  "last_updated": "2026-11-08T00:55:34.241737",
+  "success_count": 1,
+  "fail_count": 12,
+  "companies": [
+    {
+      "code": "2880",
+      "name": "華南金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "公告本公司召開2026年第3季中文法人說明會，公布2026年前3季營運概況",
+        "代子公司華南產險公告公司治理主管異動"
+      ]
+    },
+    {
+      "code": "2881",
+      "name": "富邦金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "富邦金控舉辦115年第三季法人說明會",
+        "富邦金控代富邦華一銀行有限公司公告發行2026年金融債券\r\n(補充111/11/11公告)",
+        "富邦金控代子公司富邦產險公告處分新北市淡水區不動產",
+        "富邦金控代子公司富邦產險公告危老重建\r\n顧問工程契約累積達五億元以上（補充110/04/23、\r\n115/04/15、115/07/27公告）",
+        "公告本公司受邀參加UBS APAC Financials, Fintech and Property Corporate Day 2026"
+      ]
+    },
+    {
+      "code": "2882",
+      "name": "國泰金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "代子公司國泰綜合證券公告向國泰人壽保險(股)公司取得使用權資產",
+        "代子公司國泰世華商業銀行公告授信資產之轉讓",
+        "本公司代子公司國泰綜合證券公告向國泰人壽保險股份有限公司\r\n變更使用權資產(提前終止停車位租約)"
+      ]
+    },
+    {
+      "code": "2883",
+      "name": "凱基金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "補充113年12月20日代子公司凱基證券公告取得不動產使用權資產"
+      ]
+    },
+    {
+      "code": "2884",
+      "name": "玉山金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "玉山金控代子公司玉山投顧公告董事長異動",
+        "玉山金控受邀參加UBS舉辦Financials, Fintech and Property Corporate Day 2026",
+        "玉山金控受邀參加Bank of America舉辦2026 Taiwan Financial Tour",
+        "玉山金控將於2026年11月17日下午3點30分召開2026年第3季法人說明會",
+        "玉山金控受邀參加Morgan Stanley舉辦2026 AP Summit"
+      ]
+    },
+    {
+      "code": "2885",
+      "name": "元大金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "元大金控代子公司元大投信公告因股份轉換案\r\n依據企業併購法第33條規定公告相關事項",
+        "公告本公司擬於民國115年11月10日受邀參加美銀證券舉辦之BofA Taiwan Financial Tour"
+      ]
+    },
+    {
+      "code": "2886",
+      "name": "兆豐金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "公告本公司將召開2026年第三季線上法人說明會",
+        "代本公司之子公司兆豐國際商業銀行(股)公司公告受金管會\r\n核處罰鍰新臺幣200萬元",
+        "代本公司之子公司兆豐資產管理股份有限公司公告以法拍標購取得土地及建物",
+        "代本公司之子公司兆豐國際商業銀行股份有限公司公告\r\n其董事會通過辦理115年度應分攤捐助財團法人中小企業信\r\n用保證基金款項"
+      ]
+    },
+    {
+      "code": "2887",
+      "name": "台新新光金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "本公司代子公司新光人壽公告臺北市中正區不動產處分案"
+      ]
+    },
+    {
+      "code": "2889",
+      "name": "國票金",
+      "announcement_date": "115/11/06",
+      "announcement_title": "公告本公司115年10月份自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2889&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國票金控",
+        "monthly_profit": 80,
+        "cumulative_profit": 3772,
+        "monthly_eps": null,
+        "cumulative_eps": 1.03,
+        "cumulative_profit_yoy_pct": 99.9,
+        "cumulative_profit_yoy_abs": 1885.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": ""
+      },
+      "subsidiaries": [
+        {
+          "name": "國際票券",
+          "monthly_profit": 122,
+          "cumulative_profit": 2263,
+          "monthly_eps": null,
+          "cumulative_eps": 1.21,
+          "cumulative_profit_yoy_pct": 41.6,
+          "cumulative_profit_yoy_abs": 665.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國票證券",
+          "monthly_profit": 205,
+          "cumulative_profit": 3461,
+          "monthly_eps": null,
+          "cumulative_eps": 3.01,
+          "cumulative_profit_yoy_pct": 228.7,
+          "cumulative_profit_yoy_abs": 2408.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/10",
+      "parse_method": "llm",
+      "news_checked_at": "2026-11-08T00:55:34.948887",
+      "news_summary": "**重點**\n\n國票金（2889）於 11 月 6 日公告 2026 年 10 月自結盈餘，單月稅後純益約 7,956 萬元，較上月稅後純益 3 億 4,579 萬元大幅月減 76.99%。\n單月獲利驟降的主因，\n主要是子公司國票證券在 10 月單月獲利「降溫」，加上創投轉投資國旺租賃虧損進一步擴大，拖累金控整體表現。\n惟累計表現依舊亮眼，\n累計前 10 月稅後盈餘達 37 億 7,223 萬元，較去年同期成長 99.92%，每股稅後盈餘（EPS）1.03 元，9 月底每股淨值 12.69 元。\n\n**子公司明細**\n- 國際票券：\n10 月稅後純益 1 億 2,190 萬元，累計 1 至 10 月稅後純益 22 億 6,278 萬元，年增 41.64%，主因票券業務承銷量、部位評價及利息淨收益提升，獲利維持穩健。\n另據報導，\n債券養券收益維持正貢獻，獲利仍較去年同期大幅增長；股權業務受惠 AI 產業需求成長，帶動台股表現亮眼，挹注股票及可轉債部位獲利，OCI 部位股息收益貢獻亦顯著成長。\n\n- 國票證券：\n10 月稅後純益 2 億 524 萬元，累計 1 至 10 月稅後純益 34 億 6,120 萬元，較去年同期大幅成長 228.57%，主要受惠台股交投持續活絡，市場成交金額明顯擴大，帶動經紀業務手續費收入及融資、融券等利息收益倍增；自營業務方面，期貨衍生性商品、股票及認購（售）權證等各類部位操作得宜，相關收益大幅增加。\n\n- 國票創投：\n累計 1 至 10 月本業獲利 1 億 1,436 萬元，較去年同期減少 46.41%，主因部分投資個股之處分及評價利益減少；中國大陸轉投資之國旺租賃因當地經濟疲弱、增加提列壞帳損失準備，致國票創投整體獲利轉為虧損，累計 1 至 10 月稅後損失 2 億 8,996 萬元。",
+      "news_sources": [
+        {
+          "url": "https://udn.com/news/story/7252/9862067",
+          "title": "國票金獲利／10月自結月減逾7成 子公司單月「降溫」"
+        },
+        {
+          "url": "https://news.cnyes.com/news/id/6650481",
+          "title": "國票金前10月獲利翻倍EPS 1.03元 票券、證券雙引擎亮眼"
+        }
+      ],
+      "news_generated_at": "2026-11-08T00:55:58.670354"
+    },
+    {
+      "code": "2890",
+      "name": "永豐金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "永豐金控公告115年第三季法人說明會相關資訊",
+        "永豐金控代子公司京城銀行公告董事會決議通過\r\n停止股票公開發行暨辦理解散案",
+        "永豐金控代子公司京城銀行公告股東臨時會重要決議事項",
+        "永豐金控代子公司永豐銀行說明媒體報導",
+        "永豐金控代子公司永豐金證券公告訂定合併基準日"
+      ]
+    },
+    {
+      "code": "2891",
+      "name": "中信金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "代子公司中國信託綜合證券(股)公司公告於116年會計年度開始日後變動會計政策。\r\n(補充115/09/21公告)",
+        "代子公司中國信託綜合證券(股)公司公告於116年會計年度開始日後變動會計估計事項。\r\n(補充115/09/21公告)",
+        "代子公司台灣彩券股份有限公司公告董事會代行股東會\r\n重要決議事項",
+        "(補充公告)代子公司台灣人壽保險(股)公司公告決議參與\r\n吉信股份有限公司現金增資",
+        "代子公司中國信託商業銀行公告擬自116年度起將投資性不動產之後續衡量\r\n由成本模式變更為公允價值模式。(補充115/09/24公告)"
+      ]
+    },
+    {
+      "code": "2892",
+      "name": "第一金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "代子公司第一金證券公告金管會核准總經理到任"
+      ]
+    },
+    {
+      "code": "5880",
+      "name": "合庫金",
+      "error": "no_match",
+      "error_msg": "115/10 月自結損益尚未公告",
+      "available_titles": [
+        "公告本公司暨主要子公司115年8月份自結合併盈餘",
+        "代子公司合作金庫證券投資信託股份有限公司公告\r\n法遵主管異動",
+        "代子公司合作金庫證券投資信託股份有限公司公告\r\n內部稽核主管異動",
+        "公告本公司資安長異動",
+        "代子公司合作金庫商業銀行公告資安長異動"
+      ]
+    }
+  ]
+}
