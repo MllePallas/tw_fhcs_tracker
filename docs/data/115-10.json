@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/10",
-  "last_updated": "2026-11-09T01:14:14.884479",
-  "success_count": 1,
-  "fail_count": 12,
+  "last_updated": "2026-11-09T18:43:06.920207",
+  "success_count": 2,
+  "fail_count": 11,
   "companies": [
     {
       "code": "2880",
@@ -162,15 +162,71 @@
     {
       "code": "2890",
       "name": "永豐金",
-      "error": "no_match",
-      "error_msg": "115/10 月自結損益尚未公告",
-      "available_titles": [
-        "永豐金控公告115年第三季法人說明會相關資訊",
-        "永豐金控代子公司京城銀行公告董事會決議通過\r\n停止股票公開發行暨辦理解散案",
-        "永豐金控代子公司京城銀行公告股東臨時會重要決議事項",
-        "永豐金控代子公司永豐銀行說明媒體報導",
-        "永豐金控代子公司永豐金證券公告訂定合併基準日"
-      ]
+      "announcement_date": "115/11/09",
+      "announcement_title": "永豐金控公告其與子公司115年10月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "永豐金控",
+        "monthly_profit": 1756,
+        "cumulative_profit": 38531,
+        "monthly_eps": 0.12,
+        "cumulative_eps": 2.61,
+        "cumulative_profit_yoy_pct": 67.9,
+        "cumulative_profit_yoy_abs": 15586.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
+      },
+      "subsidiaries": [
+        {
+          "name": "永豐銀行",
+          "monthly_profit": 1400,
+          "cumulative_profit": 20373,
+          "monthly_eps": 0.12,
+          "cumulative_eps": 1.71,
+          "cumulative_profit_yoy_pct": 14.7,
+          "cumulative_profit_yoy_abs": 2617.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "京城銀行",
+          "monthly_profit": 239,
+          "cumulative_profit": 5342,
+          "monthly_eps": 0.21,
+          "cumulative_eps": 4.81,
+          "cumulative_profit_yoy_pct": 1485.2,
+          "cumulative_profit_yoy_abs": 5005.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
+        },
+        {
+          "name": "永豐金證券",
+          "monthly_profit": 370,
+          "cumulative_profit": 12015,
+          "monthly_eps": 0.21,
+          "cumulative_eps": 6.94,
+          "cumulative_profit_yoy_pct": 124.0,
+          "cumulative_profit_yoy_abs": 6652.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/10",
+      "parse_method": "llm",
+      "news_checked_at": "2026-11-09T18:43:07.638399",
+      "news_summary": "**重點**\n\n永豐金（2890）於 2026 年 11 月 9 日公布 10 月自結損益，單月稅後純益降至 17.56 億元，月減 49%、年減 27%，主因前一月高基期的大筆承銷手續費入帳結束、資本市場波動導致證券及創投子公司資本利得顯著縮水，以及各子公司配合現金增資案認列員工認股費用拉高營業成本。\n儘管單月走弱，\n在銀行與證券核心業務強勁支撐下，前 10 月累計稅後純益高達 385.31 億元，大幅年增 68%，年化 ROE 升至 17.10%，前 10 月 EPS 達 2.61 元，各項累計指標均刷出歷史同期新高紀錄。\n\n**子公司明細**\n- 永豐銀行：\n單月稅後純益 14 億元、月減 19%，主因較高的提存費用與手續費淨收益減少，抵銷了較佳的金融交易淨收益。\n前 10 月累計稅後純益 203.73 億元，年增 15%，寫下連續第六年獲利創新高，動能來自利息淨收益（年增 24%）及手續費淨收益（年增 10%），逾放比率維持健全僅 0.24%。\n\n- 京城銀行：\n10 月稅後純益 2.39 億元、月減 16%，反映金融交易收益減少與營業費用提升；前 10 月稅後純益 53.42 億元，扣除 1 月處分京城銀國際租賃利得與無形資產攤銷後貢獻金控獲利 46.45 億元，逾放比率極低僅 0.14%。\n\n- 永豐金證券：\n單月稅後純益 3.7 億元、月減 74%，主因上個月有大筆承銷手續費淨收益，且資本利得大幅減少。\n前 10 月累計稅後純益達 120.15 億元，年增 124%，創歷史同期新高，主要受惠於經紀與泛財管手續費淨收益大增 110% 及資本利得挹注。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9867737",
+          "title": "永豐金前十月大賺385億元 銀行及證券子公司獲利成長是主因"
+        },
+        {
+          "url": "https://money.udn.com/money/story/5613/9867293",
+          "title": "永豐金獲利／前十月自結賺385.3億元創同期新高 EPS 2.61元"
+        }
+      ],
+      "news_generated_at": "2026-11-09T18:43:27.968710"
     },
     {
       "code": "2891",
