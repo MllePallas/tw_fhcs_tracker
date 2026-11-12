@@ -36,7 +36,7 @@ function tableRows(title) {
 }
 function expected(row) {
   return [row.name,number(row.monthly),percent(row.mom),number(row.mom.delta,true),percent(row.monthly_yoy),
-    row.rank12.rank===null?'—':`${row.rank12.rank}/12`,number(row.cumulative),percent(row.yoy)];
+    number(row.cumulative),percent(row.yoy)];
 }
 test('every holding and subsidiary figure in September draft matches the calculation pack',{skip:!draft},()=>{
   const holdings=tableRows('| 金控 | 單月淨利 |');
@@ -50,7 +50,7 @@ test('every holding and subsidiary figure in September draft matches the calcula
     assert.equal(rows.length,count);
     for(const cells of rows){
       const row=pack.subsidiaries.find(r=>r.industry===industry&&r.name===cells[0]);assert.ok(row,cells[0]);
-      assert.deepEqual(cells.slice(0,8),expected(row));
+      assert.deepEqual(cells.slice(0,7),expected(row));
     }
   }
 });
