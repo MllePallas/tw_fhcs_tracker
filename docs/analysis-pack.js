@@ -16,8 +16,12 @@
   const kind = name => /人壽/.test(name)?'life':/銀行/.test(name)?'bank':/證券/.test(name)?'securities':'other';
   function cmp(cur,base,note='') {
     const c=A.reportedYoY(cur,base,note);
+    if(A.finite(cur)&&A.finite(base)&&base<0&&cur>0){c.status='loss_to_profit';c.pct=null;}
+    else if(A.finite(cur)&&A.finite(base)&&base>0&&cur<0){c.status='profit_to_loss';c.pct=null;}
     return {base:c.base,delta:c.delta,pct:c.pct,status:c.status,note:c.reason};
   }
+  const average = values => values.length ? values.reduce((sum, n) => sum + n, 0) / values.length : null;
+  const sum = values => values.reduce((total, n) => total + n, 0);
   function build(history,rules,requested) {
     const period=roc(requested), current=history[period];
     if (!current || current.report_period!==period) throw new Error('找不到所選月份資料');
@@ -25,6 +29,7 @@
     const pack={schema_version:1,period:ad(period),unit:'新台幣億元',source:'MOPS 月自結',
       data_updated_at:current.last_updated||'',coverage:{expected:13,available:0,missing:[]},
       holdings:[],subsidiaries:[],attribution:[],history:[],markets:[],news:[],limitations:[],
+      group_stats:{},quarter_groups:{},market_history:[],market_ranks:{},
       methodology:['金額為新台幣億元；顯示小數一位，計算保留原始精度。EPS 為元。',
         'YoY 與 MoM＝（本期－基期）÷基期絕對值；零基期及缺值不計百分比。跨零另註轉盈／轉虧。',
         '前3月平均不含當月；近3月合計與再前3月合計不重疊；缺任一必要月份不計算。',
@@ -35,6 +40,10 @@
         '市場同向不代表因果；手續費、VaR、避險成本等未揭露項目需財報／管理帳。']};
     const entity=(c,p,name)=>name?A.activeSubsidiaries(c?.subsidiaries,rules,c?.code,p).find(s=>s.name===name||s.name===rules.aliases?.[name]):c?.holding_company;
     const get=(p,code,name)=>{const c=A.company(history,p,code);return {c,h:entity(c,p,name)};};
+    const consolidationNote=(code,periods)=>{
+      const start=[...periods].sort()[0],end=[...periods].sort().at(-1);
+      return (rules.subsidiary_events||[]).find(e=>e.consolidation&&e.code===code&&start<e.month&&e.month<=end)?.label||'';
+    };
     function row(code,name=null) {
       const {c,h}=get(period,code,name),prev=get(before,code,name),old=get(prior,code,name);
       const monthly=yi(h?.monthly_profit,c?.unit),cumulative=yi(h?.cumulative_profit,c?.unit);
@@ -43,6 +52,23 @@
       const rankNote=A.reason({...rules,accounting:null},code,A.yearMonths(period),A.yearMonths(prior),name);
       const recent=A.range(A.shift(period,-1),3).map(p=>{const d=get(p,code,name);return yi(d.h?.monthly_profit,d.c?.unit);});
       const avg=recent.every(A.finite)?recent.reduce((a,b)=>a+b,0)/3:null;
+      const last12=A.range(period,12).map(p=>{const d=get(p,code,name);return yi(d.h?.monthly_profit,d.c?.unit);});
+      const rankScopeNote=A.reason({...rules,accounting:null},code,A.range(period,12),[],name)||(!name?consolidationNote(code,A.range(period,12)):'');
+      const rank12=last12.every(A.finite)?{rank:1+last12.filter(v=>v>monthly).length,of:12,note:dates(rankScopeNote)}:{rank:null,of:12,note:'近 12 個月資料不齊'};
+      const quarterValue=end=>{
+        const d=get(end,code,name), priorEnd=A.shift(end,-3);
+        const priorQuarter=priorEnd.endsWith('/12')?0:yi(get(priorEnd,code,name).h?.cumulative_profit,get(priorEnd,code,name).c?.unit);
+        const endCum=yi(d.h?.cumulative_profit,d.c?.unit);
+        return A.finite(endCum)&&A.finite(priorQuarter)?endCum-priorQuarter:null;
+      };
+      const quarter=Number(period.split('/')[1])%3===0?(()=>{
+        const currentQ=quarterValue(period),previousQ=quarterValue(A.shift(period,-3)),yearAgoQ=quarterValue(A.shift(period,-12));
+        const quarterMonths=A.range(period,3),previousMonths=A.range(A.shift(period,-3),3),yearAgoMonths=A.range(A.shift(period,-12),3);
+        return {current:currentQ,previous:previousQ,year_ago:yearAgoQ,
+          qoq:cmp(currentQ,previousQ,A.reason(rules,code,quarterMonths,previousMonths,name)||(!name?consolidationNote(code,[...quarterMonths,...previousMonths]):'')),
+          yoy:cmp(currentQ,yearAgoQ,A.reason(rules,code,quarterMonths,yearAgoMonths,name)||(!name?consolidationNote(code,[...quarterMonths,...yearAgoMonths]):'')),
+          methodology:'各季期末累計減期初前月累計'};
+      })():null;
       const rolling=A.comparison(history,rules,code,A.range(period,3),A.range(A.shift(period,-3),3),false,name);
       const a=h?.fvoci_adjusted;
       const adjMonthly=a?.value_type==='lower_bound'?null:yi(a?.monthly_profit,c?.unit);
@@ -56,7 +82,7 @@
       if(!noteAvg&&Math.abs(deviation.pct)>=20)markers.push('偏離前3月均值 ±20%');
       if(!monthNote&&!noteAvg&&mom.delta*deviation.delta<0)markers.push('月變化與近期水準背離');
       return {code,parent:c?.name||roster[code],name:name||c?.name||roster[code],industry:name?kind(name):'holding',
-        monthly,cumulative,monthly_eps:h?.monthly_eps??null,cumulative_eps:h?.cumulative_eps??null,
+        monthly,cumulative,monthly_eps:h?.monthly_eps??null,cumulative_eps:h?.cumulative_eps??null,rank12,quarter,
         mom,yoy:cmp(cumulative,yi(old.h?.cumulative_profit,old.c?.unit),yoyNote),
         monthly_yoy:cmp(monthly,yi(old.h?.monthly_profit,old.c?.unit)),
         average3:avg,deviation,rolling3:{current:rolling.cur===null?null:rolling.cur/100,base:rolling.base===null?null:rolling.base/100,pct:rolling.pct,note:dates(rolling.reason)},
@@ -97,6 +123,101 @@
     }
     for(const p of months){const m=history[p]?.market_summary;if(!m||m.period!==p)continue;
       for(const [key,v] of Object.entries(m.items||{}))pack.markets.push({period:ad(p),key,...v});
+    }
+    function entities(p, industry) {
+      const items=[];
+      for(const code of Object.keys(roster)) {
+        const c=A.company(history,p,code);
+        if(!c)continue;
+        const source=industry==='holding'?[c.holding_company]:A.activeSubsidiaries(c.subsidiaries,rules,code,p).filter(s=>kind(s.name)===industry);
+        for(const s of source)if(s)items.push({code,name:industry==='holding'?c.name:s.name,
+          monthly:yi(s.monthly_profit,c.unit)});
+      }
+      return items;
+    }
+    function scopeChanged(code,name,currentPeriod,basePeriod,industry) {
+      // Holding-company MoM/YoY follows each company's reported profit;
+      // disclose consolidation changes in notes rather than removing it from peers.
+      if(industry==='holding')return false;
+      if(A.reason({...rules,accounting:null},code,[currentPeriod],[basePeriod],name))return true;
+      return false;
+    }
+    function groupAt(p,industry) {
+      const before=A.shift(p,-1),lastYear=A.shift(p,-12);
+      const current=entities(p,industry),previous=entities(before,industry),old=entities(lastYear,industry);
+      const lookup=list=>new Map(list.map(r=>[`${r.code}|${r.name}`,r]));
+      const prevMap=lookup(previous),oldMap=lookup(old);
+      const compatible=(baseMap,basePeriod)=>current.filter(r=>A.finite(r.monthly)&&
+        A.finite(baseMap.get(`${r.code}|${r.name}`)?.monthly)&&!scopeChanged(r.code,r.name,p,basePeriod,industry));
+      const matched=compatible(prevMap,before),yearMatched=compatible(oldMap,lastYear);
+      const changes=matched.map(r=>({code:r.code,name:r.name,current:r.monthly,previous:prevMap.get(`${r.code}|${r.name}`).monthly,
+        delta:r.monthly-prevMap.get(`${r.code}|${r.name}`).monthly,
+        mom:cmp(r.monthly,prevMap.get(`${r.code}|${r.name}`).monthly)}));
+      const currentSum=sum(matched.map(r=>r.monthly)),previousSum=sum(changes.map(r=>r.previous));
+      const net=currentSum-previousSum,topChanges=[...changes].filter(r=>Math.sign(r.delta)===Math.sign(net))
+        .sort((a,b)=>Math.abs(b.delta)-Math.abs(a.delta)).slice(0,2);
+      const topProfit=[...matched].sort((a,b)=>b.monthly-a.monthly).slice(0,2);
+      const previousTop=[...changes].sort((a,b)=>b.previous-a.previous).slice(0,2);
+      const matchedYoY=sum(yearMatched.map(r=>r.monthly)),baseYoY=sum(yearMatched.map(r=>oldMap.get(`${r.code}|${r.name}`).monthly));
+      const pctValues=changes.map(r=>r.mom.pct).filter(A.finite);
+      const currentKeys=new Set(current.map(r=>`${r.code}|${r.name}`)),previousKeys=new Set(previous.map(r=>`${r.code}|${r.name}`));
+      const comparable=current.length===previous.length&&matched.length===current.length&&
+        current.every(r=>A.finite(r.monthly))&&previous.every(r=>A.finite(r.monthly))&&
+        [...currentKeys].every(key=>previousKeys.has(key));
+      return {industry,period:ad(p),total_current:current.every(r=>A.finite(r.monthly))?sum(current.map(r=>r.monthly)):null,
+        total_count:current.length,mom_cohort_count:matched.length,mom_current:currentSum,mom_previous:previousSum,
+        mom:matched.length?cmp(currentSum,previousSum):cmp(null,null),
+        yoy_cohort_count:yearMatched.length,monthly_yoy:yearMatched.length?cmp(matchedYoY,baseYoY):cmp(null,null),
+        increase_count:changes.filter(r=>r.delta>0).length,decrease_count:changes.filter(r=>r.delta<0).length,
+        flat_count:changes.filter(r=>r.delta===0).length,mom_median:average([ ...pctValues ].sort((a,b)=>a-b).slice(Math.floor((pctValues.length-1)/2),Math.ceil((pctValues.length+1)/2))),
+        top_changes:topChanges,top_two_change_share:net!==0?sum(topChanges.map(r=>r.delta))/net*100:null,
+        top_profit:topProfit,top_two_profit_share:currentSum>0?sum(topProfit.map(r=>r.monthly))/currentSum*100:null,
+        top_two_profit_share_previous:previousSum>0?sum(previousTop.map(r=>r.previous))/previousSum*100:null,
+        opposite_direction:changes.filter(r=>Math.sign(r.delta)===-Math.sign(net)&&r.delta!==0),
+        excluded_mom:current.filter(r=>!matched.includes(r)).map(r=>r.name),
+        excluded_yoy:current.filter(r=>!yearMatched.includes(r)).map(r=>r.name),
+        comparable};
+    }
+    const industries=['holding','life','bank','securities'];
+    for(const industry of industries)pack.group_stats[industry]=groupAt(period,industry);
+    if(Number(period.split('/')[1])%3===0)for(const industry of industries.slice(1)){
+      const same=pack.subsidiaries.filter(r=>r.industry===industry && r.quarter &&
+        [r.quarter.current,r.quarter.previous,r.quarter.year_ago].every(A.finite) &&
+        !A.reason({...rules,accounting:null},r.code,A.range(period,3),
+          [...A.range(A.shift(period,-3),3),...A.range(A.shift(period,-12),3)],r.name));
+      const current=sum(same.map(r=>r.quarter.current)),previous=sum(same.map(r=>r.quarter.previous)),yearAgo=sum(same.map(r=>r.quarter.year_ago));
+      pack.quarter_groups[industry]={cohort_count:same.length,names:same.map(r=>r.name),current,previous,year_ago:yearAgo,
+        qoq:same.length?cmp(current,previous):cmp(null,null),yoy:same.length?cmp(current,yearAgo):cmp(null,null)};
+    }
+    const studyKeys=['taiex','taiex_turnover','spx','us10y','tlt','usdtwd'];
+    const movement=item=>A.finite(item?.bps_change)?item.bps_change:item?.pct_change;
+    for(const key of studyKeys){
+      const entries=pack.markets.filter(m=>m.key===key&&A.finite(movement(m)));
+      const current=entries.find(m=>m.period===pack.period);
+      const change=movement(current);
+      pack.market_ranks[key]={change:A.finite(change)?change:null,of:entries.length,
+        rise_rank:A.finite(change)?1+entries.filter(m=>movement(m)>change).length:null,
+        fall_rank:A.finite(change)?1+entries.filter(m=>movement(m)<change).length:null};
+    }
+    for(const [industry,key] of [['life','tlt'],['life','taiex'],['securities','taiex_turnover'],['securities','taiex']]){
+      const observations=[];
+      for(const p of months){
+        const m=history[p]?.market_summary?.items?.[key],marketDelta=movement(m),g=groupAt(p,industry);
+        if(!A.finite(marketDelta)||!g.comparable||!A.finite(g.mom.delta)||marketDelta===0||g.mom.delta===0)continue;
+        observations.push({period:ad(p),market_direction:Math.sign(marketDelta),group_direction:Math.sign(g.mom.delta),group:g});
+      }
+      const records=pack.subsidiaries.filter(r=>r.industry===industry).map(r=>{
+        const usable=observations.map(o=>{
+          const p=roc(o.period),c=get(p,r.code,r.name),b=get(A.shift(p,-1),r.code,r.name);
+          const now=yi(c.h?.monthly_profit,c.c?.unit),prev=yi(b.h?.monthly_profit,b.c?.unit);
+          return A.finite(now)&&A.finite(prev)&&now!==prev&&!scopeChanged(r.code,r.name,p,A.shift(p,-1),industry)?Math.sign(now-prev)===o.market_direction:null;
+        }).filter(v=>v!==null);
+        return {code:r.code,name:r.name,same:usable.filter(Boolean).length,of:usable.length};
+      }).filter(r=>r.of>0);
+      const byMost=[...records].sort((a,b)=>b.same-a.same||b.of-a.of||a.name.localeCompare(b.name));
+      const byLeast=[...records].sort((a,b)=>a.same-b.same||b.of-a.of||a.name.localeCompare(b.name));
+      pack.market_history.push({industry,market_key:key,same:observations.filter(o=>o.market_direction===o.group_direction).length,
+        of:observations.length,periods:observations.map(o=>o.period),most:byMost.slice(0,2),least:byLeast.slice(0,2)});
     }
     if(pack.coverage.missing.length)pack.limitations.push(`公告資料 ${pack.coverage.available}/13 家；${pack.coverage.missing.join('；')}。`);
     const marketKeys=pack.markets.filter(m=>m.period===pack.period).map(m=>m.key);

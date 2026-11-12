@@ -3,7 +3,7 @@
   "period": "2026/09",
   "unit": "新台幣億元",
   "source": "MOPS 月自結",
-  "data_updated_at": "2026-10-15T23:48:57.650845",
+  "data_updated_at": "2026-10-20T13:31:07.286626",
   "coverage": {
     "expected": 13,
     "available": 13,
@@ -19,6 +19,31 @@
       "cumulative": 263.67,
       "monthly_eps": null,
       "cumulative_eps": 1.88,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 90.03000000000003,
+        "previous": 97.03999999999999,
+        "year_ago": 82.28,
+        "qoq": {
+          "base": 97.03999999999999,
+          "delta": -7.0099999999999625,
+          "pct": -7.223825226710597,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 82.28,
+          "delta": 7.750000000000028,
+          "pct": 9.419056878949963,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 33.71,
         "delta": -10.260000000000002,
@@ -73,6 +98,31 @@
       "cumulative": 1272.2,
       "monthly_eps": null,
       "cumulative_eps": 8.8,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 298.80000000000007,
+        "previous": 640.7,
+        "year_ago": 395.80000000000007,
+        "qoq": {
+          "base": 640.7,
+          "delta": -341.9,
+          "pct": -53.36350866240049,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 395.80000000000007,
+          "delta": -97,
+          "pct": -24.50732693279434,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 246.8,
         "delta": -177.20000000000002,
@@ -138,6 +188,31 @@
       "cumulative": 1053.6,
       "monthly_eps": null,
       "cumulative_eps": 6.94,
+      "rank12": {
+        "rank": 10,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 288.39999999999986,
+        "previous": 448.6,
+        "year_ago": 290.29999999999995,
+        "qoq": {
+          "base": 448.6,
+          "delta": -160.20000000000016,
+          "pct": -35.71110120374502,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 290.29999999999995,
+          "delta": -1.900000000000091,
+          "pct": -0.6544953496383367,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 113,
         "delta": -45.8,
@@ -203,6 +278,31 @@
       "cumulative": 389.31,
       "monthly_eps": null,
       "cumulative_eps": 2.26,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 104.91000000000003,
+        "previous": 167.49999999999997,
+        "year_ago": 135.76,
+        "qoq": {
+          "base": 167.49999999999997,
+          "delta": -62.58999999999995,
+          "pct": -37.36716417910445,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 135.76,
+          "delta": -30.849999999999966,
+          "pct": -22.723924572775463,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 57.61,
         "delta": -31.2,
@@ -268,6 +368,31 @@
       "cumulative": 318.46,
       "monthly_eps": null,
       "cumulative_eps": 1.95,
+      "rank12": {
+        "rank": 3,
+        "of": 12,
+        "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
+      },
+      "quarter": {
+        "current": 104.11999999999998,
+        "previous": 113.77000000000001,
+        "year_ago": 94.48999999999998,
+        "qoq": {
+          "base": 113.77000000000001,
+          "delta": -9.650000000000034,
+          "pct": -8.482025138437226,
+          "status": "normal",
+          "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
+        },
+        "yoy": {
+          "base": 94.48999999999998,
+          "delta": 9.629999999999995,
+          "pct": 10.191554661868977,
+          "status": "normal",
+          "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 35.95,
         "delta": 2.1099999999999994,
@@ -319,6 +444,31 @@
       "cumulative": 549.59,
       "monthly_eps": null,
       "cumulative_eps": 3.96,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 183.87,
+        "previous": 221.63000000000002,
+        "year_ago": 104.66999999999999,
+        "qoq": {
+          "base": 221.63000000000002,
+          "delta": -37.76000000000002,
+          "pct": -17.037404683481487,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 104.66999999999999,
+          "delta": 79.20000000000002,
+          "pct": 75.66638005159075,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 70.1,
         "delta": -19.919999999999995,
@@ -373,6 +523,31 @@
       "cumulative": 328.48,
       "monthly_eps": null,
       "cumulative_eps": 2.21,
+      "rank12": {
+        "rank": 5,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 115.41000000000003,
+        "previous": 119.1,
+        "year_ago": 100.94000000000003,
+        "qoq": {
+          "base": 119.1,
+          "delta": -3.6899999999999693,
+          "pct": -3.0982367758186142,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 100.94000000000003,
+          "delta": 14.469999999999999,
+          "pct": 14.33524866257182,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 35.6,
         "delta": 0.6899999999999977,
@@ -426,6 +601,31 @@
       "cumulative": 641.2,
       "monthly_eps": null,
       "cumulative_eps": 2.47,
+      "rank12": {
+        "rank": 11,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 203.20000000000005,
+        "previous": 227.6,
+        "year_ago": 123.89999999999999,
+        "qoq": {
+          "base": 227.6,
+          "delta": -24.39999999999995,
+          "pct": -10.72056239015815,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 123.89999999999999,
+          "delta": 79.30000000000005,
+          "pct": 64.00322841000812,
+          "status": "normal",
+          "note": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 69.6,
         "delta": -25.39999999999999,
@@ -480,6 +680,31 @@
       "cumulative": 36.93,
       "monthly_eps": null,
       "cumulative_eps": 1.01,
+      "rank12": {
+        "rank": 6,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 9.100000000000001,
+        "previous": 18.86,
+        "year_ago": 10.5,
+        "qoq": {
+          "base": 18.86,
+          "delta": -9.759999999999998,
+          "pct": -51.74973488865322,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 10.5,
+          "delta": -1.3999999999999986,
+          "pct": -13.33333333333332,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 3.75,
         "delta": -0.29000000000000004,
@@ -533,6 +758,31 @@
       "cumulative": 367.76,
       "monthly_eps": 0.23,
       "cumulative_eps": 2.49,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 122.25999999999999,
+        "previous": 136.09,
+        "year_ago": 78.66,
+        "qoq": {
+          "base": 136.09,
+          "delta": -13.830000000000013,
+          "pct": -10.162392534352275,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 78.66,
+          "delta": 43.599999999999994,
+          "pct": 55.42842613780829,
+          "status": "normal",
+          "note": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 44.12,
         "delta": -9.799999999999997,
@@ -587,6 +837,31 @@
       "cumulative": 632.37,
       "monthly_eps": null,
       "cumulative_eps": 3.18,
+      "rank12": {
+        "rank": 2,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 237,
+        "previous": 164.33,
+        "year_ago": 249.18,
+        "qoq": {
+          "base": 164.33,
+          "delta": 72.66999999999999,
+          "pct": 44.221992332501664,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 249.18,
+          "delta": -12.180000000000007,
+          "pct": -4.888032747411512,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 99.31,
         "delta": -5.730000000000004,
@@ -652,6 +927,31 @@
       "cumulative": 262.25,
       "monthly_eps": null,
       "cumulative_eps": 1.82,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 84.27000000000001,
+        "previous": 95.53999999999999,
+        "year_ago": 77.53,
+        "qoq": {
+          "base": 95.53999999999999,
+          "delta": -11.269999999999982,
+          "pct": -11.79610634289301,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 77.53,
+          "delta": 6.740000000000009,
+          "pct": 8.693409002966606,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 29.13,
         "delta": -5.379999999999999,
@@ -706,6 +1006,31 @@
       "cumulative": 196.08,
       "monthly_eps": null,
       "cumulative_eps": 1.22,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 67.19000000000003,
+        "previous": 72.98999999999998,
+        "year_ago": 60.61999999999999,
+        "qoq": {
+          "base": 72.98999999999998,
+          "delta": -5.7999999999999545,
+          "pct": -7.946294012878416,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 60.61999999999999,
+          "delta": 6.570000000000036,
+          "pct": 10.838007258330645,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 22.48,
         "delta": -3.240000000000002,
@@ -759,6 +1084,31 @@
       "cumulative": 209.87,
       "monthly_eps": null,
       "cumulative_eps": 1.97,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 77.28,
+        "previous": 71.18,
+        "year_ago": 73.02,
+        "qoq": {
+          "base": 71.18,
+          "delta": 6.099999999999994,
+          "pct": 8.569822983984258,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 73.02,
+          "delta": 4.260000000000005,
+          "pct": 5.8340180772391195,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 27.9,
         "delta": -7.939999999999998,
@@ -813,6 +1163,31 @@
       "cumulative": 42.48,
       "monthly_eps": null,
       "cumulative_eps": 6.49,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 10.139999999999993,
+        "previous": 21.040000000000003,
+        "year_ago": 7.180000000000001,
+        "qoq": {
+          "base": 21.040000000000003,
+          "delta": -10.90000000000001,
+          "pct": -51.806083650190146,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 7.180000000000001,
+          "delta": 2.959999999999993,
+          "pct": 41.22562674094697,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 4.54,
         "delta": -1.9100000000000001,
@@ -867,6 +1242,31 @@
       "cumulative": 16.75,
       "monthly_eps": null,
       "cumulative_eps": 8.37,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 5.76,
+        "previous": 5.930000000000001,
+        "year_ago": 4.9399999999999995,
+        "qoq": {
+          "base": 5.930000000000001,
+          "delta": -0.17000000000000082,
+          "pct": -2.8667790893760676,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 4.9399999999999995,
+          "delta": 0.8200000000000003,
+          "pct": 16.599190283400816,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 1.85,
         "delta": -0.16000000000000014,
@@ -918,6 +1318,31 @@
       "cumulative": 372,
       "monthly_eps": null,
       "cumulative_eps": 2.16,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 114.69999999999999,
+        "previous": 135.70000000000002,
+        "year_ago": 96.39999999999998,
+        "qoq": {
+          "base": 135.70000000000002,
+          "delta": -21.00000000000003,
+          "pct": -15.475313190862213,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 96.39999999999998,
+          "delta": 18.30000000000001,
+          "pct": 18.98340248962657,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 43.2,
         "delta": -8.100000000000001,
@@ -971,6 +1396,31 @@
       "cumulative": 179,
       "monthly_eps": null,
       "cumulative_eps": 11.01,
+      "rank12": {
+        "rank": 3,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 68.8,
+        "previous": 70.6,
+        "year_ago": 35.8,
+        "qoq": {
+          "base": 70.6,
+          "delta": -1.7999999999999972,
+          "pct": -2.549575070821526,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 35.8,
+          "delta": 33,
+          "pct": 92.17877094972067,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 23.2,
         "delta": 0.6999999999999993,
@@ -1022,6 +1472,31 @@
       "cumulative": 79.6,
       "monthly_eps": null,
       "cumulative_eps": 26.53,
+      "rank12": {
+        "rank": 6,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 23.699999999999996,
+        "previous": 30,
+        "year_ago": 22.1,
+        "qoq": {
+          "base": 30,
+          "delta": -6.300000000000004,
+          "pct": -21.000000000000014,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 22.1,
+          "delta": 1.5999999999999943,
+          "pct": 7.239819004524861,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 7.2,
         "delta": 0.9999999999999991,
@@ -1075,6 +1550,31 @@
       "cumulative": 658.5,
       "monthly_eps": null,
       "cumulative_eps": 5.56,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 102.70000000000005,
+        "previous": 404.59999999999997,
+        "year_ago": 233.1,
+        "qoq": {
+          "base": 404.59999999999997,
+          "delta": -301.8999999999999,
+          "pct": -74.6169055857637,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 233.1,
+          "delta": -130.39999999999995,
+          "pct": -55.941655941655924,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 172.5,
         "delta": -165.8,
@@ -1140,6 +1640,31 @@
       "cumulative": 13.8,
       "monthly_eps": null,
       "cumulative_eps": 5.1,
+      "rank12": {
+        "rank": null,
+        "of": 12,
+        "note": "近 12 個月資料不齊"
+      },
+      "quarter": {
+        "current": 4.9,
+        "previous": 4.800000000000001,
+        "year_ago": null,
+        "qoq": {
+          "base": 4.800000000000001,
+          "delta": 0.09999999999999964,
+          "pct": 2.0833333333333255,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "比較月份資料不足"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 1.9,
         "delta": -0.3999999999999999,
@@ -1193,6 +1718,31 @@
       "cumulative": 601.7,
       "monthly_eps": null,
       "cumulative_eps": 9.46,
+      "rank12": {
+        "rank": 10,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 139.30000000000007,
+        "previous": 288.7,
+        "year_ago": 156.1,
+        "qoq": {
+          "base": 288.7,
+          "delta": -149.39999999999992,
+          "pct": -51.74922064426738,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 156.1,
+          "delta": -16.799999999999926,
+          "pct": -10.762331838564975,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 67.4,
         "delta": -49.800000000000004,
@@ -1258,6 +1808,31 @@
       "cumulative": 391.7,
       "monthly_eps": null,
       "cumulative_eps": 2.86,
+      "rank12": {
+        "rank": 6,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 121.80000000000001,
+        "previous": 137.89999999999998,
+        "year_ago": 113.09999999999997,
+        "qoq": {
+          "base": 137.89999999999998,
+          "delta": -16.099999999999966,
+          "pct": -11.675126903553275,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 113.09999999999997,
+          "delta": 8.700000000000045,
+          "pct": 7.692307692307734,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 37.1,
         "delta": 4.600000000000001,
@@ -1311,6 +1886,31 @@
       "cumulative": 35.9,
       "monthly_eps": null,
       "cumulative_eps": 17.93,
+      "rank12": {
+        "rank": 5,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 12.5,
+        "previous": 12.799999999999999,
+        "year_ago": 9.399999999999999,
+        "qoq": {
+          "base": 12.799999999999999,
+          "delta": -0.29999999999999893,
+          "pct": -2.343749999999992,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 9.399999999999999,
+          "delta": 3.1000000000000014,
+          "pct": 32.97872340425534,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 3.2,
         "delta": 0.7999999999999998,
@@ -1365,6 +1965,31 @@
       "cumulative": 69.6,
       "monthly_eps": null,
       "cumulative_eps": 8.71,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 25.499999999999993,
+        "previous": 28.700000000000003,
+        "year_ago": 12.899999999999999,
+        "qoq": {
+          "base": 28.700000000000003,
+          "delta": -3.20000000000001,
+          "pct": -11.149825783972158,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 12.899999999999999,
+          "delta": 12.599999999999994,
+          "pct": 97.67441860465112,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 8.9,
         "delta": -2.2,
@@ -1419,6 +2044,31 @@
       "cumulative": 28.9,
       "monthly_eps": null,
       "cumulative_eps": 19.26,
+      "rank12": {
+        "rank": 2,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 12.399999999999999,
+        "previous": 7.9,
+        "year_ago": 6.300000000000001,
+        "qoq": {
+          "base": 7.9,
+          "delta": 4.499999999999998,
+          "pct": 56.962025316455666,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 6.300000000000001,
+          "delta": 6.099999999999998,
+          "pct": 96.82539682539678,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 3.7,
         "delta": 0.19999999999999973,
@@ -1470,6 +2120,31 @@
       "cumulative": 134.51,
       "monthly_eps": null,
       "cumulative_eps": 2.55,
+      "rank12": {
+        "rank": 10,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 42.47999999999999,
+        "previous": 44.07,
+        "year_ago": 81.91999999999999,
+        "qoq": {
+          "base": 44.07,
+          "delta": -1.5900000000000105,
+          "pct": -3.607896528250534,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 81.91999999999999,
+          "delta": -39.44,
+          "pct": -48.14453125000001,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 22.49,
         "delta": -14.499999999999998,
@@ -1535,11 +2210,36 @@
       "cumulative": 52.69,
       "monthly_eps": null,
       "cumulative_eps": 1.12,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 9.93,
+        "previous": 21.77,
+        "year_ago": 19.15,
+        "qoq": {
+          "base": 21.77,
+          "delta": -11.84,
+          "pct": -54.386770785484615,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 19.15,
+          "delta": -9.219999999999999,
+          "pct": -48.14621409921671,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": -2.99,
         "delta": 9.129999999999999,
-        "pct": 305.3511705685618,
-        "status": "normal",
+        "pct": null,
+        "status": "loss_to_profit",
         "note": ""
       },
       "yoy": {
@@ -1574,7 +2274,6 @@
       "rank_note": "",
       "markers": [
         "虧轉盈",
-        "MoM 達 ±15%",
         "偏離前3月均值 ±20%"
       ],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2883&seq_no=1&TYPEK=all",
@@ -1590,6 +2289,31 @@
       "cumulative": 13.71,
       "monthly_eps": null,
       "cumulative_eps": 0.67,
+      "rank12": {
+        "rank": 2,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 6.220000000000001,
+        "previous": 5.63,
+        "year_ago": 4.0200000000000005,
+        "qoq": {
+          "base": 5.63,
+          "delta": 0.5900000000000007,
+          "pct": 10.479573712255787,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 4.0200000000000005,
+          "delta": 2.2,
+          "pct": 54.72636815920397,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 2.48,
         "delta": 1.5699999999999998,
@@ -1644,6 +2368,31 @@
       "cumulative": 242.26,
       "monthly_eps": null,
       "cumulative_eps": 11.44,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 62.89999999999998,
+        "previous": 120.30000000000001,
+        "year_ago": 44.54,
+        "qoq": {
+          "base": 120.30000000000001,
+          "delta": -57.400000000000034,
+          "pct": -47.71404821280135,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 44.54,
+          "delta": 18.359999999999978,
+          "pct": 41.221374045801475,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 40.96,
         "delta": -26.23,
@@ -1698,6 +2447,31 @@
       "cumulative": 279.51,
       "monthly_eps": null,
       "cumulative_eps": 1.91,
+      "rank12": {
+        "rank": 4,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 91.47999999999999,
+        "previous": 100.41,
+        "year_ago": 83.5,
+        "qoq": {
+          "base": 100.41,
+          "delta": -8.930000000000007,
+          "pct": -8.893536500348578,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 83.5,
+          "delta": 7.97999999999999,
+          "pct": 9.556886227544897,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 30.19,
         "delta": 0.8499999999999979,
@@ -1751,19 +2525,44 @@
       "cumulative": 1.44,
       "monthly_eps": null,
       "cumulative_eps": 0.02,
+      "rank12": {
+        "rank": null,
+        "of": 12,
+        "note": "近 12 個月資料不齊"
+      },
+      "quarter": {
+        "current": null,
+        "previous": null,
+        "year_ago": null,
+        "qoq": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
+        },
+        "yoy": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": null,
         "delta": null,
         "pct": null,
         "status": "missing",
-        "note": "比較月份資料不足"
+        "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
       },
       "yoy": {
         "base": null,
         "delta": null,
         "pct": null,
         "status": "missing",
-        "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
       },
       "monthly_yoy": {
         "base": null,
@@ -1778,16 +2577,16 @@
         "delta": null,
         "pct": null,
         "status": "missing",
-        "note": "比較月份資料不足"
+        "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
       },
       "rolling3": {
         "current": null,
         "base": null,
         "pct": null,
-        "note": "比較月份資料不足"
+        "note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
       },
       "yoy_rank_eligible": false,
-      "rank_note": "",
+      "rank_note": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數",
       "markers": [],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
       "announcement_date": "2026/10/15",
@@ -1802,6 +2601,31 @@
       "cumulative": 40.43,
       "monthly_eps": null,
       "cumulative_eps": 7.32,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 12.259999999999998,
+        "previous": 17.64,
+        "year_ago": 8.540000000000001,
+        "qoq": {
+          "base": 17.64,
+          "delta": -5.380000000000003,
+          "pct": -30.498866213151942,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 8.540000000000001,
+          "delta": 3.719999999999997,
+          "pct": 43.55971896955499,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 4.24,
         "delta": -0.5100000000000002,
@@ -1855,6 +2679,31 @@
       "cumulative": 10.29,
       "monthly_eps": null,
       "cumulative_eps": 1.87,
+      "rank12": {
+        "rank": 4,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 0.25,
+        "previous": 2.9399999999999995,
+        "year_ago": 3.9,
+        "qoq": {
+          "base": 2.9399999999999995,
+          "delta": -2.6899999999999995,
+          "pct": -91.49659863945578,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 3.9,
+          "delta": -3.65,
+          "pct": -93.58974358974359,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 3.82,
         "delta": -1.5799999999999996,
@@ -1872,16 +2721,16 @@
       "monthly_yoy": {
         "base": -1.17,
         "delta": 3.41,
-        "pct": 291.45299145299145,
-        "status": "normal",
+        "pct": null,
+        "status": "loss_to_profit",
         "note": ""
       },
       "average3": -0.9066666666666664,
       "deviation": {
         "base": -0.9066666666666664,
         "delta": 3.1466666666666665,
-        "pct": 347.0588235294119,
-        "status": "normal",
+        "pct": null,
+        "status": "loss_to_profit",
         "note": ""
       },
       "rolling3": {
@@ -1894,7 +2743,6 @@
       "rank_note": "",
       "markers": [
         "MoM 達 ±15%",
-        "偏離前3月均值 ±20%",
         "月變化與近期水準背離"
       ],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
@@ -1910,6 +2758,31 @@
       "cumulative": 4.51,
       "monthly_eps": null,
       "cumulative_eps": 15.02,
+      "rank12": {
+        "rank": 1,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 1.7899999999999996,
+        "previous": 1.7200000000000002,
+        "year_ago": null,
+        "qoq": {
+          "base": 1.7200000000000002,
+          "delta": 0.0699999999999994,
+          "pct": 4.06976744186043,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "比較月份資料不足"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.52,
         "delta": 0.31999999999999995,
@@ -1964,6 +2837,31 @@
       "cumulative": 370.57,
       "monthly_eps": null,
       "cumulative_eps": 5.2,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 125.28999999999999,
+        "previous": 157.93,
+        "year_ago": 69.07,
+        "qoq": {
+          "base": 157.93,
+          "delta": -32.640000000000015,
+          "pct": -20.667384284176542,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 69.07,
+          "delta": 56.22,
+          "pct": 81.39568553641234,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 45.06,
         "delta": -12.830000000000005,
@@ -2018,6 +2916,31 @@
       "cumulative": 121.64,
       "monthly_eps": null,
       "cumulative_eps": 1.32,
+      "rank12": {
+        "rank": 5,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 44.72,
+        "previous": 40.04,
+        "year_ago": 31.199999999999996,
+        "qoq": {
+          "base": 40.04,
+          "delta": 4.68,
+          "pct": 11.688311688311687,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 31.199999999999996,
+          "delta": 13.520000000000003,
+          "pct": 43.33333333333335,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 15.32,
         "delta": -1.2699999999999996,
@@ -2069,6 +2992,31 @@
       "cumulative": 26.23,
       "monthly_eps": null,
       "cumulative_eps": 6.97,
+      "rank12": {
+        "rank": 4,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 10.790000000000001,
+        "previous": 8.44,
+        "year_ago": 7.07,
+        "qoq": {
+          "base": 8.44,
+          "delta": 2.3500000000000014,
+          "pct": 27.843601895734615,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 7.07,
+          "delta": 3.7200000000000006,
+          "pct": 52.61669024045263,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 3.45,
         "delta": -0.4900000000000002,
@@ -2122,18 +3070,43 @@
       "cumulative": 27.5,
       "monthly_eps": null,
       "cumulative_eps": 0.94,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 3.09,
+        "previous": 11.51,
+        "year_ago": -4.62,
+        "qoq": {
+          "base": 11.51,
+          "delta": -8.42,
+          "pct": -73.15377932232842,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": -4.62,
+          "delta": 7.71,
+          "pct": null,
+          "status": "loss_to_profit",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 3.55,
         "delta": -4.04,
-        "pct": -113.80281690140845,
-        "status": "normal",
+        "pct": null,
+        "status": "profit_to_loss",
         "note": ""
       },
       "yoy": {
         "base": -3.12,
         "delta": 30.62,
-        "pct": 981.4102564102564,
-        "status": "normal",
+        "pct": null,
+        "status": "loss_to_profit",
         "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
       },
       "monthly_yoy": {
@@ -2147,8 +3120,8 @@
       "deviation": {
         "base": 1.9133333333333333,
         "delta": -2.4033333333333333,
-        "pct": -125.60975609756098,
-        "status": "normal",
+        "pct": null,
+        "status": "profit_to_loss",
         "note": ""
       },
       "rolling3": {
@@ -2160,9 +3133,7 @@
       "yoy_rank_eligible": false,
       "rank_note": "",
       "markers": [
-        "盈轉虧",
-        "MoM 達 ±15%",
-        "偏離前3月均值 ±20%"
+        "盈轉虧"
       ],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2885&seq_no=1&TYPEK=all",
       "announcement_date": "2026/10/13",
@@ -2177,6 +3148,31 @@
       "cumulative": 48.47,
       "monthly_eps": null,
       "cumulative_eps": 21.36,
+      "rank12": {
+        "rank": 2,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 18.799999999999997,
+        "previous": 16.76,
+        "year_ago": 10.100000000000001,
+        "qoq": {
+          "base": 16.76,
+          "delta": 2.0399999999999956,
+          "pct": 12.171837708830521,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 10.100000000000001,
+          "delta": 8.699999999999996,
+          "pct": 86.13861386138608,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 6.39,
         "delta": -0.09999999999999964,
@@ -2230,6 +3226,31 @@
       "cumulative": 248.18,
       "monthly_eps": null,
       "cumulative_eps": 2.48,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 89.52000000000001,
+        "previous": 87.86,
+        "year_ago": 80.31,
+        "qoq": {
+          "base": 87.86,
+          "delta": 1.6600000000000108,
+          "pct": 1.8893694513999668,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 80.31,
+          "delta": 9.210000000000008,
+          "pct": 11.468061262607405,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 25.34,
         "delta": -3.280000000000001,
@@ -2283,6 +3304,31 @@
       "cumulative": 50.33,
       "monthly_eps": null,
       "cumulative_eps": 4.2,
+      "rank12": {
+        "rank": 1,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 15.07,
+        "previous": 21.799999999999997,
+        "year_ago": 11.5,
+        "qoq": {
+          "base": 21.799999999999997,
+          "delta": -6.729999999999997,
+          "pct": -30.871559633027513,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 11.5,
+          "delta": 3.5700000000000003,
+          "pct": 31.043478260869566,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 7.25,
         "delta": 4.51,
@@ -2337,6 +3383,31 @@
       "cumulative": 25.43,
       "monthly_eps": null,
       "cumulative_eps": 1.68,
+      "rank12": {
+        "rank": 12,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 7.43,
+        "previous": 9.73,
+        "year_ago": 6.729999999999999,
+        "qoq": {
+          "base": 9.73,
+          "delta": -2.3000000000000007,
+          "pct": -23.6382322713258,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 6.729999999999999,
+          "delta": 0.7000000000000011,
+          "pct": 10.40118870728085,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 2.22,
         "delta": -0.5200000000000002,
@@ -2391,6 +3462,31 @@
       "cumulative": 8.6,
       "monthly_eps": null,
       "cumulative_eps": 2.62,
+      "rank12": {
+        "rank": 2,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 2.9699999999999998,
+        "previous": 3.3,
+        "year_ago": 2.58,
+        "qoq": {
+          "base": 3.3,
+          "delta": -0.33000000000000007,
+          "pct": -10.000000000000004,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 2.58,
+          "delta": 0.3899999999999997,
+          "pct": 15.11627906976743,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.82,
         "delta": 0.31999999999999995,
@@ -2444,6 +3540,31 @@
       "cumulative": 193.4,
       "monthly_eps": null,
       "cumulative_eps": 1.57,
+      "rank12": {
+        "rank": 8,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 69.4,
+        "previous": 60.5,
+        "year_ago": 56,
+        "qoq": {
+          "base": 60.5,
+          "delta": 8.900000000000006,
+          "pct": 14.710743801652901,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 56,
+          "delta": 13.400000000000006,
+          "pct": 23.928571428571438,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 25.1,
         "delta": -5.900000000000002,
@@ -2498,6 +3619,31 @@
       "cumulative": 75.5,
       "monthly_eps": null,
       "cumulative_eps": 1.51,
+      "rank12": {
+        "rank": 11,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 27.700000000000003,
+        "previous": 25.4,
+        "year_ago": null,
+        "qoq": {
+          "base": 25.4,
+          "delta": 2.3000000000000043,
+          "pct": 9.055118110236238,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 8.5,
         "delta": -2.2,
@@ -2552,6 +3698,31 @@
       "cumulative": 322.2,
       "monthly_eps": null,
       "cumulative_eps": 3.49,
+      "rank12": {
+        "rank": 10,
+        "of": 12,
+        "note": "2026/01 壽險子公司整併"
+      },
+      "quarter": {
+        "current": 97.19999999999999,
+        "previous": 105.8,
+        "year_ago": null,
+        "qoq": {
+          "base": 105.8,
+          "delta": -8.600000000000009,
+          "pct": -8.128544423440461,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 20.8,
         "delta": -2.1000000000000014,
@@ -2594,18 +3765,7 @@
       ],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2887&seq_no=1&TYPEK=all",
       "announcement_date": "2026/10/14",
-      "fvoci": {
-        "monthly": null,
-        "cumulative": 936.2,
-        "value_type": "exact",
-        "prefix": "逾",
-        "monthly_prefix": "逾",
-        "disposal_monthly": null,
-        "disposal_method": "由同一期加計後金額減原始稅後淨利計算，需留意來源是否同為稅後數",
-        "quote": "另前九月FVOCI股票處分利益546.9億元，加計稅後純益後，對保留盈餘貢獻936.2億元，創歷年同期新高。（新光人壽）",
-        "source_url": "https://udn.com/news/story/7239/9815175",
-        "yoy": null
-      }
+      "fvoci": null
     },
     {
       "code": "2887",
@@ -2616,6 +3776,31 @@
       "cumulative": 73.9,
       "monthly_eps": null,
       "cumulative_eps": 2.95,
+      "rank12": {
+        "rank": 8,
+        "of": 12,
+        "note": "2026/04/06 元富證券併入台新證券；4 月為過渡月份"
+      },
+      "quarter": {
+        "current": 18.60000000000001,
+        "previous": 39.599999999999994,
+        "year_ago": 10.1,
+        "qoq": {
+          "base": 39.599999999999994,
+          "delta": -20.999999999999986,
+          "pct": -53.030303030303,
+          "status": "normal",
+          "note": "2026/04/06 元富證券併入台新證券；4 月為過渡月份"
+        },
+        "yoy": {
+          "base": 10.1,
+          "delta": 8.500000000000009,
+          "pct": 84.15841584158424,
+          "status": "normal",
+          "note": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 15.5,
         "delta": -12.2,
@@ -2670,6 +3855,31 @@
       "cumulative": 21.41,
       "monthly_eps": null,
       "cumulative_eps": 1.14,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 5.82,
+        "previous": 8.51,
+        "year_ago": 5.67,
+        "qoq": {
+          "base": 8.51,
+          "delta": -2.6899999999999995,
+          "pct": -31.609870740305517,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 5.67,
+          "delta": 0.15000000000000036,
+          "pct": 2.645502645502652,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 2.15,
         "delta": -0.34999999999999987,
@@ -2724,6 +3934,31 @@
       "cumulative": 32.56,
       "monthly_eps": null,
       "cumulative_eps": 2.83,
+      "rank12": {
+        "rank": 4,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 12.130000000000003,
+        "previous": 14.43,
+        "year_ago": 7.04,
+        "qoq": {
+          "base": 14.43,
+          "delta": -2.299999999999997,
+          "pct": -15.939015939015919,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 7.04,
+          "delta": 5.0900000000000025,
+          "pct": 72.3011363636364,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 5.14,
         "delta": -0.6099999999999994,
@@ -2777,6 +4012,31 @@
       "cumulative": 189.73,
       "monthly_eps": 0.15,
       "cumulative_eps": 1.59,
+      "rank12": {
+        "rank": 8,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 54.48999999999998,
+        "previous": 61.750000000000014,
+        "year_ago": 49.120000000000005,
+        "qoq": {
+          "base": 61.750000000000014,
+          "delta": -7.2600000000000335,
+          "pct": -11.757085020242966,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 49.120000000000005,
+          "delta": 5.369999999999976,
+          "pct": 10.932410423452719,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 17.27,
         "delta": 0.010000000000001563,
@@ -2830,6 +4090,31 @@
       "cumulative": 51.04,
       "monthly_eps": 0.26,
       "cumulative_eps": 4.59,
+      "rank12": {
+        "rank": 12,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 13.479999999999997,
+        "previous": 22.17,
+        "year_ago": null,
+        "qoq": {
+          "base": 22.17,
+          "delta": -8.690000000000005,
+          "pct": -39.19711321605776,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": null,
+          "delta": null,
+          "pct": null,
+          "status": "missing",
+          "note": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 4.96,
         "delta": -2.11,
@@ -2884,6 +4169,31 @@
       "cumulative": 116.46,
       "monthly_eps": 0.83,
       "cumulative_eps": 6.72,
+      "rank12": {
+        "rank": 3,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 42.97999999999999,
+        "previous": 49.86,
+        "year_ago": 27.22,
+        "qoq": {
+          "base": 49.86,
+          "delta": -6.88000000000001,
+          "pct": -13.79863618130768,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 27.22,
+          "delta": 15.759999999999991,
+          "pct": 57.8986039676708,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 14.39,
         "delta": 0.049999999999998934,
@@ -2896,7 +4206,7 @@
         "delta": 68.24,
         "pct": 141.51804230609707,
         "status": "normal",
-        "note": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列"
+        "note": ""
       },
       "monthly_yoy": {
         "base": 8.58,
@@ -2919,8 +4229,8 @@
         "pct": -13.778580024067388,
         "note": ""
       },
-      "yoy_rank_eligible": false,
-      "rank_note": "2025/10/01 京城銀行成為永豐金控全資子公司；永豐銀行與京城銀行仍分列",
+      "yoy_rank_eligible": true,
+      "rank_note": "",
       "markers": [],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2890&seq_no=1&TYPEK=all",
       "announcement_date": "2026/10/08",
@@ -2935,6 +4245,31 @@
       "cumulative": 495.25,
       "monthly_eps": null,
       "cumulative_eps": 2.65,
+      "rank12": {
+        "rank": 1,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 183.47000000000003,
+        "previous": 145.91999999999996,
+        "year_ago": 142.94,
+        "qoq": {
+          "base": 145.91999999999996,
+          "delta": 37.55000000000007,
+          "pct": 25.733278508771985,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 142.94,
+          "delta": 40.53000000000003,
+          "pct": 28.354554358472107,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 69.11,
         "delta": 0.18000000000000682,
@@ -2988,6 +4323,31 @@
       "cumulative": 149.28,
       "monthly_eps": null,
       "cumulative_eps": 2.4,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 46.519999999999996,
+        "previous": 25.24000000000001,
+        "year_ago": 105.24000000000001,
+        "qoq": {
+          "base": 25.24000000000001,
+          "delta": 21.279999999999987,
+          "pct": 84.31061806656092,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 105.24000000000001,
+          "delta": -58.72000000000001,
+          "pct": -55.79627518053972,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 30.59,
         "delta": -17.67,
@@ -3053,6 +4413,31 @@
       "cumulative": 232.23,
       "monthly_eps": null,
       "cumulative_eps": 1.85,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 77.66999999999999,
+        "previous": 78.83,
+        "year_ago": 67.44,
+        "qoq": {
+          "base": 78.83,
+          "delta": -1.1600000000000108,
+          "pct": -1.4715209945452377,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 67.44,
+          "delta": 10.22999999999999,
+          "pct": 15.169039145907458,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 24.52,
         "delta": -3.3900000000000006,
@@ -3106,6 +4491,31 @@
       "cumulative": 20.05,
       "monthly_eps": null,
       "cumulative_eps": 2.91,
+      "rank12": {
+        "rank": 4,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 5.940000000000001,
+        "previous": 9,
+        "year_ago": 4.58,
+        "qoq": {
+          "base": 9,
+          "delta": -3.0599999999999987,
+          "pct": -33.999999999999986,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 4.58,
+          "delta": 1.3600000000000012,
+          "pct": 29.69432314410483,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 2.23,
         "delta": 0.2799999999999998,
@@ -3157,11 +4567,36 @@
       "cumulative": 6.48,
       "monthly_eps": null,
       "cumulative_eps": 0.95,
+      "rank12": {
+        "rank": 11,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 2.3000000000000007,
+        "previous": 2.6499999999999995,
+        "year_ago": 5.05,
+        "qoq": {
+          "base": 2.6499999999999995,
+          "delta": -0.34999999999999876,
+          "pct": -13.207547169811276,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 5.05,
+          "delta": -2.749999999999999,
+          "pct": -54.455445544554436,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.71,
         "delta": -0.87,
-        "pct": -122.53521126760565,
-        "status": "normal",
+        "pct": null,
+        "status": "profit_to_loss",
         "note": ""
       },
       "yoy": {
@@ -3174,16 +4609,16 @@
       "monthly_yoy": {
         "base": 1.96,
         "delta": -2.12,
-        "pct": -108.16326530612245,
-        "status": "normal",
+        "pct": null,
+        "status": "profit_to_loss",
         "note": ""
       },
       "average3": 1.0433333333333332,
       "deviation": {
         "base": 1.0433333333333332,
         "delta": -1.2033333333333331,
-        "pct": -115.33546325878594,
-        "status": "normal",
+        "pct": null,
+        "status": "profit_to_loss",
         "note": ""
       },
       "rolling3": {
@@ -3195,9 +4630,7 @@
       "yoy_rank_eligible": true,
       "rank_note": "",
       "markers": [
-        "盈轉虧",
-        "MoM 達 ±15%",
-        "偏離前3月均值 ±20%"
+        "盈轉虧"
       ],
       "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2892&seq_no=1&TYPEK=all",
       "announcement_date": "2026/10/13",
@@ -3212,6 +4645,31 @@
       "cumulative": 179.84,
       "monthly_eps": null,
       "cumulative_eps": 1.27,
+      "rank12": {
+        "rank": 7,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 64.8,
+        "previous": 64.19,
+        "year_ago": 54.67999999999999,
+        "qoq": {
+          "base": 64.19,
+          "delta": 0.6099999999999994,
+          "pct": 0.9503037856363911,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 54.67999999999999,
+          "delta": 10.120000000000005,
+          "pct": 18.50768105340162,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 19.52,
         "delta": -1.75,
@@ -3265,6 +4723,31 @@
       "cumulative": 3.04,
       "monthly_eps": null,
       "cumulative_eps": 0.97,
+      "rank12": {
+        "rank": 8,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 1.06,
+        "previous": 1.0899999999999999,
+        "year_ago": 0.9800000000000002,
+        "qoq": {
+          "base": 1.0899999999999999,
+          "delta": -0.029999999999999805,
+          "pct": -2.752293577981634,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 0.9800000000000002,
+          "delta": 0.07999999999999985,
+          "pct": 8.163265306122431,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.35,
         "delta": -0.03999999999999998,
@@ -3316,6 +4799,31 @@
       "cumulative": 4.27,
       "monthly_eps": null,
       "cumulative_eps": 0.88,
+      "rank12": {
+        "rank": 8,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 1.0399999999999996,
+        "previous": 2.05,
+        "year_ago": 1.0200000000000002,
+        "qoq": {
+          "base": 2.05,
+          "delta": -1.0100000000000002,
+          "pct": -49.26829268292685,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 1.0200000000000002,
+          "delta": 0.01999999999999935,
+          "pct": 1.9607843137254264,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.3,
         "delta": 0.010000000000000009,
@@ -3370,6 +4878,31 @@
       "cumulative": 17.22,
       "monthly_eps": null,
       "cumulative_eps": 3.31,
+      "rank12": {
+        "rank": 6,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 3.339999999999998,
+        "previous": 9.88,
+        "year_ago": 2.76,
+        "qoq": {
+          "base": 9.88,
+          "delta": -6.540000000000003,
+          "pct": -66.19433198380568,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 2.76,
+          "delta": 0.5799999999999983,
+          "pct": 21.01449275362313,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 2.38,
         "delta": -1.15,
@@ -3423,6 +4956,31 @@
       "cumulative": 12.95,
       "monthly_eps": null,
       "cumulative_eps": 1.88,
+      "rank12": {
+        "rank": 9,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 2.6099999999999994,
+        "previous": 5.87,
+        "year_ago": 3.24,
+        "qoq": {
+          "base": 5.87,
+          "delta": -3.2600000000000007,
+          "pct": -55.53662691652471,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 3.24,
+          "delta": -0.6300000000000008,
+          "pct": -19.444444444444468,
+          "status": "normal",
+          "note": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.81,
         "delta": 0.039999999999999925,
@@ -3477,6 +5035,31 @@
       "cumulative": 0.08,
       "monthly_eps": null,
       "cumulative_eps": 0.24,
+      "rank12": {
+        "rank": 2,
+        "of": 12,
+        "note": ""
+      },
+      "quarter": {
+        "current": 0.06,
+        "previous": 0.018000000000000002,
+        "year_ago": 0.020000000000000004,
+        "qoq": {
+          "base": 0.018000000000000002,
+          "delta": 0.041999999999999996,
+          "pct": 233.33333333333331,
+          "status": "normal",
+          "note": ""
+        },
+        "yoy": {
+          "base": 0.020000000000000004,
+          "delta": 0.039999999999999994,
+          "pct": 199.99999999999994,
+          "status": "normal",
+          "note": ""
+        },
+        "methodology": "各季期末累計減期初前月累計"
+      },
       "mom": {
         "base": 0.02,
         "delta": 0,
@@ -22545,14 +24128,20 @@
       "period": "2026/09",
       "code": "2880",
       "name": "華南金",
-      "summary": "**重點**\n\n華南金（2880）於 10 月 13 日公布自結獲利，2026 年 9 月稅後純益 23.45 億元，前三季累計稅後純益達 263.67 億元，年增 32.4%，EPS 為 1.88 元，年化 ROE 達 14.38%，各財務指標均創歷史同期新高。\n9 月單月稅後純益月減 30%，主要受惠非銀行子公司獲利大增 170%，成為推升金控獲利的重要動能。\n9 月單月獲利回落，主要受到股利收入減少及美國升息影響既有換匯交易（SWAP）收益所致；\n隨著新承作 SWAP 收益條件改善，第 4 季金融操作收益表現可望回溫。\n前三季累計獲利已逼近去年全年 264.2 億元，全年獲利可望再創歷史新高。\n\n**子公司明細**\n- **華南銀行**：\n9 月稅後純益 19.96 億元，前三季 209.87 億元，年增 13.1%。9 月獲利較上月減少，主要係股利旺季進入尾聲、股利收入減少，以及 Fed 升息影響 SWAP 既有部位兌換收益減少。\n前三季 NIM 提升 5 個基點，利息淨收益年增 12%；財富管理手續費淨收益突破 138 億元，年增 29%。\n\n- **華南永昌證券**：\n9 月稅後純益 2.63 億元，前三季 42.48 億元，年增 215%，獲利表現亮眼。\n前三季經紀手續費收入 60.33 億元、年增 110%，承銷業務收入 8.34 億元、年增 443%，自營投資獲利 11.01 億元、年增 180%。\n\n- **華南產險**：\n9 月稅後純益 1.69 億元，前三季 16.75 億元，年增 32%，主要受惠商業火險及工程險業務成長，損失率改善推升核保利潤，且網路投保保費較去年同期成長 11.82%，展現數位轉型效益。\n\n- **華南金創投**：\n9 月稅後純益 0.52 億元，前三季 3.49 億元、EPS 1.74 元，雙創歷史同期新高，主要受惠於整體股市行情上揚，掌握有利時機實現持股處分利益。",
-      "generated_at": "2026-10-15T00:04:50.809910",
+      "summary": "**重點**\n\n華南金控於 2026 年 10 月 13 日公布自結獲利，2026 年 9 月單月稅後純益 23.45 億元，前三季累計稅後純益達 263.67 億元，年成長 32.4%，EPS 為 1.88 元，年化 ROE 達 14.38%，各財務指標皆創歷史同期新高，且已逼近去年全年獲利 264.2 億元。\n單月獲利月減 30%，主因股利旺季進入尾聲致股利收入減少，以及美聯儲升息影響既有 SWAP 換匯部位之兌換收益；全年獲利可望再創新高。\n\n**子公司明細**\n- **華南銀行：** \n9 月稅後純益 19.96 億元，前三季稅後純益 209.87 億元，年成長 13.10%；9 月獲利較上月減少，主因股利旺季進入尾聲使股利收入減少，以及 Fed 升息影響 SWAP 既有部位兌換收益減少。\n第三季放款較前季增加 1,693 億元、成長 7%，NIM 提升 5 個基點，利息淨收益年增 12%；財富管理手續費淨收益突破 138 億元，年增 29%。\n\n- **華南永昌證券：** \n9 月稅後純益 2.63 億元，前三季稅後純益 42.48 億元，年成長 215%，獲利表現亮眼，經紀、承銷、自營三大核心業務均較去年同期大幅成長。\n\n- **華南產險：** \n9 月稅後純益 1.69 億元，前三季稅後純益 16.75 億元，年增 32%，主要受惠商業火險及工程險業務成長，損失率改善推升核保利潤，且網路投保保費較去年同期成長 11.82%，展現數位轉型效益。\n\n- **華南金創投：** \n9 月稅後純益 0.52 億元，前三季稅後純益 3.49 億元、EPS 1.74 元，雙創歷史同期新高，主因抓緊股市上揚時機處分持股實現利益，加上國內經濟與出口動能強勁帶動投資組合績效。",
+      "generated_at": "2026-10-20T00:37:31.042842",
       "manual": false,
       "sources": [
         {
-          "title": "金控前三季獲利 元大金、華南金、第一金齊創高 「這家」年增翻倍暫領跑 - 日報 - 工商時報",
-          "url": "https://www.ctee.com.tw/news/20261014700167-439901",
-          "published_at": "2026-10-14",
+          "title": "華南金9月獲利出爐！前3季已賺263.67億創新高 直逼去年全年",
+          "url": "https://www.nownews.com/news/6883088",
+          "published_at": "",
+          "type": "新聞摘要來源（未逐句核實）"
+        },
+        {
+          "title": "華南金獲利／前三季263億元創同期新高、直逼去年全年 年增32.4%",
+          "url": "https://money.udn.com/money/story/5613/9812356",
+          "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
       ],
@@ -23585,8 +25174,8 @@
       "period": "2026/09",
       "code": "2883",
       "name": "凱基金",
-      "summary": "**重點**\n\n凱基金控（2883）公布9月自結單月稅後獲利26.41億元，月減54%；今年前三季累計稅後獲利達389.31億元，EPS為2.26元，已超越歷年全年度獲利。\n凱基金說明，9月獲利受到台股市場觀望氣氛濃厚、整體成交量較前月降溫，且美國公債殖利率走升，影響債券市場價格修正及金融資產評價波動所致。\n在金控層級，\n9月FVOCI股票處分利益約46.89億元，加計單月稅後獲利後合計對保留盈餘貢獻達73.3億元；前3季累計股票處分利益共546.96億元，加計稅後獲利後合計對保留盈餘貢獻達936.26億元，續創歷史同期新高。\n\n**子公司明細**\n- 凱基人壽：\n9月新契約保費收入達165億元，較去年同期成長188%，創近5年單月新高，累計前9月新契約保費收入1,079億元，較去年同期成長105%；投資及獲利方面，9月稅後獲利7.99億元，加計FVOCI股票處分利益稅後金額約46.9億元，單月對保留盈餘貢獻達54.89億元；累計前3季稅後獲利134.51億元，加計FVOCI股票處分利益約544.07億元，合計對保留盈餘貢獻達678.59億元。\n\n- 凱基銀行：\n受惠於存放款規模穩定成長及利息、手續費收入核心收益動能支持，9月稅後獲利6.14億元，前三季稅後獲利52.69億元，累計前三季提存前淨利75.82億元，較去年同期成長15%，財管手續費收入較去年同期成長30%以上。\n\n- 凱基證券：\n9月因市場震盪壓縮自營操作空間，且台股成交量較前月萎縮，單月稅後獲利14.73億元；前3季累計稅後獲利達242.26億元，續創同期新高，年成長197%，累計年化股東權益報酬率逾4成。",
-      "generated_at": "2026-10-15T23:49:17.123038",
+      "summary": "**重點**\n\n凱基金（2883）公布9月自結單月稅後獲利26.41億元，月減54%；今年前三季累計稅後獲利389.31億元，EPS 2.26元，已超越歷年全年度獲利。\n凱基金說明，9月獲利下滑主因台股市場觀望氣氛濃厚，成交量較前月降溫，且美國公債殖利率走升，影響債券市場價格修正及金融資產評價波動。\n金控合併層級加計FVOCI方面，\n9月FVOCI股票處分利益約46.89億元，加計單月稅後獲利，合計對保留盈餘貢獻達73.3億元；前三季累計股票處分利益共546.96億元，加計稅後獲利，合計對保留盈餘貢獻達936.26億元，續創歷史同期新高。\n\n**子公司明細**\n- 凱基證券：\n9月因市場震盪壓縮自營操作空間，且台股成交量亦較前月萎縮，單月稅後獲利14.73億元；前3季累計稅後獲利達242.26億元，續創同期新高，較去年同期大幅成長197%，累計年化股東權益報酬率逾4成。\n承銷業務亦強勁，\n承銷手續費收入較去年同期成長逾六成。\n\n- 凱基人壽：\n9月新契約保費收入達165億元，較去年同期成長188%，創近5年單月新高，累計前9月新契約保費收入1,079億元，較去年同期成長105%。\n投資方面，凱基人壽適時實現部分資本利得，9月稅後獲利7.99億元，加計FVOCI股票處分利益稅後金額約46.9億元，單月對保留盈餘貢獻達54.89億元；累計前3季稅後獲利134.51億元，加計FVOCI股票處分利益約544.07億元，合計對保留盈餘貢獻達678.59億元。\n\n- 凱基銀行：\n受惠於存放款規模穩定成長及利息、手續費等核心收益動能，9月稅後獲利6.14億元，前三季稅後獲利52.69億元，累計前三季提存前淨利75.82億元，較去年同期成長15%；財管手續費收入較去年同期成長30%以上。",
+      "generated_at": "2026-10-19T15:31:18.255029",
       "manual": false,
       "sources": [
         {
@@ -24238,14 +25827,20 @@
       "period": "2026/09",
       "code": "2885",
       "name": "元大金",
-      "summary": "**重點**\n\n元大金（2885）於 10 月 13 日公布 9 月自結獲利，單月稅後純益 50.18 億元，月減 28.42%、年增 46.85%；累計前九月稅後純益達 549.59 億元，年增 105.88%，獲利翻倍成長，EPS 達 3.96 元。\n前九月獲利一舉突破 500 億元大關，主要受惠台股行情強勁、成交量維持高檔，帶動證券經紀手續費收入成長，加上銀行利息淨收益及財富管理業務穩健挹注。\n單月獲利月減幅度明顯，但\n元大金控及旗下證券、銀行、期貨子公司，9 月單月與前九月累計獲利均創歷年同期新高。\n\n**子公司明細**\n- 元大證券：\n9 月稅後純益 32.23 億元，雖月減 39.81%，但年增 30.01%；累計前九月稅後純益 370.57 億元，年增 124.66%，EPS 達 5.20 元，單月及累計獲利均創歷年同期新高。\n9 月大盤指數累計上漲 1,811 點，日均成交量持續逾 1.1 兆元，帶動證券經紀手續費收入為主要獲利來源。\n\n- 元大銀行：\n主要受惠利息淨收益及財富管理手續費收入穩健挹注，9 月稅後純益 14.05 億元，月減 8.29%、年增 48.21%；累計前九月稅後純益 121.64 億元，年增 44.53%，EPS 為 1.32 元，單月及累計獲利同樣刷新歷年同期紀錄。\n\n- 元大投信：\n9 月稅後純益 6.29 億元，累計前九月稅後純益 48.47 億元，EPS 達 21.36 元。\n\n- 元大期貨：\n9 月稅後純益 2.96 億元，累計前九月稅後純益 26.23 億元，EPS 為 6.97 元。\n\n- 元大人壽：\n9 月稅後虧損 0.49 億元，累計前九月稅後純益 27.50 億元，EPS 為 0.94 元。",
-      "generated_at": "2026-10-15T00:05:39.097750",
+      "summary": "**重點**\n\n元大金（2885）於10月13日公布9月自結獲利，單月稅後純益50.18億元，月減28.42%、年增46.85%；累計前九月稅後純益達549.59億元，年增105.88%，EPS為3.96元。\n主要驅動因素為台股行情強勁、成交量維持高檔，帶動證券經紀手續費收入大增，並加計銀行利息淨收益及財富管理業務穩健挹注；9月大盤指數累計上漲1,811點，日均成交量持續逾1.1兆元，有效支撐集團整體獲利。\n值得注意的是，\n元大金控及旗下證券、銀行、期貨子公司，9月單月與前九月累計獲利均創歷年同期新高。\n\n**子公司明細**\n- 元大證券：\n9月稅後純益32.23億元，雖月減39.81%，但年增30.01%；累計前九月稅後純益370.57億元，年增124.66%，EPS達5.20元，單月及累計獲利均創歷年同期新高，\n占金控整體獲利約67.4%，為集團最大獲利引擎。\n\n- 元大銀行：\n9月稅後純益14.05億元，月減8.29%、年增48.21%；累計前九月稅後純益121.64億元，年增44.53%，EPS為1.32元，主要受惠利息淨收益及財富管理手續費收入穩健挹注，單月及累計獲利同樣刷新歷年同期紀錄。\n\n- 元大投信：\n9月稅後純益6.29億元，累計前九月稅後純益48.47億元，EPS達21.36元。\n\n- 元大期貨：\n9月稅後純益2.96億元，累計前九月稅後純益26.23億元，EPS為6.97元。\n\n- 元大人壽：\n9月稅後虧損0.49億元，累計前九月稅後純益27.50億元，EPS為0.94元。",
+      "generated_at": "2026-10-20T00:38:18.885417",
       "manual": false,
       "sources": [
         {
-          "title": "金控前三季獲利 元大金、華南金、第一金齊創高 「這家」年增翻倍暫領跑 - 日報 - 工商時報",
-          "url": "https://www.ctee.com.tw/news/20261014700167-439901",
-          "published_at": "2026-10-14",
+          "title": "三家金控前九月獲利衝高！元大金倍增至549億 EPS 3.96元",
+          "url": "https://udn.com/news/story/7239/9812818",
+          "published_at": "",
+          "type": "新聞摘要來源（未逐句核實）"
+        },
+        {
+          "title": "元大金獲利／前九月狂賺近550億元創新高 元大證貢獻逾六成",
+          "url": "https://money.udn.com/money/story/5613/9812518",
+          "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
       ],
@@ -24570,8 +26165,8 @@
       "period": "2026/09",
       "code": "2886",
       "name": "兆豐金",
-      "summary": "**重點**\n\n兆豐金（2886）2026年9月稅後純益36.29億元、月增1.9%，累計前九月賺328.48億元，寫史上同期新高、年增16.14%，EPS為2.21元，在四家公股金控中獲利、EPS、股價均居首位。9月單月獲利逆勢月增，關鍵在於兆豐證券子公司受惠自營與承銷業務獲利較前月大幅增加；\n惟\n兆豐銀行9月因增加呆帳及其他提存，稅後純益月減近13%，抵銷部分證券獲利增幅，致金控單月獲利僅微增1.9%。\n\n**子公司明細**\n- 兆豐銀行：9月稅後淨利22.06億元，前9月稅後淨利248.18億元，為同期新高、年增6.06%。\n\n- 兆豐證券：9月稅後淨利11.76億元，前9月稅後淨利50.33億元、年增達173.38%，\n創史上單月新高，為當月拉抬金控獲利的主力。\n\n- 兆豐票券：9月稅後淨利1.70億元，前9月稅後淨利25.43億元、年增33.42%。\n\n- 兆豐產險：9月單月獲利1.14億元、年增15.15%，累計前9月獲利8.60億元，年增31.50%。",
-      "generated_at": "2026-10-15T23:50:04.264610",
+      "summary": "**重點**\n\n兆豐金（2886）2026 年 9 月稅後純益 36.29 億元、月增 1.9%，累計前九月賺 328.48 億元，寫史上同期新高、年增 16.14%，每股稅後純益（EPS）2.21 元，為四家公股金控中獲利、EPS 與股價三項指標全數居首的唯一金控。兆豐金 9 月獲利逆勢成長，關鍵在於兆豐證券受惠自營與承銷業務獲利較前月增加逾 5 億元，創史上單月新高，成為拉抬金控獲利的主力；惟兆豐銀行因增加呆帳及其他提存，單月獲利月減近 13%，部分抵銷了證券獲利增幅。\n\n**子公司明細**\n\n- 兆豐銀行：9 月稅後淨利 22.06 億元，前 9 月稅後淨利 248.18 億元，為同期新高、年增 6.06%；獲利動能主要來自利息與手續費淨收益成長，合計較去年同期增加約 50 億元。\n- 兆豐證券：9 月稅後淨利 11.76 億元（創歷年單月最高紀錄），前 9 月稅後淨利 50.33 億元、年增達 173.38%。\n- 兆豐票券：9 月稅後淨利 1.7 億元，前 9 月稅後淨利 25.43 億元、年增 33.42%。\n- 兆豐產險：9 月稅後淨利 1.14 億元，前 9 月稅後淨利 8.6 億元、年增 31.5%。",
+      "generated_at": "2026-10-19T15:32:03.400118",
       "manual": false,
       "sources": [
         {
@@ -24901,20 +26496,20 @@
       "period": "2026/09",
       "code": "2887",
       "name": "台新新光金",
-      "summary": "**重點**\n\n台新新光金控（2887）14日公布 9 月自結稅後純益 44.2 億元，較去年同期成長 8%，累計前九月稅後純益 641.7 億元，年增 184%，EPS 2.47 元創歷史新高。\n各子公司獲利動能主要來自銀行本業穩健、財富管理及證券業務，前九月稅後純益全數刷新歷年同期紀錄。\n壽險子公司新光人壽則受惠於 \nCSM 持續穩定釋放與經常性投資收益雙重挹注，營運績效維持穩健。\n\n**子公司明細**\n- 台新銀行：\n9 月稅後純益 19.2 億元，累計 193.4 億元，年增 25%，續創歷年同期新高；受惠核心業務動能強勁，淨利差較去年同期增加，帶動淨利息收入及淨手續費收入均呈 25% 成長。\n截至 9 月底逾放比 0.18%，備抵呆帳覆蓋率 714%，資產品質維持穩健。\n\n- 新光銀行：\n9 月稅後淨利 6.3 億元，累計 75.5 億元，年增 87%，續創歷年同期新高；累計淨手續費收入年增 27%，保險與基金等財富管理商品銷量動能強勁，帶動財管收益續創新高。\n\n- 新光人壽：\n9 月稅後淨利 18.7 億元，累計 322.2 億元；在 CSM 持續穩定釋放與經常性投資收益雙重挹注下，營運績效維持穩健；1–9 月 FYP 達 1,037.2 億元，年成長 30%。\n\n- 台新證券：\n9 月稅後淨利 3.3 億元，累計 89.6 億元（含元富證券今年 1 月 1 日至 4 月 5 日獲利），續創歷年同期新高；主因自營投資部位擴大，且證券市場指數上升、交易熱絡，致營業證券處分利益與經紀手續費收入增加。",
-      "generated_at": "2026-10-15T00:06:31.006281",
+      "summary": "**重點**\n\n台新新光金控（2887）於10月14日公布2026年9月自結稅後純益44.2億元，較去年同期成長8%，累計前三季稅後純益為641.7億元，年增184%，每股稅後純益（EPS）為2.47元，創歷史新高。\n9月單月獲利月減主因為美國聯準會升息一碼、美債殖利率攀升，債券價格下跌衝擊壽險投資收益；惟累計前三季獲利仍大幅超越去年同期。\n\n**子公司明細**\n- 台新銀行：9月稅後淨利19.2億元，累計稅後淨利193.4億元，較去年同期增加25%，續創歷年同期新高；受惠於核心業務動能強勁，淨利差較去年同期增加，帶動淨利息收入及淨手續費收入均呈25%成長。\n\n- 新光銀行：9月稅後淨利6.3億元，累計稅後淨利75.5億元，較去年同期增加87%，續創歷年同期新高；累計淨手續費收入較去年同期成長27%，保險與基金等財富管理商品銷量動能強勁，帶動財管收益續創新高。\n\n- 新光人壽：9月稅後純益18.7億元，累計前三季稅後純益322.2億元；在CSM（合約服務邊際）持續穩定釋放與經常性投資收益的雙重挹注下，營運績效維持穩健；1至9月初年度保費（FYP）達1,037.2億元，年增30%。\n\n- 台新證券：9月稅後淨利3.3億元，累計稅後淨利89.6億元（含元富證券今年1月1日至4月5日獲利），創歷年同期新高；主因自營投資部位擴大，且證券市場指數上升、交易熱絡，帶動營業證券處分利益與經紀手續費收入增加。",
+      "generated_at": "2026-10-20T00:39:07.511536",
       "manual": false,
       "sources": [
         {
-          "title": "台新新光金獲利／前九月641億元、年增184% EPS 2.47元創新高",
-          "url": "https://udn.com/news/story/7252/9814963",
-          "published_at": "",
+          "title": "台新新光金前三季大賺641.7億元 EPS續創高、達2.47元 - 金融 - 工商時報",
+          "url": "https://www.ctee.com.tw/news/20261014702062-430304",
+          "published_at": "2026-10-14",
           "type": "新聞摘要來源（未逐句核實）"
         },
         {
-          "title": "台新新光金獲利／前九月641億元、年增184% EPS 2.47元創新高",
-          "url": "https://money.udn.com/money/story/5613/9814963",
-          "published_at": "",
+          "title": "《金融股》續創高！台新新光金前三季賺641.7億元、EPS 2.47元 - 證券 - 工商時報",
+          "url": "https://www.ctee.com.tw/news/20261015700567-430201",
+          "published_at": "2026-10-15",
           "type": "新聞摘要來源（未逐句核實）"
         }
       ],
@@ -25252,19 +26847,19 @@
       "period": "2026/09",
       "code": "2889",
       "name": "國票金",
-      "summary": "**重點**\n\n國票金（2889）2026年9月自結稅後盈餘3億4,579萬元，累計1至9月稅後盈餘36億9,267萬元，年增116.29%，EPS 1.01元，9月底每股淨值12.66元。\n獲利大幅躍進主要受惠於證券子公司高成交量環境，以及票券三大業務（票券、債券、股權）同步正向貢獻；\n惟國票創投因轉投資中國國旺租賃遭經濟疲弱拖累，前9月虧損擴大至1億8,321萬元，影響母公司整體獲利表現。\n\n**子公司明細**\n- 國際票券：\n9月稅後純益1億7,997萬元，累計前9月稅後純益21億4,087萬元，年增49.77%。票券業務受惠於承銷量、部位（含FRCP）評價利益及利息淨收益提升，獲利維持穩健。\n\n- 國票證券：\n9月稅後純益4億5,295萬元，累計前9月稅後純益32億5,595萬元，年增302.79%，獲利續創歷史新高。受惠台股日均成交量值維持高檔，帶動經紀業務手續費收入、融資及不限用途借貸利息收入呈倍數成長；自營業務交易策略奏效，期貨衍生性商品、股票、認購（售）權證操作績效良好，自營收益大幅增加。\n\n- 國票創投：\n本業因投資部分個股處分、評價利益較去年減少，累計本業獲利1億7,561萬元，年減37.59%；加計中國國旺租賃壞帳損失準備提存後，整體前9月稅後損失1億8,321萬元。",
-      "generated_at": "2026-10-15T13:20:02.222000",
+      "summary": "**重點**\n\n國票金控（2889）2026年9月自結稅後盈餘3億4,579萬元，累計1至9月稅後盈餘36億9,267萬元，較去年同期增加19億8,541萬元，年增116.29%；每股稅後盈餘1.01元，9月底每股淨值12.66元。\n三大主業均維持正向成長：票券業務承銷量與利息淨收益提升；股權業務受惠AI產業需求帶動台股供應鏈大漲，OCI股息收入貢獻顯著；債券業務雖受Fed升息影響使外幣RP成本走揚，但台外幣養券收益仍維持正貢獻，國票證券獲利大增3倍創歷史新高為主要成長動能。\n\n**子公司明細**\n- 國際票券：\n9月稅後純益1億7,997萬元，累計1至9月稅後純益21億4,087萬元，較去年同期成長49.77%；票券業務受惠於承銷量、部位（含FRCP）評價利益及利息淨收益提升，獲利維持穩健。\n\n- 國票證券：\n9月稅後純益4.53億元，累計前九月稅後純益32.6億元，較去年同期成長302.79%，獲利仍為歷史新高；受惠台股日均成交量值維持高檔，帶動經紀業務手續費及融資利息收入倍數成長，自營業務各期貨衍生性商品、股票及權證操作績效良好，整體自營收益大幅增加。\n\n- 國票創投：\n因轉投資中國國旺租賃遭中國經濟疲弱拖累，前9月虧損持續擴大，稅後損失達1億8,321萬元，影響母公司整體獲利表現。\n管理層表示，目前核心任務為清理與優化國旺租賃資產品質，進行據點裁撤與精簡，預計年底前將逾放比降至5%以下。",
+      "generated_at": "2026-10-19T15:32:55.799123",
       "manual": false,
       "sources": [
         {
-          "title": "國票金獲利／前三季每股稅後盈餘1.01元 淨利年增翻一倍",
-          "url": "https://udn.com/news/story/7239/9800486",
+          "title": "國票金法說會／前三季賺36.92億元翻倍成長 EPS 1.01元",
+          "url": "https://udn.com/news/story/7252/9824160",
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         },
         {
-          "title": "國票金前三季 EPS 1.01元",
-          "url": "https://money.udn.com/money/story/5613/9801485",
+          "title": "國票金法說會／前三季賺36.92億元翻倍成長 EPS 1.01元",
+          "url": "https://money.udn.com/money/story/5613/9824160",
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
@@ -25590,19 +27185,19 @@
       "period": "2026/09",
       "code": "2890",
       "name": "永豐金",
-      "summary": "**重點**\n\n永豐金（2890）公布 2026 年 9 月自結累計稅後淨利達 367.76 億元，較前一年度成長 79%，前九月累計 EPS 為 2.49 元，年化 ROE 達 18.36%，各財務結果皆創下公司歷史同期新高。\n9 月單月稅後淨利為 34.32 億元，月減 22%，月度下滑主因為**創投子公司資本利得減少**以及**京城銀行提存費用增加**，致使獲利相較上月縮水。\n\n**子公司明細**\n- **永豐銀行**：\n9 月單月稅後淨利 17.28 億元（月增 0.1%），月度微幅成長主因所得稅費用減少，抵銷金融交易淨收益下滑的影響；\n累計前三季稅後純益達 189.7 億元、年增 18%，連續第六年創獲利新高，淨收益成長由利息淨收益（年增 25%）與手續費淨收益（年增 11%）帶動；逾放比率維持於 0.25%。\n\n- **永豐金證券**：\n9 月單月稅後淨利 14.44 億元（月增 0.4%），主因所得稅費用減少與承銷手續費淨收益大幅增加，抵銷資本利得減少的影響；\n累計前三季稅後純益 116.4 億元、年增 142%，創歷史同期新高，主要受惠於經紀與泛財管手續費淨收益成長（年增 122%）及較高資本利得。\n\n- **京城銀行**：\n前三季稅後純益達 51 億元；\n扣除一月份國際租賃處分利得 2.88 億元及可辨認無形資產攤銷費用後，對金控獲利貢獻為 44.33 億元，其中利息淨收益、手續費淨收益與金融交易淨收益成長均顯著。",
-      "generated_at": "2026-10-15T13:20:51.226827",
+      "summary": "**重點**\n\n永豐金（2890）公布 2026 年 9 月自結稅後淨利 34.32 億元（月減 22%），累計前九月稅後淨利達 367.76 億元（年增 79%），前九月 EPS 為 2.49 元，年化 ROE 達 18.36%，各財務結果皆創下公司歷史同期新高。單月獲利月減主因為創投子公司資本利得減少，以及京城銀行提存費用增加，致使整體獲利相較上月縮減。\n\n**子公司明細**\n- 永豐銀行：\n9 月單月稅後淨利 17.28 億元（月增 0.1%），月度變動主因所得稅費用減少，抵銷了金融交易淨收益減少的影響；累計前九月稅後淨利 189.73 億元（年增 18%），連續第六年創獲利新高，淨收益成長由利息淨收益（年增 25%）及手續費淨收益（年增 11%）帶動；資產品質維持穩定，逾放比率為 0.25%。\n\n- 永豐金證券：\n9 月單月稅後淨利 14.44 億元（月增 0.4%），月度變動主因所得稅費用減少與承銷手續費淨收益大幅增加，抵銷資本利得減少；累計前九月稅後淨利 116.46 億元（年增 142%），創歷史同期新高，主要受惠於經紀與泛財管手續費淨收益成長，以及較高的資本利得，手續費淨收益年成長 122%。\n\n- 京城銀行：\n累計前三季稅後純益達 51 億元；\n扣除一月份國際租賃處分利得 2.88 億元及可辨認無形資產攤銷費用後，對金控獲利貢獻為 44.33 億元，其中利息淨收益、手續費淨收益與金融交易淨收益成長顯著。",
+      "generated_at": "2026-10-19T15:33:43.072343",
       "manual": false,
       "sources": [
         {
-          "title": "永豐金前三季EPS 2.49元 獲利寫下八個同期新高",
-          "url": "https://money.udn.com/money/story/5613/9804088",
+          "title": "永豐金9月獲利出爐！累計今年已賺367.76億元、EPS 2.49元",
+          "url": "https://www.nownews.com/news/6881842",
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         },
         {
-          "title": "永豐金獲利／9月自結賺367.7億元 前三季再創新高 EPS 達2.49元",
-          "url": "https://udn.com/news/story/7239/9803374",
+          "title": "永豐金前三季EPS 2.49元 獲利寫下八個同期新高",
+          "url": "https://money.udn.com/money/story/5613/9804088",
           "published_at": "",
           "type": "新聞摘要來源（未逐句核實）"
         }
@@ -25897,20 +27492,20 @@
       "period": "2026/09",
       "code": "2891",
       "name": "中信金",
-      "summary": "**重點**\n\n中信金控（2891）於2026年10月14日公告9月份自結獲利，單月稅後純益93.58億元，累計前九月合併稅後純益632.37億元，EPS為3.18元，創歷年同期新高。\n單月獲利主要驅動力來自銀行核心業務穩健及財富管理業務良好表現；\n若加計FVOCI權益工具稅後處分利益，累計金控前9月達1,314.62億元，超越歷年全年獲利表現，兩者合計對保留盈餘影響為每股6.68元。\n\n**子公司明細**\n- **中國信託銀行**：\n9月份核心業務動能穩健，財富管理業務表現良好，單月稅後獲利69.29億元；累計前9月稅後獲利495.25億元，較去年同期成長18%，除淨利差提升外，財富管理業務成長逾三成，刷卡消費金額及存、放款餘額均有雙位數增長，獲利創歷年同期新高。\n\n- **台灣人壽**：\n9月份受基金評價利益挹注，單月稅後獲利12.92億元；累計前9月稅後獲利149.28億元，主要來自過往累積CSM攤銷、基金評價利益及投資型保單以國際財務報導準則第15號重新衡量的影響。\n保險業務動能方面，在分紅及投資型保單銷售帶動下，累計新契約保費達897億元，較去年同期成長81%。\n\n- **金控合併層級（加計FVOCI）**：\n9月FVOCI之權益工具稅後處分利益金控合計176.37億元，累計前九月合計682.25億元；金控9月本期淨利加計FVOCI權益工具稅後處分利益為269.95億元，累計前九月共1,314.62億元。",
-      "generated_at": "2026-10-15T00:07:19.247628",
+      "summary": "**重點**\n\n中信金控（2891）於10月14日公告2026年9月份自結獲利，單月稅後純益93.58億元，累計前九月合併稅後純益632.37億元，EPS為3.18元。\n單月獲利主要動能來自\n子公司中國信託銀行核心業務穩健，財富管理業務表現良好\n；壽險子公司則受\n基金評價利益挹注\n支撐。金控層級FVOCI表現尤為亮眼：\n金控9月本期淨利若加計FVOCI權益工具之稅後處分利益後，單月達269.95億元；累計前9月高達1,314.62億元，一舉超越歷年全年的獲利表現，兩者合計對保留盈餘的影響數高達每股6.68元。\n\n**子公司明細**\n- 中國信託銀行：\n9月核心業務動能穩健，財富管理業務表現良好，單月稅後獲利69.29億元；累計前9月稅後獲利495.25億元，較去年同期成長18%，除淨利差提升外，財富管理業務成長逾3成，刷卡消費金額及存、放款餘額亦皆有雙位數增長，帶動獲利創下歷年同期新高。\n\n- 台灣人壽：\n9月受基金評價利益挹注，單月稅後獲利12.92億元；累計前9月稅後獲利149.28億元，主要來自過往累積CSM攤銷、基金評價利益及投資型保單以國際財務報導準則第15號重新衡量影響。\n此外，\n在分紅及投資型保單銷售帶動下，累計新契約保費達897億元，較去年同期成長81%。",
+      "generated_at": "2026-10-20T00:39:55.319835",
       "manual": false,
       "sources": [
         {
-          "title": "中信金獲利／前九月大賺632億元 EPS達3.18元",
-          "url": "https://udn.com/news/story/7252/9814850",
-          "published_at": "",
+          "title": "《金融股》中信金前9月大賺1314億 加計處分利益超越歷年全年獲利 - 證券 - 工商時報",
+          "url": "https://www.ctee.com.tw/news/20261015700566-430201",
+          "published_at": "2026-10-15",
           "type": "新聞摘要來源（未逐句核實）"
         },
         {
-          "title": "中信金9月獲利93.58億元！累計前3季已賺632.37億元、EPS 3.18元",
-          "url": "https://www.nownews.com/news/6883431",
-          "published_at": "",
+          "title": "金控獲利排名榜更新 中信等5業者前三季獲利飆同期新高 這家暫居第一名 - 日報 - 工商時報",
+          "url": "https://www.ctee.com.tw/news/20261015700074-430304",
+          "published_at": "2026-10-15",
           "type": "新聞摘要來源（未逐句核實）"
         }
       ],
@@ -26185,10 +27780,16 @@
       "period": "2026/09",
       "code": "2892",
       "name": "第一金",
-      "summary": "**重點**\n\n第一金控（2892）公布最新自結損益，9月單月合併稅後純益23.75億元，較前月減少18.5%，主要受配息旺季落幕及台美利差擴大引發金融商品評價損益波動影響。\n累計前九月稅後淨利262.25億元，年增20.9%，EPS達1.82元，創歷史同期新高；第一金表示，累計獲利已達去年全年269.33億元的97.4%，全年獲利可望再創新高。\n\n**子公司明細**\n- 第一銀行：\n9月受金融商品評價損失影響，惟淨利息收入及淨手續費收入仍維持穩健，加上提存費用減少，部分抵銷衝擊；前九月稅後淨利232.23億元，年增13%，創歷史同期最佳，逾放比維持0.16%，備抵呆帳覆蓋率升至864.09%。\n\n- 第一金證券：\n受惠投資部位獲利及承銷業務成長，9月單月獲利月增12.5%，前九月稅後淨利達20.05億元，年增165.1%，為集團獲利爆發力最強勁的亮點單位。\n\n- 第一金人壽：\n9月由盈轉虧，稅後淨損1,585萬元，主因美國升息使財務結果較上月減少1.01億元，但保險業務本業結果維持穩健；累計前九月稅後淨利仍達6.48億元。",
-      "generated_at": "2026-10-15T13:21:38.925101",
+      "summary": "**重點**\n\n受配息旺季落幕及台美利差擴大引發金融商品評價損益波動影響，9月單月獲利較上月回落。\n第一金控9月稅後淨利23.75億元，月減18.5%；累計前九月稅後淨利262.25億元，年增20.9%，EPS為1.82元，創歷史同期新高，累計獲利已達去年全年269.33億元的97.4%。\n\n**子公司明細**\n- 第一銀行：\n9月受金融商品評價損失影響，但淨利息收入及淨手續費收入仍維持穩健，加上提存費用減少，部分抵銷衝擊；前9月稅後淨利232.23億元，年增13%，創歷史同期最佳，逾放比維持0.16%，備抵呆帳覆蓋率升至864.09%。\n\n- 第一金證券：\n受惠投資部位獲利及承銷業務成長，9月單月獲利月增12.5%，前9月稅後淨利達20.05億元，年增165.1%，為集團獲利爆發力最強勁的亮點單位。\n\n- 第一金人壽：\n9月由盈轉虧，稅後淨損1,585萬元，主因美國升息使財務結果較上月減少1.01億元，但保險業務本業結果維持穩健；累計前9月稅後淨利仍達6.48億元。",
+      "generated_at": "2026-10-19T15:34:28.401972",
       "manual": false,
       "sources": [
+        {
+          "title": "第一金 獲利穩漲相佳 - 日報 - 工商時報",
+          "url": "https://www.ctee.com.tw/news/20261018700173-439903",
+          "published_at": "2026-10-18",
+          "type": "新聞摘要來源（未逐句核實）"
+        },
         {
           "title": "金控前三季獲利 元大金、華南金、第一金齊創高 「這家」年增翻倍暫領跑 - 日報 - 工商時報",
           "url": "https://www.ctee.com.tw/news/20261014700167-439901",
@@ -26411,8 +28012,8 @@
       "period": "2026/09",
       "code": "5880",
       "name": "合庫金",
-      "summary": "**重點**\n\n合庫金（5880）2026 年 9 月合併稅後淨利為 19.24 億元，累計至前九月合併稅後淨利為 202.49 億元，較去年同期成長 26.8%，續創歷年同期新高紀錄。\n獲利動能主要來自銀行本業穩健、\n合庫銀行、合庫證券及合庫人壽累計稅後淨利亦皆創下歷年同期新高紀錄。\n\n**子公司明細**\n- 合庫銀行：\n累計至 9 月合併稅後淨利為 179.84 億元，較去年同期增加 19.37 億元，成長 12.07%。\n\n- 合庫證券：\n累計至 9 月合併稅後淨利為 17.22 億元，較去年同期增加 15.42 億元，獲利大幅成長。\n\n- 合庫人壽：\n累計至 9 月稅後淨利為 12.95 億元，較去年同期增加 5.73 億元，獲利成長動能佳。\n\n- 其餘子公司：\n合庫票券、合庫資產管理及合庫創投累計稅後淨利皆較去年同期增加，獲利持續穩健成長。\n\n- 整體金控：\n累計 EPS 達 1.22 元。",
-      "generated_at": "2026-10-15T23:50:52.808860",
+      "summary": "**重點**\n\n合庫金（5880）9月合併稅後淨利為 19.24 億元，累計至9月合併稅後淨利為 202.49 億元，較去年同期成長 26.8%，續創歷年同期新高紀錄。\n每股稅後純益（EPS）達 1.22 元。\n獲利成長主要受惠於銀行子公司利息淨收益大幅增加，加上財富管理及證券業務貢獻顯著提升。\n\n**子公司明細**\n- 合庫銀行：\n累計至9月合併稅後淨利為 179.84 億元，較去年同期增加 19.37 億元，成長 12.07%。\n\n- 合庫證券：\n累計至9月合併稅後淨利為 17.22 億元，較去年同期增加 15.42 億元，獲利大幅成長，並創下歷年同期新高紀錄。\n\n- 合庫人壽：\n累計至9月稅後淨利為 12.95 億元，較去年同期增加 5.73 億元，獲利成長動能佳，亦創歷年同期新高。\n\n- 合庫票券、合庫資產管理、合庫創投：\n累計稅後淨利皆較去年同期增加，獲利持續穩健成長。",
+      "generated_at": "2026-10-19T15:35:16.147465",
       "manual": false,
       "sources": [
         {
@@ -26436,6 +28037,839 @@
     "合庫金新聞待核對：來源標題的獲利期間與所選月份不符；整份摘要不納入本月原因推論。",
     "新聞來源發布日期未提供者列為未取得；摘要生成時間不等同發布時間。"
   ],
+  "group_stats": {
+    "holding": {
+      "industry": "holding",
+      "period": "2026/09",
+      "total_current": 529.7399999999999,
+      "total_count": 13,
+      "mom_cohort_count": 13,
+      "mom_current": 529.7399999999999,
+      "mom_previous": 861.16,
+      "mom": {
+        "base": 861.16,
+        "delta": -331.4200000000001,
+        "pct": -38.48529889915928,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy_cohort_count": 13,
+      "monthly_yoy": {
+        "base": 656.01,
+        "delta": -126.2700000000001,
+        "pct": -19.248182192344643,
+        "status": "normal",
+        "note": ""
+      },
+      "increase_count": 2,
+      "decrease_count": 11,
+      "flat_count": 0,
+      "mom_median": -22.21214868540344,
+      "top_changes": [
+        {
+          "code": "2881",
+          "name": "富邦金",
+          "current": 69.6,
+          "previous": 246.8,
+          "delta": -177.20000000000002,
+          "mom": {
+            "base": 246.8,
+            "delta": -177.20000000000002,
+            "pct": -71.79902755267423,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2882",
+          "name": "國泰金",
+          "current": 67.2,
+          "previous": 113,
+          "delta": -45.8,
+          "mom": {
+            "base": 113,
+            "delta": -45.8,
+            "pct": -40.53097345132743,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "top_two_change_share": 67.28622291955824,
+      "top_profit": [
+        {
+          "code": "2891",
+          "name": "中信金",
+          "monthly": 93.58
+        },
+        {
+          "code": "2881",
+          "name": "富邦金",
+          "monthly": 69.6
+        }
+      ],
+      "top_two_profit_share": 30.803790538754868,
+      "top_two_profit_share_previous": 41.78085373217521,
+      "opposite_direction": [
+        {
+          "code": "2884",
+          "name": "玉山金",
+          "current": 38.06,
+          "previous": 35.95,
+          "delta": 2.1099999999999994,
+          "mom": {
+            "base": 35.95,
+            "delta": 2.1099999999999994,
+            "pct": 5.869262865090401,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2886",
+          "name": "兆豐金",
+          "current": 36.29,
+          "previous": 35.6,
+          "delta": 0.6899999999999977,
+          "mom": {
+            "base": 35.6,
+            "delta": 0.6899999999999977,
+            "pct": 1.9382022471910048,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "excluded_mom": [],
+      "excluded_yoy": [],
+      "comparable": true
+    },
+    "life": {
+      "industry": "life",
+      "period": "2026/09",
+      "total_current": 65.55,
+      "total_count": 9,
+      "mom_cohort_count": 8,
+      "mom_current": 64.11,
+      "mom_previous": 318.84999999999997,
+      "mom": {
+        "base": 318.84999999999997,
+        "delta": -254.73999999999995,
+        "pct": -79.89336678689038,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy_cohort_count": 7,
+      "monthly_yoy": {
+        "base": 268.35999999999996,
+        "delta": -222.94999999999996,
+        "pct": -83.07870025339096,
+        "status": "normal",
+        "note": ""
+      },
+      "increase_count": 1,
+      "decrease_count": 7,
+      "flat_count": 0,
+      "mom_median": -61.118537155229795,
+      "top_changes": [
+        {
+          "code": "2881",
+          "name": "富邦人壽",
+          "current": 6.7,
+          "previous": 172.5,
+          "delta": -165.8,
+          "mom": {
+            "base": 172.5,
+            "delta": -165.8,
+            "pct": -96.11594202898551,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2882",
+          "name": "國泰人壽",
+          "current": 17.6,
+          "previous": 67.4,
+          "delta": -49.800000000000004,
+          "mom": {
+            "base": 67.4,
+            "delta": -49.800000000000004,
+            "pct": -73.88724035608308,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "top_two_change_share": 84.63531443825079,
+      "top_profit": [
+        {
+          "code": "2887",
+          "name": "新光人壽",
+          "monthly": 18.7
+        },
+        {
+          "code": "2882",
+          "name": "國泰人壽",
+          "monthly": 17.6
+        }
+      ],
+      "top_two_profit_share": 56.62143191389798,
+      "top_two_profit_share_previous": 75.2391406617532,
+      "opposite_direction": [
+        {
+          "code": "5880",
+          "name": "合庫人壽",
+          "current": 0.85,
+          "previous": 0.81,
+          "delta": 0.039999999999999925,
+          "mom": {
+            "base": 0.81,
+            "delta": 0.039999999999999925,
+            "pct": 4.938271604938262,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "excluded_mom": [
+        "三商人壽"
+      ],
+      "excluded_yoy": [
+        "三商人壽",
+        "新光人壽"
+      ],
+      "comparable": false
+    },
+    "bank": {
+      "industry": "bank",
+      "period": "2026/09",
+      "total_current": 323.87,
+      "total_count": 14,
+      "mom_cohort_count": 14,
+      "mom_current": 323.87,
+      "mom_previous": 345.03999999999996,
+      "mom": {
+        "base": 345.03999999999996,
+        "delta": -21.16999999999996,
+        "pct": -6.135520519360063,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy_cohort_count": 13,
+      "monthly_yoy": {
+        "base": 283.32000000000005,
+        "delta": 37.69999999999993,
+        "pct": 13.306508541578403,
+        "status": "normal",
+        "note": ""
+      },
+      "increase_count": 5,
+      "decrease_count": 9,
+      "flat_count": 0,
+      "mom_median": -12.943962115232837,
+      "top_changes": [
+        {
+          "code": "2881",
+          "name": "台北富邦銀行",
+          "current": 35.1,
+          "previous": 43.2,
+          "delta": -8.100000000000001,
+          "mom": {
+            "base": 43.2,
+            "delta": -8.100000000000001,
+            "pct": -18.750000000000004,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2880",
+          "name": "華南銀行",
+          "current": 19.96,
+          "previous": 27.9,
+          "delta": -7.939999999999998,
+          "mom": {
+            "base": 27.9,
+            "delta": -7.939999999999998,
+            "pct": -28.458781362007162,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "top_two_change_share": 75.76759565422783,
+      "top_profit": [
+        {
+          "code": "2891",
+          "name": "中國信託銀行",
+          "monthly": 69.29
+        },
+        {
+          "code": "2882",
+          "name": "國泰世華銀行",
+          "monthly": 41.7
+        }
+      ],
+      "top_two_profit_share": 34.26992311730015,
+      "top_two_profit_share_previous": 32.54984929283562,
+      "opposite_direction": [
+        {
+          "code": "2882",
+          "name": "國泰世華銀行",
+          "current": 41.7,
+          "previous": 37.1,
+          "delta": 4.600000000000001,
+          "mom": {
+            "base": 37.1,
+            "delta": 4.600000000000001,
+            "pct": 12.3989218328841,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2883",
+          "name": "凱基銀行",
+          "current": 6.14,
+          "previous": -2.99,
+          "delta": 9.129999999999999,
+          "mom": {
+            "base": -2.99,
+            "delta": 9.129999999999999,
+            "pct": null,
+            "status": "loss_to_profit",
+            "note": ""
+          }
+        },
+        {
+          "code": "2884",
+          "name": "玉山銀行",
+          "current": 31.04,
+          "previous": 30.19,
+          "delta": 0.8499999999999979,
+          "mom": {
+            "base": 30.19,
+            "delta": 0.8499999999999979,
+            "pct": 2.8155018217952894,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2890",
+          "name": "永豐銀行",
+          "current": 17.28,
+          "previous": 17.27,
+          "delta": 0.010000000000001563,
+          "mom": {
+            "base": 17.27,
+            "delta": 0.010000000000001563,
+            "pct": 0.057903879559939565,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2891",
+          "name": "中國信託銀行",
+          "current": 69.29,
+          "previous": 69.11,
+          "delta": 0.18000000000000682,
+          "mom": {
+            "base": 69.11,
+            "delta": 0.18000000000000682,
+            "pct": 0.2604543481406552,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "excluded_mom": [],
+      "excluded_yoy": [
+        "京城銀行"
+      ],
+      "comparable": true
+    },
+    "securities": {
+      "industry": "securities",
+      "period": "2026/09",
+      "total_current": 121.69,
+      "total_count": 12,
+      "mom_cohort_count": 12,
+      "mom_current": 121.69,
+      "mom_previous": 173.78999999999994,
+      "mom": {
+        "base": 173.78999999999994,
+        "delta": -52.09999999999994,
+        "pct": -29.978709937280602,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy_cohort_count": 11,
+      "monthly_yoy": {
+        "base": 74.8,
+        "delta": 43.59,
+        "pct": 58.27540106951873,
+        "status": "normal",
+        "note": ""
+      },
+      "increase_count": 4,
+      "decrease_count": 8,
+      "flat_count": 0,
+      "mom_median": -18.37370150519398,
+      "top_changes": [
+        {
+          "code": "2883",
+          "name": "凱基證券",
+          "current": 14.73,
+          "previous": 40.96,
+          "delta": -26.23,
+          "mom": {
+            "base": 40.96,
+            "delta": -26.23,
+            "pct": -64.0380859375,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2885",
+          "name": "元大證券",
+          "current": 32.23,
+          "previous": 45.06,
+          "delta": -12.830000000000005,
+          "mom": {
+            "base": 45.06,
+            "delta": -12.830000000000005,
+            "pct": -28.473146915224156,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "top_two_change_share": 74.97120921305192,
+      "top_profit": [
+        {
+          "code": "2885",
+          "name": "元大證券",
+          "monthly": 32.23
+        },
+        {
+          "code": "2881",
+          "name": "富邦證券",
+          "monthly": 23.9
+        }
+      ],
+      "top_two_profit_share": 46.12540060810255,
+      "top_two_profit_share_previous": 49.49651878704186,
+      "opposite_direction": [
+        {
+          "code": "2881",
+          "name": "富邦證券",
+          "current": 23.9,
+          "previous": 23.2,
+          "delta": 0.6999999999999993,
+          "mom": {
+            "base": 23.2,
+            "delta": 0.6999999999999993,
+            "pct": 3.0172413793103416,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2886",
+          "name": "兆豐證券",
+          "current": 11.76,
+          "previous": 7.25,
+          "delta": 4.51,
+          "mom": {
+            "base": 7.25,
+            "delta": 4.51,
+            "pct": 62.206896551724135,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2890",
+          "name": "永豐金證券",
+          "current": 14.44,
+          "previous": 14.39,
+          "delta": 0.049999999999998934,
+          "mom": {
+            "base": 14.39,
+            "delta": 0.049999999999998934,
+            "pct": 0.3474635163307779,
+            "status": "normal",
+            "note": ""
+          }
+        },
+        {
+          "code": "2892",
+          "name": "第一金證券",
+          "current": 2.51,
+          "previous": 2.23,
+          "delta": 0.2799999999999998,
+          "mom": {
+            "base": 2.23,
+            "delta": 0.2799999999999998,
+            "pct": 12.556053811659185,
+            "status": "normal",
+            "note": ""
+          }
+        }
+      ],
+      "excluded_mom": [],
+      "excluded_yoy": [
+        "台新證券"
+      ],
+      "comparable": true
+    }
+  },
+  "quarter_groups": {
+    "life": {
+      "cohort_count": 7,
+      "names": [
+        "富邦人壽",
+        "國泰人壽",
+        "凱基人壽",
+        "元大人壽",
+        "台灣人壽",
+        "第一金人壽",
+        "合庫人壽"
+      ],
+      "current": 339.0000000000001,
+      "previous": 782.64,
+      "year_ago": 580.03,
+      "qoq": {
+        "base": 782.64,
+        "delta": -443.6399999999999,
+        "pct": -56.68506593069609,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": 580.03,
+        "delta": -241.02999999999986,
+        "pct": -41.5547471682499,
+        "status": "normal",
+        "note": ""
+      }
+    },
+    "bank": {
+      "cohort_count": 12,
+      "names": [
+        "華南銀行",
+        "台北富邦銀行",
+        "國泰世華銀行",
+        "凱基銀行",
+        "玉山銀行",
+        "元大銀行",
+        "兆豐銀行",
+        "台新銀行",
+        "永豐銀行",
+        "中國信託銀行",
+        "第一銀行",
+        "合庫銀行"
+      ],
+      "current": 999.2599999999999,
+      "previous": 1006.05,
+      "year_ago": 866.8599999999998,
+      "qoq": {
+        "base": 1006.05,
+        "delta": -6.790000000000077,
+        "pct": -0.6749167536404828,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": 866.8599999999998,
+        "delta": 132.4000000000001,
+        "pct": 15.27351590798977,
+        "status": "normal",
+        "note": ""
+      }
+    },
+    "securities": {
+      "cohort_count": 11,
+      "names": [
+        "華南永昌證券",
+        "富邦證券",
+        "國泰證券",
+        "凱基證券",
+        "玉山證券",
+        "元大證券",
+        "兆豐證券",
+        "國票證券",
+        "永豐金證券",
+        "第一金證券",
+        "合庫證券"
+      ],
+      "current": 384.3499999999999,
+      "previous": 521.1800000000001,
+      "year_ago": 231.12999999999997,
+      "qoq": {
+        "base": 521.1800000000001,
+        "delta": -136.83000000000015,
+        "pct": -26.253885413868556,
+        "status": "normal",
+        "note": ""
+      },
+      "yoy": {
+        "base": 231.12999999999997,
+        "delta": 153.21999999999994,
+        "pct": 66.29169731320034,
+        "status": "normal",
+        "note": ""
+      }
+    }
+  },
+  "market_history": [
+    {
+      "industry": "life",
+      "market_key": "tlt",
+      "same": 11,
+      "of": 15,
+      "periods": [
+        "2025/02",
+        "2025/03",
+        "2025/04",
+        "2025/05",
+        "2025/06",
+        "2025/09",
+        "2025/10",
+        "2025/11",
+        "2025/12",
+        "2026/02",
+        "2026/03",
+        "2026/05",
+        "2026/06",
+        "2026/07",
+        "2026/08"
+      ],
+      "most": [
+        {
+          "code": "2883",
+          "name": "凱基人壽",
+          "same": 13,
+          "of": 15
+        },
+        {
+          "code": "2881",
+          "name": "富邦人壽",
+          "same": 13,
+          "of": 15
+        }
+      ],
+      "least": [
+        {
+          "code": "2887",
+          "name": "新光人壽",
+          "same": 5,
+          "of": 10
+        },
+        {
+          "code": "2892",
+          "name": "第一金人壽",
+          "same": 8,
+          "of": 15
+        }
+      ]
+    },
+    {
+      "industry": "life",
+      "market_key": "taiex",
+      "same": 11,
+      "of": 15,
+      "periods": [
+        "2025/02",
+        "2025/03",
+        "2025/04",
+        "2025/06",
+        "2025/09",
+        "2025/10",
+        "2025/11",
+        "2025/12",
+        "2026/02",
+        "2026/03",
+        "2026/04",
+        "2026/05",
+        "2026/06",
+        "2026/07",
+        "2026/08"
+      ],
+      "most": [
+        {
+          "code": "2882",
+          "name": "國泰人壽",
+          "same": 12,
+          "of": 15
+        },
+        {
+          "code": "2883",
+          "name": "凱基人壽",
+          "same": 11,
+          "of": 15
+        }
+      ],
+      "least": [
+        {
+          "code": "2887",
+          "name": "新光人壽",
+          "same": 4,
+          "of": 11
+        },
+        {
+          "code": "2885",
+          "name": "元大人壽",
+          "same": 7,
+          "of": 15
+        }
+      ]
+    },
+    {
+      "industry": "securities",
+      "market_key": "taiex_turnover",
+      "same": 8,
+      "of": 15,
+      "periods": [
+        "2025/03",
+        "2025/04",
+        "2025/05",
+        "2025/06",
+        "2025/09",
+        "2025/10",
+        "2025/11",
+        "2025/12",
+        "2026/01",
+        "2026/02",
+        "2026/03",
+        "2026/06",
+        "2026/07",
+        "2026/08",
+        "2026/09"
+      ],
+      "most": [
+        {
+          "code": "2885",
+          "name": "元大證券",
+          "same": 12,
+          "of": 15
+        },
+        {
+          "code": "2882",
+          "name": "國泰證券",
+          "same": 12,
+          "of": 15
+        }
+      ],
+      "least": [
+        {
+          "code": "2887",
+          "name": "台新證券",
+          "same": 5,
+          "of": 15
+        },
+        {
+          "code": "2890",
+          "name": "永豐金證券",
+          "same": 5,
+          "of": 15
+        }
+      ]
+    },
+    {
+      "industry": "securities",
+      "market_key": "taiex",
+      "same": 10,
+      "of": 15,
+      "periods": [
+        "2025/02",
+        "2025/03",
+        "2025/04",
+        "2025/06",
+        "2025/09",
+        "2025/10",
+        "2025/11",
+        "2025/12",
+        "2026/01",
+        "2026/02",
+        "2026/03",
+        "2026/06",
+        "2026/07",
+        "2026/08",
+        "2026/09"
+      ],
+      "most": [
+        {
+          "code": "2883",
+          "name": "凱基證券",
+          "same": 11,
+          "of": 15
+        },
+        {
+          "code": "2892",
+          "name": "第一金證券",
+          "same": 10,
+          "of": 15
+        }
+      ],
+      "least": [
+        {
+          "code": "2885",
+          "name": "元大證券",
+          "same": 6,
+          "of": 15
+        },
+        {
+          "code": "2887",
+          "name": "台新證券",
+          "same": 7,
+          "of": 15
+        }
+      ]
+    }
+  ],
+  "market_ranks": {
+    "taiex": {
+      "change": 3.93,
+      "of": 20,
+      "rise_rank": 11,
+      "fall_rank": 10
+    },
+    "taiex_turnover": {
+      "change": -7.03,
+      "of": 20,
+      "rise_rank": 14,
+      "fall_rank": 7
+    },
+    "spx": {
+      "change": -0.45,
+      "of": 21,
+      "rise_rank": 15,
+      "fall_rank": 7
+    },
+    "us10y": {
+      "change": 54,
+      "of": 21,
+      "rise_rank": 1,
+      "fall_rank": 21
+    },
+    "tlt": {
+      "change": -5.74,
+      "of": 20,
+      "rise_rank": 20,
+      "fall_rank": 1
+    },
+    "usdtwd": {
+      "change": 0.71,
+      "of": 21,
+      "rise_rank": 9,
+      "fall_rank": 13
+    }
+  },
   "methodology": [
     "金額為新台幣億元；顯示小數一位，計算保留原始精度。EPS 為元。",
     "YoY 與 MoM＝（本期－基期）÷基期絕對值；零基期及缺值不計百分比。跨零另註轉盈／轉虧。",

@@ -160,8 +160,8 @@ def publish(pack, output=REPORTS, client=None, overwrite_manual=False, reviewer=
         report_data_hash=data_hash if content_changed else (old_data_hash or data_hash)
         meta={**previous,'period':pack['period'],'manual':True,'data_hash':report_data_hash,
               'data_changed':bool(report_data_hash!=data_hash)}
-        headline=re.search(r'## (?:本月一句話重點|本月重點)\s*\n+([^\n]+)',md.read_text(encoding='utf-8'))
-        if headline:meta['headline']=re.sub(r'\*\*','',headline.group(1).strip())
+        headline=re.search(r'## (?:本月一句話重點|本月重點)\s*\n+\*\*([^*]+)\*\*',md.read_text(encoding='utf-8'))
+        if headline:meta['headline']=headline.group(1).strip()
         if previous.get('manual_output_hash')!=manual_hash:meta['generated_at']=datetime.now(timezone.utc).isoformat()
         meta['manual_output_hash']=manual_hash
     elif not overwrite_manual and md.exists() and ((previous.get('input_hash')==input_hash and (previous.get('ai_status')=='generated' or client is None)) or (previous.get('attempt_input_hash')==input_hash and previous.get('attempts',0)>=3)):

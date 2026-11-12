@@ -196,6 +196,8 @@ test('period YoY shows reported change, and missing intermediate month blocks ag
 test('quarter comparison defaults to current quarter and matches equal-length windows', () => {
   const {ctx,element}=context();
   vm.runInContext('buildPeriodOptions();renderPeriodSelector()',ctx);
+  assert.equal(vm.runInContext('state.periodSel.key',ctx),vm.runInContext('state.periodOptions[0].key',ctx));
+  vm.runInContext("state.periodSel=state.periodOptions.find(o=>o.key==='q-115-3')",ctx);
   const opt=vm.runInContext('state.periodSel',ctx);
   assert.equal(opt.label,'2026/07–09（Q3）');
   assert.deepEqual(Array.from(opt.months),['115/07','115/08','115/09']);

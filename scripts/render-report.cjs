@@ -16,7 +16,7 @@ let cards='';
 if (!input.meta.data_changed) {
   for(const [kind,label] of [['holding','金控'],['life','壽險'],['bank','銀行'],['securities','證券']]){
     const {n,current,base,pct}=input.totals[kind];
-    cards+=`<div class="kpi"><span class="k-label">${n}家可比${label}單月合計</span><span class="k-value">${n?nf.format(current):'—'}</span><span class="k-delta ${pct>=0?'up':'down'}">${pct===null?'—':(pct>0?'+':'')+nf.format(pct)+'%'} MoM</span><span class="k-foot">前月：${n?nf.format(base):'—'}</span></div>`;
+    cards+=`<div class="kpi"><span class="k-label">${n}家${kind==='holding'?'':'可比'}${label}單月合計</span><span class="k-value">${n?nf.format(current):'—'}</span><span class="k-delta ${pct>=0?'up':'down'}">${pct===null?'—':(pct>0?'+':'')+nf.format(pct)+'%'} MoM</span><span class="k-foot">前月：${n?nf.format(base):'—'}</span></div>`;
   }
 }
 const status=input.meta.data_changed?'原始資料已有更新，本文保留人工修訂':input.meta.ai_status==='fallback'?'新聞分析暫未完成，先提供數字趨勢':input.meta.manual?'人工修訂版':'依公開數據與新聞自動產製';

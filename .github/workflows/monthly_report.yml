@@ -38,7 +38,7 @@ jobs:
       - name: Verify calculations and report publishing
         run: |
           node tests/analytics.test.cjs
-          node tests/analysis-pack.test.cjs
+          node --test tests/analysis-pack.test.cjs tests/report-numbers.test.cjs
           python -m unittest discover -s tests -p 'test_*.py'
       - name: Render approved report files without AI
         env:
@@ -61,6 +61,7 @@ jobs:
             if [[ ! "$period" =~ ^20[0-9]{2}/(0[1-9]|1[0-2])$ ]]; then echo "Invalid report period: $period"; exit 1; fi
             stem="${period:0:4}-${period:5:2}"
             if [ ! -f "docs/reports/$stem.md" ]; then echo "Approved Markdown missing: $stem.md"; exit 1; fi
+            REPORT_FILE="docs/reports/$stem.md" node --test tests/report-language.test.cjs
             python scraper/monthly_report.py --period "$period" --no-ai
           done
       - name: Save rendered reports

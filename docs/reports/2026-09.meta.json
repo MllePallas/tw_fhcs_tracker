@@ -1,10 +1,10 @@
 {
   "period": "2026/09",
   "manual": true,
-  "data_hash": "6f68edd38c9616ff16a8910b2b62ddd706dd294681627a929f3abb1734680425",
+  "data_hash": "6173f6d38e60aba859c88a75783a8c0a38e76b0dcbf51c61a02a15df32c95a72",
   "data_changed": false,
-  "headline": "13家金控單月獲利月減38.5%；富邦人壽回落是最大單一減項，但券商與銀行亦普遍走弱。",
-  "generated_at": "2026-10-16T02:27:52.445979+00:00",
-  "manual_output_hash": "b485f63912e598a4a2056ecefe243607eddc967f1abd1153bc1ac3faba2c5a05",
+  "headline": "13 家金控 2026/09 單月稅後淨利合計 529.7 億元，較 8 月 861.2 億元月減 331.4 億元（−38.5%）；富邦金月減 177.2 億元，其中富邦人壽月減 165.8 億元。",
+  "generated_at": "2026-11-12T09:01:45.893715+00:00",
+  "manual_output_hash": "d0ed5e3f81898641bf27fdc8f910e325e10ca7325f822d30794b8e29971fc38f",
   "data_hash_schema": 2
 }
