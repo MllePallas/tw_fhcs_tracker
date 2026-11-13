@@ -228,7 +228,7 @@ test('quarter changes with missing or changed basis are excluded from rankings',
   vm.runInContext('buildPeriodOptions()',ctx);
   assert.equal(vm.runInContext("periodQoqOf(state.periodOptions.find(o=>o.key==='q-115-1'),'2881',100,90).status",ctx),'incomparable');
   vm.runInContext("delete monthCache['115/05']",ctx);
-  const row=vm.runInContext("buildPeriodHoldingRows(state.periodOptions[0]).find(r=>r.code==='2880')",ctx);
+  const row=vm.runInContext("buildPeriodHoldingRows(state.periodOptions.find(o=>o.key==='q-115-2')).find(r=>r.code==='2880')",ctx);
   assert.equal(row.delta,null);
   assert.equal(row.rank,undefined);
 });
