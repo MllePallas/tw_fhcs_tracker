@@ -63,7 +63,7 @@
           <div class="mode-toggle" id="mode-toggle">
             <button class="mode-btn active" data-pm="monthly" onclick="setPageMode('monthly')">完整月報</button>
             <button class="mode-btn" data-pm="trend" onclick="setPageMode('trend')">趨勢重點</button>
-            <button class="mode-btn" data-pm="period" onclick="setPageMode('period')">季度比較</button>
+            <button class="mode-btn" data-pm="period" onclick="setPageMode('period')">歷史趨勢</button>
           </div>
         </div>
         <div class="ctrl-group ctrl-month">
@@ -73,10 +73,29 @@
           </select>
         </div>
         <div class="ctrl-group ctrl-period hidden" id="ctrl-period">
-          <label>期間：</label>
-          <select id="period-select" onchange="onPeriodChange()"></select>
+          <label>公司：</label>
+          <select id="history-entity" aria-label="公司" onchange="onHistoryControlChange()"></select>
         </div>
-        <div class="ctrl-group">
+        <div class="ctrl-group ctrl-history hidden" id="ctrl-history-range">
+          <label>期間：</label>
+          <select id="history-range" aria-label="歷史期間" onchange="onHistoryControlChange()">
+            <option value="year">本年度</option>
+            <option value="12">最近 12 個月</option>
+            <option value="all">全部期間</option>
+          </select>
+        </div>
+        <div class="ctrl-group ctrl-history hidden" id="ctrl-history-frequency">
+          <label>頻率：</label>
+          <select id="history-frequency" aria-label="資料頻率" onchange="onHistoryControlChange()">
+            <option value="month">月度</option>
+            <option value="quarter">季度</option>
+          </select>
+        </div>
+        <select id="period-select" class="hidden" aria-hidden="true" tabindex="-1"></select>
+        <div class="ctrl-group ctrl-history hidden" id="ctrl-history-download">
+          <button class="btn-download" onclick="downloadHistoryCsv()" title="下載目前公司顯示的歷史數字（CSV）">下載 CSV</button>
+        </div>
+        <div class="ctrl-group ctrl-sort">
           <label>排序：</label>
           <select id="sort-select" aria-label="排序" onchange="renderAll()">
             <option value="trend_change">月增減金額最大</option>

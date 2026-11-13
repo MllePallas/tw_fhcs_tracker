@@ -24,6 +24,8 @@ let state = {
   pageMode: 'monthly',     // 完整月報（預設）、趨勢重點、期間比較
   periodSel: null,         // 期間比較目前選取的期間（buildPeriodOptions 產生）
   periodOptions: [],       // 期間選項清單
+  historyEntity: null,     // 歷史趨勢目前選取的金控或子公司
+  historyRows: [],         // 目前畫面資料，供 CSV 下載共用
   prevMonth: null,         // 上月資料（MoM 欄與變動拆解用；缺檔為 null）
 };
 
@@ -83,6 +85,7 @@ function setView(mode) {
   document.querySelectorAll('.industry-tabs .tab').forEach(btn => {
     btn.classList.toggle('active', btn.dataset.view === mode);
   });
+  if (state.pageMode === 'period') refreshHistoryEntitySelector();
   renderAll();
   resetTableScroll();
 }
@@ -355,12 +358,11 @@ function renderAll() {
   state.displayUnit = document.getElementById('unit-select').value;
   state.sortMode    = document.getElementById('sort-select').value;
   const showOverview = state.pageMode === 'monthly' && state.viewMode === 'holdings';
-  document.getElementById('market-context').classList.toggle('hidden', !showOverview && state.pageMode !== 'period');
+  document.getElementById('market-context').classList.toggle('hidden', !showOverview);
   document.querySelector('.ctrl-download').classList.toggle('hidden', !showOverview);
   if (state.pageMode === 'trend') { renderTrendDashboard(); return; }
 
-  // 草稿新增：期間比較模式走獨立渲染流程
-  if (state.pageMode === 'period') { renderPeriodAll(); return; }
+  if (state.pageMode === 'period') { renderHistoryAll(); return; }
 
   updatePeriodBadge();
   updateLastUpdated();
@@ -521,8 +523,8 @@ function renderHoldingsTable() {
     <tr>
       <th rowspan="2" class="col-code">代號</th>
       <th rowspan="2" class="col-name">金控</th>
-      <th colspan="4" class="col-group">稅後淨利（公告口徑）</th>
-      <th class="col-group">稅後 EPS (元)</th>
+      <th colspan="4" class="col-group"><span class="col-group-label">稅後淨利<span class="col-group-sub">（公告口徑）</span></span></th>
+      <th class="col-group"><span class="col-group-label">稅後 EPS (元)</span></th>
       <th rowspan="2" class="col-source">公告日期</th>
     </tr>
     <tr>
@@ -534,6 +536,7 @@ function renderHoldingsTable() {
     </tr>`;
   const companies = sortCompanies([...state.data.companies]);
   document.getElementById('main-tbody').innerHTML = companies.map(renderRow).join('');
+  syncStickyNameWidth();
 
   // 金控層級 FVOCI 加計列註腳（有實際出現加計列才顯示）
   const tfoot = document.getElementById('main-tfoot');
@@ -544,6 +547,14 @@ function renderHoldingsTable() {
       ? `<tr><td colspan="8" class="table-footnote"><span><sup>*</sup> ${FVOCI_FOOTNOTE_HOLDINGS}</span></td></tr>`
       : '';
   }
+}
+
+// 手機橫向捲動時，群組表頭文字（稅後淨利／EPS）要停在固定名稱欄右側，
+// 不能滑進名稱欄底下被蓋掉 → 以 CSS 變數告知名稱欄實際寬度（隨字型／內容而變）
+function syncStickyNameWidth() {
+  const table = document.getElementById('main-table');
+  const nameTh = table?.querySelector('thead th.col-name');
+  if (nameTh) table.style.setProperty('--sticky-name-w', `${nameTh.offsetWidth}px`);
 }
 
 // 產業視角（銀行 / 壽險 / 證券）
@@ -1340,8 +1351,9 @@ function renderBarChart(canvasId, prevChart, series, curLabel, priorLabel, unit)
 
 // ── 輔助函數 ───────────────────────────────────────────
 function updatePeriodBadge() {
-  if (state.pageMode === 'period' && state.periodSel) {
-    document.getElementById('period-badge').textContent = `${state.periodSel.label}｜季度比較`;
+  if (state.pageMode === 'period') {
+    const entity = state.historyEntity;
+    document.getElementById('period-badge').textContent = `${entity?.name || '歷史資料'}｜歷史趨勢`;
     return;
   }
   const p = state.data?.report_period;
@@ -2253,7 +2265,7 @@ function formatNum(n) {
 
 /* ═══════════════════════════════════════════════════════════════════
    草稿新增（2026-08）：
-   1. 季度比較模式（本季、上季與去年同季）
+   1. 歷史趨勢使用的季度彙總相容邏輯（本季、上季與去年同季）
    2. 單月獲利變動拆解（金控 MoM 歸因至子公司）＋ 總表「當月 MoM」欄
    ═══════════════════════════════════════════════════════════════════ */
 
@@ -2782,7 +2794,7 @@ function renderPeriodChart(opt, holdRows) {
   }
 }
 
-// 季度比較：主要業務別的獲利增減；未完整揭露的項目留在其他軋差。
+// 舊季度彙總明細相容邏輯：主要業務別的獲利增減；未完整揭露項目留在其他軋差。
 function showPeriodDetail(code) {
   const opt = state.periodSel;
   if (!opt) return;
@@ -2845,6 +2857,243 @@ function showPeriodDetail(code) {
   panel.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
 }
 
+// ── 歷史趨勢：單一金控／子公司的逐月與逐季數字 ─────────────────────
+
+function canonicalHistoryName(name) {
+  for (const [current, previous] of Object.entries(comparisonRules?.aliases || {})) {
+    if (name === previous) return current;
+  }
+  return name;
+}
+
+function historyEntities(view = state.viewMode) {
+  const found = new Map();
+  const periods = Object.keys(monthCache).filter(p => monthCache[p]).sort();
+  for (const period of periods) {
+    for (const c of monthCache[period].companies || []) {
+      if (c.error) continue;
+      if (view === 'holdings') {
+        found.set(`h|${c.code}`, { key:`h|${c.code}`, kind:'holding', code:c.code, name:c.name, parentName:c.name });
+        continue;
+      }
+      for (const sub of A.activeSubsidiaries(c.subsidiaries, comparisonRules, c.code, period)) {
+        if (classifyIndustry(sub.name) !== view) continue;
+        const name = canonicalHistoryName(sub.name);
+        const key = `s|${c.code}|${name}`;
+        found.set(key, { key, kind:'subsidiary', code:c.code, name, parentName:c.name });
+      }
+    }
+  }
+  return [...found.values()].sort((a,b) => a.code.localeCompare(b.code) || a.name.localeCompare(b.name, 'zh-Hant'));
+}
+
+function refreshHistoryEntitySelector() {
+  const sel = document.getElementById('history-entity');
+  if (!sel) return;
+  const entities = historyEntities();
+  const previousKey = sel.value || state.historyEntity?.key;
+  sel.innerHTML = entities.map(e => `<option value="${escapeHtml(e.key)}">${escapeHtml(e.kind === 'holding' ? `${e.code} ${e.name}` : `${e.parentName}｜${e.name}`)}</option>`).join('');
+  const chosen = entities.find(e => e.key === previousKey) || entities[0] || null;
+  sel.value = chosen?.key || '';
+  state.historyEntity = chosen;
+}
+
+function onHistoryControlChange() {
+  const key = document.getElementById('history-entity')?.value;
+  state.historyEntity = historyEntities().find(e => e.key === key) || null;
+  renderAll();
+  resetTableScroll();
+}
+
+function historyPeriods() {
+  const end = state.data?.report_period;
+  const all = (state.index?.months || []).map(m => m.period).filter(p => p <= end && monthCache[p]).sort();
+  const range = document.getElementById('history-range')?.value || 'year';
+  if (range === '12') return all.slice(-12);
+  if (range === 'all') return all;
+  const year = String(end || '').split('/')[0];
+  return all.filter(p => p.startsWith(`${year}/`));
+}
+
+function historyValue(entity, period, field) {
+  return A.value(monthCache, period, entity.code, field,
+    entity.kind === 'subsidiary' ? entity.name : null, comparisonRules);
+}
+
+function historyReason(entity, current, base) {
+  return A.reason(comparisonRules, entity.code, current, base,
+    entity.kind === 'subsidiary' ? entity.name : null);
+}
+
+function historyMonthlyRows(entity, periods) {
+  return periods.map(period => {
+    const profit = historyValue(entity, period, 'monthly_profit');
+    const previousPeriod = A.shift(period, -1);
+    const previous = historyValue(entity, previousPeriod, 'monthly_profit');
+    const momReason = historyReason(entity, [period], [previousPeriod]);
+    const mom = A.compare(profit, previous, { reason:momReason });
+    const yearAgoPeriod = A.shift(period, -12);
+    const yearAgo = historyValue(entity, yearAgoPeriod, 'monthly_profit');
+    const yoy = A.reportedYoY(profit, yearAgo, historyReason(entity, [period], [yearAgoPeriod]));
+    const cumulative = historyValue(entity, period, 'cumulative_profit');
+    const cumulativeBase = historyValue(entity, yearAgoPeriod, 'cumulative_profit');
+    const cumulativeYoy = A.reportedYoY(cumulative, cumulativeBase,
+      historyReason(entity, A.yearMonths(period), A.yearMonths(yearAgoPeriod)));
+    return { period, label:periodAd(period), profit, previous, mom, yearAgo, yoy, cumulative, cumulativeYoy };
+  });
+}
+
+function historyPeriodProfit(entity, months) {
+  const aggregate = periodAggCompany(months, entity.code);
+  if (!aggregate) return null;
+  if (entity.kind === 'holding') return aggregate.profit;
+  const oldName = comparisonRules.aliases?.[entity.name];
+  const sub = aggregate.subs.find(s => s.name === entity.name || s.name === oldName);
+  return sub?.profit ?? null;
+}
+
+function historyQuarterGroups(periods) {
+  const groups = new Map();
+  for (const period of periods) {
+    const [y,m] = period.split('/').map(Number);
+    const q = Math.ceil(m / 3), key = `${y}-${q}`;
+    if (!groups.has(key)) groups.set(key, []);
+    groups.get(key).push(period);
+  }
+  return [...groups.entries()].map(([key, months]) => {
+    months.sort();
+    const [y,q] = key.split('-').map(Number);
+    return { key, months, label:`${adYear(y)} Q${q}${months.length < 3 ? '（未完）' : ''}` };
+  });
+}
+
+function historyQuarterRows(entity, periods) {
+  return historyQuarterGroups(periods).map(group => {
+    const profit = historyPeriodProfit(entity, group.months);
+    const priorMonths = group.months.map(p => A.shift(p, -3));
+    const yearAgoMonths = group.months.map(p => A.shift(p, -12));
+    const previous = historyPeriodProfit(entity, priorMonths);
+    const yearAgo = historyPeriodProfit(entity, yearAgoMonths);
+    const qoq = A.compare(profit, previous, { reason:historyReason(entity, group.months, priorMonths) });
+    const yoy = A.reportedYoY(profit, yearAgo, historyReason(entity, group.months, yearAgoMonths));
+    return { ...group, profit, previous, qoq, yearAgo, yoy };
+  });
+}
+
+function historyMetricDisplay(metric) {
+  const info = formatYoY(metric?.pct, metric?.delta, metric?.status, '百萬元', state.displayUnit);
+  return `<span class="${info.cls}"${metric?.reason ? ` title="${escapeHtml(metric.reason)}"` : ''}>${info.disp}</span>`;
+}
+
+function historyAmount(value, cls = true) {
+  if (!A.finite(value)) return '—';
+  const shown = convertUnit(value, '百萬元', state.displayUnit);
+  return `<span class="${cls ? shown >= 0 ? 'positive' : 'negative' : ''}">${formatNum(shown)}</span>`;
+}
+
+function renderHistoryMonthlyTable(entity, rows) {
+  document.getElementById('main-thead').innerHTML = `<tr>
+    <th>月份</th><th>單月稅後淨利</th><th>月增減</th><th>MoM</th>
+    <th>去年同月</th><th>YoY</th><th>年初累計</th><th>累計 YoY</th>
+  </tr>`;
+  document.getElementById('main-tbody').innerHTML = rows.map(r => {
+    const delta = r.mom && !['missing','incomparable'].includes(r.mom.status) ? r.mom.delta : null;
+    return `<tr>
+      <td class="col-entity">${r.label}</td>
+      <td class="num">${historyAmount(r.profit)}</td>
+      <td class="num">${delta == null ? '—' : signedPeriodAmount(delta, state.displayUnit)}</td>
+      <td class="num yoy">${historyMetricDisplay(r.mom)}</td>
+      <td class="num pd-base">${historyAmount(r.yearAgo, false)}</td>
+      <td class="num yoy">${historyMetricDisplay(r.yoy)}</td>
+      <td class="num">${historyAmount(r.cumulative)}</td>
+      <td class="num yoy">${historyMetricDisplay(r.cumulativeYoy)}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="8" class="loading-cell">此期間沒有可顯示的月份</td></tr>';
+  document.getElementById('main-tfoot').innerHTML = `<tr><td colspan="8" class="table-footnote"><span>單月與累計均採各期公告數；未揭露或缺少資料顯示 —，不補值。跨合併或會計事件的比較會標示口徑不同。</span></td></tr>`;
+}
+
+function renderHistoryQuarterTable(entity, rows) {
+  document.getElementById('main-thead').innerHTML = `<tr>
+    <th>季度</th><th>單季稅後淨利</th><th>較上季增減</th><th>QoQ</th>
+    <th>去年同季</th><th>YoY</th>
+  </tr>`;
+  document.getElementById('main-tbody').innerHTML = rows.map(r => {
+    const delta = r.qoq && !['missing','incomparable'].includes(r.qoq.status) ? r.qoq.delta : null;
+    return `<tr>
+      <td class="col-entity">${r.label}</td>
+      <td class="num">${historyAmount(r.profit)}</td>
+      <td class="num">${delta == null ? '—' : signedPeriodAmount(delta, state.displayUnit)}</td>
+      <td class="num yoy">${historyMetricDisplay(r.qoq)}</td>
+      <td class="num pd-base">${historyAmount(r.yearAgo, false)}</td>
+      <td class="num yoy">${historyMetricDisplay(r.yoy)}</td>
+    </tr>`;
+  }).join('') || '<tr><td colspan="6" class="loading-cell">此期間沒有可顯示的季度</td></tr>';
+  document.getElementById('main-tfoot').innerHTML = `<tr><td colspan="6" class="table-footnote"><span>單季獲利以期末累計減期初前月累計計算；未完季只取目前已有月份，並與上季及去年同季的等長月份比較。</span></td></tr>`;
+}
+
+function renderHistoryChart(entity, rows, frequency) {
+  const title = document.getElementById('bar-chart-title');
+  title.textContent = `${entity.name}｜${frequency === 'month' ? '每月' : '每季'}稅後淨利走勢`;
+  const note = document.getElementById('bar-chart-note');
+  note.textContent = rows.some(r => !A.finite(r.profit)) ? '部分期間未揭露獲利，圖表以斷點呈現。' : '';
+  note.classList.toggle('hidden', !note.textContent);
+  if (typeof Chart === 'undefined') return;
+  if (state.barChart) state.barChart.destroy();
+  const ctx = document.getElementById('bar-chart').getContext('2d');
+  const unit = state.displayUnit;
+  state.barChart = new Chart(ctx, {
+    type:'line',
+    data:{
+      labels:rows.map(r => r.label),
+      datasets:[
+        { label:frequency === 'month' ? '單月稅後淨利' : '單季稅後淨利', data:rows.map(r => A.finite(r.profit) ? convertUnit(r.profit,'百萬元',unit) : null), borderColor:'#315c9b', backgroundColor:'rgba(49,92,155,.12)', pointRadius:3, tension:.2, spanGaps:false, fill:true },
+        { label:frequency === 'month' ? '去年同月' : '去年同季', data:rows.map(r => A.finite(r.yearAgo) ? convertUnit(r.yearAgo,'百萬元',unit) : null), borderColor:'#9aa4b2', borderDash:[5,4], pointRadius:2, tension:.2, spanGaps:false }
+      ]
+    },
+    options:{ responsive:true, maintainAspectRatio:false, interaction:{mode:'index',intersect:false}, plugins:{legend:{position:'bottom'},tooltip:{callbacks:{label:c=>`${c.dataset.label}：${c.raw == null ? '—' : formatNum(c.raw)} ${unit}`}}}, scales:{x:{grid:{display:false}},y:{border:{display:false},grid:{color:'#eceef2'},ticks:{callback:v=>formatNum(v)}}} }
+  });
+}
+
+function renderHistoryAll() {
+  if (!state.historyEntity) refreshHistoryEntitySelector();
+  const entity = state.historyEntity;
+  if (!entity) return;
+  updatePeriodBadge();
+  const periods = historyPeriods();
+  const frequency = document.getElementById('history-frequency')?.value || 'month';
+  const rows = frequency === 'quarter' ? historyQuarterRows(entity, periods) : historyMonthlyRows(entity, periods);
+  state.historyRows = rows;
+  document.getElementById('last-updated').textContent = `${entity.kind === 'holding' ? entity.name : `${entity.parentName}｜${entity.name}`}｜${frequency === 'month' ? '月度' : '季度'}歷史`;
+  document.getElementById('table-unit-hint').textContent = `單位：${unitFullLabel(state.displayUnit)}｜公告稅後淨利`;
+  document.getElementById('main-table').className = 'view-history';
+  document.getElementById('summary-cards').innerHTML = '';
+  if (frequency === 'quarter') renderHistoryQuarterTable(entity, rows);
+  else renderHistoryMonthlyTable(entity, rows);
+  renderHistoryChart(entity, rows, frequency);
+}
+
+function historyCsvText() {
+  const frequency = document.getElementById('history-frequency')?.value || 'month';
+  const metricText = metric => metric?.pct != null ? `${metric.pct.toFixed(1)}%` : STATUS_LABELS[metric?.status] || '';
+  const esc = value => `"${String(value ?? '').replace(/"/g,'""')}"`;
+  const rows = state.historyRows || [];
+  const dataRows = frequency === 'quarter'
+    ? [['季度','單季稅後淨利（百萬元）','較上季增減（百萬元）','QoQ','去年同季（百萬元）','YoY'], ...rows.map(r => [r.label,r.profit,r.qoq?.delta,metricText(r.qoq),r.yearAgo,metricText(r.yoy)])]
+    : [['月份','單月稅後淨利（百萬元）','月增減（百萬元）','MoM','去年同月（百萬元）','YoY','年初累計（百萬元）','累計 YoY'], ...rows.map(r => [r.label,r.profit,r.mom?.delta,metricText(r.mom),r.yearAgo,metricText(r.yoy),r.cumulative,metricText(r.cumulativeYoy)])];
+  const matrix = [['公司', state.historyEntity?.name || ''], ['所屬金控', state.historyEntity?.parentName || ''], [], ...dataRows];
+  return matrix.map(row => row.map(esc).join(',')).join('\r\n');
+}
+
+function downloadHistoryCsv() {
+  if (!state.historyEntity || !state.historyRows.length) return;
+  const blob = new Blob(['\ufeff', historyCsvText()], {type:'text/csv;charset=utf-8'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = `${state.historyEntity.name}-${document.getElementById('history-frequency')?.value === 'quarter' ? '季度' : '月度'}獲利.csv`;
+  a.click();
+  URL.revokeObjectURL(a.href);
+}
+
 // ── 模式切換 ──
 const SORT_OPTIONS_BY_MODE = {
   trend: [
@@ -2892,12 +3141,14 @@ function setPageMode(mode) {
   });
   const cp = document.getElementById('ctrl-period');
   if (cp) cp.classList.toggle('hidden', state.pageMode !== 'period');
+  document.querySelectorAll('.ctrl-history').forEach(el => el.classList.toggle('hidden', state.pageMode !== 'period'));
   setSortOptionsForMode(state.pageMode);
   closeDetail();
 
   if (state.pageMode === 'period') {
-    if (!state.periodOptions.length) { buildPeriodOptions(); renderPeriodSelector(); }
-    onPeriodChange();
+    refreshHistoryEntitySelector();
+    renderAll();
+    resetTableScroll();
   } else {
     renderAll();
     resetTableScroll();

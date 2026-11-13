@@ -12,7 +12,7 @@
 
 新版比較與缺值規則、原始公告口徑及測試方式見 [COMPARISON_POLICY.md](COMPARISON_POLICY.md)。
 
-GitHub 自動更新月自結、新聞與市場資料；完整月報、趨勢重點數字及季度比較隨資料更新。自結獲利分析報告須先人工確認 Markdown，提交後才由 GitHub 排版發布。期間一律顯示西元年月。操作方式見 [AUTOMATED_REPORTS.md](AUTOMATED_REPORTS.md)。
+GitHub 自動更新月自結、新聞與市場資料；完整月報、趨勢重點及單一金控／子公司的月度與季度歷史隨資料更新。自結獲利分析報告須先人工確認 Markdown，提交後才由 GitHub 排版發布。期間一律顯示西元年月。操作方式見 [AUTOMATED_REPORTS.md](AUTOMATED_REPORTS.md)。
 
 - 每月 8~15 日自動從 MOPS 爬取 13 家金控公告
 - 解析金控本體及各子公司當月/累計稅後淨利

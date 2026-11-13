@@ -193,7 +193,7 @@ test('period YoY shows reported change, and missing intermediate month blocks ag
   vm.runInContext("delete monthCache['115/07']",ctx);
   assert.equal(vm.runInContext("periodAggCompany(['115/06','115/07','115/08'],'2880')",ctx),null);
 });
-test('quarter comparison defaults to current quarter and matches equal-length windows', () => {
+test('quarter aggregation helpers match equal-length windows', () => {
   const {ctx,element}=context();
   vm.runInContext('buildPeriodOptions();renderPeriodSelector()',ctx);
   assert.equal(vm.runInContext('state.periodSel.key',ctx),vm.runInContext('state.periodOptions[0].key',ctx));
@@ -218,10 +218,10 @@ test('quarter comparison defaults to current quarter and matches equal-length wi
   assert.match(detail,/銀行/);assert.match(detail,/壽險/);assert.match(detail,/證券/);
   assert.match(detail,/其他（含母公司與合併調整）/);
   vm.runInContext("state.pageMode='period';state.viewMode='holdings';renderAll()",ctx);
-  assert.equal(element('market-context').classList.contains('hidden'),false);
-  assert.match(element('summary-cards').innerHTML,/較上季增額最大/);
-  vm.runInContext("state.viewMode='bank';renderAll()",ctx);
-  assert.match(element('summary-cards').innerHTML,/銀行/);
+  assert.equal(element('market-context').classList.contains('hidden'),true);
+  assert.match(element('main-thead').innerHTML,/單月稅後淨利/);
+  vm.runInContext("setView('bank')",ctx);
+  assert.ok(vm.runInContext("state.historyEntity.kind==='subsidiary'" ,ctx));
 });
 test('quarter changes with missing or changed basis are excluded from rankings', () => {
   const {ctx}=context();
@@ -231,6 +231,31 @@ test('quarter changes with missing or changed basis are excluded from rankings',
   const row=vm.runInContext("buildPeriodHoldingRows(state.periodOptions[0]).find(r=>r.code==='2880')",ctx);
   assert.equal(row.delta,null);
   assert.equal(row.rank,undefined);
+});
+test('history view lists one entity month by month, supports quarters and CSV', () => {
+  const {ctx,element}=context();
+  vm.runInContext(`
+    state.data=monthCache['115/10'];
+    state.pageMode='period';
+    state.viewMode='bank';
+    refreshHistoryEntitySelector();
+    document.getElementById('history-entity').value=historyEntities().find(e=>e.name==='中國信託銀行').key;
+    onHistoryControlChange();
+  `,ctx);
+  assert.equal(vm.runInContext('state.historyEntity.name',ctx),'中國信託銀行');
+  assert.equal(vm.runInContext('state.historyRows.length',ctx),10);
+  assert.match(element('main-tbody').innerHTML,/2026\/01/);
+  assert.match(element('main-tbody').innerHTML,/2026\/10/);
+  assert.match(element('main-thead').innerHTML,/年初累計/);
+  const october=vm.runInContext("state.historyRows.find(r=>r.period==='115/10')",ctx);
+  near(october.profit,5509);
+  near(october.cumulative,55034);
+  assert.match(vm.runInContext('historyCsvText()',ctx),/中國信託|月份|單月稅後淨利/);
+  element('history-frequency').value='quarter';
+  vm.runInContext('renderAll()',ctx);
+  assert.match(element('main-thead').innerHTML,/單季稅後淨利/);
+  assert.equal(vm.runInContext('state.historyRows.length',ctx),4);
+  assert.match(element('main-tbody').innerHTML,/2026 Q4（未完）/);
 });
 test('dashboard renders all companies, touch-accessible heatmap and empty filter state', () => {
   const {ctx,element}=context();

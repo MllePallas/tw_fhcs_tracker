@@ -1240,6 +1240,15 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
     /* 陰影標示「右側還有欄位、數字會捲到此欄下方」，避免把被裁切的數字誤讀為完整值 */
     box-shadow: 3px 0 5px -3px rgba(16, 20, 24, .22);
   }
+  /* 群組表頭（稅後淨利／EPS）跨多欄置中，橫向捲動時文字會滑進固定名稱欄底下被蓋掉 →
+     sticky 下在內層 span，停在名稱欄右緣（--sticky-name-w 由 app.js 依實際欄寬設定） */
+  #main-table thead th.col-group > .col-group-label {
+    position: sticky;
+    left: calc(var(--sticky-name-w, 84px) + 8px);
+    display: inline-block;
+  }
+  /* 捲到最右時群組只剩約 100px 可視，單行標籤放不下 → 口徑說明換到第二行縮窄標籤 */
+  #main-table thead th.col-group .col-group-sub { display: block; font-size: 10px; font-weight: 500; }
   #main-table tbody tr.fvoci-row td:nth-child(2) { background: var(--fvoci-bg); }
   #main-table tbody tr.error-row td:nth-child(2) { background: var(--surface-alt); }
 
@@ -1419,10 +1428,12 @@ button:focus-visible { outline: 2px solid var(--primary); outline-offset: 1px; }
 
 /* 期間比較模式：隱藏單月專屬控制項與第二張圖 */
 body.pm-period .ctrl-month,
+body.pm-period .ctrl-sort,
 body.pm-period .ctrl-download,
 body.pm-period #btn-snapshot,
 body.pm-period .mobile-view-toggle,
 body.pm-period .mobile-cards,
+body.pm-period #market-context,
 body.pm-period #cumul-chart-title,
 body.pm-period #cumul-chart-container,
 body.pm-period #cumul-chart-note { display: none !important; }
@@ -1435,6 +1446,18 @@ body.pm-period .table-container { display: block !important; }
 .pd-base { color: var(--text-muted); }
 .pd-resid td { color: var(--text-muted); font-size: 12.5px; background: var(--surface-alt); }
 #main-table.view-period th { white-space: nowrap; }
+#main-table.view-history th { white-space: nowrap; }
+#main-table.view-history td:first-child { font-weight: 600; white-space: nowrap; }
+
+body.pm-period .ctrl-period select { min-width: 190px; }
+body.pm-period #ctrl-history-download .btn-download { padding: 6px 12px; }
+
+@media (max-width: 720px) {
+  body.pm-period .ctrl-period { grid-column: 1 / -1; }
+  body.pm-period .ctrl-history { min-width: 0; }
+  body.pm-period #ctrl-history-download { grid-column: 1 / -1; }
+  body.pm-period #ctrl-history-download .btn-download { width: 100%; justify-content: center; padding: 10px; }
+}
 
 /* MoM 拆解面板（詳情內） */
 .mom-panel {
