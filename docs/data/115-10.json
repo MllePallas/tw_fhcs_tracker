@@ -223,13 +223,12 @@
         "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
         "fvoci_adjusted": {
           "cumulative_profit": 245700.0,
-          "monthly_profit": 22040.0,
           "delta_vs_original": 131250.0,
           "label": "對保留盈餘影響數",
           "cumulative_eps": 16.5,
-          "source_url": "https://www.ctee.com.tw/news/20261116701556-430301",
-          "source_quote": "2026年10月稅後淨利90.9億元，加計FVOCI股票資本利得129.5億，單月對保留盈餘影響數為220.4億；…加計FVOCI股票處分利益後，累計前10月對保留盈餘影響數達2,457億，每股EPS達16.5元",
-          "original_value_text": "單月220.4億元、累計2,457億元",
+          "source_url": "https://www.pinview.com.tw/News/64829.html",
+          "source_quote": "若加計FVOCI股票處分損益，國泰金累計前10月對保留盈餘之影響數達2457億元、每股16.5元",
+          "original_value_text": "累計2,457億元",
           "manual": true,
           "generated_at": "2026-11-16T17:34:13.505137",
           "yoy_pct": null,
@@ -247,19 +246,7 @@
           "cumulative_profit_yoy_pct": 31.2,
           "cumulative_profit_yoy_abs": 15330.0,
           "cumulative_profit_yoy_status": "normal",
-          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
-          "fvoci_adjusted": {
-            "cumulative_profit": 191820.0,
-            "delta_vs_original": 127280.0,
-            "source_url": "https://www.ctee.com.tw/news/20261116701556-430301",
-            "source_quote": "國泰人壽…累計前10月稅後淨利為645.4億，加計FVOCI股票處分利益後，累計對保留盈餘影響數達1,918.2億元",
-            "original_value_text": "累計前10月1,918.2億元",
-            "manual": true,
-            "generated_at": "2026-11-16T17:34:13.808197",
-            "yoy_pct": null,
-            "yoy_abs": null,
-            "yoy_status": "not_presented"
-          }
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算"
         },
         {
           "name": "國泰世華銀行",
@@ -309,7 +296,7 @@
       "unit": "百萬元",
       "report_month": "115/10",
       "parse_method": "llm",
-      "news_summary": "**重點**\n國泰金10月稅後淨利90.9億元，加計FVOCI股票資本利得129.5億元，單月對保留盈餘影響數220.4億元；累計前10月稅後淨利1,145億元、EPS 7.56元，加計FVOCI股票處分利益後累計對保留盈餘影響數達2,457億元、每股16.5元，續創歷史新高。世華銀行、產險、證券及投信累計稅後淨利均創歷年同期新高。\n\n**子公司明細**\n- 國泰人壽：10月稅後淨利43.8億元，受惠CSM釋出與經常性利差穩定貢獻，加上美債長率走降、FVTPL評價利益回升；累計645.4億元，加計FVOCI股票處分利益後累計對保留盈餘影響數1,918.2億元、創歷史新高。10月底淨值比12.55%，外匯價格變動準備金餘額1,446億元。\n- 國泰世華銀行：10月40.6億元，累計432.3億元、年增13%；淨利息收入年增17%、淨手續費收入年增13%，逾放比0.13%、備抵呆帳覆蓋率1,135%。\n- 國泰產險、國泰證券、國泰投信：累計稅後淨利均續創歷年同期新高（10月分別為1.9億、8.8億、4.4億元，累計37.7億、78.4億、33.3億元）。",
+      "news_summary": "**重點**\n國泰金10月稅後淨利90.9億元，累計前10月稅後淨利1,144.5億元、EPS 7.56元，加計FVOCI股票處分利益後累計對保留盈餘影響數達2,457億元、每股16.5元，續創歷史新高。世華銀行、產險、證券及投信累計稅後淨利均創歷年同期新高。\n\n**子公司明細**\n- 國泰人壽：10月稅後淨利43.8億元，公司說明單月獲利主要來自CSM穩定攤銷與經常性收益；累計645.4億元，加計FVOCI股票處分利益後累計對保留盈餘影響數突破1,900億元、創歷史新高。10月底淨值比12.55%，外匯價格變動準備金餘額1,446億元。\n- 國泰世華銀行：10月40.6億元，累計432.3億元、年增13%；淨利息收入年增17%、淨手續費收入年增13%，逾放比0.13%、備抵呆帳覆蓋率1,135%。\n- 國泰產險、國泰證券、國泰投信：累計稅後淨利均續創歷年同期新高（10月分別為1.9億、8.8億、4.4億元，累計37.7億、78.4億、33.3億元）。",
       "news_sources": [
         {
           "url": "https://www.ctee.com.tw/news/20261116701556-430301",
@@ -722,19 +709,7 @@
           "cumulative_profit_yoy_pct": 1077.7,
           "cumulative_profit_yoy_abs": 31360.0,
           "cumulative_profit_yoy_status": "normal",
-          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份",
-          "fvoci_adjusted": {
-            "cumulative_profit": 99660,
-            "monthly_profit": 6040,
-            "delta_vs_original": 65390,
-            "source_url": "https://money.udn.com/money/story/5613/9877781",
-            "source_quote": "新光人壽10月FVOCI股票處分利益約55.6億元，加計單月稅後純益，合計對保留盈餘貢獻60.4億元；前十月累計實現股票處分利益共602.5億元，加計稅後純益，合計對保留盈餘貢獻達996.6億元",
-            "original_value_text": "累計對保留盈餘貢獻達 996.6 億元；單月對保留盈餘貢獻 60.4 億元",
-            "generated_at": "2026-11-14T01:47:49.631747",
-            "yoy_pct": null,
-            "yoy_abs": null,
-            "yoy_status": "not_presented"
-          }
+          "cumulative_profit_yoy_reason": "2025/07/24 台新與新光金控合併；7 月為非完整合併月份"
         },
         {
           "name": "台新證券",
