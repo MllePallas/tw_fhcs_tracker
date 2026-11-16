@@ -87,3 +87,8 @@ test('new fields preserve missing data and do not rank incomplete history',()=>{
   assert.equal(f.quarter.current,null);
   assert.equal(p.group_stats.holding.excluded_mom.includes('富邦金'),true);
 });
+test('market direction ties have stable order across operating systems',()=>{
+  const p=P.build(history,rules,'2026/10');
+  const lifeTaiex=p.market_history.find(r=>r.industry==='life'&&r.market_key==='taiex');
+  assert.deepEqual(lifeTaiex.most.map(r=>r.name),['凱基人壽','國泰人壽']);
+});

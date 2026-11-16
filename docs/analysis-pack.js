@@ -214,8 +214,9 @@
         }).filter(v=>v!==null);
         return {code:r.code,name:r.name,same:usable.filter(Boolean).length,of:usable.length};
       }).filter(r=>r.of>0);
-      const byMost=[...records].sort((a,b)=>b.same-a.same||b.of-a.of||a.name.localeCompare(b.name));
-      const byLeast=[...records].sort((a,b)=>a.same-b.same||b.of-a.of||a.name.localeCompare(b.name));
+      const byName=(a,b)=>a.name<b.name?-1:a.name>b.name?1:0;
+      const byMost=[...records].sort((a,b)=>b.same-a.same||b.of-a.of||byName(a,b));
+      const byLeast=[...records].sort((a,b)=>a.same-b.same||b.of-a.of||byName(a,b));
       pack.market_history.push({industry,market_key:key,same:observations.filter(o=>o.market_direction===o.group_direction).length,
         of:observations.length,periods:observations.map(o=>o.period),most:byMost.slice(0,2),least:byLeast.slice(0,2)});
     }
