@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/10",
-  "last_updated": "2026-11-16T17:33:20.773391",
-  "success_count": 12,
-  "fail_count": 1,
+  "last_updated": "2026-11-16T18:22:16.735688",
+  "success_count": 13,
+  "fail_count": 0,
   "companies": [
     {
       "code": "2880",
@@ -424,15 +424,89 @@
     {
       "code": "2884",
       "name": "玉山金",
-      "error": "no_match",
-      "error_msg": "115/10 月自結損益尚未公告",
-      "available_titles": [
-        "玉山金控代子公司玉山投顧公告董事長異動",
-        "玉山金控受邀參加UBS舉辦Financials, Fintech and Property Corporate Day 2026",
-        "玉山金控受邀參加Bank of America舉辦2026 Taiwan Financial Tour",
-        "玉山金控將於2026年11月17日下午3點30分召開2026年第3季法人說明會",
-        "玉山金控受邀參加Morgan Stanley舉辦2026 AP Summit"
-      ]
+      "announcement_date": "115/11/16",
+      "announcement_title": "公告本公司暨子公司115年10月自結盈餘",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2884&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "玉山金控",
+        "monthly_profit": 3435,
+        "cumulative_profit": 35281,
+        "monthly_eps": null,
+        "cumulative_eps": 2.14,
+        "cumulative_profit_yoy_pct": 20.3,
+        "cumulative_profit_yoy_abs": 5948.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": ""
+      },
+      "subsidiaries": [
+        {
+          "name": "玉山銀行",
+          "monthly_profit": 3349,
+          "cumulative_profit": 31300,
+          "monthly_eps": null,
+          "cumulative_eps": 2.14,
+          "cumulative_profit_yoy_pct": 10.6,
+          "cumulative_profit_yoy_abs": 2994.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "三商人壽",
+          "monthly_profit": -128,
+          "cumulative_profit": 15,
+          "monthly_eps": null,
+          "cumulative_eps": 0.0,
+          "cumulative_profit_yoy_pct": null,
+          "cumulative_profit_yoy_abs": null,
+          "cumulative_profit_yoy_status": "missing",
+          "cumulative_profit_yoy_reason": "2026/09/01 三商人壽納入玉山金控；8 月無可比子公司數"
+        },
+        {
+          "name": "玉山證券",
+          "monthly_profit": 371,
+          "cumulative_profit": 4414,
+          "monthly_eps": null,
+          "cumulative_eps": 7.99,
+          "cumulative_profit_yoy_pct": 112.6,
+          "cumulative_profit_yoy_abs": 2338.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "玉山創投",
+          "monthly_profit": -293,
+          "cumulative_profit": 736,
+          "monthly_eps": null,
+          "cumulative_eps": 1.34,
+          "cumulative_profit_yoy_pct": 666.7,
+          "cumulative_profit_yoy_abs": 640.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "玉山投信",
+          "monthly_profit": 59,
+          "cumulative_profit": 510,
+          "monthly_eps": null,
+          "cumulative_eps": 17.01,
+          "cumulative_profit_yoy_pct": 242.3,
+          "cumulative_profit_yoy_abs": 361.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/10",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n玉山金10月自結稅後淨利34.4億元，累計前10月352.8億元、年增20.28%，EPS 2.14元，創歷史新高。10月底金控總資產6.72兆元；玉山銀行合併存款餘額4.21兆元、合併放款2.10兆元。\n\n**子公司明細**\n- 玉山銀行：10月稅後淨利33.5億元，累計313億元、年增10.58%；放款需求持續成長帶動淨利息收入年增26%，財富管理與信用卡簽帳成長帶動淨手續費收入年增19%。\n- 玉山證券：10月3.71億元，累計44.14億元、年增112.59%，經紀及複委託業務穩健成長帶動手續費收入提升。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9882272",
+          "title": "玉山金獲利／前十月稅後淨利352億元 EPS 2.14元創歷史新高 | 經濟日報"
+        }
+      ],
+      "news_generated_at": "2026-11-16T18:22:33.217031",
+      "news_manual": true
     },
     {
       "code": "2885",
