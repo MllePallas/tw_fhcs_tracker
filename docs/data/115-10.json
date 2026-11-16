@@ -10,9 +10,9 @@
     "raw_source": "原始數據：公開資訊觀測站（MOPS）各金控月自結損益公告；市場概況：Yahoo Finance、TWSE"
   },
   "report_period": "115/10",
-  "last_updated": "2026-11-16T01:22:12.799039",
-  "success_count": 10,
-  "fail_count": 3,
+  "last_updated": "2026-11-16T17:33:20.773391",
+  "success_count": 12,
+  "fail_count": 1,
   "companies": [
     {
       "code": "2880",
@@ -93,26 +93,231 @@
     {
       "code": "2881",
       "name": "富邦金",
-      "error": "no_match",
-      "error_msg": "115/10 月自結損益尚未公告",
-      "available_titles": [
-        "富邦金控舉辦115年第三季法人說明會",
-        "富邦金控代富邦華一銀行有限公司公告發行2026年金融債券\r\n(補充111/11/11公告)",
-        "富邦金控代子公司富邦產險公告處分新北市淡水區不動產",
-        "富邦金控代子公司富邦產險公告危老重建\r\n顧問工程契約累積達五億元以上（補充110/04/23、\r\n115/04/15、115/07/27公告）",
-        "公告本公司受邀參加UBS APAC Financials, Fintech and Property Corporate Day 2026"
-      ]
+      "announcement_date": "115/11/16",
+      "announcement_title": "公告本公司暨主要子公司115年10月合併自結損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2881&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "富邦金控",
+        "monthly_profit": -750,
+        "cumulative_profit": 126470,
+        "monthly_eps": null,
+        "cumulative_eps": 8.75,
+        "cumulative_profit_yoy_pct": 16.2,
+        "cumulative_profit_yoy_abs": 17630.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+        "fvoci_adjusted": {
+          "cumulative_profit": 263430.0,
+          "monthly_profit": 13470.0,
+          "delta_vs_original": 136960.0,
+          "label": "對保留盈餘影響數",
+          "cumulative_eps": 18.52,
+          "source_url": "https://money.udn.com/money/story/5613/9882130",
+          "source_quote": "富邦金控10月對保留盈餘影響數為134.7億元，包括稅後淨損7.5億元及FVOCI權益工具稅後處分損益142.2億元；累計前十月對保留盈餘影響數共2,634.3億元、每股18.52元",
+          "original_value_text": "單月134.7億元、累計2,634.3億元",
+          "manual": true,
+          "generated_at": "2026-11-16T17:34:12.878187",
+          "yoy_pct": null,
+          "yoy_abs": null,
+          "yoy_status": "not_presented"
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "台北富邦銀行",
+          "monthly_profit": 4010,
+          "cumulative_profit": 41210,
+          "monthly_eps": null,
+          "cumulative_eps": 2.39,
+          "cumulative_profit_yoy_pct": 27.2,
+          "cumulative_profit_yoy_abs": 8800.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "富邦證券",
+          "monthly_profit": 820,
+          "cumulative_profit": 18720,
+          "monthly_eps": null,
+          "cumulative_eps": 11.51,
+          "cumulative_profit_yoy_pct": 116.2,
+          "cumulative_profit_yoy_abs": 10060.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "富邦產險",
+          "monthly_profit": 720,
+          "cumulative_profit": 8680,
+          "monthly_eps": null,
+          "cumulative_eps": 28.93,
+          "cumulative_profit_yoy_pct": 52.5,
+          "cumulative_profit_yoy_abs": 2990.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "富邦人壽",
+          "monthly_profit": -6490,
+          "cumulative_profit": 59360,
+          "monthly_eps": null,
+          "cumulative_eps": 5.01,
+          "cumulative_profit_yoy_pct": -1.4,
+          "cumulative_profit_yoy_abs": -840.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+          "fvoci_adjusted": {
+            "cumulative_profit": 190190.0,
+            "monthly_profit": 7310.0,
+            "delta_vs_original": 130830.0,
+            "source_url": "https://money.udn.com/money/story/5613/9882130",
+            "source_quote": "富邦人壽10月對保留盈餘影響數為73.1億元，包括稅後淨損64.9億元及FVOCI權益工具稅後處分損益138.0億元；累計前10月對保留盈餘影響數達1,901.9億元",
+            "original_value_text": "單月73.1億元、累計1,901.9億元",
+            "manual": true,
+            "generated_at": "2026-11-16T17:34:13.204199",
+            "yoy_pct": null,
+            "yoy_abs": null,
+            "yoy_status": "not_presented"
+          }
+        },
+        {
+          "name": "富邦投信",
+          "monthly_profit": 200,
+          "cumulative_profit": 1580,
+          "monthly_eps": null,
+          "cumulative_eps": 5.83,
+          "cumulative_profit_yoy_pct": null,
+          "cumulative_profit_yoy_abs": null,
+          "cumulative_profit_yoy_status": "missing",
+          "cumulative_profit_yoy_reason": "比較月份資料不足"
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/10",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n富邦金10月稅後淨損7.5億元，主因當月台股下跌5.7%及固定收益部位評價損失；累計前10月稅後純益1,264.7億元、EPS 8.75元。10月FVOCI權益工具稅後處分損益142.2億元，加計後單月對保留盈餘影響數134.7億元；累計前10月FVOCI處分損益1,369.6億元，對保留盈餘影響數2,634.3億元、每股18.52元，超越歷年全年獲利表現。\n\n**子公司明細**\n- 富邦人壽：10月稅後淨損64.9億元、累計稅後純益593.6億元；10月FVOCI處分損益138.0億元、累計1,308.3億元，單月與累計對保留盈餘影響數分別為73.1億元、1,901.9億元，累計續創歷年新高。累計初年度保費1,372.8億元、年增41%。\n- 台北富邦銀行：10月40.1億元、年增24%，累計412.1億元、年增27%，單月及累計均創同期新高；利息淨收益、手續費淨收益分別成長29%、36%，逾放比0.12%。\n- 富邦證券：10月8.2億元，累計187.2億元、年增116%，經紀及財管收入成長103%、金融資產部位收入成長168%。\n- 富邦產險：10月7.2億元，累計86.8億元、超越歷年全年獲利；加計FVOCI後單月與累計對保留盈餘影響數分別為8.7億元、113.7億元。\n- 富邦投信：10月2億元、累計15.8億元（分別年增60%、66%），資產管理規模約1.6兆元、年增45%。",
+      "news_sources": [
+        {
+          "url": "https://money.udn.com/money/story/5613/9882130",
+          "title": "富邦金獲利／前十月自結賺1,264億元、EPS 達8.75元 | 經濟日報"
+        }
+      ],
+      "news_generated_at": "2026-11-16T17:34:49.237625",
+      "news_manual": true
     },
     {
       "code": "2882",
       "name": "國泰金",
-      "error": "no_match",
-      "error_msg": "115/10 月自結損益尚未公告",
-      "available_titles": [
-        "代子公司國泰綜合證券公告向國泰人壽保險(股)公司取得使用權資產",
-        "代子公司國泰世華商業銀行公告授信資產之轉讓",
-        "本公司代子公司國泰綜合證券公告向國泰人壽保險股份有限公司\r\n變更使用權資產(提前終止停車位租約)"
-      ]
+      "announcement_date": "115/11/16",
+      "announcement_title": "公告本公司暨主要子公司115年10月自結合併稅後損益",
+      "source_url": "https://mops.twse.com.tw/mops/web/t05st02?co_id=2882&seq_no=1&TYPEK=all",
+      "holding_company": {
+        "name": "國泰金控",
+        "monthly_profit": 9090,
+        "cumulative_profit": 114450,
+        "monthly_eps": null,
+        "cumulative_eps": 7.56,
+        "cumulative_profit_yoy_pct": 21.5,
+        "cumulative_profit_yoy_abs": 20230.0,
+        "cumulative_profit_yoy_status": "normal",
+        "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+        "fvoci_adjusted": {
+          "cumulative_profit": 245700.0,
+          "monthly_profit": 22040.0,
+          "delta_vs_original": 131250.0,
+          "label": "對保留盈餘影響數",
+          "cumulative_eps": 16.5,
+          "source_url": "https://www.ctee.com.tw/news/20261116701556-430301",
+          "source_quote": "2026年10月稅後淨利90.9億元，加計FVOCI股票資本利得129.5億，單月對保留盈餘影響數為220.4億；…加計FVOCI股票處分利益後，累計前10月對保留盈餘影響數達2,457億，每股EPS達16.5元",
+          "original_value_text": "單月220.4億元、累計2,457億元",
+          "manual": true,
+          "generated_at": "2026-11-16T17:34:13.505137",
+          "yoy_pct": null,
+          "yoy_abs": null,
+          "yoy_status": "not_presented"
+        }
+      },
+      "subsidiaries": [
+        {
+          "name": "國泰人壽",
+          "monthly_profit": 4380,
+          "cumulative_profit": 64540,
+          "monthly_eps": null,
+          "cumulative_eps": 10.15,
+          "cumulative_profit_yoy_pct": 31.2,
+          "cumulative_profit_yoy_abs": 15330.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": "跨越 2026 年壽險新制；YoY 依各期原始公告數計算",
+          "fvoci_adjusted": {
+            "cumulative_profit": 191820.0,
+            "delta_vs_original": 127280.0,
+            "source_url": "https://www.ctee.com.tw/news/20261116701556-430301",
+            "source_quote": "國泰人壽…累計前10月稅後淨利為645.4億，加計FVOCI股票處分利益後，累計對保留盈餘影響數達1,918.2億元",
+            "original_value_text": "累計前10月1,918.2億元",
+            "manual": true,
+            "generated_at": "2026-11-16T17:34:13.808197",
+            "yoy_pct": null,
+            "yoy_abs": null,
+            "yoy_status": "not_presented"
+          }
+        },
+        {
+          "name": "國泰世華銀行",
+          "monthly_profit": 4060,
+          "cumulative_profit": 43230,
+          "monthly_eps": null,
+          "cumulative_eps": 3.15,
+          "cumulative_profit_yoy_pct": 12.5,
+          "cumulative_profit_yoy_abs": 4820.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國泰產險",
+          "monthly_profit": 190,
+          "cumulative_profit": 3770,
+          "monthly_eps": null,
+          "cumulative_eps": 18.87,
+          "cumulative_profit_yoy_pct": 20.8,
+          "cumulative_profit_yoy_abs": 650.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國泰證券",
+          "monthly_profit": 880,
+          "cumulative_profit": 7840,
+          "monthly_eps": null,
+          "cumulative_eps": 9.73,
+          "cumulative_profit_yoy_pct": 119.6,
+          "cumulative_profit_yoy_abs": 4270.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        },
+        {
+          "name": "國泰投信",
+          "monthly_profit": 440,
+          "cumulative_profit": 3330,
+          "monthly_eps": null,
+          "cumulative_eps": 22.22,
+          "cumulative_profit_yoy_pct": 42.9,
+          "cumulative_profit_yoy_abs": 1000.0,
+          "cumulative_profit_yoy_status": "normal",
+          "cumulative_profit_yoy_reason": ""
+        }
+      ],
+      "unit": "百萬元",
+      "report_month": "115/10",
+      "parse_method": "llm",
+      "news_summary": "**重點**\n國泰金10月稅後淨利90.9億元，加計FVOCI股票資本利得129.5億元，單月對保留盈餘影響數220.4億元；累計前10月稅後淨利1,145億元、EPS 7.56元，加計FVOCI股票處分利益後累計對保留盈餘影響數達2,457億元、每股16.5元，續創歷史新高。世華銀行、產險、證券及投信累計稅後淨利均創歷年同期新高。\n\n**子公司明細**\n- 國泰人壽：10月稅後淨利43.8億元，受惠CSM釋出與經常性利差穩定貢獻，加上美債長率走降、FVTPL評價利益回升；累計645.4億元，加計FVOCI股票處分利益後累計對保留盈餘影響數1,918.2億元、創歷史新高。10月底淨值比12.55%，外匯價格變動準備金餘額1,446億元。\n- 國泰世華銀行：10月40.6億元，累計432.3億元、年增13%；淨利息收入年增17%、淨手續費收入年增13%，逾放比0.13%、備抵呆帳覆蓋率1,135%。\n- 國泰產險、國泰證券、國泰投信：累計稅後淨利均續創歷年同期新高（10月分別為1.9億、8.8億、4.4億元，累計37.7億、78.4億、33.3億元）。",
+      "news_sources": [
+        {
+          "url": "https://www.ctee.com.tw/news/20261116701556-430301",
+          "title": "國泰金前十月獲利1,145億元 EPS為7.56元 子公司各自亮眼 | 工商時報"
+        }
+      ],
+      "news_generated_at": "2026-11-16T17:34:49.349877",
+      "news_manual": true
     },
     {
       "code": "2883",
