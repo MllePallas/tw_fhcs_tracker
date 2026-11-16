@@ -263,6 +263,13 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   const html=element('trend-root').innerHTML;
   assert.equal((html.match(/id="trend-row-/g)||[]).length,13);
   assert.ok(html.includes('heat-table'));assert.ok(!html.includes('NaN'));assert.ok(!html.includes('Infinity'));
+  assert.match(html,/預設依較上月增減金額的絕對值，由大到小排序/);
+  assert.match(html,/<select id="trend-sort"[^>]*>.*<option value="trend_change" selected>月增減額絕對值 ↓<\/option>/);
+  vm.runInContext("setTrendSort('code')",ctx);
+  assert.equal(vm.runInContext('state.sortMode',ctx),'code');
+  assert.equal(element('sort-select').value,'code');
+  assert.match(element('trend-root').innerHTML,/<option value="code" selected>代號<\/option>/);
+  vm.runInContext("setTrendSort('trend_change')",ctx);
   vm.runInContext("trendFilter='turn';renderTrendDashboard()",ctx);
   assert.equal((element('trend-root').innerHTML.match(/id="trend-row-/g)||[]).length,1);
   vm.runInContext("renderTrendDetail('2889')",ctx);

@@ -3097,7 +3097,7 @@ function downloadHistoryCsv() {
 // ── 模式切換 ──
 const SORT_OPTIONS_BY_MODE = {
   trend: [
-    ['trend_change', '月增減金額最大'], ['trend_up', '月增加金額最多'],
+    ['trend_change', '月增減額絕對值 ↓'], ['trend_up', '月增加金額最多'],
     ['trend_down', '月減少金額最多'], ['trend_amount', '當月獲利最高'], ['code', '代號'],
   ],
   monthly: [
