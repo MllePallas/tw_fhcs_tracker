@@ -262,6 +262,9 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   vm.runInContext('renderTrendDashboard()',ctx);
   const html=element('trend-root').innerHTML;
   assert.equal((html.match(/id="trend-row-/g)||[]).length,13);
+  assert.match(html,/凱基金與主要三家同業的比較/);
+  assert.match(html,/國泰金與富邦金對照壽險獲利，元大金對照證券獲利/);
+  assert.deepEqual(Array.from(html.matchAll(/class="trend-highlight" onclick="openTrendCompany\('(\d+)'\)"/g), m => m[1]),['2883','2882','2881','2885']);
   assert.ok(html.includes('heat-table'));assert.ok(!html.includes('NaN'));assert.ok(!html.includes('Infinity'));
   assert.match(html,/預設依較上月增減金額的絕對值，由大到小排序/);
   assert.match(html,/<select id="trend-sort"[^>]*>.*<option value="trend_change" selected>月增減額絕對值 ↓<\/option>/);
@@ -312,19 +315,14 @@ test('monthly sector views retain merger-month history and separate SinoPac bank
   assert.match(element('corporate-event-note').innerHTML,/2026\/05 起不再單列/);
 });
 
-test('trend sorting and highlights use monthly amounts, including profit/loss turns', () => {
+test('trend table sorts by monthly changes while comparison cards keep their peer order', () => {
   const {ctx}=context();
   const rows=vm.runInContext("state.sortMode='trend_change';visibleTrendRows()",ctx);
   const deltas=Array.from(rows,r=>Math.abs(r.mom.delta));
   assert.deepEqual(deltas,[...deltas].sort((a,b)=>b-a));
-  const highlights=vm.runInContext('trendHighlights(allTrendRows())',ctx);
-  assert.equal(new Set(highlights.map(r=>r.code)).size,highlights.length);
-  assert.ok(highlights.length<=4);
-  assert.ok(highlights.some(r=>r.code==='2881' && r.mom.status==='loss_to_profit'));
-  const max=Math.max(...rows.map(r=>r.mom.delta));
-  const min=Math.min(...rows.map(r=>r.mom.delta));
-  assert.equal(highlights[0].mom.delta,max);
-  assert.equal(highlights[1].mom.delta,min);
+  const peers=vm.runInContext('trendComparisonPeers(allTrendRows())',ctx);
+  assert.deepEqual(Array.from(peers,peer=>peer.code),['2883','2882','2881','2885']);
+  assert.deepEqual(Array.from(peers,peer=>peer.reason),['比較主體','壽險對照','壽險對照','證券對照']);
 });
 
 test('heatmap compares adjacent months and a missing older month does not block current MoM', () => {
@@ -333,12 +331,6 @@ test('heatmap compares adjacent months and a missing older month does not block 
   assert.match(html,/2026\/08 \+98.4%/);
   vm.runInContext("delete monthCache['115/06'];trendFilter='missing'",ctx);
   assert.ok(!vm.runInContext("visibleTrendRows().some(r=>r.code==='2889')",ctx));
-  const mock=vm.runInContext(`trendHighlights([
-    {code:'missing',mom:{status:'missing',delta:null}},
-    {code:'boundary',mom:{status:'incomparable',delta:99999}},
-    {code:'flat',mom:{status:'normal',delta:0}}
-  ])`,ctx);
-  assert.equal(mock.length,0);
 });
 
 test('source navigation preserves the selected historical month and opens holdings details', async () => {

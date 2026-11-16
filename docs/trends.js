@@ -114,15 +114,15 @@ function subsidiaryBreakdownHtml(attribution) {
     <p class="mom-note">單位：${unitFullLabel(state.displayUnit)}。以兩期已揭露子公司稅後淨利計算；金控與子公司間可能有持股、合併沖銷及未揭露項目。差額僅供核對，不代表已查明業務原因。FVOCI 未列入。</p>
   </section>`;
 }
-function trendHighlights(rows) {
-  const available = rows.filter(r => validMonthlyDelta(r) !== null);
-  const up = available.filter(r => r.mom.delta > 0).sort((a,b) => b.mom.delta-a.mom.delta);
-  const down = available.filter(r => r.mom.delta < 0).sort((a,b) => a.mom.delta-b.mom.delta);
-  const turns = available.filter(r => ['loss_to_profit','profit_to_loss'].includes(r.mom.status))
-    .sort((a,b) => Math.abs(b.mom.delta)-Math.abs(a.mom.delta));
-  return [up[0], down[0], ...turns, ...available.filter(r => r.mom.delta !== 0)
-    .sort((a,b) => Math.abs(b.mom.delta)-Math.abs(a.mom.delta))]
-    .filter((r,i,all) => r && all.findIndex(x => x?.code === r.code) === i).slice(0,4);
+const TREND_COMPARISON_PEERS = [
+  { code:'2883', reason:'比較主體' },
+  { code:'2882', reason:'壽險對照' },
+  { code:'2881', reason:'壽險對照' },
+  { code:'2885', reason:'證券對照' },
+];
+function trendComparisonPeers(rows) {
+  const byCode = new Map(rows.map(row => [row.code, row]));
+  return TREND_COMPARISON_PEERS.map(peer => ({...peer, row:byCode.get(peer.code)})).filter(peer => peer.row);
 }
 function visibleTrendRows() {
   const rows = allTrendRows().filter(r => trendFilter === 'all' ||
@@ -171,13 +171,19 @@ function renderTrendDashboard() {
   const p = state.data.report_period, unit = state.displayUnit;
   const valid = all.filter(r => r.monthly !== null).length;
   const comparable = all.filter(r => !['missing', 'incomparable'].includes(r.mom.status));
-  const highlights = trendHighlights(all);
+  const peers = trendComparisonPeers(all);
   const attributionByCode = new Map(all.map(r => [r.code, A.monthlyAttribution(monthCache, comparisonRules, p, r.code)]));
+  const peerCardsHtml = peers.map(({row:r, reason}) => {
+    const delta = validMonthlyDelta(r);
+    const summary = delta === null ? '較上月資料不足' : delta > 0 ? `增加 ${trendNumber(delta)}` : delta < 0 ? `減少 ${trendNumber(-delta)}` : '持平';
+    return `<button class="trend-highlight" onclick="openTrendCompany('${r.code}')"><span>${r.name} <small>${r.code}</small></span><span class="trend-peer-reason">${reason}</span><strong>${summary}<small>${unit} · MoM ${changeText(r.mom)}</small></strong><span class="trend-highlight-subs">增減最大子公司：${subsidiaryChangeHtml(attributionByCode.get(r.code), 1)}</span><span>${r.labels.filter(label => label !== changeText(r.mom)).join(' · ') || '查看當月公告與子公司'}</span><span class="highlight-link">查看月份數字 →</span></button>`;
+  }).join('');
   document.getElementById('trend-root').innerHTML = `
     ${typeof monthlyReportHtml === 'function' ? monthlyReportHtml(p) : ''}
     <section class="trend-intro"><div><p class="eyebrow">${periodLabel(p)} · 趨勢重點</p><h2>先看變化，再看數字</h2><p>原始單月稅後淨利，不含 FVOCI 加計數。查看金控與主要子公司的月增減、單月年增率及歷史走勢。</p></div><div class="coverage"><strong>${valid}<span> / ${all.length}</span></strong><span>家單月資料已取得</span></div></section>
     <div class="trend-breadth">與上月可比較 ${comparable.length} 家：<strong class="up">${comparable.filter(r => r.mom.direction > 0).length} 家增加</strong><strong class="down">${comparable.filter(r => r.mom.direction < 0).length} 家減少</strong><span>${comparable.filter(r => r.mom.direction === 0).length} 家持平</span><span>其餘 ${all.length - comparable.length} 家缺資料或口徑不同</span></div>
-    <div class="trend-highlights">${highlights.map(r => `<button class="trend-highlight" onclick="openTrendCompany('${r.code}')"><span>${r.name} <small>${r.code}</small></span><strong>${r.mom.delta > 0 ? '增加' : '減少'} ${trendNumber(Math.abs(r.mom.delta))}<small>${unit} · MoM ${changeText(r.mom)}</small></strong><span class="trend-highlight-subs">增減最大子公司：${subsidiaryChangeHtml(attributionByCode.get(r.code), 1)}</span><span>${r.labels.filter(label => label !== changeText(r.mom)).join(' · ') || '較上月獲利變化'}</span><span class="highlight-link">查看月份數字 →</span></button>`).join('') || '<p class="empty-trend">目前無可列示的月度增減。</p>'}</div>
+    <div class="trend-peer-heading"><h3>凱基金與主要三家同業的比較</h3><p>以凱基金為比較主體，國泰金與富邦金對照壽險獲利，元大金對照證券獲利；各框顯示所選月份的月增減。</p></div>
+    <div class="trend-highlights">${peerCardsHtml}</div>
     <section class="trend-section"><div class="trend-section-head"><div><h3>金控趨勢總覽</h3><p>預設依較上月增減金額的絕對值，由大到小排序；增加與減少混合列示。點公司查看歷史數字。</p></div><div class="trend-tools"><label>篩選<select id="trend-filter" onchange="setTrendFilter(this.value)">${[['all','全部公司'],['up','較上月增加'],['down','較上月減少'],['turn','轉盈／轉虧'],['flag','有變化標記'],['missing','資料或口徑待留意']].map(([v,t]) => `<option value="${v}" ${trendFilter === v ? 'selected' : ''}>${t}</option>`).join('')}</select></label><label>排序<select id="trend-sort" onchange="setTrendSort(this.value)">${SORT_OPTIONS_BY_MODE.trend.map(([v,t]) => `<option value="${v}" ${state.sortMode===v ? 'selected' : ''}>${t}</option>`).join('')}</select></label></div></div>
     <p class="trend-unit">單位：${unitFullLabel(unit)} · ${periodAd(p)} · 顯示 ${rows.length} 家 <span>← 窄螢幕可左右滑動</span></p>
     <div class="trend-table-wrap"><table class="trend-table"><thead><tr><th>公司</th><th>當月獲利</th><th>較上月增減金額</th><th>MoM</th><th>主要子公司較上月增減額</th><th>單月 YoY</th><th>近 12 月走勢</th><th>變化標記／口徑</th></tr></thead><tbody>${rows.map(r => `<tr id="trend-row-${r.code}"><th><button class="company-link" onclick="openTrendCompany('${r.code}')">${r.name}</button><small>${r.code}</small></th><td class="num ${r.monthly < 0 ? 'negative' : ''}">${trendNumber(r.monthly)}${r.monthly === null ? '<small>未取得當月數</small>' : ''}</td><td class="num">${monthlyDeltaHtml(r)}</td><td class="num">${metricHtml(r.mom,false)}</td><td class="trend-subsidiaries">${subsidiaryChangeHtml(attributionByCode.get(r.code))}</td><td class="num">${metricHtml(r.yoy,false)}</td><td><button class="spark-button" aria-label="查看${r.name}歷史趨勢" onclick="openTrendCompany('${r.code}')">${sparkline(r)}</button></td><td class="trend-tags">${r.labels.map(s => `<span>${s}</span>`).join('') || '<span class="muted">—</span>'}${r.notes.length ? `<button class="basis-flag" onclick="openTrendCompany('${r.code}')" title="${escapeHtml(r.notes.join('；'))}">比較說明 ${r.notes.length}</button>` : ''}</td></tr>`).join('') || '<tr><td colspan="8" class="empty-trend">沒有符合篩選的公司。請切換「全部公司」。</td></tr>'}</tbody></table></div></section>
@@ -252,7 +258,7 @@ function methodologyHtml() {
     <li>資料來源為 MOPS 月自結。趨勢使用原始單月稅後淨利，不含 FVOCI 加計數；期間均以西元年／月顯示。</li>
     <li>月增減金額＝當月−前月；MoM＝（當月−前月）÷前月。負值、轉盈轉虧、零基期與低基期改列狀態及金額，不顯示誤導的百分比。低基期門檻為 15 百萬元與比較兩月獲利絕對值中位數的 10% 取較高者。</li>
     <li>單月 YoY＝（當月−去年同月）÷去年同月絕對值。會計新制與合併事件另註，YoY 仍列公告數變動率；去年同月為零或缺值時不計百分比。MoM 跨越口徑變更時停止比較。</li>
-    <li>重點卡片優先列月增、月減金額最大的公司，再列轉盈、轉虧及其餘增減金額較大的公司；公司不重複，最多四家。預設依月增減金額絕對值排序。</li>
+    <li>比較卡片固定列凱基金、國泰金、富邦金、元大金，依序作為比較主體、壽險對照及證券對照；各卡數字隨所選月份更新。下方金控趨勢總覽預設依月增減金額絕對值排序。</li>
     <li>連續 3 次月增／月減需 4 個月完整可比資料；近 6 月新高／低需 6 個月且嚴格高於／低於其餘月份。標記描述歷史數字，不代表經營改善、惡化或未來預測。</li>
     <li>子公司增減＝本月與上月已揭露單月稅後淨利之差；總覽列增減絕對值最大的兩家。未揭露、跨合併或口徑變更不推算。子公司全部可比時才列金控與子公司增減合計的差額；差額可能含母公司、合併沖銷、持股及未列項目，不代表已查明原因。</li>
     <li>未公告與缺值不補零；走勢圖在缺值或口徑變更處斷線，各公司採獨立刻度。完整公告與新聞請至對應月份的金控總覽查閱。</li>
