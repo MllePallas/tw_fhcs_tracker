@@ -268,7 +268,7 @@ test('dashboard renders all companies, touch-accessible heatmap and empty filter
   vm.runInContext("renderTrendDetail('2889')",ctx);
   assert.ok(element('trend-detail').innerHTML.includes('+98.4%'));
   assert.match(element('trend-detail').innerHTML,/2026\/07 前月獲利/);
-  assert.match(html,/主要子公司增減/);
+  assert.match(html,/<th>MoM<\/th><th>主要子公司較上月增減額<\/th><th>單月 YoY<\/th>/);
   assert.match(html,/富邦人壽.*\+249\.1/);
   assert.match(element('trend-detail').innerHTML,/子公司單月獲利增減/);
   assert.match(element('trend-detail').innerHTML,/母公司及其他（差額）/);
