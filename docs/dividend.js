@@ -14,6 +14,7 @@
     period: null,
     data: null,
     prices: {},
+    shares: {},        // TWSE 已發行普通股數（prices.json 的 shares 區塊）
     pricesMeta: null,
     method: 'upstream',
     basis: 'annualized',
@@ -85,9 +86,14 @@
     const hCum = h.cumulative_profit != null ? h.cumulative_profit * sc : null;
     const hFv = h.fvoci_adjusted && h.fvoci_adjusted.cumulative_profit != null ? h.fvoci_adjusted.cumulative_profit * sc : null;
     const eps = num(h.cumulative_eps);
-    const autoShares = hCum !== null && eps && eps > 0 ? hCum / eps : null;          // 百萬股
+    const autoShares = hCum !== null && eps && eps > 0 ? hCum / eps : null;          // EPS 反推，百萬股
+    const tw = state.shares[c.code];
+    const twseShares = tw && tw.common_shares ? tw.common_shares / 1e6 : null;       // TWSE，百萬股
     const manShares = num(ov.shares);
-    const shares = manShares !== null && manShares > 0 ? manShares * 100 : autoShares;
+    let shares, sharesSrc;
+    if (manShares !== null && manShares > 0) { shares = manShares * 100; sharesSrc = 'manual'; }
+    else if (twseShares) { shares = twseShares; sharesSrc = 'twse'; }
+    else { shares = autoShares; sharesSrc = autoShares ? 'implied' : null; }
 
     const hRef = (hFv ?? hCum);
     const hRefAnnual = hRef !== null ? hRef * factor : null;
@@ -127,8 +133,8 @@
     const implied = distributable !== null && hRefAnnual ? distributable / hRefAnnual * 100 : null;
 
     return {
-      code: c.code, name: c.name, month, factor, hCum, hFv, hRefAnnual, eps, autoShares, shares,
-      sharesOv: manShares !== null, base, distributable, subs, payoutPct, payoutOv: num(ov.payout) !== null,
+      code: c.code, name: c.name, month, factor, hCum, hFv, hRefAnnual, eps, autoShares, twseShares, shares, sharesSrc,
+      twseSharesDate: tw ? tw.date : null, twsePref: tw ? tw.preferred_shares : 0, base, distributable, subs, payoutPct, payoutOv: num(ov.payout) !== null,
       dps, price, priceOv: priceOv !== null, priceDate: priceOv !== null ? null : (pr && pr.date), yld, implied,
       annualEps: hRefAnnual !== null && shares ? hRefAnnual / shares : null,
     };
@@ -166,7 +172,7 @@
       <th class="dv-l">金控</th>
       <th>${baseLabel}<small>億元</small></th>
       <th>可配發金額<small>億元</small></th>
-      <th>推估股數<small>億股</small></th>
+      <th>流通股數<small>億股・TWSE</small></th>
       <th>隱含配發率<small>占加計FVOCI獲利</small></th>
       <th class="dv-key">每股現金股利<small>元</small></th>
       <th>收盤價<small>元・可覆寫</small></th>
@@ -185,7 +191,7 @@
           <span class="dv-code">${esc(r.code)}</span> ${esc(r.name)}</td>
         <td>${baseCell}</td>
         <td>${fmt(yi(r.distributable))}</td>
-        <td>${fmt(r.shares !== null ? r.shares / 100 : null, 2)}${r.sharesOv ? '<small class="dv-flag">手動</small>' : ''}</td>
+        <td>${fmt(r.shares !== null ? r.shares / 100 : null, 2)}${r.sharesSrc === 'manual' ? '<small class="dv-flag">手動</small>' : r.sharesSrc === 'implied' ? '<small class="dv-flag">EPS 反推</small>' : ''}</td>
         <td>${r.implied !== null ? fmt(r.implied, 0) + '%' : '—'}</td>
         <td class="dv-key">${fmt(r.dps, 2)}</td>
         <td class="dv-pricecell">${priceCell}</td>
@@ -231,9 +237,11 @@
           <span class="dv-pct">${input(`payout:${r.code}`, ov.payout ?? '', P('payout'), 'dv-num dv-small')}<em>%</em></span></label></div>`;
     }
     html += `<div class="dv-inline-params">
-      <label class="dv-field dv-inline"><span>股數（億股）</span>
-        ${input(`shares:${r.code}`, ov.shares ?? '', r.autoShares !== null ? fmt(r.autoShares / 100, 2) : '輸入', 'dv-num dv-small')}</label>
-      <span class="dv-muted">反推：累計淨利 ${fmt(yi(r.hCum))} 億 ÷ 累計 EPS ${fmt(r.eps, 2)} 元；年化 EPS（含 FVOCI）約 ${fmt(r.annualEps, 2)} 元</span>
+      <label class="dv-field dv-inline"><span>流通股數（億股）</span>
+        ${input(`shares:${r.code}`, ov.shares ?? '', (r.twseShares ?? r.autoShares) !== null ? fmt((r.twseShares ?? r.autoShares) / 100, 2) : '輸入', 'dv-num dv-small')}</label>
+      <span class="dv-muted">${r.twseShares
+        ? `TWSE 已發行普通股數 ${fmt(r.twseShares / 100, 2)} 億股${r.twseSharesDate ? `（${esc(r.twseSharesDate)}）` : ''}${r.twsePref ? `，另有特別股 ${fmt(r.twsePref / 1e8, 2)} 億股（不參與普通股配息，未計入）` : ''}`
+        : 'TWSE 股數尚無資料，暫以 EPS 反推'}；對照：累計淨利 ${fmt(yi(r.hCum))} 億 ÷ 累計 EPS ${fmt(r.eps, 2)} 元 ≈ ${fmt(r.autoShares !== null ? r.autoShares / 100 : null, 2)} 億股${r.twseShares && r.autoShares ? `（差 ${fmt((r.autoShares / r.twseShares - 1) * 100, 1)}%）` : ''}；年化 EPS（含 FVOCI）約 ${fmt(r.annualEps, 2)} 元</span>
     </div>`;
     return `<div class="dv-detail-inner">${html}</div>`;
   }
@@ -241,9 +249,13 @@
   function renderPriceNote() {
     const dates = Object.values(state.prices).map((p) => p.date).filter(Boolean).sort();
     const latest = dates[dates.length - 1];
-    $('dv-price-note').innerHTML = latest
-      ? `收盤價為 ${esc(latest)} 收盤（TWSE OpenAPI，缺值以 Yahoo Finance 補），平日收盤後自動更新。輸入框可暫時覆寫價格。`
-      : '尚未取得收盤價資料，可在「收盤價」欄手動輸入以計算殖利率。';
+    const sd = Object.values(state.shares).map((x) => x.date).filter(Boolean).sort();
+    const sharesTxt = sd.length
+      ? `流通股數取自 TWSE 上市公司基本資料「已發行普通股數」（${esc(sd[sd.length - 1])}）。`
+      : '流通股數尚未取得 TWSE 資料，暫以累計淨利 ÷ 累計 EPS 反推。';
+    $('dv-price-note').innerHTML = (latest
+      ? `收盤價為 ${esc(latest)} 收盤（TWSE OpenAPI，缺值以 Yahoo Finance 補），平日收盤後自動更新，輸入框可暫時覆寫價格。`
+      : '尚未取得收盤價資料，可在「收盤價」欄手動輸入以計算殖利率。') + sharesTxt;
   }
 
   function render() {
@@ -331,8 +343,9 @@
     try {
       const p = await getJSON('data/prices.json');
       state.prices = p.prices || {};
+      state.shares = p.shares || {};
       state.pricesMeta = p;
-    } catch (_) { state.prices = {}; }
+    } catch (_) { state.prices = {}; state.shares = {}; }
 
     const months = (state.index.months || []).filter((m) => m.success_count > 0);
     $('dv-period').innerHTML = months.map((m) => `<option value="${esc(m.period)}">${esc(rocToAd(m.period))}</option>`).join('');
