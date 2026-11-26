@@ -5,9 +5,9 @@
     "repository": "https://github.com/MllePallas/tw_fhcs_tracker",
     "data_license": "CC BY 4.0",
     "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
-    "raw_source": "收盤價：TWSE OpenAPI（STOCK_DAY_ALL），缺值以 Yahoo Finance 補"
+    "raw_source": "收盤價：TWSE OpenAPI（STOCK_DAY_ALL），缺值以 Yahoo Finance 補；已發行普通股數：TWSE OpenAPI（t187ap03_L 上市公司基本資料）"
   },
-  "generated_at": "2026-11-26T11:37:04+08:00",
+  "generated_at": "2026-11-26T11:43:14+08:00",
   "prices": {
     "2880": {
       "close": 42.75,
@@ -86,6 +86,86 @@
       "date": "2026-11-25",
       "source": "TWSE OpenAPI STOCK_DAY_ALL",
       "name": "合庫金"
+    }
+  },
+  "shares": {
+    "2880": {
+      "common_shares": 14056134739,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2881": {
+      "common_shares": 14007364952,
+      "preferred_shares": 1599990000,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2882": {
+      "common_shares": 14669210128,
+      "preferred_shares": 1533300000,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2883": {
+      "common_shares": 16974612475,
+      "preferred_shares": 1582142374,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2884": {
+      "common_shares": 17723510471,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2885": {
+      "common_shares": 13864395944,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2886": {
+      "common_shares": 14833378282,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2887": {
+      "common_shares": 25115061997,
+      "preferred_shares": 4491088552,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2889": {
+      "common_shares": 3665902186,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2890": {
+      "common_shares": 14782168721,
+      "preferred_shares": 10000000,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2891": {
+      "common_shares": 19675932806,
+      "preferred_shares": 499990000,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "2892": {
+      "common_shares": 14379468650,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
+    },
+    "5880": {
+      "common_shares": 16072960337,
+      "preferred_shares": 0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI t187ap03_L（已發行普通股數）"
     }
   }
 }
