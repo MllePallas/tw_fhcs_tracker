@@ -1,0 +1,91 @@
+{
+  "_meta": {
+    "dataset": "台灣金控月自結獲利追蹤",
+    "author": "Mandy Chao",
+    "repository": "https://github.com/MllePallas/tw_fhcs_tracker",
+    "data_license": "CC BY 4.0",
+    "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
+    "raw_source": "收盤價：TWSE OpenAPI（STOCK_DAY_ALL），缺值以 Yahoo Finance 補"
+  },
+  "generated_at": "2026-11-26T11:37:04+08:00",
+  "prices": {
+    "2880": {
+      "close": 42.75,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "華南金"
+    },
+    "2881": {
+      "close": 132.5,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "富邦金"
+    },
+    "2882": {
+      "close": 100.5,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "國泰金"
+    },
+    "2883": {
+      "close": 30.05,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "凱基金"
+    },
+    "2884": {
+      "close": 38.95,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "玉山金"
+    },
+    "2885": {
+      "close": 61.5,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "元大金"
+    },
+    "2886": {
+      "close": 49.7,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "兆豐金"
+    },
+    "2887": {
+      "close": 34.0,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "台新新光金"
+    },
+    "2889": {
+      "close": 14.85,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "國票金"
+    },
+    "2890": {
+      "close": 36.35,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "永豐金"
+    },
+    "2891": {
+      "close": 65.9,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "中信金"
+    },
+    "2892": {
+      "close": 36.95,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "第一金"
+    },
+    "5880": {
+      "close": 26.4,
+      "date": "2026-11-25",
+      "source": "TWSE OpenAPI STOCK_DAY_ALL",
+      "name": "合庫金"
+    }
+  }
+}
