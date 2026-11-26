@@ -7,7 +7,7 @@
     "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
     "raw_source": "收盤價：TWSE OpenAPI（STOCK_DAY_ALL），缺值以 Yahoo Finance 補；已發行普通股數：TWSE OpenAPI（t187ap03_L 上市公司基本資料）"
   },
-  "generated_at": "2026-11-26T11:43:14+08:00",
+  "generated_at": "2026-11-26T11:43:43+08:00",
   "prices": {
     "2880": {
       "close": 42.75,
