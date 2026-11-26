@@ -780,6 +780,30 @@ docs/
 
 ---
 
+## 股利試算頁（docs/dividend.html）
+
+以月自結獲利推估各金控現金股利與殖利率的試算工具（`dividend.html` / `dividend.js` / `dividend.css`），讀 `data/index.json`、`data/{period}.json`、`data/prices.json`，不動任何月自結資料檔。
+
+**兩種算法**：
+- **子公司上繳**（`upstream`）：各子公司年度獲利 × 上繳比例後加總，視為金控可配發金額。預設上繳比例：銀行／證券 70%、壽險 10%、其他 70%（`DEFAULTS`），可逐家覆寫。壽險有揭露時以加計 FVOCI 後數字為基準，否則用稅後淨利；子公司虧損以 0 上繳計
+- **總配發率**：金控稅後淨利（有揭露時加計 FVOCI）× 配發率（預設 40%）
+
+**兩種基準**：
+- **年化**：累計獲利 × 12 ÷ 累計月數
+- **手動**：先帶入年化數字，可逐家改寫
+
+每股股利 = 可配發金額 ÷ 流通股數；殖利率 = 每股股利 ÷ 收盤價。收盤價、股數、參數皆可在頁面上覆寫（存 localStorage `dv-calc-v1`）。
+
+**收盤價與流通股數**：來自 TWSE OpenAPI——收盤價 `STOCK_DAY_ALL`（缺值以 Yahoo Finance 補）、股數 `t187ap03_L` 的「已發行普通股數」（特別股另列、不計入）。由 `scraper/price_snapshot.py` 寫入 `docs/data/prices.json`（`prices` / `shares` 兩區塊；本次沒抓到的公司保留舊值並標 `stale`）。**沒有排程，需手動執行**（2026-11-26 起移除 `update_prices.yml`）：
+
+```bash
+cd scraper && python price_snapshot.py   # 只需 requests
+```
+
+TWSE 股數缺漏時，前端改以「累計淨利 ÷ 累計 EPS」反推並標示「EPS 反推」。
+
+---
+
 ## 已知問題與注意事項
 
 - **2883 名稱不一致**：MOPS 公告標題有時顯示「開發金」，程式以 `companies.py` 的「凱基金」為準
