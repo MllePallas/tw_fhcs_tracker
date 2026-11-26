@@ -3,8 +3,10 @@
 # 供股利試算頁（docs/dividend.html）計算每股股利與殖利率。
 #
 # 資料源（依序嘗試，免 API key）：
-#   1. TWSE OpenAPI STOCK_DAY_ALL（上市個股最近交易日行情，一次一個請求）
-#   2. Yahoo Finance chart API（逐檔補缺）
+#   1. TWSE 每日收盤行情 MI_INDEX（證交所網站，當日收盤後約 14:30 即更新）
+#   2. TWSE OpenAPI STOCK_DAY_ALL（上市個股最近交易日行情；常到傍晚才更新到當日）
+#      兩者取日期較新者
+#   3. Yahoo Finance chart API（逐檔補缺）
 # 股數：TWSE OpenAPI t187ap03_L（上市公司基本資料）「已發行普通股數或TDR原股發行股數」
 #
 # 只寫 prices.json 這一個新檔，不動既有月自結資料檔。
@@ -34,7 +36,7 @@ META = {
     "repository": "https://github.com/MllePallas/tw_fhcs_tracker",
     "data_license": "CC BY 4.0",
     "attribution": "使用本資料須標示來源：台灣金控月自結獲利追蹤（Mandy Chao），https://github.com/MllePallas/tw_fhcs_tracker，CC BY 4.0",
-    "raw_source": "收盤價：TWSE OpenAPI（STOCK_DAY_ALL），缺值以 Yahoo Finance 補；已發行普通股數：TWSE OpenAPI（t187ap03_L 上市公司基本資料）",
+    "raw_source": "收盤價：TWSE 每日收盤行情（MI_INDEX）／TWSE OpenAPI（STOCK_DAY_ALL），缺值以 Yahoo Finance 補；已發行普通股數：TWSE OpenAPI（t187ap03_L 上市公司基本資料）",
 }
 
 
@@ -76,6 +78,34 @@ def fetch_twse(codes) -> dict:
             "source": "TWSE OpenAPI STOCK_DAY_ALL",
         }
     return out
+
+
+def fetch_twse_daily(codes, days_back: int = 7) -> dict:
+    """TWSE 每日收盤行情（MI_INDEX）：由今天往前找最近一個有資料的交易日。"""
+    today = datetime.now(TPE).date()
+    for i in range(days_back):
+        d = today - timedelta(days=i)
+        url = ("https://www.twse.com.tw/exchangeReport/MI_INDEX"
+               f"?response=json&date={d:%Y%m%d}&type=ALLBUT0999")
+        r = requests.get(url, headers=UA, timeout=30)
+        r.raise_for_status()
+        j = r.json()
+        if j.get("stat") != "OK":
+            continue   # 非交易日或當日尚未出表
+        for t in j.get("tables") or []:
+            f = t.get("fields") or []
+            if "證券代號" not in f or "收盤價" not in f:
+                continue
+            ic, ip = f.index("證券代號"), f.index("收盤價")
+            out = {}
+            for row in t.get("data") or []:
+                code = str(row[ic]).strip()
+                close = to_float(row[ip]) if code in codes else None
+                if close is not None:
+                    out[code] = {"close": close, "date": d.isoformat(), "source": "TWSE 每日收盤行情 MI_INDEX"}
+            if out:
+                return out
+    return {}
 
 
 def to_int(v) -> int | None:
@@ -126,10 +156,18 @@ def main() -> int:
     codes = company_codes()
     prices: dict = {}
     try:
-        prices = fetch_twse(codes)
-        logger.info("TWSE: %d/%d", len(prices), len(codes))
+        prices = fetch_twse_daily(codes)
+        logger.info("TWSE MI_INDEX: %d/%d", len(prices), len(codes))
     except Exception as e:  # noqa: BLE001
-        logger.warning("TWSE 失敗：%s", e)
+        logger.warning("TWSE MI_INDEX 失敗：%s", e)
+    try:
+        api = fetch_twse(codes)
+        logger.info("TWSE OpenAPI: %d/%d", len(api), len(codes))
+        for code, v in api.items():   # 取日期較新者
+            if code not in prices or (v.get("date") or "") > (prices[code].get("date") or ""):
+                prices[code] = v
+    except Exception as e:  # noqa: BLE001
+        logger.warning("TWSE OpenAPI 失敗：%s", e)
 
     for code in codes:
         if code in prices and prices[code].get("date"):

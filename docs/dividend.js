@@ -22,6 +22,7 @@
     paramRaw: {},      // 使用者輸入的全體比例（字串）；空值即用預設
     ov: {},            // 各期覆寫：ov[period][code] = { ratio:{sub:pct}, payout, base:{sub|_h: 億}, price, shares }
     open: new Set(),
+    order: null,       // 目前列順序（代號陣列）；只在選排序、換算法／基準／期別、重設時重排，輸入數字不自動重排
   };
 
   // ── 工具 ──────────────────────────────────────────────
@@ -186,7 +187,13 @@
       ? `「金控總配發率」僅列出金控層級有揭露加計 FVOCI 獲利的公司（${companies.map((c) => esc(c.name)).join('、') || '本期無'}）；`
         + `其餘 ${excluded.length} 家未揭露，其稅後淨利不含 FVOCI 處分利益，套用配發率會失真，故不列入。`
       : '';
-    const rows = sortRows(companies.map((c) => ({ ...compute(c), _raw: c })));
+    const computed = companies.map((c) => ({ ...compute(c), _raw: c }));
+    const fresh = sortRows(computed.slice()).map((r) => r.code);
+    const sameSet = state.order && state.order.length === fresh.length && fresh.every((c) => state.order.includes(c));
+    if (!sameSet) state.order = fresh;
+    const pos = new Map(state.order.map((c, i) => [c, i]));
+    const rows = computed.sort((a, b) => pos.get(a.code) - pos.get(b.code));
+    $('dv-resort').hidden = state.order.join() === fresh.join();
     const manual = state.basis === 'manual';
     const baseLabel = manual ? '全年獲利（手動）' : '全年獲利（年化）';
     const head = `<thead><tr>
@@ -275,7 +282,7 @@
       ? `流通股數取自 TWSE 上市公司基本資料「已發行普通股數」（${esc(sd[sd.length - 1])}）。`
       : '流通股數尚未取得 TWSE 資料，暫以累計淨利 ÷ 累計 EPS 反推。';
     $('dv-price-note').innerHTML = (latest
-      ? `收盤價為 ${esc(latest)} 收盤（TWSE OpenAPI，缺值以 Yahoo Finance 補），輸入框可暫時覆寫價格。`
+      ? `收盤價為 ${esc(latest)} 收盤（TWSE，缺值以 Yahoo Finance 補），輸入框可暫時覆寫價格。`
       : '尚未取得收盤價資料，可在「收盤價」欄手動輸入以計算殖利率。') + sharesTxt;
   }
 
@@ -324,13 +331,15 @@
 
   function bind() {
     document.addEventListener('input', onInput);
-    $('dv-method').addEventListener('change', (e) => { state.method = e.target.value; save(); render(); });
-    $('dv-basis').addEventListener('change', (e) => { state.basis = e.target.value; save(); render(); });
-    $('dv-sort').addEventListener('change', (e) => { state.sort = e.target.value; save(); render(); });
+    $('dv-method').addEventListener('change', (e) => { state.method = e.target.value; state.order = null; save(); render(); });
+    $('dv-basis').addEventListener('change', (e) => { state.basis = e.target.value; state.order = null; save(); render(); });
+    $('dv-sort').addEventListener('change', (e) => { state.sort = e.target.value; state.order = null; save(); render(); });
+    $('dv-resort').addEventListener('click', () => { state.order = null; render(); });
     $('dv-period').addEventListener('change', (e) => loadPeriod(e.target.value));
     $('dv-reset').addEventListener('click', () => {
       state.paramRaw = {};
       delete state.ov[state.period];
+      state.order = null;
       save(); render();
     });
     $('dv-table').addEventListener('click', (e) => {
@@ -347,6 +356,7 @@
     if (!entry) return;
     state.period = period;
     state.data = await getJSON(`data/${entry.file}`);
+    state.order = null;
     $('dv-period-badge').textContent = `${rocToAd(period)} 自結`;
     try { history.replaceState(null, '', `?period=${rocToAd(period).replace('/', '-')}`); } catch (_) { /* ignore */ }
     render();
