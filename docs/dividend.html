@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>金控現金股利試算｜台灣金控月自結獲利追蹤</title>
+  <meta name="description" content="以 13 家上市金控月自結獲利推估全年現金股利與殖利率：可切換子公司上繳或總配發率兩種算法，並手動調整上繳比例、配發率與獲利基準。" />
+  <link rel="canonical" href="https://tw-fhcs-tracker.vercel.app/dividend.html" />
+  <link rel="license" href="https://creativecommons.org/licenses/by/4.0/" />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="stylesheet" href="dividend.css" />
+</head>
+<body class="dv-page">
+
+  <header>
+    <div class="header-inner">
+      <div class="header-title">
+        <h1>金控現金股利試算</h1>
+        <p class="subtitle">以月自結獲利推估 ｜ 資料來源：公開資訊觀測站、TWSE</p>
+      </div>
+      <div class="header-actions">
+        <a class="dv-back" href="./index.html">← 返回月報</a>
+        <div class="period-badge" id="dv-period-badge">載入中...</div>
+      </div>
+    </div>
+  </header>
+
+  <main class="dv-main">
+
+    <section class="dv-panel" aria-label="試算設定">
+      <div class="dv-controls">
+        <label class="dv-field">
+          <span>資料月份</span>
+          <select id="dv-period"></select>
+        </label>
+        <label class="dv-field">
+          <span>計算方式</span>
+          <select id="dv-method">
+            <option value="upstream">子公司獲利上繳</option>
+            <option value="payout">金控總配發率</option>
+          </select>
+        </label>
+        <label class="dv-field">
+          <span>計算基準</span>
+          <select id="dv-basis">
+            <option value="annualized">獲利年化</option>
+            <option value="manual">手動調整</option>
+          </select>
+        </label>
+        <button type="button" class="dv-btn" id="dv-reset">重設為預設值</button>
+      </div>
+
+      <div class="dv-params" id="dv-params"></div>
+      <p class="dv-hint" id="dv-hint"></p>
+    </section>
+
+    <section class="dv-panel dv-table-panel">
+      <div class="dv-table-head">
+        <h2 id="dv-table-title">各金控推估現金股利</h2>
+        <label class="dv-field dv-inline">
+          <span>排序</span>
+          <select id="dv-sort">
+            <option value="code">代號</option>
+            <option value="yield">殖利率（高→低）</option>
+            <option value="dps">每股股利（高→低）</option>
+          </select>
+        </label>
+      </div>
+      <div class="dv-table-wrap">
+        <table class="dv-table" id="dv-table"></table>
+      </div>
+      <p class="dv-price-note" id="dv-price-note"></p>
+    </section>
+
+    <section class="dv-panel dv-notes">
+      <h2>計算說明與假設</h2>
+      <ul>
+        <li><b>子公司獲利上繳</b>：各子公司年度獲利 × 上繳比例後加總，視為金控可發放的現金股利總額。壽險以「加計 FVOCI 股票處分利益」後的數字為基準（有揭露者），未揭露則用稅後淨利。</li>
+        <li><b>金控總配發率</b>：金控稅後淨利加計 FVOCI 處分利益（有揭露者）× 配發率。</li>
+        <li><b>獲利年化</b>：累計獲利 × 12 ÷ 累計月數，例如 3 月累計 × 4。<b>手動調整</b>會先帶入年化數字，可逐一改寫。</li>
+        <li><b>股數</b>：以金控累計稅後淨利 ÷ 累計 EPS 反推（單位：億股）；有特別股的金控會略高估普通股數，可在明細中手動修正。</li>
+        <li>未計入金控本身費用、利息、特別股股息、法定盈餘公積提列與子公司非 100% 持股的影響；子公司虧損以 0 上繳計。</li>
+        <li>殖利率 = 每股現金股利 ÷ 最近交易日收盤價；收盤價可手動覆寫。</li>
+        <li>本頁為試算工具，數字依假設而定，不代表公司實際配息政策，也不構成投資建議。</li>
+      </ul>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <p class="copyright">© 2026 Mandy Chao</p>
+    <p class="disclaimer">本網站為個人開發與維護之專案，所有資料來源均為公開資訊。本網站內容僅供資訊參考，不構成投資建議，若有引用請標註來源。</p>
+  </footer>
+
+  <script src="dividend.js"></script>
+</body>
+</html>

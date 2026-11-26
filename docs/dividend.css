@@ -1,0 +1,71 @@
+/* 金控現金股利試算頁專用樣式（全部以 dv- 前綴，避免影響主站） */
+.dv-main { max-width: 1200px; margin: 0 auto; padding: 20px 24px 40px; display: flex; flex-direction: column; gap: 16px; }
+.dv-back { font-size: 13px; color: var(--primary); text-decoration: none; }
+.dv-back:hover { text-decoration: underline; }
+
+.dv-panel { background: var(--surface); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow); padding: 16px 18px; }
+.dv-panel h2 { font-size: 15px; font-weight: 700; color: var(--text); }
+
+.dv-controls, .dv-params { display: flex; flex-wrap: wrap; gap: 14px 20px; align-items: flex-end; }
+.dv-params { margin-top: 14px; padding-top: 14px; border-top: 1px dashed var(--border); }
+.dv-field { display: flex; flex-direction: column; gap: 4px; font-size: 12px; color: var(--text-muted); }
+.dv-field.dv-inline { flex-direction: row; align-items: center; gap: 8px; }
+.dv-field select {
+  font: inherit; font-size: 14px; color: var(--text); padding: 6px 28px 6px 10px; min-width: 150px;
+  border: 1px solid var(--border-strong); border-radius: var(--radius); background: var(--surface);
+}
+.dv-btn {
+  font: inherit; font-size: 13px; padding: 7px 14px; border-radius: var(--radius); cursor: pointer;
+  border: 1px solid var(--border-strong); background: var(--surface-alt); color: var(--text-2);
+}
+.dv-btn:hover { border-color: var(--primary); color: var(--primary); }
+.dv-hint { margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+
+.dv-input {
+  font: inherit; font-size: 13px; color: var(--text); width: 96px; padding: 4px 8px; text-align: right;
+  border: 1px solid var(--border-strong); border-radius: 4px; background: var(--surface);
+  font-variant-numeric: tabular-nums;
+}
+.dv-input::placeholder { color: var(--text-2); opacity: 1; }
+.dv-input:focus { outline: 2px solid var(--primary-bg); border-color: var(--primary); }
+.dv-input:not(:placeholder-shown) { background: var(--warning-bg); border-color: #e2cf9a; }
+.dv-params .dv-input:not(:placeholder-shown) { background: var(--surface); border-color: var(--border-strong); }
+.dv-input.dv-small { width: 64px; }
+.dv-pct { display: inline-flex; align-items: center; gap: 4px; }
+.dv-pct em { font-style: normal; color: var(--text-muted); }
+
+.dv-table-head { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; margin-bottom: 10px; }
+.dv-table-wrap { overflow-x: auto; }
+.dv-table, .dv-sub { width: 100%; border-collapse: collapse; font-variant-numeric: tabular-nums; }
+.dv-table th, .dv-table td, .dv-sub th, .dv-sub td { padding: 8px 10px; text-align: right; white-space: nowrap; border-bottom: 1px solid var(--border); }
+.dv-table th, .dv-sub th { font-size: 12px; font-weight: 600; color: var(--text-2); background: var(--surface-alt); vertical-align: bottom; }
+.dv-table th small, .dv-sub th small { display: block; font-weight: 400; color: var(--text-muted); font-size: 11px; }
+.dv-table .dv-l, .dv-sub .dv-l { text-align: left; }
+.dv-table td.dv-key { font-weight: 700; color: var(--primary); font-size: 15px; }
+.dv-table th.dv-key { color: var(--primary); }
+.dv-row:hover td { background: var(--surface-alt); }
+.dv-row.open td { background: var(--primary-bg); }
+.dv-code { color: var(--text-muted); font-size: 12px; margin-right: 2px; }
+.dv-toggle { border: 0; background: none; cursor: pointer; color: var(--text-muted); width: 18px; font-size: 12px; }
+.dv-pricecell { display: table-cell; }
+.dv-date, .dv-flag { display: block; font-size: 11px; color: var(--text-muted); }
+.dv-flag { color: var(--warning); }
+
+.dv-detail > td { background: var(--fvoci-bg); padding: 0 !important; }
+.dv-detail-inner { padding: 12px 16px 14px 36px; }
+.dv-sub { background: var(--surface); border: 1px solid var(--border); }
+.dv-sub tfoot td { font-weight: 700; border-bottom: 0; }
+.dv-inline-params { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; margin-top: 10px; font-size: 12px; }
+.dv-muted { color: var(--text-muted); font-size: 12px; }
+.dv-cat { font-size: 11px; padding: 1px 7px; border-radius: 10px; background: var(--border); color: var(--text-2); }
+.dv-cat-life { background: #e9ecf7; color: var(--fvoci); }
+.dv-cat-bank { background: #e8f1ee; color: var(--positive); }
+
+.dv-price-note { margin-top: 10px; font-size: 12px; color: var(--text-muted); }
+.dv-notes ul { margin: 8px 0 0 18px; font-size: 13px; color: var(--text-2); display: grid; gap: 4px; }
+
+@media (max-width: 720px) {
+  .dv-main { padding: 14px 12px 30px; }
+  .dv-field select { min-width: 130px; }
+  .dv-detail-inner { padding: 10px; }
+}

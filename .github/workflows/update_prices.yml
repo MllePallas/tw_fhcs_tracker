@@ -1,0 +1,48 @@
+name: Update Closing Prices
+
+on:
+  # 平日台北 17:23（UTC 09:23）抓最近交易日收盤價，供股利試算頁計算殖利率
+  # TWSE OpenAPI 收盤後約下午更新；分鐘避開整點以減少排程延遲
+  schedule:
+    - cron: '23 9 * * 1-5'
+  workflow_dispatch:
+
+concurrency:
+  group: finhold-data-write
+  cancel-in-progress: false
+
+jobs:
+  prices:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v5
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v6
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch closing prices
+        run: |
+          cd scraper
+          python price_snapshot.py
+
+      - name: Commit updated prices
+        run: |
+          git config --global user.name 'github-actions[bot]'
+          git config --global user.email 'github-actions[bot]@users.noreply.github.com'
+          git add docs/data/prices.json
+          if ! git diff --staged --quiet; then
+            git commit -m "chore: update closing prices $(date +'%Y-%m-%d')"
+            git pull --rebase
+            git push
+          fi
