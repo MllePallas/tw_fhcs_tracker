@@ -172,7 +172,20 @@
   }
 
   function renderTable() {
-    const companies = (state.data && state.data.companies) || [];
+    const all = (state.data && state.data.companies) || [];
+    // 總配發率需以「加計 FVOCI」的金控獲利為基準才精確 → 只列金控層級有揭露具體加計數者（門檻型不算）
+    const hasHoldingFv = (c) => {
+      const fv = c.holding_company && c.holding_company.fvoci_adjusted;
+      return !!fv && fv.cumulative_profit != null && fv.value_type !== 'lower_bound';
+    };
+    const payout = state.method === 'payout';
+    const companies = payout ? all.filter(hasHoldingFv) : all;
+    const excluded = payout ? all.filter((c) => !hasHoldingFv(c)) : [];
+    $('dv-filter-note').hidden = !payout;
+    $('dv-filter-note').innerHTML = payout
+      ? `「金控總配發率」僅列出金控層級有揭露加計 FVOCI 獲利的公司（${companies.map((c) => esc(c.name)).join('、') || '本期無'}）；`
+        + `其餘 ${excluded.length} 家未揭露，其稅後淨利不含 FVOCI 處分利益，套用配發率會失真，故不列入。`
+      : '';
     const rows = sortRows(companies.map((c) => ({ ...compute(c), _raw: c })));
     const manual = state.basis === 'manual';
     const baseLabel = manual ? '全年獲利（手動）' : '全年獲利（年化）';
@@ -182,7 +195,7 @@
       <th>可配發金額<small>億元</small></th>
       <th>流通股數<small>億股・TWSE</small></th>
       <th>隱含配發率<small>占加計FVOCI獲利</small></th>
-      <th class="dv-key">每股現金股利<small>元</small></th>
+      <th class="dv-key">預估每股現金股利<small>元</small></th>
       <th>收盤價<small>元・可覆寫</small></th>
       <th class="dv-key">現金殖利率</th>
     </tr></thead>`;

@@ -64,6 +64,8 @@
 .dv-cat-life { background: #e9ecf7; color: var(--fvoci); }
 .dv-cat-bank { background: #e8f1ee; color: var(--positive); }
 
+.dv-filter-note { margin: 0 0 10px; padding: 8px 12px; font-size: 12px; color: var(--text-2); background: var(--surface-alt); border-left: 3px solid var(--primary); border-radius: 2px; }
+.dv-filter-note[hidden] { display: none; }
 .dv-price-note { margin-top: 10px; font-size: 12px; color: var(--text-muted); }
 .dv-notes ul { margin: 8px 0 0 18px; font-size: 13px; color: var(--text-2); display: grid; gap: 4px; }
 
