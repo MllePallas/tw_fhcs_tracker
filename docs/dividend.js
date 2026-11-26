@@ -158,9 +158,17 @@
   }
 
   function sortRows(rows) {
-    const k = state.sort;
+    const k = { yield: 'yld', dps: 'dps' }[state.sort] || 'code';
     if (k === 'code') return rows.sort((a, b) => a.code.localeCompare(b.code));
-    return rows.sort((a, b) => (b[k] ?? -Infinity) - (a[k] ?? -Infinity));
+    // 由高到低；無數值（如尚無收盤價）一律排最後，同值依代號
+    return rows.sort((a, b) => {
+      const va = Number.isFinite(a[k]) ? a[k] : null;
+      const vb = Number.isFinite(b[k]) ? b[k] : null;
+      if (va === null && vb === null) return a.code.localeCompare(b.code);
+      if (va === null) return 1;
+      if (vb === null) return -1;
+      return vb - va || a.code.localeCompare(b.code);
+    });
   }
 
   function renderTable() {
@@ -254,7 +262,7 @@
       ? `流通股數取自 TWSE 上市公司基本資料「已發行普通股數」（${esc(sd[sd.length - 1])}）。`
       : '流通股數尚未取得 TWSE 資料，暫以累計淨利 ÷ 累計 EPS 反推。';
     $('dv-price-note').innerHTML = (latest
-      ? `收盤價為 ${esc(latest)} 收盤（TWSE OpenAPI，缺值以 Yahoo Finance 補），平日收盤後自動更新，輸入框可暫時覆寫價格。`
+      ? `收盤價為 ${esc(latest)} 收盤（TWSE OpenAPI，缺值以 Yahoo Finance 補），輸入框可暫時覆寫價格。`
       : '尚未取得收盤價資料，可在「收盤價」欄手動輸入以計算殖利率。') + sharesTxt;
   }
 
